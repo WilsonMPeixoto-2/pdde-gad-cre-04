@@ -1,0 +1,750 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design System - 4ª CRE Institutional Theme */
+/* Premium Professional Design with Blue Palette */
+
+@layer base {
+  :root {
+    /* Modern Government Design System */
+    /* Background - Subtle slate-50 gradient base */
+    --background: 210 40% 98%;
+    --foreground: 215 25% 27%; /* slate-700 for body text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%; /* slate-900 */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary - Deep Navy (#0F172A) */
+    --primary: 222 47% 11%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Soft Slate */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted - Refined Slate Gray */
+    --muted: 210 40% 93%;
+    --muted-foreground: 215 16% 47%; /* slate-500 */
+
+    /* Accent - Sky Blue (#0EA5E9) */
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Success - Professional Emerald */
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning - Amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%; /* slate-200 */
+    --input: 214 32% 91%;
+    --ring: 199 89% 48%; /* Sky blue accent */
+
+    --radius: 0.625rem;
+
+    /* Sidebar - Deep Navy Gradient */
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 199 89% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 17%; /* slate-800 */
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 199 89% 48%;
+
+    /* Custom tokens - Modern Government */
+    --section-header: 222 47% 11%; /* Navy */
+    --section-number: 199 89% 48%; /* Sky Blue */
+    --highlight-bg: 199 95% 95%; /* Sky-50 */
+    --table-header: 222 47% 11%;
+    --table-stripe: 210 40% 98%;
+
+    /* Typography */
+    --font-heading: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 222 47% 8%; /* slate-950 */
+    --foreground: 210 40% 96%; /* slate-100 */
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 199 89% 48%; /* Sky blue as primary in dark */
+    --primary-foreground: 222 47% 8%;
+
+    --secondary: 217 33% 17%; /* slate-800 */
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%; /* slate-400 */
+
+    --accent: 199 89% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 160 84% 45%;
+    --success-foreground: 222 47% 8%;
+
+    --warning: 38 92% 55%;
+    --warning-foreground: 222 47% 8%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 217 33% 22%; /* slate-700 */
+    --input: 217 33% 22%;
+    --ring: 199 89% 48%;
+
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 199 89% 48%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 33% 22%;
+    --sidebar-ring: 199 89% 55%;
+
+    --section-header: 199 89% 55%;
+    --section-number: 199 89% 48%;
+    --highlight-bg: 217 33% 17%;
+    --table-header: 222 47% 15%;
+    --table-stripe: 222 47% 11%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Subtle slate-50 gradient background - reduces eye strain */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: 
+      linear-gradient(180deg, hsl(210 40% 96%) 0%, hsl(0 0% 100%) 50%, hsl(210 40% 98%) 100%),
+      radial-gradient(ellipse at 20% 0%, hsl(199 89% 48% / 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, hsl(199 89% 48% / 0.02) 0%, transparent 50%);
+  }
+
+  .dark body::before {
+    background: 
+      linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 47% 10%) 50%, hsl(222 47% 8%) 100%);
+  }
+
+  .dark body::before {
+    background-image: 
+      radial-gradient(circle at 20% 30%, hsl(var(--primary) / 0.025) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(var(--primary) / 0.02) 0%, transparent 50%),
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 80px,
+        hsl(var(--primary) / 0.015) 80px,
+        hsl(var(--primary) / 0.015) 81px
+      );
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better text rendering */
+  p, li, td, th {
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer components {
+  .section-card {
+    @apply bg-card rounded-xl border border-slate-200 p-6 sm:p-8 transition-all duration-300;
+    box-shadow: 0 4px 20px -4px hsl(215 25% 15% / 0.08), 0 2px 8px -2px hsl(215 25% 15% / 0.04);
+  }
+
+  .section-card:hover {
+    box-shadow: 0 10px 40px -10px hsl(215 25% 15% / 0.12), 0 4px 16px -4px hsl(215 25% 15% / 0.06);
+  }
+
+  .section-heading {
+    @apply font-heading font-semibold text-slate-900 text-lg sm:text-xl pb-3 mb-4 border-b border-slate-200 flex items-center gap-2;
+  }
+
+  .section-heading::before {
+    content: '';
+    @apply w-1 h-5 bg-accent rounded-full;
+  }
+
+  .content-spacing {
+    @apply space-y-6 leading-relaxed;
+  }
+
+  .content-spacing p {
+    @apply text-slate-700 leading-relaxed;
+  }
+
+  .content-spacing h3, .content-spacing h4 {
+    @apply font-heading font-semibold text-slate-900;
+  }
+
+  .section-number {
+    @apply inline-flex items-center justify-center w-11 h-11 rounded-xl text-primary-foreground font-bold text-base;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(215 75% 28%) 100%);
+    box-shadow: 0 4px 14px -3px hsl(var(--primary) / 0.4);
+  }
+
+  .highlight-box {
+    @apply border-l-4 border-accent p-5 sm:p-6 rounded-r-xl bg-slate-50;
+  }
+
+  .step-indicator {
+    @apply flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl text-primary-foreground font-bold relative z-10;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(215 75% 28%) 100%);
+    box-shadow: 0 4px 14px -3px hsl(var(--primary) / 0.35);
+  }
+
+  /* Timeline connector for step sequences */
+  .timeline-steps {
+    @apply relative;
+  }
+
+  .timeline-steps::before {
+    content: '';
+    @apply absolute left-5 sm:left-[1.375rem] top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/30 via-primary/20 to-primary/10;
+    z-index: 0;
+  }
+
+  .timeline-step {
+    @apply relative;
+  }
+
+  /* Data typography - Monospace for codes, numbers, values */
+  .data-code {
+    font-family: 'Roboto Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace;
+    @apply tracking-tight;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200;
+  }
+
+  .nav-link.active {
+    @apply bg-primary-foreground text-primary shadow-md;
+  }
+
+  .table-institutional {
+    @apply w-full border-collapse overflow-hidden;
+    border-radius: 0.75rem;
+  }
+
+  .table-institutional th {
+    @apply text-primary-foreground px-4 py-3.5 text-left font-semibold text-sm tracking-wide;
+    background: linear-gradient(135deg, hsl(var(--table-header)) 0%, hsl(215 75% 28%) 100%);
+  }
+
+  .table-institutional td {
+    @apply px-4 py-3.5 border-b border-border/40 text-sm;
+  }
+
+  .table-institutional tr:nth-child(even) td {
+    @apply bg-[hsl(var(--table-stripe))];
+  }
+
+  .table-institutional tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .table-institutional tr {
+    @apply transition-colors duration-150;
+  }
+
+  .table-institutional tbody tr:hover td {
+    @apply bg-primary/5;
+  }
+
+  .text-justified {
+    @apply text-justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .print-only {
+    @apply hidden print:block;
+  }
+
+  .no-print {
+    @apply print:hidden;
+  }
+
+  /* Premium link styling */
+  .link-premium {
+    @apply text-primary font-medium underline-offset-4 hover:underline transition-colors;
+  }
+
+  /* Glass effect for special elements */
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 4px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* CRITICAL: Print engines may not trigger scroll animations for off-screen content.
+     Force all scroll-reveal sections to be visible so the PDF contains the full document. */
+  .opacity-0,
+  [class*="opacity-0"] {
+    opacity: 1 !important;
+  }
+
+  .translate-y-8,
+  .-translate-y-8,
+  .translate-y-4,
+  .-translate-y-4,
+  .translate-y-2,
+  .-translate-y-2 {
+    transform: none !important;
+  }
+
+  [style*="transition-delay"] {
+    transition-delay: 0ms !important;
+  }
+
+  /* CRITICAL: Fix content cut-off issue */
+  html, body {
+    background: white !important;
+    color: hsl(215, 30%, 12%) !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Remove all height constraints and overflow hidden */
+  div, main, section, article {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure flex containers don't constrain height */
+  .flex, .flex-1, .min-h-screen {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  .section-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid hsl(215, 25%, 82%) !important;
+    margin-bottom: 14pt !important;
+    background: white !important;
+    border-radius: 8pt !important;
+  }
+
+  .highlight-box {
+    background: hsl(210, 65%, 96%) !important;
+    border-left: 4px solid hsl(215, 75%, 32%) !important;
+    padding: 12pt !important;
+    margin: 8pt 0 !important;
+    border-radius: 0 6pt 6pt 0 !important;
+  }
+
+  /* Section headers and dividers */
+  .section-number, .step-indicator {
+    background: hsl(215, 75%, 32%) !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact !important;
+    border-radius: 6pt !important;
+  }
+
+  /* Tables */
+  .table-institutional th,
+  table thead th {
+    background: hsl(215, 75%, 32%) !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact !important;
+    padding: 8pt 10pt !important;
+    font-weight: 600 !important;
+  }
+
+  .table-institutional td,
+  table tbody td {
+    padding: 7pt 10pt !important;
+    border-bottom: 1px solid hsl(215, 25%, 86%) !important;
+  }
+
+  .table-institutional tr:nth-child(even) td,
+  table tbody tr:nth-child(even) td {
+    background: hsl(210, 25%, 97%) !important;
+  }
+
+  /* Primary colored elements */
+  .bg-primary,
+  [class*="bg-primary"] {
+    background: hsl(215, 75%, 32%) !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* Ensure text inside primary backgrounds is white */
+  .text-primary-foreground,
+  [class*="text-primary-foreground"],
+  .bg-primary h3,
+  .bg-primary p,
+  [class*="bg-primary"] h3,
+  [class*="bg-primary"] p,
+  [class*="from-primary"] h3,
+  [class*="from-primary"] p {
+    color: white !important;
+    opacity: 1 !important;
+  }
+
+  .text-primary {
+    color: hsl(215, 75%, 32%) !important;
+  }
+
+  .border-primary {
+    border-color: hsl(215, 75%, 32%) !important;
+  }
+
+  /* Badges and tags */
+  .bg-primary\/10 {
+    background: hsl(210, 65%, 94%) !important;
+  }
+
+  /* Hero Cover - print version */
+  #hero-cover {
+    background: linear-gradient(135deg, hsl(215, 75%, 32%) 0%, hsl(215, 75%, 22%) 100%) !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact !important;
+    page-break-after: always;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 60pt 36pt !important;
+    overflow: visible !important;
+  }
+
+  /* Fix: gradient text (bg-clip-text + text-transparent) can render as a blank block in PDF */
+  #hero-cover .hero-title-accent {
+    background: none !important;
+    background-clip: border-box !important;
+    -webkit-background-clip: border-box !important;
+    color: hsl(var(--primary-foreground)) !important;
+    -webkit-text-fill-color: currentColor !important;
+    text-shadow: none !important;
+  }
+  
+  /* Hide decorative layers on print (avoid artifacts in the cover) */
+  #hero-cover > div.absolute,
+  #hero-cover > div:first-child,
+  #hero-cover .animate-pulse,
+  #hero-cover .animate-bounce {
+    display: none !important;
+  }
+
+  /* Section Divider - print version */
+  .section-divider-print {
+    background: linear-gradient(135deg, hsl(215, 75%, 38%) 0%, hsl(215, 75%, 28%) 100%) !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact !important;
+    page-break-before: always;
+    page-break-after: avoid;
+    padding: 28pt 18pt !important;
+    margin: 18pt 0 !important;
+    border-radius: 8pt !important;
+  }
+
+  /* SEI Mockup */
+  .sei-mockup {
+    border: 1px solid hsl(215, 25%, 82%) !important;
+    background: white !important;
+  }
+
+  .sei-mockup-header {
+    background: hsl(215, 75%, 32%) !important;
+    color: white !important;
+  }
+
+  /* Icons Bar */
+  .sei-icons-bar {
+    background: hsl(210, 25%, 96%) !important;
+    border: 1px solid hsl(215, 25%, 85%) !important;
+  }
+
+  /* Links */
+  a {
+    color: hsl(215, 75%, 32%) !important;
+    text-decoration: underline !important;
+  }
+
+  /* Alert boxes */
+  .border-l-4 {
+    border-left-width: 4px !important;
+    border-left-color: hsl(215, 75%, 32%) !important;
+  }
+
+  /* Success elements */
+  .text-success {
+    color: hsl(175, 65%, 35%) !important;
+  }
+
+  .bg-success {
+    background: hsl(175, 65%, 38%) !important;
+  }
+
+  /* Hide non-printable elements */
+  .no-print,
+  button,
+  .fixed,
+  nav,
+  aside {
+    display: none !important;
+  }
+
+  /* Footer */
+  .print-only {
+    display: block !important;
+    margin-top: 18pt !important;
+    padding-top: 10pt !important;
+    border-top: 1px solid hsl(215, 25%, 82%) !important;
+    text-align: center !important;
+    font-size: 9pt !important;
+  }
+
+  /* Page margins and breaks */
+  @page {
+    margin: 1.4cm 1.4cm 2cm 1.4cm;
+    size: A4;
+    
+    @top-center {
+      content: "Documento produzido pela GAD da 4ª CRE";
+      font-size: 8pt;
+      color: hsl(215, 30%, 50%);
+      font-family: 'Inter', sans-serif;
+    }
+    
+    @bottom-center {
+      content: "GAD 4ª CRE | Prestação de Contas SDP | Página " counter(page);
+      font-size: 8pt;
+      color: hsl(215, 30%, 50%);
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  /* Print watermark - subtle authorship mark */
+  body::after {
+    content: "GAD 4ª CRE";
+    position: fixed;
+    bottom: 10mm;
+    right: 10mm;
+    font-size: 7pt;
+    color: hsl(215, 30%, 75%);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+  }
+
+  h2, h3 {
+    page-break-after: avoid;
+  }
+
+  table {
+    page-break-inside: avoid;
+  }
+
+  /* Gradient backgrounds for print */
+  .bg-gradient-to-r,
+  .bg-gradient-to-br {
+    background: hsl(210, 35%, 95%) !important;
+  }
+
+  /* Code blocks */
+  code {
+    background: hsl(210, 25%, 94%) !important;
+    padding: 2pt 4pt !important;
+    border-radius: 3pt !important;
+  }
+
+  /* Hide background pattern on print */
+  body::before {
+    display: none !important;
+  }
+}
+
+/* Responsive View Mode Override */
+/* Force mobile layout regardless of screen size */
+.force-mobile {
+  --force-mobile: true;
+}
+
+.force-mobile .container {
+  max-width: 480px !important;
+  margin: 0 auto !important;
+}
+
+.force-mobile .sidebar-wrapper {
+  display: none !important;
+}
+
+.force-mobile .sm\:grid-cols-2,
+.force-mobile .sm\:grid-cols-3,
+.force-mobile .md\:grid-cols-2,
+.force-mobile .md\:grid-cols-3,
+.force-mobile .lg\:grid-cols-2,
+.force-mobile .lg\:grid-cols-3,
+.force-mobile .lg\:grid-cols-4 {
+  grid-template-columns: 1fr !important;
+}
+
+.force-mobile .hidden.sm\:block,
+.force-mobile .hidden.sm\:inline,
+.force-mobile .hidden.md\:block,
+.force-mobile .hidden.lg\:block {
+  display: none !important;
+}
+
+.force-mobile .sm\:hidden {
+  display: block !important;
+}
+
+.force-mobile .sm\:text-lg,
+.force-mobile .sm\:text-xl,
+.force-mobile .md\:text-2xl,
+.force-mobile .lg\:text-3xl {
+  font-size: inherit !important;
+}
+
+.force-mobile .sm\:px-4,
+.force-mobile .sm\:px-6,
+.force-mobile .md\:px-8,
+.force-mobile .lg\:px-12 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.force-mobile .sm\:py-4,
+.force-mobile .sm\:py-6,
+.force-mobile .md\:py-8 {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+.force-mobile .sm\:gap-4,
+.force-mobile .sm\:gap-6,
+.force-mobile .md\:gap-8 {
+  gap: 0.75rem !important;
+}
+
+.force-mobile .sm\:w-12,
+.force-mobile .md\:w-16 {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+
+.force-mobile .sm\:flex-row {
+  flex-direction: column !important;
+}
+
+/* Force desktop layout regardless of screen size */
+.force-desktop {
+  --force-desktop: true;
+}
+
+.force-desktop .container {
+  max-width: 1280px !important;
+}
+
+.force-desktop .sidebar-wrapper {
+  display: block !important;
+}
+
+.force-desktop .hidden.sm\:block,
+.force-desktop .hidden.sm\:inline {
+  display: block !important;
+}
+
+.force-desktop .hidden.sm\:inline {
+  display: inline !important;
+}
+
+.force-desktop .sm\:hidden,
+.force-desktop .md\:hidden,
+.force-desktop .lg\:hidden {
+  display: none !important;
+}
+
+.force-desktop .sm\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.force-desktop .lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.force-desktop .sm\:flex-row {
+  flex-direction: row !important;
+}

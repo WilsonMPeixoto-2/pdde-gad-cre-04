@@ -12,12 +12,11 @@ interface Section {
 const sections: Section[] = [
   { id: "introducao", number: "0", title: "Apresentação", icon: <FileText className="w-4 h-4" /> },
   { id: "secao-1", number: "1", title: "Abertura do Processo", icon: <ClipboardList className="w-4 h-4" /> },
-  { id: "secao-2", number: "2", title: "Instrução Processual", icon: <FileText className="w-4 h-4" /> },
-  { id: "secao-3", number: "3", title: "Inclusão de Documentos", icon: <Upload className="w-4 h-4" /> },
-  { id: "secao-4", number: "4", title: "Declaração de Autenticidade", icon: <Table2 className="w-4 h-4" /> },
-  { id: "secao-5", number: "5", title: "Bloco de Assinatura", icon: <CheckCircle className="w-4 h-4" /> },
-  { id: "secao-6", number: "6", title: "Despacho e Finalização", icon: <FileText className="w-4 h-4" /> },
-  { id: "contatos", number: "7", title: "Contatos", icon: <Phone className="w-4 h-4" /> },
+  { id: "secao-2", number: "2", title: "Despacho de Encaminhamento", icon: <FileText className="w-4 h-4" /> },
+  { id: "secao-3", number: "3", title: "Demonstrativo de Despesas", icon: <Table2 className="w-4 h-4" /> },
+  { id: "secao-4", number: "4", title: "Documentos Externos", icon: <Upload className="w-4 h-4" /> },
+  { id: "secao-5", number: "5", title: "Conferência e Envio", icon: <CheckCircle className="w-4 h-4" /> },
+  { id: "contatos", number: "6", title: "Contatos", icon: <Phone className="w-4 h-4" /> },
   { id: "anexo", number: "A", title: "Anexo - Legislação", icon: <Scale className="w-4 h-4" /> },
 ];
 
@@ -57,7 +56,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                 </div>
                 <div>
                   <h2 className="font-heading font-bold text-sidebar-foreground text-lg">POP</h2>
-                  <p className="text-xs text-sidebar-foreground/60">Prestação de Contas PDDE</p>
+                  <p className="text-xs text-sidebar-foreground/60">Prestação de Contas SDP</p>
                 </div>
               </div>
               <Button

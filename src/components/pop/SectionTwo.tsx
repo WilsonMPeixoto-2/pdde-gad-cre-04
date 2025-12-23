@@ -7,9 +7,46 @@ import { PDDEChecklist } from "./PDDEChecklist";
 export const SectionTwo = () => {
   return (
     <section id="secao-2" className="scroll-mt-20 animate-fade-in">
+      {/* Bloco 1: Introdução ao Checklist */}
+      <div className="mb-8 section-card bg-gradient-to-br from-slate-50 to-blue-50/30 border-l-4 border-l-primary">
+        <div className="content-spacing">
+          <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">
+            Após a devida <strong className="text-slate-900">autuação do processo</strong>, apresenta-se a seguir o rol taxativo de documentos necessários para a instrução processual. Esta etapa é crítica para garantir a conformidade da prestação de contas.
+          </p>
+          <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">
+            Para auxiliar na conferência, disponibilizamos abaixo uma <strong className="text-primary">Lista de Verificação Interativa (Checklist)</strong>. Esta ferramenta de apoio permite o monitoramento em tempo real dos itens já encartados, calculando automaticamente o percentual de completude da instrução.
+          </p>
+          <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+            Adicionalmente, visando a padronização documental e a mitigação de dúvidas quanto à estrutura e ao conteúdo, o gestor poderá utilizar a funcionalidade de <strong className="text-primary">"Modelos de Documentos"</strong>, localizada logo após a lista, para visualizar e baixar paradigmas reais de cada item exigido.
+          </p>
+        </div>
+      </div>
+
       {/* Checklist de Documentos PDDE */}
       <div className="mb-8">
         <PDDEChecklist />
+      </div>
+
+      {/* Bloco 2: Texto de Transição e Estrutura */}
+      <div className="mb-8 section-card bg-gradient-to-br from-amber-50/50 to-orange-50/30 border-l-4 border-l-amber-500">
+        <div className="content-spacing">
+          <h3 className="section-heading text-amber-900 border-b-amber-300">Roteiro de Instrução</h3>
+          <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">
+            A sequência deste manual detalhará os procedimentos técnicos para a composição dos autos, divididos conforme a origem do documento:
+          </p>
+          <div className="space-y-3">
+            <div className="p-4 bg-white/70 rounded-lg border border-amber-200/50">
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                <strong className="text-amber-800">2.1 – Inclusão de Documentos Externos:</strong> Neste tópico, serão apresentadas as diretrizes para o encarte de todos os documentos gerados fora do ambiente do sistema SEI!RIO (digitalizados ou arquivos eletrônicos), acompanhados de notas explicativas sobre a finalidade de cada item.
+              </p>
+            </div>
+            <div className="p-4 bg-white/70 rounded-lg border border-amber-200/50">
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                <strong className="text-amber-800">3.0 – Elaboração de Documentos Internos:</strong> O tópico seguinte abordará exclusivamente os documentos que devem ser produzidos e editados utilizando o editor de texto nativo da plataforma SEI!RIO.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Download Buttons - Modelos de Documentos PDDE */}

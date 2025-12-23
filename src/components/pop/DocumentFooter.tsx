@@ -41,7 +41,7 @@ export const DocumentFooter = () => {
           {/* Message */}
           <p className="text-muted-foreground text-sm leading-relaxed max-w-lg mx-auto">
             Este documento foi elaborado pela Gerência de Administração da 4ª CRE 
-            para auxiliar diretores e gestores escolares na prestação de contas do SDP.
+            para auxiliar a GAD e gestores escolares na prestação de contas do PDDE.
           </p>
 
           {/* Logo/Badge */}

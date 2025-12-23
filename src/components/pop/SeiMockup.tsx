@@ -127,18 +127,18 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
             <Search className="w-4 h-4" />
             <input 
               type="text" 
-              placeholder="gestão conselhos" 
+              placeholder="prestação" 
               className="bg-secondary/50 border border-border rounded px-3 py-1.5 text-foreground w-full"
-              defaultValue="gestão conselhos"
+              defaultValue="prestação"
             />
           </div>
           
           <div className="space-y-1">
             <div className="px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-secondary cursor-pointer">
-              Gestão de Conselhos Municipais
+              Devolução de Prestação de Contas
             </div>
-            <div className="px-3 py-2 rounded-lg text-sm bg-primary text-primary-foreground font-semibold cursor-pointer shadow-md leading-relaxed">
-              GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
+            <div className="px-3 py-2 rounded-lg text-sm bg-primary text-primary-foreground font-semibold cursor-pointer shadow-md">
+              EXECUÇÃO FINANCEIRA: SISTEMA DESCENTRALIZADO DE PAGAMENTO - SDP
             </div>
             <div className="px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-secondary cursor-pointer">
               Prestação de Contas de Suprimento de Fundos

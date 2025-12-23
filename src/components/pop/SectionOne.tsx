@@ -1,4 +1,4 @@
-import { ClipboardList, LogIn, KeyRound } from "lucide-react";
+import { ClipboardList } from "lucide-react";
 import { SeiMockup } from "./SeiMockup";
 import { CopyButton } from "./CopyButton";
 import { Callout } from "./Callout";
@@ -17,69 +17,15 @@ export const SectionOne = () => {
               <h3 className="section-heading">1.1. Sobre esta etapa</h3>
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
                 A etapa inicial compreende a autuação do processo administrativo eletrônico, 
-                no qual serão inseridos todos os documentos comprobatórios da prestação de contas do PDDE.
+                no qual serão inseridos todos os documentos comprobatórios da prestação de contas.
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* Acesso ao SEI */}
-        <div className="section-card">
-          <h3 className="section-heading">1.2. Acesso ao SEI!RIO</h3>
-          <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              Para acessar o sistema, o usuário deve informar seu <strong className="text-slate-900">login</strong> e 
-              <strong className="text-slate-900"> senha</strong> no portal do SEI!RIO. Após a autenticação inicial, 
-              será solicitado o código de verificação em duas etapas (2FA).
-            </p>
-
-            <div className="mt-6 bg-card border border-border rounded-xl overflow-hidden shadow-lg max-w-sm">
-              {/* SEI Header */}
-              <div className="text-primary-foreground px-4 py-3 flex items-center gap-2" style={{ background: 'hsl(215, 75%, 28%)' }}>
-                <div className="w-8 h-8 bg-primary-foreground/20 rounded flex items-center justify-center">
-                  <span className="text-xs font-bold">SEI</span>
-                </div>
-                <span className="font-semibold text-sm">SEI!RIO - Login</span>
-              </div>
-              
-              {/* Login Form */}
-              <div className="p-4 space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm text-muted-foreground flex items-center gap-2">
-                    <LogIn className="w-4 h-4" />
-                    Usuário
-                  </label>
-                  <div className="bg-secondary/50 border border-border rounded px-3 py-2 text-sm text-muted-foreground">
-                    seu.usuario
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm text-muted-foreground flex items-center gap-2">
-                    <KeyRound className="w-4 h-4" />
-                    Senha
-                  </label>
-                  <div className="bg-secondary/50 border border-border rounded px-3 py-2 text-sm text-muted-foreground">
-                    ••••••••
-                  </div>
-                </div>
-                <div className="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium text-center cursor-pointer hover:bg-primary/90">
-                  Acessar
-                </div>
-              </div>
-            </div>
-
-            <Callout variant="info" title="Verificação em Duas Etapas (2FA)" className="mt-6">
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Após inserir usuário e senha, você receberá um código de verificação por e-mail ou aplicativo 
-                autenticador. Este código deve ser informado para concluir o acesso.
-              </p>
-            </Callout>
           </div>
         </div>
 
         {/* Steps */}
         <div className="section-card">
-          <h3 className="section-heading">1.3. Iniciando o Processo</h3>
+          <h3 className="section-heading">1.2. Iniciando o Processo</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
               Para abrir um novo processo no SEI!RIO, o usuário deve selecionar a opção 
@@ -95,7 +41,7 @@ export const SectionOne = () => {
 
         {/* Type Selection */}
         <div className="section-card">
-          <h3 className="section-heading">1.4. Seleção do Tipo de Processo</h3>
+          <h3 className="section-heading">1.3. Seleção do Tipo de Processo</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
               Ao selecionar essa opção, o usuário deverá indicar o TIPO DE PROCESSO a ser instaurado. 
@@ -104,10 +50,10 @@ export const SectionOne = () => {
 
             <Callout variant="info" title="Tipo de Processo Correto:">
               <div className="flex items-center gap-2 mt-2">
-                <p className="text-slate-900 font-semibold text-sm sm:text-base flex-1 leading-relaxed">
-                  GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
+                <p className="text-slate-900 font-semibold text-sm sm:text-base flex-1">
+                  EXECUÇÃO FINANCEIRA: SISTEMA DESCENTRALIZADO DE PAGAMENTO - SDP
                 </p>
-                <CopyButton text="GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC" label="Copiado!" />
+                <CopyButton text="EXECUÇÃO FINANCEIRA: SISTEMA DESCENTRALIZADO DE PAGAMENTO - SDP" label="Copiado!" />
               </div>
             </Callout>
 
@@ -118,83 +64,51 @@ export const SectionOne = () => {
           </div>
         </div>
 
-        {/* Specification */}
-        <div className="section-card">
-          <h3 className="section-heading">1.5. Especificação</h3>
-          <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              O cadastrante deverá obrigatoriamente digitar os metadados estabelecidos pela GAD, 
-              composto pela <strong className="text-slate-900">identificação da unidade escolar</strong> seguida 
-              do <strong className="text-slate-900">tipo de PDDE e exercício</strong>.
-            </p>
-
-            <Callout variant="success" title="Exemplo de Especificação:">
-              <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg">
-                  PRESTAÇÃO DE CONTAS DO CEC DA (XX.XX.XXX – E.M. XXXX-PDDE BÁSICO/2025)
-                </code>
-                <CopyButton text="PRESTAÇÃO DE CONTAS DO CEC DA (XX.XX.XXX – E.M. XXXX-PDDE BÁSICO/2025)" label="Copiado!" />
-              </div>
-            </Callout>
-
-            <Callout variant="warning" title="Atenção:" className="mt-4">
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Substitua <code className="bg-slate-200 px-1 rounded">XX.XX.XXX</code> pela designação da sua unidade 
-                e <code className="bg-slate-200 px-1 rounded">E.M. XXXX</code> pelo nome da escola.
-              </p>
-            </Callout>
-          </div>
-        </div>
-
         {/* Classification */}
         <div className="section-card">
-          <h3 className="section-heading">1.6. Classificação por Assuntos</h3>
+          <h3 className="section-heading">1.5. Classificação por Assuntos</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              Este campo deverá ser preenchido com o código de classificação correspondente ao assunto do processo.
+              Este campo será preenchido automaticamente pelo sistema, em conformidade com o Tipo de 
+              Processo selecionado pelo usuário na etapa anterior.
             </p>
 
             <div className="bg-gradient-to-r from-slate-100 to-slate-50 rounded-xl p-5">
-              <p className="text-sm text-slate-600 mb-3">Classificação do PDDE:</p>
+              <p className="text-sm text-slate-600 mb-3">Classificação automática:</p>
               <div className="flex items-center gap-2">
                 <code className="flex-1 bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 break-all shadow-sm">
-                  03.04.01.02 - PRESTAÇÃO DE CONTAS DO CEC
+                  01.05.03.11 - SISTEMA DESCENTRALIZADO DE PAGAMENTO
                 </code>
-                <CopyButton text="03.04.01.02" label="Copiado!" />
+                <CopyButton text="01.05.03.11 - SISTEMA DESCENTRALIZADO DE PAGAMENTO" label="Copiado!" />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Interessados */}
+        {/* Specification */}
         <div className="section-card">
-          <h3 className="section-heading">1.7. Interessados</h3>
+          <h3 className="section-heading">1.8. Especificação</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              Neste campo, deve ser informado o <strong className="text-slate-900">CNPJ do CEC</strong> da unidade escolar. 
-              O CNPJ é o identificador único do Conselho Escola Comunidade junto à Receita Federal.
+              O cadastrante deverá obrigatoriamente digitar os metadados estabelecidos pela GAD, 
+              composto pelo Objetivo do processo (PRESTAÇÃO DE CONTAS DE SDP) + DESIGNAÇÃO DA UNIDADE 
+              ESCOLAR seguida da NOMENCLATURA DA UNIDADE.
             </p>
-            
-            <Callout variant="success" title="Adicione o CNPJ do CEC:">
-              <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-slate-900 data-code text-sm bg-white/50 px-3 py-2 rounded-lg">
-                  XX.XXX.XXX/0001-XX (CNPJ do CEC da sua unidade)
-                </code>
-              </div>
-            </Callout>
 
-            <Callout variant="info" title="Onde encontrar o CNPJ?" className="mt-4">
-              <p className="text-sm text-slate-700 leading-relaxed">
-                O CNPJ do CEC pode ser encontrado no Cartão CNPJ da entidade ou consultado junto à 
-                Gerência de Administração (GAD).
-              </p>
+            <Callout variant="success" title="Exemplo de Especificação:">
+              <div className="flex items-center gap-2 mt-2">
+                <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg">
+                  Prestação de contas de SDP - E/CRE(04.30.502) Ciep Elis Regina
+                </code>
+                <CopyButton text="Prestação de contas de SDP - E/CRE(04.30.502) Ciep Elis Regina" label="Copiado!" />
+              </div>
             </Callout>
           </div>
         </div>
 
         {/* Access Level */}
         <div className="section-card">
-          <h3 className="section-heading">1.8. Nível de Acesso</h3>
+          <h3 className="section-heading">1.11. Nível de Acesso</h3>
           <div className="content-spacing">
             <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
               <table className="table-institutional text-sm w-full">
@@ -223,9 +137,9 @@ export const SectionOne = () => {
 
             <Callout variant="info" title="Princípio da Publicidade" className="mt-6">
               <p className="text-sm text-slate-700 leading-relaxed">
-                Os processos de prestação de contas do PDDE devem, como regra, ser classificados 
+                Os processos de prestação de contas do SDP devem, como regra, ser classificados 
                 com nível de acesso <strong className="text-slate-900">"Público"</strong>, por se 
-                referirem à aplicação de recursos públicos federais (Art. 37 CF e Lei nº 12.527/2011 - LAI).
+                referirem à aplicação de recursos públicos (Art. 37 CF e Lei nº 12.527/2011 - LAI).
               </p>
               <p className="text-sm text-slate-900 font-semibold mt-3">
                 → Selecione a opção "Público" no campo Nível de Acesso.
@@ -234,39 +148,31 @@ export const SectionOne = () => {
           </div>
         </div>
 
+        <div className="section-card">
+          <h3 className="section-heading">1.12. Interessados</h3>
+          <div className="content-spacing">
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+              Este campo é utilizado para registrar unidades ou entidades que possuam interesse no processo.
+            </p>
+            <Callout variant="success" title="Adicione a GAD como interessada:">
+              <div className="flex items-center gap-2 mt-2">
+                <code className="flex-1 text-slate-900 data-code text-sm bg-white/50 px-3 py-2 rounded-lg">
+                  10729 - E/4a.CRE/GAD
+                </code>
+                <CopyButton text="10729 - E/4a.CRE/GAD" label="Código copiado!" />
+              </div>
+            </Callout>
+          </div>
+        </div>
+
         {/* Observações */}
         <div className="section-card">
-          <h3 className="section-heading">1.9. Observações da Unidade</h3>
+          <h3 className="section-heading">1.13. Observações da Unidade</h3>
           <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
             O campo "Observações desta unidade" poderá ser preenchido por cada unidade em que o processo 
             tramitar. As observações inseridas por outras unidades aparecerão, na tela Alterar Processo, 
             separadamente, na Lista de observações de outras unidades.
           </p>
-        </div>
-
-        {/* Salvar */}
-        <div className="section-card border-l-4 border-l-success">
-          <h3 className="section-heading">1.10. Salvando o Processo</h3>
-          <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              Após preencher todos os campos obrigatórios, clique no botão <strong className="text-slate-900">"Salvar"</strong> para 
-              concluir a autuação do processo. O sistema gerará automaticamente o número do processo no formato:
-            </p>
-            
-            <div className="bg-gradient-to-r from-slate-100 to-slate-50 rounded-xl p-5 mt-4">
-              <p className="text-sm text-slate-600 mb-2">Exemplo de número de processo:</p>
-              <code className="bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 shadow-sm inline-block">
-                04.XX.XXXXXX/2025
-              </code>
-            </div>
-
-            <Callout variant="success" title="Processo Criado!" className="mt-4">
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Com o processo autuado, você está pronto para iniciar a instrução processual, 
-                incluindo os documentos exigidos para a prestação de contas do PDDE.
-              </p>
-            </Callout>
-          </div>
         </div>
       </div>
     </section>

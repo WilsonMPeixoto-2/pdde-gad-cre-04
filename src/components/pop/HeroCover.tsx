@@ -42,16 +42,16 @@ export const HeroCover = () => {
             <FileText className="w-4 h-4" />
             Procedimento Operacional Padrão
           </div>
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-[1.05] mb-8 tracking-tight">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-[1.05] mb-8 tracking-tight">
             Prestação de Contas
             <br />
             <span className="hero-title-accent bg-gradient-to-r from-[hsl(199,89%,48%)] via-[hsl(199,89%,60%)] to-[hsl(199,89%,48%)] bg-clip-text text-transparent">
-              PDDE no SEI!RIO
+              SDP no SEI!RIO
             </span>
           </h1>
           <p className="text-xl sm:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
-            Guia operacional para diretores(as), gestores(as) escolares e equipe da GAD 
-            na instrução da Prestação de Contas do PDDE diretamente no SEI!RIO.
+            Guia operacional para diretores(as) e gestores(as) escolares na instrução 
+            da Prestação de Contas do SDP diretamente no SEI!RIO.
           </p>
         </div>
         

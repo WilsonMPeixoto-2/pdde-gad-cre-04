@@ -2,10 +2,16 @@ import { FileText, PenLine, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { InfoDrawer, AutenticacaoVsAssinaturaContent } from "./InfoDrawer";
 import { Callout } from "./Callout";
+import { PDDEChecklist } from "./PDDEChecklist";
 
 export const SectionTwo = () => {
   return (
     <section id="secao-2" className="scroll-mt-20 animate-fade-in">
+      {/* Checklist de Documentos PDDE */}
+      <div className="mb-8">
+        <PDDEChecklist />
+      </div>
+
       {/* Download Button - Ofício de Prestação de Contas PDDE */}
       <div className="mb-8 p-5 sm:p-6 rounded-xl bg-gradient-to-r from-blue-50 to-blue-50/50 border border-blue-200">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">

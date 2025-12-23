@@ -209,103 +209,92 @@ export const SectionOne = () => {
               A criação do Processo será confirmada com a tela abaixo:
             </p>
             
-            {/* Mockup da tela de confirmação */}
-            <div className="mt-4 border border-slate-300 rounded-lg overflow-hidden shadow-lg bg-white">
+            {/* Mockup da tela de confirmação - Qualidade Profissional */}
+            <div className="mt-4 border border-[#dee2e6] rounded-xl overflow-hidden shadow-xl bg-white">
               {/* Header verde prefeitura */}
-              <div className="bg-[#006633] text-white text-[10px] sm:text-xs px-3 py-1 font-medium tracking-wide">
+              <div className="bg-gradient-to-r from-[#006633] to-[#00802b] text-white text-[10px] sm:text-xs px-4 py-1.5 font-medium tracking-wide">
                 PREFEITURA DA CIDADE DO RIO DE JANEIRO
               </div>
               
               {/* Barra SEI */}
-              <div className="bg-gradient-to-b from-[#f5f5f5] to-[#e8e8e8] border-b border-slate-300 px-3 py-2">
-                <div className="flex items-center gap-2">
+              <div className="bg-gradient-to-b from-[#f8f9fa] to-[#e9ecef] border-b border-[#dee2e6] px-4 py-2.5">
+                <div className="flex items-center gap-3">
                   <div className="flex items-baseline">
-                    <span className="text-[#006633] font-black text-xl italic tracking-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>sei</span>
-                    <span className="text-[#FFD700] font-black text-xl italic" style={{ fontFamily: 'Arial Black, sans-serif' }}>!</span>
+                    <span className="text-[#006633] font-black text-xl sm:text-2xl italic tracking-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>sei</span>
+                    <span className="text-[#FFD700] font-black text-xl sm:text-2xl italic" style={{ fontFamily: 'Arial Black, sans-serif', textShadow: '0 1px 2px rgba(0,0,0,0.15)' }}>!</span>
                   </div>
-                  <span className="text-[10px] sm:text-xs text-slate-500 ml-2">SEI - Prefeitura da Cidade do Rio de Janeiro</span>
+                  <span className="text-[10px] sm:text-xs text-[#6c757d] hidden sm:inline">SEI - Prefeitura da Cidade do Rio de Janeiro</span>
                 </div>
               </div>
               
               {/* Content */}
-              <div className="bg-[#fafafa] p-3 sm:p-4">
-                <div className="flex flex-col sm:flex-row items-start gap-4">
+              <div className="bg-gradient-to-b from-[#fafbfc] to-[#f5f6f7] p-4 sm:p-5">
+                <div className="flex flex-col sm:flex-row items-start gap-5">
                   {/* Sidebar com número do processo */}
                   <div className="flex-shrink-0 w-full sm:w-auto">
-                    <div className="inline-flex items-center gap-2 border-2 border-red-500 rounded px-2 py-1.5 bg-[#fffde7] shadow-sm">
-                      <svg className="w-4 h-4 text-[#FFB300]" viewBox="0 0 24 24" fill="currentColor">
+                    <div className="inline-flex items-center gap-2.5 border-2 border-[#dc3545] rounded-lg px-3 py-2 bg-gradient-to-b from-[#fffde7] to-[#fff9c4] shadow-md hover:shadow-lg transition-shadow duration-200">
+                      <svg className="w-5 h-5 text-[#FFB300] drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
                       </svg>
-                      <a href="#" className="text-[#0066CC] font-semibold text-sm hover:underline cursor-pointer">
+                      <a href="#" className="text-[#0d6efd] font-bold text-sm sm:text-base hover:text-[#0a58ca] transition-colors cursor-pointer underline decoration-2 underline-offset-2">
                         000700.000063/2025-35
                       </a>
-                      <svg className="w-4 h-4 text-[#4CAF50]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9V6z"/>
+                      <svg className="w-5 h-5 text-[#198754] drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z"/>
                       </svg>
                     </div>
-                    <div className="mt-2 text-xs text-slate-600 flex items-center gap-1 cursor-pointer hover:text-slate-800">
-                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <div className="mt-3 text-xs text-[#6c757d] flex items-center gap-1.5 cursor-pointer hover:text-[#495057] transition-colors group">
+                      <svg className="w-4 h-4 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                       </svg>
-                      <span>Consultar Andamento</span>
+                      <span className="group-hover:underline">Consultar Andamento</span>
                     </div>
                   </div>
                   
                   {/* Área principal */}
                   <div className="flex-1 w-full">
-                    {/* Barra de ferramentas SEI */}
-                    <div className="flex flex-wrap gap-0.5 mb-4 p-1.5 bg-white border border-slate-200 rounded shadow-sm">
-                      {/* Ícones estilo SEI */}
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Incluir Documento">
-                        <svg className="w-5 h-5 text-[#FFB300]" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Ciência">
-                        <svg className="w-5 h-5 text-[#8BC34A]" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Atualizar">
-                        <svg className="w-5 h-5 text-[#2196F3]" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Anexar Processo">
-                        <svg className="w-5 h-5 text-[#9C27B0]" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Sobrestar">
-                        <svg className="w-5 h-5 text-[#FF9800]" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Consultar">
-                        <svg className="w-5 h-5 text-[#00BCD4]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Acompanhamento">
-                        <svg className="w-5 h-5 text-[#FFC107]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Enviar E-mail">
-                        <svg className="w-5 h-5 text-[#607D8B]" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Relacionar">
-                        <svg className="w-5 h-5 text-[#795548]" viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Gerenciar">
-                        <svg className="w-5 h-5 text-[#9E9E9E]" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Enviar">
-                        <svg className="w-5 h-5 text-[#4CAF50]" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Concluir">
-                        <svg className="w-5 h-5 text-[#E91E63]" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Duplicar">
-                        <svg className="w-5 h-5 text-[#3F51B5]" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Contato">
-                        <svg className="w-5 h-5 text-[#009688]" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                      </div>
-                      <div className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded cursor-pointer" title="Lista">
-                        <svg className="w-5 h-5 text-[#673AB7]" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-                      </div>
+                    {/* Barra de ferramentas SEI - Profissional com Animações */}
+                    <div className="flex flex-wrap gap-1 mb-4 p-2 bg-gradient-to-b from-[#ffffff] to-[#f8f9fa] border border-[#dee2e6] rounded-lg shadow-sm">
+                      {/* Ícones estilo SEI com hover profissional */}
+                      {[
+                        { color: '#FFB300', path: 'M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z', title: 'Incluir Documento' },
+                        { color: '#8BC34A', path: 'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z', title: 'Ciência' },
+                        { color: '#2196F3', path: 'M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z', title: 'Atualizar' },
+                        { color: '#9C27B0', path: 'M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z', title: 'Anexar' },
+                        { color: '#FF9800', path: 'M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z', title: 'Sobrestar' },
+                        { color: '#00BCD4', path: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z', title: 'Info' },
+                        { color: '#FFC107', path: 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z', title: 'Favorito' },
+                        { color: '#607D8B', path: 'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z', title: 'E-mail' },
+                        { color: '#795548', path: 'M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z', title: 'Relacionar' },
+                        { color: '#9E9E9E', path: 'M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z', title: 'Config' },
+                        { color: '#4CAF50', path: 'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z', title: 'Enviar' },
+                        { color: '#E91E63', path: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z', title: 'Concluir' },
+                        { color: '#3F51B5', path: 'M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z', title: 'Duplicar' },
+                        { color: '#009688', path: 'M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z', title: 'Contato' },
+                        { color: '#673AB7', path: 'M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z', title: 'Lista' },
+                      ].map((icon, i) => (
+                        <div 
+                          key={i}
+                          className="w-8 h-8 flex items-center justify-center rounded-md cursor-pointer transition-all duration-200 ease-out hover:scale-125 hover:shadow-lg hover:bg-gradient-to-b hover:from-white hover:to-[#f0f0f0] active:scale-95 group" 
+                          title={icon.title}
+                        >
+                          <svg 
+                            className="w-5 h-5 transition-all duration-200 group-hover:drop-shadow-md" 
+                            style={{ color: icon.color }}
+                            viewBox="0 0 24 24" 
+                            fill="currentColor"
+                          >
+                            <path d={icon.path}/>
+                          </svg>
+                        </div>
+                      ))}
                     </div>
                     
-                    <p className="text-sm text-slate-700">
-                      Processo aberto somente na unidade E/SUBG/GCGR.
-                    </p>
+                    <div className="bg-white border border-[#e9ecef] rounded-lg p-3 shadow-sm">
+                      <p className="text-sm text-[#495057]">
+                        Processo aberto somente na unidade <strong className="text-[#212529]">E/SUBG/GCGR</strong>.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

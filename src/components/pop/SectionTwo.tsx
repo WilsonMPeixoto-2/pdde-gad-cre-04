@@ -12,37 +12,86 @@ export const SectionTwo = () => {
         <PDDEChecklist />
       </div>
 
-      {/* Download Button - Ofício de Prestação de Contas PDDE */}
-      <div className="mb-8 p-5 sm:p-6 rounded-xl bg-gradient-to-r from-blue-50 to-blue-50/50 border border-blue-200">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <div className="flex items-center gap-3 flex-1">
-            <div className="p-2.5 rounded-lg bg-blue-100">
-              <FileText className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-slate-900 text-sm sm:text-base">
-                Ofício de Prestação de Contas PDDE
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-600">
-                Modelo em PDF para formalização da prestação de contas do PDDE
-              </p>
+      {/* Download Buttons - Modelos de Documentos PDDE */}
+      <div className="mb-8 space-y-3">
+        {[
+          {
+            title: "Ofício de Prestação de Contas PDDE",
+            description: "Modelo em PDF para formalização da prestação de contas do PDDE",
+            href: "/models/MODELO_DE_OFICIO_PDDE.pdf",
+          },
+          {
+            title: "Planejamento com Ata",
+            description: "Modelo de planejamento e ata de reunião do Conselho Escolar",
+            href: "/models/PLANEJAMENTO_COM_ATA.pdf",
+          },
+          {
+            title: "Consolidação de Pesquisa de Preços",
+            description: "Modelo para consolidar cotações e justificar escolha de fornecedor",
+            href: "/models/CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf",
+          },
+          {
+            title: "Demonstrativo de Despesa",
+            description: "Modelo para demonstração das despesas realizadas com recursos do PDDE",
+            href: "/models/DEMONSTRATIVO_DE_DESPESA.pdf",
+          },
+          {
+            title: "Nota Fiscal Eletrônica - DANFE",
+            description: "Modelo de referência para Notas Fiscais Eletrônicas",
+            href: "/models/NOTA_FISCAL_ELETRONICA_DANFE.pdf",
+          },
+          {
+            title: "Extrato de Conta Corrente",
+            description: "Modelo de extrato bancário da conta corrente do PDDE",
+            href: "/models/EXTRATO_CONTA_CORRENTE.pdf",
+          },
+          {
+            title: "Extrato de Aplicação",
+            description: "Modelo de extrato de aplicação financeira dos recursos",
+            href: "/models/EXTRATO_APLICACAO.pdf",
+          },
+          {
+            title: "Parecer do Conselho",
+            description: "Modelo de parecer conclusivo do Conselho Escolar",
+            href: "/models/PARECER_DO_CONSELHO.pdf",
+          },
+        ].map((doc, index) => (
+          <div
+            key={index}
+            className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-50 to-blue-50/50 border border-blue-200"
+          >
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-3 flex-1">
+                <div className="p-2 rounded-lg bg-blue-100">
+                  <FileText className="w-4 h-4 text-blue-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-slate-900 text-sm">
+                    {doc.title}
+                  </h4>
+                  <p className="text-xs text-slate-600">
+                    {doc.description}
+                  </p>
+                </div>
+              </div>
+              <Button
+                asChild
+                size="sm"
+                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <a
+                  href={doc.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Baixar PDF</span>
+                </a>
+              </Button>
             </div>
           </div>
-          <Button
-            asChild
-            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            <a
-              href="/models/MODELO_DE_OFICIO_PDDE.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <Download className="w-4 h-4" />
-              <span>Baixar Modelo (PDF)</span>
-            </a>
-          </Button>
-        </div>
+        ))}
       </div>
 
       <div className="space-y-8">

@@ -127,9 +127,9 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
             <Search className="w-4 h-4" />
             <input 
               type="text" 
-              placeholder="prestação" 
+              placeholder="pdde" 
               className="bg-secondary/50 border border-border rounded px-3 py-1.5 text-foreground w-full"
-              defaultValue="prestação"
+              defaultValue="pdde"
             />
           </div>
           
@@ -138,7 +138,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
               Devolução de Prestação de Contas
             </div>
             <div className="px-3 py-2 rounded-lg text-sm bg-primary text-primary-foreground font-semibold cursor-pointer shadow-md">
-              EXECUÇÃO FINANCEIRA: SISTEMA DESCENTRALIZADO DE PAGAMENTO - SDP
+              EXECUÇÃO FINANCEIRA: PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE
             </div>
             <div className="px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-secondary cursor-pointer">
               Prestação de Contas de Suprimento de Fundos

@@ -38,7 +38,7 @@ export const SectionFour = () => {
                 como elementos comprobatórios essenciais.
               </p>
               <p className="text-muted-foreground text-sm sm:text-base text-justified leading-relaxed mb-3">
-                No contexto da prestação de contas do SDP, os documentos externos mais comuns incluem:
+                No contexto da prestação de contas do PDDE, os documentos externos mais comuns incluem:
               </p>
               <div className="flex flex-wrap gap-2">
                 {[
@@ -135,7 +135,7 @@ export const SectionFour = () => {
               <div>
                 <h4 className="font-semibold text-foreground">Nível de Acesso</h4>
                 <p className="text-sm text-muted-foreground">
-                  Para documentos do SDP sem informações sigilosas, marque <strong className="text-foreground">"Público"</strong>
+                  Para documentos do PDDE sem informações sigilosas, marque <strong className="text-foreground">"Público"</strong>
                 </p>
               </div>
             </div>

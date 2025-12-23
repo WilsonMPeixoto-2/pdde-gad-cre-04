@@ -17,7 +17,7 @@ export const SectionOne = () => {
               <h3 className="section-heading">1.1. Sobre esta etapa</h3>
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
                 A etapa inicial compreende a autuação do processo administrativo eletrônico, 
-                no qual serão inseridos todos os documentos comprobatórios da prestação de contas.
+                no qual serão inseridos todos os documentos comprobatórios da prestação de contas do PDDE.
               </p>
             </div>
           </div>
@@ -51,9 +51,9 @@ export const SectionOne = () => {
             <Callout variant="info" title="Tipo de Processo Correto:">
               <div className="flex items-center gap-2 mt-2">
                 <p className="text-slate-900 font-semibold text-sm sm:text-base flex-1">
-                  EXECUÇÃO FINANCEIRA: SISTEMA DESCENTRALIZADO DE PAGAMENTO - SDP
+                  EXECUÇÃO FINANCEIRA: PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE
                 </p>
-                <CopyButton text="EXECUÇÃO FINANCEIRA: SISTEMA DESCENTRALIZADO DE PAGAMENTO - SDP" label="Copiado!" />
+                <CopyButton text="EXECUÇÃO FINANCEIRA: PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE" label="Copiado!" />
               </div>
             </Callout>
 
@@ -66,7 +66,7 @@ export const SectionOne = () => {
 
         {/* Classification */}
         <div className="section-card">
-          <h3 className="section-heading">1.5. Classificação por Assuntos</h3>
+          <h3 className="section-heading">1.4. Classificação por Assuntos</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
               Este campo será preenchido automaticamente pelo sistema, em conformidade com o Tipo de 
@@ -77,9 +77,9 @@ export const SectionOne = () => {
               <p className="text-sm text-slate-600 mb-3">Classificação automática:</p>
               <div className="flex items-center gap-2">
                 <code className="flex-1 bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 break-all shadow-sm">
-                  01.05.03.11 - SISTEMA DESCENTRALIZADO DE PAGAMENTO
+                  01.05.03.04 - PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE
                 </code>
-                <CopyButton text="01.05.03.11 - SISTEMA DESCENTRALIZADO DE PAGAMENTO" label="Copiado!" />
+                <CopyButton text="01.05.03.04 - PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE" label="Copiado!" />
               </div>
             </div>
           </div>
@@ -87,20 +87,20 @@ export const SectionOne = () => {
 
         {/* Specification */}
         <div className="section-card">
-          <h3 className="section-heading">1.8. Especificação</h3>
+          <h3 className="section-heading">1.5. Especificação</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
               O cadastrante deverá obrigatoriamente digitar os metadados estabelecidos pela GAD, 
-              composto pelo Objetivo do processo (PRESTAÇÃO DE CONTAS DE SDP) + DESIGNAÇÃO DA UNIDADE 
+              composto pelo Objetivo do processo (PRESTAÇÃO DE CONTAS DE PDDE) + DESIGNAÇÃO DA UNIDADE 
               ESCOLAR seguida da NOMENCLATURA DA UNIDADE.
             </p>
 
             <Callout variant="success" title="Exemplo de Especificação:">
               <div className="flex items-center gap-2 mt-2">
                 <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg">
-                  Prestação de contas de SDP - E/CRE(04.30.502) Ciep Elis Regina
+                  Prestação de contas de PDDE - E/CRE(04.30.502) Ciep Elis Regina
                 </code>
-                <CopyButton text="Prestação de contas de SDP - E/CRE(04.30.502) Ciep Elis Regina" label="Copiado!" />
+                <CopyButton text="Prestação de contas de PDDE - E/CRE(04.30.502) Ciep Elis Regina" label="Copiado!" />
               </div>
             </Callout>
           </div>
@@ -108,7 +108,7 @@ export const SectionOne = () => {
 
         {/* Access Level */}
         <div className="section-card">
-          <h3 className="section-heading">1.11. Nível de Acesso</h3>
+          <h3 className="section-heading">1.6. Nível de Acesso</h3>
           <div className="content-spacing">
             <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
               <table className="table-institutional text-sm w-full">
@@ -137,7 +137,7 @@ export const SectionOne = () => {
 
             <Callout variant="info" title="Princípio da Publicidade" className="mt-6">
               <p className="text-sm text-slate-700 leading-relaxed">
-                Os processos de prestação de contas do SDP devem, como regra, ser classificados 
+                Os processos de prestação de contas do PDDE devem, como regra, ser classificados 
                 com nível de acesso <strong className="text-slate-900">"Público"</strong>, por se 
                 referirem à aplicação de recursos públicos (Art. 37 CF e Lei nº 12.527/2011 - LAI).
               </p>
@@ -149,7 +149,7 @@ export const SectionOne = () => {
         </div>
 
         <div className="section-card">
-          <h3 className="section-heading">1.12. Interessados</h3>
+          <h3 className="section-heading">1.7. Interessados</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
               Este campo é utilizado para registrar unidades ou entidades que possuam interesse no processo.
@@ -167,7 +167,7 @@ export const SectionOne = () => {
 
         {/* Observações */}
         <div className="section-card">
-          <h3 className="section-heading">1.13. Observações da Unidade</h3>
+          <h3 className="section-heading">1.8. Observações da Unidade</h3>
           <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
             O campo "Observações desta unidade" poderá ser preenchido por cada unidade em que o processo 
             tramitar. As observações inseridas por outras unidades aparecerão, na tela Alterar Processo, 

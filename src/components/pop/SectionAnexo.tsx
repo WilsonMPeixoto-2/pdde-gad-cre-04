@@ -39,10 +39,10 @@ export const SectionAnexo = () => {
   ];
 
   const prazosPrestacao = [
-    { situacao: "Prestação regular", prazo: "Até 120 dias após liberação de recursos" },
-    { situacao: "Solicitação de reposição de recursos", prazo: "Antes de 90 dias (Art. 23 §4º da Res. 107/2022)" },
+    { situacao: "Prestação regular PDDE", prazo: "Até 31 de dezembro do ano subsequente ao repasse" },
+    { situacao: "Devolução de saldos", prazo: "Conforme orientações do FNDE" },
     { situacao: "Substituição de gestor", prazo: "Imediata" },
-    { situacao: "Encerramento do SDP", prazo: "Imediata" },
+    { situacao: "Encerramento do exercício", prazo: "Conforme calendário FNDE" },
   ];
 
   const documentosComprobatorios = [
@@ -264,10 +264,10 @@ export const SectionAnexo = () => {
             <Calculator className="w-5 h-5 text-amber-600" />
           </div>
           <div>
-            <h4 className="font-semibold text-foreground mb-2">Retenção de Tributos (Res. CGM nº 1.176/2015)</h4>
+            <h4 className="font-semibold text-foreground mb-2">Retenção de Tributos</h4>
             <p className="text-muted-foreground text-sm leading-relaxed text-justified mb-2">
-              Mesmo no SDP, a <strong className="text-foreground">regra de retenção na fonte se aplica</strong>. 
-              Se você pagar um prestador de serviço (PJ ou PF) pelo valor bruto sem reter o ISS, INSS ou IRRF quando devido, a prestação de contas será reprovada.
+              Mesmo no PDDE, a <strong className="text-foreground">regra de retenção na fonte pode se aplicar</strong>. 
+              Verifique com a GAD antes de realizar pagamentos a prestadores de serviço.
             </p>
             <ul className="text-muted-foreground text-sm space-y-1 list-disc list-inside">
               <li><strong className="text-foreground">ISS:</strong> Serviços prestados no Rio de Janeiro</li>

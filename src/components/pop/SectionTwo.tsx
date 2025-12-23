@@ -18,7 +18,7 @@ export const SectionTwo = () => {
                 Modelo do Despacho de Encaminhamento
               </h4>
               <p className="text-xs sm:text-sm text-slate-600">
-                Documento editável (.docx) para formalização da prestação de contas
+                Documento editável (.docx) para formalização da prestação de contas do PDDE
               </p>
             </div>
           </div>
@@ -50,7 +50,7 @@ export const SectionTwo = () => {
               <h3 className="section-heading">2.1. O Despacho de Encaminhamento</h3>
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
                 O Despacho de Encaminhamento é o documento que formaliza a prestação de contas 
-                para a Gerência de Administração (GAD).
+                do PDDE para a Gerência de Administração (GAD).
               </p>
             </div>
           </div>
@@ -61,7 +61,7 @@ export const SectionTwo = () => {
           <h3 className="section-heading">Funções Principais</h3>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              "Formaliza a prestação de contas da unidade gestora do SDP",
+              "Formaliza a prestação de contas da unidade gestora do PDDE",
               "Registra os valores e datas de liberação dos recursos",
               "Documenta o percentual de recursos consumidos",
               "Estabelece a base documental para análise e aprovação pela GAD",
@@ -93,7 +93,7 @@ export const SectionTwo = () => {
               <div>
                 <h4 className="font-semibold text-slate-900 mb-1">Escolha do Tipo de Documento</h4>
                 <p className="text-sm text-slate-700 leading-relaxed">
-                  Selecione o tipo: <strong className="text-slate-900">"Encaminhamento da Prestação de Contas dos Gestores SDP"</strong>
+                  Selecione o tipo: <strong className="text-slate-900">"Encaminhamento da Prestação de Contas PDDE"</strong>
                 </p>
               </div>
             </div>
@@ -121,7 +121,7 @@ export const SectionTwo = () => {
             
             <Callout variant="info" title="Formato obrigatório:">
               <code className="block bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 break-all shadow-sm mt-2">
-                SDP – E/CRE (04.xx.xxx) NOME DA ESCOLA
+                PDDE – E/CRE (04.xx.xxx) NOME DA ESCOLA
               </code>
             </Callout>
           </div>
@@ -145,23 +145,19 @@ export const SectionTwo = () => {
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="pl-6 sm:pl-8 text-slate-700">Saldo da natureza <span className="data-code">441</span></td>
+                  <td className="pl-6 sm:pl-8 text-slate-700">Saldo Custeio</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="pl-6 sm:pl-8 text-slate-700">Saldo da natureza <span className="data-code">435</span></td>
+                  <td className="pl-6 sm:pl-8 text-slate-700">Saldo Capital</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="pl-6 sm:pl-8 text-slate-700">Saldo da natureza <span className="data-code">434</span></td>
+                  <td className="text-slate-700">Total dos Créditos (repasses)</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="text-slate-700">Total dos Créditos (ressuprimentos)</td>
-                  <td className="text-right data-code">-</td>
-                </tr>
-                <tr>
-                  <td className="text-slate-700">Pgtos em cartão (Boletos Bancários)</td>
+                  <td className="text-slate-700">Despesas realizadas</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr className="font-semibold bg-accent/10">

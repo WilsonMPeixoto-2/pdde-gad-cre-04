@@ -158,17 +158,109 @@ export const SectionOne = () => {
                 <CopyButton text="10729 - E/4a.CRE/GAD" label="Código copiado!" />
               </div>
             </Callout>
+            <Callout variant="info" title="Adicione também a Unidade Escolar:" className="mt-4">
+              <p className="text-sm text-slate-700">
+                Busque pela <strong className="text-slate-900">designação</strong> da unidade escolar para adicioná-la como interessada.
+              </p>
+            </Callout>
           </div>
         </div>
 
         {/* Observações */}
         <div className="section-card">
           <h3 className="section-heading">1.8. Observações da Unidade</h3>
-          <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-            O campo "Observações desta unidade" poderá ser preenchido por cada unidade em que o processo 
-            tramitar. As observações inseridas por outras unidades aparecerão, na tela Alterar Processo, 
-            separadamente, na Lista de observações de outras unidades.
-          </p>
+          <div className="content-spacing">
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+              O campo "Observações desta unidade" poderá ser preenchido por cada unidade em que o processo 
+              tramitar. As observações inseridas por outras unidades aparecerão, na tela Alterar Processo, 
+              separadamente, na Lista de observações de outras unidades.
+            </p>
+            <Callout variant="success" title="Observação desta Unidade:" className="mt-4">
+              <div className="flex items-center gap-2 mt-2">
+                <code className="flex-1 text-slate-900 data-code text-sm bg-white/50 px-3 py-2 rounded-lg">
+                  INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)
+                </code>
+                <CopyButton text="INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)" label="Copiado!" />
+              </div>
+            </Callout>
+          </div>
+        </div>
+
+        {/* Salvar */}
+        <div className="section-card">
+          <h3 className="section-heading">1.9. Salvando o Processo</h3>
+          <div className="content-spacing">
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+              Após verificação de todos os campos, clique no botão <strong className="text-slate-900">"SALVAR"</strong> para criar o processo.
+            </p>
+            <div className="mt-4">
+              <button className="bg-[#006400] hover:bg-[#005200] text-white font-semibold px-6 py-2 rounded shadow-md transition-colors cursor-default">
+                Salvar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Confirmação */}
+        <div className="section-card">
+          <h3 className="section-heading">1.10. Confirmação da Criação</h3>
+          <div className="content-spacing">
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+              A criação do Processo será confirmada com a tela abaixo:
+            </p>
+            
+            {/* Mockup da tela de confirmação */}
+            <div className="mt-4 border border-slate-300 rounded-lg overflow-hidden shadow-sm">
+              {/* Header */}
+              <div className="bg-[#006633] text-white text-xs px-3 py-1">
+                PREFEITURA DA CIDADE DO RIO DE JANEIRO
+              </div>
+              <div className="bg-[#f0f0f0] border-b border-slate-300 px-3 py-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-[#006633] font-bold text-lg italic">sei!</span>
+                  <span className="text-xs text-slate-600">SEI - Prefeitura da Cidade do Rio de Janeiro</span>
+                </div>
+              </div>
+              
+              {/* Content */}
+              <div className="bg-white p-4">
+                <div className="flex items-start gap-4">
+                  {/* Sidebar com número do processo */}
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center gap-2 border-2 border-red-500 rounded px-2 py-1 bg-yellow-50">
+                      <span className="text-yellow-600">📁</span>
+                      <span className="text-blue-700 font-semibold text-sm underline">000700.000063/2025-35</span>
+                      <span className="text-green-600">🔓</span>
+                    </div>
+                    <div className="mt-2 text-xs text-slate-600 flex items-center gap-1">
+                      <span>🔍</span> Consultar Andamento
+                    </div>
+                  </div>
+                  
+                  {/* Área principal */}
+                  <div className="flex-1">
+                    {/* Barra de ferramentas */}
+                    <div className="flex flex-wrap gap-1 mb-4 p-2 bg-slate-50 rounded">
+                      {['📄', '📋', '🔄', '📎', '📁', 'ℹ️', '⭐', '📧', '🔗', '⚙️', '🏠', '📑', '📂', '🗂️', '📤', '📞', '📋'].map((icon, i) => (
+                        <span key={i} className="w-6 h-6 flex items-center justify-center text-sm bg-white border border-slate-200 rounded">{icon}</span>
+                      ))}
+                    </div>
+                    
+                    <p className="text-sm text-slate-700">
+                      Processo aberto somente na unidade E/SUBG/GCGR.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <Callout variant="warning" title="Importante!" className="mt-6">
+              <p className="text-sm text-slate-700 leading-relaxed">
+                Copie o <strong className="text-slate-900">número do Processo</strong> que foi gerado e preencha a planilha 
+                <strong className="text-slate-900"> "Controle de processos 2026"</strong> enviada pela GCGR.
+              </p>
+            </Callout>
+          </div>
         </div>
       </div>
     </section>

@@ -58,7 +58,7 @@ const SeiHeader = ({ title, showLogo = false }: { title?: string; showLogo?: boo
         <div className="flex items-center gap-2">
           <div className="flex items-baseline">
             <span className="text-[#006633] font-black text-lg italic tracking-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>sei</span>
-            <span className="text-[#FFD700] font-black text-lg italic" style={{ fontFamily: 'Arial Black, sans-serif', textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>!</span>
+            <span className="text-[#006633] font-black text-lg italic" style={{ fontFamily: 'Arial Black, sans-serif', textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>!</span>
           </div>
           {showLogo && (
             <span className="text-[10px] text-[#6c757d] ml-1 hidden sm:inline">SEI - Prefeitura da Cidade do Rio de Janeiro</span>

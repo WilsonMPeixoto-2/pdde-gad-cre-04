@@ -27,10 +27,10 @@ export const SeiIncluirIcon: React.FC<IconProps> = ({ size = 24, className }) =>
       strokeWidth="2"
       strokeLinejoin="round"
     />
-    <circle cx="16" cy="18" r="5" fill="#FFD700" stroke="#DAA520" strokeWidth="1" />
+    <circle cx="16" cy="18" r="5" fill="#0EA5E9" stroke="#0284C7" strokeWidth="1" />
     <path
       d="M16 14V22M12 18H20"
-      stroke="#DAA520"
+      stroke="#ffffff"
       strokeWidth="2"
       strokeLinecap="round"
     />
@@ -52,7 +52,7 @@ export const SeiAssinarIcon: React.FC<IconProps> = ({ size = 24, className }) =>
       stroke="#000000"
       strokeWidth="1.5"
     />
-    <path d="M16.5 4.5L19.5 7.5" stroke="#FFD700" strokeWidth="2" />
+    <path d="M16.5 4.5L19.5 7.5" stroke="#64748B" strokeWidth="2" />
     <path d="M5 22L7.5 21.5L10 19" stroke="#333333" strokeWidth="1" />
   </svg>
 );
@@ -103,12 +103,12 @@ export const SeiPastaIcon: React.FC<IconProps> = ({ size = 24, className }) => (
   >
     <path
       d="M22 11V6C22 4.89543 21.1046 4 20 4H10L8 2H4C2.89543 2 2 2.89543 2 4V11"
-      fill="#E3C565"
-      stroke="#CCA340"
+      fill="#38BDF8"
+      stroke="#0284C7"
       strokeWidth="1"
     />
-    <rect x="2" y="8" width="20" height="14" rx="2" fill="#F4D06F" stroke="#CCA340" strokeWidth="1" />
-    <path d="M2 11H22" stroke="#CCA340" strokeWidth="1" strokeOpacity="0.5" />
+    <rect x="2" y="8" width="20" height="14" rx="2" fill="#7DD3FC" stroke="#0284C7" strokeWidth="1" />
+    <path d="M2 11H22" stroke="#0284C7" strokeWidth="1" strokeOpacity="0.5" />
   </svg>
 );
 

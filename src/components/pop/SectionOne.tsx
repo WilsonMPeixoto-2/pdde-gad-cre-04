@@ -51,9 +51,9 @@ export const SectionOne = () => {
             <Callout variant="info" title="Tipo de Processo Correto:">
               <div className="flex items-center gap-2 mt-2">
                 <p className="text-slate-900 font-semibold text-sm sm:text-base flex-1">
-                  EXECUÇÃO FINANCEIRA: PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE
+                  GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
                 </p>
-                <CopyButton text="EXECUÇÃO FINANCEIRA: PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE" label="Copiado!" />
+                <CopyButton text="GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC" label="Copiado!" />
               </div>
             </Callout>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Menu, ClipboardList, FileText, Table2, Upload, CheckCircle, Phone, Scale } from "lucide-react";
+import { Menu, ClipboardList, FileText, Upload, CheckCircle, Phone, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
@@ -11,6 +11,7 @@ import { SectionTwo } from "@/components/pop/SectionTwo";
 import { SectionThree } from "@/components/pop/SectionThree";
 import { SectionFour } from "@/components/pop/SectionFour";
 import { SectionFive } from "@/components/pop/SectionFive";
+import { SectionSix } from "@/components/pop/SectionSix";
 import { SectionContacts } from "@/components/pop/SectionContacts";
 import { SectionAnexo } from "@/components/pop/SectionAnexo";
 import { BackToTop } from "@/components/pop/BackToTop";
@@ -33,7 +34,7 @@ const Index = () => {
 
   const handlePrint = useCallback(() => {
     const originalTitle = document.title;
-    const printTitle = "SDP_PRESTACAO_DE_CONTAS_GAD_4_CRE";
+    const printTitle = "PDDE_PRESTACAO_DE_CONTAS_GAD_4_CRE";
 
     const restoreTitle = () => {
       document.title = originalTitle;
@@ -53,7 +54,7 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["introducao", "secao-1", "secao-2", "secao-3", "secao-4", "secao-5", "contatos", "anexo"];
+      const sections = ["introducao", "secao-1", "secao-2", "secao-3", "secao-4", "secao-5", "secao-6", "contatos", "anexo"];
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -110,35 +111,42 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="2" title="Despacho de Encaminhamento" subtitle="Elaboração do documento de formalização da prestação de contas" icon={FileText} />
+                <SectionDivider number="2" title="Instrução Processual" subtitle="Documentos exigidos para a prestação de contas do PDDE" icon={FileText} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionTwo />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="3" title="Demonstrativo de Despesas" subtitle="Como gerar no SEI!RIO, conferência de dados e naturezas de despesa" icon={Table2} />
+                <SectionDivider number="3" title="Inclusão de Documentos" subtitle="Como incluir documentos externos no processo do SEI!RIO" icon={Upload} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionThree />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="4" title="Documentos Externos" subtitle="Notas fiscais, recibos, comprovantes e demais documentos" icon={Upload} />
+                <SectionDivider number="4" title="Declaração de Autenticidade" subtitle="Elaboração da declaração de autenticidade dos documentos" icon={FileText} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionFour />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="5" title="Conferência e Envio" subtitle="Verificação dos documentos e envio para a GAD" icon={CheckCircle} />
+                <SectionDivider number="5" title="Bloco de Assinatura" subtitle="Criação do bloco de assinatura e disponibilização para a escola" icon={CheckCircle} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionFive />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="6" title="Contatos" subtitle="Canais de atendimento e suporte da GAD/4ª CRE" icon={Phone} />
+                <SectionDivider number="6" title="Despacho e Finalização" subtitle="Despachos da GAD e do Coordenador para aprovação" icon={FileText} />
+              </AnimatedSection>
+              <AnimatedSection delay={150}>
+                <SectionSix />
+              </AnimatedSection>
+
+              <AnimatedSection delay={100}>
+                <SectionDivider number="7" title="Contatos" subtitle="Canais de atendimento e suporte da GAD/4ª CRE" icon={Phone} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionContacts onPrint={handlePrint} />
@@ -156,7 +164,7 @@ const Index = () => {
             </div>
 
             <div className="print-only mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
-              <p>Procedimento Operacional Padrão - Prestação de Contas SDP</p>
+              <p>Procedimento Operacional Padrão - Prestação de Contas PDDE</p>
               <p>4ª Coordenadoria Regional de Educação | GAD</p>
             </div>
           </div>

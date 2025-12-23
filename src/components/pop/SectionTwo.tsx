@@ -127,9 +127,9 @@ export const SectionTwo = () => {
                   3
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 3 – Inclusão de Documentos Externos</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 uppercase tracking-wide">Externos</span></h4>
                   <p className="text-slate-600 text-sm leading-relaxed text-justify">
-                    Neste tópico, serão apresentadas as diretrizes para o encarte de todos os documentos gerados fora do ambiente do sistema <strong className="text-slate-800">SEI!RIO</strong> (<strong className="text-sky-600">digitalizados</strong> ou <strong className="text-emerald-600">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
+                    Documentos gerados fora do ambiente do sistema <strong className="text-slate-800">SEI!RIO</strong> (<strong className="text-sky-600">digitalizados</strong> ou <strong className="text-emerald-600 uppercase">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
                   </p>
                 </div>
               </div>

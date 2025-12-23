@@ -258,10 +258,10 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Alerta Retenção de Tributos */}
-      <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-amber-500 bg-gradient-to-r from-amber-500/5 to-transparent">
+      <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-sky-500 bg-gradient-to-r from-sky-500/5 to-transparent">
         <div className="flex items-start gap-4">
-          <div className="p-2.5 rounded-lg bg-amber-500/10 shrink-0">
-            <Calculator className="w-5 h-5 text-amber-600" />
+          <div className="p-2.5 rounded-lg bg-sky-500/10 shrink-0">
+            <Calculator className="w-5 h-5 text-sky-600" />
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-2">Retenção de Tributos</h4>

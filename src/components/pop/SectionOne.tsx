@@ -292,7 +292,7 @@ export const SectionOne = () => {
                     
                     <div className="bg-white border border-[#e9ecef] rounded-lg p-3 shadow-sm">
                       <p className="text-sm text-[#495057]">
-                        Processo aberto somente na unidade <strong className="text-[#212529]">E/SUBG/GCGR</strong>.
+                        Processo aberto com sucesso.
                       </p>
                     </div>
                   </div>

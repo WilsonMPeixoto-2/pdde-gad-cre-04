@@ -19,9 +19,9 @@ const variantStyles: Record<CalloutVariant, { bg: string; border: string; icon: 
     iconComponent: Info,
   },
   warning: {
-    bg: "bg-amber-50",
-    border: "border-l-amber-500",
-    icon: "text-amber-600",
+    bg: "bg-sky-50",
+    border: "border-l-sky-500",
+    icon: "text-sky-600",
     iconComponent: AlertTriangle,
   },
   success: {

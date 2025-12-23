@@ -73,9 +73,9 @@ export const SectionOne = () => {
               <p className="text-sm text-slate-600 mb-3">Classificação automática:</p>
               <div className="flex items-center gap-2">
                 <code className="flex-1 bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 break-all shadow-sm">
-                  01.05.03.04 - PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE
+                  03.04.01.02 - PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
                 </code>
-                <CopyButton text="01.05.03.04 - PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE" label="Copiado!" />
+                <CopyButton text="03.04.01.02 - PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC" label="Copiado!" />
               </div>
             </div>
           </div>

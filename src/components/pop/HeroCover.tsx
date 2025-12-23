@@ -46,12 +46,12 @@ export const HeroCover = () => {
             Prestação de Contas
             <br />
             <span className="hero-title-accent bg-gradient-to-r from-[hsl(199,89%,48%)] via-[hsl(199,89%,60%)] to-[hsl(199,89%,48%)] bg-clip-text text-transparent">
-              SDP no SEI!RIO
+              PDDE no SEI!RIO
             </span>
           </h1>
           <p className="text-xl sm:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
-            Guia operacional para diretores(as) e gestores(as) escolares na instrução 
-            da Prestação de Contas do SDP diretamente no SEI!RIO.
+            Guia operacional para a GAD e gestores(as) escolares na instrução 
+            da Prestação de Contas do PDDE diretamente no SEI!RIO.
           </p>
         </div>
         

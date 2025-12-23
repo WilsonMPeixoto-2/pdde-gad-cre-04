@@ -6,7 +6,7 @@ import { Callout } from "./Callout";
 export const SectionTwo = () => {
   return (
     <section id="secao-2" className="scroll-mt-20 animate-fade-in">
-      {/* Download Button - Despacho de Encaminhamento */}
+      {/* Download Button - Ofício de Prestação de Contas PDDE */}
       <div className="mb-8 p-5 sm:p-6 rounded-xl bg-gradient-to-r from-blue-50 to-blue-50/50 border border-blue-200">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex items-center gap-3 flex-1">
@@ -15,10 +15,10 @@ export const SectionTwo = () => {
             </div>
             <div>
               <h4 className="font-semibold text-slate-900 text-sm sm:text-base">
-                Modelo do Despacho de Encaminhamento
+                Ofício de Prestação de Contas PDDE
               </h4>
               <p className="text-xs sm:text-sm text-slate-600">
-                Documento editável (.docx) para formalização da prestação de contas do PDDE
+                Modelo em PDF para formalização da prestação de contas do PDDE
               </p>
             </div>
           </div>
@@ -27,13 +27,13 @@ export const SectionTwo = () => {
             className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <a
-              href="https://rioeduca-my.sharepoint.com/:w:/g/personal/wilson_mpeixoto_rioeduca_net/IQC9wPR-JwJySpEGFJeisX7SAU96gsNWnIZiVss7WC0KKjE?e=6sP1ua"
+              href="/models/MODELO_DE_OFICIO_PDDE.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
-              <span>Baixar Modelo Editável</span>
+              <span>Baixar Modelo (PDF)</span>
             </a>
           </Button>
         </div>

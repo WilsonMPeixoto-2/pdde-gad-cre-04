@@ -127,7 +127,7 @@ export const SectionTwo = () => {
                   3
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 uppercase tracking-wide">Externos</span></h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 font-bold uppercase tracking-wide">EXTERNOS</span></h4>
                   <p className="text-slate-600 text-sm leading-relaxed text-justify">
                     Documentos gerados fora do ambiente do sistema <strong className="text-slate-800">SEI!RIO</strong> (<strong className="text-sky-600">digitalizados</strong> ou <strong className="text-emerald-600 uppercase">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
                   </p>

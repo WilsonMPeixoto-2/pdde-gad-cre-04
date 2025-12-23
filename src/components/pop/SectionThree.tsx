@@ -1,6 +1,4 @@
-import { Table2, AlertCircle, FileSpreadsheet, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { InfoDrawer, NaturezasDespesaContent } from "./InfoDrawer";
+import { Upload, FileImage, FileText, AlertCircle, CheckCircle2 } from "lucide-react";
 
 export const SectionThree = () => {
   return (
@@ -10,133 +8,148 @@ export const SectionThree = () => {
         <div className="section-number">3</div>
         <div>
           <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
-            Demonstrativo de Despesas
+            Inclusão de Documentos <span className="text-sky-600 font-bold uppercase">EXTERNOS</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-1">
-            Como gerar no SEI!RIO, conferência de dados e categorias de despesa
+            Documentos gerados fora do ambiente do sistema SEI!RIO (digitalizados ou arquivos <span className="text-emerald-600 font-semibold uppercase">NATO DIGITAIS</span>)
           </p>
         </div>
       </div>
 
       <div className="space-y-5">
         {/* Intro */}
-        <div className="section-card p-5 sm:p-6 border-l-4 border-l-primary">
+        <div className="section-card p-5 sm:p-6 border-l-4 border-l-sky-500">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-primary/10 shrink-0">
-              <Table2 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+            <div className="p-3 rounded-xl bg-sky-100 shrink-0">
+              <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground mb-2">3.1. Demonstrativo de Despesas – Documento Interno</h3>
+              <h3 className="font-semibold text-foreground mb-2">3.1. O que são Documentos Externos?</h3>
               <p className="text-muted-foreground text-sm sm:text-base text-justified leading-relaxed">
-                Utilize o modelo abaixo como referência para preencher o demonstrativo de despesas 
-                no sistema SEI!RIO. Este modelo contempla as categorias Custeio e Capital, 
-                conforme orientações do FNDE.
+                Documentos externos são aqueles que <strong className="text-slate-800">não foram criados dentro do SEI!RIO</strong>. 
+                Incluem documentos digitalizados (escaneados) e arquivos nato digitais, como PDFs, 
+                notas fiscais eletrônicas, extratos bancários, comprovantes e outros documentos 
+                recebidos em formato digital.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Payment Table Template */}
+        {/* Tipos de Documentos Externos */}
         <div className="section-card p-5 sm:p-6">
-          <h3 className="font-semibold text-foreground mb-4">
-            Demonstrativo de Pagamentos PDDE
-          </h3>
-          
-          <div className="overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0">
-            <table className="table-institutional text-sm">
-              <thead>
-                <tr>
-                  <th className="rounded-tl-lg">Data da Nota</th>
-                  <th>Tipo de Transação</th>
-                  <th>Favorecido</th>
-                  <th>Categoria</th>
-                  <th className="text-right rounded-tr-lg">Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="text-muted-foreground">DD/MM/AAAA</td>
-                  <td className="text-muted-foreground">Compra/Serviço</td>
-                  <td className="text-muted-foreground">Nome</td>
-                  <td className="data-code text-muted-foreground">Custeio</td>
-                  <td className="text-right data-code">R$ 0,00</td>
-                </tr>
-                <tr className="bg-primary/5">
-                  <td colSpan={4} className="text-right font-semibold">Valor total:</td>
-                  <td className="text-right data-code font-semibold">R$ 0,00</td>
-                </tr>
-                <tr className="bg-success/5">
-                  <td colSpan={4} className="text-right font-semibold">Saldo disponível:</td>
-                  <td className="text-right data-code font-semibold text-success">R$ 0,00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Expense Categories */}
-        <div className="section-card p-5 sm:p-6">
-          <div className="flex items-center gap-3 flex-wrap mb-4">
-            <h3 className="font-semibold text-foreground">Categorias de Despesa do PDDE</h3>
-            <InfoDrawer title="Categorias de Despesa" triggerLabel="Saiba mais">
-              <NaturezasDespesaContent />
-            </InfoDrawer>
-          </div>
+          <h3 className="font-semibold text-foreground mb-4">3.2. Tipos de Documentos Externos</h3>
           
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl border-l-4 border-l-primary">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm shadow-md">
-                  Custeio
-                </span>
+            <div className="p-4 bg-gradient-to-br from-slate-50 to-slate-100/50 rounded-xl border-l-4 border-l-slate-500">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 rounded-lg bg-slate-200">
+                  <FileImage className="w-4 h-4 text-slate-700" />
+                </div>
+                <span className="font-semibold text-slate-800">Digitalizados</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Material de consumo, manutenção, pequenos reparos, serviços de terceiros
+                Documentos físicos escaneados em formato PDF ou imagem (notas fiscais em papel, 
+                recibos, atas manuscritas, etc.)
               </p>
             </div>
             
-            <div className="p-4 bg-gradient-to-br from-success/10 to-success/5 rounded-xl border-l-4 border-l-success">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-xl bg-success text-success-foreground font-bold text-sm shadow-md">
-                  Capital
-                </span>
+            <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-xl border-l-4 border-l-emerald-500">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 rounded-lg bg-emerald-200">
+                  <FileText className="w-4 h-4 text-emerald-700" />
+                </div>
+                <span className="font-semibold text-emerald-800 uppercase">Nato Digitais</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Equipamentos, material permanente, mobiliário
+                Arquivos já criados em formato digital (NF-e, DANFE, extratos bancários eletrônicos, 
+                comprovantes de transferência, etc.)
               </p>
             </div>
           </div>
         </div>
 
-        {/* Excel Note with Download Button */}
-        <div className="section-card p-5 sm:p-6 border border-success/30 bg-gradient-to-br from-success/5 to-transparent">
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <div className="p-3 rounded-xl bg-success/10 shrink-0">
-              <FileSpreadsheet className="w-5 h-5 sm:w-6 sm:h-6 text-success" />
+        {/* Procedimento de Inclusão */}
+        <div className="section-card p-5 sm:p-6 border-l-4 border-l-primary">
+          <h3 className="font-semibold text-foreground mb-4">3.3. Procedimento de Inclusão no SEI!RIO</h3>
+          
+          <div className="space-y-4">
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-white to-sky-50/30 rounded-xl border border-slate-200">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+                1
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-800 mb-1">Acessar o Processo</h4>
+                <p className="text-sm text-muted-foreground">
+                  Com o processo de prestação de contas aberto, clique no ícone <strong>"Incluir Documento"</strong> na barra de ferramentas.
+                </p>
+              </div>
             </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-foreground mb-2">Planilha de Apoio</h3>
-              <p className="text-muted-foreground text-sm sm:text-base text-justified leading-relaxed mb-4">
-                O documento original editável em formato Excel (MAPA DE DESPESAS - PDDE.xlsx) 
-                segue como anexo a este POP para facilitar o preenchimento e adaptação às necessidades 
-                de cada unidade escolar.
-              </p>
-              
-              <a
-                href="https://rioeduca-my.sharepoint.com/:x:/g/personal/wilson_mpeixoto_rioeduca_net/IQAgPn37Ap6PR4fGjfFcFY_3AZ7erJVwGFF7TvO5QrjTxTU?e=bSMVpy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block"
-              >
-                <Button className="bg-success hover:bg-success/90 text-success-foreground shadow-lg hover:shadow-xl transition-all duration-300 gap-2">
-                  <Download className="w-4 h-4" />
-                  Baixar Modelo Editável (Excel)
-                </Button>
-              </a>
-              
-              <p className="text-xs text-muted-foreground mt-3">
-                Clique para abrir o arquivo no SharePoint e baixar o modelo editável
-              </p>
+
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-white to-sky-50/30 rounded-xl border border-slate-200">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+                2
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-800 mb-1">Selecionar "Externo"</h4>
+                <p className="text-sm text-muted-foreground">
+                  Na tela de seleção de tipo de documento, escolha a opção <strong>"Externo"</strong> para indicar que o documento foi gerado fora do SEI!RIO.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-white to-sky-50/30 rounded-xl border border-slate-200">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+                3
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-800 mb-1">Preencher Metadados</h4>
+                <p className="text-sm text-muted-foreground">
+                  Informe o tipo de documento, data, número (se houver), formato (nato digital ou digitalizado), 
+                  e nível de acesso adequado.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-white to-sky-50/30 rounded-xl border border-slate-200">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+                4
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-800 mb-1">Anexar Arquivo</h4>
+                <p className="text-sm text-muted-foreground">
+                  Clique em <strong>"Escolher arquivo"</strong>, selecione o documento no seu computador e clique em <strong>"Confirmar Dados"</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Dicas Importantes */}
+        <div className="section-card p-5 sm:p-6 border border-sky-200 bg-gradient-to-br from-sky-50/50 to-transparent">
+          <div className="flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-sky-100 shrink-0">
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-foreground mb-3">3.4. Orientações Importantes</h3>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>Verifique a <strong className="text-slate-700">legibilidade</strong> dos documentos digitalizados antes de incluí-los</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>Utilize formato <strong className="text-slate-700">PDF</strong> preferencialmente para garantir compatibilidade</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>Nomeie os arquivos de forma clara antes de anexar (ex: "NF_001_Fornecedor.pdf")</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>Respeite o limite de tamanho de arquivo estabelecido pelo sistema</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

@@ -308,15 +308,48 @@
     @apply print:hidden;
   }
 
-  /* Premium link styling */
+  /* Premium link styling with WCAG compliant contrast */
   .link-premium {
     @apply text-primary font-medium underline-offset-4 hover:underline transition-colors;
+  }
+
+  /* Accessible link cards - legislation/external links */
+  .link-card {
+    @apply relative transition-all duration-300;
+  }
+
+  .link-card:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  .link-card:hover .link-card-icon,
+  .link-card:focus-visible .link-card-icon {
+    @apply bg-primary/30;
+  }
+
+  .link-card:hover .link-card-title,
+  .link-card:focus-visible .link-card-title {
+    @apply text-primary underline underline-offset-2;
+  }
+
+  .link-card:hover .link-card-arrow,
+  .link-card:focus-visible .link-card-arrow {
+    @apply text-primary translate-x-0.5;
   }
 
   /* Glass effect for special elements */
   .glass-effect {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Ensure minimum contrast for muted text */
+  .text-accessible-muted {
+    @apply text-slate-600;
+  }
+
+  .dark .text-accessible-muted {
+    @apply text-slate-300;
   }
 }
 

@@ -102,6 +102,8 @@ export const SectionThree = () => {
                     src={seiIncludeDocIcon} 
                     alt="Ícone Incluir Documento no SEI!RIO" 
                     className="h-8 object-contain"
+                    width={177}
+                    height={32}
                   />
                 </div>
               </div>
@@ -122,6 +124,8 @@ export const SectionThree = () => {
                     src={seiChooseDocType} 
                     alt="Escolha o Tipo do Documento - Externo" 
                     className="max-w-full sm:max-w-md object-contain rounded"
+                    width={448}
+                    height={187}
                   />
                 </div>
               </div>

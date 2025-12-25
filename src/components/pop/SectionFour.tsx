@@ -10,10 +10,10 @@ export const SectionFour = () => {
         <div className="section-number">4</div>
         <div>
           <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
-            Inserção de Documentos Externos
+            Autenticação de Documentos Externos
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-1">
-            Notas fiscais, recibos, comprovantes e demais documentos
+            Procedimento para validar documentos externos incluídos no SEI!RIO
           </p>
         </div>
       </div>

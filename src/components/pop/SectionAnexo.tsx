@@ -328,16 +328,17 @@ export const SectionAnexo = () => {
             href="https://doweb.rio.rj.gov.br/portal/edicoes/download/5089#page=16"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 border border-primary/30 hover:border-primary/50 transition-all duration-300 group sm:col-span-2"
+            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 border-2 border-primary/40 hover:border-primary/60 focus-visible:border-primary transition-all duration-300 group sm:col-span-2"
+            aria-label="Abrir Resolução Conjunta CGM/SMFP nº 107/2022 no Diário Oficial"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors shrink-0">
+            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center transition-colors shrink-0">
               <Gavel className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground group-hover:text-primary transition-colors">Resolução Conjunta CGM/SMFP nº 107/2022</p>
-              <p className="text-sm text-muted-foreground">D.O. de 19/08/2022 (abre na pág. 16)</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução Conjunta CGM/SMFP nº 107/2022</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 19/08/2022 (abre na pág. 16)</p>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary ml-auto shrink-0 transition-colors" />
+            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
 
           {/* Decreto 50.162/2022 */}
@@ -345,16 +346,17 @@ export const SectionAnexo = () => {
             href="https://doweb.rio.rj.gov.br/portal/edicoes/download/5024#page=3"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
+            aria-label="Abrir Decreto Rio nº 50.162/2022 no Diário Oficial"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
               <Scale className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground group-hover:text-primary transition-colors">Decreto Rio nº 50.162/2022</p>
-              <p className="text-sm text-muted-foreground">D.O. de 02/02/2022 (abre na pág. 3)</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Decreto Rio nº 50.162/2022</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 02/02/2022 (abre na pág. 3)</p>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary ml-auto shrink-0 transition-colors" />
+            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
 
           {/* Resolução 2067/2025 */}
@@ -362,16 +364,17 @@ export const SectionAnexo = () => {
             href="https://doweb.rio.rj.gov.br/portal/edicoes/download/8557#page=40"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
+            aria-label="Abrir Resolução CGM nº 2067/2025 no Diário Oficial"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
               <CreditCard className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground group-hover:text-primary transition-colors">Resolução CGM nº 2067/2025</p>
-              <p className="text-sm text-muted-foreground">D.O. de 12/06/2025 (abre na pág. 40)</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução CGM nº 2067/2025</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 12/06/2025 (abre na pág. 40)</p>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary ml-auto shrink-0 transition-colors" />
+            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
 
           {/* Resolução 115/2023 */}
@@ -379,16 +382,17 @@ export const SectionAnexo = () => {
             href="https://doweb.rio.rj.gov.br/portal/edicoes/download/5694#page=11"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
+            aria-label="Abrir Resolução Conjunta nº 115/2023 no Diário Oficial"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
               <FileText className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground group-hover:text-primary transition-colors">Resolução Conjunta nº 115/2023</p>
-              <p className="text-sm text-muted-foreground">D.O. de 23/03/2023 (abre na pág. 11)</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução Conjunta nº 115/2023</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 23/03/2023 (abre na pág. 11)</p>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary ml-auto shrink-0 transition-colors" />
+            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
 
           {/* Guia de Retenção */}
@@ -396,16 +400,17 @@ export const SectionAnexo = () => {
             href="https://carioca.rio/servicos/iss-casos-de-responsabilidade-e-retencao/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
+            aria-label="Abrir Guia de Retenção de Tributos ISS no Portal Carioca"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
               <Calculator className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground group-hover:text-primary transition-colors">Guia de Retenção de Tributos - ISS</p>
-              <p className="text-sm text-muted-foreground">Casos de responsabilidade e retenção - Portal Carioca</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Guia de Retenção de Tributos - ISS</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">Casos de responsabilidade e retenção - Portal Carioca</p>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary ml-auto shrink-0 transition-colors" />
+            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
 
           {/* Portal CGM - Manuais */}
@@ -413,16 +418,17 @@ export const SectionAnexo = () => {
             href="https://controladoria.prefeitura.rio/normas-e-procedimentos-de-controle-caixas/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
+            aria-label="Abrir Manuais e Orientações da CGM-Rio"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
               <BookOpen className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground group-hover:text-primary transition-colors">Manuais e Orientações - CGM-Rio</p>
-              <p className="text-sm text-muted-foreground">Normas e procedimentos de controle</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Manuais e Orientações - CGM-Rio</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">Normas e procedimentos de controle</p>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary ml-auto shrink-0 transition-colors" />
+            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
 
           {/* Diário Oficial - Busca */}
@@ -430,16 +436,17 @@ export const SectionAnexo = () => {
             href="https://doweb.rio.rj.gov.br/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group sm:col-span-2"
+            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group sm:col-span-2"
+            aria-label="Abrir Diário Oficial do Rio de Janeiro"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
               <FileText className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="font-semibold text-foreground group-hover:text-primary transition-colors">Diário Oficial do Rio de Janeiro</p>
-              <p className="text-sm text-muted-foreground">Busque legislações por data ou palavra-chave</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Diário Oficial do Rio de Janeiro</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">Busque legislações por data ou palavra-chave</p>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary ml-auto shrink-0 transition-colors" />
+            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
         </div>
       </div>

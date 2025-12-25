@@ -118,14 +118,14 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="3" title="Inclusão de Documentos" subtitle="Como incluir documentos externos no processo do SEI!RIO" icon={Upload} />
+                <SectionDivider number="3" title="Inclusão de Documentos Externos" subtitle="Como incluir documentos digitalizados e nato digitais no SEI!RIO" icon={Upload} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionThree />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="4" title="Declaração de Autenticidade" subtitle="Elaboração da declaração de autenticidade dos documentos" icon={FileText} />
+                <SectionDivider number="4" title="Autenticação de Documentos" subtitle="Procedimento para autenticar documentos externos no SEI!RIO" icon={FileText} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionFour />

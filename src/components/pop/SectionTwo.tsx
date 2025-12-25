@@ -5,19 +5,74 @@ import { PDDEChecklist } from "./PDDEChecklist";
 export const SectionTwo = () => {
   return (
     <section id="secao-2" className="scroll-mt-20 animate-fade-in">
-      {/* Bloco 1: Introdução ao Checklist */}
-      {/* Bloco 1: Introdução ao Checklist */}
+      {/* Bloco 1: Introdução ao Checklist - Estruturado para escaneabilidade */}
       <div className="mb-8 section-card bg-gradient-to-br from-slate-50 via-white to-sky-50/40 border-l-4 border-l-sky-500 shadow-sm">
-        <div className="content-spacing">
-          <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify mb-4">
-            Após a devida <strong className="text-slate-900 font-semibold">autuação do processo</strong>, apresenta-se a seguir o rol taxativo de documentos necessários para a instrução processual. Esta etapa é crítica para garantir a conformidade da prestação de contas.
-          </p>
-          <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify mb-4">
-            Para auxiliar na conferência, disponibilizamos abaixo uma <strong className="text-sky-600 font-semibold">Lista de Verificação Interativa (Checklist)</strong>. Esta ferramenta de apoio permite o monitoramento em tempo real dos itens já encartados, calculando automaticamente o percentual de completude da instrução.
-          </p>
-          <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
-            Adicionalmente, visando a padronização documental e a mitigação de dúvidas quanto à estrutura e ao conteúdo, o gestor poderá utilizar a funcionalidade de <strong className="text-sky-600 font-semibold">"Modelos de Documentos"</strong>, localizada logo após a lista, para visualizar e baixar paradigmas reais de cada item exigido.
-          </p>
+        <div className="space-y-5">
+          {/* O que é */}
+          <div className="p-4 bg-white/80 rounded-lg border border-slate-200/60">
+            <h3 className="text-sm font-bold text-sky-700 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+              O que é
+            </h3>
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
+              O rol taxativo de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-slate-900 font-semibold">autuação do processo</strong>.
+            </p>
+          </div>
+
+          {/* Por que importa */}
+          <div className="p-4 bg-white/80 rounded-lg border border-slate-200/60">
+            <h3 className="text-sm font-bold text-emerald-700 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Por que importa
+            </h3>
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
+              Esta etapa é <strong className="text-slate-900 font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
+            </p>
+          </div>
+
+          {/* O que você precisa fazer */}
+          <div className="p-4 bg-sky-50/80 rounded-lg border border-sky-200/60">
+            <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              O que você precisa fazer
+            </h3>
+            <ul className="space-y-2 text-slate-700 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-sky-600 font-bold">1.</span>
+                <span>Use a <strong className="text-sky-600 font-semibold">Lista de Verificação Interativa</strong> abaixo para monitorar os itens já encartados</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-sky-600 font-bold">2.</span>
+                <span>Consulte os <strong className="text-sky-600 font-semibold">Modelos de Documentos</strong> para padronização</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-sky-600 font-bold">3.</span>
+                <span>Acompanhe o percentual de completude automaticamente calculado</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Erros comuns */}
+          <div className="p-4 bg-amber-50/80 rounded-lg border border-amber-200/60">
+            <h3 className="text-sm font-bold text-amber-700 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              Erros comuns a evitar
+            </h3>
+            <ul className="space-y-1.5 text-slate-700 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-amber-600">•</span>
+                <span>Esquecer de incluir a <strong>Declaração de Autenticidade</strong> (item 14 do checklist)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-600">•</span>
+                <span>Nomear documentos de forma genérica, dificultando identificação futura</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-600">•</span>
+                <span>Anexar extratos de período diferente do exercício financeiro</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -140,9 +195,9 @@ export const SectionTwo = () => {
                   4
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 4 – Elaboração de Documentos Internos</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 4 – Autenticação de Documentos</h4>
                   <p className="text-slate-600 text-sm leading-relaxed text-justify">
-                    O tópico seguinte abordará exclusivamente os documentos que devem ser produzidos e editados utilizando o editor de texto nativo da plataforma <strong className="text-slate-800">SEI!RIO</strong>.
+                    Procedimento para <strong className="text-slate-800">autenticar documentos externos</strong> incluídos no processo, validando sua integridade e conformidade.
                   </p>
                 </div>
               </div>

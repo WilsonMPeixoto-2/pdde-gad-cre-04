@@ -1,4 +1,4 @@
-import { Upload, FileImage, FileText, AlertCircle, CheckCircle2, Lightbulb, FilePlus2 } from "lucide-react";
+import { Upload, FileImage, FileText, AlertCircle, CheckCircle2, Lightbulb, FilePlus2, ArrowRight, ExternalLink, FileDown, Scissors, Image } from "lucide-react";
 import seiIncludeDocIcon from "@/assets/sei-include-doc-icon.png";
 import seiChooseDocType from "@/assets/sei-choose-doc-type.png";
 
@@ -163,18 +163,24 @@ export const SectionThree = () => {
                 <h4 className="font-semibold text-slate-800 mb-3">Preencher Metadados</h4>
                 
                 <div className="space-y-4 ml-2">
-                  {/* 3.1 Tipo de documento */}
+                  {/* A) Tipo de documento */}
                   <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-l-sky-400">
-                    <h5 className="font-semibold text-slate-700 mb-2">3.1. Tipo de Documento</h5>
+                    <h5 className="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">A</span>
+                      Tipo de Documento
+                    </h5>
                     <p className="text-sm text-muted-foreground">
                       Em <strong className="text-sky-700">"Tipo de Documento"</strong>, selecione na barra de pesquisa o tipo que mais se adequar ao documento 
                       (extrato, nota de empenho, nota fiscal, etc.)
                     </p>
                   </div>
 
-                  {/* 3.2 Número */}
+                  {/* B) Número */}
                   <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-l-sky-400">
-                    <h5 className="font-semibold text-slate-700 mb-2">3.2. Número</h5>
+                    <h5 className="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">B</span>
+                      Número
+                    </h5>
                     <p className="text-sm text-muted-foreground mb-3">
                       Em <strong className="text-sky-700">"Número"</strong>, preencha, se houver, o número da Nota, o número da ata, ou, se possível, 
                       outra forma de identificação numérica do documento.
@@ -188,17 +194,23 @@ export const SectionThree = () => {
                     </div>
                   </div>
 
-                  {/* Data do documento */}
+                  {/* C) Data do documento */}
                   <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-l-sky-400">
-                    <h5 className="font-semibold text-slate-700 mb-2">3.3. Data do Documento</h5>
+                    <h5 className="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">C</span>
+                      Data do Documento
+                    </h5>
                     <p className="text-sm text-muted-foreground">
                       Informe a <strong className="text-sky-700">data de emissão do documento</strong> (quando disponível no documento).
                     </p>
                   </div>
 
-                  {/* Nome na árvore */}
+                  {/* D) Nome na árvore */}
                   <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-l-primary">
-                    <h5 className="font-semibold text-slate-700 mb-2">3.4. Nome na Árvore</h5>
+                    <h5 className="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">D</span>
+                      Nome na Árvore
+                    </h5>
                     <p className="text-sm text-muted-foreground mb-3">
                       Este campo é <strong className="text-primary">fundamental para identificação singular do documento</strong> e pesquisas futuras para encontrá-lo.
                     </p>
@@ -219,22 +231,36 @@ export const SectionThree = () => {
                       </li>
                     </ul>
 
-                    {/* Observação destacada */}
-                    <div className="p-4 bg-gradient-to-r from-sky-100 to-sky-200/70 rounded-xl border-2 border-sky-400">
-                      <h6 className="font-bold text-sky-800 uppercase mb-3 flex items-center gap-2">
-                        <AlertCircle className="w-5 h-5" />
-                        Observação
-                      </h6>
-                      <div className="space-y-3 text-sm text-sky-900 font-medium leading-relaxed">
-                        <p>
-                          NA DATA DE ELABORAÇÃO DESTE DOCUMENTO ORIENTADOR NÃO HÁ NOMENCLATURA ÚNICA OFICIAL ESTIPULADA PARA CADA DOCUMENTO.
+                    {/* Observação destacada - reformulado */}
+                    <div className="p-5 bg-gradient-to-br from-slate-50 to-sky-50 rounded-xl border border-slate-200 shadow-sm">
+                      <div className="flex items-center gap-2 mb-4">
+                        <AlertCircle className="w-5 h-5 text-sky-600" />
+                        <h6 className="font-semibold text-slate-800">Observação importante</h6>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Na data de elaboração deste documento orientador, <strong className="text-slate-700">não há nomenclatura única oficial</strong> estipulada para cada documento.
                         </p>
-                        <p>
-                          <strong className="text-sky-950">A REGRA DE OURO É:</strong> TENHA MUITO ZELO NO MOMENTO DE NOMEAR CADA DOCUMENTO DE FORMA QUE A ESCOLHA SEJA TANTO INFORMATIVA QUANTO IDENTIFICADORA.
-                        </p>
-                        <p>
-                          POR LÓGICA, DEVE-SE SEMPRE COMEÇAR PELA FUNÇÃO PRINCIPAL DO DOCUMENTO (OFÍCIO, NOTA DE EMPENHO, EXTRATO, ETC) E PROSSEGUIR COM OUTROS DADOS QUE SEJAM RELEVANTES (MÊS DE REFERÊNCIA, OBJETIVO, COMO EXTRATO DE CONTA CORRENTE E EXTRATO DE APLICAÇÕES...)
-                        </p>
+                        
+                        <div className="p-3 bg-sky-100/70 rounded-lg border border-sky-200">
+                          <p className="text-sm text-sky-800 font-medium flex items-start gap-2">
+                            <Lightbulb className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
+                            <span><strong>Regra de ouro:</strong> Nomeie cada documento de forma que a escolha seja tanto <em>informativa</em> quanto <em>identificadora</em>.</span>
+                          </p>
+                        </div>
+                        
+                        <div className="p-3 bg-slate-100 rounded-lg">
+                          <p className="text-sm text-slate-700 mb-2 font-medium">Estrutura sugerida:</p>
+                          <div className="flex items-center gap-2 flex-wrap text-sm">
+                            <span className="px-2 py-1 bg-white rounded border border-slate-200 text-slate-600">Função do documento</span>
+                            <ArrowRight className="w-4 h-4 text-slate-400" />
+                            <span className="px-2 py-1 bg-white rounded border border-slate-200 text-slate-600">Dados relevantes</span>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-2">
+                            Ex: Tipo (Ofício, NE, Extrato) → Mês de referência, objetivo, especificação
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -257,32 +283,90 @@ export const SectionThree = () => {
           </div>
         </div>
 
-        {/* Dicas Importantes */}
+        {/* Orientações Importantes e Dicas de Digitalização */}
         <div className="section-card p-5 sm:p-6 border border-sky-200 bg-gradient-to-br from-sky-50/50 to-transparent">
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-4 mb-5">
             <div className="p-3 rounded-xl bg-sky-100 shrink-0">
-              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600" />
+              <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground mb-3">3.5. Orientações Importantes</h3>
-              <ul className="space-y-2">
+              <h3 className="font-semibold text-foreground mb-2">3.5. Orientações Importantes e Dicas de Digitalização</h3>
+              <p className="text-sm text-muted-foreground">
+                Para garantir a integridade e a correta indexação dos documentos no SEI, observe as seguintes práticas:
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-4 ml-0 sm:ml-16">
+            {/* Qualidade da Digitalização */}
+            <div className="p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+              <div className="flex items-center gap-2 mb-2">
+                <Image className="w-4 h-4 text-sky-600" />
+                <h4 className="font-semibold text-slate-700">Qualidade da Digitalização</h4>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Certifique-se de que o documento físico esteja <strong className="text-slate-700">legível antes de digitalizá-lo</strong>. 
+                Configure o scanner para uma resolução de qualidade (recomenda-se <strong className="text-sky-700">600 dpi ou superior</strong>) para garantir nitidez.
+              </p>
+            </div>
+
+            {/* Nome do Arquivo */}
+            <div className="p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+              <div className="flex items-center gap-2 mb-2">
+                <FileDown className="w-4 h-4 text-sky-600" />
+                <h4 className="font-semibold text-slate-700">O Preenchimento dos Dados define o Nome do Arquivo</h4>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                <strong className="text-slate-700">Não é necessário renomear o arquivo</strong> no seu computador antes de anexá-lo (ex: scan001.pdf). 
+                O SEI ignora o nome original e gera automaticamente um novo nome na árvore de processos baseado nos campos que você preencher 
+                na tela de cadastro (Tipo de Documento, Número, Data, etc.).
+              </p>
+              <div className="flex items-start gap-2 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <p className="text-sm text-amber-800 font-medium">
+                  <strong>Atenção:</strong> Por isso, preencha esses campos com exatidão para facilitar a busca futura.
+                </p>
+              </div>
+            </div>
+
+            {/* Gerenciamento de Tamanho */}
+            <div className="p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+              <div className="flex items-center gap-2 mb-2">
+                <Scissors className="w-4 h-4 text-sky-600" />
+                <h4 className="font-semibold text-slate-700">Gerenciamento de Tamanho de Arquivo</h4>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                Caso o sistema bloqueie o anexo por exceder o limite de tamanho permitido, adote uma das seguintes soluções:
+              </p>
+              <ul className="space-y-2 mb-4">
                 <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Verifique a <strong className="text-slate-700">legibilidade</strong> dos documentos digitalizados antes de incluí-los</span>
+                  <ArrowRight className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
+                  <span>Reduza a resolução no momento da digitalização</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Utilize formato <strong className="text-slate-700">PDF</strong> preferencialmente para garantir compatibilidade</span>
+                  <ArrowRight className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
+                  <span>Compacte o arquivo PDF</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Nomeie os arquivos de forma clara antes de anexar (ex: "NF_001_Fornecedor.pdf")</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Respeite o limite de tamanho de arquivo estabelecido pelo sistema</span>
+                  <ArrowRight className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
+                  <span>Divida documentos muito longos em blocos menores (Partes 1, 2, etc.)</span>
                 </li>
               </ul>
+              <div className="flex items-start gap-2 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+                <Lightbulb className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <p className="text-sm text-emerald-800">
+                  <strong>Ferramenta útil:</strong> Para compactar ou dividir arquivos, você pode utilizar ferramentas gratuitas como o{" "}
+                  <a 
+                    href="https://www.ilovepdf.com/pt" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-semibold text-emerald-700 underline underline-offset-2 hover:text-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded"
+                  >
+                    iLovePDF
+                    <ExternalLink className="w-3 h-3 inline ml-1" />
+                  </a>.
+                </p>
+              </div>
             </div>
           </div>
         </div>

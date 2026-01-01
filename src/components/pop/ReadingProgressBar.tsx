@@ -2,34 +2,46 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 export const ReadingProgressBar = () => {
   const [progress, setProgress] = useState(0);
-  const rafRef = useRef<number | null>(null);
+  const scrollRafRef = useRef<number | null>(null);
+  const resizeRafRef = useRef<number | null>(null);
   const totalHeightRef = useRef(0);
 
   // Cache total height on mount and resize only (avoids reflow on scroll)
+  // Wrapped in rAF to prevent forced reflow during critical rendering
   const updateTotalHeight = useCallback(() => {
-    totalHeightRef.current = document.documentElement.scrollHeight - window.innerHeight;
+    if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
+    
+    resizeRafRef.current = requestAnimationFrame(() => {
+      totalHeightRef.current = document.documentElement.scrollHeight - window.innerHeight;
+      resizeRafRef.current = null;
+    });
   }, []);
 
   const handleScroll = useCallback(() => {
-    if (rafRef.current) return;
+    if (scrollRafRef.current) return;
     
-    rafRef.current = requestAnimationFrame(() => {
+    scrollRafRef.current = requestAnimationFrame(() => {
       if (totalHeightRef.current > 0) {
         const currentProgress = (window.scrollY / totalHeightRef.current) * 100;
         setProgress(Math.min(currentProgress, 100));
       }
-      rafRef.current = null;
+      scrollRafRef.current = null;
     });
   }, []);
 
   useEffect(() => {
-    updateTotalHeight();
+    // Defer initial calculation to after first paint
+    const timeoutId = setTimeout(updateTotalHeight, 0);
+    
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", updateTotalHeight, { passive: true });
+    
     return () => {
+      clearTimeout(timeoutId);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateTotalHeight);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
+      if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
     };
   }, [handleScroll, updateTotalHeight]);
 

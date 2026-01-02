@@ -91,8 +91,8 @@ const Index = () => {
 
         <main className="flex-1 lg:ml-0">
           <div className="lg:hidden fixed bottom-4 left-4 z-40 no-print">
-            <Button size="lg" className="rounded-full shadow-lg" onClick={() => setSidebarOpen(true)}>
-              <Menu className="w-5 h-5 mr-2" />
+            <Button size="lg" className="rounded-full shadow-lg" onClick={() => setSidebarOpen(true)} aria-label="Abrir menu de navegação">
+              <Menu className="w-5 h-5 mr-2" aria-hidden="true" />
               Menu
             </Button>
           </div>

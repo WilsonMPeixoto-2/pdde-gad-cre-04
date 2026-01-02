@@ -28,7 +28,7 @@
 
     /* Muted - Refined Slate Gray */
     --muted: 210 40% 93%;
-    --muted-foreground: 215 16% 47%; /* slate-500 */
+    --muted-foreground: 215 25% 35%; /* Darker for WCAG AA contrast */
 
     /* Accent - Sky Blue (#0EA5E9) */
     --accent: 199 89% 48%;

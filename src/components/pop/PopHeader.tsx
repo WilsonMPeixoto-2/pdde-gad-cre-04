@@ -109,6 +109,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               onClick={cycleViewMode}
               className={`text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-200 ${viewMode !== 'auto' ? 'bg-primary-foreground/20' : ''}`}
               title={getViewModeTitle()}
+              aria-label={getViewModeTitle()}
             >
               {getViewModeIcon()}
             </Button>
@@ -118,6 +119,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               onClick={toggleDarkMode}
               className="text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-200"
               title={isDark ? "Modo claro" : "Modo escuro"}
+              aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
@@ -126,6 +128,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               size="sm"
               onClick={onPrint}
               className="text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-4 transition-all duration-200"
+              aria-label="Imprimir documento"
             >
               <Printer className="w-4 h-4 sm:mr-2" />
               <span className="hidden sm:inline">Imprimir</span>
@@ -135,6 +138,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               size="sm"
               onClick={onPrint}
               className="h-9 w-9 sm:h-10 sm:w-auto sm:px-4 shadow-lg hover:shadow-xl transition-all duration-200"
+              aria-label="Baixar documento como PDF"
             >
               <Download className="w-4 h-4 sm:mr-2" />
               <span className="hidden sm:inline">Download</span>

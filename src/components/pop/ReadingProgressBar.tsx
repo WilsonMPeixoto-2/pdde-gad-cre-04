@@ -46,7 +46,14 @@ export const ReadingProgressBar = () => {
   }, [handleScroll, updateTotalHeight]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] h-1 bg-secondary/30 no-print">
+    <div 
+      className="fixed top-0 left-0 right-0 z-[60] h-1 bg-secondary/30 no-print"
+      role="progressbar"
+      aria-label="Progresso de leitura do documento"
+      aria-valuenow={Math.round(progress)}
+      aria-valuemin={0}
+      aria-valuemax={100}
+    >
       <div 
         className="h-full bg-gradient-to-r from-primary via-primary to-success transition-all duration-150 ease-out"
         style={{ width: `${progress}%` }}

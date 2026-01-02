@@ -33,11 +33,12 @@ export const CopyButton = ({ text, label = "Copiado!", className = "" }: CopyBut
       onClick={handleCopy}
       className={`p-1.5 rounded-lg hover:bg-primary/10 transition-colors ${className}`}
       title="Copiar para área de transferência"
+      aria-label="Copiar para área de transferência"
     >
       {copied ? (
-        <Check className="w-4 h-4 text-success" />
+        <Check className="w-4 h-4 text-success" aria-hidden="true" />
       ) : (
-        <Copy className="w-4 h-4 text-muted-foreground hover:text-primary" />
+        <Copy className="w-4 h-4 text-muted-foreground hover:text-primary" aria-hidden="true" />
       )}
     </button>
   );

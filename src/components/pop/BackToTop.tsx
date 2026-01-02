@@ -38,8 +38,9 @@ export const BackToTop = () => {
       className="fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 no-print bg-primary hover:bg-primary/90"
       size="icon"
       title="Voltar ao topo"
+      aria-label="Voltar ao topo da página"
     >
-      <ArrowUp className="w-5 h-5" />
+      <ArrowUp className="w-5 h-5" aria-hidden="true" />
     </Button>
   );
 };

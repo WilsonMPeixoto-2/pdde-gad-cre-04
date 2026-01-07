@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const STORAGE_KEY = 'sdp-document-checklist';
+const STORAGE_KEY = 'pdde-document-checklist';
 
 export const useDocumentChecklist = (items: string[]) => {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());

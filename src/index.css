@@ -621,7 +621,7 @@
     }
     
     @bottom-center {
-      content: "GAD 4ª CRE | Prestação de Contas SDP | Página " counter(page);
+      content: "GAD 4ª CRE | Prestação de Contas PDDE | Página " counter(page);
       font-size: 8pt;
       color: hsl(215, 30%, 50%);
       font-family: 'Inter', sans-serif;

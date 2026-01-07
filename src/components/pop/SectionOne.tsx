@@ -104,7 +104,7 @@ export const SectionOne = () => {
 
         {/* Access Level */}
         <div className="section-card">
-          <h3 className="section-heading">1.6. Nível de Acesso</h3>
+          <h3 className="section-heading">1.6. Publicidade e proteção de dados (LGPD/LAI)</h3>
           <div className="content-spacing">
             <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
               <table className="table-institutional text-sm w-full">
@@ -131,14 +131,15 @@ export const SectionOne = () => {
               </table>
             </div>
 
-            <Callout variant="info" title="Princípio da Publicidade" className="mt-6">
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Os processos de prestação de contas do PDDE devem, como regra, ser classificados 
-                com nível de acesso <strong className="text-slate-900">"Público"</strong>, por se 
-                referirem à aplicação de recursos públicos (Art. 37 CF e Lei nº 12.527/2011 - LAI).
+            <Callout variant="info" title="Transparência + Proteção de Dados" className="mt-6">
+              <p className="text-sm text-slate-700 leading-relaxed text-justify">
+                A prestação de contas deve ser <strong className="text-slate-900">transparente</strong> à comunidade escolar e aos órgãos de controle. Entretanto, documentos que contenham <strong className="text-slate-900">dados pessoais</strong> (ex.: CPF, dados bancários, endereços, assinaturas) devem receber tratamento compatível com <strong className="text-slate-900">LGPD/LAI</strong>, incluindo restrição de acesso quando cabível.
+              </p>
+              <p className="text-sm text-slate-700 leading-relaxed mt-3 p-3 bg-white/60 rounded-lg border border-slate-200/60">
+                <strong className="text-primary">Boa prática:</strong> mantenha como <strong className="text-accent">públicos</strong> os demonstrativos, atas e sínteses de execução; e <strong className="text-warning">restrinja</strong> anexos com dados pessoais, quando necessário.
               </p>
               <p className="text-sm text-slate-900 font-semibold mt-3">
-                → Selecione a opção "Público" no campo Nível de Acesso.
+                → Selecione "Público" como regra geral; use "Restrito" para documentos com dados pessoais sensíveis.
               </p>
             </Callout>
           </div>

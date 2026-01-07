@@ -15,7 +15,7 @@ export const SectionTwo = () => {
               O que é
             </h3>
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
-              O rol taxativo de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-slate-900 font-semibold">autuação do processo</strong>.
+              O <strong className="text-slate-900 font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-slate-900 font-semibold">autuação do processo</strong>.
             </p>
           </div>
 

@@ -1,34 +1,31 @@
 import { useState, useEffect } from "react";
-import { CheckCircle2, Circle, ClipboardCheck } from "lucide-react";
+import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle } from "lucide-react";
 
 interface ChecklistItem {
   id: number;
   text: string;
   checked: boolean;
+  complementar?: boolean;
 }
 
 const initialItems: ChecklistItem[] = [
-  { id: 1, text: "Ofício de Prestação de Contas PDDE - Programa - CEC XXXX", checked: false },
-  { id: 2, text: "Demonstrativo da Execução Financeira Anual - caso haja mais de um programa por conta bancária", checked: false },
-  { id: 3, text: "Demonstrativo da Execução da Receita e da Despesa e de Pagamentos Efetuados", checked: false },
-  { id: 4, text: "Conciliação Bancária Conta XXX", checked: false },
-  { id: 5, text: "Extratos Conta Corrente", checked: false },
-  { id: 6, text: "Extratos de Aplicações", checked: false },
-  { id: 7, text: "Comprovantes de Despesas", checked: false },
-  { id: 8, text: "Consolidação de Pesquisa de Preços", checked: false },
-  { id: 9, text: "Planejamentos ou Planos de Ação com Ata", checked: false },
-  { id: 10, text: "Cópia de Ata e/ou Justificativa, para situações excepcionais (não-execução de programa, depósito em conta e etc.)", checked: false },
-  { id: 11, text: "Declaração da consulta a empresa de contabilidade", checked: false },
-  { id: 12, text: "Declaração de lançamento no BB ágil", checked: false },
-  { id: 13, text: "Parecer do Conselho Fiscal", checked: false },
-  { id: 14, text: "Declaração do presidente do CEC da autenticidade dos documentos", checked: false },
-  { id: 15, text: "Despacho da GAD para o Coordenador da CRE", checked: false },
-  { id: 16, text: "Despacho do Coordenador da CRE com o publique-se", checked: false },
-  { id: 17, text: "Lauda do D.O com a publicação da aprovação/aprovação com ressalvas/reprovação", checked: false },
-  { id: 18, text: "Incluir o Relacionamento do processo de inventário", checked: false },
+  // Rol mínimo/essencial
+  { id: 1, text: "Rol de materiais, bens e serviços priorizados (planejamento do gasto)", checked: false },
+  { id: 2, text: "Consolidação das pesquisas de preços (ou justificativa pela não realização / uso de SRP)", checked: false },
+  { id: 3, text: "Demonstrativo de execução da receita e da despesa e de pagamentos efetuados (SiGPC/Contas Online)", checked: false },
+  { id: 4, text: "Extratos bancários da conta do PDDE e das aplicações financeiras (quando houver)", checked: false },
+  { id: 5, text: "Conciliação bancária (se houver saldo em 31/12 ou movimentações pendentes)", checked: false },
+  { id: 6, text: "Documentos comprobatórios das despesas (NF/DANFE/recibos/RPA etc.) + comprovantes de pagamento", checked: false },
+  { id: 7, text: "Atas de aprovação do plano de gastos e da execução (decisões coletivas)", checked: false },
+  // Complementares (quando aplicável)
+  { id: 8, text: "Atesto/termo de recebimento e/ou evidência de entrega/execução (carimbo/declaração/fotos)", checked: false, complementar: true },
+  { id: 9, text: "Parecer/aprovação do Conselho/assembleia, quando adotado pela UEx", checked: false, complementar: true },
+  { id: 10, text: "Relação de bens permanentes e providência de incorporação/controle patrimonial (despesas de capital)", checked: false, complementar: true },
+  { id: 11, text: "Comprovante de devolução/recolhimento (se houver restituição de saldo ao erário)", checked: false, complementar: true },
+  { id: 12, text: "Comprovante/protocolo de envio/registro no sistema do FNDE (print ou recibo do SiGPC)", checked: false, complementar: true },
 ];
 
-const STORAGE_KEY = "pdde-checklist-state";
+const STORAGE_KEY = "pdde-checklist-state-v2";
 
 export const PDDEChecklist = () => {
   const [items, setItems] = useState<ChecklistItem[]>(() => {
@@ -57,28 +54,30 @@ export const PDDEChecklist = () => {
     );
   };
 
+  const essenciaisCount = items.filter(item => !item.complementar).length;
+  const essenciaisCompleted = items.filter(item => !item.complementar && item.checked).length;
   const completedCount = items.filter(item => item.checked).length;
-  const progressPercent = (completedCount / items.length) * 100;
+  const progressPercent = (essenciaisCompleted / essenciaisCount) * 100;
 
   const resetChecklist = () => {
     setItems(initialItems);
   };
 
+  const essenciais = items.filter(item => !item.complementar);
+  const complementares = items.filter(item => item.complementar);
+
   return (
     <div className="section-card border-l-4 border-l-primary">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-primary/10">
             <ClipboardCheck className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h3 className="font-bold text-foreground text-base sm:text-lg">
-              Checklist de Documentos - PDDE
-            </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Marque os documentos já incluídos no processo
-            </p>
+            <h2 className="font-bold text-foreground text-base sm:text-lg">
+              Checklist mínimo — Prestação de Contas do PDDE (SEI!RIO)
+            </h2>
           </div>
         </div>
         <button
@@ -89,12 +88,17 @@ export const PDDEChecklist = () => {
         </button>
       </div>
 
+      {/* Intro */}
+      <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+        Este é o <strong className="text-foreground">rol MÍNIMO/ESSENCIAL</strong> de documentos. Podem existir peças complementares conforme a ação do PDDE e orientações do FNDE.
+      </p>
+
       {/* Progress Bar */}
       <div className="mb-6">
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-muted-foreground">Progresso</span>
+          <span className="text-muted-foreground">Itens essenciais</span>
           <span className="font-semibold text-primary">
-            {completedCount} de {items.length} ({Math.round(progressPercent)}%)
+            {essenciaisCompleted} de {essenciaisCount} ({Math.round(progressPercent)}%)
           </span>
         </div>
         <div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -105,9 +109,9 @@ export const PDDEChecklist = () => {
         </div>
       </div>
 
-      {/* Checklist Items */}
-      <div className="space-y-2">
-        {items.map((item) => (
+      {/* Essenciais */}
+      <div className="space-y-2 mb-6">
+        {essenciais.map((item) => (
           <button
             key={item.id}
             onClick={() => toggleItem(item.id)}
@@ -128,7 +132,7 @@ export const PDDEChecklist = () => {
               <span className={`font-semibold text-xs shrink-0 ${
                 item.checked ? "text-success" : "text-primary"
               }`}>
-                {String(item.id).padStart(2, "0")}º
+                {item.id}.
               </span>
               <span className={`text-sm leading-relaxed ${
                 item.checked
@@ -142,12 +146,63 @@ export const PDDEChecklist = () => {
         ))}
       </div>
 
+      {/* Complementares */}
+      <div className="mb-6">
+        <h3 className="text-sm font-semibold text-amber-700 dark:text-amber-400 mb-3 flex items-center gap-2">
+          <FileCheck className="w-4 h-4" />
+          Complementares (quando aplicável)
+        </h3>
+        <div className="space-y-2">
+          {complementares.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => toggleItem(item.id)}
+              className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group ${
+                item.checked
+                  ? "bg-amber-50 dark:bg-amber-950/30 border-amber-300/50 hover:bg-amber-100/50"
+                  : "bg-amber-50/30 dark:bg-amber-950/10 border-amber-200/30 hover:bg-amber-50/60 hover:border-amber-300/50"
+              }`}
+            >
+              <div className="shrink-0 mt-0.5">
+                {item.checked ? (
+                  <CheckCircle2 className="w-5 h-5 text-amber-600" />
+                ) : (
+                  <Circle className="w-5 h-5 text-amber-400 group-hover:text-amber-600 transition-colors" />
+                )}
+              </div>
+              <div className="flex items-start gap-2 flex-1 min-w-0">
+                <span className={`text-sm leading-relaxed ${
+                  item.checked
+                    ? "text-amber-700 dark:text-amber-400 line-through decoration-amber-400/50"
+                    : "text-foreground"
+                }`}>
+                  {item.text}
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Callout - Conferência do original */}
+      <div className="p-4 bg-gradient-to-r from-sky-50 to-sky-100/50 dark:from-sky-950/40 dark:to-sky-900/20 border border-sky-200/60 dark:border-sky-800/40 rounded-xl">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+          <div>
+            <p className="font-semibold text-sky-800 dark:text-sky-300 text-sm mb-1">Conferência do original</p>
+            <p className="text-sm text-sky-700 dark:text-sky-400 leading-relaxed">
+              Quando houver documentos digitalizados, registre <strong>"CONFERE COM O ORIGINAL"</strong>, com assinatura do responsável, e mantenha os originais arquivados na UEx.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Completion Message */}
-      {completedCount === items.length && (
+      {essenciaisCompleted === essenciaisCount && (
         <div className="mt-6 p-4 bg-success/10 border border-success/30 rounded-xl text-center animate-fade-in">
           <CheckCircle2 className="w-8 h-8 text-success mx-auto mb-2" />
-          <p className="font-semibold text-success">Checklist Completo!</p>
-          <p className="text-sm text-success/80">Todos os documentos foram marcados.</p>
+          <p className="font-semibold text-success">Itens essenciais completos!</p>
+          <p className="text-sm text-success/80">Verifique os itens complementares quando aplicável.</p>
         </div>
       )}
     </div>

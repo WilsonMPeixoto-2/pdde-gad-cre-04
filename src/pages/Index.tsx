@@ -6,6 +6,7 @@ import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
+import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { SectionOne } from "@/components/pop/SectionOne";
 import { SectionTwo } from "@/components/pop/SectionTwo";
 import { SectionThree } from "@/components/pop/SectionThree";
@@ -101,6 +102,10 @@ const Index = () => {
             <div className="space-y-8">
               <AnimatedSection>
                 <SectionIntro />
+              </AnimatedSection>
+
+              <AnimatedSection delay={50}>
+                <ScopeCallout />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>

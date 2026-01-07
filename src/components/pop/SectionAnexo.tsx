@@ -65,8 +65,8 @@ export const SectionAnexo = () => {
               Anexo – Legislação de Referência
             </h2>
             <p className="text-muted-foreground text-justified leading-relaxed">
-              Consolidação das principais regras e documentos exigidos conforme <strong>Resolução Conjunta CGM/SMFP nº 107/2022</strong>, 
-              atualizada pela <strong>Res. 115/2023</strong> e complementada pela <strong>Res. CGM nº 2067/2025</strong>.
+              Consolidação das principais regras e documentos exigidos conforme <strong>Resolução CD/FNDE nº 15/2021</strong> 
+              e demais normativos do FNDE aplicáveis ao PDDE.
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ export const SectionAnexo = () => {
           </div>
           <h3 className="text-lg font-semibold text-foreground">
             Prazos para Prestação de Contas
-            <span className="ml-2 text-sm font-normal text-muted-foreground">(Art. 25 da Res. Conjunta CGM/SMFP nº 107/2022)</span>
+            <span className="ml-2 text-sm font-normal text-muted-foreground">(Conforme normativos do FNDE)</span>
           </h3>
         </div>
 
@@ -180,7 +180,7 @@ export const SectionAnexo = () => {
           </div>
           <h3 className="text-lg font-semibold text-foreground">
             Documentos Comprobatórios por Tipo de Despesa
-            <span className="ml-2 text-sm font-normal text-muted-foreground">(Art. 22 da Res. Conjunta CGM/SMFP nº 107/2022)</span>
+            <span className="ml-2 text-sm font-normal text-muted-foreground">(Conforme Resolução CD/FNDE nº 15/2021)</span>
           </h3>
         </div>
 
@@ -212,7 +212,7 @@ export const SectionAnexo = () => {
           </div>
           <h3 className="text-lg font-semibold text-foreground">
             Regras para Comprovantes de Despesa
-            <span className="ml-2 text-sm font-normal text-muted-foreground">(Res. Conjunta CGM/SMFP nº 107/2022)</span>
+            <span className="ml-2 text-sm font-normal text-muted-foreground">(Conforme normativos do FNDE)</span>
           </h3>
         </div>
 
@@ -287,9 +287,9 @@ export const SectionAnexo = () => {
           <div>
             <h4 className="font-semibold text-foreground mb-2">Encerramento do Exercício 2025</h4>
             <p className="text-muted-foreground text-sm leading-relaxed text-justified">
-              <strong className="text-foreground">Atenção especial em dezembro:</strong> A regra geral de 120 dias para prestação de contas fica suspensa/alterada para o fechamento do ano. 
-              O prazo para devolver saldo não utilizado ou prestar contas é <strong className="text-foreground">encurtado drasticamente</strong> (geralmente primeira quinzena de dezembro/janeiro). 
-              Consulte a <strong className="text-foreground">Resolução de Encerramento do Exercício 2025</strong> publicada pela CGM/SMFP.
+              <strong className="text-foreground">Atenção especial em dezembro:</strong> O prazo para prestação de contas do PDDE no SiGPC/Contas Online é até 31 de dezembro do ano subsequente ao repasse. 
+              Fique atento às orientações do FNDE sobre <strong className="text-foreground">devolução de saldos</strong> e encerramento do exercício. 
+              Consulte os <strong className="text-foreground">informativos oficiais do FNDE</strong> para atualizações.
             </p>
           </div>
         </div>
@@ -323,20 +323,20 @@ export const SectionAnexo = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4">
-          {/* Resolução 107/2022 - Principal */}
+          {/* Resolução CD/FNDE nº 15/2021 - Principal */}
           <a
-            href="https://doweb.rio.rj.gov.br/portal/edicoes/download/5089#page=16"
+            href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view"
             target="_blank"
             rel="noopener noreferrer"
             className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 border-2 border-primary/40 hover:border-primary/60 focus-visible:border-primary transition-all duration-300 group sm:col-span-2"
-            aria-label="Abrir Resolução Conjunta CGM/SMFP nº 107/2022 no Diário Oficial"
+            aria-label="Abrir Resolução CD/FNDE nº 15/2021 no Portal GOV.BR"
           >
             <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center transition-colors shrink-0">
               <Gavel className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução Conjunta CGM/SMFP nº 107/2022</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 19/08/2022 (abre na pág. 16)</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução CD/FNDE nº 15/2021</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">Dispõe sobre o PDDE Básico e suas ações integradas</p>
             </div>
             <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
@@ -413,20 +413,20 @@ export const SectionAnexo = () => {
             <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>
 
-          {/* Portal CGM - Manuais */}
+          {/* Portal FNDE - PDDE */}
           <a
-            href="https://controladoria.prefeitura.rio/normas-e-procedimentos-de-controle-caixas/"
+            href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde"
             target="_blank"
             rel="noopener noreferrer"
             className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
-            aria-label="Abrir Manuais e Orientações da CGM-Rio"
+            aria-label="Abrir Portal do PDDE no site do FNDE"
           >
             <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
               <BookOpen className="w-6 h-6 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Manuais e Orientações - CGM-Rio</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">Normas e procedimentos de controle</p>
+              <p className="link-card-title font-semibold text-foreground transition-colors">Portal do PDDE - FNDE</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">Informações oficiais sobre o programa</p>
             </div>
             <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
           </a>

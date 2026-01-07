@@ -83,22 +83,43 @@ export const SectionOne = () => {
 
         {/* Specification */}
         <div className="section-card">
-          <h3 className="section-heading">1.5. Especificação</h3>
+          <h3 className="section-heading">1.5. Padrão de identificação do processo (SEI!RIO)</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              O cadastrante deverá obrigatoriamente digitar os metadados estabelecidos pela GAD, 
-              composto pelo Objetivo do processo (PRESTAÇÃO DE CONTAS DE PDDE) + DESIGNAÇÃO DA UNIDADE 
-              ESCOLAR seguida da NOMENCLATURA DA UNIDADE.
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
+              O cadastrante deverá obrigatoriamente digitar a especificação seguindo o padrão abaixo, 
+              incluindo sempre o <strong className="text-sky-600">EXERCÍCIO</strong> (ano de referência) 
+              e a <strong className="text-sky-600">AÇÃO do PDDE</strong> quando aplicável.
             </p>
 
-            <Callout variant="success" title="Exemplo de Especificação:">
-              <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg">
-                  Prestação de contas de PDDE - E/CRE(04.30.502) Ciep Elis Regina
-                </code>
-                <CopyButton text="Prestação de contas de PDDE - E/CRE(04.30.502) Ciep Elis Regina" label="Copiado!" />
+            <Callout variant="success" title="Padrão obrigatório:">
+              <div className="space-y-3 mt-2">
+                <div>
+                  <p className="text-xs text-slate-600 mb-1 font-medium">Formato básico:</p>
+                  <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg block">
+                    PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ da UEx/CEC
+                  </code>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-600 mb-1 font-medium">Com mais de uma ação:</p>
+                  <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg block">
+                    PDDE (Básico + Ações Integradas) — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ
+                  </code>
+                </div>
               </div>
             </Callout>
+
+            <Callout variant="info" title="Exemplo prático:" className="mt-4">
+              <div className="flex items-center gap-2 mt-2">
+                <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg">
+                  PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00
+                </code>
+                <CopyButton text="PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00" label="Copiado!" />
+              </div>
+            </Callout>
+
+            <p className="text-sm text-muted-foreground mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200/60">
+              <strong className="text-amber-700">Por que isso importa?</strong> Evita confusão entre anos, ações e prestações de contas diferentes.
+            </p>
           </div>
         </div>
 

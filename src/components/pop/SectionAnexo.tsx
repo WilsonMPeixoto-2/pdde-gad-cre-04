@@ -331,143 +331,137 @@ export const SectionAnexo = () => {
         </div>
       </div>
 
-      {/* Links para Consulta */}
+      {/* Base Normativa - Reorganizada por finalidade */}
       <div className="section-card p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-5">
           <div className="p-2.5 rounded-lg bg-primary/10">
             <BookOpen className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            Consulte a Legislação na Íntegra
-          </h3>
+          <h2 className="text-xl font-bold text-foreground">
+            Base normativa (organizada por finalidade)
+          </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          {/* Resolução CD/FNDE nº 15/2021 - Principal */}
-          <a
-            href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 border-2 border-primary/40 hover:border-primary/60 focus-visible:border-primary transition-all duration-300 group sm:col-span-2"
-            aria-label="Abrir Resolução CD/FNDE nº 15/2021 no Portal GOV.BR"
-          >
-            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center transition-colors shrink-0">
-              <Gavel className="w-6 h-6 text-primary" />
-            </div>
-            <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução CD/FNDE nº 15/2021</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">Dispõe sobre o PDDE Básico e suas ações integradas</p>
-            </div>
-            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
-          </a>
+        {/* A) PDDE — regras federais (FNDE) */}
+        <div className="mb-8">
+          <h3 className="text-base font-semibold text-primary mb-4 flex items-center gap-2">
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold">A</span>
+            PDDE — regras federais (FNDE)
+          </h3>
+          
+          <ul className="space-y-2 mb-5 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2">
+              <Gavel className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+              <span><strong className="text-foreground">Lei nº 11.947/2009</strong> — Dispõe sobre o atendimento da alimentação escolar e do PDDE</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Gavel className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+              <span><strong className="text-foreground">Resolução CD/FNDE nº 15/2021</strong> — Orientações para execução, fiscalização, monitoramento e prestação de contas do PDDE</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <BookOpen className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+              <span><strong className="text-foreground">Guias e capacitações oficiais do FNDE (PDDE)</strong> — Conforme exercício vigente</span>
+            </li>
+          </ul>
 
-          {/* Decreto 50.162/2022 */}
-          <a
-            href="https://doweb.rio.rj.gov.br/portal/edicoes/download/5024#page=3"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
-            aria-label="Abrir Decreto Rio nº 50.162/2022 no Diário Oficial"
-          >
-            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
-              <Scale className="w-6 h-6 text-primary" />
-            </div>
-            <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Decreto Rio nº 50.162/2022</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 02/02/2022 (abre na pág. 3)</p>
-            </div>
-            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
-          </a>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {/* Resolução CD/FNDE nº 15/2021 */}
+            <a
+              href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 border-2 border-primary/40 hover:border-primary/60 transition-all duration-300 group"
+              aria-label="Abrir Resolução CD/FNDE nº 15/2021 no Portal GOV.BR"
+            >
+              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                <Gavel className="w-5 h-5 text-primary" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="link-card-title font-semibold text-foreground text-sm">Resolução CD/FNDE nº 15/2021</p>
+                <p className="text-xs text-slate-600 dark:text-slate-300">Texto integral no GOV.BR</p>
+              </div>
+              <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 shrink-0" aria-hidden="true" />
+            </a>
 
-          {/* Resolução 2067/2025 */}
-          <a
-            href="https://doweb.rio.rj.gov.br/portal/edicoes/download/8557#page=40"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
-            aria-label="Abrir Resolução CGM nº 2067/2025 no Diário Oficial"
-          >
-            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
-              <CreditCard className="w-6 h-6 text-primary" />
-            </div>
-            <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução CGM nº 2067/2025</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 12/06/2025 (abre na pág. 40)</p>
-            </div>
-            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
-          </a>
+            {/* Portal FNDE - PDDE */}
+            <a
+              href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 transition-all duration-300 group"
+              aria-label="Abrir Portal do PDDE no site do FNDE"
+            >
+              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <BookOpen className="w-5 h-5 text-primary" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="link-card-title font-semibold text-foreground text-sm">Portal do PDDE - FNDE</p>
+                <p className="text-xs text-slate-600 dark:text-slate-300">Guias, manuais e capacitações</p>
+              </div>
+              <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 shrink-0" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
 
-          {/* Resolução 115/2023 */}
-          <a
-            href="https://doweb.rio.rj.gov.br/portal/edicoes/download/5694#page=11"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
-            aria-label="Abrir Resolução Conjunta nº 115/2023 no Diário Oficial"
-          >
-            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
-              <FileText className="w-6 h-6 text-primary" />
-            </div>
-            <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Resolução Conjunta nº 115/2023</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">D.O. de 23/03/2023 (abre na pág. 11)</p>
-            </div>
-            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
-          </a>
+        {/* B) Procedimento interno e sistema (SEI!RIO / SME-Rio) */}
+        <div>
+          <h3 className="text-base font-semibold text-amber-700 dark:text-amber-400 mb-4 flex items-center gap-2">
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold">B</span>
+            Procedimento interno e sistema (SEI!RIO / SME-Rio)
+          </h3>
+          
+          <ul className="space-y-2 mb-5 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2">
+              <Scale className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <span><strong className="text-foreground">Normas municipais vigentes</strong> — Tramitação processual no SEI!RIO, assinatura eletrônica e autenticação administrativa</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Scale className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <span><strong className="text-foreground">Lei nº 12.527/2011 (LAI)</strong> — Classificação de acesso e transparência</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Scale className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <span><strong className="text-foreground">Lei nº 13.709/2018 (LGPD)</strong> — Tratamento de dados pessoais</span>
+            </li>
+          </ul>
 
-          {/* Guia de Retenção */}
-          <a
-            href="https://carioca.rio/servicos/iss-casos-de-responsabilidade-e-retencao/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
-            aria-label="Abrir Guia de Retenção de Tributos ISS no Portal Carioca"
-          >
-            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
-              <Calculator className="w-6 h-6 text-primary" />
-            </div>
-            <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Guia de Retenção de Tributos - ISS</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">Casos de responsabilidade e retenção - Portal Carioca</p>
-            </div>
-            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
-          </a>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {/* Decreto Rio 50.162/2022 */}
+            <a
+              href="https://doweb.rio.rj.gov.br/portal/edicoes/download/5024#page=3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 transition-all duration-300 group"
+              aria-label="Abrir Decreto Rio nº 50.162/2022 no Diário Oficial"
+            >
+              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <Scale className="w-5 h-5 text-primary" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="link-card-title font-semibold text-foreground text-sm">Decreto Rio nº 50.162/2022</p>
+                <p className="text-xs text-slate-600 dark:text-slate-300">Procedimentos internos - SEI!RIO</p>
+              </div>
+              <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 shrink-0" aria-hidden="true" />
+            </a>
 
-          {/* Portal FNDE - PDDE */}
-          <a
-            href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group"
-            aria-label="Abrir Portal do PDDE no site do FNDE"
-          >
-            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
-              <BookOpen className="w-6 h-6 text-primary" />
-            </div>
-            <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Portal do PDDE - FNDE</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">Informações oficiais sobre o programa</p>
-            </div>
-            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
-          </a>
-
-          {/* Diário Oficial - Busca */}
-          <a
-            href="https://doweb.rio.rj.gov.br/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-card flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 focus-visible:border-primary transition-all duration-300 group sm:col-span-2"
-            aria-label="Abrir Diário Oficial do Rio de Janeiro"
-          >
-            <div className="link-card-icon w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors shrink-0">
-              <FileText className="w-6 h-6 text-primary" />
-            </div>
-            <div className="min-w-0">
-              <p className="link-card-title font-semibold text-foreground transition-colors">Diário Oficial do Rio de Janeiro</p>
-              <p className="text-sm text-slate-600 dark:text-slate-300">Busque legislações por data ou palavra-chave</p>
-            </div>
-            <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 ml-auto shrink-0 transition-all duration-200" aria-hidden="true" />
-          </a>
+            {/* Diário Oficial */}
+            <a
+              href="https://doweb.rio.rj.gov.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-slate-300 hover:border-primary/40 transition-all duration-300 group"
+              aria-label="Abrir Diário Oficial do Rio de Janeiro"
+            >
+              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <FileText className="w-5 h-5 text-primary" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="link-card-title font-semibold text-foreground text-sm">Diário Oficial do Rio</p>
+                <p className="text-xs text-slate-600 dark:text-slate-300">Busca por legislação municipal</p>
+              </div>
+              <ExternalLink className="link-card-arrow w-4 h-4 text-slate-500 shrink-0" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

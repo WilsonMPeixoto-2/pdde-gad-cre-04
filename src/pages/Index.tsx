@@ -54,21 +54,32 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
+    let rafId: number | null = null;
+    
     const handleScroll = () => {
-      const sections = ["introducao", "secao-1", "secao-2", "secao-3", "secao-4", "secao-5", "secao-6", "contatos", "anexo"];
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(sectionId);
-            break;
+      if (rafId) return;
+      
+      rafId = requestAnimationFrame(() => {
+        const sections = ["introducao", "secao-1", "secao-2", "secao-3", "secao-4", "secao-5", "secao-6", "contatos", "anexo"];
+        for (const sectionId of sections) {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 150 && rect.bottom >= 150) {
+              setActiveSection(sectionId);
+              break;
+            }
           }
         }
-      }
+        rafId = null;
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (

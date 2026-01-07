@@ -39,10 +39,9 @@ export const SectionAnexo = () => {
   ];
 
   const prazosPrestacao = [
-    { situacao: "Prestação regular PDDE", prazo: "Até 31 de dezembro do ano subsequente ao repasse" },
-    { situacao: "Devolução de saldos", prazo: "Conforme orientações do FNDE" },
-    { situacao: "Substituição de gestor", prazo: "Imediata" },
-    { situacao: "Encerramento do exercício", prazo: "Conforme calendário FNDE" },
+    { tipo: "federal", situacao: "Prazo FEDERAL (FNDE)", prazo: "A EEx deve encaminhar a prestação de contas ao FNDE até 30/04 do ano seguinte ao do repasse." },
+    { tipo: "uex", situacao: "Prazo UEx → EEx", prazo: "A UEx deve remeter a prestação de contas à EEx dentro do prazo interno definido pela EEx, garantindo tempo hábil antes de 30/04. Como prática de referência, organize o dossiê e finalize a remessa até 31/01 do ano seguinte, salvo orientação diversa." },
+    { tipo: "interno", situacao: "Prazo INTERNO (SEI!RIO / 4ª CRE)", prazo: "Após concluir as etapas federais e organizar os documentos, a escola deve autuar e instruir o processo no SEI!RIO e remeter à GAD dentro do prazo interno divulgado anualmente." },
   ];
 
   const documentosComprobatorios = [
@@ -147,28 +146,49 @@ export const SectionAnexo = () => {
             <Clock className="w-5 h-5 text-primary" />
           </div>
           <h3 className="text-lg font-semibold text-foreground">
-            Prazos para Prestação de Contas
-            <span className="ml-2 text-sm font-normal text-muted-foreground">(Conforme normativos do FNDE)</span>
+            Prazos — como cumprir sem erro
           </h3>
         </div>
 
-        <div className="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-          <Table className="table-institutional">
-            <TableHeader>
-              <TableRow>
-                <TableHead className="bg-primary text-primary-foreground rounded-tl-lg">Situação</TableHead>
-                <TableHead className="bg-primary text-primary-foreground rounded-tr-lg">Prazo</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {prazosPrestacao.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">{item.situacao}</TableCell>
-                  <TableCell>{item.prazo}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+        <div className="space-y-4">
+          {prazosPrestacao.map((item, index) => (
+            <div 
+              key={index} 
+              className={`p-4 rounded-xl border-l-4 ${
+                item.tipo === 'federal' 
+                  ? 'border-l-primary bg-primary/5' 
+                  : item.tipo === 'uex' 
+                    ? 'border-l-amber-500 bg-amber-50 dark:bg-amber-950/30' 
+                    : 'border-l-blue-500 bg-blue-50 dark:bg-blue-950/30'
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold ${
+                  item.tipo === 'federal' 
+                    ? 'bg-primary text-primary-foreground' 
+                    : item.tipo === 'uex' 
+                      ? 'bg-amber-500 text-white' 
+                      : 'bg-blue-500 text-white'
+                }`}>
+                  {index + 1}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-foreground mb-1">{item.situacao}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.prazo}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Regra de ouro */}
+        <div className="mt-5 p-4 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+          <div className="flex items-start gap-3">
+            <CalendarClock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <p className="text-sm text-foreground leading-relaxed">
+              <strong className="text-primary">Regra de ouro:</strong> não deixe para organizar documentos no fim do ano; mantenha o dossiê atualizado a cada despesa.
+            </p>
+          </div>
         </div>
       </div>
 

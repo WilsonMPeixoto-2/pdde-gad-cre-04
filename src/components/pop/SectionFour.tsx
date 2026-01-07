@@ -255,12 +255,18 @@ export const SectionFour = () => {
             <div className="flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold text-foreground mb-1">Conclusão Importante</p>
-                <p className="text-sm text-muted-foreground text-justified leading-relaxed">
-                  Os documentos de prestação de contas que exigem assinatura eletrônica devem ser 
-                  obrigatoriamente criados dentro do sistema SEI. <strong className="text-foreground">
-                  Não anexe arquivos PDF externos ou planilhas Excel para esta finalidade.</strong>
-                </p>
+                <p className="font-bold text-foreground mb-2">Assinatura e anexação no SEI!RIO</p>
+                <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-justified">
+                    <strong className="text-foreground">Documentos internos</strong> que precisem de assinatura no SEI!RIO 
+                    (despachos, ofícios, declarações) devem ser criados no <strong className="text-foreground">editor do sistema</strong> para assinatura eletrônica.
+                  </p>
+                  <p className="text-justified">
+                    <strong className="text-foreground">Documentos externos/nato digitais</strong> (extratos bancários, DANFE/NF-e, 
+                    comprovantes de pagamento, prints de cotação, atas digitalizadas) devem ser anexados como 
+                    <strong className="text-foreground"> "Documento Externo"</strong>, com nomenclatura padronizada e conferência quando aplicável.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

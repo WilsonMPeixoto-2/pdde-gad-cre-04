@@ -165,12 +165,12 @@ export const SectionSix = () => {
           <h3 className="section-heading">Especificação do Documento</h3>
           <div className="content-spacing">
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
-              O campo deve ser preenchido seguindo o formato exato indicado:
+              O campo deve ser preenchido seguindo o formato padronizado, incluindo o <strong className="text-sky-600">exercício</strong>:
             </p>
             
             <Callout variant="info" title="Formato obrigatório:">
               <code className="block bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 break-all shadow-sm mt-2">
-                PDDE – E/CRE (04.xx.xxx) NOME DA ESCOLA
+                PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA
               </code>
             </Callout>
           </div>

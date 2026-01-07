@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { Menu, ClipboardList, FileText, Upload, CheckCircle, Phone, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PopHeader } from "@/components/pop/PopHeader";
@@ -9,16 +9,26 @@ import { SectionIntro } from "@/components/pop/SectionIntro";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { SectionOne } from "@/components/pop/SectionOne";
 import { SectionTwo } from "@/components/pop/SectionTwo";
-import { SectionThree } from "@/components/pop/SectionThree";
-import { SectionFour } from "@/components/pop/SectionFour";
-import { SectionFive } from "@/components/pop/SectionFive";
-import { SectionSix } from "@/components/pop/SectionSix";
-import { SectionContacts } from "@/components/pop/SectionContacts";
-import { SectionAnexo } from "@/components/pop/SectionAnexo";
 import { BackToTop } from "@/components/pop/BackToTop";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
+
+// Lazy load below-the-fold sections for better initial load performance
+const SectionThree = lazy(() => import("@/components/pop/SectionThree").then(m => ({ default: m.SectionThree })));
+const SectionFour = lazy(() => import("@/components/pop/SectionFour").then(m => ({ default: m.SectionFour })));
+const SectionFive = lazy(() => import("@/components/pop/SectionFive").then(m => ({ default: m.SectionFive })));
+const SectionSix = lazy(() => import("@/components/pop/SectionSix").then(m => ({ default: m.SectionSix })));
+const SectionContacts = lazy(() => import("@/components/pop/SectionContacts").then(m => ({ default: m.SectionContacts })));
+const SectionAnexo = lazy(() => import("@/components/pop/SectionAnexo").then(m => ({ default: m.SectionAnexo })));
+
+// Minimal loading placeholder
+const SectionLoader = () => (
+  <div className="animate-pulse space-y-4 p-6">
+    <div className="h-4 bg-muted rounded w-3/4"></div>
+    <div className="h-4 bg-muted rounded w-1/2"></div>
+  </div>
+);
 
 
 const Index = () => {
@@ -137,42 +147,54 @@ const Index = () => {
                 <SectionDivider number="3" title="Inclusão de Documentos Externos" subtitle="Como incluir documentos digitalizados e nato digitais no SEI!RIO" icon={Upload} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionThree />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionThree />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 <SectionDivider number="4" title="Autenticação de Documentos" subtitle="Procedimento para autenticar documentos externos no SEI!RIO" icon={FileText} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionFour />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionFour />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 <SectionDivider number="5" title="Bloco de Assinatura" subtitle="Criação do bloco de assinatura e disponibilização para a escola" icon={CheckCircle} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionFive />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionFive />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 <SectionDivider number="6" title="Despacho e Finalização" subtitle="Despachos da GAD e do Coordenador para aprovação" icon={FileText} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionSix />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionSix />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 <SectionDivider number="7" title="Contatos" subtitle="Canais de atendimento e suporte da GAD/4ª CRE" icon={Phone} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionContacts onPrint={handlePrint} />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionContacts onPrint={handlePrint} />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 <SectionDivider number="A" title="Anexo" subtitle="Legislação de referência e documentos exigidos" icon={Scale} />
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionAnexo />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionAnexo />
+                </Suspense>
               </AnimatedSection>
 
               {/* Document Footer */}

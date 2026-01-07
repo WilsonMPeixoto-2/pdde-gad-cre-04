@@ -82,7 +82,8 @@ export const PDDEChecklist = () => {
         </div>
         <button
           onClick={resetChecklist}
-          className="text-xs text-muted-foreground hover:text-foreground transition-colors underline"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none rounded px-1"
+          aria-label="Limpar todas as marcações do checklist"
         >
           Limpar
         </button>
@@ -115,13 +116,15 @@ export const PDDEChecklist = () => {
           <button
             key={item.id}
             onClick={() => toggleItem(item.id)}
-            className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group ${
+            className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
               item.checked
                 ? "bg-success/10 border-success/30 hover:bg-success/15"
                 : "bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-primary/30"
             }`}
+            aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item ${item.id}: ${item.text}`}
+            aria-pressed={item.checked}
           >
-            <div className="shrink-0 mt-0.5">
+            <div className="shrink-0 mt-0.5" aria-hidden="true">
               {item.checked ? (
                 <CheckCircle2 className="w-5 h-5 text-success" />
               ) : (
@@ -157,13 +160,15 @@ export const PDDEChecklist = () => {
             <button
               key={item.id}
               onClick={() => toggleItem(item.id)}
-              className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group ${
+              className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
                 item.checked
                   ? "bg-amber-50 dark:bg-amber-950/30 border-amber-300/50 hover:bg-amber-100/50"
                   : "bg-amber-50/30 dark:bg-amber-950/10 border-amber-200/30 hover:bg-amber-50/60 hover:border-amber-300/50"
               }`}
+              aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item complementar: ${item.text}`}
+              aria-pressed={item.checked}
             >
-              <div className="shrink-0 mt-0.5">
+              <div className="shrink-0 mt-0.5" aria-hidden="true">
                 {item.checked ? (
                   <CheckCircle2 className="w-5 h-5 text-amber-600" />
                 ) : (

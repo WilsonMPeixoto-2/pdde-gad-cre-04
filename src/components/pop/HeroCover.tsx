@@ -55,8 +55,8 @@ export const HeroCover = () => {
           </p>
         </div>
         
-        {/* Glass Cards with Hover Lift */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 max-w-4xl mx-auto mb-12" role="list" aria-label="Informações institucionais">
+        {/* Glass Cards with Premium Effects */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 max-w-4xl mx-auto mb-12 stagger-animation" role="list" aria-label="Informações institucionais">
           {[
             { icon: <Building2 className="w-6 h-6" aria-hidden="true" />, label: "GAD", desc: "Gerência de Administração" },
             { icon: <BookOpen className="w-6 h-6" aria-hidden="true" />, label: "POP", desc: "Procedimento Operacional Padrão" },
@@ -66,7 +66,7 @@ export const HeroCover = () => {
             <div 
               key={i} 
               role="listitem"
-              className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white/15 hover:border-white/30 hover:shadow-xl group"
+              className="glass-premium rounded-2xl p-5 text-center tilt-hover group"
             >
               <div className="inline-flex items-center justify-center w-12 h-12 bg-white/10 rounded-xl mb-3 group-hover:bg-white/20 transition-all group-hover:scale-110" aria-hidden="true">
                 <span className="text-white">{item.icon}</span>

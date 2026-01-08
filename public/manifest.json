@@ -1,0 +1,46 @@
+{
+  "name": "PDDE - Guia de Procedimentos",
+  "short_name": "PDDE Guide",
+  "description": "Procedimento Operacional Padrão para PDDE - CRE 04 Brazlândia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c4a6e",
+  "theme_color": "#0369a1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Início",
+      "short_name": "Início",
+      "description": "Ir para o início do guia",
+      "url": "/#introducao",
+      "icons": [{ "src": "/favicon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Checklist",
+      "short_name": "Checklist",
+      "description": "Ver checklist de documentos",
+      "url": "/#secao-5",
+      "icons": [{ "src": "/favicon.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

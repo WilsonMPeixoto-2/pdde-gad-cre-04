@@ -1029,3 +1029,35 @@
 .force-desktop .sm\:flex-row {
   flex-direction: row !important;
 }
+
+/* ===== DROP CAPS ===== */
+/* Decorative first letter for introductions */
+.drop-cap::first-letter {
+  float: left;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-right: 0.5rem;
+  margin-top: 0.125rem;
+  color: hsl(var(--primary));
+  font-family: var(--font-heading);
+}
+
+.dark .drop-cap::first-letter {
+  color: hsl(var(--accent));
+}
+
+/* Drop cap with gradient effect */
+.drop-cap-gradient::first-letter {
+  float: left;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-right: 0.75rem;
+  margin-top: 0.125rem;
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--font-heading);
+}

@@ -190,11 +190,6 @@
     @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 
-  /* Skip link for keyboard navigation */
-  .skip-link {
-    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:shadow-lg;
-  }
-
   /* Ensure all interactive elements have visible focus */
   button:focus-visible,
   a:focus-visible,
@@ -209,16 +204,24 @@
 
 @layer components {
   .section-card {
-    @apply bg-card rounded-xl border border-slate-200 p-6 sm:p-8 transition-all duration-300;
+    @apply bg-card rounded-xl border border-border p-6 sm:p-8 transition-all duration-300;
     box-shadow: 0 4px 20px -4px hsl(215 25% 15% / 0.08), 0 2px 8px -2px hsl(215 25% 15% / 0.04);
+  }
+
+  .dark .section-card {
+    box-shadow: 0 4px 20px -4px hsl(0 0% 0% / 0.3), 0 2px 8px -2px hsl(0 0% 0% / 0.2);
   }
 
   .section-card:hover {
     box-shadow: 0 10px 40px -10px hsl(215 25% 15% / 0.12), 0 4px 16px -4px hsl(215 25% 15% / 0.06);
   }
 
+  .dark .section-card:hover {
+    box-shadow: 0 10px 40px -10px hsl(0 0% 0% / 0.4), 0 4px 16px -4px hsl(0 0% 0% / 0.25);
+  }
+
   .section-heading {
-    @apply font-heading font-semibold text-slate-900 text-lg sm:text-xl pb-3 mb-4 border-b border-slate-200 flex items-center gap-2;
+    @apply font-heading font-semibold text-foreground text-lg sm:text-xl pb-3 mb-4 border-b border-border flex items-center gap-2;
   }
 
   .section-heading::before {
@@ -231,11 +234,11 @@
   }
 
   .content-spacing p {
-    @apply text-slate-700 leading-relaxed;
+    @apply text-foreground leading-relaxed;
   }
 
   .content-spacing h3, .content-spacing h4 {
-    @apply font-heading font-semibold text-slate-900;
+    @apply font-heading font-semibold text-foreground;
   }
 
   .section-number {
@@ -245,7 +248,7 @@
   }
 
   .highlight-box {
-    @apply border-l-4 border-accent p-5 sm:p-6 rounded-r-xl bg-slate-50;
+    @apply border-l-4 border-accent p-5 sm:p-6 rounded-r-xl bg-secondary/50;
   }
 
   .step-indicator {

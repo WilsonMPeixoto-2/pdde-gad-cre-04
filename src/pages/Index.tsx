@@ -22,11 +22,13 @@ const SectionSix = lazy(() => import("@/components/pop/SectionSix").then(m => ({
 const SectionContacts = lazy(() => import("@/components/pop/SectionContacts").then(m => ({ default: m.SectionContacts })));
 const SectionAnexo = lazy(() => import("@/components/pop/SectionAnexo").then(m => ({ default: m.SectionAnexo })));
 
-// Minimal loading placeholder
+// Premium shimmer skeleton loader
 const SectionLoader = () => (
-  <div className="animate-pulse space-y-4 p-6">
-    <div className="h-4 bg-muted rounded w-3/4"></div>
-    <div className="h-4 bg-muted rounded w-1/2"></div>
+  <div className="space-y-4 p-6">
+    <div className="h-6 skeleton-shimmer rounded-lg w-3/4"></div>
+    <div className="h-4 skeleton-shimmer rounded-lg w-full"></div>
+    <div className="h-4 skeleton-shimmer rounded-lg w-5/6"></div>
+    <div className="h-4 skeleton-shimmer rounded-lg w-1/2"></div>
   </div>
 );
 

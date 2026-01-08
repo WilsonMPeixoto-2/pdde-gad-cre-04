@@ -106,10 +106,12 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                       {section.number}
                     </span>
                     <span className="flex-1 text-sm font-medium leading-tight">{section.title}</span>
-                    <ChevronRight className={cn(
-                      "w-4 h-4 transition-transform duration-200",
-                      activeSection === section.id && "rotate-90"
-                    )} aria-hidden="true" />
+                    <span className="icon-bounce">
+                      <ChevronRight className={cn(
+                        "w-4 h-4 transition-transform duration-200",
+                        activeSection === section.id && "rotate-90"
+                      )} aria-hidden="true" />
+                    </span>
                   </button>
                 </li>
               ))}
@@ -120,7 +122,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
           <div className="p-4 border-t border-sidebar-border/30">
             <div className="text-[10px] text-sidebar-foreground/40 text-center space-y-0.5">
               <p className="font-semibold">4ª CRE - GAD</p>
-              <p>Versão 2025</p>
+              <p>Versão 1.4 - Janeiro/2026</p>
             </div>
           </div>
         </div>

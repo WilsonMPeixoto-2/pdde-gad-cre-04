@@ -11,7 +11,7 @@ interface SectionDividerProps {
 export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
   ({ number, title, subtitle, icon: Icon }, ref) => {
     return (
-      <div ref={ref} className="relative py-14 sm:py-18 my-8 sm:my-12 -mx-4 sm:-mx-0 section-divider-print">
+      <div ref={ref} className="relative py-14 sm:py-18 my-8 sm:my-12 -mx-4 sm:-mx-0 section-divider-print noise-texture">
         {/* Premium Gradient Background */}
         <div className="absolute inset-0 overflow-hidden print-hide-effects" style={{ background: 'linear-gradient(135deg, hsl(215, 75%, 32%) 0%, hsl(215, 75%, 26%) 50%, hsl(215, 75%, 22%) 100%)' }}>
           {/* Subtle Pattern */}

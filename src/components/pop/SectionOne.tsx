@@ -15,7 +15,7 @@ export const SectionOne = () => {
             </div>
             <div className="content-spacing">
               <h3 className="section-heading">1.1. Sobre esta etapa</h3>
-              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                 A etapa inicial compreende a autuação do processo administrativo eletrônico, 
                 no qual serão inseridos todos os documentos comprobatórios da prestação de contas do PDDE.
               </p>
@@ -27,13 +27,13 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.2. Iniciando o Processo</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               Para abrir um novo processo no SEI!RIO, o usuário deve selecionar a opção 
-              <strong className="text-slate-900"> "INICIAR PROCESSO"</strong>, conforme o menu de navegação do sistema.
+              <strong className="text-foreground"> "INICIAR PROCESSO"</strong>, conforme o menu de navegação do sistema.
             </p>
 
             <div className="mt-6">
-              <p className="text-sm font-medium text-slate-900 mb-3">Visualização do menu:</p>
+              <p className="text-sm font-medium text-foreground mb-3">Visualização do menu:</p>
               <SeiMockup variant="menu" highlight="iniciar" />
             </div>
           </div>
@@ -43,14 +43,14 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.3. Seleção do Tipo de Processo</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               Ao selecionar essa opção, o usuário deverá indicar o TIPO DE PROCESSO a ser instaurado. 
               Os tipos de processo disponíveis serão exibidos de acordo com os termos informados na busca.
             </p>
 
             <Callout variant="info" title="Tipo de Processo Correto:">
               <div className="flex items-center gap-2 mt-2">
-                <p className="text-slate-900 font-semibold text-sm sm:text-base flex-1">
+                <p className="text-foreground font-semibold text-sm sm:text-base flex-1">
                   GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
                 </p>
                 <CopyButton text="GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC" label="Copiado!" />
@@ -64,15 +64,15 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.4. Classificação por Assuntos</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               Este campo será preenchido automaticamente pelo sistema, em conformidade com o Tipo de 
               Processo selecionado pelo usuário na etapa anterior.
             </p>
 
-            <div className="bg-gradient-to-r from-slate-100 to-slate-50 rounded-xl p-5">
-              <p className="text-sm text-slate-600 mb-3">Classificação automática:</p>
+            <div className="bg-secondary/50 dark:bg-secondary/30 rounded-xl p-5">
+              <p className="text-sm text-muted-foreground mb-3">Classificação automática:</p>
               <div className="flex items-center gap-2">
-                <code className="flex-1 bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 break-all shadow-sm">
+                <code className="flex-1 bg-background px-4 py-3 rounded-lg border border-border text-sm data-code text-foreground break-all shadow-sm">
                   03.04.01.02 - PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
                 </code>
                 <CopyButton text="03.04.01.02 - PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC" label="Copiado!" />
@@ -85,23 +85,23 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.5. Padrão de identificação do processo (SEI!RIO)</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-justify">
               O cadastrante deverá obrigatoriamente digitar a especificação seguindo o padrão abaixo, 
-              incluindo sempre o <strong className="text-sky-600">EXERCÍCIO</strong> (ano de referência) 
-              e a <strong className="text-sky-600">AÇÃO do PDDE</strong> quando aplicável.
+              incluindo sempre o <strong className="text-sky-600 dark:text-sky-400">EXERCÍCIO</strong> (ano de referência) 
+              e a <strong className="text-sky-600 dark:text-sky-400">AÇÃO do PDDE</strong> quando aplicável.
             </p>
 
             <Callout variant="success" title="Padrão obrigatório:">
               <div className="space-y-3 mt-2">
                 <div>
-                  <p className="text-xs text-slate-600 mb-1 font-medium">Formato básico:</p>
-                  <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg block">
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">Formato básico:</p>
+                  <code className="flex-1 text-foreground data-code text-sm break-all bg-background/50 px-3 py-2 rounded-lg block">
                     PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ da UEx/CEC
                   </code>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-600 mb-1 font-medium">Com mais de uma ação:</p>
-                  <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg block">
+                  <p className="text-xs text-muted-foreground mb-1 font-medium">Com mais de uma ação:</p>
+                  <code className="flex-1 text-foreground data-code text-sm break-all bg-background/50 px-3 py-2 rounded-lg block">
                     PDDE (Básico + Ações Integradas) — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ
                   </code>
                 </div>
@@ -110,15 +110,15 @@ export const SectionOne = () => {
 
             <Callout variant="info" title="Exemplo prático:" className="mt-4">
               <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-slate-900 data-code text-sm break-all bg-white/50 px-3 py-2 rounded-lg">
+                <code className="flex-1 text-foreground data-code text-sm break-all bg-background/50 px-3 py-2 rounded-lg">
                   PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00
                 </code>
                 <CopyButton text="PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00" label="Copiado!" />
               </div>
             </Callout>
 
-            <p className="text-sm text-muted-foreground mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200/60">
-              <strong className="text-amber-700">Por que isso importa?</strong> Evita confusão entre anos, ações e prestações de contas diferentes.
+            <p className="text-sm text-muted-foreground mt-4 p-3 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200/60 dark:border-amber-800/40">
+              <strong className="text-amber-700 dark:text-amber-400">Por que isso importa?</strong> Evita confusão entre anos, ações e prestações de contas diferentes.
             </p>
           </div>
         </div>
@@ -138,28 +138,28 @@ export const SectionOne = () => {
                 <tbody>
                   <tr>
                     <td className="font-semibold text-accent">Público</td>
-                    <td className="text-slate-700 leading-relaxed">Documentos acessíveis a qualquer pessoa, seja usuário interno ou externo via Consulta Pública.</td>
+                    <td className="text-muted-foreground leading-relaxed">Documentos acessíveis a qualquer pessoa, seja usuário interno ou externo via Consulta Pública.</td>
                   </tr>
                   <tr>
                     <td className="font-semibold text-warning">Restrito</td>
-                    <td className="text-slate-700 leading-relaxed">Acessíveis apenas para a unidade que criou o processo e por unidades que recebam o processo para instrução.</td>
+                    <td className="text-muted-foreground leading-relaxed">Acessíveis apenas para a unidade que criou o processo e por unidades que recebam o processo para instrução.</td>
                   </tr>
                   <tr>
                     <td className="font-semibold text-destructive">Sigiloso</td>
-                    <td className="text-slate-700 leading-relaxed">Classificação atribuída a informações confidenciais, com acesso controlado por Credenciais de Acesso.</td>
+                    <td className="text-muted-foreground leading-relaxed">Classificação atribuída a informações confidenciais, com acesso controlado por Credenciais de Acesso.</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             <Callout variant="info" title="Transparência + Proteção de Dados" className="mt-6">
-              <p className="text-sm text-slate-700 leading-relaxed text-justify">
-                A prestação de contas deve ser <strong className="text-slate-900">transparente</strong> à comunidade escolar e aos órgãos de controle. Entretanto, documentos que contenham <strong className="text-slate-900">dados pessoais</strong> (ex.: CPF, dados bancários, endereços, assinaturas) devem receber tratamento compatível com <strong className="text-slate-900">LGPD/LAI</strong>, incluindo restrição de acesso quando cabível.
+              <p className="text-sm text-foreground/80 leading-relaxed text-justify">
+                A prestação de contas deve ser <strong className="text-foreground">transparente</strong> à comunidade escolar e aos órgãos de controle. Entretanto, documentos que contenham <strong className="text-foreground">dados pessoais</strong> (ex.: CPF, dados bancários, endereços, assinaturas) devem receber tratamento compatível com <strong className="text-foreground">LGPD/LAI</strong>, incluindo restrição de acesso quando cabível.
               </p>
-              <p className="text-sm text-slate-700 leading-relaxed mt-3 p-3 bg-white/60 rounded-lg border border-slate-200/60">
+              <p className="text-sm text-foreground/80 leading-relaxed mt-3 p-3 bg-background/60 rounded-lg border border-border/60">
                 <strong className="text-primary">Boa prática:</strong> mantenha como <strong className="text-accent">públicos</strong> os demonstrativos, atas e sínteses de execução; e <strong className="text-warning">restrinja</strong> anexos com dados pessoais, quando necessário.
               </p>
-              <p className="text-sm text-slate-900 font-semibold mt-3">
+              <p className="text-sm text-foreground font-semibold mt-3">
                 → Selecione "Público" como regra geral; use "Restrito" para documentos com dados pessoais sensíveis.
               </p>
             </Callout>
@@ -169,20 +169,20 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.7. Interessados</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               Este campo é utilizado para registrar unidades ou entidades que possuam interesse no processo.
             </p>
             <Callout variant="success" title="Adicione a GAD como interessada:">
               <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-slate-900 data-code text-sm bg-white/50 px-3 py-2 rounded-lg">
+                <code className="flex-1 text-foreground data-code text-sm bg-background/50 px-3 py-2 rounded-lg">
                   10729 - E/4a.CRE/GAD
                 </code>
                 <CopyButton text="10729 - E/4a.CRE/GAD" label="Código copiado!" />
               </div>
             </Callout>
             <Callout variant="info" title="Adicione também a Unidade Escolar:" className="mt-4">
-              <p className="text-sm text-slate-700">
-                Busque pela <strong className="text-slate-900">designação</strong> da unidade escolar para adicioná-la como interessada.
+              <p className="text-sm text-foreground/80">
+                Busque pela <strong className="text-foreground">designação</strong> da unidade escolar para adicioná-la como interessada.
               </p>
             </Callout>
           </div>
@@ -192,14 +192,14 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.8. Observações da Unidade</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               O campo "Observações desta unidade" poderá ser preenchido por cada unidade em que o processo 
               tramitar. As observações inseridas por outras unidades aparecerão, na tela Alterar Processo, 
               separadamente, na Lista de observações de outras unidades.
             </p>
             <Callout variant="success" title="Observação desta Unidade:" className="mt-4">
               <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-slate-900 data-code text-sm bg-white/50 px-3 py-2 rounded-lg">
+                <code className="flex-1 text-foreground data-code text-sm bg-background/50 px-3 py-2 rounded-lg">
                   INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)
                 </code>
                 <CopyButton text="INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)" label="Copiado!" />
@@ -212,8 +212,8 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.9. Salvando o Processo</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              Após verificação de todos os campos, clique no botão <strong className="text-slate-900">"SALVAR"</strong> para criar o processo.
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Após verificação de todos os campos, clique no botão <strong className="text-foreground">"SALVAR"</strong> para criar o processo.
             </p>
             <div className="mt-4">
               <button className="bg-[#006400] hover:bg-[#005200] text-white font-semibold px-6 py-2 rounded shadow-md transition-colors cursor-default">
@@ -227,7 +227,7 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.10. Confirmação da Criação</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               A criação do Processo será confirmada com a tela abaixo:
             </p>
             
@@ -323,9 +323,9 @@ export const SectionOne = () => {
             </div>
 
             <Callout variant="warning" title="Importante!" className="mt-6">
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Copie o <strong className="text-slate-900">número do Processo</strong> que foi gerado e preencha a planilha 
-                <strong className="text-slate-900"> "Controle de processos 2026"</strong> enviada pela GCGR.
+              <p className="text-sm text-foreground/80 leading-relaxed">
+                Copie o <strong className="text-foreground">número do Processo</strong> que foi gerado e preencha a planilha 
+                <strong className="text-foreground"> "Controle de processos 2026"</strong> enviada pela GCGR.
               </p>
             </Callout>
           </div>

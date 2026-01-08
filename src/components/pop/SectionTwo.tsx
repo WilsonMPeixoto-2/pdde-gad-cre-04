@@ -6,69 +6,69 @@ export const SectionTwo = () => {
   return (
     <section id="secao-2" className="scroll-mt-20 animate-fade-in">
       {/* Bloco 1: Introdução ao Checklist - Estruturado para escaneabilidade */}
-      <div className="mb-8 section-card bg-gradient-to-br from-slate-50 via-white to-sky-50/40 border-l-4 border-l-sky-500 shadow-sm">
+      <div className="mb-8 section-card bg-gradient-to-br from-secondary/50 via-background to-sky-50/40 dark:from-secondary/20 dark:via-background dark:to-sky-950/20 border-l-4 border-l-sky-500 shadow-sm">
         <div className="space-y-5">
           {/* O que é */}
-          <div className="p-4 bg-white/80 rounded-lg border border-slate-200/60">
-            <h3 className="text-sm font-bold text-sky-700 uppercase tracking-wide mb-2 flex items-center gap-2">
+          <div className="p-4 bg-background/80 rounded-lg border border-border/60">
+            <h3 className="text-sm font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wide mb-2 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
               O que é
             </h3>
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
-              O <strong className="text-slate-900 font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-slate-900 font-semibold">autuação do processo</strong>.
+            <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-justify">
+              O <strong className="text-foreground font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-foreground font-semibold">autuação do processo</strong>.
             </p>
           </div>
 
           {/* Por que importa */}
-          <div className="p-4 bg-white/80 rounded-lg border border-slate-200/60">
-            <h3 className="text-sm font-bold text-emerald-700 uppercase tracking-wide mb-2 flex items-center gap-2">
+          <div className="p-4 bg-background/80 rounded-lg border border-border/60">
+            <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide mb-2 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
               Por que importa
             </h3>
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
-              Esta etapa é <strong className="text-slate-900 font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
+            <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-justify">
+              Esta etapa é <strong className="text-foreground font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
             </p>
           </div>
 
           {/* O que você precisa fazer */}
-          <div className="p-4 bg-sky-50/80 rounded-lg border border-sky-200/60">
+          <div className="p-4 bg-sky-50/80 dark:bg-sky-950/40 rounded-lg border border-sky-200/60 dark:border-sky-800/40">
             <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
               O que você precisa fazer
             </h3>
-            <ul className="space-y-2 text-slate-700 text-sm sm:text-base">
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
-                <span className="text-sky-600 font-bold">1.</span>
-                <span>Use a <strong className="text-sky-600 font-semibold">Lista de Verificação Interativa</strong> abaixo para monitorar os itens já encartados</span>
+                <span className="text-sky-600 dark:text-sky-400 font-bold">1.</span>
+                <span>Use a <strong className="text-sky-600 dark:text-sky-400 font-semibold">Lista de Verificação Interativa</strong> abaixo para monitorar os itens já encartados</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-sky-600 font-bold">2.</span>
-                <span>Consulte os <strong className="text-sky-600 font-semibold">Modelos de Documentos</strong> para padronização</span>
+                <span className="text-sky-600 dark:text-sky-400 font-bold">2.</span>
+                <span>Consulte os <strong className="text-sky-600 dark:text-sky-400 font-semibold">Modelos de Documentos</strong> para padronização</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-sky-600 font-bold">3.</span>
+                <span className="text-sky-600 dark:text-sky-400 font-bold">3.</span>
                 <span>Acompanhe o percentual de completude automaticamente calculado</span>
               </li>
             </ul>
           </div>
 
           {/* Erros comuns */}
-          <div className="p-4 bg-amber-50/80 rounded-lg border border-amber-200/60">
-            <h3 className="text-sm font-bold text-amber-700 uppercase tracking-wide mb-2 flex items-center gap-2">
+          <div className="p-4 bg-amber-50/80 dark:bg-amber-950/40 rounded-lg border border-amber-200/60 dark:border-amber-800/40">
+            <h3 className="text-sm font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-2 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
               Erros comuns a evitar
             </h3>
-            <ul className="space-y-1.5 text-slate-700 text-sm">
+            <ul className="space-y-1.5 text-foreground/80 text-sm">
               <li className="flex items-start gap-2">
-                <span className="text-amber-600">•</span>
-                <span>Esquecer de incluir a <strong>Declaração de Autenticidade</strong> (item 14 do checklist)</span>
+                <span className="text-amber-600 dark:text-amber-400">•</span>
+                <span>Esquecer de incluir a <strong className="text-foreground">Declaração de Autenticidade</strong> (item 14 do checklist)</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-amber-600">•</span>
+                <span className="text-amber-600 dark:text-amber-400">•</span>
                 <span>Nomear documentos de forma genérica, dificultando identificação futura</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-amber-600">•</span>
+                <span className="text-amber-600 dark:text-amber-400">•</span>
                 <span>Anexar extratos de período diferente do exercício financeiro</span>
               </li>
             </ul>
@@ -82,9 +82,9 @@ export const SectionTwo = () => {
       </div>
 
       {/* Regras Operacionais - Evitar Glosa */}
-      <div className="mb-8 section-card bg-gradient-to-br from-amber-50/50 via-white to-orange-50/30 border-l-4 border-l-amber-500 shadow-sm">
+      <div className="mb-8 section-card bg-gradient-to-br from-amber-50/50 dark:from-amber-950/30 via-background to-orange-50/30 dark:to-orange-950/20 border-l-4 border-l-amber-500 shadow-sm">
         <div className="content-spacing">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-5 flex items-center gap-3">
+          <h2 className="text-lg sm:text-xl font-bold text-foreground mb-5 flex items-center gap-3">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm shadow-md">⚠</span>
             Regras operacionais (evite glosa)
           </h2>
@@ -158,7 +158,7 @@ export const SectionTwo = () => {
 
       {/* Download Buttons - Modelos de Documentos PDDE */}
       <div className="mb-8">
-        <h3 className="section-heading text-slate-900 mb-6">Modelos de Documentos</h3>
+        <h3 className="section-heading text-foreground mb-6">Modelos de Documentos</h3>
         <div className="space-y-3">
           {[
             {
@@ -204,18 +204,18 @@ export const SectionTwo = () => {
           ].map((doc, index) => (
             <div
               key={index}
-              className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-slate-50 via-white to-sky-50/30 border border-slate-200 hover:border-sky-300 hover:shadow-md transition-all duration-300"
+              className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-secondary/50 dark:from-secondary/30 via-background to-sky-50/30 dark:to-sky-950/20 border border-border hover:border-sky-300 dark:hover:border-sky-700 hover:shadow-md transition-all duration-300"
             >
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
                 <div className="flex items-center gap-3 flex-1">
-                  <div className="p-2.5 rounded-lg bg-gradient-to-br from-sky-100 to-sky-50 border border-sky-200/50">
-                    <FileText className="w-4 h-4 text-sky-600" />
+                  <div className="p-2.5 rounded-lg bg-gradient-to-br from-sky-100 to-sky-50 dark:from-sky-900/50 dark:to-sky-950/30 border border-sky-200/50 dark:border-sky-700/50">
+                    <FileText className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-900 text-sm">
+                    <h4 className="font-semibold text-foreground text-sm">
                       {doc.title}
                     </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-muted-foreground leading-relaxed">
                       {doc.description}
                     </p>
                   </div>

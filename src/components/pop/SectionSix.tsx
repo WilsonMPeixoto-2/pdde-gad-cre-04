@@ -86,7 +86,7 @@ export const SectionSix = () => {
       </Callout>
 
       {/* ============ CONTEÚDO TRANSFERIDO DA SEÇÃO 2 ============ */}
-      <div className="space-y-8 mt-8 pt-8 border-t border-slate-200">
+      <div className="space-y-8 mt-8 pt-8 border-t border-border">
         <h3 className="section-heading text-primary">Conteúdo Adicional - Despacho de Encaminhamento</h3>
         
         {/* Definition Card */}
@@ -97,9 +97,9 @@ export const SectionSix = () => {
             </div>
             <div className="content-spacing">
               <h3 className="section-heading">O Despacho de Encaminhamento</h3>
-              <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-justify">
                 O Despacho de Encaminhamento é o documento que formaliza a prestação de contas 
-                do PDDE para a <strong className="text-sky-700">Gerência de Administração (GAD)</strong>.
+                do PDDE para a <strong className="text-sky-600 dark:text-sky-400">Gerência de Administração (GAD)</strong>.
               </p>
             </div>
           </div>
@@ -127,31 +127,31 @@ export const SectionSix = () => {
           <h3 className="section-heading">Procedimentos para Criar o Despacho</h3>
           
           <div className="space-y-4 timeline-steps">
-            <div className="flex items-start gap-4 p-5 bg-slate-50 rounded-xl timeline-step">
+            <div className="flex items-start gap-4 p-5 bg-muted/50 rounded-xl timeline-step">
               <div className="step-indicator shrink-0 text-sm">1</div>
               <div>
-                <h4 className="font-semibold text-slate-900 mb-1">Incluir Documento</h4>
-                <p className="text-sm text-slate-700 leading-relaxed text-justify">
-                  Com o processo aberto, clique no ícone <strong className="text-sky-700">"INCLUIR DOCUMENTO"</strong> na barra de ferramentas do SEI.
+                <h4 className="font-semibold text-foreground mb-1">Incluir Documento</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed text-justify">
+                  Com o processo aberto, clique no ícone <strong className="text-sky-600 dark:text-sky-400">"INCLUIR DOCUMENTO"</strong> na barra de ferramentas do SEI.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 bg-slate-50 rounded-xl timeline-step">
+            <div className="flex items-start gap-4 p-5 bg-muted/50 rounded-xl timeline-step">
               <div className="step-indicator shrink-0 text-sm">2</div>
               <div>
-                <h4 className="font-semibold text-slate-900 mb-1">Escolha do Tipo de Documento</h4>
-                <p className="text-sm text-slate-700 leading-relaxed text-justify">
-                  Selecione o tipo: <strong className="text-sky-700">"Encaminhamento da Prestação de Contas PDDE"</strong>
+                <h4 className="font-semibold text-foreground mb-1">Escolha do Tipo de Documento</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed text-justify">
+                  Selecione o tipo: <strong className="text-sky-600 dark:text-sky-400">"Encaminhamento da Prestação de Contas PDDE"</strong>
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 bg-slate-50 rounded-xl timeline-step">
+            <div className="flex items-start gap-4 p-5 bg-muted/50 rounded-xl timeline-step">
               <div className="step-indicator shrink-0 text-sm">3</div>
               <div>
-                <h4 className="font-semibold text-slate-900 mb-1">Preenchimento do Editor</h4>
-                <p className="text-sm text-slate-700 leading-relaxed text-justify">
+                <h4 className="font-semibold text-foreground mb-1">Preenchimento do Editor</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed text-justify">
                   No corpo do documento, digite o conteúdo do despacho ou cole o texto padronizado 
                   utilizado pela sua unidade.
                 </p>
@@ -160,23 +160,21 @@ export const SectionSix = () => {
           </div>
         </div>
 
-        {/* Specification Format */}
         <div className="section-card">
           <h3 className="section-heading">Especificação do Documento</h3>
           <div className="content-spacing">
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify">
-              O campo deve ser preenchido seguindo o formato padronizado, incluindo o <strong className="text-sky-600">exercício</strong>:
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-justify">
+              O campo deve ser preenchido seguindo o formato padronizado, incluindo o <strong className="text-sky-600 dark:text-sky-400">exercício</strong>:
             </p>
             
             <Callout variant="info" title="Formato obrigatório:">
-              <code className="block bg-white px-4 py-3 rounded-lg border border-slate-200 text-sm data-code text-slate-900 break-all shadow-sm mt-2">
+              <code className="block bg-card px-4 py-3 rounded-lg border border-border text-sm data-code text-foreground break-all shadow-sm mt-2">
                 PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA
               </code>
             </Callout>
           </div>
         </div>
 
-        {/* Execution Summary Template */}
         <div className="section-card">
           <h3 className="section-heading">Modelo de Execução Resumida</h3>
           
@@ -190,27 +188,27 @@ export const SectionSix = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td className="text-slate-700">Saldo total inicial em 00/00/202X</td>
+                  <td className="text-muted-foreground">Saldo total inicial em 00/00/202X</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="pl-6 sm:pl-8 text-slate-700">Saldo Custeio</td>
+                  <td className="pl-6 sm:pl-8 text-muted-foreground">Saldo Custeio</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="pl-6 sm:pl-8 text-slate-700">Saldo Capital</td>
+                  <td className="pl-6 sm:pl-8 text-muted-foreground">Saldo Capital</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="text-slate-700">Total dos Créditos (repasses)</td>
+                  <td className="text-muted-foreground">Total dos Créditos (repasses)</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr>
-                  <td className="text-slate-700">Despesas realizadas</td>
+                  <td className="text-muted-foreground">Despesas realizadas</td>
                   <td className="text-right data-code">-</td>
                 </tr>
                 <tr className="font-semibold bg-accent/10">
-                  <td className="text-slate-900">Saldo total final em 00/00/202X</td>
+                  <td className="text-foreground">Saldo total final em 00/00/202X</td>
                   <td className="text-right data-code">-</td>
                 </tr>
               </tbody>
@@ -228,17 +226,17 @@ export const SectionSix = () => {
           </div>
           
           <div className="space-y-4">
-            <div className="flex items-start gap-3 p-5 bg-slate-50 rounded-xl">
+            <div className="flex items-start gap-3 p-5 bg-muted/50 rounded-xl">
               <PenLine className="w-5 h-5 text-accent shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-slate-900">1. Assinar</p>
-                <p className="text-sm text-slate-700 leading-relaxed text-justify">
-                  Clique no ícone <strong className="text-sky-700">Assinar Documento</strong> (representado por uma caneta preta na barra de ferramentas).
+                <p className="font-semibold text-foreground">1. Assinar</p>
+                <p className="text-sm text-muted-foreground leading-relaxed text-justify">
+                  Clique no ícone <strong className="text-sky-600 dark:text-sky-400">Assinar Documento</strong> (representado por uma caneta preta na barra de ferramentas).
                 </p>
               </div>
             </div>
             <Callout variant="success" title="2. Verificar">
-              <span className="text-justify block">Certifique-se de que o despacho assinado apareceu corretamente na <strong className="text-emerald-700">árvore do processo</strong> (menu lateral esquerdo), indicando que o documento foi gerado e assinado com sucesso.</span>
+              <span className="text-justify block">Certifique-se de que o despacho assinado apareceu corretamente na <strong className="text-emerald-700 dark:text-emerald-400">árvore do processo</strong> (menu lateral esquerdo), indicando que o documento foi gerado e assinado com sucesso.</span>
             </Callout>
           </div>
 
@@ -246,7 +244,7 @@ export const SectionSix = () => {
             <Callout variant="warning">
               <span className="text-justify block">Caso o documento não apareça como assinado ou não esteja visível na árvore, 
               atualize a página e confira novamente. Persistindo a inconsistência, acione 
-              o suporte responsável pelo <strong className="text-amber-700">SEI!RIO</strong> antes de dar prosseguimento.</span>
+              o suporte responsável pelo <strong className="text-sky-600 dark:text-sky-400">SEI!RIO</strong> antes de dar prosseguimento.</span>
             </Callout>
           </div>
         </div>

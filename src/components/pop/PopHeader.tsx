@@ -1,6 +1,7 @@
-import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search, X } from "lucide-react";
+import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
+import { ShareQRCode } from "./ShareQRCode";
 
 interface PopHeaderProps {
   onPrint: () => void;
@@ -103,6 +104,30 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
 
           {/* Actions */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Search Button - Opens Command Palette */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                // Trigger Cmd+K programmatically
+                const event = new KeyboardEvent('keydown', {
+                  key: 'k',
+                  metaKey: true,
+                  ctrlKey: true,
+                  bubbles: true
+                });
+                document.dispatchEvent(event);
+              }}
+              className="text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-3 transition-all duration-200"
+              title="Buscar (Ctrl+K)"
+              aria-label="Abrir busca global"
+            >
+              <Search className="w-4 h-4 sm:mr-2" aria-hidden="true" />
+              <span className="hidden sm:inline text-xs font-mono opacity-70">⌘K</span>
+            </Button>
+
+            <ShareQRCode sectionTitle="PDDE - Guia de Procedimentos" />
+
             <Button
               variant="ghost"
               size="sm"
@@ -121,7 +146,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               title={isDark ? "Modo claro" : "Modo escuro"}
               aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
             >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {isDark ? <Sun className="w-4 h-4" aria-hidden="true" /> : <Moon className="w-4 h-4" aria-hidden="true" />}
             </Button>
             <Button
               variant="ghost"
@@ -130,17 +155,17 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               className="text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-4 transition-all duration-200"
               aria-label="Imprimir documento"
             >
-              <Printer className="w-4 h-4 sm:mr-2" />
+              <Printer className="w-4 h-4 sm:mr-2" aria-hidden="true" />
               <span className="hidden sm:inline">Imprimir</span>
             </Button>
             <Button
               variant="secondary"
               size="sm"
               onClick={onPrint}
-              className="h-9 w-9 sm:h-10 sm:w-auto sm:px-4 shadow-lg hover:shadow-xl transition-all duration-200"
+              className="h-9 w-9 sm:h-10 sm:w-auto sm:px-4 shadow-lg hover:shadow-xl transition-all duration-200 btn-premium"
               aria-label="Baixar documento como PDF"
             >
-              <Download className="w-4 h-4 sm:mr-2" />
+              <Download className="w-4 h-4 sm:mr-2" aria-hidden="true" />
               <span className="hidden sm:inline">Download</span>
             </Button>
           </div>

@@ -7,7 +7,7 @@ export const SectionIntro = () => {
           Prezados(as) Diretores(as),
         </h2>
         <div className="content-spacing space-y-5">
-          <p className="text-foreground leading-relaxed text-sm sm:text-base">
+          <p className="drop-cap text-foreground leading-relaxed text-sm sm:text-base text-justify">
             A rotina de uma gestão escolar é intensa. Entre demandas pedagógicas, cuidado com pessoas 
             e urgências do dia a dia, sabemos que a organização administrativa exige tempo, atenção e, 
             muitas vezes, decisões rápidas. Por isso, a 4ª Coordenadoria Regional de Educação, por meio 

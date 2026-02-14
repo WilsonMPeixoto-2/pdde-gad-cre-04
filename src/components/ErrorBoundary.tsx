@@ -18,8 +18,10 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
 
   componentDidCatch(error: unknown, info: { componentStack: string }) {
     // Surface the full component stack in console logs so we can pinpoint the exact offender.
-    console.error("[ErrorBoundary] Caught render error:", error);
-    console.error("[ErrorBoundary] Component stack:", info.componentStack);
+    if (import.meta.env.DEV) {
+      console.error("[ErrorBoundary] Caught render error:", error);
+      console.error("[ErrorBoundary] Component stack:", info.componentStack);
+    }
   }
 
   private handleReload = () => {

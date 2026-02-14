@@ -38,11 +38,11 @@ const Auth = () => {
       });
 
       if (error) {
-        console.error("Google sign-in error:", error);
+        if (import.meta.env.DEV) console.error("Google sign-in error:", error);
         toast.error("Erro ao fazer login com Google. Tente novamente.");
       }
     } catch (error) {
-      console.error("Unexpected error:", error);
+      if (import.meta.env.DEV) console.error("Unexpected error:", error);
       toast.error("Erro inesperado. Tente novamente.");
     } finally {
       setIsLoading(false);

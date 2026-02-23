@@ -123,10 +123,26 @@ export const searchIndex: SearchItem[] = [
   {
     id: "checklist",
     title: "Checklist de Documentos",
-    content: "Lista de verificação de documentos do PDDE",
-    keywords: ["checklist", "verificação", "lista", "conferência"],
+    content: "Lista de verificação de documentos do PDDE conforme Resolução CD/FNDE nº 15/2021",
+    keywords: ["checklist", "verificação", "lista", "conferência", "sigpc", "contas online"],
     section: "Seção 5",
     anchor: "secao-5"
+  },
+  {
+    id: "sigpc",
+    title: "SiGPC / Contas Online",
+    content: "Sistema de Gestão de Prestação de Contas do FNDE para registro e envio da prestação de contas do PDDE",
+    keywords: ["sigpc", "contas online", "sistema", "fnde", "prestação"],
+    section: "Anexos",
+    anchor: "anexos"
+  },
+  {
+    id: "vedacoes",
+    title: "Vedações do PDDE",
+    content: "Despesas proibidas com recursos do PDDE conforme Resolução CD/FNDE nº 15/2021",
+    keywords: ["vedações", "proibido", "vedado", "despesas proibidas"],
+    section: "Anexos",
+    anchor: "anexos"
   },
   {
     id: "contatos",

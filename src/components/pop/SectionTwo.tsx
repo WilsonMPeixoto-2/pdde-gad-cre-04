@@ -61,7 +61,7 @@ export const SectionTwo = () => {
             <ul className="space-y-1.5 text-foreground/80 text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400">•</span>
-                <span>Esquecer de incluir a <strong className="text-foreground">Declaração de Autenticidade</strong> (item 14 do checklist)</span>
+                <span>Não realizar as <strong className="text-foreground">3 pesquisas de preços obrigatórias</strong> (Res. FNDE 15/2021, Art. 17)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400">•</span>
@@ -70,6 +70,10 @@ export const SectionTwo = () => {
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400">•</span>
                 <span>Anexar extratos de período diferente do exercício financeiro</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-600 dark:text-amber-400">•</span>
+                <span>Não registrar a prestação de contas no <strong className="text-foreground">SiGPC/Contas Online</strong></span>
               </li>
             </ul>
           </div>
@@ -129,20 +133,42 @@ export const SectionTwo = () => {
             </ul>
           </div>
 
-          {/* Vedações */}
-          <div className="mb-3">
-            <h3 className="text-sm font-bold text-red-700 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-              Atenção às vedações (exemplos comuns)
+          {/* Pesquisa de Preços */}
+          <div className="mb-5">
+            <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Pesquisa de preços — regra das 3 cotações
             </h3>
-            <ul className="space-y-2 text-slate-700 text-sm sm:text-base">
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
-                <span className="text-red-600 font-bold">•</span>
-                <span className="text-justify"><strong className="text-red-700">Não aplicar</strong> recursos em despesas típicas de <strong className="text-slate-900">manutenção predial/contas recorrentes</strong> (ex.: aluguel, telefone, água, luz, esgoto) e nem em <strong className="text-slate-900">despesas assistencialistas</strong>.</span>
+                <span className="text-primary font-bold">•</span>
+                <span className="text-justify">Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 17)</strong>, é obrigatório obter no mínimo <strong className="text-primary">3 cotações de preços</strong> de fornecedores distintos para cada aquisição.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-red-600 font-bold">•</span>
-                <span className="text-justify">Em caso de dúvida sobre enquadramento, <strong className="text-sky-600">consulte a GAD antes de executar</strong> a despesa.</span>
+                <span className="text-primary font-bold">•</span>
+                <span className="text-justify">Quando houver <strong className="text-foreground">múltiplas ações do PDDE</strong> no mesmo exercício, os gastos devem ser <strong className="text-foreground">separados por ação</strong> (rateio de despesas), com controle individualizado.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary font-bold">•</span>
+                <span className="text-justify">A cotação pode ser dispensada quando a UEx utilizar o <strong className="text-foreground">Sistema de Registro de Preços (SRP)</strong>, desde que devidamente documentado.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Vedações */}
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-red-700 dark:text-red-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+              Vedações — despesas proibidas (Res. FNDE 15/2021)
+            </h3>
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-justify"><strong className="text-red-700 dark:text-red-400">Não aplicar</strong> recursos em despesas de <strong className="text-foreground">pessoal, contas recorrentes</strong> (água, luz, telefone, aluguel), <strong className="text-foreground">despesas assistencialistas</strong> ou <strong className="text-foreground">gêneros alimentícios</strong> (cobertos pelo PNAE).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-justify">Em caso de dúvida sobre enquadramento, <strong className="text-primary">consulte a GAD antes de executar</strong> a despesa.</span>
               </li>
             </ul>
           </div>

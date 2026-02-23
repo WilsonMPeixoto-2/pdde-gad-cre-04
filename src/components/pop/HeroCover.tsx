@@ -61,7 +61,7 @@ export const HeroCover = () => {
             { icon: <Building2 className="w-6 h-6" aria-hidden="true" />, label: "GAD", desc: "Gerência de Administração" },
             { icon: <BookOpen className="w-6 h-6" aria-hidden="true" />, label: "POP", desc: "Procedimento Operacional Padrão" },
             { icon: <FileText className="w-6 h-6" aria-hidden="true" />, label: "SEI!RIO", desc: "Sistema Eletrônico" },
-            { icon: <Calendar className="w-6 h-6" aria-hidden="true" />, label: "V. 1.4", desc: "Janeiro/2026" },
+            { icon: <Calendar className="w-6 h-6" aria-hidden="true" />, label: "V. 1.5", desc: "Fevereiro/2026" },
           ].map((item, i) => (
             <div 
               key={i} 

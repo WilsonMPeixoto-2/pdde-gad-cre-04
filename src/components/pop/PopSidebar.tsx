@@ -1,6 +1,7 @@
-import { ChevronRight, FileText, ClipboardList, Table2, Upload, CheckCircle, Phone, X, Scale } from "lucide-react";
+import { ChevronRight, FileText, ClipboardList, Upload, CheckCircle, Phone, X, Scale } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState, useCallback } from "react";
 
 interface Section {
   id: string;
@@ -14,8 +15,8 @@ const sections: Section[] = [
   { id: "secao-1", number: "1", title: "Abertura do Processo", icon: <ClipboardList className="w-4 h-4" /> },
   { id: "secao-2", number: "2", title: "Instrução Processual", icon: <FileText className="w-4 h-4" /> },
   { id: "secao-3", number: "3", title: "Inclusão de Documentos", icon: <Upload className="w-4 h-4" /> },
-  { id: "secao-4", number: "4", title: "Declaração de Autenticidade", icon: <FileText className="w-4 h-4" /> },
-  { id: "secao-5", number: "5", title: "Bloco de Assinatura", icon: <CheckCircle className="w-4 h-4" /> },
+  { id: "secao-4", number: "4", title: "Autenticação de Documentos", icon: <FileText className="w-4 h-4" /> },
+  { id: "secao-5", number: "5", title: "Conferência e Envio", icon: <CheckCircle className="w-4 h-4" /> },
   { id: "secao-6", number: "6", title: "Despacho e Finalização", icon: <FileText className="w-4 h-4" /> },
   { id: "contatos", number: "7", title: "Contatos", icon: <Phone className="w-4 h-4" /> },
   { id: "anexo", number: "A", title: "Anexo - Legislação", icon: <Scale className="w-4 h-4" /> },
@@ -28,7 +29,53 @@ interface PopSidebarProps {
   onClose: () => void;
 }
 
+/** Returns a map of sectionId → scroll progress (0–1) */
+function useSectionProgress() {
+  const [progress, setProgress] = useState<Record<string, number>>({});
+
+  const calculate = useCallback(() => {
+    const result: Record<string, number> = {};
+    const viewportH = window.innerHeight;
+
+    for (const s of sections) {
+      const el = document.getElementById(s.id);
+      if (!el) continue;
+      const rect = el.getBoundingClientRect();
+      const sectionH = rect.height || 1;
+
+      // How much of the section has scrolled past the viewport top
+      const scrolled = -rect.top + viewportH * 0.3; // offset so "read" starts a bit after entering
+      const ratio = Math.min(1, Math.max(0, scrolled / sectionH));
+      result[s.id] = ratio;
+    }
+    setProgress(result);
+  }, []);
+
+  useEffect(() => {
+    let raf: number | null = null;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        calculate();
+        raf = null;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // initial calc
+    const timeout = setTimeout(calculate, 300);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+      clearTimeout(timeout);
+    };
+  }, [calculate]);
+
+  return progress;
+}
+
 export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: PopSidebarProps) => {
+  const progress = useSectionProgress();
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -81,40 +128,65 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
               Sumário
             </p>
             <ul className="space-y-1" role="list" aria-labelledby="nav-heading">
-              {sections.map((section) => (
-                <li key={section.id}>
-                  <button
-                    onClick={() => {
-                      onSectionClick(section.id);
-                      onClose();
-                    }}
-                    className={cn(
-                      "w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
-                      activeSection === section.id
-                        ? "bg-accent text-accent-foreground shadow-lg"
-                        : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/30"
-                    )}
-                    aria-label={`Ir para seção ${section.number}: ${section.title}`}
-                    aria-current={activeSection === section.id ? "true" : undefined}
-                  >
-                    <span className={cn(
-                      "flex items-center justify-center w-7 h-7 rounded-lg text-xs font-bold transition-all",
-                      activeSection === section.id
-                        ? "bg-accent-foreground/20 text-accent-foreground"
-                        : "bg-sidebar-accent/50 text-sidebar-foreground"
-                    )} aria-hidden="true">
-                      {section.number}
-                    </span>
-                    <span className="flex-1 text-sm font-medium leading-tight">{section.title}</span>
-                    <span className="icon-bounce">
+              {sections.map((section) => {
+                const sectionProgress = progress[section.id] ?? 0;
+                const isActive = activeSection === section.id;
+                const isRead = sectionProgress >= 0.95;
+
+                return (
+                  <li key={section.id} className="relative">
+                    {/* Progress bar on the left edge */}
+                    <div className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full overflow-hidden bg-sidebar-accent/20" aria-hidden="true">
+                      <div
+                        className="w-full rounded-full transition-all duration-500 ease-out"
+                        style={{
+                          height: `${sectionProgress * 100}%`,
+                          background: isRead
+                            ? 'hsl(160, 84%, 39%)'
+                            : isActive
+                              ? 'hsl(199, 89%, 48%)'
+                              : 'hsl(199, 89%, 48%, 0.5)',
+                        }}
+                      />
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        onSectionClick(section.id);
+                        onClose();
+                      }}
+                      className={cn(
+                        "w-full text-left flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-xl transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none group",
+                        isActive
+                          ? "bg-accent text-accent-foreground shadow-lg"
+                          : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 hover:pl-5"
+                      )}
+                      aria-label={`Ir para seção ${section.number}: ${section.title}`}
+                      aria-current={isActive ? "true" : undefined}
+                    >
+                      <span className={cn(
+                        "flex items-center justify-center w-7 h-7 rounded-lg text-xs font-bold transition-all duration-200",
+                        isActive
+                          ? "bg-accent-foreground/20 text-accent-foreground"
+                          : isRead
+                            ? "bg-emerald-500/20 text-emerald-400"
+                            : "bg-sidebar-accent/50 text-sidebar-foreground group-hover:bg-sidebar-accent/70"
+                      )} aria-hidden="true">
+                        {isRead && !isActive ? (
+                          <CheckCircle className="w-3.5 h-3.5" />
+                        ) : (
+                          section.number
+                        )}
+                      </span>
+                      <span className="flex-1 text-sm font-medium leading-tight">{section.title}</span>
                       <ChevronRight className={cn(
-                        "w-4 h-4 transition-transform duration-200",
-                        activeSection === section.id && "rotate-90"
+                        "w-4 h-4 transition-all duration-200 opacity-0 group-hover:opacity-100",
+                        isActive && "opacity-100 rotate-90"
                       )} aria-hidden="true" />
-                    </span>
-                  </button>
-                </li>
-              ))}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 

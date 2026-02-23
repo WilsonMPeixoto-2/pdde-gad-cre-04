@@ -11,7 +11,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
     <section id="contatos" className="scroll-mt-20 animate-fade-in">
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="section-number">6</div>
+        <div className="section-number">7</div>
         <div>
           <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
             Contatos da GAD/4ª CRE
@@ -227,7 +227,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
             <span className="text-sm">Gerência de Administração (GAD)</span><br />
             <span className="text-xs text-muted-foreground/70 mt-2 block flex items-center justify-center gap-2">
               <Calendar className="w-3 h-3" />
-              Última atualização: 16 de dezembro de 2025
+              Última atualização: Fevereiro de 2026
             </span>
           </p>
         </div>

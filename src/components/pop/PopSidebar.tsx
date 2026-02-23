@@ -122,7 +122,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
           <div className="p-4 border-t border-sidebar-border/30">
             <div className="text-[10px] text-sidebar-foreground/40 text-center space-y-0.5">
               <p className="font-semibold">4ª CRE - GAD</p>
-              <p>Versão 1.4 - Janeiro/2026</p>
+              <p>Versão 1.5 - Fevereiro/2026</p>
             </div>
           </div>
         </div>

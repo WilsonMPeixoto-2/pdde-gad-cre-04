@@ -16,7 +16,7 @@ export const DocumentFooter = () => {
       </div>
 
       {/* Footer Card */}
-      <div className="section-card text-center py-10 px-8 bg-gradient-to-br from-slate-50 to-white">
+      <div className="section-card text-center py-10 px-8 bg-gradient-to-br from-secondary to-card">
         <div className="max-w-2xl mx-auto space-y-6">
           {/* Institution Info */}
           <div className="space-y-3">
@@ -32,7 +32,7 @@ export const DocumentFooter = () => {
           {/* Version Info */}
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Calendar className="w-4 h-4" />
-            <span className="text-sm">Última atualização: 16 de dezembro de 2025</span>
+            <span className="text-sm">Última atualização: Fevereiro de 2026</span>
           </div>
 
           {/* Divider */}

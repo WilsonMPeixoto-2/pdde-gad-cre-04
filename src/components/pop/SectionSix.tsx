@@ -67,9 +67,9 @@ export const SectionSix = () => {
               <span className="text-sm font-bold text-primary">4</span>
             </div>
             <div>
-              <p className="font-medium text-foreground">Relacionamento com Processo de Inventário</p>
+              <p className="font-medium text-foreground">Controle Patrimonial — PDDE Capital</p>
               <p className="text-sm text-muted-foreground mt-1">
-                Quando aplicável, o processo de prestação de contas é relacionado ao processo de inventário da escola.
+                Quando houver aquisição de bens com recursos de capital do PDDE, a escola deve providenciar a incorporação dos bens ao patrimônio escolar, conforme Resolução CD/FNDE nº 15/2021. A relação de bens adquiridos deve constar da prestação de contas.
               </p>
             </div>
           </div>

@@ -95,40 +95,40 @@ export const SectionTwo = () => {
 
           {/* Compras pela internet */}
           <div className="mb-5">
-            <h3 className="text-sm font-bold text-amber-700 uppercase tracking-wide mb-3 flex items-center gap-2">
+            <h3 className="text-sm font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-3 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
               Compras pela internet (quando aplicável)
             </h3>
-            <ul className="space-y-2 text-slate-700 text-sm sm:text-base">
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
-                <span className="text-amber-600 font-bold">•</span>
-                <span className="text-justify">Use <strong className="text-slate-900">sites nacionais confiáveis</strong> e registre a cotação com print contendo: <strong className="text-sky-600">descrição completa, preço final e frete</strong>.</span>
+                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
+                <span className="text-justify">Use <strong className="text-foreground">sites nacionais confiáveis</strong> e registre a cotação com print contendo: <strong className="text-sky-600 dark:text-sky-400">descrição completa, preço final e frete</strong>.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-amber-600 font-bold">•</span>
-                <span className="text-justify">Compare o <strong className="text-slate-900">valor total</strong> (incluindo frete) e registre o critério da escolha.</span>
+                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
+                <span className="text-justify">Compare o <strong className="text-foreground">valor total</strong> (incluindo frete) e registre o critério da escolha.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-amber-600 font-bold">•</span>
-                <span className="text-justify">Guarde o <strong className="text-slate-900">comprovante de pagamento</strong> identificando o fornecedor vencedor.</span>
+                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
+                <span className="text-justify">Guarde o <strong className="text-foreground">comprovante de pagamento</strong> identificando o fornecedor vencedor.</span>
               </li>
             </ul>
           </div>
 
           {/* Sistema de Registro de Preços */}
           <div className="mb-5">
-            <h3 className="text-sm font-bold text-emerald-700 uppercase tracking-wide mb-3 flex items-center gap-2">
+            <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide mb-3 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
               Sistema de Registro de Preços (SRP) — alternativa à pesquisa de preços
             </h3>
-            <ul className="space-y-2 text-slate-700 text-sm sm:text-base">
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
-                <span className="text-emerald-600 font-bold">•</span>
-                <span className="text-justify">Se a <strong className="text-slate-900">UEx/EM</strong> usar SRP (adesão a ata), anexe a <strong className="text-sky-600">ata/acordo</strong> e os documentos do fornecedor.</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
+                <span className="text-justify">Se a <strong className="text-foreground">UEx/EM</strong> usar SRP (adesão a ata), anexe a <strong className="text-sky-600 dark:text-sky-400">ata/acordo</strong> e os documentos do fornecedor.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-emerald-600 font-bold">•</span>
-                <span className="text-justify">Nesse caso, registre no processo que a <strong className="text-slate-900">pesquisa de preços foi dispensada</strong> por uso de SRP.</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
+                <span className="text-justify">Nesse caso, registre no processo que a <strong className="text-foreground">pesquisa de preços foi dispensada</strong> por uso de SRP.</span>
               </li>
             </ul>
           </div>
@@ -174,8 +174,8 @@ export const SectionTwo = () => {
           </div>
 
           {/* Nota explicativa */}
-          <div className="p-3 bg-slate-100/80 rounded-lg border border-slate-200/60 mt-4">
-            <p className="text-slate-600 text-xs sm:text-sm italic text-center">
+          <div className="p-3 bg-muted rounded-lg border border-border mt-4">
+            <p className="text-muted-foreground text-xs sm:text-sm italic text-center">
               Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes — reduzindo inconsistências e glosas.
             </p>
           </div>
@@ -268,37 +268,37 @@ export const SectionTwo = () => {
       </div>
 
       {/* Bloco 2: Roteiro de Instrução - AGORA APÓS MODELOS */}
-      <div className="mb-8 section-card bg-gradient-to-br from-slate-50 via-white to-primary/5 border-l-4 border-l-primary shadow-sm">
+      <div className="mb-8 section-card bg-gradient-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-sm">
         <div className="content-spacing">
           <h3 className="section-heading text-primary border-b-primary/20">
             Roteiro de Instrução para as próximas etapas deste guia
           </h3>
-          <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-justify mb-5">
+          <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-justify mb-5">
             A sequência deste manual detalhará os procedimentos técnicos para a composição dos autos, divididos conforme a origem do documento:
           </p>
           <div className="space-y-4">
-            <div className="p-5 bg-gradient-to-r from-white to-sky-50/50 rounded-xl border border-sky-200/60 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="p-5 bg-gradient-to-r from-card to-sky-50/50 dark:to-sky-950/20 rounded-xl border border-sky-200/60 dark:border-sky-800/40 shadow-sm hover:shadow-md transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 text-white font-bold text-sm shrink-0 shadow-md">
                   3
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 font-bold uppercase tracking-wide">EXTERNOS</span></h4>
-                  <p className="text-slate-600 text-sm leading-relaxed text-justify">
-                    Documentos gerados fora do ambiente do sistema <strong className="text-slate-800">SEI!RIO</strong> (<strong className="text-sky-600">digitalizados</strong> ou <strong className="text-emerald-600 uppercase">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
+                  <h4 className="font-semibold text-foreground mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 dark:text-sky-400 font-bold uppercase tracking-wide">EXTERNOS</span></h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed text-justify">
+                    Documentos gerados fora do ambiente do sistema <strong className="text-foreground">SEI!RIO</strong> (<strong className="text-sky-600 dark:text-sky-400">digitalizados</strong> ou <strong className="text-emerald-600 dark:text-emerald-400 uppercase">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="p-5 bg-gradient-to-r from-white to-primary/5 rounded-xl border border-primary/20 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="p-5 bg-gradient-to-r from-card to-primary/5 rounded-xl border border-primary/20 shadow-sm hover:shadow-md transition-all duration-300">
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-slate-800 text-white font-bold text-sm shrink-0 shadow-md">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-sm shrink-0 shadow-md">
                   4
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-900 mb-2">Tópico 4 – Autenticação de Documentos</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed text-justify">
-                    Procedimento para <strong className="text-slate-800">autenticar documentos externos</strong> incluídos no processo, validando sua integridade e conformidade.
+                  <h4 className="font-semibold text-foreground mb-2">Tópico 4 – Autenticação de Documentos</h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed text-justify">
+                    Procedimento para <strong className="text-foreground">autenticar documentos externos</strong> incluídos no processo, validando sua integridade e conformidade.
                   </p>
                 </div>
               </div>

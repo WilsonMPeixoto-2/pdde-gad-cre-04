@@ -81,24 +81,45 @@ export const DocumentFooter = () => {
       </div>
 
       {/* Author Signature */}
-      <div className="mt-8 text-center space-y-3">
-        <p className="text-xs text-muted-foreground tracking-widest uppercase">Desenvolvido por</p>
-        <p className="font-heading font-semibold text-foreground tracking-tight">Wilson M. Peixoto</p>
-        <p className="text-xs text-muted-foreground italic">Inovação para a Gestão Pública</p>
-        
-        <div className="flex items-center justify-center gap-4 pt-2">
-          <a href="tel:+5521981738753" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
-            <Phone className="w-3.5 h-3.5" />
-            <span>(21) 98173-8753</span>
-          </a>
-          <a href="mailto:wilsonmpeixoto@gmail.com" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
-            <Mail className="w-3.5 h-3.5" />
-            <span>wilsonmpeixoto@gmail.com</span>
-          </a>
-          <a href="https://www.linkedin.com/in/wilson-peixoto/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
-            <Linkedin className="w-3.5 h-3.5" />
-            <span>LinkedIn</span>
-          </a>
+      <div className="mt-10 relative">
+        <div className="relative overflow-hidden rounded-xl text-center py-8 px-6 border border-border/30" style={{
+          background: 'linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--secondary) / 0.5) 100%)',
+        }}>
+          {/* Subtle glow */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] h-[100px] rounded-full blur-[60px]" style={{
+            background: 'hsl(var(--primary) / 0.06)'
+          }} />
+
+          <div className="relative space-y-3">
+            <div className="w-12 h-0.5 mx-auto rounded-full mb-4" style={{
+              background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.4), transparent)'
+            }} />
+
+            <p className="text-[10px] text-muted-foreground tracking-[0.25em] uppercase font-medium">Desenvolvido por</p>
+            
+            <p className="font-heading font-bold text-foreground tracking-tight text-base" style={{
+              background: 'linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>Wilson M. Peixoto</p>
+            
+            <p className="text-xs text-muted-foreground italic tracking-wide">Inovação para a Gestão Pública</p>
+
+            <div className="flex items-center justify-center gap-5 pt-3 flex-wrap">
+              <a href="tel:+5521981738753" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
+                <Phone className="w-3.5 h-3.5" />
+                <span>(21) 98173-8753</span>
+              </a>
+              <a href="mailto:wilsonmpeixoto@gmail.com" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
+                <Mail className="w-3.5 h-3.5" />
+                <span>wilsonmpeixoto@gmail.com</span>
+              </a>
+              <a href="https://www.linkedin.com/in/wilson-peixoto/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
+                <Linkedin className="w-3.5 h-3.5" />
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

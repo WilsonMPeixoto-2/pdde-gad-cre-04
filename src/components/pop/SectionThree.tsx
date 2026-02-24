@@ -1,10 +1,19 @@
 import { Upload, FileImage, FileText, AlertCircle, CheckCircle2, Lightbulb, FilePlus2, ArrowRight, ExternalLink, FileDown, Scissors, Image } from "lucide-react";
 import seiIncludeDocIcon from "@/assets/sei-include-doc-icon.png";
 import seiChooseDocType from "@/assets/sei-choose-doc-type.png";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionThree = () => {
   return (
     <section id="secao-3" className="scroll-mt-20 animate-fade-in">
+      {/* Profile Callouts */}
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
+        Digitalize documentos em PDF com resolução mínima de 200 DPI. Nomeie cada arquivo de forma descritiva antes de anexar (ex.: "NF_001_Jan2025_Papelaria.pdf").
+      </ProfileCallout>
+      <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
+        Confirme que todos os documentos externos estão com o tipo correto (digitalizado vs. nato digital) e que o "Nome na Árvore" permite identificação inequívoca na busca do SEI.
+      </ProfileCallout>
+
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
         <div className="section-number">3</div>

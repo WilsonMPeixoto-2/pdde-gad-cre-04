@@ -10,6 +10,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useDocumentChecklist } from "@/hooks/useDocumentChecklist";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionAnexo = () => {
   const documentosExigidos = [
@@ -54,6 +55,14 @@ export const SectionAnexo = () => {
 
   return (
     <section id="anexo" className="scroll-mt-20">
+      {/* Profile Callouts */}
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
+        Use o checklist interativo abaixo para conferir se todos os documentos obrigatórios foram reunidos antes de enviar o processo. Imprima o resumo dos itens pendentes se necessário.
+      </ProfileCallout>
+      <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
+        Ao receber o processo, cruze a lista de documentos obrigatórios com a árvore do SEI. Verifique especialmente: 3 cotações de preço, extratos do período integral e aprovação do Conselho Escolar.
+      </ProfileCallout>
+
       {/* Header */}
       <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-l-primary">
         <div className="flex items-start gap-4">
@@ -240,7 +249,7 @@ export const SectionAnexo = () => {
         </div>
 
         <div className="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-          <Table className="table-institutional">
+          <Table className="table-institutional table-responsive-cards">
             <TableHeader>
               <TableRow>
                 <TableHead className="bg-primary text-primary-foreground rounded-tl-lg">Tipo de Despesa</TableHead>
@@ -250,8 +259,8 @@ export const SectionAnexo = () => {
             <TableBody>
               {documentosComprobatorios.map((item, index) => (
                 <TableRow key={index}>
-                  <TableCell className="font-medium">{item.tipo}</TableCell>
-                  <TableCell>{item.documentos}</TableCell>
+                  <TableCell className="font-medium" data-label="Tipo de Despesa">{item.tipo}</TableCell>
+                  <TableCell data-label="Documentos Aceitos">{item.documentos}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -272,7 +281,7 @@ export const SectionAnexo = () => {
         </div>
 
         <div className="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-          <Table className="table-institutional">
+          <Table className="table-institutional table-responsive-cards">
             <TableHeader>
               <TableRow>
                 <TableHead className="bg-primary text-primary-foreground rounded-tl-lg">Regra</TableHead>
@@ -282,8 +291,8 @@ export const SectionAnexo = () => {
             <TableBody>
               {regrasComprovantes.map((item, index) => (
                 <TableRow key={index}>
-                  <TableCell>{item.regra}</TableCell>
-                  <TableCell className="text-center">
+                  <TableCell data-label="Regra">{item.regra}</TableCell>
+                  <TableCell className="text-center" data-label="Referência">
                     <span className="inline-block px-2.5 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-lg">
                       {item.artigo}
                     </span>

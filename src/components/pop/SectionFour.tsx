@@ -1,10 +1,19 @@
 import { Upload, FileText, Calendar, Hash, FolderTree, Shield, AlertCircle, CheckCircle2 } from "lucide-react";
 import { SeiMockup } from "./SeiMockup";
 import { InfoDrawer, NatoDigitalVsDigitalizadoContent, AutenticacaoVsAssinaturaContent } from "./InfoDrawer";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionFour = () => {
   return (
     <section id="secao-4" className="scroll-mt-20 animate-fade-in">
+      {/* Profile Callouts */}
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
+        Autentique cada documento imediatamente após incluí-lo. Não deixe para autenticar todos de uma vez — isso reduz o risco de esquecer algum item.
+      </ProfileCallout>
+      <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
+        Verifique se todos os documentos externos foram devidamente autenticados (selo preto com check). Documentos sem autenticação invalidam a instrução processual.
+      </ProfileCallout>
+
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
         <div className="section-number">4</div>
@@ -147,7 +156,7 @@ export const SectionFour = () => {
           <h3 className="font-semibold text-foreground mb-4">Resumo do Preenchimento</h3>
           
           <div className="overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0">
-            <table className="table-institutional text-sm">
+            <table className="table-institutional table-responsive-cards text-sm">
               <thead>
                 <tr>
                   <th className="rounded-tl-lg">Campo</th>
@@ -156,32 +165,32 @@ export const SectionFour = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td className="font-semibold">TIPO DO DOCUMENTO</td>
-                  <td>Selecione "Nota Fiscal" (ou Recibo/Fatura)</td>
+                  <td className="font-semibold" data-label="Campo">TIPO DO DOCUMENTO</td>
+                  <td data-label="Valor">Selecione "Nota Fiscal" (ou Recibo/Fatura)</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">DATA DO DOCUMENTO</td>
-                  <td>Data de emissão da Nota</td>
+                  <td className="font-semibold" data-label="Campo">DATA DO DOCUMENTO</td>
+                  <td data-label="Valor">Data de emissão da Nota</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">NÚMERO</td>
-                  <td>Número da NF</td>
+                  <td className="font-semibold" data-label="Campo">NÚMERO</td>
+                  <td data-label="Valor">Número da NF</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">NOME NA ÁRVORE</td>
-                  <td>Nome da empresa emissora</td>
+                  <td className="font-semibold" data-label="Campo">NOME NA ÁRVORE</td>
+                  <td data-label="Valor">Nome da empresa emissora</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">FORMATO</td>
-                  <td>Digitalizado nesta unidade</td>
+                  <td className="font-semibold" data-label="Campo">FORMATO</td>
+                  <td data-label="Valor">Digitalizado nesta unidade</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">TIPO DE CONFERÊNCIA</td>
-                  <td>"Cópia Simples" ou "Original"</td>
+                  <td className="font-semibold" data-label="Campo">TIPO DE CONFERÊNCIA</td>
+                  <td data-label="Valor">"Cópia Simples" ou "Original"</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">NÍVEL DE ACESSO</td>
-                  <td className="text-primary font-medium">Público</td>
+                  <td className="font-semibold" data-label="Campo">NÍVEL DE ACESSO</td>
+                  <td className="text-primary font-medium" data-label="Valor">Público</td>
                 </tr>
               </tbody>
             </table>

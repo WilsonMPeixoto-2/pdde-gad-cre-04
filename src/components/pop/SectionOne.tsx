@@ -2,6 +2,7 @@ import { ClipboardList } from "lucide-react";
 import { SeiMockup } from "./SeiMockup";
 import { CopyButton } from "./CopyButton";
 import { Callout } from "./Callout";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionOne = () => {
   return (
@@ -21,6 +22,14 @@ export const SectionOne = () => {
               </p>
             </div>
           </div>
+
+          <ProfileCallout visibleFor="diretor" variant="info">
+            <p>Certifique-se de ter em mãos o <strong className="text-foreground">CNPJ do CEC</strong>, a <strong className="text-foreground">designação da escola</strong> e o <strong className="text-foreground">exercício de referência</strong> antes de iniciar a autuação.</p>
+          </ProfileCallout>
+
+          <ProfileCallout visibleFor="gad" variant="warning">
+            <p>Ao receber o processo, verifique se a <strong className="text-foreground">especificação</strong> segue o padrão obrigatório e se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos fora do padrão devem ser devolvidos para correção.</p>
+          </ProfileCallout>
         </div>
 
         {/* Steps */}

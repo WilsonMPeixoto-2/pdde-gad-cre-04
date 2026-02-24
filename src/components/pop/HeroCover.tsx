@@ -49,7 +49,7 @@ export const HeroCover = () => {
             <FileText className="w-4 h-4" aria-hidden="true" />
             Procedimento Operacional Padrão
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-[1.05] mb-8 hero-stagger" style={{ animationDelay: '0.4s', letterSpacing: '-0.03em' }}>
+          <h1 className="font-heading font-extrabold text-white leading-[1.05] mb-8 hero-stagger" style={{ animationDelay: '0.4s', letterSpacing: '-0.03em', fontSize: 'clamp(2.75rem, 5vw + 1rem, 6rem)', textWrap: 'balance' as any }}>
             Prestação de Contas
             <br />
             <span className="hero-title-accent bg-clip-text text-transparent" style={{
@@ -93,7 +93,7 @@ export const HeroCover = () => {
         <div className="mt-12 hero-stagger" style={{ animationDelay: '1.3s' }} aria-hidden="true">
           <button 
             onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group cursor-pointer bg-transparent border-none inline-flex flex-col items-center gap-3 transition-all duration-300 hover:translate-y-1"
+            className="group cursor-pointer bg-transparent border-none inline-flex flex-col items-center gap-3 transition-all duration-300 hover:translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent rounded-lg"
           >
             <div className="w-8 h-14 border-2 border-white/20 rounded-full flex items-start justify-center p-2 group-hover:border-white/40 transition-colors duration-300">
               <div className="w-1.5 h-3 bg-white/60 rounded-full scroll-dot-animation" />

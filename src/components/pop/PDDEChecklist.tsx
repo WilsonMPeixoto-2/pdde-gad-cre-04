@@ -327,6 +327,31 @@ export const PDDEChecklist = () => {
         </div>
       )}
 
+      {/* Contextual Warnings */}
+      {items.find(i => i.id === 9 && !i.checked) && items.find(i => i.id === 6 && i.checked) && (
+        <div className="p-3.5 bg-warning/5 border border-warning/20 rounded-xl mb-4 flex items-start gap-3 animate-fade-in">
+          <AlertTriangle className="w-4 h-4 text-warning shrink-0 mt-0.5" />
+          <div>
+            <p className="font-semibold text-warning text-xs mb-0.5">Despesa de capital detectada?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Se houver despesa de capital, lembre-se de preencher a <strong className="text-foreground">Relação de bens</strong> e providenciar a <strong className="text-foreground">incorporação patrimonial</strong>.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {items.find(i => i.id === 4 && !i.checked) && essenciaisCompleted >= 4 && (
+        <div className="p-3.5 bg-destructive/5 border border-destructive/20 rounded-xl mb-4 flex items-start gap-3 animate-fade-in">
+          <AlertTriangle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
+          <div>
+            <p className="font-semibold text-destructive text-xs mb-0.5">Extrato bancário pendente</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              A ausência de extratos bancários do período integral do exercício é um dos principais motivos de <strong className="text-foreground">glosa</strong>. Providencie antes de avançar.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Callout - Conferência do original */}
       <div className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl">
         <div className="flex items-start gap-3">
@@ -339,7 +364,6 @@ export const PDDEChecklist = () => {
           </div>
         </div>
       </div>
-
       {/* Completion Message */}
       {essenciaisCompleted === essenciaisCount && (
         <div className="mt-6 p-4 bg-success/10 border border-success/30 rounded-xl text-center animate-fade-in">

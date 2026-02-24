@@ -1,6 +1,7 @@
-import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search } from "lucide-react";
+import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import { ShareQRCode } from "./ShareQRCode";
 
@@ -74,6 +75,11 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
     }
   };
 
+  const openSearch = () => {
+    const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true });
+    document.dispatchEvent(event);
+  };
+
   return (
     <TooltipProvider delayDuration={100}>
     <header className="sticky top-0 z-50 no-print header-backdrop" style={{ 
@@ -107,28 +113,32 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
             </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          {/* Actions — Desktop */}
+          <div className="hidden sm:flex items-center gap-1.5 shrink-0">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => {
-                    const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true });
-                    document.dispatchEvent(event);
-                  }}
-                  className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-3 transition-all duration-300 hover:scale-105"
+                  onClick={openSearch}
+                  className="text-white/80 hover:text-white hover:bg-white/10 h-10 w-auto px-3 transition-all duration-300 hover:scale-105"
                   aria-label="Abrir busca global (Ctrl+K)"
                 >
-                  <Search className="w-4 h-4 sm:mr-2 transition-transform duration-300 active:scale-90" aria-hidden="true" />
-                  <span className="hidden sm:inline text-xs font-mono opacity-60">⌘K</span>
+                  <Search className="w-4 h-4 mr-2 transition-transform duration-300 active:scale-90" aria-hidden="true" />
+                  <span className="text-xs font-mono opacity-60">⌘K</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="bottom"><p>Buscar (Ctrl+K)</p></TooltipContent>
             </Tooltip>
 
-            <ShareQRCode sectionTitle="PDDE - Guia de Procedimentos" />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div>
+                  <ShareQRCode sectionTitle="PDDE - Guia de Procedimentos" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="bottom"><p>Compartilhar via QR Code</p></TooltipContent>
+            </Tooltip>
 
             <Tooltip>
               <TooltipTrigger asChild>
@@ -136,7 +146,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
                   variant="ghost"
                   size="sm"
                   onClick={cycleViewMode}
-                  className={`text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105 ${viewMode !== 'auto' ? 'bg-white/15 text-white' : ''}`}
+                  className={`text-white/80 hover:text-white hover:bg-white/10 h-10 w-10 transition-all duration-300 hover:scale-105 ${viewMode !== 'auto' ? 'bg-white/15 text-white' : ''}`}
                   aria-label={getViewModeTitle()}
                   aria-pressed={viewMode !== 'auto'}
                 >
@@ -151,7 +161,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
                   variant="ghost"
                   size="sm"
                   onClick={toggleDarkMode}
-                  className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105"
+                  className="text-white/80 hover:text-white hover:bg-white/10 h-10 w-10 transition-all duration-300 hover:scale-105"
                   aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
                   aria-pressed={isDark}
                 >
@@ -164,25 +174,72 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               variant="ghost"
               size="sm"
               onClick={onPrint}
-              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-4 transition-all duration-300 hover:scale-105"
+              className="text-white/80 hover:text-white hover:bg-white/10 h-10 w-auto px-4 transition-all duration-300 hover:scale-105"
               aria-label="Imprimir documento"
             >
-              <Printer className="w-4 h-4 sm:mr-2" aria-hidden="true" />
-              <span className="hidden sm:inline">Imprimir</span>
+              <Printer className="w-4 h-4 mr-2" aria-hidden="true" />
+              <span>Imprimir</span>
             </Button>
             <Button
               size="sm"
               onClick={onPrint}
-              className="h-9 w-9 sm:h-10 sm:w-auto sm:px-4 transition-all duration-300 hover:scale-105 btn-premium text-white border-0"
+              className="h-10 w-auto px-4 transition-all duration-300 hover:scale-105 btn-premium text-white border-0"
               style={{
                 background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
                 boxShadow: '0 4px 16px -4px hsl(199, 89%, 48%, 0.4)'
               }}
               aria-label="Baixar documento como PDF"
             >
-              <Download className="w-4 h-4 sm:mr-2" aria-hidden="true" />
-              <span className="hidden sm:inline font-medium">Download</span>
+              <Download className="w-4 h-4 mr-2" aria-hidden="true" />
+              <span className="font-medium">Download</span>
             </Button>
+          </div>
+
+          {/* Actions — Mobile: only search, dark mode, overflow */}
+          <div className="flex sm:hidden items-center gap-1 shrink-0">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={openSearch}
+              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 transition-all duration-300"
+              aria-label="Abrir busca global"
+            >
+              <Search className="w-4 h-4" aria-hidden="true" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleDarkMode}
+              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 transition-all duration-300"
+              aria-label={isDark ? "Modo claro" : "Modo escuro"}
+              aria-pressed={isDark}
+            >
+              {isDark ? <Sun className="w-4 h-4" aria-hidden="true" /> : <Moon className="w-4 h-4" aria-hidden="true" />}
+            </Button>
+
+            {/* Overflow menu for secondary actions */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9"
+                  aria-label="Mais ações"
+                >
+                  <MoreVertical className="w-4 h-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem onClick={onPrint}>
+                  <Printer className="w-4 h-4 mr-2" />
+                  Imprimir / PDF
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={cycleViewMode}>
+                  {getViewModeIcon()}
+                  <span className="ml-2">Modo de visualização</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>

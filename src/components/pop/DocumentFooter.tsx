@@ -25,7 +25,7 @@ export const DocumentFooter = () => {
         background: 'linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--card)) 50%, hsl(var(--secondary)) 100%)'
       }}>
         {/* Subtle mesh orb */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" style={{
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] max-sm:w-[150px] max-sm:h-[150px] rounded-full blur-[100px] max-sm:blur-[50px] -translate-y-1/2 translate-x-1/3" style={{
           background: 'hsl(var(--accent) / 0.06)'
         }} />
 
@@ -86,7 +86,7 @@ export const DocumentFooter = () => {
           background: 'linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--secondary) / 0.5) 100%)',
         }}>
           {/* Subtle glow */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] h-[100px] rounded-full blur-[60px]" style={{
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] h-[100px] max-sm:w-[100px] max-sm:h-[50px] rounded-full blur-[60px] max-sm:blur-[30px]" style={{
             background: 'hsl(var(--primary) / 0.06)'
           }} />
 

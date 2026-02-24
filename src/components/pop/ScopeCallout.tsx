@@ -2,9 +2,9 @@ import { AlertTriangle } from "lucide-react";
 
 export const ScopeCallout = () => {
   return (
-    <div className="border-l-4 border-l-amber-500 rounded-r-xl p-5 sm:p-6 bg-amber-50 dark:bg-amber-950/30">
+    <div className="border-l-4 border-l-warning rounded-r-xl p-5 sm:p-6 bg-warning/5 dark:bg-warning/10">
       <div className="flex items-start gap-3">
-        <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5 text-amber-600 dark:text-amber-500" aria-hidden="true" />
+        <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5 text-warning" aria-hidden="true" />
         <div className="flex-1 min-w-0">
           <p className="font-bold text-foreground mb-2">IMPORTANTE — O que este POP cobre</p>
           <p className="text-sm text-muted-foreground leading-relaxed text-justified">

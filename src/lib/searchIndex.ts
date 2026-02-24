@@ -70,7 +70,7 @@ export const searchIndex: SearchItem[] = [
     content: "Requisitos e modelo de nota fiscal eletrônica DANFE",
     keywords: ["nota", "fiscal", "danfe", "eletrônica", "nfe"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "extrato",
@@ -78,7 +78,7 @@ export const searchIndex: SearchItem[] = [
     content: "Extrato de conta corrente e aplicação financeira",
     keywords: ["extrato", "bancário", "conta", "corrente", "aplicação"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "parecer",
@@ -86,7 +86,7 @@ export const searchIndex: SearchItem[] = [
     content: "Modelo de parecer do conselho escolar",
     keywords: ["parecer", "conselho", "escolar", "modelo"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "planejamento",
@@ -94,7 +94,7 @@ export const searchIndex: SearchItem[] = [
     content: "Documento de planejamento e ata de reunião",
     keywords: ["planejamento", "ata", "reunião", "documento"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "oficio",
@@ -102,7 +102,7 @@ export const searchIndex: SearchItem[] = [
     content: "Modelo padrão de ofício para o PDDE",
     keywords: ["ofício", "modelo", "documento", "padrão"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "pesquisa-precos",
@@ -110,7 +110,7 @@ export const searchIndex: SearchItem[] = [
     content: "Consolidação e documentação de pesquisa de preços",
     keywords: ["pesquisa", "preços", "cotação", "consolidação"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "despesa",
@@ -118,7 +118,7 @@ export const searchIndex: SearchItem[] = [
     content: "Modelo de demonstrativo de despesas realizadas",
     keywords: ["despesa", "demonstrativo", "gastos", "modelo"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "checklist",
@@ -134,7 +134,7 @@ export const searchIndex: SearchItem[] = [
     content: "Sistema de Gestão de Prestação de Contas do FNDE para registro e envio da prestação de contas do PDDE",
     keywords: ["sigpc", "contas online", "sistema", "fnde", "prestação"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "vedacoes",
@@ -142,7 +142,7 @@ export const searchIndex: SearchItem[] = [
     content: "Despesas proibidas com recursos do PDDE conforme Resolução CD/FNDE nº 15/2021",
     keywords: ["vedações", "proibido", "vedado", "despesas proibidas"],
     section: "Anexos",
-    anchor: "anexos"
+    anchor: "anexo"
   },
   {
     id: "contatos",

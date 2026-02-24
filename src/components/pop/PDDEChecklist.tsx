@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check } from "lucide-react";
 import confetti from "canvas-confetti";
+import { toast } from "sonner";
 
 interface ChecklistItem {
   id: number;
@@ -27,10 +28,13 @@ const initialItems: ChecklistItem[] = [
   { id: 13, text: "Termo de doação (quando houver doação de bens à escola pública vinculada)", checked: false, complementar: true },
 ];
 
+type FilterType = 'todos' | 'pendentes' | 'concluidos' | 'essenciais' | 'complementares';
+
 const STORAGE_KEY = "pdde-checklist-state-v3";
 
 export const PDDEChecklist = () => {
   const hasConfettiFired = useRef(false);
+  const [filter, setFilter] = useState<FilterType>('todos');
   const [items, setItems] = useState<ChecklistItem[]>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -90,8 +94,72 @@ export const PDDEChecklist = () => {
     hasConfettiFired.current = false;
   };
 
-  const essenciais = items.filter(item => !item.complementar);
-  const complementares = items.filter(item => item.complementar);
+  // Filter logic
+  const getFilteredItems = useCallback(() => {
+    switch (filter) {
+      case 'pendentes':
+        return items.filter(item => !item.checked);
+      case 'concluidos':
+        return items.filter(item => item.checked);
+      case 'essenciais':
+        return items.filter(item => !item.complementar);
+      case 'complementares':
+        return items.filter(item => item.complementar);
+      default:
+        return items;
+    }
+  }, [items, filter]);
+
+  const filteredItems = getFilteredItems();
+  const essenciaisFiltered = filteredItems.filter(item => !item.complementar);
+  const complementaresFiltered = filteredItems.filter(item => item.complementar);
+
+  // Generate summary of pending items
+  const generateSummary = useCallback(() => {
+    const pending = items.filter(item => !item.checked);
+    if (pending.length === 0) {
+      toast.success("Todos os itens foram concluídos!");
+      return;
+    }
+
+    const essenciaisPending = pending.filter(i => !i.complementar);
+    const complementaresPending = pending.filter(i => i.complementar);
+
+    let text = "📋 RESUMO — Itens pendentes da Prestação de Contas PDDE\n\n";
+
+    if (essenciaisPending.length > 0) {
+      text += "⚠️ ESSENCIAIS (obrigatórios):\n";
+      essenciaisPending.forEach(item => {
+        text += `  ☐ ${item.id}. ${item.text}\n`;
+      });
+      text += "\n";
+    }
+
+    if (complementaresPending.length > 0) {
+      text += "📎 COMPLEMENTARES (quando aplicável):\n";
+      complementaresPending.forEach(item => {
+        text += `  ☐ ${item.text}\n`;
+      });
+    }
+
+    text += `\nTotal pendente: ${pending.length} item(ns) — ${essenciaisPending.length} essencial(is), ${complementaresPending.length} complementar(es)`;
+
+    navigator.clipboard.writeText(text).then(() => {
+      toast.success("Resumo copiado para a área de transferência!");
+    }).catch(() => {
+      toast.error("Erro ao copiar resumo");
+    });
+  }, [items]);
+
+  const filters: { key: FilterType; label: string }[] = [
+    { key: 'todos', label: 'Todos' },
+    { key: 'pendentes', label: `Pendentes (${items.filter(i => !i.checked).length})` },
+    { key: 'concluidos', label: `Concluídos (${completedCount})` },
+    { key: 'essenciais', label: 'Essenciais' },
+    { key: 'complementares', label: 'Complementares' },
+  ];
+
+  const pendingCount = items.filter(i => !i.checked).length;
 
   return (
     <div className="section-card border-l-4 border-l-primary">
@@ -122,7 +190,7 @@ export const PDDEChecklist = () => {
       </p>
 
       {/* Progress Bar */}
-      <div className="mb-6">
+      <div className="mb-4">
         <div className="flex items-center justify-between text-sm mb-2">
           <span className="text-muted-foreground">Itens essenciais</span>
           <span className="font-semibold text-primary">
@@ -137,75 +205,68 @@ export const PDDEChecklist = () => {
         </div>
       </div>
 
-      {/* Essenciais */}
-      <div className="space-y-2 mb-6">
-        {essenciais.map((item) => (
+      {/* Filters */}
+      <div className="flex items-center gap-2 mb-4 flex-wrap">
+        <Filter className="w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
+        {filters.map(f => (
           <button
-            key={item.id}
-            onClick={() => toggleItem(item.id)}
-            className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
-              item.checked
-                ? "bg-success/10 border-success/30 hover:bg-success/15"
-                : "bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-primary/30"
+            key={f.key}
+            onClick={() => setFilter(f.key)}
+            className={`text-xs px-3 py-1.5 rounded-full border transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
+              filter === f.key
+                ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                : 'bg-muted/50 text-muted-foreground border-border/50 hover:bg-muted hover:text-foreground'
             }`}
-            aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item ${item.id}: ${item.text}`}
-            aria-pressed={item.checked}
+            aria-pressed={filter === f.key}
           >
-            <div className="shrink-0 mt-0.5" aria-hidden="true">
-              {item.checked ? (
-                <CheckCircle2 className="w-5 h-5 text-success" />
-              ) : (
-                <Circle className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              )}
-            </div>
-            <div className="flex items-start gap-2 flex-1 min-w-0">
-              <span className={`font-semibold text-xs shrink-0 ${
-                item.checked ? "text-success" : "text-primary"
-              }`}>
-                {item.id}.
-              </span>
-              <span className={`text-sm leading-relaxed ${
-                item.checked
-                  ? "text-success line-through decoration-success/50"
-                  : "text-foreground"
-              }`}>
-                {item.text}
-              </span>
-            </div>
+            {f.label}
           </button>
         ))}
       </div>
 
-      {/* Complementares */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-amber-700 dark:text-amber-400 mb-3 flex items-center gap-2">
-          <FileCheck className="w-4 h-4" />
-          Complementares (quando aplicável)
-        </h3>
-        <div className="space-y-2">
-          {complementares.map((item) => (
+      {/* Summary Button */}
+      {pendingCount > 0 && (
+        <button
+          onClick={generateSummary}
+          className="w-full flex items-center justify-center gap-2 mb-5 py-2.5 px-4 rounded-lg border border-primary/30 bg-primary/5 text-primary text-sm font-medium hover:bg-primary/10 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+          aria-label={`Copiar resumo dos ${pendingCount} itens pendentes`}
+        >
+          <Copy className="w-4 h-4" aria-hidden="true" />
+          Copiar resumo do que falta ({pendingCount} {pendingCount === 1 ? 'item' : 'itens'})
+        </button>
+      )}
+
+      {/* Essenciais */}
+      {essenciaisFiltered.length > 0 && (
+        <div className="space-y-2 mb-6">
+          {essenciaisFiltered.map((item) => (
             <button
               key={item.id}
               onClick={() => toggleItem(item.id)}
               className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
                 item.checked
-                  ? "bg-amber-50 dark:bg-amber-950/30 border-amber-300/50 hover:bg-amber-100/50"
-                  : "bg-amber-50/30 dark:bg-amber-950/10 border-amber-200/30 hover:bg-amber-50/60 hover:border-amber-300/50"
+                  ? "bg-success/10 border-success/30 hover:bg-success/15"
+                  : "bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-primary/30"
               }`}
-              aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item complementar: ${item.text}`}
+              aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item ${item.id}: ${item.text}`}
               aria-pressed={item.checked}
             >
               <div className="shrink-0 mt-0.5" aria-hidden="true">
                 {item.checked ? (
-                  <CheckCircle2 className="w-5 h-5 text-amber-600" />
+                  <CheckCircle2 className="w-5 h-5 text-success" />
                 ) : (
-                  <Circle className="w-5 h-5 text-amber-400 group-hover:text-amber-600 transition-colors" />
+                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 )}
               </div>
               <div className="flex items-start gap-2 flex-1 min-w-0">
+                <span className={`font-semibold text-xs shrink-0 ${
+                  item.checked ? "text-success" : "text-primary"
+                }`}>
+                  {item.id}.
+                </span>
                 <span className={`text-sm leading-relaxed ${
                   item.checked
-                    ? "text-amber-700 dark:text-amber-400 line-through decoration-amber-400/50"
+                    ? "text-success line-through decoration-success/50"
                     : "text-foreground"
                 }`}>
                   {item.text}
@@ -214,16 +275,66 @@ export const PDDEChecklist = () => {
             </button>
           ))}
         </div>
-      </div>
+      )}
+
+      {/* Complementares */}
+      {complementaresFiltered.length > 0 && (
+        <div className="mb-6">
+          <h3 className="text-sm font-semibold text-warning dark:text-warning mb-3 flex items-center gap-2">
+            <FileCheck className="w-4 h-4" />
+            Complementares (quando aplicável)
+          </h3>
+          <div className="space-y-2">
+            {complementaresFiltered.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => toggleItem(item.id)}
+                className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
+                  item.checked
+                    ? "bg-warning/10 border-warning/30 hover:bg-warning/15"
+                    : "bg-warning/5 border-warning/20 hover:bg-warning/10 hover:border-warning/40"
+                }`}
+                aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item complementar: ${item.text}`}
+                aria-pressed={item.checked}
+              >
+                <div className="shrink-0 mt-0.5" aria-hidden="true">
+                  {item.checked ? (
+                    <CheckCircle2 className="w-5 h-5 text-warning" />
+                  ) : (
+                    <Circle className="w-5 h-5 text-warning/50 group-hover:text-warning transition-colors" />
+                  )}
+                </div>
+                <div className="flex items-start gap-2 flex-1 min-w-0">
+                  <span className={`text-sm leading-relaxed ${
+                    item.checked
+                      ? "text-warning line-through decoration-warning/50"
+                      : "text-foreground"
+                  }`}>
+                    {item.text}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Empty state for filters */}
+      {filteredItems.length === 0 && (
+        <div className="text-center py-8 text-muted-foreground">
+          <Check className="w-8 h-8 mx-auto mb-2 text-success" />
+          <p className="text-sm font-medium">Nenhum item nesta categoria.</p>
+        </div>
+      )}
 
       {/* Callout - Conferência do original */}
-      <div className="p-4 bg-gradient-to-r from-sky-50 to-sky-100/50 dark:from-sky-950/40 dark:to-sky-900/20 border border-sky-200/60 dark:border-sky-800/40 rounded-xl">
+      <div className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl">
         <div className="flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+          <AlertTriangle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
           <div>
-            <p className="font-semibold text-sky-800 dark:text-sky-300 text-sm mb-1">Conferência do original</p>
-            <p className="text-sm text-sky-700 dark:text-sky-400 leading-relaxed">
-              Quando houver documentos digitalizados, registre <strong>"CONFERE COM O ORIGINAL"</strong>, com assinatura do responsável, e mantenha os originais arquivados na UEx.
+            <p className="font-semibold text-primary text-sm mb-1">Conferência do original</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Quando houver documentos digitalizados, registre <strong className="text-foreground">"CONFERE COM O ORIGINAL"</strong>, com assinatura do responsável, e mantenha os originais arquivados na UEx.
             </p>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
 import { ProfileCallout } from "./ProfileCallout";
+import { SmartTemplates } from "./SmartTemplates";
+import { ProcessJourneyMap } from "./ProcessJourneyMap";
 
 export const SectionTwo = () => {
   return (
@@ -192,6 +194,16 @@ export const SectionTwo = () => {
 
       {/* Modelos de Documentos PDDE - Componente dedicado */}
       <PDDEModelCards />
+
+      {/* Smart Templates */}
+      <div className="mb-8">
+        <SmartTemplates />
+      </div>
+
+      {/* Process Journey Map */}
+      <div className="mb-8">
+        <ProcessJourneyMap />
+      </div>
 
       {/* Bloco 2: Roteiro de Instrução - AGORA APÓS MODELOS */}
       <div className="mb-8 section-card bg-gradient-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-sm">

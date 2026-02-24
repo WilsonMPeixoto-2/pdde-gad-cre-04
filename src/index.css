@@ -1079,7 +1079,9 @@ body::before {
   /* Hide profile mode callouts and interactive widgets in print */
   [data-profile-callout],
   .guided-wizard,
-  .branding-badge {
+  .branding-badge,
+  .smart-templates,
+  .process-journey-map {
     display: none !important;
   }
 

@@ -167,6 +167,22 @@ export const searchIndex: SearchItem[] = [
     keywords: ["fluxo", "processo", "etapas", "diagrama"],
     section: "Seção 1",
     anchor: "secao-1"
+  },
+  {
+    id: "smart-templates",
+    title: "Modelos com Preenchimento Rápido",
+    content: "Preencha ofícios e despachos com dados da escola e copie o texto pronto",
+    keywords: ["modelo", "ofício", "despacho", "preencher", "template", "cnpj", "escola"],
+    section: "Seção 2",
+    anchor: "secao-2"
+  },
+  {
+    id: "jornada",
+    title: "Mapa da Jornada Processual",
+    content: "Visualização completa do fluxo processual com status por etapa e dependências",
+    keywords: ["jornada", "mapa", "fluxo", "etapas", "progresso", "dependência"],
+    section: "Seção 2",
+    anchor: "secao-2"
   }
 ];
 

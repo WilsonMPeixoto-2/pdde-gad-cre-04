@@ -24,7 +24,7 @@ const models: PDDEModel[] = [
     href: "/models/MODELO_DE_OFICIO_PDDE.pdf",
     fileName: "MODELO_DE_OFICIO_PDDE.pdf",
     fileSize: "~120 KB",
-    icon: <FileText className="w-4 h-4" />,
+    icon: <FileText className="w-5 h-5" />,
     category: "instrucao",
   },
   {
@@ -33,7 +33,7 @@ const models: PDDEModel[] = [
     href: "/models/PLANEJAMENTO_COM_ATA.pdf",
     fileName: "PLANEJAMENTO_COM_ATA.pdf",
     fileSize: "~95 KB",
-    icon: <ClipboardList className="w-4 h-4" />,
+    icon: <ClipboardList className="w-5 h-5" />,
     category: "instrucao",
   },
   {
@@ -42,7 +42,7 @@ const models: PDDEModel[] = [
     href: "/models/CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf",
     fileName: "CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf",
     fileSize: "~110 KB",
-    icon: <FileCheck className="w-4 h-4" />,
+    icon: <FileCheck className="w-5 h-5" />,
     category: "instrucao",
   },
   {
@@ -51,7 +51,7 @@ const models: PDDEModel[] = [
     href: "/models/DEMONSTRATIVO_DE_DESPESA.pdf",
     fileName: "DEMONSTRATIVO_DE_DESPESA.pdf",
     fileSize: "~130 KB",
-    icon: <FileSpreadsheet className="w-4 h-4" />,
+    icon: <FileSpreadsheet className="w-5 h-5" />,
     category: "financeiro",
   },
   {
@@ -60,7 +60,7 @@ const models: PDDEModel[] = [
     href: "/models/NOTA_FISCAL_ELETRONICA_DANFE.pdf",
     fileName: "NOTA_FISCAL_ELETRONICA_DANFE.pdf",
     fileSize: "~85 KB",
-    icon: <Receipt className="w-4 h-4" />,
+    icon: <Receipt className="w-5 h-5" />,
     category: "financeiro",
   },
   {
@@ -69,7 +69,7 @@ const models: PDDEModel[] = [
     href: "/models/EXTRATO_CONTA_CORRENTE.pdf",
     fileName: "EXTRATO_CONTA_CORRENTE.pdf",
     fileSize: "~70 KB",
-    icon: <Building2 className="w-4 h-4" />,
+    icon: <Building2 className="w-5 h-5" />,
     category: "financeiro",
   },
   {
@@ -78,7 +78,7 @@ const models: PDDEModel[] = [
     href: "/models/EXTRATO_APLICACAO.pdf",
     fileName: "EXTRATO_APLICACAO.pdf",
     fileSize: "~65 KB",
-    icon: <Building2 className="w-4 h-4" />,
+    icon: <Building2 className="w-5 h-5" />,
     category: "financeiro",
   },
   {
@@ -87,26 +87,32 @@ const models: PDDEModel[] = [
     href: "/models/PARECER_DO_CONSELHO.pdf",
     fileName: "PARECER_DO_CONSELHO.pdf",
     fileSize: "~100 KB",
-    icon: <FileCheck className="w-4 h-4" />,
+    icon: <FileCheck className="w-5 h-5" />,
     category: "parecer",
   },
 ];
 
-const categoryLabels: Record<PDDEModel["category"], { label: string; color: string; bgColor: string }> = {
+const categoryLabels: Record<PDDEModel["category"], { label: string; color: string; bgColor: string; iconBg: string; iconColor: string }> = {
   instrucao: {
     label: "Instrução Processual",
-    color: "text-sky-700 dark:text-sky-400",
-    bgColor: "bg-sky-100/80 dark:bg-sky-900/40",
+    color: "text-primary dark:text-accent",
+    bgColor: "bg-primary/10 dark:bg-accent/15",
+    iconBg: "bg-gradient-to-br from-primary/15 to-primary/5 dark:from-accent/20 dark:to-accent/5",
+    iconColor: "text-primary dark:text-accent",
   },
   financeiro: {
     label: "Documentos Financeiros",
-    color: "text-emerald-700 dark:text-emerald-400",
-    bgColor: "bg-emerald-100/80 dark:bg-emerald-900/40",
+    color: "text-success dark:text-success",
+    bgColor: "bg-success/10 dark:bg-success/15",
+    iconBg: "bg-gradient-to-br from-success/15 to-success/5 dark:from-success/20 dark:to-success/5",
+    iconColor: "text-success",
   },
   parecer: {
     label: "Deliberação",
-    color: "text-violet-700 dark:text-violet-400",
-    bgColor: "bg-violet-100/80 dark:bg-violet-900/40",
+    color: "text-accent dark:text-accent",
+    bgColor: "bg-accent/10 dark:bg-accent/15",
+    iconBg: "bg-gradient-to-br from-accent/15 to-accent/5 dark:from-accent/20 dark:to-accent/5",
+    iconColor: "text-accent",
   },
 };
 
@@ -134,7 +140,7 @@ export const PDDEModelCards = () => {
   return (
     <div className="mb-8">
       {/* Header com botão Download All */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-8">
         <h3 className="section-heading text-foreground mb-0 border-b-0 pb-0">
           Modelos de Documentos
         </h3>
@@ -145,7 +151,7 @@ export const PDDEModelCards = () => {
                 onClick={handleDownloadAll}
                 variant="outline"
                 size="sm"
-                className="gap-2 border-primary/30 text-primary hover:bg-primary/5 hover:border-primary/50 transition-all duration-300"
+                className="gap-2 border-primary/30 text-primary hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 btn-premium"
               >
                 <FolderDown className="w-4 h-4" />
                 <span>Baixar todos ({models.length})</span>
@@ -159,47 +165,49 @@ export const PDDEModelCards = () => {
       </div>
 
       {/* Grouped cards */}
-      <div className="space-y-6">
+      <div className="space-y-8">
         {grouped.map((group) => (
           <div key={group.category}>
             {/* Category label */}
-            <div className="flex items-center gap-2 mb-3">
-              <span className={`text-xs font-bold uppercase tracking-wider ${group.color}`}>
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-1 h-5 rounded-full ${group.category === 'instrucao' ? 'bg-primary dark:bg-accent' : group.category === 'financeiro' ? 'bg-success' : 'bg-accent'}`} />
+              <span className={`text-xs font-bold uppercase tracking-widest ${group.color}`}>
                 {group.label}
               </span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${group.color} ${group.bgColor}`}>
+              <span className={`text-[10px] px-2.5 py-1 rounded-full font-semibold ${group.color} ${group.bgColor}`}>
                 {group.items.length} {group.items.length === 1 ? "modelo" : "modelos"}
               </span>
             </div>
 
             {/* Cards */}
-            <div className="space-y-2.5">
+            <div className="space-y-3">
               {group.items.map((doc, index) => (
                 <div
                   key={index}
-                  className="group p-4 rounded-xl bg-gradient-to-r from-secondary/40 dark:from-secondary/20 via-background to-background border border-border/60 hover:border-primary/30 dark:hover:border-primary/40 hover:shadow-md transition-all duration-300"
+                  className="group relative p-5 rounded-2xl bg-card border border-border/60 hover:border-primary/30 dark:hover:border-accent/30 hover:shadow-soft-lg transition-all duration-300"
+                  style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
                 >
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
                       {/* Icon */}
-                      <div className="p-2.5 rounded-lg bg-gradient-to-br from-sky-100 to-sky-50 dark:from-sky-900/50 dark:to-sky-950/30 border border-sky-200/50 dark:border-sky-700/50 shrink-0 group-hover:scale-105 transition-transform duration-300">
-                        <span className="text-sky-600 dark:text-sky-400">{doc.icon}</span>
+                      <div className={`p-3 rounded-xl ${group.iconBg} border border-border/30 shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <span className={group.iconColor}>{doc.icon}</span>
                       </div>
                       {/* Info */}
                       <div className="min-w-0">
-                        <h4 className="font-semibold text-foreground text-sm leading-tight">
+                        <h4 className="font-heading font-semibold text-foreground text-[15px] leading-tight tracking-tight">
                           {doc.title}
                         </h4>
-                        <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">
+                        <p className="text-xs text-muted-foreground leading-relaxed mt-1">
                           {doc.description}
                         </p>
                         {/* File meta */}
-                        <div className="flex items-center gap-2 mt-1.5">
-                          <span className="text-[10px] text-muted-foreground/70 font-mono truncate max-w-[200px]">
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-[10px] text-muted-foreground/60 data-code truncate max-w-[200px]">
                             {doc.fileName}
                           </span>
-                          <span className="text-muted-foreground/40">·</span>
-                          <span className="text-[10px] text-muted-foreground/70">
+                          <span className="text-muted-foreground/30">·</span>
+                          <span className="text-[10px] text-muted-foreground/60 data-code">
                             {doc.fileSize}
                           </span>
                         </div>
@@ -212,7 +220,7 @@ export const PDDEModelCards = () => {
                           <Button
                             asChild
                             size="sm"
-                            className="w-full sm:w-auto bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white shadow-md hover:shadow-lg transition-all duration-300"
+                            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-soft hover:shadow-soft-lg transition-all duration-300 rounded-xl btn-premium"
                           >
                             <a
                               href={doc.href}
@@ -221,7 +229,7 @@ export const PDDEModelCards = () => {
                               className="flex items-center gap-2"
                             >
                               <Download className="w-3.5 h-3.5" />
-                              <span>Baixar PDF</span>
+                              <span className="font-medium">Baixar PDF</span>
                             </a>
                           </Button>
                         </TooltipTrigger>

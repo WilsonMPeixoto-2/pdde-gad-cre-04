@@ -1,5 +1,6 @@
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionTwo = () => {
   return (
@@ -78,6 +79,14 @@ export const SectionTwo = () => {
           </div>
         </div>
       </div>
+
+      {/* Profile Callouts */}
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola">
+        Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme for reunindo — o progresso é salvo automaticamente no seu navegador.
+      </ProfileCallout>
+      <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-4">
+        Verifique se todas as 3 cotações de preços estão anexadas e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
+      </ProfileCallout>
 
       {/* Checklist de Documentos PDDE */}
       <div className="mb-8">

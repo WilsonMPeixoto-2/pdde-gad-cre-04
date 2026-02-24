@@ -1,4 +1,4 @@
-import { BookOpen, Calendar, Building2, FileText, ChevronDown } from "lucide-react";
+import { BookOpen, Calendar, Building2, FileText, ChevronDown, ClipboardList } from "lucide-react";
 
 export const HeroCover = () => {
   return (
@@ -89,8 +89,31 @@ export const HeroCover = () => {
           ))}
         </div>
         
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 hero-stagger" style={{ animationDelay: '1.2s' }}>
+          <button
+            onClick={() => document.getElementById('secao-2')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white shadow-xl transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            style={{
+              background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
+              boxShadow: '0 4px 24px -4px hsl(199, 89%, 48%, 0.45)'
+            }}
+          >
+            <ClipboardList className="w-5 h-5" aria-hidden="true" />
+            Ir para o Checklist
+            <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
+          </button>
+          <button
+            onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white/90 bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg transition-all duration-300 hover:bg-white/15 hover:scale-[1.03] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          >
+            <BookOpen className="w-5 h-5" aria-hidden="true" />
+            Iniciar Leitura
+          </button>
+        </div>
+
         {/* Scroll Indicator */}
-        <div className="mt-12 hero-stagger" style={{ animationDelay: '1.3s' }} aria-hidden="true">
+        <div className="mt-10 hero-stagger" style={{ animationDelay: '1.5s' }} aria-hidden="true">
           <button 
             onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
             className="group cursor-pointer bg-transparent border-none inline-flex flex-col items-center gap-3 transition-all duration-300 hover:translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent rounded-lg"

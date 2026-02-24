@@ -1,6 +1,5 @@
-import { FileText, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { PDDEChecklist } from "./PDDEChecklist";
+import { PDDEModelCards } from "./PDDEModelCards";
 
 export const SectionTwo = () => {
   return (
@@ -182,90 +181,8 @@ export const SectionTwo = () => {
         </div>
       </div>
 
-      {/* Download Buttons - Modelos de Documentos PDDE */}
-      <div className="mb-8">
-        <h3 className="section-heading text-foreground mb-6">Modelos de Documentos</h3>
-        <div className="space-y-3">
-          {[
-            {
-              title: "Ofício de Prestação de Contas PDDE",
-              description: "Modelo em PDF para formalização da prestação de contas do PDDE",
-              href: "/models/MODELO_DE_OFICIO_PDDE.pdf",
-            },
-            {
-              title: "Planejamento com Ata",
-              description: "Modelo de planejamento e ata de reunião do Conselho Escolar",
-              href: "/models/PLANEJAMENTO_COM_ATA.pdf",
-            },
-            {
-              title: "Consolidação de Pesquisa de Preços",
-              description: "Modelo para consolidar cotações e justificar escolha de fornecedor",
-              href: "/models/CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf",
-            },
-            {
-              title: "Demonstrativo de Despesa",
-              description: "Modelo para demonstração das despesas realizadas com recursos do PDDE",
-              href: "/models/DEMONSTRATIVO_DE_DESPESA.pdf",
-            },
-            {
-              title: "Nota Fiscal Eletrônica - DANFE",
-              description: "Modelo de referência para Notas Fiscais Eletrônicas",
-              href: "/models/NOTA_FISCAL_ELETRONICA_DANFE.pdf",
-            },
-            {
-              title: "Extrato de Conta Corrente",
-              description: "Modelo de extrato bancário da conta corrente do PDDE",
-              href: "/models/EXTRATO_CONTA_CORRENTE.pdf",
-            },
-            {
-              title: "Extrato de Aplicação",
-              description: "Modelo de extrato de aplicação financeira dos recursos",
-              href: "/models/EXTRATO_APLICACAO.pdf",
-            },
-            {
-              title: "Parecer do Conselho",
-              description: "Modelo de parecer conclusivo do Conselho Escolar",
-              href: "/models/PARECER_DO_CONSELHO.pdf",
-            },
-          ].map((doc, index) => (
-            <div
-              key={index}
-              className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-secondary/50 dark:from-secondary/30 via-background to-sky-50/30 dark:to-sky-950/20 border border-border hover:border-sky-300 dark:hover:border-sky-700 hover:shadow-md transition-all duration-300"
-            >
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-                <div className="flex items-center gap-3 flex-1">
-                  <div className="p-2.5 rounded-lg bg-gradient-to-br from-sky-100 to-sky-50 dark:from-sky-900/50 dark:to-sky-950/30 border border-sky-200/50 dark:border-sky-700/50">
-                    <FileText className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground text-sm">
-                      {doc.title}
-                    </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {doc.description}
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  asChild
-                  size="sm"
-                  className="w-full sm:w-auto bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  <a
-                    href={doc.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                    <span>Baixar PDF</span>
-                  </a>
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Modelos de Documentos PDDE - Componente dedicado */}
+      <PDDEModelCards />
 
       {/* Bloco 2: Roteiro de Instrução - AGORA APÓS MODELOS */}
       <div className="mb-8 section-card bg-gradient-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-sm">

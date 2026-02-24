@@ -155,11 +155,12 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                         onSectionClick(section.id);
                         onClose();
                       }}
-                      className={cn(
-                        "w-full text-left flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-xl transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none group",
+                    className={cn(
+                        "w-full text-left flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none group",
+                        "transition-[background-color,color,transform,opacity,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
                         isActive
                           ? "bg-accent text-accent-foreground shadow-lg"
-                          : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 hover:pl-5"
+                          : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 hover:translate-x-1"
                       )}
                       aria-label={`Ir para seção ${section.number}: ${section.title}`}
                       aria-current={isActive ? "true" : undefined}

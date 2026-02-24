@@ -1,5 +1,6 @@
 import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useEffect, useState } from "react";
 import { ShareQRCode } from "./ShareQRCode";
 
@@ -74,10 +75,8 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 no-print" style={{ 
-      background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.92) 50%, rgba(15, 23, 42, 0.95) 100%)', 
-      backdropFilter: 'blur(20px) saturate(180%)',
-      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+    <TooltipProvider delayDuration={100}>
+    <header className="sticky top-0 z-50 no-print header-backdrop" style={{ 
       borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
       boxShadow: '0 4px 30px -4px rgba(0, 0, 0, 0.3), inset 0 -1px 0 0 rgba(255, 255, 255, 0.05)'
     }}>
@@ -110,43 +109,57 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
 
           {/* Actions */}
           <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true });
-                document.dispatchEvent(event);
-              }}
-              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-3 transition-all duration-300 hover:scale-105"
-              title="Buscar (Ctrl+K)"
-              aria-label="Abrir busca global"
-            >
-              <Search className="w-4 h-4 sm:mr-2" aria-hidden="true" />
-              <span className="hidden sm:inline text-xs font-mono opacity-60">⌘K</span>
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true });
+                    document.dispatchEvent(event);
+                  }}
+                  className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-3 transition-all duration-300 hover:scale-105"
+                  aria-label="Abrir busca global (Ctrl+K)"
+                >
+                  <Search className="w-4 h-4 sm:mr-2 transition-transform duration-300 active:scale-90" aria-hidden="true" />
+                  <span className="hidden sm:inline text-xs font-mono opacity-60">⌘K</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom"><p>Buscar (Ctrl+K)</p></TooltipContent>
+            </Tooltip>
 
             <ShareQRCode sectionTitle="PDDE - Guia de Procedimentos" />
 
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={cycleViewMode}
-              className={`text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105 ${viewMode !== 'auto' ? 'bg-white/15 text-white' : ''}`}
-              title={getViewModeTitle()}
-              aria-label={getViewModeTitle()}
-            >
-              {getViewModeIcon()}
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleDarkMode}
-              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105"
-              title={isDark ? "Modo claro" : "Modo escuro"}
-              aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
-            >
-              {isDark ? <Sun className="w-4 h-4" aria-hidden="true" /> : <Moon className="w-4 h-4" aria-hidden="true" />}
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={cycleViewMode}
+                  className={`text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105 ${viewMode !== 'auto' ? 'bg-white/15 text-white' : ''}`}
+                  aria-label={getViewModeTitle()}
+                  aria-pressed={viewMode !== 'auto'}
+                >
+                  <span className="transition-transform duration-300 active:scale-90">{getViewModeIcon()}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom"><p>{getViewModeTitle()}</p></TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={toggleDarkMode}
+                  className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105"
+                  aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
+                  aria-pressed={isDark}
+                >
+                  {isDark ? <Sun className="w-4 h-4 transition-transform duration-300 active:scale-90" aria-hidden="true" /> : <Moon className="w-4 h-4 transition-transform duration-300 active:scale-90" aria-hidden="true" />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom"><p>{isDark ? "Modo claro" : "Modo escuro"}</p></TooltipContent>
+            </Tooltip>
             <Button
               variant="ghost"
               size="sm"
@@ -174,5 +187,6 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
         </div>
       </div>
     </header>
+    </TooltipProvider>
   );
 };

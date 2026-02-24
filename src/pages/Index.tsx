@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, lazy, Suspense } from "react";
+import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { Menu, ClipboardList, FileText, Upload, CheckCircle, Phone, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PopHeader } from "@/components/pop/PopHeader";
@@ -22,9 +22,9 @@ const SectionSix = lazy(() => import("@/components/pop/SectionSix").then(m => ({
 const SectionContacts = lazy(() => import("@/components/pop/SectionContacts").then(m => ({ default: m.SectionContacts })));
 const SectionAnexo = lazy(() => import("@/components/pop/SectionAnexo").then(m => ({ default: m.SectionAnexo })));
 
-// Premium shimmer skeleton loader
+// Premium shimmer skeleton loader with min-height to prevent CLS
 const SectionLoader = () => (
-  <div className="space-y-4 p-6">
+  <div className="space-y-4 p-6 min-h-[400px]">
     <div className="h-6 skeleton-shimmer rounded-lg w-3/4"></div>
     <div className="h-4 skeleton-shimmer rounded-lg w-full"></div>
     <div className="h-4 skeleton-shimmer rounded-lg w-5/6"></div>
@@ -42,6 +42,13 @@ const Index = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setActiveSection(sectionId);
+      // A11y: Transfer focus to the section heading after scroll
+      const heading = element.querySelector('h2, h3, [role="heading"]') as HTMLElement;
+      if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        // Delay focus until scroll animation settles
+        setTimeout(() => heading.focus({ preventScroll: true }), 600);
+      }
     }
   }, []);
 
@@ -65,33 +72,37 @@ const Index = () => {
     });
   }, []);
 
+  // IntersectionObserver replaces scroll listener — no reflows, passive detection
   useEffect(() => {
-    let rafId: number | null = null;
-    
-    const handleScroll = () => {
-      if (rafId) return;
-      
-      rafId = requestAnimationFrame(() => {
-        const sections = ["introducao", "secao-1", "secao-2", "secao-3", "secao-4", "secao-5", "secao-6", "contatos", "anexo"];
-        for (const sectionId of sections) {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            const rect = element.getBoundingClientRect();
-            if (rect.top <= 150 && rect.bottom >= 150) {
-              setActiveSection(sectionId);
-              break;
-            }
+    const sectionIds = ["introducao", "secao-1", "secao-2", "secao-3", "secao-4", "secao-5", "secao-6", "contatos", "anexo"];
+    const visibleSections = new Map<string, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visibleSections.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            visibleSections.delete(entry.target.id);
           }
         }
-        rafId = null;
-      });
-    };
-    
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+        // Pick the first visible section in document order
+        for (const id of sectionIds) {
+          if (visibleSections.has(id)) {
+            setActiveSection(id);
+            break;
+          }
+        }
+      },
+      { rootMargin: '-80px 0px -50% 0px', threshold: [0, 0.1, 0.3] }
+    );
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (

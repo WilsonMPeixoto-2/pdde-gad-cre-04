@@ -26,6 +26,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -42,6 +43,7 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          glow: "hsl(var(--accent-glow))",
         },
         success: {
           DEFAULT: "hsl(var(--success))",
@@ -58,6 +60,7 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+          hover: "hsl(var(--card-hover))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -80,6 +83,8 @@ export default {
         'soft': '0 4px 20px -4px hsl(215 25% 15% / 0.08), 0 2px 8px -2px hsl(215 25% 15% / 0.04)',
         'soft-lg': '0 10px 40px -10px hsl(215 25% 15% / 0.12), 0 4px 16px -4px hsl(215 25% 15% / 0.06)',
         'soft-xl': '0 20px 60px -15px hsl(215 25% 15% / 0.15), 0 8px 24px -6px hsl(215 25% 15% / 0.08)',
+        'glow': '0 0 25px -5px hsl(199 89% 48% / 0.3)',
+        'glow-lg': '0 0 40px -5px hsl(199 89% 48% / 0.4)',
       },
       keyframes: {
         "accordion-down": {

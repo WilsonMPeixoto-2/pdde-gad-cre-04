@@ -82,7 +82,7 @@
     --accent-intense: 199 89% 40%;
 
     /* Typography */
-    --font-heading: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-heading: 'Outfit', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
   }
 

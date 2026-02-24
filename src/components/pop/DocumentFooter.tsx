@@ -1,4 +1,4 @@
-import { Building2, Calendar } from "lucide-react";
+import { Building2, Calendar, Phone, Mail, Linkedin } from "lucide-react";
 
 export const DocumentFooter = () => {
   return (
@@ -77,6 +77,28 @@ export const DocumentFooter = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Author Signature */}
+      <div className="mt-8 text-center space-y-3">
+        <p className="text-xs text-muted-foreground tracking-widest uppercase">Desenvolvido por</p>
+        <p className="font-heading font-semibold text-foreground tracking-tight">Wilson M. Peixoto</p>
+        <p className="text-xs text-muted-foreground italic">Inovação para a Gestão Pública</p>
+        
+        <div className="flex items-center justify-center gap-4 pt-2">
+          <a href="tel:+5521981738753" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+            <Phone className="w-3.5 h-3.5" />
+            <span>(21) 98173-8753</span>
+          </a>
+          <a href="mailto:wilsonmpeixoto@gmail.com" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+            <Mail className="w-3.5 h-3.5" />
+            <span>wilsonmpeixoto@gmail.com</span>
+          </a>
+          <a href="https://www.linkedin.com/in/wilson-peixoto/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+            <Linkedin className="w-3.5 h-3.5" />
+            <span>LinkedIn</span>
+          </a>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { FileText, Send, UserCheck, PenLine } from "lucide-react";
 import { Callout } from "./Callout";
 import { InfoDrawer, AutenticacaoVsAssinaturaContent } from "./InfoDrawer";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionSix = () => {
   return (
@@ -84,6 +85,14 @@ export const SectionSix = () => {
           Em caso de pendências, a GAD entrará em contato para as devidas correções.
         </p>
       </Callout>
+
+      <ProfileCallout visibleFor="diretor" variant="info">
+        <p>Após o envio, acompanhe o andamento no SEI!RIO. Se a GAD solicitar correções, atenda no prazo indicado para evitar atrasos na aprovação.</p>
+      </ProfileCallout>
+
+      <ProfileCallout visibleFor="gad" variant="info">
+        <p>Ao elaborar o despacho de aprovação, registre os valores conferidos e o percentual de execução. Processos com <strong className="text-foreground">despesa de capital</strong> exigem verificação adicional de incorporação patrimonial.</p>
+      </ProfileCallout>
 
       {/* ============ CONTEÚDO TRANSFERIDO DA SEÇÃO 2 ============ */}
       <div className="space-y-8 mt-8 pt-8 border-t border-border">

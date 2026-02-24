@@ -4,6 +4,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import { ShareQRCode } from "./ShareQRCode";
+import { ProfileModeSelector } from "./ProfileModeSelector";
 
 interface PopHeaderProps {
   onPrint: () => void;
@@ -115,6 +116,8 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
 
           {/* Actions — Desktop */}
           <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+            <ProfileModeSelector />
+            <div className="w-px h-6 bg-white/15 mx-1" />
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -197,6 +200,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
 
           {/* Actions — Mobile: only search, dark mode, overflow */}
           <div className="flex sm:hidden items-center gap-1 shrink-0">
+            <ProfileModeSelector />
             <Button
               variant="ghost"
               size="sm"

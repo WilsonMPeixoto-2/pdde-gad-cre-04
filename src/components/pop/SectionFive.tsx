@@ -1,6 +1,7 @@
 import { CheckCircle, Send, FileCheck, AlertCircle, FolderTree } from "lucide-react";
 import { SeiMockup } from "./SeiMockup";
 import { CopyButton } from "./CopyButton";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionFive = () => {
   const gadCodes = [
@@ -160,6 +161,14 @@ export const SectionFive = () => {
             </div>
           </div>
         </div>
+
+        <ProfileCallout visibleFor="diretor" variant="success">
+          <p>Antes de enviar, peça a um colega que revise a árvore do processo. Um segundo par de olhos ajuda a evitar retrabalho e devoluções pela GAD.</p>
+        </ProfileCallout>
+
+        <ProfileCallout visibleFor="gad" variant="warning">
+          <p>Na conferência do processo recebido, verifique: <strong className="text-foreground">ordem dos documentos na árvore</strong>, <strong className="text-foreground">autenticações válidas</strong> e <strong className="text-foreground">correspondência entre valores do extrato e do demonstrativo</strong>.</p>
+        </ProfileCallout>
       </div>
     </section>
   );

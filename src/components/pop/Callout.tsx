@@ -1,3 +1,4 @@
+import React from "react";
 import { Info, AlertTriangle, CheckCircle, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -13,55 +14,54 @@ interface CalloutProps {
 
 const variantStyles: Record<CalloutVariant, { bg: string; border: string; icon: string; iconComponent: LucideIcon }> = {
   info: {
-    bg: "bg-blue-50 dark:bg-blue-950/40",
-    border: "border-l-blue-500",
-    icon: "text-blue-600 dark:text-blue-400",
+    bg: "bg-primary/5 dark:bg-primary/10",
+    border: "border-l-primary dark:border-l-accent",
+    icon: "text-primary dark:text-accent",
     iconComponent: Info,
   },
   warning: {
-    bg: "bg-sky-50 dark:bg-sky-950/40",
-    border: "border-l-sky-500",
-    icon: "text-sky-600 dark:text-sky-400",
+    bg: "bg-accent/5 dark:bg-accent/10",
+    border: "border-l-accent",
+    icon: "text-accent",
     iconComponent: AlertTriangle,
   },
   success: {
-    bg: "bg-emerald-50 dark:bg-emerald-950/40",
-    border: "border-l-emerald-500",
-    icon: "text-emerald-600 dark:text-emerald-400",
+    bg: "bg-success/5 dark:bg-success/10",
+    border: "border-l-success",
+    icon: "text-success",
     iconComponent: CheckCircle,
   },
 };
 
-export const Callout = ({ 
-  variant = "info", 
-  title, 
-  children, 
-  className,
-  icon: CustomIcon 
-}: CalloutProps) => {
-  const styles = variantStyles[variant];
-  const IconComponent = CustomIcon || styles.iconComponent;
+export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
+  ({ variant = "info", title, children, className, icon: CustomIcon }, ref) => {
+    const styles = variantStyles[variant];
+    const IconComponent = CustomIcon || styles.iconComponent;
 
-  return (
-    <div
-      className={cn(
-        "border-l-4 rounded-r-xl p-5 sm:p-6",
-        styles.bg,
-        styles.border,
-        className
-      )}
-    >
-      <div className="flex items-start gap-3">
-        <IconComponent className={cn("w-5 h-5 shrink-0 mt-0.5", styles.icon)} />
-        <div className="flex-1 min-w-0">
-          {title && (
-            <p className="font-bold text-foreground mb-1">{title}</p>
-          )}
-          <div className="text-sm text-foreground/80 leading-relaxed">
-            {children}
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "border-l-4 rounded-r-2xl p-5 sm:p-6 transition-colors duration-200",
+          styles.bg,
+          styles.border,
+          className
+        )}
+      >
+        <div className="flex items-start gap-3">
+          <IconComponent className={cn("w-5 h-5 shrink-0 mt-0.5", styles.icon)} />
+          <div className="flex-1 min-w-0">
+            {title && (
+              <p className="font-heading font-bold text-foreground mb-1.5 tracking-tight">{title}</p>
+            )}
+            <div className="text-sm text-foreground/80 leading-relaxed">
+              {children}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
+
+Callout.displayName = "Callout";

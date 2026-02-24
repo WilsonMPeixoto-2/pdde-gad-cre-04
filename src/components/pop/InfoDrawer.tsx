@@ -1,3 +1,4 @@
+import React, { ReactNode } from "react";
 import { HelpCircle, FileDigit, ScanLine, PenLine, ShieldCheck, FileCheck, LucideIcon } from "lucide-react";
 import {
   Sheet,
@@ -6,7 +7,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ReactNode } from "react";
 
 interface InfoDrawerProps {
   trigger?: ReactNode;
@@ -15,36 +15,40 @@ interface InfoDrawerProps {
   children: ReactNode;
 }
 
-export const InfoDrawer = ({ trigger, triggerLabel = "Entenda a Regra", title, children }: InfoDrawerProps) => {
-  return (
-    <Sheet>
-      <SheetTrigger asChild>
-        {trigger || (
-          <button className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-primary bg-primary/10 hover:bg-primary/20 rounded-full transition-all duration-200 border border-primary/20 hover:border-primary/30 group">
-            <HelpCircle className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-            <span>{triggerLabel}</span>
-          </button>
-        )}
-      </SheetTrigger>
-      <SheetContent 
-        side="right" 
-        className="w-full sm:max-w-md overflow-y-auto bg-gradient-to-b from-background to-secondary/20"
-      >
-        <SheetHeader className="pb-4 border-b border-border/50">
-          <SheetTitle className="text-xl font-heading flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-primary/10">
-              <HelpCircle className="w-5 h-5 text-primary" />
-            </div>
-            {title}
-          </SheetTitle>
-        </SheetHeader>
-        <div className="mt-6 space-y-6">
-          {children}
-        </div>
-      </SheetContent>
-    </Sheet>
-  );
-};
+export const InfoDrawer = React.forwardRef<HTMLDivElement, InfoDrawerProps>(
+  ({ trigger, triggerLabel = "Entenda a Regra", title, children }, ref) => {
+    return (
+      <Sheet>
+        <SheetTrigger asChild>
+          {trigger || (
+            <button className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-primary bg-primary/10 hover:bg-primary/15 rounded-full transition-all duration-200 border border-primary/20 hover:border-primary/30 group">
+              <HelpCircle className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+              <span>{triggerLabel}</span>
+            </button>
+          )}
+        </SheetTrigger>
+        <SheetContent 
+          side="right" 
+          className="w-full sm:max-w-md overflow-y-auto bg-gradient-to-b from-background to-secondary/20"
+        >
+          <SheetHeader className="pb-4 border-b border-border/50">
+            <SheetTitle className="text-xl font-heading flex items-center gap-2.5 tracking-tight">
+              <div className="p-2.5 rounded-xl bg-primary/10">
+                <HelpCircle className="w-5 h-5 text-primary" />
+              </div>
+              {title}
+            </SheetTitle>
+          </SheetHeader>
+          <div ref={ref} className="mt-6 space-y-6">
+            {children}
+          </div>
+        </SheetContent>
+      </Sheet>
+    );
+  }
+);
+
+InfoDrawer.displayName = "InfoDrawer";
 
 // Pre-built content blocks for common info sections
 export const InfoBlock = ({ 
@@ -225,19 +229,19 @@ export const AutenticacaoVsAssinaturaContent = () => (
       <div className="space-y-2 text-sm">
         <div className="flex items-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
-          <span><strong>Despacho de Encaminhamento:</strong> Assinar</span>
+          <span className="text-foreground"><strong>Despacho de Encaminhamento:</strong> Assinar</span>
         </div>
         <div className="flex items-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
-          <span><strong>Demonstrativo de Despesas:</strong> Assinar</span>
+          <span className="text-foreground"><strong>Demonstrativo de Despesas:</strong> Assinar</span>
         </div>
         <div className="flex items-center gap-2">
           <FileCheck className="w-4 h-4 text-success" />
-          <span><strong>Nota Fiscal (PDF externo):</strong> Autenticar</span>
+          <span className="text-foreground"><strong>Nota Fiscal (PDF externo):</strong> Autenticar</span>
         </div>
         <div className="flex items-center gap-2">
           <FileCheck className="w-4 h-4 text-success" />
-          <span><strong>Comprovante de Pagamento:</strong> Autenticar</span>
+          <span className="text-foreground"><strong>Comprovante de Pagamento:</strong> Autenticar</span>
         </div>
       </div>
     </div>

@@ -106,13 +106,13 @@ export const DocumentFooter = () => {
             <p className="text-xs text-muted-foreground italic tracking-wide">Inovação para a Gestão Pública</p>
 
             <div className="flex items-center justify-center gap-5 pt-3 flex-wrap">
-              <a href="tel:+5521981738753" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
+              <a href="tel:+5521994974132" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
                 <Phone className="w-3.5 h-3.5" />
-                <span>(21) 98173-8753</span>
+                <span>(21) 99497-4132</span>
               </a>
-              <a href="mailto:wilsonmpeixoto@gmail.com" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
+              <a href="mailto:wilsonmp2@gmail.com" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
                 <Mail className="w-3.5 h-3.5" />
-                <span>wilsonmpeixoto@gmail.com</span>
+                <span>wilsonmp2@gmail.com</span>
               </a>
               <a href="https://www.linkedin.com/in/wilson-peixoto/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
                 <Linkedin className="w-3.5 h-3.5" />

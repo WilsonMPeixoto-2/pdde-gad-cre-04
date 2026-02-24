@@ -59,71 +59,70 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
 
   const getViewModeIcon = () => {
     switch (viewMode) {
-      case 'mobile':
-        return <Smartphone className="w-4 h-4" />;
-      case 'desktop':
-        return <Monitor className="w-4 h-4" />;
-      default:
-        return <Monitor className="w-4 h-4 opacity-50" />;
+      case 'mobile': return <Smartphone className="w-4 h-4" />;
+      case 'desktop': return <Monitor className="w-4 h-4" />;
+      default: return <Monitor className="w-4 h-4 opacity-50" />;
     }
   };
 
   const getViewModeTitle = () => {
     switch (viewMode) {
-      case 'mobile':
-        return 'Visualização mobile (clique para automático)';
-      case 'desktop':
-        return 'Visualização desktop (clique para mobile)';
-      default:
-        return 'Visualização automática (clique para desktop)';
+      case 'mobile': return 'Visualização mobile (clique para automático)';
+      case 'desktop': return 'Visualização desktop (clique para mobile)';
+      default: return 'Visualização automática (clique para desktop)';
     }
   };
 
   return (
-    <header className="sticky top-0 z-50 no-print border-b border-white/10 shadow-lg" style={{ 
-      background: 'rgba(15, 23, 42, 0.92)', 
-      backdropFilter: 'blur(12px)',
-      WebkitBackdropFilter: 'blur(12px)'
+    <header className="sticky top-0 z-50 no-print" style={{ 
+      background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.92) 50%, rgba(15, 23, 42, 0.95) 100%)', 
+      backdropFilter: 'blur(20px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+      boxShadow: '0 4px 30px -4px rgba(0, 0, 0, 0.3), inset 0 -1px 0 0 rgba(255, 255, 255, 0.05)'
     }}>
+      {/* Animated gradient border bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px]" style={{
+        background: 'linear-gradient(90deg, transparent, hsl(199, 89%, 48%, 0.5), hsl(215, 75%, 45%, 0.3), hsl(199, 89%, 48%, 0.5), transparent)',
+        backgroundSize: '200% 100%',
+        animation: 'gradient-shift 4s ease infinite'
+      }} />
+
       <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between gap-3">
           {/* Logo and Title */}
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-accent rounded-xl shadow-lg shrink-0">
-              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-accent-foreground" />
+          <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl shrink-0 transition-all duration-300 hover:scale-105" style={{
+              background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
+              boxShadow: '0 4px 16px -4px hsl(199, 89%, 48%, 0.4), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)'
+            }}>
+              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="min-w-0">
-              <h1 className="text-sm sm:text-lg lg:text-xl font-heading font-bold text-primary-foreground truncate tracking-tight">
+              <h1 className="text-sm sm:text-lg lg:text-xl font-heading font-bold text-white truncate" style={{ letterSpacing: '-0.02em' }}>
                 Procedimento Operacional Padrão
               </h1>
-              <p className="text-xs sm:text-sm text-primary-foreground/70 hidden sm:block">
+              <p className="text-xs sm:text-sm text-white/60 hidden sm:block tracking-wide">
                 4ª Coordenadoria Regional de Educação | GAD
               </p>
             </div>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Search Button - Opens Command Palette */}
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => {
-                // Trigger Cmd+K programmatically
-                const event = new KeyboardEvent('keydown', {
-                  key: 'k',
-                  metaKey: true,
-                  ctrlKey: true,
-                  bubbles: true
-                });
+                const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true });
                 document.dispatchEvent(event);
               }}
-              className="text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-3 transition-all duration-200"
+              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-3 transition-all duration-300 hover:scale-105"
               title="Buscar (Ctrl+K)"
               aria-label="Abrir busca global"
             >
               <Search className="w-4 h-4 sm:mr-2" aria-hidden="true" />
-              <span className="hidden sm:inline text-xs font-mono opacity-70">⌘K</span>
+              <span className="hidden sm:inline text-xs font-mono opacity-60">⌘K</span>
             </Button>
 
             <ShareQRCode sectionTitle="PDDE - Guia de Procedimentos" />
@@ -132,7 +131,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               variant="ghost"
               size="sm"
               onClick={cycleViewMode}
-              className={`text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-200 ${viewMode !== 'auto' ? 'bg-primary-foreground/20' : ''}`}
+              className={`text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105 ${viewMode !== 'auto' ? 'bg-white/15 text-white' : ''}`}
               title={getViewModeTitle()}
               aria-label={getViewModeTitle()}
             >
@@ -142,7 +141,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               variant="ghost"
               size="sm"
               onClick={toggleDarkMode}
-              className="text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-200"
+              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10 transition-all duration-300 hover:scale-105"
               title={isDark ? "Modo claro" : "Modo escuro"}
               aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
             >
@@ -152,21 +151,24 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
               variant="ghost"
               size="sm"
               onClick={onPrint}
-              className="text-primary-foreground hover:bg-primary-foreground/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-4 transition-all duration-200"
+              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-auto sm:px-4 transition-all duration-300 hover:scale-105"
               aria-label="Imprimir documento"
             >
               <Printer className="w-4 h-4 sm:mr-2" aria-hidden="true" />
               <span className="hidden sm:inline">Imprimir</span>
             </Button>
             <Button
-              variant="secondary"
               size="sm"
               onClick={onPrint}
-              className="h-9 w-9 sm:h-10 sm:w-auto sm:px-4 shadow-lg hover:shadow-xl transition-all duration-200 btn-premium"
+              className="h-9 w-9 sm:h-10 sm:w-auto sm:px-4 transition-all duration-300 hover:scale-105 btn-premium text-white border-0"
+              style={{
+                background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
+                boxShadow: '0 4px 16px -4px hsl(199, 89%, 48%, 0.4)'
+              }}
               aria-label="Baixar documento como PDF"
             >
               <Download className="w-4 h-4 sm:mr-2" aria-hidden="true" />
-              <span className="hidden sm:inline">Download</span>
+              <span className="hidden sm:inline font-medium">Download</span>
             </Button>
           </div>
         </div>

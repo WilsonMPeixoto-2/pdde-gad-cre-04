@@ -55,7 +55,7 @@ export const ReadingProgressBar = () => {
       aria-valuemax={100}
     >
       <div 
-        className="h-full bg-gradient-to-r from-primary via-primary to-success transition-all duration-150 ease-out"
+        className="h-full bg-gradient-to-r from-primary via-accent to-success transition-all duration-150 ease-out animate-[shimmer_2s_ease-in-out_infinite] bg-[length:200%_100%]"
         style={{ width: `${progress}%` }}
       />
     </div>

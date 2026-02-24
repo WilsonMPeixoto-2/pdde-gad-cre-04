@@ -157,6 +157,20 @@
       radial-gradient(ellipse at 80% 100%, hsl(199 89% 48% / 0.02) 0%, transparent 50%);
   }
 
+  /* Subtle noise texture overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   .dark body::before {
     background: 
       linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 47% 10%) 50%, hsl(222 47% 8%) 100%);
@@ -370,7 +384,13 @@
 
   /* Accessible link cards - legislation/external links */
   .link-card {
-    @apply relative transition-all duration-300;
+    @apply relative transition-all duration-300 ease-out;
+    transform: translateY(0);
+  }
+
+  .link-card:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 8px 25px -8px hsl(var(--primary) / 0.2);
   }
 
   .link-card:focus-visible {
@@ -380,6 +400,8 @@
   .link-card:hover .link-card-icon,
   .link-card:focus-visible .link-card-icon {
     @apply bg-primary/30;
+    transform: scale(1.1);
+    transition: all 0.3s ease-out;
   }
 
   .link-card:hover .link-card-title,
@@ -389,7 +411,7 @@
 
   .link-card:hover .link-card-arrow,
   .link-card:focus-visible .link-card-arrow {
-    @apply text-primary translate-x-0.5;
+    @apply text-primary translate-x-1;
   }
 
   /* Glass effect for special elements */

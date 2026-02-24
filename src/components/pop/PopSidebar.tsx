@@ -1,7 +1,7 @@
 import { ChevronRight, FileText, ClipboardList, Upload, CheckCircle, Phone, X, Scale } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 interface Section {
   id: string;
@@ -22,55 +22,54 @@ const sections: Section[] = [
   { id: "anexo", number: "A", title: "Anexo - Legislação", icon: <Scale className="w-4 h-4" /> },
 ];
 
+/** Uses IntersectionObserver for scroll progress instead of getBoundingClientRect in loop */
+function useSectionProgress() {
+  const [progress, setProgress] = useState<Record<string, number>>({});
+  const progressRef = useRef<Record<string, number>>({});
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    for (const s of sections) {
+      const el = document.getElementById(s.id);
+      if (!el) continue;
+
+      // Use multiple thresholds to approximate scroll progress
+      const thresholds = Array.from({ length: 21 }, (_, i) => i / 20); // 0, 0.05, 0.1, ..., 1.0
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const id = entry.target.id;
+            if (entry.isIntersecting) {
+              progressRef.current[id] = Math.max(
+                progressRef.current[id] ?? 0,
+                entry.intersectionRatio
+              );
+            }
+          }
+          setProgress({ ...progressRef.current });
+        },
+        { threshold: thresholds }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    }
+
+    return () => {
+      for (const obs of observers) obs.disconnect();
+    };
+  }, []);
+
+  return progress;
+}
+
 interface PopSidebarProps {
   activeSection: string;
   onSectionClick: (sectionId: string) => void;
   isOpen: boolean;
   onClose: () => void;
-}
-
-/** Returns a map of sectionId → scroll progress (0–1) */
-function useSectionProgress() {
-  const [progress, setProgress] = useState<Record<string, number>>({});
-
-  const calculate = useCallback(() => {
-    const result: Record<string, number> = {};
-    const viewportH = window.innerHeight;
-
-    for (const s of sections) {
-      const el = document.getElementById(s.id);
-      if (!el) continue;
-      const rect = el.getBoundingClientRect();
-      const sectionH = rect.height || 1;
-
-      // How much of the section has scrolled past the viewport top
-      const scrolled = -rect.top + viewportH * 0.3; // offset so "read" starts a bit after entering
-      const ratio = Math.min(1, Math.max(0, scrolled / sectionH));
-      result[s.id] = ratio;
-    }
-    setProgress(result);
-  }, []);
-
-  useEffect(() => {
-    let raf: number | null = null;
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        calculate();
-        raf = null;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    // initial calc
-    const timeout = setTimeout(calculate, 300);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-      clearTimeout(timeout);
-    };
-  }, [calculate]);
-
-  return progress;
 }
 
 export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: PopSidebarProps) => {
@@ -90,7 +89,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed lg:sticky top-0 left-0 z-50 lg:z-30 h-screen w-72 transform transition-all duration-300 ease-out lg:transform-none no-print shadow-2xl lg:shadow-lg",
+          "fixed lg:sticky top-0 left-0 z-50 lg:z-30 h-screen w-72 transform transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:transform-none no-print shadow-2xl lg:shadow-lg",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
         style={{ background: 'linear-gradient(180deg, hsl(222, 47%, 13%) 0%, hsl(222, 47%, 9%) 100%)' }}

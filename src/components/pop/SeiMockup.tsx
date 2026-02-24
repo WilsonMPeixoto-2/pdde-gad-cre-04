@@ -8,7 +8,7 @@ interface SeiMockupProps {
 
 // Professional SEI-style icon button with animations
 const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode; label?: string; active?: boolean }) => (
-  <div className={`
+  <div role="button" aria-label={label ? `Ação SEI: ${label}` : 'Ação SEI'} aria-pressed={active} className={`
     flex flex-col items-center gap-1 p-1.5 rounded cursor-pointer 
     transition-all duration-200 ease-out
     hover:scale-110 hover:shadow-md

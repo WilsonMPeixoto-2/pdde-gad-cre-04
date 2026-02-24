@@ -17,10 +17,10 @@ export const HeroCover = () => {
     >
       {/* Mesh Gradient Orbs with varied colors */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] bg-[hsl(199,89%,48%,0.12)] rounded-full blur-[100px] animate-pulse" style={{ willChange: 'transform, opacity' }} />
-        <div className="absolute top-[50%] right-[10%] w-[400px] h-[400px] bg-[hsl(260,60%,50%,0.08)] rounded-full blur-[120px]" style={{ willChange: 'transform', animation: 'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite 1s' }} />
-        <div className="absolute bottom-[10%] left-[40%] w-[600px] h-[300px] bg-[hsl(199,89%,48%,0.08)] rounded-full blur-[80px]" style={{ willChange: 'transform', animation: 'pulse 5s cubic-bezier(0.4,0,0.6,1) infinite 2s' }} />
-        <div className="absolute top-[30%] left-[60%] w-[350px] h-[350px] bg-[hsl(215,75%,45%,0.1)] rounded-full blur-[100px]" style={{ willChange: 'transform', animation: 'pulse 6s cubic-bezier(0.4,0,0.6,1) infinite 3s' }} />
+        <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] max-sm:w-[250px] max-sm:h-[250px] bg-[hsl(199,89%,48%,0.12)] rounded-full blur-[100px] max-sm:blur-[60px] animate-pulse" style={{ willChange: 'transform, opacity' }} />
+        <div className="absolute top-[50%] right-[10%] w-[400px] h-[400px] max-sm:w-[200px] max-sm:h-[200px] bg-[hsl(260,60%,50%,0.08)] rounded-full blur-[120px] max-sm:blur-[60px]" style={{ willChange: 'transform', animation: 'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite 1s' }} />
+        <div className="absolute bottom-[10%] left-[40%] w-[600px] h-[300px] max-sm:w-[300px] max-sm:h-[150px] bg-[hsl(199,89%,48%,0.08)] rounded-full blur-[80px] max-sm:blur-[40px]" style={{ willChange: 'transform', animation: 'pulse 5s cubic-bezier(0.4,0,0.6,1) infinite 2s' }} />
+        <div className="absolute top-[30%] left-[60%] w-[350px] h-[350px] max-sm:w-[180px] max-sm:h-[180px] bg-[hsl(215,75%,45%,0.1)] rounded-full blur-[100px] max-sm:blur-[50px]" style={{ willChange: 'transform', animation: 'pulse 6s cubic-bezier(0.4,0,0.6,1) infinite 3s' }} />
       </div>
 
       {/* Breathing Grid Pattern */}

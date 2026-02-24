@@ -10,6 +10,7 @@ import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { SectionOne } from "@/components/pop/SectionOne";
 import { SectionTwo } from "@/components/pop/SectionTwo";
 import { BackToTop } from "@/components/pop/BackToTop";
+import { GuidedWizard } from "@/components/pop/GuidedWizard";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
@@ -222,6 +223,7 @@ const Index = () => {
         </main>
       </div>
       <BackToTop />
+      <GuidedWizard />
       
     </div>
   );

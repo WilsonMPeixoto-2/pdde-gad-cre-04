@@ -182,8 +182,7 @@ export const HeroCover = () => {
 
           {/* Subtitle */}
           <p 
-            className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed font-light hero-stagger"
-            style={{ animationDelay: '0.55s' }}
+            className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed font-light"
           >
             Guia operacional para diretores(as) e gestores(as) escolares na instrução 
             da Prestação de Contas do PDDE diretamente no SEI!RIO.

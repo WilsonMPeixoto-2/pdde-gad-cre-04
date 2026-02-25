@@ -1,130 +1,277 @@
 import { BookOpen, Calendar, Building2, FileText, ChevronDown, ClipboardList } from "lucide-react";
 
+/**
+ * HeroCover — Premium autoral "Institucional Cinemático"
+ * 
+ * Art direction: Deep navy base with layered radial glows,
+ * organic topographic SVG lines, grain texture, and controlled
+ * light beams. No grid/blueprint pattern.
+ */
 export const HeroCover = () => {
   return (
     <div 
       id="hero-cover"
-      className="min-h-[90vh] sm:min-h-[85vh] flex items-center justify-center relative overflow-hidden"
+      className="min-h-[92vh] sm:min-h-[88vh] flex items-center justify-center relative overflow-hidden"
       style={{
         background: `
-          radial-gradient(ellipse 80% 50% at 50% -20%, hsl(199, 89%, 48%, 0.25), transparent),
-          radial-gradient(ellipse 60% 40% at 80% 60%, hsl(215, 75%, 45%, 0.2), transparent),
-          radial-gradient(ellipse 40% 40% at 15% 70%, hsl(260, 60%, 50%, 0.1), transparent),
-          radial-gradient(ellipse 50% 50% at 20% 80%, hsl(199, 89%, 48%, 0.15), transparent),
-          linear-gradient(180deg, hsl(222, 47%, 11%) 0%, hsl(215, 50%, 14%) 50%, hsl(222, 47%, 11%) 100%)
+          linear-gradient(180deg, 
+            hsl(222, 47%, 7%) 0%, 
+            hsl(218, 50%, 11%) 30%, 
+            hsl(215, 55%, 14%) 55%, 
+            hsl(218, 50%, 11%) 80%, 
+            hsl(222, 47%, 7%) 100%
+          )
         `
       }}
     >
-      {/* Mesh Gradient Orbs with varied colors */}
-      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] max-sm:w-[250px] max-sm:h-[250px] bg-[hsl(199,89%,48%,0.12)] rounded-full blur-[100px] max-sm:blur-[60px] animate-pulse" style={{ willChange: 'transform, opacity' }} />
-        <div className="absolute top-[50%] right-[10%] w-[400px] h-[400px] max-sm:w-[200px] max-sm:h-[200px] bg-[hsl(260,60%,50%,0.08)] rounded-full blur-[120px] max-sm:blur-[60px]" style={{ willChange: 'transform', animation: 'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite 1s' }} />
-        <div className="absolute bottom-[10%] left-[40%] w-[600px] h-[300px] max-sm:w-[300px] max-sm:h-[150px] bg-[hsl(199,89%,48%,0.08)] rounded-full blur-[80px] max-sm:blur-[40px]" style={{ willChange: 'transform', animation: 'pulse 5s cubic-bezier(0.4,0,0.6,1) infinite 2s' }} />
-        <div className="absolute top-[30%] left-[60%] w-[350px] h-[350px] max-sm:w-[180px] max-sm:h-[180px] bg-[hsl(215,75%,45%,0.1)] rounded-full blur-[100px] max-sm:blur-[50px]" style={{ willChange: 'transform', animation: 'pulse 6s cubic-bezier(0.4,0,0.6,1) infinite 3s' }} />
+      {/* === LAYER 1: Deep radial glows (autoral, not template) === */}
+      <div className="absolute inset-0" aria-hidden="true">
+        {/* Primary glow — top-left, warm accent */}
+        <div 
+          className="absolute w-[700px] h-[700px] max-sm:w-[350px] max-sm:h-[350px] rounded-full"
+          style={{ 
+            top: '-15%', left: '-5%',
+            background: 'radial-gradient(circle, hsl(199, 89%, 48%, 0.12) 0%, hsl(199, 89%, 48%, 0.04) 40%, transparent 70%)',
+            filter: 'blur(60px)',
+            willChange: 'transform',
+            animation: 'hero-glow-drift 12s ease-in-out infinite'
+          }} 
+        />
+        {/* Secondary glow — center-right, deep blue */}
+        <div 
+          className="absolute w-[600px] h-[600px] max-sm:w-[300px] max-sm:h-[300px] rounded-full"
+          style={{ 
+            top: '30%', right: '-8%',
+            background: 'radial-gradient(circle, hsl(215, 75%, 45%, 0.1) 0%, hsl(215, 75%, 45%, 0.03) 45%, transparent 70%)',
+            filter: 'blur(80px)',
+            willChange: 'transform',
+            animation: 'hero-glow-drift 15s ease-in-out infinite reverse'
+          }} 
+        />
+        {/* Tertiary glow — bottom, subtle violet */}
+        <div 
+          className="absolute w-[500px] h-[300px] max-sm:w-[250px] max-sm:h-[150px] rounded-full"
+          style={{ 
+            bottom: '5%', left: '25%',
+            background: 'radial-gradient(ellipse, hsl(230, 50%, 45%, 0.07) 0%, transparent 65%)',
+            filter: 'blur(70px)',
+            willChange: 'transform',
+            animation: 'hero-glow-drift 18s ease-in-out infinite 3s'
+          }} 
+        />
       </div>
 
-      {/* Breathing Grid Pattern */}
-      <div className="absolute inset-0" aria-hidden="true" style={{
-        backgroundImage: `linear-gradient(hsl(0,0%,100%) 1px, transparent 1px), linear-gradient(90deg, hsl(0,0%,100%) 1px, transparent 1px)`,
-        backgroundSize: '50px 50px',
-        animation: 'grid-breathe 6s ease-in-out infinite'
-      }} />
-      
-      <div className="relative z-10 text-center px-6 py-16 max-w-5xl mx-auto">
+      {/* === LAYER 2: Organic topographic lines (SVG) === */}
+      <div className="absolute inset-0 opacity-[0.04]" aria-hidden="true">
+        <svg className="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Organic flowing curves — institutional / topographic feel */}
+          <path d="M-100,200 C150,150 300,300 500,250 S700,100 900,180 S1100,300 1300,220" stroke="hsl(199, 89%, 60%)" strokeWidth="1" opacity="0.6" />
+          <path d="M-50,350 C200,300 350,420 550,380 S750,250 950,340 S1150,450 1350,370" stroke="hsl(199, 89%, 55%)" strokeWidth="0.8" opacity="0.5" />
+          <path d="M-100,500 C100,460 300,550 500,510 S700,400 900,480 S1100,560 1300,500" stroke="hsl(215, 75%, 55%)" strokeWidth="0.6" opacity="0.4" />
+          <path d="M-80,120 C180,80 380,170 580,130 S780,60 980,140 S1180,200 1380,150" stroke="hsl(199, 89%, 65%)" strokeWidth="0.5" opacity="0.35" />
+          <path d="M-60,650 C140,620 340,700 540,660 S740,580 940,650 S1140,720 1340,670" stroke="hsl(215, 60%, 50%)" strokeWidth="0.5" opacity="0.3" />
+          {/* Accent arcs */}
+          <path d="M200,0 Q400,400 200,800" stroke="hsl(199, 89%, 55%)" strokeWidth="0.4" opacity="0.25" />
+          <path d="M900,0 Q700,350 950,800" stroke="hsl(215, 75%, 50%)" strokeWidth="0.4" opacity="0.2" />
+        </svg>
+      </div>
+
+      {/* === LAYER 3: Light beam (single controlled diagonal) === */}
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div 
+          className="absolute"
+          style={{
+            top: '-20%', left: '15%',
+            width: '2px', height: '140%',
+            background: 'linear-gradient(180deg, transparent 0%, hsl(199, 89%, 60%, 0.08) 30%, hsl(199, 89%, 48%, 0.15) 50%, hsl(199, 89%, 60%, 0.08) 70%, transparent 100%)',
+            transform: 'rotate(25deg)',
+            filter: 'blur(8px)',
+          }}
+        />
+        <div 
+          className="absolute"
+          style={{
+            top: '-10%', right: '25%',
+            width: '1px', height: '130%',
+            background: 'linear-gradient(180deg, transparent 0%, hsl(215, 75%, 55%, 0.06) 35%, hsl(215, 75%, 45%, 0.12) 55%, hsl(215, 75%, 55%, 0.06) 75%, transparent 100%)',
+            transform: 'rotate(-18deg)',
+            filter: 'blur(6px)',
+          }}
+        />
+      </div>
+
+      {/* === LAYER 4: Grain texture (premium anti-banding) === */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        aria-hidden="true"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '200px 200px',
+          opacity: 0.035,
+          mixBlendMode: 'overlay',
+        }}
+      />
+
+      {/* === LAYER 5: Vignette === */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        aria-hidden="true"
+        style={{
+          background: 'radial-gradient(ellipse 70% 60% at 50% 45%, transparent 0%, hsl(222, 47%, 7%, 0.5) 100%)',
+        }}
+      />
+
+      {/* === CONTENT === */}
+      <div className="relative z-10 text-center px-5 sm:px-6 py-12 sm:py-16 max-w-5xl mx-auto">
         {/* Institution Badge */}
-        <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-full mb-12 shadow-xl hero-stagger transition-all duration-300 hover:bg-white/15 hover:scale-[1.02]" style={{ animationDelay: '0.1s' }}>
-          <Building2 className="w-5 h-5 text-white" aria-hidden="true" />
-          <span className="text-white font-medium text-sm sm:text-base tracking-wide">
+        <div 
+          className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-8 sm:mb-10 hero-stagger transition-all duration-300 hover:scale-[1.02]"
+          style={{ 
+            animationDelay: '0.1s',
+            background: 'hsl(199, 89%, 48%, 0.08)',
+            border: '1px solid hsl(199, 89%, 48%, 0.2)',
+            backdropFilter: 'blur(12px)',
+          }}
+        >
+          <Building2 className="w-4 h-4 text-accent" aria-hidden="true" />
+          <span className="text-white/90 font-medium text-xs sm:text-sm tracking-wide">
             4ª Coordenadoria Regional de Educação
           </span>
         </div>
         
-        {/* Main Title */}
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold mb-8 shadow-xl tracking-wider uppercase hero-stagger text-white" style={{ 
-            animationDelay: '0.25s',
-            background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
-            boxShadow: '0 4px 20px -4px hsl(199, 89%, 48%, 0.4)'
-          }}>
-            <FileText className="w-4 h-4" aria-hidden="true" />
+        {/* Main Title Block */}
+        <div className="mb-10 sm:mb-12">
+          {/* POP Label */}
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold mb-6 sm:mb-8 tracking-[0.15em] uppercase hero-stagger"
+            style={{ 
+              animationDelay: '0.25s',
+              background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 40%) 100%)',
+              color: 'white',
+              boxShadow: '0 2px 16px -4px hsl(199, 89%, 48%, 0.35)',
+            }}
+          >
+            <FileText className="w-3.5 h-3.5" aria-hidden="true" />
             Procedimento Operacional Padrão
           </div>
-          <h1 className="font-heading font-extrabold text-white leading-[1.05] mb-8 hero-stagger" style={{ animationDelay: '0.4s', letterSpacing: '-0.03em', fontSize: 'clamp(2.75rem, 5vw + 1rem, 6rem)', textWrap: 'balance' as any }}>
+
+          {/* Title */}
+          <h1 
+            className="font-heading font-extrabold text-white leading-[1.08] mb-6 sm:mb-8 hero-stagger"
+            style={{ 
+              animationDelay: '0.4s', 
+              letterSpacing: '-0.03em', 
+              fontSize: 'clamp(2.25rem, 5vw + 0.5rem, 5.5rem)',
+              textWrap: 'balance' as any,
+            }}
+          >
             Prestação de Contas
             <br />
-            <span className="hero-title-accent bg-clip-text text-transparent" style={{
-              backgroundImage: 'linear-gradient(90deg, hsl(199,89%,48%), hsl(199,89%,65%), hsl(199,89%,48%))',
-              backgroundSize: '300% 100%',
-              animation: 'title-shimmer 6s ease infinite'
-            }}>
+            <span 
+              className="hero-title-accent bg-clip-text text-transparent"
+              style={{
+                backgroundImage: 'linear-gradient(90deg, hsl(199, 89%, 55%), hsl(199, 89%, 72%), hsl(199, 89%, 55%))',
+                backgroundSize: '300% 100%',
+                animation: 'title-shimmer 8s ease infinite',
+              }}
+            >
               PDDE no SEI!RIO
             </span>
           </h1>
-          <p className="text-xl sm:text-2xl text-white/75 max-w-3xl mx-auto leading-relaxed font-light hero-stagger" style={{ animationDelay: '0.55s' }}>
+
+          {/* Subtitle */}
+          <p 
+            className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed font-light hero-stagger"
+            style={{ animationDelay: '0.55s' }}
+          >
             Guia operacional para diretores(as) e gestores(as) escolares na instrução 
             da Prestação de Contas do PDDE diretamente no SEI!RIO.
           </p>
         </div>
         
-        {/* Glass Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 max-w-4xl mx-auto mb-12" role="list" aria-label="Informações institucionais">
+        {/* Info Cards — refined chips */}
+        <div 
+          className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10 sm:mb-12"
+          role="list" 
+          aria-label="Informações institucionais"
+        >
           {[
-            { icon: <Building2 className="w-6 h-6" aria-hidden="true" />, label: "GAD", desc: "Gerência de Administração" },
-            { icon: <BookOpen className="w-6 h-6" aria-hidden="true" />, label: "POP", desc: "Procedimento Operacional Padrão" },
-            { icon: <FileText className="w-6 h-6" aria-hidden="true" />, label: "SEI!RIO", desc: "Sistema Eletrônico" },
-            { icon: <Calendar className="w-6 h-6" aria-hidden="true" />, label: "V. 1.5", desc: "Fevereiro/2026" },
+            { icon: <Building2 className="w-5 h-5" aria-hidden="true" />, label: "GAD", desc: "Gerência de Administração" },
+            { icon: <BookOpen className="w-5 h-5" aria-hidden="true" />, label: "POP", desc: "Procedimento Padrão" },
+            { icon: <FileText className="w-5 h-5" aria-hidden="true" />, label: "SEI!RIO", desc: "Sistema Eletrônico" },
+            { icon: <Calendar className="w-5 h-5" aria-hidden="true" />, label: "V. 1.5", desc: "Fevereiro/2026" },
           ].map((item, i) => (
             <div 
               key={i} 
               role="listitem"
-              className="glass-premium rounded-2xl p-5 text-center tilt-hover group hero-stagger"
-              style={{ animationDelay: `${0.7 + i * 0.12}s` }}
+              className="group rounded-xl p-4 text-center hero-stagger transition-all duration-300 hover:translate-y-[-2px]"
+              style={{ 
+                animationDelay: `${0.7 + i * 0.1}s`,
+                background: 'hsl(0 0% 100% / 0.04)',
+                border: '1px solid hsl(0 0% 100% / 0.08)',
+                backdropFilter: 'blur(8px)',
+              }}
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-white/10 rounded-xl mb-3 group-hover:bg-white/20 transition-all duration-400 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-white/5 group-hover:rotate-[-3deg]" aria-hidden="true">
-                <span className="text-white">{item.icon}</span>
+              <div 
+                className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-2.5 transition-all duration-300 group-hover:scale-110"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(199, 89%, 48%, 0.15), hsl(215, 75%, 45%, 0.1))',
+                  border: '1px solid hsl(199, 89%, 48%, 0.12)',
+                }}
+              >
+                <span className="text-accent">{item.icon}</span>
               </div>
-              <p className="text-white font-bold text-base tracking-wide">{item.label}</p>
-              <p className="text-white/55 text-xs mt-1 tracking-wide">{item.desc}</p>
+              <p className="text-white font-semibold text-sm tracking-wide">{item.label}</p>
+              <p className="text-white/40 text-[11px] mt-0.5 tracking-wide leading-tight">{item.desc}</p>
             </div>
           ))}
         </div>
         
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 hero-stagger" style={{ animationDelay: '1.2s' }}>
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 hero-stagger" style={{ animationDelay: '1.1s' }}>
           <button
             onClick={() => document.getElementById('secao-2')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white shadow-xl transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium"
             style={{
-              background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
-              boxShadow: '0 4px 24px -4px hsl(199, 89%, 48%, 0.45)'
+              background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 40%) 100%)',
+              boxShadow: '0 4px 20px -4px hsl(199, 89%, 48%, 0.4), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
             }}
           >
-            <ClipboardList className="w-5 h-5" aria-hidden="true" />
-            Ir para o Checklist
-            <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
+            <ClipboardList className="w-4 h-4" aria-hidden="true" />
+            Começar pelo Checklist
+            <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
           </button>
           <button
             onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white/90 bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg transition-all duration-300 hover:bg-white/15 hover:scale-[1.03] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white/80 transition-all duration-300 hover:text-white hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            style={{
+              background: 'hsl(0 0% 100% / 0.06)',
+              border: '1px solid hsl(0 0% 100% / 0.12)',
+              backdropFilter: 'blur(8px)',
+            }}
           >
-            <BookOpen className="w-5 h-5" aria-hidden="true" />
-            Iniciar Leitura
+            <BookOpen className="w-4 h-4" aria-hidden="true" />
+            Ler Guia Completo
           </button>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="mt-10 hero-stagger" style={{ animationDelay: '1.5s' }} aria-hidden="true">
+        <div className="mt-8 sm:mt-10 hero-stagger" style={{ animationDelay: '1.4s' }} aria-hidden="true">
           <button 
             onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group cursor-pointer bg-transparent border-none inline-flex flex-col items-center gap-3 transition-all duration-300 hover:translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent rounded-lg"
+            className="group cursor-pointer bg-transparent border-none inline-flex flex-col items-center gap-2.5 transition-all duration-300 hover:translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent rounded-lg"
           >
-            <div className="w-8 h-14 border-2 border-white/20 rounded-full flex items-start justify-center p-2 group-hover:border-white/40 transition-colors duration-300">
-              <div className="w-1.5 h-3 bg-white/60 rounded-full scroll-dot-animation" />
+            <div 
+              className="w-7 h-12 rounded-full flex items-start justify-center p-2 transition-colors duration-300 group-hover:border-white/30"
+              style={{ border: '1.5px solid hsl(0 0% 100% / 0.15)' }}
+            >
+              <div className="w-1 h-2.5 bg-white/50 rounded-full scroll-dot-animation" />
             </div>
-            <div className="flex items-center gap-1.5 text-white/30 group-hover:text-white/60 transition-colors duration-300">
-              <ChevronDown className="w-3.5 h-3.5" />
-              <span className="text-xs tracking-widest uppercase font-medium">Role para continuar</span>
-              <ChevronDown className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-1 text-white/25 group-hover:text-white/50 transition-colors duration-300">
+              <ChevronDown className="w-3 h-3" />
+              <span className="text-[10px] tracking-[0.2em] uppercase font-medium">Role para continuar</span>
+              <ChevronDown className="w-3 h-3" />
             </div>
           </button>
         </div>

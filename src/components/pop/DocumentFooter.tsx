@@ -101,7 +101,11 @@ export const DocumentFooter = () => {
               background: 'linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-            }}>Wilson M. Peixoto</p>
+            }}>Wilson M. Peixoto <span className="font-normal text-sm" style={{
+              background: 'none',
+              WebkitBackgroundClip: 'unset',
+              WebkitTextFillColor: 'hsl(var(--muted-foreground))',
+            }}>- SME/RJ</span></p>
             
             <p className="text-xs text-muted-foreground italic tracking-wide">Inovação para a Gestão Pública</p>
 

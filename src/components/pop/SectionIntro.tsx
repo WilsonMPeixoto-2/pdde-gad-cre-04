@@ -44,6 +44,16 @@ export const SectionIntro = () => {
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Gerente – E/4ª CRE/GAD</p>
           </div>
         </div>
+
+        {/* Subtle author byline */}
+        <div className="mt-6 flex items-center justify-end gap-2 opacity-60 hover:opacity-90 transition-opacity duration-500">
+          <div className="h-px flex-1 max-w-[60px]" style={{
+            background: 'linear-gradient(90deg, transparent, hsl(var(--border)))'
+          }} />
+          <p className="text-[10px] tracking-wider text-muted-foreground">
+            Elaborado por <span className="font-semibold">Wilson M. Peixoto</span> · SME/RJ
+          </p>
+        </div>
       </div>
     </section>
   );

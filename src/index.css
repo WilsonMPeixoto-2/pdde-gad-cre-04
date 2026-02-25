@@ -878,9 +878,10 @@ body::before {
   100% { background-position: 200% center; }
 }
 
-@keyframes grid-breathe {
-  0%, 100% { opacity: 0.02; }
-  50% { opacity: 0.05; }
+@keyframes hero-glow-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 1; }
+  33% { transform: translate(15px, -10px) scale(1.03); opacity: 0.85; }
+  66% { transform: translate(-10px, 8px) scale(0.97); opacity: 0.95; }
 }
 
 /* ===== PRINT STYLES ===== */

@@ -9,11 +9,13 @@ import { SectionIntro } from "@/components/pop/SectionIntro";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { SectionOne } from "@/components/pop/SectionOne";
 import { SectionTwo } from "@/components/pop/SectionTwo";
-import { BackToTop } from "@/components/pop/BackToTop";
-import { GuidedWizard } from "@/components/pop/GuidedWizard";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
+
+// Lazy load non-critical interactive widgets
+const BackToTop = lazy(() => import("@/components/pop/BackToTop").then(m => ({ default: m.BackToTop })));
+const GuidedWizard = lazy(() => import("@/components/pop/GuidedWizard").then(m => ({ default: m.GuidedWizard })));
 
 // Lazy load below-the-fold sections for better initial load performance
 const SectionThree = lazy(() => import("@/components/pop/SectionThree").then(m => ({ default: m.SectionThree })));
@@ -222,9 +224,12 @@ const Index = () => {
           </div>
         </main>
       </div>
-      <BackToTop />
-      <GuidedWizard />
-      
+      <Suspense fallback={null}>
+        <BackToTop />
+      </Suspense>
+      <Suspense fallback={null}>
+        <GuidedWizard />
+      </Suspense>
     </div>
   );
 };

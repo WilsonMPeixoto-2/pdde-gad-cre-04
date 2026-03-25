@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { QrCode, Copy, Download, Check, Share2 } from "lucide-react";
+import QRCode from "qrcode";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,99 +17,42 @@ interface ShareQRCodeProps {
   sectionTitle?: string;
 }
 
-export function ShareQRCode({ sectionId, sectionTitle = "PDDE Guide" }: ShareQRCodeProps) {
+export function ShareQRCode({ sectionId, sectionTitle = "POP PDDE no SEI!RIO" }: ShareQRCodeProps) {
   const [copied, setCopied] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const shareUrl = sectionId 
     ? `${window.location.origin}${window.location.pathname}#${sectionId}`
     : window.location.href;
 
-  // Generate QR code as SVG
   useEffect(() => {
-    generateQRCode();
-  }, [shareUrl]);
+    let isActive = true;
 
-  const generateQRCode = () => {
-    // Simple QR code generation using canvas
-    const size = 200;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = size;
-    canvas.height = size;
-
-    // Clear canvas
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, size, size);
-
-    // Create a simple QR-like pattern based on URL hash
-    const hash = simpleHash(shareUrl);
-    const cellSize = 8;
-    const margin = 16;
-    const gridSize = Math.floor((size - margin * 2) / cellSize);
-
-    ctx.fillStyle = '#0369a1'; // Primary color
-
-    // Position detection patterns (corners)
-    drawFinderPattern(ctx, margin, margin, cellSize);
-    drawFinderPattern(ctx, size - margin - cellSize * 7, margin, cellSize);
-    drawFinderPattern(ctx, margin, size - margin - cellSize * 7, cellSize);
-
-    // Data modules based on URL hash
-    for (let i = 0; i < gridSize; i++) {
-      for (let j = 0; j < gridSize; j++) {
-        // Skip finder pattern areas
-        if (isInFinderArea(i, j, gridSize)) continue;
-
-        const bit = (hash >> ((i * gridSize + j) % 32)) & 1;
-        if (bit || Math.random() > 0.6) {
-          ctx.fillRect(
-            margin + i * cellSize,
-            margin + j * cellSize,
-            cellSize - 1,
-            cellSize - 1
-          );
+    QRCode.toDataURL(shareUrl, {
+      width: 240,
+      margin: 2,
+      errorCorrectionLevel: "M",
+      color: {
+        dark: "#0369a1",
+        light: "#ffffff",
+      },
+    })
+      .then((dataUrl) => {
+        if (isActive) {
+          setQrDataUrl(dataUrl);
         }
-      }
-    }
+      })
+      .catch(() => {
+        if (isActive) {
+          setQrDataUrl("");
+          toast.error("Nao foi possivel gerar o QR Code.");
+        }
+      });
 
-    setQrDataUrl(canvas.toDataURL('image/png'));
-  };
-
-  const simpleHash = (str: string): number => {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash;
-    }
-    return Math.abs(hash);
-  };
-
-  const drawFinderPattern = (ctx: CanvasRenderingContext2D, x: number, y: number, cellSize: number) => {
-    // Outer square
-    ctx.fillRect(x, y, cellSize * 7, cellSize * 7);
-    // Inner white square
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(x + cellSize, y + cellSize, cellSize * 5, cellSize * 5);
-    // Center square
-    ctx.fillStyle = '#0369a1';
-    ctx.fillRect(x + cellSize * 2, y + cellSize * 2, cellSize * 3, cellSize * 3);
-  };
-
-  const isInFinderArea = (i: number, j: number, gridSize: number): boolean => {
-    const finderSize = 8;
-    return (
-      (i < finderSize && j < finderSize) ||
-      (i >= gridSize - finderSize && j < finderSize) ||
-      (i < finderSize && j >= gridSize - finderSize)
-    );
-  };
+    return () => {
+      isActive = false;
+    };
+  }, [shareUrl]);
 
   const copyLink = async () => {
     try {
@@ -174,9 +118,6 @@ export function ShareQRCode({ sectionId, sectionTitle = "PDDE Guide" }: ShareQRC
         </DialogHeader>
 
         <div className="flex flex-col items-center gap-4 py-4">
-          {/* Hidden canvas for QR generation */}
-          <canvas ref={canvasRef} className="hidden" />
-
           {/* QR Code display */}
           <div className="p-4 bg-white rounded-xl shadow-md">
             {qrDataUrl ? (

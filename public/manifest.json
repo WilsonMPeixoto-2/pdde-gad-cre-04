@@ -1,7 +1,7 @@
 {
-  "name": "PDDE - Guia de Procedimentos",
-  "short_name": "PDDE Guide",
-  "description": "Procedimento Operacional Padrão para PDDE - CRE 04 Brazlândia",
+  "name": "POP PDDE no SEI!RIO - 4a CRE",
+  "short_name": "PDDE 4a CRE",
+  "description": "Guia oficial da 4a CRE para instruir a prestacao de contas do PDDE no SEI!RIO.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0c4a6e",

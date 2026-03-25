@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://pdde-gad-cre-04.vercel.app/sitemap.xml

@@ -1,16 +1,17 @@
-const CACHE_NAME = 'pdde-guide-v1.4';
+const CACHE_NAME = "pdde-guide-v1.6";
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/favicon.png',
-  '/manifest.json'
+  "/",
+  "/index.html",
+  "/favicon.png",
+  "/manifest.json",
+  "/og-image.png",
 ];
 
 // Install event - cache static assets
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW] Caching static assets');
+      console.log("[SW] Caching static assets");
       return cache.addAll(STATIC_ASSETS);
     })
   );
@@ -18,14 +19,14 @@ self.addEventListener('install', (event) => {
 });
 
 // Activate event - clean old caches
-self.addEventListener('activate', (event) => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
           .filter((name) => name !== CACHE_NAME)
           .map((name) => {
-            console.log('[SW] Deleting old cache:', name);
+            console.log("[SW] Deleting old cache:", name);
             return caches.delete(name);
           })
       );
@@ -35,12 +36,14 @@ self.addEventListener('activate', (event) => {
 });
 
 // Fetch event - network first, fallback to cache
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   // Skip non-GET requests
-  if (event.request.method !== 'GET') return;
+  if (event.request.method !== "GET") return;
 
-  // Skip chrome-extension and other non-http requests
-  if (!event.request.url.startsWith('http')) return;
+  const requestUrl = new URL(event.request.url);
+
+  // Cache only same-origin assets to avoid stale third-party responses
+  if (requestUrl.origin !== self.location.origin) return;
 
   event.respondWith(
     fetch(event.request)
@@ -61,18 +64,18 @@ self.addEventListener('fetch', (event) => {
             return cachedResponse;
           }
           // For navigation requests, return cached index.html
-          if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+          if (event.request.mode === "navigate") {
+            return caches.match("/index.html");
           }
-          return new Response('Offline', { status: 503 });
+          return new Response("Offline", { status: 503 });
         });
       })
   );
 });
 
 // Handle messages from main thread
-self.addEventListener('message', (event) => {
-  if (event.data === 'skipWaiting') {
+self.addEventListener("message", (event) => {
+  if (event.data === "skipWaiting") {
     self.skipWaiting();
   }
 });

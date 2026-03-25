@@ -89,7 +89,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed lg:sticky top-0 left-0 z-50 lg:z-30 h-screen w-72 transform transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:transform-none no-print shadow-2xl lg:shadow-lg",
+          "fixed lg:sticky top-0 left-0 z-50 lg:z-30 h-screen w-72 transform transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:transform-none no-print shadow-2xl lg:shadow-lg",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
         style={{ background: 'linear-gradient(180deg, hsl(222, 47%, 13%) 0%, hsl(222, 47%, 9%) 100%)' }}
@@ -156,7 +156,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                       }}
                     className={cn(
                         "w-full text-left flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none group",
-                        "transition-[background-color,color,transform,opacity,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        "transition-[background-color,color,transform,opacity,box-shadow] duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]",
                         isActive
                           ? "bg-accent text-accent-foreground shadow-lg"
                           : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 hover:translate-x-1"

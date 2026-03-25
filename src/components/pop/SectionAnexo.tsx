@@ -118,7 +118,16 @@ export const SectionAnexo = () => {
             return (
               <div
                 key={index}
+                role="checkbox"
+                aria-checked={checked}
+                tabIndex={0}
                 onClick={() => toggleItem(item.documento)}
+                onKeyDown={(event) => {
+                  if (event.key === " " || event.key === "Enter") {
+                    event.preventDefault();
+                    toggleItem(item.documento);
+                  }
+                }}
                 className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${
                   checked 
                     ? 'bg-success/5 border-success/30' 
@@ -127,6 +136,7 @@ export const SectionAnexo = () => {
               >
                 <Checkbox
                   checked={checked}
+                  onClick={(event) => event.stopPropagation()}
                   onCheckedChange={() => toggleItem(item.documento)}
                   className="shrink-0"
                 />

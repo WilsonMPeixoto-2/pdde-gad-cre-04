@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { BookOpen, Calendar, Building2, FileText, ChevronDown, ClipboardList } from "lucide-react";
 
 /**
@@ -163,7 +164,7 @@ export const HeroCover = () => {
               animationDelay: '0.4s', 
               letterSpacing: '-0.03em', 
               fontSize: 'clamp(2.25rem, 5vw + 0.5rem, 5.5rem)',
-              textWrap: 'balance' as any,
+              textWrap: "balance" as CSSProperties["textWrap"],
             }}
           >
             Prestação de Contas

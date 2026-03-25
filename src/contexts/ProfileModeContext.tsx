@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import React, { createContext, useContext, useState, useCallback } from "react";
 
 export type ProfileMode = "diretor" | "gad";
 
@@ -32,7 +32,11 @@ export const ProfileModeProvider = ({ children }: { children: React.ReactNode })
     setModeState(newMode);
     try {
       localStorage.setItem(STORAGE_KEY, newMode);
-    } catch {}
+    } catch {
+      if (import.meta.env.DEV) {
+        console.warn("Nao foi possivel salvar o modo de perfil no navegador.");
+      }
+    }
   }, []);
 
   const value = {

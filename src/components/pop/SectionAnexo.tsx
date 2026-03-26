@@ -25,7 +25,7 @@ const systemCards = [
   {
     title: "Registro federal do exercício",
     description:
-      "O sistema federal pode variar conforme o exercício. Para recursos recebidos em 2024, o FNDE orientou que a UEx preencha o BB Gestão Ágil e que a EEx analise/julgue e consolide os dados no SiGPC.",
+      "O sistema federal pode variar conforme o exercício. Para recursos repassados a partir de 2023, o FNDE passou a usar o BB Gestão Ágil no fluxo do PDDE, mantendo as etapas de análise e julgamento pela EEx e, quando cabível, rotinas de consolidação no SiGPC.",
   },
   {
     title: "Rito local no Rio",
@@ -60,8 +60,13 @@ const officialLinks = [
   },
   {
     title: "Comunicado PDDE nº 47/2024",
-    description: "Orientação operacional do BB Gestão Ágil e do SiGPC para os recursos recebidos em 2024.",
+    description: "Orientação operacional específica para os recursos recebidos em 2024, complementar à adoção do BB Gestão Ágil a partir de 2023.",
     href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2024-1/Comunicadon.47_2024Orientaesparaaprestaodecontasdosrecursosrecebidosem2024.pdf",
+  },
+  {
+    title: "Perguntas e Respostas PDDE (BB Gestão Ágil)",
+    description: "Material oficial do FNDE que explicita o recorte dos recursos repassados em 2023 e 2024 e a convivência com o SiGPC.",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil/PerguntaseRespostasPDDE.pdf",
   },
   {
     title: "Comunicado PDDE nº 01/2026",

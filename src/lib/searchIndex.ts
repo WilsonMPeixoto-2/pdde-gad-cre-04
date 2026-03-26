@@ -117,8 +117,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: "sigpc",
     title: "BB Gestão Ágil e SiGPC",
-    content: "Ferramentas federais que precisam ser distinguidas na comprovação da execução e no acompanhamento da prestação de contas do PDDE.",
-    keywords: ["bb gestão ágil", "sigpc", "contas online", "fnde", "demonstrativo", "prestação"],
+    content: "Ferramentas federais que precisam ser distinguidas na comprovação da execução e no acompanhamento da prestação de contas do PDDE, com BB Gestão Ágil adotado para repasses a partir de 2023.",
+    keywords: ["bb gestão ágil", "sigpc", "contas online", "fnde", "demonstrativo", "prestação", "2023", "2024", "eex", "uex"],
     section: sectionTitle("anexo"),
     anchor: "anexo",
   },

@@ -92,7 +92,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-foreground/60 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-foreground/60 backdrop-blur-xs z-40 lg:hidden"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -169,7 +169,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                         onClose();
                       }}
                     className={cn(
-                        "w-full text-left flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none group",
+                        "w-full text-left flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden group",
                         "transition-[background-color,color,transform,opacity,box-shadow] duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]",
                         isActive
                           ? "bg-accent text-accent-foreground shadow-lg"

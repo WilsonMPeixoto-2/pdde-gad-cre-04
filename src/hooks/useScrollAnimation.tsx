@@ -9,17 +9,12 @@ interface UseScrollAnimationOptions {
 export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
   const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", triggerOnce = true } = options;
   const ref = useRef<HTMLDivElement>(null);
-  // Start visible to avoid FCP delay - elements above fold show immediately
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    // Initially set to not visible for elements below fold
-    // This runs after first paint so doesn't affect FCP
-    setIsVisible(false);
-    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

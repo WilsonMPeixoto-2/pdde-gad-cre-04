@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { startTransition, useDeferredValue, useEffect, useEffectEvent, useState, useCallback, useMemo } from "react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -14,14 +14,18 @@ import { Search, FileText, Hash, ArrowRight, Keyboard } from "lucide-react";
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchItem[]>([]);
+  const deferredQuery = useDeferredValue(query);
+
+  const openPalette = useEffectEvent(() => {
+    setOpen(true);
+  });
 
   // Listen for Cmd+K / Ctrl+K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        setOpen(true);
+        openPalette();
       }
     };
 
@@ -29,18 +33,18 @@ export function CommandPalette() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Search when query changes
-  useEffect(() => {
-    if (query.trim()) {
-      setResults(searchItems(query));
-    } else {
-      setResults([]);
+  const results = useMemo<SearchItem[]>(() => {
+    if (!deferredQuery.trim()) {
+      return [];
     }
-  }, [query]);
+    return searchItems(deferredQuery);
+  }, [deferredQuery]);
 
   const handleSelect = useCallback((item: SearchItem) => {
-    setOpen(false);
-    setQuery("");
+    startTransition(() => {
+      setOpen(false);
+      setQuery("");
+    });
     
     // Navigate to section
     const element = document.getElementById(item.anchor);

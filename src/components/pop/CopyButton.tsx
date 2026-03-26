@@ -31,7 +31,7 @@ export const CopyButton = ({ text, label = "Copiado!", className = "" }: CopyBut
   return (
     <button
       onClick={handleCopy}
-      className={`inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border/60 bg-background/80 text-muted-foreground shadow-sm transition-all duration-200 hover:border-primary/25 hover:bg-primary/8 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${className}`}
+      className={`inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border/60 bg-background/80 text-muted-foreground shadow-xs transition-all duration-200 hover:border-primary/25 hover:bg-primary/8 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${className}`}
       title="Copiar para área de transferência"
       aria-label="Copiar para área de transferência"
     >

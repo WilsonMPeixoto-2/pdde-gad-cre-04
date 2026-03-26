@@ -234,7 +234,7 @@ export const HeroCover = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 hero-stagger" style={{ animationDelay: '1.1s' }}>
           <button
             onClick={() => document.getElementById(GUIDE_ANCHORS.checklist)?.scrollIntoView({ behavior: 'smooth' })}
-            className="group inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium sm:w-auto"
+            className="group inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium sm:w-auto"
             style={{
               background: 'linear-gradient(135deg, hsl(197, 82%, 43%) 0%, hsl(211, 64%, 24%) 100%)',
               boxShadow: '0 4px 20px -4px hsl(197, 82%, 43%, 0.4), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
@@ -246,7 +246,7 @@ export const HeroCover = () => {
           </button>
           <button
             onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white/80 transition-all duration-300 hover:text-white hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent sm:w-auto"
+            className="inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white/80 transition-all duration-300 hover:text-white hover:scale-[1.02] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent sm:w-auto"
             style={{
               background: 'hsl(0 0% 100% / 0.06)',
               border: '1px solid hsl(0 0% 100% / 0.12)',
@@ -262,7 +262,7 @@ export const HeroCover = () => {
         <div className="mt-8 sm:mt-10 hero-stagger" style={{ animationDelay: '1.4s' }} aria-hidden="true">
           <button 
             onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group cursor-pointer bg-transparent border-none inline-flex flex-col items-center gap-2.5 transition-all duration-300 hover:translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent rounded-lg"
+            className="group cursor-pointer bg-transparent border-none inline-flex flex-col items-center gap-2.5 transition-all duration-300 hover:translate-y-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent rounded-lg"
           >
             <div 
               className="w-7 h-12 rounded-full flex items-start justify-center p-2 transition-colors duration-300 group-hover:border-white/30"

@@ -154,7 +154,7 @@ const Index = () => {
         />
 
         <main className="min-w-0 flex-1 lg:ml-0">
-          <div className="mx-auto w-full max-w-[78rem] px-4 py-8 sm:px-6 sm:py-10 xl:px-10">
+          <div className="mx-auto w-full max-w-312 px-4 py-8 sm:px-6 sm:py-10 xl:px-10">
             <div className="space-y-10">
               <AnimatedSection>
                 <SectionIntro />

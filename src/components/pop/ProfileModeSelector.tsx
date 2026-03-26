@@ -24,7 +24,7 @@ export const ProfileModeSelector = () => {
   const { mode, setMode } = useProfileMode();
 
   return (
-    <div className="flex items-center gap-1 rounded-xl border border-border/40 bg-background/70 p-1 shadow-sm backdrop-blur">
+    <div className="flex items-center gap-1 rounded-xl border border-border/40 bg-background/70 p-1 shadow-xs backdrop-blur-sm">
       {modes.map((m) => {
         const isActive = mode === m.value;
         return (
@@ -35,7 +35,7 @@ export const ProfileModeSelector = () => {
                 className={cn(
                   "flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-semibold transition-all duration-200",
                   isActive
-                    ? "bg-background text-foreground shadow-sm border border-border/60"
+                    ? "bg-background text-foreground shadow-xs border border-border/60"
                     : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
                 aria-pressed={isActive}

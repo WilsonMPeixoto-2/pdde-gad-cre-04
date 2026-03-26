@@ -40,7 +40,7 @@ export const ReadingProgressBar = () => {
 
   return (
     <div 
-      className="fixed top-0 left-0 right-0 z-[60] h-1 no-print"
+      className="fixed top-0 left-0 right-0 z-60 h-1 no-print"
       style={{ background: 'hsl(var(--secondary) / 0.3)' }}
       role="progressbar"
       aria-label="Progresso de leitura do documento"

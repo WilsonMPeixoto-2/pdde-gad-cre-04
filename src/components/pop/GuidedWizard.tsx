@@ -144,7 +144,7 @@ export const GuidedWizard = () => {
         <div className="px-4 pt-3">
           <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-primary to-primary/70 rounded-full transition-all duration-500 ease-out"
+              className="h-full bg-linear-to-r from-primary to-primary/70 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -157,7 +157,7 @@ export const GuidedWizard = () => {
               key={s.id}
               onClick={() => setCurrentStep(i)}
               className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+                "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-hidden",
                 i === currentStep
                   ? "bg-primary text-primary-foreground shadow-md"
                   : completedSteps.has(i)
@@ -248,7 +248,7 @@ export const GuidedWizard = () => {
           </Button>
 
           <Button
-            variant={completedSteps.has(currentStep) ? "outline" : "default"}
+            variant={completedSteps.has(currentStep) ? "outline-solid" : "default"}
             size="sm"
             onClick={() => toggleStepComplete(currentStep)}
             className={cn("gap-1.5 text-xs", completedSteps.has(currentStep) && "text-success border-success/30")}

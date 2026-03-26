@@ -60,7 +60,7 @@ export const SectionOne = () => {
 
             <Callout variant="info" title="Tipo de Processo Correto:">
               <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                <p className="flex-1 text-sm font-semibold text-foreground sm:text-base [text-wrap:pretty]">
+                <p className="flex-1 text-sm font-semibold text-foreground sm:text-base text-pretty">
                   {PROCESS_TYPE_LABEL}
                 </p>
                 <CopyButton text={PROCESS_TYPE_LABEL} label="Copiado!" className="self-end sm:self-auto" />
@@ -87,7 +87,7 @@ export const SectionOne = () => {
             <div className="rounded-[1.35rem] bg-secondary/50 p-5 dark:bg-secondary/30">
               <p className="text-sm text-muted-foreground mb-3">Classificação automática:</p>
               <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                <code className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-sm whitespace-normal break-words data-code">
+                <code className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-xs whitespace-normal wrap-break-word data-code">
                   {PROCESS_CLASSIFICATION_LABEL}
                 </code>
                 <CopyButton text={PROCESS_CLASSIFICATION_LABEL} label="Copiado!" className="self-end sm:self-auto" />
@@ -110,13 +110,13 @@ export const SectionOne = () => {
               <div className="space-y-3 mt-2">
                 <div>
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Formato básico:</p>
-                  <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
+                  <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
                     PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ da UEx/CEC
                   </code>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Com mais de uma ação:</p>
-                  <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
+                  <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
                     PDDE (Básico + Ações Integradas) — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ
                   </code>
                 </div>
@@ -125,7 +125,7 @@ export const SectionOne = () => {
 
             <Callout variant="info" title="Exemplo prático:" className="mt-4">
               <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
+                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
                   PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00
                 </code>
                 <CopyButton text="PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00" label="Copiado!" className="self-end sm:self-auto" />
@@ -189,7 +189,7 @@ export const SectionOne = () => {
             </p>
             <Callout variant="success" title="Adicione a GAD como interessada:">
               <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
+                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
                   {GAD_UNIT.displayLabel}
                 </code>
                 <CopyButton text={GAD_UNIT.displayLabel} label="Código copiado!" className="self-end sm:self-auto" />
@@ -214,7 +214,7 @@ export const SectionOne = () => {
             </p>
             <Callout variant="success" title="Observação desta Unidade:" className="mt-4">
               <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
+                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
                   INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)
                 </code>
                 <CopyButton text="INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)" label="Copiado!" className="self-end sm:self-auto" />
@@ -249,12 +249,12 @@ export const SectionOne = () => {
             {/* Mockup da tela de confirmação - Qualidade Profissional */}
             <div className="mt-4 border border-[#dee2e6] rounded-xl overflow-hidden shadow-xl bg-white">
               {/* Header verde prefeitura */}
-              <div className="bg-gradient-to-r from-[#006633] to-[#00802b] text-white text-[10px] sm:text-xs px-4 py-1.5 font-medium tracking-wide">
+              <div className="bg-linear-to-r from-[#006633] to-[#00802b] text-white text-[10px] sm:text-xs px-4 py-1.5 font-medium tracking-wide">
                 PREFEITURA DA CIDADE DO RIO DE JANEIRO
               </div>
               
               {/* Barra SEI */}
-              <div className="bg-gradient-to-b from-[#f8f9fa] to-[#e9ecef] border-b border-[#dee2e6] px-4 py-2.5">
+              <div className="bg-linear-to-b from-[#f8f9fa] to-[#e9ecef] border-b border-[#dee2e6] px-4 py-2.5">
                 <div className="flex items-center gap-3">
                   <div className="flex items-baseline">
                     <span className="text-[#006633] font-black text-xl sm:text-2xl italic tracking-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>sei</span>
@@ -265,18 +265,18 @@ export const SectionOne = () => {
               </div>
               
               {/* Content */}
-              <div className="bg-gradient-to-b from-[#fafbfc] to-[#f5f6f7] p-4 sm:p-5">
+              <div className="bg-linear-to-b from-[#fafbfc] to-[#f5f6f7] p-4 sm:p-5">
                 <div className="flex flex-col sm:flex-row items-start gap-5">
                   {/* Sidebar com número do processo */}
-                  <div className="flex-shrink-0 w-full sm:w-auto">
-                    <div className="inline-flex items-center gap-2.5 border-2 border-[#dc3545] rounded-lg px-3 py-2 bg-gradient-to-b from-[#fffde7] to-[#fff9c4] shadow-md hover:shadow-lg transition-shadow duration-200">
-                      <svg className="w-5 h-5 text-[#FFB300] drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
+                  <div className="shrink-0 w-full sm:w-auto">
+                    <div className="inline-flex items-center gap-2.5 border-2 border-[#dc3545] rounded-lg px-3 py-2 bg-linear-to-b from-[#fffde7] to-[#fff9c4] shadow-md hover:shadow-lg transition-shadow duration-200">
+                      <svg className="w-5 h-5 text-[#FFB300] drop-shadow-xs" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
                       </svg>
                       <a href="#" className="text-[#0d6efd] font-bold text-sm sm:text-base hover:text-[#0a58ca] transition-colors cursor-pointer underline decoration-2 underline-offset-2">
                         000700.000063/2025-35
                       </a>
-                      <svg className="w-5 h-5 text-[#198754] drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
+                      <svg className="w-5 h-5 text-[#198754] drop-shadow-xs" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z"/>
                       </svg>
                     </div>
@@ -291,7 +291,7 @@ export const SectionOne = () => {
                   {/* Área principal */}
                   <div className="flex-1 w-full">
                     {/* Barra de ferramentas SEI - Profissional com Animações */}
-                    <div className="flex flex-wrap gap-1 mb-4 p-2 bg-gradient-to-b from-[#ffffff] to-[#f8f9fa] border border-[#dee2e6] rounded-lg shadow-sm">
+                    <div className="flex flex-wrap gap-1 mb-4 p-2 bg-linear-to-b from-[#ffffff] to-[#f8f9fa] border border-[#dee2e6] rounded-lg shadow-xs">
                       {/* Ícones estilo SEI com hover profissional */}
                       {[
                         { color: '#FFB300', path: 'M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z', title: 'Incluir Documento' },
@@ -312,7 +312,7 @@ export const SectionOne = () => {
                       ].map((icon, i) => (
                         <div 
                           key={i}
-                          className="w-8 h-8 flex items-center justify-center rounded-md cursor-pointer transition-all duration-200 ease-out hover:scale-125 hover:shadow-lg hover:bg-gradient-to-b hover:from-white hover:to-[#f0f0f0] active:scale-95 group" 
+                          className="w-8 h-8 flex items-center justify-center rounded-md cursor-pointer transition-all duration-200 ease-out hover:scale-125 hover:shadow-lg hover:bg-linear-to-b hover:from-white hover:to-[#f0f0f0] active:scale-95 group" 
                           title={icon.title}
                         >
                           <svg 
@@ -327,7 +327,7 @@ export const SectionOne = () => {
                       ))}
                     </div>
                     
-                    <div className="bg-white border border-[#e9ecef] rounded-lg p-3 shadow-sm">
+                    <div className="bg-white border border-[#e9ecef] rounded-lg p-3 shadow-xs">
                       <p className="text-sm text-[#495057]">
                         Processo aberto com sucesso.
                       </p>

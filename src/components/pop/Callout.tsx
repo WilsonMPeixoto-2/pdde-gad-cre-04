@@ -55,7 +55,7 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
       >
         {/* Gradient left border */}
         <div className={cn(
-          "absolute left-0 top-4 bottom-4 w-1 rounded-full bg-gradient-to-b",
+          "absolute left-0 top-4 bottom-4 w-1 rounded-full bg-linear-to-b",
           styles.borderGradient
         )} />
 
@@ -70,7 +70,7 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
             {title && (
               <p className="font-heading mb-1.5 text-sm font-bold text-foreground sm:text-base" style={{ letterSpacing: '-0.01em' }}>{title}</p>
             )}
-            <div className="text-sm leading-6 text-foreground/80 sm:leading-relaxed [text-wrap:pretty]">
+            <div className="text-sm leading-6 text-foreground/80 sm:leading-relaxed text-pretty">
               {children}
             </div>
           </div>

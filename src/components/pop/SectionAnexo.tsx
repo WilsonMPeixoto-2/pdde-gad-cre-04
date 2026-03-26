@@ -90,7 +90,7 @@ export const SectionAnexo = () => {
         Na análise, confirme se o processo reflete três planos sem misturá-los: <strong>execução do gasto</strong>, <strong>registro federal aplicável ao exercício</strong> e <strong>rito interno da SME-RJ</strong>.
       </ProfileCallout>
 
-      <div className="section-card mb-6 border-l-4 border-l-primary bg-gradient-to-br from-card via-card to-primary/5 p-6 sm:p-8">
+      <div className="section-card mb-6 border-l-4 border-l-primary bg-linear-to-br from-card via-card to-primary/5 p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <div className="rounded-xl bg-primary/10 p-3 shrink-0">
             <Scale className="h-6 w-6 text-primary" />
@@ -99,7 +99,7 @@ export const SectionAnexo = () => {
             <h2 className="mb-2 text-2xl font-heading font-bold tracking-tight text-foreground">
               Anexo — Base rápida de conferência
             </h2>
-            <p className="leading-relaxed text-muted-foreground text-left sm:text-justify [text-wrap:pretty]">
+            <p className="leading-relaxed text-muted-foreground text-left sm:text-justify text-pretty">
               Este anexo existe apenas para <strong>não deixar o manual ensinar procedimento errado</strong>. Ele resume a regra federal mínima, separa os sistemas envolvidos e aponta os marcos que mais impactam a conferência da prestação de contas.
             </p>
           </div>
@@ -151,7 +151,7 @@ export const SectionAnexo = () => {
           ))}
         </div>
 
-        <div className="mt-5 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-primary/5 p-4">
+        <div className="mt-5 rounded-xl border border-primary/20 bg-linear-to-r from-primary/10 to-primary/5 p-4">
           <div className="flex items-start gap-3">
             <ArrowRight className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
             <p className="text-sm leading-relaxed text-foreground">
@@ -194,7 +194,7 @@ export const SectionAnexo = () => {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-card group flex items-center gap-4 rounded-xl border-2 border-border bg-gradient-to-r from-secondary to-secondary/50 p-4 transition-all duration-300 hover:border-primary/40 hover:from-primary/10 hover:to-primary/5"
+              className="link-card group flex items-center gap-4 rounded-xl border-2 border-border bg-linear-to-r from-secondary to-secondary/50 p-4 transition-all duration-300 hover:border-primary/40 hover:from-primary/10 hover:to-primary/5"
             >
               <div className="link-card-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                 <ExternalLink className="h-5 w-5 text-primary" />

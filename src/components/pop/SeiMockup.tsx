@@ -15,8 +15,8 @@ const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode;
     hover:scale-110 hover:shadow-md
     active:scale-95
     ${active 
-      ? 'bg-gradient-to-b from-[#e8f4fd] to-[#d0e8f9] shadow-sm border border-[#b8d4ea]' 
-      : 'hover:bg-gradient-to-b hover:from-[#f5f8fa] hover:to-[#e8eef2]'
+      ? 'bg-linear-to-b from-[#e8f4fd] to-[#d0e8f9] shadow-xs border border-[#b8d4ea]' 
+      : 'hover:bg-linear-to-b hover:from-[#f5f8fa] hover:to-[#e8eef2]'
     }
   `}>
     <div className={`
@@ -35,7 +35,7 @@ const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode;
 
 // SEI Action Icons Bar with professional styling
 export const SeiIconsBar = () => (
-  <div className="flex items-center gap-0.5 p-2 bg-gradient-to-b from-[#fafbfc] to-[#f0f3f5] border border-[#d0d7de] rounded-lg overflow-x-auto shadow-sm">
+  <div className="flex items-center gap-0.5 p-2 bg-linear-to-b from-[#fafbfc] to-[#f0f3f5] border border-[#d0d7de] rounded-lg overflow-x-auto shadow-xs">
     <SeiIconButton icon={<SeiIncluirIcon size={20} />} label="Incluir" active />
     <SeiIconButton icon={<SeiEnviarIcon size={20} />} label="Enviar" />
     <SeiIconButton icon={<Eye className="w-5 h-5" />} label="Visualizar" />
@@ -50,11 +50,11 @@ export const SeiIconsBar = () => (
 const SeiHeader = ({ title, showLogo = false }: { title?: string; showLogo?: boolean }) => (
   <div className="sei-mockup-header-pro">
     {/* Green bar */}
-    <div className="bg-gradient-to-r from-[#006633] to-[#00802b] text-white text-[10px] px-3 py-1 font-medium tracking-wide">
+    <div className="bg-linear-to-r from-[#006633] to-[#00802b] text-white text-[10px] px-3 py-1 font-medium tracking-wide">
       PREFEITURA DA CIDADE DO RIO DE JANEIRO
     </div>
     {/* SEI bar */}
-    <div className="bg-gradient-to-b from-[#f8f9fa] to-[#e9ecef] border-b border-[#dee2e6] px-3 py-2">
+    <div className="bg-linear-to-b from-[#f8f9fa] to-[#e9ecef] border-b border-[#dee2e6] px-3 py-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-baseline">
@@ -81,7 +81,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
         <SeiHeader showLogo />
         
         {/* Menu Items */}
-        <div className="p-3 space-y-0.5 bg-gradient-to-b from-white to-[#f8f9fa]">
+        <div className="p-3 space-y-0.5 bg-linear-to-b from-white to-[#f8f9fa]">
           {[
             { icon: <Search className="w-4 h-4" />, label: "Pesquisar no Menu", key: "search" },
             { icon: <Menu className="w-4 h-4" />, label: "Estatísticas", key: "stats" },
@@ -94,7 +94,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
                 flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm cursor-pointer
                 transition-all duration-200 ease-out
                 ${highlight === item.key 
-                  ? "bg-gradient-to-r from-[#1565C0] to-[#1976D2] text-white font-semibold shadow-md transform scale-[1.02]" 
+                  ? "bg-linear-to-r from-[#1565C0] to-[#1976D2] text-white font-semibold shadow-md transform scale-[1.02]" 
                   : "text-[#495057] hover:bg-[#e9ecef] hover:translate-x-1"
                 }
               `}
@@ -113,7 +113,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
       <div className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg">
         <SeiHeader title="Árvore do Processo" />
         
-        <div className="p-3 text-sm bg-gradient-to-b from-white to-[#fafbfc]">
+        <div className="p-3 text-sm bg-linear-to-b from-white to-[#fafbfc]">
           {/* Process Root */}
           <div className="flex items-center gap-2 px-2 py-2 font-semibold text-[#212529] bg-[#e3f2fd] rounded-lg mb-2">
             <ChevronDown className="w-4 h-4 text-[#1565C0]" />
@@ -129,7 +129,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
                 className="
                   flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer group
                   transition-all duration-200 ease-out
-                  hover:bg-[#f5f5f5] hover:translate-x-1 hover:shadow-sm
+                  hover:bg-[#f5f5f5] hover:translate-x-1 hover:shadow-xs
                 "
               >
                 <FileText className="w-4 h-4 text-[#90a4ae] group-hover:text-[#546e7a] transition-colors" />
@@ -157,13 +157,13 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
       <div className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg">
         <SeiHeader title="Escolha o Tipo de Processo" />
         
-        <div className="p-4 space-y-3 bg-gradient-to-b from-white to-[#fafbfc]">
+        <div className="p-4 space-y-3 bg-linear-to-b from-white to-[#fafbfc]">
           <div className="flex items-center gap-2 text-sm">
             <Search className="w-4 h-4 text-[#6c757d]" />
             <input 
               type="text" 
               placeholder="prestação de contas" 
-              className="bg-white border border-[#ced4da] rounded-lg px-3 py-2 text-[#495057] w-full focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0]/20 transition-all outline-none"
+              className="bg-white border border-[#ced4da] rounded-lg px-3 py-2 text-[#495057] w-full focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0]/20 transition-all outline-hidden"
               defaultValue="prestação de contas"
             />
           </div>
@@ -180,7 +180,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
                   px-3 py-2.5 rounded-lg text-sm cursor-pointer
                   transition-all duration-200 ease-out
                   ${item.active 
-                    ? "bg-gradient-to-r from-[#1565C0] to-[#1976D2] text-white font-semibold shadow-md" 
+                    ? "bg-linear-to-r from-[#1565C0] to-[#1976D2] text-white font-semibold shadow-md" 
                     : "text-[#495057] hover:bg-[#e9ecef] hover:translate-x-1"
                   }
                 `}
@@ -199,7 +199,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
       <div className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg">
         <SeiHeader title="Registrar Documento Externo" />
         
-        <div className="p-4 space-y-4 text-sm bg-gradient-to-b from-white to-[#fafbfc]">
+        <div className="p-4 space-y-4 text-sm bg-linear-to-b from-white to-[#fafbfc]">
           {[
             { label: "Tipo do Documento", value: "Nota Fiscal" },
             { label: "Data do Documento", value: "15/12/2025" },
@@ -223,7 +223,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
           
           <div className="pt-3 flex items-center gap-3 border-t border-[#e9ecef]">
             <button className="
-              px-5 py-2.5 bg-gradient-to-b from-[#1976D2] to-[#1565C0] text-white rounded-lg text-xs font-semibold 
+              px-5 py-2.5 bg-linear-to-b from-[#1976D2] to-[#1565C0] text-white rounded-lg text-xs font-semibold 
               cursor-pointer shadow-md
               transition-all duration-200 ease-out
               hover:shadow-lg hover:from-[#1e88e5] hover:to-[#1976D2] hover:scale-105
@@ -232,7 +232,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
               Confirmar
             </button>
             <button className="
-              px-5 py-2.5 bg-gradient-to-b from-[#f5f5f5] to-[#e0e0e0] text-[#424242] rounded-lg text-xs font-semibold 
+              px-5 py-2.5 bg-linear-to-b from-[#f5f5f5] to-[#e0e0e0] text-[#424242] rounded-lg text-xs font-semibold 
               cursor-pointer border border-[#bdbdbd]
               transition-all duration-200 ease-out
               hover:from-[#eeeeee] hover:to-[#e0e0e0] hover:scale-105

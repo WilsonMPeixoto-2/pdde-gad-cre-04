@@ -26,20 +26,20 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
       <div className="space-y-5">
         {/* Main Contact Card */}
         <div className="section-card overflow-hidden">
-          <div className="bg-gradient-to-r from-primary via-primary to-primary/80 p-5 sm:p-6 text-primary-foreground relative overflow-hidden print:bg-primary print:from-primary print:to-primary">
+          <div className="bg-linear-to-r from-primary via-primary to-primary/80 p-5 sm:p-6 text-primary-foreground relative overflow-hidden print:bg-primary print:from-primary print:to-primary">
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.03%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-50 print:hidden"></div>
             <div className="relative">
-              <h3 className="text-xl sm:text-2xl font-heading font-bold mb-1 print:text-white print:!text-white">
+              <h3 className="text-xl sm:text-2xl font-heading font-bold mb-1 print:text-white print:text-white!">
                 Gerência de Administração
               </h3>
-              <p className="text-primary-foreground/80 print:text-white print:!text-white print:opacity-100">
+              <p className="text-primary-foreground/80 print:text-white print:text-white! print:opacity-100">
                 4ª Coordenadoria Regional de Educação
               </p>
             </div>
           </div>
           
           <div className="p-5 sm:p-6 space-y-4">
-            <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+            <div className="flex items-center gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl">
               <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 shrink-0">
                 <Mail className="w-6 h-6 text-primary" />
               </div>
@@ -55,7 +55,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
               <CopyButton text="gadcre04@rioeduca.net" label="E-mail copiado!" />
             </div>
 
-            <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+            <div className="flex items-center gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl">
               <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 shrink-0">
                 <Phone className="w-6 h-6 text-primary" />
               </div>
@@ -71,7 +71,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
               <CopyButton text="(21) 2475-9209" label="Telefone copiado!" />
             </div>
 
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl">
               <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 shrink-0">
                 <MapPin className="w-6 h-6 text-primary" />
               </div>
@@ -100,7 +100,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
               href="https://sei.rio/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+              className="flex items-center gap-4 p-4 rounded-xl bg-linear-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
                 <Monitor className="w-6 h-6 text-primary" />
@@ -116,7 +116,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
               href="https://sei.rio/servidor/guias-e-ambiente-de-teste/guia-do-usuario-interno/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+              className="flex items-center gap-4 p-4 rounded-xl bg-linear-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
                 <BookOpen className="w-6 h-6 text-primary" />
@@ -145,7 +145,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
             href="https://sei.rio/servidor/atendimento/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group mb-4"
+            className="flex items-center gap-4 p-4 rounded-xl bg-linear-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group mb-4"
           >
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
               <Headset className="w-6 h-6 text-primary" />
@@ -169,7 +169,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
             entre em contato com os administradores locais do sistema através dos e-mails abaixo.
           </p>
           
-          <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl border border-primary/20">
+          <div className="flex items-center gap-4 p-4 bg-linear-to-r from-primary/10 to-primary/5 rounded-xl border border-primary/20">
             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 shrink-0">
               <Mail className="w-6 h-6 text-primary" />
             </div>
@@ -222,7 +222,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
         </div>
 
         {/* Footer Note */}
-        <div className="p-6 bg-gradient-to-br from-primary/10 via-primary/5 to-secondary rounded-xl border border-border/50">
+        <div className="p-6 bg-linear-to-br from-primary/10 via-primary/5 to-secondary rounded-xl border border-border/50">
           <p className="text-center text-muted-foreground leading-relaxed">
             <strong className="text-foreground text-base sm:text-lg">Antes de solicitar apoio</strong><br />
             <span className="text-sm">

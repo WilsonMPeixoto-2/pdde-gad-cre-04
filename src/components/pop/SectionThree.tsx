@@ -51,7 +51,7 @@ export const SectionThree = () => {
           <h3 className="font-semibold text-foreground mb-4">3.2. Tipos de Documentos Externos</h3>
           
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="rounded-[1.35rem] border border-border/60 bg-gradient-to-br from-secondary to-secondary/50 p-4 shadow-soft">
+            <div className="rounded-[1.35rem] border border-border/60 bg-linear-to-br from-secondary to-secondary/50 p-4 shadow-soft">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-muted">
                   <FileImage className="w-4 h-4 text-foreground" />
@@ -64,7 +64,7 @@ export const SectionThree = () => {
               </p>
             </div>
             
-            <div className="rounded-[1.35rem] border border-emerald-200/70 bg-gradient-to-br from-emerald-50 to-emerald-100/50 p-4 shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/40 dark:to-emerald-900/20">
+            <div className="rounded-[1.35rem] border border-emerald-200/70 bg-linear-to-br from-emerald-50 to-emerald-100/50 p-4 shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/40 dark:to-emerald-900/20">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-emerald-200 dark:bg-emerald-800">
                   <FileText className="w-4 h-4 text-emerald-700 dark:text-emerald-300" />
@@ -92,7 +92,7 @@ export const SectionThree = () => {
           
           <div className="space-y-4">
             {/* Item 1 */}
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl border border-border">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
                 1
               </div>
@@ -106,7 +106,7 @@ export const SectionThree = () => {
                   </span>{" "}
                   na barra de ferramentas.
                 </p>
-                <div className="inline-block p-2 bg-card rounded-lg border border-border shadow-sm">
+                <div className="inline-block p-2 bg-card rounded-lg border border-border shadow-xs">
                   <img 
                     src={seiIncludeDocIcon} 
                     alt="Ícone Incluir Documento no SEI!RIO" 
@@ -119,7 +119,7 @@ export const SectionThree = () => {
             </div>
 
             {/* Item 2 */}
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl border border-border">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
                 2
               </div>
@@ -128,7 +128,7 @@ export const SectionThree = () => {
                 <p className="text-sm text-muted-foreground mb-3">
                   Na tela de seleção de tipo de documento, escolha a opção <strong className="text-foreground">"Externo"</strong> para indicar que o documento foi gerado fora do SEI!RIO.
                 </p>
-                <div className="inline-block p-2 bg-card rounded-lg border border-border shadow-sm">
+                <div className="inline-block p-2 bg-card rounded-lg border border-border shadow-xs">
                   <img 
                     src={seiChooseDocType} 
                     alt="Escolha o Tipo do Documento - Externo" 
@@ -141,7 +141,7 @@ export const SectionThree = () => {
             </div>
 
             {/* DICA box */}
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-emerald-50 to-emerald-100/50 dark:from-emerald-950/40 dark:to-emerald-900/20 rounded-xl border-2 border-emerald-300 dark:border-emerald-700 border-dashed">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-emerald-50 to-emerald-100/50 dark:from-emerald-950/40 dark:to-emerald-900/20 rounded-xl border-2 border-emerald-300 dark:border-emerald-700 border-dashed">
               <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-800 shrink-0">
                 <Lightbulb className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
               </div>
@@ -154,7 +154,7 @@ export const SectionThree = () => {
             </div>
 
             {/* Aviso antes do item 3 */}
-            <div className="p-4 bg-gradient-to-r from-sky-50 to-sky-100/50 dark:from-sky-950/40 dark:to-sky-900/20 rounded-xl border border-sky-200 dark:border-sky-800 text-center">
+            <div className="p-4 bg-linear-to-r from-sky-50 to-sky-100/50 dark:from-sky-950/40 dark:to-sky-900/20 rounded-xl border border-sky-200 dark:border-sky-800 text-center">
               <p className="text-sky-800 dark:text-sky-300 font-medium">
                 Após selecionar "Externo", abrirá a tela:
               </p>
@@ -164,7 +164,7 @@ export const SectionThree = () => {
             </div>
 
             {/* Item 3 com sub-itens */}
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl border border-border">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
                 3
               </div>
@@ -232,16 +232,16 @@ export const SectionThree = () => {
                     <ul className="space-y-2 mb-4">
                       <li className="flex items-start gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal break-words">NE- 1ª parcela/Janeiro - 2025</code></span>
+                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal wrap-break-word">NE- 1ª parcela/Janeiro - 2025</code></span>
                       </li>
                       <li className="flex items-start gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal break-words">Nota de Empenho 2025NE001043 - GAD 4ª CRE</code></span>
+                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal wrap-break-word">Nota de Empenho 2025NE001043 - GAD 4ª CRE</code></span>
                       </li>
                     </ul>
 
                     {/* Observação destacada - reformulado */}
-                    <div className="p-5 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl border border-border shadow-sm">
+                    <div className="p-5 bg-linear-to-br from-secondary to-secondary/50 rounded-xl border border-border shadow-xs">
                       <div className="flex items-center gap-2 mb-4">
                         <AlertCircle className="w-5 h-5 text-sky-600 dark:text-sky-400" />
                         <h6 className="font-semibold text-foreground">Observação importante</h6>
@@ -278,7 +278,7 @@ export const SectionThree = () => {
             </div>
 
             {/* Item 4 */}
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl border border-border">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
                 4
               </div>
@@ -293,7 +293,7 @@ export const SectionThree = () => {
         </div>
 
         {/* Orientações Importantes e Dicas de Digitalização */}
-        <div className="section-card p-5 sm:p-6 border border-sky-200 dark:border-sky-800 bg-gradient-to-br from-sky-50/50 dark:from-sky-950/30 to-transparent">
+        <div className="section-card p-5 sm:p-6 border border-sky-200 dark:border-sky-800 bg-linear-to-br from-sky-50/50 dark:from-sky-950/30 to-transparent">
           <div className="flex items-start gap-4 mb-5">
             <div className="p-3 rounded-xl bg-sky-100 dark:bg-sky-900/50 shrink-0">
               <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600 dark:text-sky-400" />
@@ -308,7 +308,7 @@ export const SectionThree = () => {
 
           <div className="space-y-4 ml-0 sm:ml-16">
             {/* Qualidade da Digitalização */}
-            <div className="p-4 bg-card rounded-lg border border-border shadow-sm">
+            <div className="p-4 bg-card rounded-lg border border-border shadow-xs">
               <div className="flex items-center gap-2 mb-2">
                 <Image className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Qualidade da Digitalização</h4>
@@ -320,7 +320,7 @@ export const SectionThree = () => {
             </div>
 
             {/* Nome do Arquivo */}
-            <div className="p-4 bg-card rounded-lg border border-border shadow-sm">
+            <div className="p-4 bg-card rounded-lg border border-border shadow-xs">
               <div className="flex items-center gap-2 mb-2">
                 <FileDown className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">O Preenchimento dos Dados define o Nome do Arquivo</h4>
@@ -339,7 +339,7 @@ export const SectionThree = () => {
             </div>
 
             {/* Gerenciamento de Tamanho */}
-            <div className="p-4 bg-card rounded-lg border border-border shadow-sm">
+            <div className="p-4 bg-card rounded-lg border border-border shadow-xs">
               <div className="flex items-center gap-2 mb-2">
                 <Scissors className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Gerenciamento de Tamanho de Arquivo</h4>
@@ -369,7 +369,7 @@ export const SectionThree = () => {
                     href="https://www.ilovepdf.com/pt" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="font-semibold text-emerald-700 dark:text-emerald-400 underline underline-offset-2 hover:text-emerald-900 dark:hover:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded"
+                    className="font-semibold text-emerald-700 dark:text-emerald-400 underline underline-offset-2 hover:text-emerald-900 dark:hover:text-emerald-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded"
                   >
                     iLovePDF
                     <ExternalLink className="w-3 h-3 inline ml-1" />

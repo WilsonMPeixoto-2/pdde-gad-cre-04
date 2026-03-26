@@ -10,7 +10,7 @@ export const SectionTwo = () => {
   return (
     <section id="secao-2" className="scroll-mt-20 animate-fade-in">
       {/* Bloco 1: Introdução ao Checklist - Estruturado para escaneabilidade */}
-      <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-gradient-to-br from-secondary/55 via-background to-sky-50/40 shadow-sm dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
+      <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-linear-to-br from-secondary/55 via-background to-sky-50/40 shadow-xs dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
         <div className="space-y-5">
           {/* O que é */}
           <div className="rounded-[1.35rem] border border-border/60 bg-background/80 p-4 shadow-soft">
@@ -98,10 +98,10 @@ export const SectionTwo = () => {
       </div>
 
       {/* Regras Operacionais - Evitar Glosa */}
-      <div className="mb-8 section-card border-l-4 border-l-amber-500 bg-gradient-to-br from-amber-50/50 via-background to-orange-50/30 shadow-sm dark:from-amber-950/30 dark:to-orange-950/20">
+      <div className="mb-8 section-card border-l-4 border-l-amber-500 bg-linear-to-br from-amber-50/50 via-background to-orange-50/30 shadow-xs dark:from-amber-950/30 dark:to-orange-950/20">
         <div className="content-spacing">
           <h2 className="mb-5 flex items-center gap-3 text-lg font-bold text-foreground sm:text-xl">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500 text-white shadow-md">
               <Sparkles className="h-4 w-4" />
             </span>
             Regras operacionais (evite glosa)
@@ -212,7 +212,7 @@ export const SectionTwo = () => {
       </div>
 
       {/* Bloco 2: Roteiro de Instrução - AGORA APÓS MODELOS */}
-      <div className="mb-8 section-card bg-gradient-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-sm">
+      <div className="mb-8 section-card bg-linear-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-xs">
         <div className="content-spacing">
           <h3 className="section-heading text-primary border-b-primary/20">
             Roteiro de Instrução para as próximas etapas deste guia
@@ -221,9 +221,9 @@ export const SectionTwo = () => {
             A sequência deste manual detalhará os procedimentos técnicos para a composição dos autos, divididos conforme a origem do documento:
           </p>
           <div className="space-y-4">
-            <div className="p-5 bg-gradient-to-r from-card to-sky-50/50 dark:to-sky-950/20 rounded-xl border border-sky-200/60 dark:border-sky-800/40 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="p-5 bg-linear-to-r from-card to-sky-50/50 dark:to-sky-950/20 rounded-xl border border-sky-200/60 dark:border-sky-800/40 shadow-xs hover:shadow-md transition-all duration-300">
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 text-white font-bold text-sm shrink-0 shadow-md">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-linear-to-br from-sky-500 to-sky-600 text-white font-bold text-sm shrink-0 shadow-md">
                   3
                 </div>
                 <div className="flex-1">
@@ -234,9 +234,9 @@ export const SectionTwo = () => {
                 </div>
               </div>
             </div>
-            <div className="p-5 bg-gradient-to-r from-card to-primary/5 rounded-xl border border-primary/20 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="p-5 bg-linear-to-r from-card to-primary/5 rounded-xl border border-primary/20 shadow-xs hover:shadow-md transition-all duration-300">
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-sm shrink-0 shadow-md">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-linear-to-br from-primary to-primary/80 text-white font-bold text-sm shrink-0 shadow-md">
                   4
                 </div>
                 <div className="flex-1">

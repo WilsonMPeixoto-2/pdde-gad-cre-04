@@ -177,7 +177,7 @@ export const PDDEChecklist = () => {
         </div>
         <button
           onClick={resetChecklist}
-          className="inline-flex items-center justify-center rounded-full border border-border/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-200 hover:border-primary/20 hover:bg-primary/5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="inline-flex items-center justify-center rounded-full border border-border/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-200 hover:border-primary/20 hover:bg-primary/5 hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label="Limpar todas as marcações do checklist"
         >
           Limpar
@@ -199,7 +199,7 @@ export const PDDEChecklist = () => {
         </div>
         <div className="h-2 bg-muted rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full transition-all duration-500 ease-out"
+            className="h-full bg-linear-to-r from-primary to-primary/80 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -212,9 +212,9 @@ export const PDDEChecklist = () => {
           <button
             key={f.key}
             onClick={() => setFilter(f.key)}
-            className={`rounded-full border px-3.5 py-2 text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+            className={`rounded-full border px-3.5 py-2 text-xs font-medium transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
               filter === f.key
-                ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                ? 'bg-primary text-primary-foreground border-primary shadow-xs'
                 : 'bg-muted/50 text-muted-foreground border-border/50 hover:bg-muted hover:text-foreground'
             }`}
             aria-pressed={filter === f.key}
@@ -228,7 +228,7 @@ export const PDDEChecklist = () => {
       {pendingCount > 0 && (
         <button
           onClick={generateSummary}
-          className="mb-5 flex w-full items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-all duration-200 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="mb-5 flex w-full items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-all duration-200 hover:bg-primary/10 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label={`Copiar resumo dos ${pendingCount} itens pendentes`}
         >
           <Copy className="w-4 h-4" aria-hidden="true" />
@@ -243,7 +243,7 @@ export const PDDEChecklist = () => {
             <button
               key={item.id}
               onClick={() => toggleItem(item.id)}
-                className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   item.checked
                     ? "bg-success/10 border-success/30 hover:bg-success/15"
                     : "bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-primary/30"
@@ -289,7 +289,7 @@ export const PDDEChecklist = () => {
               <button
                 key={item.id}
                 onClick={() => toggleItem(item.id)}
-                className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   item.checked
                     ? "bg-warning/10 border-warning/30 hover:bg-warning/15"
                     : "bg-warning/5 border-warning/20 hover:bg-warning/10 hover:border-warning/40"
@@ -353,7 +353,7 @@ export const PDDEChecklist = () => {
       )}
 
       {/* Callout - Conferência do original */}
-      <div className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl">
+      <div className="p-4 bg-linear-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl">
         <div className="flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
           <div>

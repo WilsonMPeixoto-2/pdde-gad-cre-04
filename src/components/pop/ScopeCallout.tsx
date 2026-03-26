@@ -2,7 +2,7 @@ import { AlertTriangle } from "lucide-react";
 
 export const ScopeCallout = () => {
   return (
-    <div className="rounded-[1.5rem] border border-warning/25 bg-gradient-to-br from-warning/10 via-warning/5 to-transparent p-5 sm:p-6 shadow-soft">
+    <div className="rounded-3xl border border-warning/25 bg-linear-to-br from-warning/10 via-warning/5 to-transparent p-5 sm:p-6 shadow-soft">
       <div className="flex items-start gap-3">
         <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5 text-warning" aria-hidden="true" />
         <div className="flex-1 min-w-0">

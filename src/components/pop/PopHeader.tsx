@@ -14,22 +14,34 @@ interface PopHeaderProps {
 type ViewMode = 'auto' | 'desktop' | 'mobile';
 
 export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
-  const [isDark, setIsDark] = useState(false);
-  const [viewMode, setViewMode] = useState<ViewMode>('auto');
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("theme") === "dark";
+  });
+  const [viewMode, setViewMode] = useState<ViewMode>(() => {
+    if (typeof window === "undefined") return "auto";
+    const savedViewMode = localStorage.getItem("viewMode") as ViewMode | null;
+    return savedViewMode ?? "auto";
+  });
+
+  function applyViewMode(mode: ViewMode) {
+    document.documentElement.classList.remove('force-mobile', 'force-desktop');
+    if (mode === 'mobile') {
+      document.documentElement.classList.add('force-mobile');
+    } else if (mode === 'desktop') {
+      document.documentElement.classList.add('force-desktop');
+    }
+  }
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setIsDark(true);
+    if (isDark) {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
-    
-    const savedViewMode = localStorage.getItem('viewMode') as ViewMode;
-    if (savedViewMode) {
-      setViewMode(savedViewMode);
-      applyViewMode(savedViewMode);
-    }
-  }, []);
+
+    applyViewMode(viewMode);
+  }, [isDark, viewMode]);
 
   const toggleDarkMode = () => {
     setIsDark(!isDark);
@@ -39,15 +51,6 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
     } else {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
-    }
-  };
-
-  const applyViewMode = (mode: ViewMode) => {
-    document.documentElement.classList.remove('force-mobile', 'force-desktop');
-    if (mode === 'mobile') {
-      document.documentElement.classList.add('force-mobile');
-    } else if (mode === 'desktop') {
-      document.documentElement.classList.add('force-desktop');
     }
   };
 
@@ -88,7 +91,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
       boxShadow: '0 4px 30px -4px rgba(0, 0, 0, 0.3), inset 0 -1px 0 0 rgba(255, 255, 255, 0.05)'
     }}>
       {/* Animated gradient border bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px]" style={{
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{
         background: 'linear-gradient(90deg, transparent, hsl(199, 89%, 48%, 0.5), hsl(215, 75%, 45%, 0.3), hsl(199, 89%, 48%, 0.5), transparent)',
         backgroundSize: '200% 100%',
         animation: 'gradient-shift 4s ease infinite'

@@ -80,7 +80,7 @@ export const SectionSix = () => {
           <div className="space-y-4">
             <Callout variant="success" title="Destinatário correto da remessa" icon={Building2}>
               <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                <code className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
+                <code className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
                   {GAD_UNIT.fullLabel}
                 </code>
                 <CopyButton text={GAD_UNIT.fullLabel} label="Código copiado!" className="self-end sm:self-auto" />

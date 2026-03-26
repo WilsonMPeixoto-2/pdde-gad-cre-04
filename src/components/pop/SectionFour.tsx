@@ -56,7 +56,7 @@ export const SectionFour = () => {
                   { label: "Comprovantes de pagamento", color: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/30" },
                   { label: "Extratos bancários", color: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30" }
                 ].map((doc, i) => (
-                  <span key={i} className={`px-3 py-1.5 text-sm font-medium rounded-lg border shadow-sm ${doc.color}`}>
+                  <span key={i} className={`px-3 py-1.5 text-sm font-medium rounded-lg border shadow-xs ${doc.color}`}>
                     {doc.label}
                   </span>
                 ))}
@@ -70,7 +70,7 @@ export const SectionFour = () => {
           <h3 className="font-semibold text-foreground mb-4">4.2. Procedimento para Inclusão</h3>
           
           <div className="space-y-4 timeline-steps">
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl timeline-step">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl timeline-step">
               <div className="step-indicator shrink-0 text-sm">1</div>
               <div>
                 <h4 className="font-semibold text-foreground mb-1">Iniciando a Inclusão</h4>
@@ -81,7 +81,7 @@ export const SectionFour = () => {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl timeline-step">
+            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl timeline-step">
               <div className="step-indicator shrink-0 text-sm">2</div>
               <div>
                 <h4 className="font-semibold text-foreground mb-1">Preenchimento dos Campos</h4>
@@ -202,7 +202,7 @@ export const SectionFour = () => {
           <h3 className="font-semibold text-foreground mb-4">Anexar e Autenticar</h3>
           
           <div className="space-y-4">
-            <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+            <div className="flex items-start gap-3 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl">
               <Upload className="w-5 h-5 text-primary shrink-0 mt-0.5" />
               <div>
                 <p className="font-semibold text-foreground">Anexar o Arquivo</p>
@@ -212,7 +212,7 @@ export const SectionFour = () => {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+            <div className="flex items-start gap-3 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl">
               <CheckCircle2 className="w-5 h-5 text-success shrink-0 mt-0.5" />
               <div>
                 <div className="flex items-center gap-3 flex-wrap mb-1">
@@ -250,7 +250,7 @@ export const SectionFour = () => {
         <div className="section-card p-5 sm:p-6 border-l-4 border-l-primary">
           <h3 className="font-semibold text-foreground mb-4">4.3. Fundamentação Legal</h3>
           
-          <div className="bg-gradient-to-r from-secondary to-secondary/50 rounded-xl p-4 mb-4">
+          <div className="bg-linear-to-r from-secondary to-secondary/50 rounded-xl p-4 mb-4">
             <p className="text-sm font-bold text-foreground mb-3">DECRETO RIO N° 57.250, DE 19 DE NOVEMBRO DE 2025</p>
             <blockquote className="text-sm text-muted-foreground italic border-l-2 border-primary pl-4 text-justified leading-relaxed">
               "Art. 26. Os documentos digitais produzidos no âmbito do SEI têm sua autoria, 

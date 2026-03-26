@@ -34,7 +34,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
     return (
       <main className="min-h-screen bg-background text-foreground">
         <section className="container mx-auto max-w-2xl px-6 py-16">
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
+          <div className="rounded-2xl border border-border bg-card p-8 shadow-xs">
             <h1 className="text-2xl font-heading font-bold">Ocorreu um erro ao carregar a página</h1>
             <p className="mt-2 text-sm text-muted-foreground">
               Já registramos detalhes técnicos no console para identificar o componente exato.

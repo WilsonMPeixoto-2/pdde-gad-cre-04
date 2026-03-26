@@ -11,7 +11,7 @@ interface SectionDividerProps {
 export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
   ({ number, title, subtitle, icon: Icon }, ref) => {
     return (
-      <div ref={ref} className="relative py-16 sm:py-20 my-10 sm:my-14 -mx-4 sm:-mx-0 section-divider-print overflow-hidden">
+      <div ref={ref} className="relative py-16 sm:py-20 my-10 sm:my-14 -mx-4 sm:mx-0 section-divider-print overflow-hidden">
         {/* Premium Background — matches Hero art direction */}
         <div className="absolute inset-0 print-hide-effects" style={{ 
           background: 'linear-gradient(135deg, hsl(222, 47%, 8%) 0%, hsl(215, 55%, 18%) 40%, hsl(218, 50%, 14%) 70%, hsl(222, 47%, 8%) 100%)'
@@ -46,7 +46,7 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
         <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 px-6 sm:px-10 max-w-4xl mx-auto">
           {/* Number Badge — premium with subtle glow */}
           <div 
-            className="flex items-center justify-center rounded-2xl font-heading font-extrabold text-2xl sm:text-3xl shrink-0 text-white transition-all duration-500 hover:scale-110 hover:rotate-[-3deg]"
+            className="flex items-center justify-center rounded-2xl font-heading font-extrabold text-2xl sm:text-3xl shrink-0 text-white transition-all duration-500 hover:scale-110 hover:-rotate-3"
             style={{ 
               width: '4.5rem', 
               height: '4.5rem',

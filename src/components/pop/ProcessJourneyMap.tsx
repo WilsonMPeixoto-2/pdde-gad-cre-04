@@ -87,7 +87,7 @@ export const ProcessJourneyMap = () => {
       <div className="mb-6">
         <div className="h-2 bg-muted rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-500 ease-out"
+            className="h-full bg-linear-to-r from-primary to-accent rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -96,7 +96,7 @@ export const ProcessJourneyMap = () => {
       {/* Journey steps - vertical timeline */}
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-[1.375rem] top-4 bottom-4 w-0.5 bg-gradient-to-b from-primary/30 via-accent/20 to-muted" />
+        <div className="absolute left-5.5 top-4 bottom-4 w-0.5 bg-linear-to-b from-primary/30 via-accent/20 to-muted" />
 
         <div className="space-y-1">
           {steps.map((step, index) => {
@@ -110,7 +110,7 @@ export const ProcessJourneyMap = () => {
                 <button
                   onClick={() => toggleStep(step)}
                   disabled={isLocked}
-                  className={`relative z-10 shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
+                  className={`relative z-10 shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden ${
                     isCompleted
                       ? "bg-success text-success-foreground shadow-md"
                       : isAvailable

@@ -151,12 +151,12 @@ export const SmartTemplates = () => {
           return (
             <div
               key={template.id}
-              className="overflow-hidden rounded-[1.5rem] border border-border/60 bg-card transition-all duration-300 hover:border-primary/15 hover:shadow-soft"
+              className="overflow-hidden rounded-3xl border border-border/60 bg-card transition-all duration-300 hover:border-primary/15 hover:shadow-soft"
             >
               {/* Header */}
               <button
                 onClick={() => setActiveTemplate(isActive ? null : template.id)}
-                className="w-full flex items-center justify-between p-4 text-left hover:bg-muted/30 transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="w-full flex items-center justify-between p-4 text-left hover:bg-muted/30 transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden"
                 aria-expanded={isActive}
               >
                 <div>
@@ -183,7 +183,7 @@ export const SmartTemplates = () => {
                           value={templateValues[field.key] || ""}
                           onChange={e => updateField(template.id, field.key, e.target.value)}
                           placeholder={field.placeholder}
-                          className="w-full px-3 py-2 text-sm rounded-lg border border-border/60 bg-background focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all outline-none placeholder:text-muted-foreground/50"
+                          className="w-full px-3 py-2 text-sm rounded-lg border border-border/60 bg-background focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all outline-hidden placeholder:text-muted-foreground/50"
                         />
                       </div>
                     ))}

@@ -31,7 +31,7 @@ export const InfoDrawer = React.forwardRef<HTMLDivElement, InfoDrawerProps>(
         </SheetTrigger>
         <SheetContent 
           side="right" 
-          className="w-full sm:max-w-md overflow-y-auto bg-gradient-to-b from-background to-secondary/20"
+          className="w-full sm:max-w-md overflow-y-auto bg-linear-to-b from-background to-secondary/20"
         >
           <SheetHeader className="pb-4 border-b border-border/50">
             <SheetTitle className="text-xl font-heading flex items-center gap-2.5 tracking-tight">

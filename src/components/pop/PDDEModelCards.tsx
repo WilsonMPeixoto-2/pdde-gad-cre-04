@@ -53,7 +53,7 @@ const categoryLabels: Record<PDDEModel["category"], { label: string; color: stri
     label: "Instrução Processual",
     color: "text-primary dark:text-accent",
     bgColor: "bg-primary/8 dark:bg-accent/12",
-    iconBg: "bg-gradient-to-br from-primary/15 to-primary/5 dark:from-accent/20 dark:to-accent/5",
+    iconBg: "bg-linear-to-br from-primary/15 to-primary/5 dark:from-accent/20 dark:to-accent/5",
     iconColor: "text-primary dark:text-accent",
     accent: "hsl(var(--primary))",
   },
@@ -61,7 +61,7 @@ const categoryLabels: Record<PDDEModel["category"], { label: string; color: stri
     label: "Documentos Financeiros",
     color: "text-success dark:text-success",
     bgColor: "bg-success/8 dark:bg-success/12",
-    iconBg: "bg-gradient-to-br from-success/15 to-success/5 dark:from-success/20 dark:to-success/5",
+    iconBg: "bg-linear-to-br from-success/15 to-success/5 dark:from-success/20 dark:to-success/5",
     iconColor: "text-success",
     accent: "hsl(var(--success))",
   },
@@ -69,7 +69,7 @@ const categoryLabels: Record<PDDEModel["category"], { label: string; color: stri
     label: "Deliberação",
     color: "text-accent dark:text-accent",
     bgColor: "bg-accent/8 dark:bg-accent/12",
-    iconBg: "bg-gradient-to-br from-accent/15 to-accent/5 dark:from-accent/20 dark:to-accent/5",
+    iconBg: "bg-linear-to-br from-accent/15 to-accent/5 dark:from-accent/20 dark:to-accent/5",
     iconColor: "text-accent",
     accent: "hsl(var(--accent))",
   },
@@ -123,7 +123,7 @@ export const PDDEModelCards = () => {
         </TooltipProvider>
       </div>
 
-      <div className="mb-6 rounded-[1.35rem] border border-amber-200/70 bg-amber-50/80 p-4 text-sm text-foreground shadow-sm dark:border-amber-800/40 dark:bg-amber-950/25">
+      <div className="mb-6 rounded-[1.35rem] border border-amber-200/70 bg-amber-50/80 p-4 text-sm text-foreground shadow-xs dark:border-amber-800/40 dark:bg-amber-950/25">
         O <strong className="text-foreground">núcleo mínimo obrigatório</strong> continua sendo o do art. 33 da <strong className="text-foreground">Resolução CD/FNDE nº 15/2021</strong>. Os PDFs abaixo servem como apoio visual e exemplos de peças usuais; quando houver conflito entre um modelo local e a regra federal vigente, prevalece a disciplina do FNDE e o registro federal aplicável ao exercício.
       </div>
 
@@ -152,7 +152,7 @@ export const PDDEModelCards = () => {
               {group.items.map((doc, index) => (
                 <div
                   key={index}
-                  className="group relative rounded-[1.5rem] border border-border/60 bg-card p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg"
+                  className="group relative rounded-3xl border border-border/60 bg-card p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg"
                 >
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <div className="flex items-center gap-4 flex-1 min-w-0">

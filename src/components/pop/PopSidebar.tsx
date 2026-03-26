@@ -56,6 +56,36 @@ interface PopSidebarProps {
 
 export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: PopSidebarProps) => {
   const progress = useSectionProgress();
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(min-width: 1024px)").matches : true
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const syncDesktop = () => setIsDesktop(mediaQuery.matches);
+
+    syncDesktop();
+    mediaQuery.addEventListener("change", syncDesktop);
+
+    return () => mediaQuery.removeEventListener("change", syncDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen || isDesktop || typeof window === "undefined") return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isDesktop, isOpen, onClose]);
+
+  const mobileHidden = !isOpen && !isDesktop;
 
   return (
     <>
@@ -71,12 +101,14 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed lg:sticky top-0 left-0 z-50 lg:z-30 h-screen w-72 transform transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:transform-none no-print shadow-2xl lg:shadow-lg",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          "fixed lg:sticky top-0 left-0 z-50 lg:z-30 h-screen w-[min(18rem,88vw)] transform transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:transform-none no-print shadow-2xl lg:shadow-lg",
+          isOpen ? "translate-x-0 visible pointer-events-auto" : "-translate-x-full invisible pointer-events-none lg:translate-x-0 lg:visible lg:pointer-events-auto"
         )}
-        style={{ background: 'linear-gradient(180deg, hsl(222, 47%, 13%) 0%, hsl(222, 47%, 9%) 100%)' }}
+        style={{ background: 'linear-gradient(180deg, hsl(var(--sidebar-background)) 0%, hsl(221 42% 10%) 100%)' }}
         role="navigation"
         aria-label="Menu principal de navegação"
+        aria-hidden={mobileHidden}
+        inert={mobileHidden ? true : undefined}
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
@@ -104,7 +136,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto p-3 lg:p-4 scrollbar-thin" aria-label="Sumário do documento">
+          <nav className="flex-1 overflow-y-auto overscroll-contain p-3 lg:p-4 scrollbar-thin" aria-label="Sumário do documento">
             <p className="text-[10px] font-bold text-sidebar-foreground/40 uppercase tracking-widest mb-3 px-2" id="nav-heading">
               Sumário
             </p>

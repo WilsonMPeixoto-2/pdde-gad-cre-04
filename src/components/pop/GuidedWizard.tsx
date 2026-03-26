@@ -11,6 +11,9 @@ const WIZARD_STORAGE_KEY = "pdde-wizard-progress-v1";
 export const GuidedWizard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const [isDockVisible, setIsDockVisible] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(min-width: 640px)").matches || window.scrollY > 320 : true
+  );
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(WIZARD_STORAGE_KEY);
@@ -28,6 +31,25 @@ export const GuidedWizard = () => {
   useEffect(() => {
     localStorage.setItem(WIZARD_STORAGE_KEY, JSON.stringify([...completedSteps]));
   }, [completedSteps]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia("(min-width: 640px)");
+
+    const syncDockVisibility = () => {
+      setIsDockVisible(mediaQuery.matches || window.scrollY > 320);
+    };
+
+    syncDockVisibility();
+    window.addEventListener("scroll", syncDockVisibility, { passive: true });
+    mediaQuery.addEventListener("change", syncDockVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", syncDockVisibility);
+      mediaQuery.removeEventListener("change", syncDockVisibility);
+    };
+  }, []);
 
   const toggleStepComplete = useCallback((stepIndex: number) => {
     setCompletedSteps(prev => {
@@ -57,12 +79,16 @@ export const GuidedWizard = () => {
   const completedCount = completedSteps.size;
   const progressPercent = (completedCount / steps.length) * 100;
 
+  if (!isOpen && !isDockVisible) {
+    return null;
+  }
+
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 left-6 z-40 no-print sm:bottom-auto sm:top-24 sm:left-auto sm:right-6">
+      <div className="fixed bottom-4 right-4 z-40 no-print sm:bottom-auto sm:right-6 sm:top-24">
         <Button
           onClick={() => setIsOpen(true)}
-          className="rounded-full shadow-xl gap-2 px-5 py-3 h-auto text-sm font-medium transition-all duration-300 hover:scale-105"
+          className="rounded-full shadow-xl gap-2 px-4 py-3 h-auto text-sm font-medium transition-all duration-300 hover:scale-[1.03] sm:px-5"
           style={{
             background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gradient-mid)) 100%)',
             boxShadow: '0 8px 32px -4px hsl(var(--primary) / 0.4)',
@@ -70,6 +96,7 @@ export const GuidedWizard = () => {
           aria-label="Abrir modo guiado da prestação de contas"
         >
           <Compass className="w-4 h-4" aria-hidden="true" />
+          <span className="sm:hidden">Guia</span>
           <span className="hidden sm:inline">Modo Guiado</span>
           {completedCount > 0 && (
             <span className="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full">
@@ -82,8 +109,8 @@ export const GuidedWizard = () => {
   }
 
   return (
-    <div className="fixed inset-x-4 bottom-4 sm:inset-auto sm:right-6 sm:top-24 sm:w-[420px] z-50 no-print">
-      <div className="rounded-2xl border border-border/60 shadow-2xl overflow-hidden" style={{
+    <div className="fixed inset-x-3 bottom-3 z-50 no-print sm:inset-auto sm:right-6 sm:top-24 sm:w-[420px]">
+      <div className="guided-wizard rounded-[1.75rem] border border-border/60 shadow-2xl overflow-hidden" style={{
         background: 'hsl(var(--card))',
         backdropFilter: 'blur(20px)',
       }}>
@@ -150,7 +177,7 @@ export const GuidedWizard = () => {
         </div>
 
         {/* Content */}
-        <div className="px-4 pb-4 max-h-[50vh] overflow-y-auto scrollbar-thin">
+        <div className="px-4 pb-4 max-h-[min(52vh,24rem)] overflow-y-auto scrollbar-thin sm:max-h-[50vh]">
           <h4 className="font-heading font-bold text-foreground text-base mb-1">
             {step.number}. {step.title}
           </h4>

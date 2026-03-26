@@ -59,7 +59,7 @@ export const ProcessJourneyMap = () => {
 
   return (
     <div className="section-card border-l-4 border-l-primary process-journey-map">
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-primary/10">
             <ChevronRight className="w-5 h-5 text-primary" />
@@ -76,7 +76,7 @@ export const ProcessJourneyMap = () => {
         {completedCount > 0 && (
           <button
             onClick={() => { setCompleted(new Set()); toast.success("Progresso reiniciado"); }}
-            className="text-xs text-muted-foreground hover:text-foreground underline transition-colors"
+            className="inline-flex items-center justify-center rounded-full border border-border/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-200 hover:border-primary/20 hover:bg-primary/5 hover:text-foreground"
           >
             Reiniciar
           </button>
@@ -130,19 +130,19 @@ export const ProcessJourneyMap = () => {
                 {/* Content */}
                 <div className={`flex-1 pb-5 ${index === steps.length - 1 ? "pb-0" : ""}`}>
                   <div
-                    className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer ${
+                    className={`cursor-pointer rounded-[1.2rem] border p-4 transition-all duration-300 ${
                       isCompleted
-                        ? "bg-success/5 border-success/20"
+                        ? "border-success/20 bg-success/5 shadow-soft"
                         : isAvailable
-                        ? "bg-card border-border/50 hover:border-primary/30 hover:bg-muted/30"
-                        : "bg-muted/20 border-border/30 opacity-70"
+                        ? "border-border/50 bg-card hover:border-primary/30 hover:bg-muted/30 hover:shadow-soft"
+                        : "border-border/30 bg-muted/20 opacity-70"
                     }`}
                     onClick={() => navigateToSection(step.sectionId)}
                     role="button"
                     tabIndex={0}
                     onKeyDown={e => { if (e.key === "Enter") navigateToSection(step.sectionId); }}
                   >
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
                         <h3 className={`font-semibold text-sm ${isCompleted ? "text-success" : "text-foreground"}`}>
                           {step.title}
@@ -151,7 +151,7 @@ export const ProcessJourneyMap = () => {
                           {step.description}
                         </p>
                       </div>
-                      <span className={`shrink-0 ${isCompleted ? "text-success" : "text-muted-foreground"}`}>
+                      <span className={`shrink-0 rounded-lg p-2 ${isCompleted ? "bg-success/10 text-success" : "bg-muted/40 text-muted-foreground"}`}>
                         <step.icon className="w-4 h-4" />
                       </span>
                     </div>

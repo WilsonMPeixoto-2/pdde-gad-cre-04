@@ -125,20 +125,20 @@ export const PDDEChecklist = () => {
     const essenciaisPending = pending.filter(i => !i.complementar);
     const complementaresPending = pending.filter(i => i.complementar);
 
-    let text = "📋 RESUMO — Itens pendentes da Prestação de Contas PDDE\n\n";
+    let text = "Resumo dos itens pendentes — Prestação de Contas PDDE\n\n";
 
     if (essenciaisPending.length > 0) {
-      text += "⚠️ ESSENCIAIS (obrigatórios):\n";
+      text += "Itens essenciais (obrigatórios):\n";
       essenciaisPending.forEach(item => {
-        text += `  ☐ ${item.id}. ${item.text}\n`;
+        text += `- ${item.id}. ${item.text}\n`;
       });
       text += "\n";
     }
 
     if (complementaresPending.length > 0) {
-      text += "📎 COMPLEMENTARES (quando aplicável):\n";
+      text += "Itens complementares (quando aplicável):\n";
       complementaresPending.forEach(item => {
-        text += `  ☐ ${item.text}\n`;
+        text += `- ${item.text}\n`;
       });
     }
 
@@ -164,7 +164,7 @@ export const PDDEChecklist = () => {
   return (
     <div className="section-card border-l-4 border-l-primary">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-primary/10">
             <ClipboardCheck className="w-5 h-5 text-primary" />
@@ -177,7 +177,7 @@ export const PDDEChecklist = () => {
         </div>
         <button
           onClick={resetChecklist}
-          className="text-xs text-muted-foreground hover:text-foreground transition-colors underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none rounded px-1"
+          className="inline-flex items-center justify-center rounded-full border border-border/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-200 hover:border-primary/20 hover:bg-primary/5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label="Limpar todas as marcações do checklist"
         >
           Limpar
@@ -190,8 +190,8 @@ export const PDDEChecklist = () => {
       </p>
 
       {/* Progress Bar */}
-      <div className="mb-4">
-        <div className="flex items-center justify-between text-sm mb-2">
+      <div className="mb-4 rounded-[1.35rem] border border-border/50 bg-secondary/35 p-4">
+        <div className="mb-2 flex items-center justify-between text-sm">
           <span className="text-muted-foreground">Itens essenciais</span>
           <span className="font-semibold text-primary">
             {essenciaisCompleted} de {essenciaisCount} ({Math.round(progressPercent)}%)
@@ -206,13 +206,13 @@ export const PDDEChecklist = () => {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-2 mb-4 flex-wrap">
+      <div className="mb-4 flex items-center gap-2 flex-wrap">
         <Filter className="w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
         {filters.map(f => (
           <button
             key={f.key}
             onClick={() => setFilter(f.key)}
-            className={`text-xs px-3 py-1.5 rounded-full border transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
+            className={`rounded-full border px-3.5 py-2 text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
               filter === f.key
                 ? 'bg-primary text-primary-foreground border-primary shadow-sm'
                 : 'bg-muted/50 text-muted-foreground border-border/50 hover:bg-muted hover:text-foreground'
@@ -228,7 +228,7 @@ export const PDDEChecklist = () => {
       {pendingCount > 0 && (
         <button
           onClick={generateSummary}
-          className="w-full flex items-center justify-center gap-2 mb-5 py-2.5 px-4 rounded-lg border border-primary/30 bg-primary/5 text-primary text-sm font-medium hover:bg-primary/10 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+          className="mb-5 flex w-full items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-all duration-200 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label={`Copiar resumo dos ${pendingCount} itens pendentes`}
         >
           <Copy className="w-4 h-4" aria-hidden="true" />
@@ -243,10 +243,10 @@ export const PDDEChecklist = () => {
             <button
               key={item.id}
               onClick={() => toggleItem(item.id)}
-              className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
-                item.checked
-                  ? "bg-success/10 border-success/30 hover:bg-success/15"
-                  : "bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-primary/30"
+                className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                  item.checked
+                    ? "bg-success/10 border-success/30 hover:bg-success/15"
+                    : "bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-primary/30"
               }`}
               aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item ${item.id}: ${item.text}`}
               aria-pressed={item.checked}
@@ -289,7 +289,7 @@ export const PDDEChecklist = () => {
               <button
                 key={item.id}
                 onClick={() => toggleItem(item.id)}
-                className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all duration-200 text-left group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${
+                className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   item.checked
                     ? "bg-warning/10 border-warning/30 hover:bg-warning/15"
                     : "bg-warning/5 border-warning/20 hover:bg-warning/10 hover:border-warning/40"

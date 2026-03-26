@@ -60,7 +60,7 @@ export const SectionSix = () => {
             </div>
             <div className="space-y-3">
               <h3 className="font-semibold text-foreground">Encaminhamento e encerramento da fase escolar</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-justify">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
                 Com a assinatura eletrônica concluída, a escola deve tramitar o processo para a GAD/4ª CRE.
                 A partir desse ponto, o fluxo passa para análise técnica da CRE, mas a unidade escolar precisa
                 continuar acompanhando o andamento para responder eventuais exigências ou pedidos de complemento.
@@ -79,11 +79,11 @@ export const SectionSix = () => {
 
           <div className="space-y-4">
             <Callout variant="success" title="Destinatário correto da remessa" icon={Building2}>
-              <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 bg-background px-3 py-2 rounded-lg border border-border text-sm data-code text-foreground break-all">
+              <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+                <code className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
                   {GAD_UNIT.fullLabel}
                 </code>
-                <CopyButton text={GAD_UNIT.fullLabel} label="Código copiado!" />
+                <CopyButton text={GAD_UNIT.fullLabel} label="Código copiado!" className="self-end sm:self-auto" />
               </div>
             </Callout>
 
@@ -119,7 +119,7 @@ export const SectionSix = () => {
                 </div>
                 <div>
                   <p className="font-medium text-foreground">{item.title}</p>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed text-justify">
+                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed text-left sm:text-justify">
                     {item.description}
                   </p>
                 </div>

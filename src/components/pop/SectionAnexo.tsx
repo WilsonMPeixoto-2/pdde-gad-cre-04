@@ -64,16 +64,16 @@ export const SectionAnexo = () => {
       </ProfileCallout>
 
       {/* Header */}
-      <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-l-primary">
+      <div className="section-card mb-6 border-l-4 border-l-primary bg-gradient-to-br from-card via-card to-primary/5 p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <div className="p-3 rounded-xl bg-primary/10 shrink-0">
             <Scale className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-foreground mb-2">
+            <h2 className="mb-2 text-2xl font-heading font-bold tracking-tight text-foreground">
               Anexo – Legislação de Referência
             </h2>
-            <p className="text-muted-foreground text-justified leading-relaxed">
+            <p className="leading-relaxed text-muted-foreground text-left sm:text-justify [text-wrap:pretty]">
               Consolidação das principais regras e documentos exigidos conforme <strong>Resolução CD/FNDE nº 15/2021</strong> 
               e demais normativos do FNDE aplicáveis ao PDDE.
             </p>
@@ -82,19 +82,19 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Documentos Exigidos - Checklist Interativo */}
-      <div className="section-card p-6 sm:p-8 mb-6">
+      <div className="section-card mb-6 p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-5">
           <div className="p-2.5 rounded-lg bg-primary/10">
             <Receipt className="w-5 h-5 text-primary" />
           </div>
           <h3 className="text-lg font-semibold text-foreground">
             Documentos que Instruem a Prestação de Contas
-            <span className="ml-2 text-sm font-normal text-muted-foreground">(Conforme Resolução CD/FNDE nº 15/2021, Art. 33)</span>
+            <span className="mt-1 block text-sm font-normal text-muted-foreground sm:ml-2 sm:mt-0 sm:inline">(Conforme Resolução CD/FNDE nº 15/2021, Art. 33)</span>
           </h3>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-5 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+        <div className="mb-5 rounded-[1.35rem] border border-border/50 bg-gradient-to-r from-secondary to-secondary/50 p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-foreground">
               Progresso da documentação
@@ -128,7 +128,7 @@ export const SectionAnexo = () => {
                     toggleItem(item.documento);
                   }
                 }}
-                className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${
+                className={`flex items-start gap-4 rounded-xl border p-4 transition-all duration-200 cursor-pointer ${
                   checked 
                     ? 'bg-success/5 border-success/30' 
                     : 'bg-card border-border/50 hover:border-primary/30 hover:bg-secondary/30'
@@ -161,7 +161,7 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Prazos */}
-      <div className="section-card p-6 sm:p-8 mb-6">
+      <div className="section-card mb-6 p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-5">
           <div className="p-2.5 rounded-lg bg-primary/10">
             <Clock className="w-5 h-5 text-primary" />
@@ -175,12 +175,12 @@ export const SectionAnexo = () => {
           {prazosPrestacao.map((item, index) => (
             <div 
               key={index} 
-              className={`p-4 rounded-xl border-l-4 ${
+              className={`rounded-[1.35rem] border border-border/50 p-4 ${
                 item.tipo === 'federal' 
-                  ? 'border-l-primary bg-primary/5' 
+                  ? 'bg-primary/5' 
                   : item.tipo === 'uex' 
-                    ? 'border-l-amber-500 bg-amber-50 dark:bg-amber-950/30' 
-                    : 'border-l-blue-500 bg-blue-50 dark:bg-blue-950/30'
+                    ? 'bg-amber-50 dark:bg-amber-950/30' 
+                    : 'bg-sky-50 dark:bg-sky-950/30'
               }`}
             >
               <div className="flex items-start gap-3">
@@ -214,14 +214,14 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Consequências da Omissão */}
-      <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-red-500 bg-gradient-to-r from-red-500/5 to-transparent">
+      <div className="section-card mb-6 border-l-4 border-red-500 bg-gradient-to-r from-red-500/5 to-transparent p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <div className="p-2.5 rounded-lg bg-red-500/10 shrink-0">
             <Ban className="w-5 h-5 text-red-600 dark:text-red-400" />
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-2">Consequências da Omissão na Prestação de Contas</h4>
-            <p className="text-muted-foreground text-sm leading-relaxed text-justified mb-3">
+            <p className="mb-3 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
               O não cumprimento dos prazos ou a não apresentação da prestação de contas acarreta, conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021</strong>:
             </p>
             <ul className="text-muted-foreground text-sm space-y-2 list-none">
@@ -247,14 +247,14 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Documentos Comprobatórios */}
-      <div className="section-card p-6 sm:p-8 mb-6">
+      <div className="section-card mb-6 p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-5">
           <div className="p-2.5 rounded-lg bg-primary/10">
             <FileText className="w-5 h-5 text-primary" />
           </div>
           <h3 className="text-lg font-semibold text-foreground">
             Documentos Comprobatórios por Tipo de Despesa
-            <span className="ml-2 text-sm font-normal text-muted-foreground">(Conforme Resolução CD/FNDE nº 15/2021)</span>
+            <span className="mt-1 block text-sm font-normal text-muted-foreground sm:ml-2 sm:mt-0 sm:inline">(Conforme Resolução CD/FNDE nº 15/2021)</span>
           </h3>
         </div>
 
@@ -279,14 +279,14 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Regras dos Comprovantes */}
-      <div className="section-card p-6 sm:p-8 mb-6">
+      <div className="section-card mb-6 p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-5">
           <div className="p-2.5 rounded-lg bg-primary/10">
             <Users className="w-5 h-5 text-primary" />
           </div>
           <h3 className="text-lg font-semibold text-foreground">
             Regras para Comprovantes de Despesa
-            <span className="ml-2 text-sm font-normal text-muted-foreground">(Conforme Resolução CD/FNDE nº 15/2021)</span>
+            <span className="mt-1 block text-sm font-normal text-muted-foreground sm:ml-2 sm:mt-0 sm:inline">(Conforme Resolução CD/FNDE nº 15/2021)</span>
           </h3>
         </div>
 
@@ -303,7 +303,7 @@ export const SectionAnexo = () => {
                 <TableRow key={index}>
                   <TableCell data-label="Regra">{item.regra}</TableCell>
                   <TableCell className="text-center" data-label="Referência">
-                    <span className="inline-block px-2.5 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-lg">
+                    <span className="inline-flex max-w-full justify-center rounded-lg bg-primary/10 px-2.5 py-1 text-center text-xs font-semibold leading-tight text-primary">
                       {item.artigo}
                     </span>
                   </TableCell>
@@ -315,14 +315,14 @@ export const SectionAnexo = () => {
       </div>
 
       {/* SiGPC/Contas Online */}
-      <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-blue-500 bg-gradient-to-r from-blue-500/5 to-transparent">
+      <div className="section-card mb-6 border-l-4 border-blue-500 bg-gradient-to-r from-blue-500/5 to-transparent p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <div className="p-2.5 rounded-lg bg-blue-500/10 shrink-0">
             <Info className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-2">SiGPC/Contas Online — Sistema de Prestação de Contas do FNDE</h4>
-            <p className="text-muted-foreground text-sm leading-relaxed text-justified mb-2">
+            <p className="mb-2 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
               O <strong className="text-foreground">SiGPC (Sistema de Gestão de Prestação de Contas)</strong>, também chamado de Contas Online, é o sistema federal obrigatório para registro e envio da prestação de contas do PDDE ao FNDE.
             </p>
             <ul className="text-muted-foreground text-sm space-y-1 list-disc list-inside">
@@ -335,14 +335,14 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Alerta Encerramento do Exercício */}
-      <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-red-500 bg-gradient-to-r from-red-500/5 to-transparent">
+      <div className="section-card mb-6 border-l-4 border-red-500 bg-gradient-to-r from-red-500/5 to-transparent p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <div className="p-2.5 rounded-lg bg-red-500/10 shrink-0">
             <CalendarClock className="w-5 h-5 text-red-600 dark:text-red-400" />
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-2">Encerramento do Exercício</h4>
-            <p className="text-muted-foreground text-sm leading-relaxed text-justified">
+            <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
               <strong className="text-foreground">Atenção especial em dezembro:</strong> Caso haja saldo remanescente em 31/12, ele deve ser reprogramado para o exercício seguinte conforme orientações do FNDE. 
               Fique atento às orientações do FNDE sobre <strong className="text-foreground">devolução de saldos</strong> (quando exigida) e encerramento do exercício. 
               Consulte os <strong className="text-foreground">informativos oficiais do FNDE</strong> para atualizações.
@@ -352,14 +352,14 @@ export const SectionAnexo = () => {
       </div>
 
       {/* Alerta Vedações PDDE */}
-      <div className="section-card p-6 sm:p-8 mb-6 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent">
+      <div className="section-card mb-6 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <div className="p-2.5 rounded-lg bg-primary/10 shrink-0">
             <AlertTriangle className="w-5 h-5 text-primary" />
           </div>
           <div>
             <h4 className="font-semibold text-foreground mb-2">Vedações — Despesas Proibidas com Recursos do PDDE</h4>
-            <p className="text-muted-foreground text-sm leading-relaxed text-justified mb-2">
+            <p className="mb-2 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
               Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 4º, §5º e Art. 17)</strong>, é vedada a aplicação dos recursos do PDDE em:
             </p>
             <ul className="text-muted-foreground text-sm space-y-1 list-disc list-inside">

@@ -3,6 +3,7 @@ import { HelpCircle, FileDigit, ScanLine, PenLine, ShieldCheck, FileCheck, Lucid
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -39,6 +40,9 @@ export const InfoDrawer = React.forwardRef<HTMLDivElement, InfoDrawerProps>(
               </div>
               {title}
             </SheetTitle>
+            <SheetDescription>
+              Painel de apoio com contexto complementar para a etapa atual do POP.
+            </SheetDescription>
           </SheetHeader>
           <div ref={ref} className="mt-6 space-y-6">
             {children}

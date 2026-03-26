@@ -24,7 +24,7 @@ export const ProfileModeSelector = () => {
   const { mode, setMode } = useProfileMode();
 
   return (
-    <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-muted/60 border border-border/50">
+    <div className="flex items-center gap-1 rounded-xl border border-border/40 bg-background/70 p-1 shadow-sm backdrop-blur">
       {modes.map((m) => {
         const isActive = mode === m.value;
         return (
@@ -33,16 +33,16 @@ export const ProfileModeSelector = () => {
               <button
                 onClick={() => setMode(m.value)}
                 className={cn(
-                  "flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all duration-200",
+                  "flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-semibold transition-all duration-200",
                   isActive
                     ? "bg-background text-foreground shadow-sm border border-border/60"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/80"
+                    : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
                 aria-pressed={isActive}
                 aria-label={`Modo ${m.label}`}
               >
                 <m.icon className="w-3.5 h-3.5" aria-hidden="true" />
-                <span className="hidden sm:inline">{m.shortLabel}</span>
+                <span>{m.shortLabel}</span>
               </button>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="max-w-[200px]">

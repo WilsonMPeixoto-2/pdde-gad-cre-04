@@ -1,6 +1,4 @@
-import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
-import { Menu, ClipboardList, FileText, Upload, CheckCircle, Phone, Scale } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
@@ -120,6 +118,22 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const originalOverflow = document.body.style.overflow;
+
+    if (sidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = originalOverflow;
+    }
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [sidebarOpen]);
+
   return (
     <div className="min-h-screen bg-background overflow-x-clip">
       {/* Reading Progress Bar */}
@@ -129,9 +143,9 @@ const Index = () => {
       <HeroCover />
 
       {/* Header */}
-      <PopHeader onPrint={handlePrint} />
+      <PopHeader onPrint={handlePrint} onOpenMenu={() => setSidebarOpen(true)} />
 
-      <div className="flex">
+      <div className="flex min-w-0">
         <PopSidebar
           activeSection={activeSection}
           onSectionClick={handleSectionClick}
@@ -139,16 +153,9 @@ const Index = () => {
           onClose={() => setSidebarOpen(false)}
         />
 
-        <main className="flex-1 lg:ml-0">
-          <div className="lg:hidden fixed bottom-4 left-4 z-40 no-print">
-            <Button size="lg" className="rounded-full shadow-lg" onClick={() => setSidebarOpen(true)} aria-label="Abrir menu de navegação">
-              <Menu className="w-5 h-5 mr-2" aria-hidden="true" />
-              Menu
-            </Button>
-          </div>
-
-          <div className="container mx-auto px-4 py-8 max-w-4xl">
-            <div className="space-y-8">
+        <main className="min-w-0 flex-1 lg:ml-0">
+          <div className="mx-auto w-full max-w-[78rem] px-4 py-8 sm:px-6 sm:py-10 xl:px-10">
+            <div className="space-y-10">
               <AnimatedSection>
                 <SectionIntro />
               </AnimatedSection>

@@ -1,11 +1,11 @@
-# POP PDDE no SEI!RIO - 4a CRE
+# POP PDDE no SEI!RIO - 4ª CRE
 
-Aplicacao web institucional com orientacoes operacionais para instrucao da prestacao de contas do PDDE no SEI!RIO, voltada a equipes escolares e a GAD da 4a CRE.
+Aplicação web institucional com orientações operacionais para instrução da prestação de contas do PDDE no SEI!RIO, voltada a equipes escolares e à GAD da 4ª CRE.
 
-## Producao
+## Produção
 
 - Site publicado: [https://pdde-gad-cre-04.vercel.app/](https://pdde-gad-cre-04.vercel.app/)
-- Repositorio: [https://github.com/WilsonMPeixoto-2/pdde-gad-cre-04](https://github.com/WilsonMPeixoto-2/pdde-gad-cre-04)
+- Repositório: [https://github.com/WilsonMPeixoto-2/pdde-gad-cre-04](https://github.com/WilsonMPeixoto-2/pdde-gad-cre-04)
 - Deploy: Vercel
 
 ## Stack
@@ -19,12 +19,12 @@ Aplicacao web institucional com orientacoes operacionais para instrucao da prest
 
 ## Desenvolvimento local
 
-Prerequisitos:
+Pré-requisitos:
 
 - Node.js 20 ou superior
 - npm
 
-Instalacao e execucao:
+Instalação e execução:
 
 ```sh
 npm install
@@ -43,17 +43,17 @@ npm run preview
 
 ## Estrutura principal
 
-- `src/pages/Index.tsx`: pagina principal publicada
-- `src/components/pop`: secoes e componentes especificos do guia
+- `src/pages/Index.tsx`: página principal publicada
+- `src/components/pop`: seções e componentes específicos do guia
 - `src/components/ui`: componentes base da interface
-- `public`: manifesto, service worker e arquivos publicos
+- `public`: manifesto, service worker e arquivos públicos
 
-## Publicacao
+## Publicação
 
-O deploy de producao e feito pela Vercel a partir deste repositorio.
+O deploy de produção é feito pela Vercel a partir deste repositório.
 
-## Manutencao
+## Manutenção
 
 - Mantenha `package-lock.json` sincronizado com `package.json`
 - Use `npm` como gerenciador principal de pacotes
-- Revise metadados publicos (`index.html`, `manifest.json`, `robots.txt`, `sitemap.xml`) sempre que o dominio ou a identidade institucional mudarem
+- Revise metadados públicos (`index.html`, `manifest.json`, `robots.txt`, `sitemap.xml`) sempre que o domínio ou a identidade institucional mudarem

@@ -34,7 +34,7 @@ const templates: Template[] = [
     fields: [
       { key: "escola", label: "Nome da Escola", placeholder: "E.M. João da Silva" },
       { key: "cnpj", label: "CNPJ da UEx", placeholder: "00.000.000/0001-00" },
-      { key: "exercicio", label: "Exercício Financeiro", placeholder: "2024" },
+      { key: "exercicio", label: "Exercício Financeiro", placeholder: "2025" },
       { key: "diretor", label: "Nome do(a) Diretor(a)", placeholder: "Maria Oliveira" },
       { key: "matricula", label: "Matrícula", placeholder: "12/345.678-9" },
     ],
@@ -60,9 +60,9 @@ const templates: Template[] = [
     title: "Despacho de Conferência",
     description: "Despacho padrão da GAD para conferência de documentos",
     fields: [
-      { key: "processo", label: "Nº do Processo SEI", placeholder: "SEI-000000/000000/2024" },
+      { key: "processo", label: "Nº do Processo SEI", placeholder: "SEI-000000/000000/2025" },
       { key: "escola", label: "Nome da Escola", placeholder: "E.M. João da Silva" },
-      { key: "exercicio", label: "Exercício Financeiro", placeholder: "2024" },
+      { key: "exercicio", label: "Exercício Financeiro", placeholder: "2025" },
       { key: "servidor", label: "Nome do Servidor GAD", placeholder: "Carlos Souza" },
     ],
     generate: (v) =>
@@ -151,7 +151,7 @@ export const SmartTemplates = () => {
           return (
             <div
               key={template.id}
-              className="rounded-xl border border-border/60 bg-card transition-all duration-300 overflow-hidden"
+              className="overflow-hidden rounded-[1.5rem] border border-border/60 bg-card transition-all duration-300 hover:border-primary/15 hover:shadow-soft"
             >
               {/* Header */}
               <button
@@ -172,7 +172,7 @@ export const SmartTemplates = () => {
               {isActive && (
                 <div className="px-4 pb-4 pt-1 border-t border-border/40 animate-fade-in">
                   {/* Fields */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                  <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {template.fields.map(field => (
                       <div key={field.key}>
                         <label className="text-xs font-medium text-muted-foreground mb-1 block">

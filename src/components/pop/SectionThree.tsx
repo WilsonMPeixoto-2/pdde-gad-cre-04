@@ -36,7 +36,7 @@ export const SectionThree = () => {
             </div>
             <div>
               <h3 className="font-semibold text-foreground mb-2">3.1. O que são Documentos Externos?</h3>
-              <p className="text-muted-foreground text-sm sm:text-base text-justified leading-relaxed">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
                 Documentos externos são aqueles que <strong className="text-foreground">não foram criados dentro do SEI!RIO</strong>. 
                 Incluem documentos digitalizados (escaneados) e arquivos nato digitais, como PDFs, 
                 notas fiscais eletrônicas, extratos bancários, comprovantes e outros documentos 
@@ -51,7 +51,7 @@ export const SectionThree = () => {
           <h3 className="font-semibold text-foreground mb-4">3.2. Tipos de Documentos Externos</h3>
           
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl border-l-4 border-l-muted-foreground">
+            <div className="rounded-[1.35rem] border border-border/60 bg-gradient-to-br from-secondary to-secondary/50 p-4 shadow-soft">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-muted">
                   <FileImage className="w-4 h-4 text-foreground" />
@@ -64,7 +64,7 @@ export const SectionThree = () => {
               </p>
             </div>
             
-            <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/40 dark:to-emerald-900/20 rounded-xl border-l-4 border-l-emerald-500">
+            <div className="rounded-[1.35rem] border border-emerald-200/70 bg-gradient-to-br from-emerald-50 to-emerald-100/50 p-4 shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/40 dark:to-emerald-900/20">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-emerald-200 dark:bg-emerald-800">
                   <FileText className="w-4 h-4 text-emerald-700 dark:text-emerald-300" />
@@ -232,11 +232,11 @@ export const SectionThree = () => {
                     <ul className="space-y-2 mb-4">
                       <li className="flex items-start gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <span><code className="px-2 py-0.5 bg-muted rounded text-foreground">NE- 1ª parcela/Janeiro - 2025</code></span>
+                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal break-words">NE- 1ª parcela/Janeiro - 2025</code></span>
                       </li>
                       <li className="flex items-start gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <span><code className="px-2 py-0.5 bg-muted rounded text-foreground">Nota de Empenho 2025NE001043 - GAD 4ª CRE</code></span>
+                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal break-words">Nota de Empenho 2025NE001043 - GAD 4ª CRE</code></span>
                       </li>
                     </ul>
 
@@ -315,7 +315,7 @@ export const SectionThree = () => {
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Certifique-se de que o documento físico esteja <strong className="text-foreground">legível antes de digitalizá-lo</strong>. 
-                Configure o scanner para uma resolução de qualidade (recomenda-se <strong className="text-sky-600 dark:text-sky-400">600 dpi ou superior</strong>) para garantir nitidez.
+                Configure o scanner para uma resolução equilibrada (recomenda-se <strong className="text-sky-600 dark:text-sky-400">200 a 300 dpi</strong>) para manter nitidez sem gerar arquivos excessivamente pesados.
               </p>
             </div>
 

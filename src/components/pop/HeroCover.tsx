@@ -50,12 +50,12 @@ export const HeroCover = () => {
             animation: 'hero-glow-drift 15s ease-in-out infinite reverse'
           }} 
         />
-        {/* Tertiary glow — bottom, subtle violet */}
+        {/* Tertiary glow — bottom, subtle teal */}
         <div 
           className="absolute w-[500px] h-[300px] max-sm:w-[250px] max-sm:h-[150px] rounded-full"
           style={{ 
             bottom: '5%', left: '25%',
-            background: 'radial-gradient(ellipse, hsl(230, 50%, 45%, 0.07) 0%, transparent 65%)',
+            background: 'radial-gradient(ellipse, hsl(168, 68%, 38%, 0.07) 0%, transparent 65%)',
             filter: 'blur(70px)',
             willChange: 'transform',
             animation: 'hero-glow-drift 18s ease-in-out infinite 3s'
@@ -131,8 +131,8 @@ export const HeroCover = () => {
           className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-8 sm:mb-10 hero-stagger transition-all duration-300 hover:scale-[1.02]"
           style={{ 
             animationDelay: '0.1s',
-            background: 'hsl(199, 89%, 48%, 0.08)',
-            border: '1px solid hsl(199, 89%, 48%, 0.2)',
+            background: 'hsl(197, 82%, 43%, 0.08)',
+            border: '1px solid hsl(197, 82%, 43%, 0.2)',
             backdropFilter: 'blur(12px)',
           }}
         >
@@ -185,6 +185,7 @@ export const HeroCover = () => {
           {/* Subtitle */}
           <p 
             className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed font-light"
+            style={{ textWrap: "pretty" as CSSProperties["textWrap"] }}
           >
             Guia operacional para diretores(as) e gestores(as) escolares na instrução 
             da Prestação de Contas do PDDE diretamente no SEI!RIO.
@@ -233,10 +234,10 @@ export const HeroCover = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 hero-stagger" style={{ animationDelay: '1.1s' }}>
           <button
             onClick={() => document.getElementById(GUIDE_ANCHORS.checklist)?.scrollIntoView({ behavior: 'smooth' })}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium"
+            className="group inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium sm:w-auto"
             style={{
-              background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 40%) 100%)',
-              boxShadow: '0 4px 20px -4px hsl(199, 89%, 48%, 0.4), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
+              background: 'linear-gradient(135deg, hsl(197, 82%, 43%) 0%, hsl(211, 64%, 24%) 100%)',
+              boxShadow: '0 4px 20px -4px hsl(197, 82%, 43%, 0.4), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
             }}
           >
             <ClipboardList className="w-4 h-4" aria-hidden="true" />
@@ -245,7 +246,7 @@ export const HeroCover = () => {
           </button>
           <button
             onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white/80 transition-all duration-300 hover:text-white hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            className="inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white/80 transition-all duration-300 hover:text-white hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent sm:w-auto"
             style={{
               background: 'hsl(0 0% 100% / 0.06)',
               border: '1px solid hsl(0 0% 100% / 0.12)',

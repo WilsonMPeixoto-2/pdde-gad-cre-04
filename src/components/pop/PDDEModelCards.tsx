@@ -128,26 +128,12 @@ export const PDDEModelCards = () => {
               {group.items.map((doc, index) => (
                 <div
                   key={index}
-                  className="group relative p-5 rounded-2xl bg-card border border-border/50 transition-all duration-500"
-                  style={{ 
-                    transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                    perspective: '1000px'
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.transform = 'translateY(-2px) rotateX(-1deg)';
-                    el.style.boxShadow = `0 12px 40px -8px hsl(215 25% 15% / 0.1), 0 0 0 1px ${group.accent}15`;
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.transform = 'translateY(0) rotateX(0)';
-                    el.style.boxShadow = 'none';
-                  }}
+                  className="group relative rounded-[1.5rem] border border-border/60 bg-card p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg"
                 >
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <div className="flex items-center gap-4 flex-1 min-w-0">
                       {/* Icon with pulse-ring on hover */}
-                      <div className={`relative p-3 rounded-xl ${group.iconBg} border border-border/20 shrink-0 transition-all duration-400 group-hover:scale-110 group-hover:rotate-[-3deg]`}>
+                      <div className={`relative p-3 rounded-xl ${group.iconBg} border border-border/20 shrink-0 transition-all duration-400 group-hover:scale-105`}>
                         <span className={group.iconColor}>{doc.icon}</span>
                         {/* Pulse ring on hover */}
                         <span className="absolute inset-[-3px] rounded-xl border-2 opacity-0 group-hover:opacity-30 transition-opacity duration-400" style={{
@@ -181,7 +167,7 @@ export const PDDEModelCards = () => {
                           <Button
                             asChild
                             size="sm"
-                            className="w-full sm:w-auto text-white shadow-soft hover:shadow-soft-lg transition-all duration-400 rounded-xl btn-premium hover:scale-[1.03] border-0"
+                            className="w-full sm:w-auto text-white shadow-soft hover:shadow-soft-lg transition-all duration-400 rounded-xl btn-premium hover:scale-[1.02] border-0"
                             style={{
                               background: `linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gradient-mid)) 100%)`
                             }}

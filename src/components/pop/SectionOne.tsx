@@ -59,11 +59,11 @@ export const SectionOne = () => {
             </p>
 
             <Callout variant="info" title="Tipo de Processo Correto:">
-              <div className="flex items-center gap-2 mt-2">
-                <p className="text-foreground font-semibold text-sm sm:text-base flex-1">
+              <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+                <p className="flex-1 text-sm font-semibold text-foreground sm:text-base [text-wrap:pretty]">
                   {PROCESS_TYPE_LABEL}
                 </p>
-                <CopyButton text={PROCESS_TYPE_LABEL} label="Copiado!" />
+                <CopyButton text={PROCESS_TYPE_LABEL} label="Copiado!" className="self-end sm:self-auto" />
               </div>
             </Callout>
 
@@ -84,13 +84,13 @@ export const SectionOne = () => {
               Processo selecionado pelo usuário na etapa anterior.
             </p>
 
-            <div className="bg-secondary/50 dark:bg-secondary/30 rounded-xl p-5">
+            <div className="rounded-[1.35rem] bg-secondary/50 p-5 dark:bg-secondary/30">
               <p className="text-sm text-muted-foreground mb-3">Classificação automática:</p>
-              <div className="flex items-center gap-2">
-                <code className="flex-1 bg-background px-4 py-3 rounded-lg border border-border text-sm data-code text-foreground break-all shadow-sm">
+              <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+                <code className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-sm whitespace-normal break-words data-code">
                   {PROCESS_CLASSIFICATION_LABEL}
                 </code>
-                <CopyButton text={PROCESS_CLASSIFICATION_LABEL} label="Copiado!" />
+                <CopyButton text={PROCESS_CLASSIFICATION_LABEL} label="Copiado!" className="self-end sm:self-auto" />
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@ export const SectionOne = () => {
         <div className="section-card">
           <h3 className="section-heading">1.5. Padrão de identificação do processo (SEI!RIO)</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-justify">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               O cadastrante deverá obrigatoriamente digitar a especificação seguindo o padrão abaixo, 
               incluindo sempre o <strong className="text-sky-600 dark:text-sky-400">EXERCÍCIO</strong> (ano de referência) 
               e a <strong className="text-sky-600 dark:text-sky-400">AÇÃO do PDDE</strong> quando aplicável.
@@ -110,13 +110,13 @@ export const SectionOne = () => {
               <div className="space-y-3 mt-2">
                 <div>
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Formato básico:</p>
-                  <code className="flex-1 text-foreground data-code text-sm break-all bg-background/50 px-3 py-2 rounded-lg block">
+                  <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
                     PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ da UEx/CEC
                   </code>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Com mais de uma ação:</p>
-                  <code className="flex-1 text-foreground data-code text-sm break-all bg-background/50 px-3 py-2 rounded-lg block">
+                  <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
                     PDDE (Básico + Ações Integradas) — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ
                   </code>
                 </div>
@@ -124,11 +124,11 @@ export const SectionOne = () => {
             </Callout>
 
             <Callout variant="info" title="Exemplo prático:" className="mt-4">
-              <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-foreground data-code text-sm break-all bg-background/50 px-3 py-2 rounded-lg">
+              <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
                   PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00
                 </code>
-                <CopyButton text="PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00" label="Copiado!" />
+                <CopyButton text="PDDE — Exercício 2025 — E/CRE (04.30.502) — Ciep Elis Regina — 00.000.000/0001-00" label="Copiado!" className="self-end sm:self-auto" />
               </div>
             </Callout>
 
@@ -168,7 +168,7 @@ export const SectionOne = () => {
             </div>
 
             <Callout variant="info" title="Transparência + Proteção de Dados" className="mt-6">
-              <p className="text-sm text-foreground/80 leading-relaxed text-justify">
+              <p className="text-sm text-foreground/80 leading-relaxed text-left sm:text-justify">
                 A prestação de contas deve ser <strong className="text-foreground">transparente</strong> à comunidade escolar e aos órgãos de controle. Entretanto, documentos que contenham <strong className="text-foreground">dados pessoais</strong> (ex.: CPF, dados bancários, endereços, assinaturas) devem receber tratamento compatível com <strong className="text-foreground">LGPD/LAI</strong>, incluindo restrição de acesso quando cabível.
               </p>
               <p className="text-sm text-foreground/80 leading-relaxed mt-3 p-3 bg-background/60 rounded-lg border border-border/60">
@@ -188,11 +188,11 @@ export const SectionOne = () => {
               Este campo é utilizado para registrar unidades ou entidades que possuam interesse no processo.
             </p>
             <Callout variant="success" title="Adicione a GAD como interessada:">
-              <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-foreground data-code text-sm bg-background/50 px-3 py-2 rounded-lg">
+              <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
                   {GAD_UNIT.displayLabel}
                 </code>
-                <CopyButton text={GAD_UNIT.displayLabel} label="Código copiado!" />
+                <CopyButton text={GAD_UNIT.displayLabel} label="Código copiado!" className="self-end sm:self-auto" />
               </div>
             </Callout>
             <Callout variant="info" title="Adicione também a Unidade Escolar:" className="mt-4">
@@ -213,11 +213,11 @@ export const SectionOne = () => {
               separadamente, na Lista de observações de outras unidades.
             </p>
             <Callout variant="success" title="Observação desta Unidade:" className="mt-4">
-              <div className="flex items-center gap-2 mt-2">
-                <code className="flex-1 text-foreground data-code text-sm bg-background/50 px-3 py-2 rounded-lg">
+              <div className="mt-2 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+                <code className="flex-1 rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal break-words data-code">
                   INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)
                 </code>
-                <CopyButton text="INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)" label="Copiado!" />
+                <CopyButton text="INSERIR CNPJ DO CEC DA UNIDADE (00.000.000/0001-00)" label="Copiado!" className="self-end sm:self-auto" />
               </div>
             </Callout>
           </div>

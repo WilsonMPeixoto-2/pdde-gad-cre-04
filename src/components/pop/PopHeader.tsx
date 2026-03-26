@@ -1,4 +1,4 @@
-import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search, MoreVertical } from "lucide-react";
+import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search, MoreVertical, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -9,11 +9,12 @@ import { ProfileModeSelector } from "./ProfileModeSelector";
 interface PopHeaderProps {
   onPrint: () => void;
   onSearch?: (query: string) => void;
+  onOpenMenu?: () => void;
 }
 
 type ViewMode = 'auto' | 'desktop' | 'mobile';
 
-export const PopHeader = ({ onPrint }: PopHeaderProps) => {
+export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
   const [isDark, setIsDark] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('auto');
 
@@ -128,7 +129,7 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
                   aria-label="Abrir busca global (Ctrl+K)"
                 >
                   <Search className="w-4 h-4 mr-2 transition-transform duration-300 active:scale-90" aria-hidden="true" />
-                  <span className="text-xs font-mono opacity-60">⌘K</span>
+                  <span className="text-xs font-mono opacity-60">Ctrl K</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="bottom"><p>Buscar (Ctrl+K)</p></TooltipContent>
@@ -198,27 +199,26 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
             </Button>
           </div>
 
-          {/* Actions — Mobile: only search, dark mode, overflow */}
-          <div className="flex sm:hidden items-center gap-1 shrink-0">
+          {/* Actions — Mobile */}
+          <div className="flex sm:hidden items-center gap-1.5 shrink-0">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onOpenMenu}
+              className="text-white/85 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl transition-all duration-300"
+              aria-label="Abrir menu de navegação"
+            >
+              <Menu className="w-4 h-4" aria-hidden="true" />
+            </Button>
             <ProfileModeSelector />
             <Button
               variant="ghost"
               size="sm"
               onClick={openSearch}
-              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 transition-all duration-300"
+              className="text-white/85 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl transition-all duration-300"
               aria-label="Abrir busca global"
             >
               <Search className="w-4 h-4" aria-hidden="true" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleDarkMode}
-              className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9 transition-all duration-300"
-              aria-label={isDark ? "Modo claro" : "Modo escuro"}
-              aria-pressed={isDark}
-            >
-              {isDark ? <Sun className="w-4 h-4" aria-hidden="true" /> : <Moon className="w-4 h-4" aria-hidden="true" />}
             </Button>
 
             {/* Overflow menu for secondary actions */}
@@ -227,13 +227,17 @@ export const PopHeader = ({ onPrint }: PopHeaderProps) => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-white/80 hover:text-white hover:bg-white/10 h-9 w-9"
+                  className="text-white/85 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl"
                   aria-label="Mais ações"
                 >
                   <MoreVertical className="w-4 h-4" aria-hidden="true" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem onClick={toggleDarkMode}>
+                  {isDark ? <Sun className="w-4 h-4 mr-2" /> : <Moon className="w-4 h-4 mr-2" />}
+                  {isDark ? "Modo claro" : "Modo escuro"}
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={onPrint}>
                   <Printer className="w-4 h-4 mr-2" />
                   Imprimir / PDF

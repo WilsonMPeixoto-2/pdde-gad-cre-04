@@ -151,7 +151,7 @@ export const InfoHighlight = ({ children, variant = "info" }: { children: ReactN
 export const NatoDigitalVsDigitalizadoContent = () => (
   <>
     <p className="text-muted-foreground text-sm leading-relaxed">
-      Entender a diferença entre esses dois tipos de documento é essencial para não cometer erros no SEI!RIO.
+      Entender essa distinção evita dois erros comuns no SEI!RIO: autenticar arquivo que já é original eletrônico e tratar como nato-digital um documento que, na verdade, veio do papel.
     </p>
 
     <InfoVisualCompare
@@ -172,24 +172,29 @@ export const NatoDigitalVsDigitalizadoContent = () => (
     <InfoBlock
       icon={FileDigit}
       title="Documento Nato-Digital"
-      description="Criado diretamente no computador (PDF gerado pelo sistema, e-mail, planilha). NÃO IMPRIMA para assinar. Use a assinatura eletrônica do SEI."
+      description="Criado originalmente em meio eletrônico. Quando a peça puder ser produzida no SEI!RIO e precisar de assinatura da própria unidade, a preferência é elaborá-la no sistema para assinatura eletrônica."
       variant="primary"
     />
 
     <InfoBlock
       icon={ScanLine}
       title="Documento Digitalizado"
-      description="Documento originalmente em papel que foi escaneado e transformado em PDF. Precisa de AUTENTICAÇÃO com 'Confere com o Original'."
+      description="Documento originalmente em papel, assinado ou carimbado fisicamente, que foi escaneado e transformado em PDF. Ao ser inserido no processo, exige autenticação administrativa para declarar que confere com o original."
       variant="success"
     />
 
     <InfoQuote
-      text="Os documentos digitais produzidos no âmbito do SEI têm sua autoria, autenticidade e integridade asseguradas mediante utilização de assinatura eletrônica. Apenas os documentos produzidos no sistema poderão ser assinados eletronicamente."
-      source="DECRETO RIO N° 57.250/2025, Art. 26"
+      text="Considera-se documento nato-digital o documento produzido originariamente em meio eletrônico e documento digitalizado aquele obtido a partir da conversão de um documento não digital."
+      source="Decreto nº 8.539/2015, art. 2º, II"
+    />
+
+    <InfoQuote
+      text="Apenas os documentos produzidos no sistema poderão ser assinados eletronicamente no SEI.Rio."
+      source="Decreto Rio nº 57.250/2025, art. 26, § 2º"
     />
 
     <InfoHighlight variant="warning">
-      Notas fiscais em papel = Digitalizar + Autenticar
+      Documento em papel digitalizado = anexar e autenticar | Documento nato-digital = anexar como original
     </InfoHighlight>
   </>
 );
@@ -225,7 +230,7 @@ export const AutenticacaoVsAssinaturaContent = () => (
     <InfoBlock
       icon={ShieldCheck}
       title="Autenticação"
-      description="Usada para documentos EXTERNOS (notas fiscais, recibos). Atesta que a cópia digital confere com o original. Ícone: selo preto com check."
+      description="Usada para documento externo digitalizado. Atesta que a cópia digital confere com o original físico mantido pela unidade. Ícone: selo preto com check."
       variant="success"
     />
 
@@ -242,7 +247,7 @@ export const AutenticacaoVsAssinaturaContent = () => (
     </div>
 
     <InfoHighlight variant="info">
-      Documento interno = Assinatura | Documento externo = Autenticação
+      Documento interno do SEI = assinatura | Documento externo digitalizado = autenticação | Documento externo nato-digital = juntada como original
     </InfoHighlight>
   </>
 );

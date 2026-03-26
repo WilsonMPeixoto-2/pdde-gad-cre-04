@@ -85,7 +85,7 @@ export const GuidedWizard = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-4 right-4 z-40 no-print sm:bottom-auto sm:right-6 sm:top-24">
+      <div className="fixed bottom-4 right-4 z-40 no-print sm:bottom-24 sm:right-6 sm:top-auto">
         <Button
           onClick={() => setIsOpen(true)}
           className="rounded-full shadow-xl gap-2 px-4 py-3 h-auto text-sm font-medium transition-all duration-300 hover:scale-[1.03] sm:px-5"
@@ -109,7 +109,7 @@ export const GuidedWizard = () => {
   }
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-50 no-print sm:inset-auto sm:right-6 sm:top-24 sm:w-[420px]">
+    <div className="fixed inset-x-3 bottom-3 z-50 no-print sm:inset-auto sm:right-6 sm:bottom-24 sm:top-auto sm:w-[420px]">
       <div className="guided-wizard rounded-[1.75rem] border border-border/60 shadow-2xl overflow-hidden" style={{
         background: 'hsl(var(--card))',
         backdropFilter: 'blur(20px)',

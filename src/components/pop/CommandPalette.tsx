@@ -54,9 +54,13 @@ export function CommandPalette() {
   }, []);
 
   const quickSuggestions = getQuickSuggestions();
+  const getItemValue = useCallback(
+    (item: SearchItem) => [item.title, item.section, item.content, ...item.keywords].join(" "),
+    [],
+  );
 
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
+    <CommandDialog open={open} onOpenChange={setOpen} commandProps={{ shouldFilter: false, loop: true }}>
       <CommandInput
         placeholder="Buscar seções, documentos, procedimentos..."
         value={query}
@@ -78,7 +82,7 @@ export function CommandPalette() {
             {results.map((item) => (
               <CommandItem
                 key={item.id}
-                value={item.id}
+                value={getItemValue(item)}
                 onSelect={() => handleSelect(item)}
                 className="flex items-center gap-3 py-3 cursor-pointer"
               >
@@ -104,7 +108,7 @@ export function CommandPalette() {
               {quickSuggestions.map((item) => (
                 <CommandItem
                   key={item.id}
-                  value={item.id}
+                  value={getItemValue(item)}
                   onSelect={() => handleSelect(item)}
                   className="flex items-center gap-3 py-2 cursor-pointer"
                 >

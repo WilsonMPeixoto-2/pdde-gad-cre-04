@@ -21,13 +21,13 @@ const finalizationFlow = [
     step: "2",
     title: "Análise da GAD",
     description:
-      "A GAD confere integridade documental, coerência entre pesquisa de preços, extratos, comprovantes, atestos e registros do processo.",
+      "A GAD confere a integridade documental e a coerência entre pesquisa de preços, extratos, comprovantes, atestos, registros federais e peças do processo.",
   },
   {
     step: "3",
     title: "Despacho técnico e aprovação",
     description:
-      "Em caso de conformidade, a GAD registra o despacho correspondente e encaminha o processo para o despacho final do Coordenador.",
+      "No âmbito da SME/RJ, a análise técnica dialoga com o fluxo regional de avaliação. Em caso de conformidade, o processo segue para manifestação conclusiva e despacho da autoridade competente.",
   },
   {
     step: "4",
@@ -127,6 +127,12 @@ export const SectionSix = () => {
             ))}
           </div>
         </div>
+
+        <Callout variant="info" title="Governança regional da análise" icon={ClipboardCheck}>
+          No âmbito da SME/RJ, a análise técnica e documental das prestações de contas envolve a atuação dos
+          Comitês Regionais de Análise e Avaliação dos Programas Federais, com posterior tramitação para
+          manifestação conclusiva e despacho de aprovação pela autoridade competente.
+        </Callout>
 
         <Callout variant="info" title="Acompanhamento do processo" icon={UserCheck}>
           A escola pode acompanhar o andamento diretamente no SEI!RIO. Caso a GAD identifique pendências,

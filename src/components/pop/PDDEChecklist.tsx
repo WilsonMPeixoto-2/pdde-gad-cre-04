@@ -11,7 +11,7 @@ interface ChecklistItem {
 }
 
 const initialItems: ChecklistItem[] = [
-  // Rol mínimo/essencial (Resolução CD/FNDE nº 15/2021, art. 33, somado às rotinas de conferência interna)
+  // Bloco A — documentos federais mínimos e peças nucleares da comprovação
   { id: 1, text: "Rol de materiais, bens e serviços priorizados (planejamento do gasto aprovado pelo Conselho/CEC)", checked: false },
   { id: 2, text: "Consolidação das pesquisas de preços — 3 orçamentos quando viável, ou justificativa idônea para quantidade inferior / uso documentado de SRP", checked: false },
   { id: 3, text: "Demonstrativo/registro federal da execução da receita, da despesa e dos pagamentos, conforme a ferramenta exigida pelo FNDE no exercício", checked: false },
@@ -19,18 +19,19 @@ const initialItems: ChecklistItem[] = [
   { id: 5, text: "Conciliação bancária (obrigatória quando houver divergência entre extrato e demonstrativo, ou saldo em 31/12)", checked: false },
   { id: 6, text: "Documentos comprobatórios das despesas (NF/DANFE/cupom fiscal/recibos/RPA), com atesto do recebimento/execução e comprovantes de pagamento", checked: false },
   { id: 7, text: "Atas de aprovação do plano de gastos e da prestação de contas pelo Conselho Escolar/CEC", checked: false },
-  // Complementares (quando aplicável)
+  // Bloco B — instrução complementar no SEI!RIO e controle interno
   { id: 8, text: "Evidência complementar de entrega/execução (declaração, fotos, laudo ou termo específico), quando o objeto exigir comprovação material adicional", checked: false, complementar: true },
   { id: 9, text: "Relação de bens adquiridos ou produzidos, quando houver despesa de capital ou bem patrimonializável", checked: false, complementar: true },
   { id: 10, text: "Controle patrimonial — providência de incorporação/registro do bem conforme a rotina da EEx ou do patrimônio escolar", checked: false, complementar: true },
   { id: 11, text: "Comprovante de devolução/recolhimento de saldo ao FNDE (quando houver restituição)", checked: false, complementar: true },
   { id: 12, text: "Comprovante do registro federal aplicável ao exercício (por exemplo, BB Gestão Ágil e rotinas correlatas), se exigido pela EEx ou pelo controle interno", checked: false, complementar: true },
   { id: 13, text: "Termo de doação ou instrumento patrimonial equivalente, quando exigido pela EEx ou pelo controle patrimonial local", checked: false, complementar: true },
+  { id: 14, text: "Declaração de autenticidade ou peça interna equivalente, se ainda exigida no fluxo vigente da CRE/SME para documentos digitalizados", checked: false, complementar: true },
 ];
 
 type FilterType = 'todos' | 'pendentes' | 'concluidos' | 'essenciais' | 'complementares';
 
-const STORAGE_KEY = "pdde-checklist-state-v3";
+const STORAGE_KEY = "pdde-checklist-state-v4";
 
 export const PDDEChecklist = () => {
   const hasConfettiFired = useRef(false);
@@ -128,7 +129,7 @@ export const PDDEChecklist = () => {
     let text = "Resumo dos itens pendentes — Prestação de Contas PDDE\n\n";
 
     if (essenciaisPending.length > 0) {
-      text += "Itens essenciais (obrigatórios):\n";
+      text += "Bloco A — documentos federais mínimos:\n";
       essenciaisPending.forEach(item => {
         text += `- ${item.id}. ${item.text}\n`;
       });
@@ -136,7 +137,7 @@ export const PDDEChecklist = () => {
     }
 
     if (complementaresPending.length > 0) {
-      text += "Itens complementares (quando aplicável):\n";
+      text += "Bloco B — instrução complementar no SEI!RIO / controle interno:\n";
       complementaresPending.forEach(item => {
         text += `- ${item.text}\n`;
       });
@@ -186,13 +187,13 @@ export const PDDEChecklist = () => {
 
       {/* Intro */}
       <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-        Este checklist reúne o <strong className="text-foreground">núcleo documental mínimo</strong> da <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (art. 33)</strong> com pontos usuais de conferência da EEx/controle interno. Pesquisa de preços admite exceções justificadas, e peças patrimoniais ou complementares podem variar conforme a ação do PDDE, o exercício e as orientações federais ou locais vigentes.
+        O <strong className="text-foreground">Bloco A</strong> destaca o núcleo documental federal mínimo e as peças nucleares da comprovação. O <strong className="text-foreground">Bloco B</strong> reúne documentos complementares úteis para a instrução no <strong className="text-foreground">SEI!RIO</strong> e para o controle interno da CRE/SME. Pesquisa de preços admite exceções justificadas, e itens adicionais podem variar conforme a ação do PDDE, o exercício e as orientações locais vigentes.
       </p>
 
       {/* Progress Bar */}
       <div className="mb-4 rounded-[1.35rem] border border-border/50 bg-secondary/35 p-4">
         <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">Itens essenciais</span>
+          <span className="text-muted-foreground">Bloco A — base federal mínima</span>
           <span className="font-semibold text-primary">
             {essenciaisCompleted} de {essenciaisCount} ({Math.round(progressPercent)}%)
           </span>
@@ -239,6 +240,15 @@ export const PDDEChecklist = () => {
       {/* Essenciais */}
       {essenciaisFiltered.length > 0 && (
         <div className="space-y-2 mb-6">
+          <div className="mb-3">
+            <h3 className="text-sm font-semibold text-primary mb-1 flex items-center gap-2">
+              <FileCheck className="w-4 h-4" />
+              Bloco A — Documentos federais mínimos
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              Núcleo da comprovação da execução e da prestação de contas, sem prejuízo de atos operacionais do exercício.
+            </p>
+          </div>
           {essenciaisFiltered.map((item) => (
             <button
               key={item.id}
@@ -282,8 +292,11 @@ export const PDDEChecklist = () => {
         <div className="mb-6">
           <h3 className="text-sm font-semibold text-warning dark:text-warning mb-3 flex items-center gap-2">
             <FileCheck className="w-4 h-4" />
-            Complementares (quando aplicável)
+            Bloco B — Instrução complementar no SEI!RIO / controle interno
           </h3>
+          <p className="mb-3 text-xs text-muted-foreground">
+            Inclua quando o objeto, o fluxo local ou a rotina patrimonial/documental da CRE/SME exigir reforço da instrução.
+          </p>
           <div className="space-y-2">
             {complementaresFiltered.map((item) => (
               <button
@@ -352,14 +365,23 @@ export const PDDEChecklist = () => {
         </div>
       )}
 
-      {/* Callout - Conferência do original */}
+      {/* Callout - Autenticação de digitalizados */}
       <div className="p-4 bg-linear-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl">
         <div className="flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
           <div>
-            <p className="font-semibold text-primary text-sm mb-1">Conferência do original</p>
+            <p className="font-semibold text-primary text-sm mb-1">Autenticação de documento digitalizado</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Quando houver documentos digitalizados, registre <strong className="text-foreground">"CONFERE COM O ORIGINAL"</strong>, com assinatura do responsável, e mantenha os originais arquivados na UEx.
+              Quando o documento externo tiver sido <strong className="text-foreground">assinado ou carimbado em meio físico e depois digitalizado</strong>, a autenticação deve ser feita no momento da inserção do anexo por quem o encartar no processo, declarando que a cópia digital <strong className="text-foreground">"confere com o original"</strong>. Os originais e comprovantes devem permanecer arquivados na sede da UEx/escola pelo prazo de <strong className="text-foreground">5 anos</strong>, nos termos dos arts. 28 e 33, § 1º, I, da{" "}
+              <a
+                href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary underline underline-offset-4"
+              >
+                Resolução CD/FNDE nº 15/2021
+              </a>
+              . Se o fluxo vigente da CRE/SME ainda exigir <strong className="text-foreground">declaração de autenticidade</strong> ou peça interna equivalente, inclua esse complemento nos autos.
             </p>
           </div>
         </div>

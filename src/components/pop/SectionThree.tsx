@@ -1,115 +1,211 @@
-import { Upload, FileImage, FileText, AlertCircle, CheckCircle2, Lightbulb, FilePlus2, ArrowRight, ExternalLink, FileDown, Scissors, Image } from "lucide-react";
+import {
+  Upload,
+  FileImage,
+  FileText,
+  AlertCircle,
+  CheckCircle2,
+  Lightbulb,
+  FilePlus2,
+  ArrowRight,
+  ExternalLink,
+  FileDown,
+  Scissors,
+  Image,
+  Scale,
+  Landmark,
+} from "lucide-react";
 import seiIncludeDocIcon from "@/assets/sei-include-doc-icon.png";
 import seiChooseDocType from "@/assets/sei-choose-doc-type.png";
 import { ProfileCallout } from "./ProfileCallout";
 
+const OFFICIAL_LINKS = {
+  decreto8539:
+    "https://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2015/Decreto/D8539.htm",
+  decretoSeiRio:
+    "https://comlurb.prefeitura.rio/wp-content/uploads/sites/74/2025/11/Decreto-SEI-57250.pdf",
+} as const;
+
+const typeCards = [
+  {
+    title: "Digitalizados",
+    accent:
+      "border-sky-200/70 bg-linear-to-br from-sky-50 to-sky-100/50 dark:border-sky-800/40 dark:from-sky-950/30 dark:to-sky-900/15",
+    iconBg: "bg-sky-100 dark:bg-sky-900/50",
+    iconColor: "text-sky-700 dark:text-sky-300",
+    icon: FileImage,
+    concept:
+      "Documento originalmente físico que foi convertido em arquivo digital por escaneamento.",
+    legal:
+      "Base federal: Decreto nº 8.539/2015, art. 2º, II, b. Base municipal: Decreto Rio nº 57.250/2025, arts. 23 e 24.",
+    practical:
+      "No SEI!RIO, esse arquivo entra como documento externo digitalizado e, quando inserido pela unidade, exige conferência/autenticação administrativa.",
+  },
+  {
+    title: "Nato-digitais",
+    accent:
+      "border-emerald-200/70 bg-linear-to-br from-emerald-50 to-emerald-100/50 dark:border-emerald-800/40 dark:from-emerald-950/40 dark:to-emerald-900/20",
+    iconBg: "bg-emerald-100 dark:bg-emerald-800/60",
+    iconColor: "text-emerald-700 dark:text-emerald-300",
+    icon: FileText,
+    concept:
+      "Documento criado originariamente em meio eletrônico, como NF-e, comprovante bancário emitido no portal do banco ou PDF exportado por sistema oficial.",
+    legal:
+      "Base federal: Decreto nº 8.539/2015, art. 2º, II, a e art. 10. Base municipal: Decreto Rio nº 57.250/2025, art. 22.",
+    practical:
+      "No fluxo do SEI!RIO, o nato-digital é juntado como original. A autenticação administrativa não é a etapa cabível para esse arquivo.",
+  },
+] as const;
+
 export const SectionThree = () => {
   return (
     <section id="secao-3" className="scroll-mt-20 animate-fade-in">
-      {/* Profile Callouts */}
       <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
-        Digitalize documentos em PDF com resolução mínima de 200 DPI. Nomeie cada arquivo de forma descritiva antes de anexar (ex.: "NF_001_Jan2025_Papelaria.pdf").
+        Digitalize preferencialmente em PDF com <strong className="text-foreground">200 a 300 dpi</strong>, preservando a legibilidade. Organize seus arquivos em pasta local, mas lembre que, no SEI!RIO, a identificação relevante será dada pelo preenchimento correto do <strong className="text-foreground">Nome na Árvore</strong>.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
-        Confirme que todos os documentos externos estão com o tipo correto (digitalizado vs. nato digital) e que o "Nome na Árvore" permite identificação inequívoca na busca do SEI.
+        Confirme se a unidade classificou corretamente cada item como <strong className="text-foreground">digitalizado</strong> ou <strong className="text-foreground">nato-digital</strong> e se o Nome na Árvore permite busca inequívoca no SEI!RIO.
       </ProfileCallout>
 
-      {/* Section Header */}
-      <div className="flex items-center gap-4 mb-6">
+      <div className="mb-6 flex items-center gap-4">
         <div className="section-number">3</div>
         <div>
-          <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
-            Inclusão de Documentos <span className="text-sky-600 font-bold uppercase">EXTERNOS</span>
+          <h2 className="text-xl font-heading font-bold text-foreground sm:text-2xl">
+            Inclusão de Documentos <span className="text-sky-600 font-bold uppercase">Externos</span>
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground mt-1">
-            Documentos gerados fora do ambiente do sistema SEI!RIO (digitalizados ou arquivos <span className="text-emerald-600 font-semibold uppercase">NATO DIGITAIS</span>)
+          <p className="mt-1 text-sm text-muted-foreground sm:text-base">
+            Procedimento para registrar, no SEI!RIO, documentos produzidos fora do sistema, sejam eles digitalizados ou nato-digitais.
           </p>
         </div>
       </div>
 
       <div className="space-y-5">
-        {/* Intro */}
-        <div className="section-card p-5 sm:p-6 border-l-4 border-l-sky-500">
+        <div className="section-card border-l-4 border-l-sky-500 p-5 sm:p-6">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-sky-100 dark:bg-sky-900/50 shrink-0">
-              <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600 dark:text-sky-400" />
+            <div className="shrink-0 rounded-xl bg-sky-100 p-3 dark:bg-sky-900/50">
+              <Upload className="h-5 w-5 text-sky-600 dark:text-sky-400 sm:h-6 sm:w-6" />
             </div>
-            <div>
-              <h3 className="font-semibold text-foreground mb-2">3.1. O que são Documentos Externos?</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
-                Documentos externos são aqueles que <strong className="text-foreground">não foram criados dentro do SEI!RIO</strong>. 
-                Incluem documentos digitalizados (escaneados) e arquivos nato digitais, como PDFs, 
-                notas fiscais eletrônicas, extratos bancários, comprovantes e outros documentos 
-                recebidos em formato digital.
+            <div className="space-y-3">
+              <h3 className="font-semibold text-foreground">3.1. Conceito e enquadramento</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground sm:text-base text-left sm:text-justify">
+                Documento externo é todo arquivo que <strong className="text-foreground">não foi produzido diretamente dentro do SEI!RIO</strong> e que precisa ser encartado ao processo administrativo como elemento de instrução. No plano federal, o Decreto nº 8.539, de <strong className="text-foreground">8 de outubro de 2015</strong>, distingue documento <strong className="text-foreground">nato-digital</strong> e documento <strong className="text-foreground">digitalizado</strong>; no plano municipal, o Decreto Rio nº <strong className="text-foreground">57.250, de 19 de novembro de 2025</strong>, disciplina como esses documentos entram no SEI!RIO.
               </p>
+
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={OFFICIAL_LINKS.decreto8539}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/12"
+                >
+                  <Scale className="h-3.5 w-3.5" />
+                  Decreto nº 8.539/2015
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+                <a
+                  href={OFFICIAL_LINKS.decretoSeiRio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 transition hover:bg-sky-100 dark:border-sky-800/40 dark:bg-sky-950/30 dark:text-sky-300"
+                >
+                  <Landmark className="h-3.5 w-3.5" />
+                  Decreto Rio nº 57.250/2025
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Tipos de Documentos Externos */}
         <div className="section-card p-5 sm:p-6">
-          <h3 className="font-semibold text-foreground mb-4">3.2. Tipos de Documentos Externos</h3>
-          
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div className="rounded-[1.35rem] border border-border/60 bg-linear-to-br from-secondary to-secondary/50 p-4 shadow-soft">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-muted">
-                  <FileImage className="w-4 h-4 text-foreground" />
-                </div>
-                <span className="font-semibold text-foreground">Digitalizados</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Documentos físicos escaneados em formato PDF ou imagem (notas fiscais em papel, 
-                recibos, atas manuscritas, etc.)
-              </p>
+          <h3 className="mb-4 font-semibold text-foreground">3.2. Classificação do documento externo</h3>
+
+          <div className="grid gap-4 xl:grid-cols-2">
+            {typeCards.map((card) => {
+              const Icon = card.icon;
+
+              return (
+                <article key={card.title} className={`rounded-[1.4rem] border p-5 shadow-soft ${card.accent}`}>
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className={`rounded-xl p-2.5 ${card.iconBg}`}>
+                      <Icon className={`h-5 w-5 ${card.iconColor}`} />
+                    </div>
+                    <h4 className="text-base font-bold text-foreground">{card.title}</h4>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="rounded-2xl border border-border/50 bg-background/75 p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        Conceito
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-foreground/80">{card.concept}</p>
+                    </div>
+
+                    <div className="rounded-2xl border border-border/50 bg-background/75 p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        Base normativa
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-foreground/80">{card.legal}</p>
+                    </div>
+
+                    <div className="rounded-2xl border border-border/50 bg-background/75 p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        Efeito prático no SEI!RIO
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-foreground/80">{card.practical}</p>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="section-card border border-primary/20 bg-linear-to-br from-primary/5 via-background to-sky-50/40 p-5 sm:p-6">
+          <div className="flex items-start gap-4">
+            <div className="shrink-0 rounded-xl bg-primary/10 p-3">
+              <AlertCircle className="h-5 w-5 text-primary sm:h-6 sm:w-6" />
             </div>
-            
-            <div className="rounded-[1.35rem] border border-emerald-200/70 bg-linear-to-br from-emerald-50 to-emerald-100/50 p-4 shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/40 dark:to-emerald-900/20">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-emerald-200 dark:bg-emerald-800">
-                  <FileText className="w-4 h-4 text-emerald-700 dark:text-emerald-300" />
-                </div>
-                <span className="font-semibold text-emerald-800 dark:text-emerald-300 uppercase">Nato Digitais</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Arquivos já criados em formato digital (NF-e, DANFE, extratos bancários eletrônicos, 
-                comprovantes de transferência, etc.)
+            <div className="space-y-3">
+              <h3 className="font-semibold text-foreground">3.3. Regra de preferência para documentos assináveis</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground sm:text-base text-left sm:text-justify">
+                Nos processos digitais, os atos devem ser praticados em meio eletrônico, salvo inviabilidade técnica, indisponibilidade relevante do sistema ou exceção normativa. Por isso, quando a peça <strong className="text-foreground">precisar ser criada e assinada pela própria unidade</strong>, a orientação preferencial é produzi-la dentro do SEI!RIO, para assinatura eletrônica.
+              </p>
+              <p className="text-sm leading-relaxed text-muted-foreground sm:text-base text-left sm:text-justify">
+                O uso de assinatura física seguida de digitalização fica reservado às hipóteses em que a elaboração e a assinatura no sistema <strong className="text-foreground">não sejam possíveis</strong> ou precisem ocorrer externamente de forma imediata. Essa lógica decorre do art. 20, do art. 23 e do art. 26, § 2º, do Decreto Rio nº 57.250/2025.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Procedimento de Inclusão */}
-        <div className="section-card p-5 sm:p-6 border-l-4 border-l-primary">
-          <h3 className="font-semibold text-foreground mb-4">
-            3.3. Procedimento de{" "}
-            <span className="inline-flex items-center gap-2 px-3 py-1 bg-sky-100 dark:bg-sky-900/50 rounded-lg border border-sky-300 dark:border-sky-700">
-              <FilePlus2 className="w-5 h-5 text-sky-700 dark:text-sky-300" />
-              <span className="text-sky-700 dark:text-sky-300 font-bold text-lg">Incluir Documento</span>
+        <div className="section-card border-l-4 border-l-primary p-5 sm:p-6">
+          <h3 className="mb-4 font-semibold text-foreground">
+            3.4. Procedimento de{" "}
+            <span className="inline-flex items-center gap-2 rounded-lg border border-sky-300 bg-sky-100 px-3 py-1 dark:border-sky-700 dark:bg-sky-900/50">
+              <FilePlus2 className="h-5 w-5 text-sky-700 dark:text-sky-300" />
+              <span className="text-lg font-bold text-sky-700 dark:text-sky-300">Incluir Documento</span>
             </span>{" "}
             no SEI!RIO
           </h3>
-          
+
           <div className="space-y-4">
-            {/* Item 1 */}
-            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+            <div className="flex items-start gap-4 rounded-xl border border-border bg-linear-to-r from-secondary to-secondary/50 p-4">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-500 text-sm font-bold text-white">
                 1
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-foreground mb-1">Acessar o Processo</h4>
-                <p className="text-sm text-muted-foreground mb-3">
+                <h4 className="mb-1 font-semibold text-foreground">Acessar o processo</h4>
+                <p className="mb-3 text-sm text-muted-foreground">
                   Com o processo de prestação de contas aberto, clique no ícone{" "}
-                  <span className="inline-flex items-center gap-2 px-2 py-0.5 bg-sky-100 dark:bg-sky-900/50 rounded border border-sky-300 dark:border-sky-700">
-                    <FilePlus2 className="w-4 h-4 text-sky-700 dark:text-sky-300" />
+                  <span className="inline-flex items-center gap-2 rounded border border-sky-300 bg-sky-100 px-2 py-0.5 dark:border-sky-700 dark:bg-sky-900/50">
+                    <FilePlus2 className="h-4 w-4 text-sky-700 dark:text-sky-300" />
                     <strong className="text-sky-700 dark:text-sky-300">Incluir Documento</strong>
                   </span>{" "}
                   na barra de ferramentas.
                 </p>
-                <div className="inline-block p-2 bg-card rounded-lg border border-border shadow-xs">
-                  <img 
-                    src={seiIncludeDocIcon} 
-                    alt="Ícone Incluir Documento no SEI!RIO" 
+                <div className="inline-block rounded-lg border border-border bg-card p-2 shadow-xs">
+                  <img
+                    src={seiIncludeDocIcon}
+                    alt="Ícone Incluir Documento no SEI!RIO"
                     className="h-8 object-contain"
                     width={177}
                     height={32}
@@ -118,21 +214,20 @@ export const SectionThree = () => {
               </div>
             </div>
 
-            {/* Item 2 */}
-            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+            <div className="flex items-start gap-4 rounded-xl border border-border bg-linear-to-r from-secondary to-secondary/50 p-4">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-500 text-sm font-bold text-white">
                 2
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-foreground mb-1">Selecionar "Externo"</h4>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Na tela de seleção de tipo de documento, escolha a opção <strong className="text-foreground">"Externo"</strong> para indicar que o documento foi gerado fora do SEI!RIO.
+                <h4 className="mb-1 font-semibold text-foreground">Selecionar a opção “Externo”</h4>
+                <p className="mb-3 text-sm text-muted-foreground">
+                  Na tela de seleção de tipo de documento, escolha <strong className="text-foreground">“Externo”</strong> para indicar que o arquivo não foi produzido dentro do SEI!RIO.
                 </p>
-                <div className="inline-block p-2 bg-card rounded-lg border border-border shadow-xs">
-                  <img 
-                    src={seiChooseDocType} 
-                    alt="Escolha o Tipo do Documento - Externo" 
-                    className="max-w-full sm:max-w-md object-contain rounded"
+                <div className="inline-block rounded-lg border border-border bg-card p-2 shadow-xs">
+                  <img
+                    src={seiChooseDocType}
+                    alt="Escolha o Tipo do Documento Externo no SEI!RIO"
+                    className="max-w-full rounded object-contain sm:max-w-md"
                     width={448}
                     height={187}
                   />
@@ -140,242 +235,202 @@ export const SectionThree = () => {
               </div>
             </div>
 
-            {/* DICA box */}
-            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-emerald-50 to-emerald-100/50 dark:from-emerald-950/40 dark:to-emerald-900/20 rounded-xl border-2 border-emerald-300 dark:border-emerald-700 border-dashed">
-              <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-800 shrink-0">
-                <Lightbulb className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <div className="flex items-start gap-4 rounded-xl border-2 border-dashed border-emerald-300 bg-linear-to-r from-emerald-50 to-emerald-100/60 p-4 dark:border-emerald-700 dark:from-emerald-950/40 dark:to-emerald-900/20">
+              <div className="shrink-0 rounded-xl bg-emerald-100 p-2 dark:bg-emerald-800">
+                <Lightbulb className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
-                <h4 className="font-bold text-emerald-700 dark:text-emerald-400 uppercase mb-1">Dica</h4>
-                <p className="text-sm text-emerald-800 dark:text-emerald-300 font-semibold">
-                  "EXTERNO" SERÁ SEMPRE A PRIMEIRA OPÇÃO DISPONÍVEL
+                <h4 className="mb-1 text-sm font-bold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-400">
+                  Orientação prática
+                </h4>
+                <p className="text-sm font-medium text-emerald-800 dark:text-emerald-300">
+                  Se o arquivo veio de fora do sistema, a porta de entrada correta é “Documento Externo”.
                 </p>
               </div>
             </div>
 
-            {/* Aviso antes do item 3 */}
-            <div className="p-4 bg-linear-to-r from-sky-50 to-sky-100/50 dark:from-sky-950/40 dark:to-sky-900/20 rounded-xl border border-sky-200 dark:border-sky-800 text-center">
-              <p className="text-sky-800 dark:text-sky-300 font-medium">
-                Após selecionar "Externo", abrirá a tela:
-              </p>
-              <p className="text-lg font-bold text-sky-700 dark:text-sky-400 mt-1">
-                "Registrar Documento Externo"
-              </p>
+            <div className="rounded-xl border border-sky-200 bg-linear-to-r from-sky-50 to-sky-100/50 p-4 text-center dark:border-sky-800 dark:from-sky-950/40 dark:to-sky-900/20">
+              <p className="font-medium text-sky-800 dark:text-sky-300">Após selecionar “Externo”, o sistema abrirá a tela</p>
+              <p className="mt-1 text-lg font-bold text-sky-700 dark:text-sky-400">“Registrar Documento Externo”</p>
             </div>
 
-            {/* Item 3 com sub-itens */}
-            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+            <div className="flex items-start gap-4 rounded-xl border border-border bg-linear-to-r from-secondary to-secondary/50 p-4">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-500 text-sm font-bold text-white">
                 3
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-foreground mb-3">Preencher Metadados</h4>
-                
-                <div className="space-y-4 ml-2">
-                  {/* A) Tipo de documento */}
-                  <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-l-sky-400">
-                    <h5 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">A</span>
-                      Tipo de Documento
-                    </h5>
-                    <p className="text-sm text-muted-foreground">
-                      Em <strong className="text-sky-600 dark:text-sky-400">"Tipo de Documento"</strong>, selecione na barra de pesquisa o tipo que mais se adequar ao documento 
-                      (extrato, nota de empenho, nota fiscal, etc.)
-                    </p>
-                  </div>
+                <h4 className="mb-3 font-semibold text-foreground">Preencher os metadados</h4>
 
-                  {/* B) Número */}
-                  <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-l-sky-400">
-                    <h5 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">B</span>
-                      Número
-                    </h5>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Em <strong className="text-sky-600 dark:text-sky-400">"Número"</strong>, preencha, se houver, o número da Nota, o número da ata, ou, se possível, 
-                      outra forma de identificação numérica do documento.
-                    </p>
-                    {/* Dica do número */}
-                    <div className="flex items-start gap-3 p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800">
-                      <Lightbulb className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                      <p className="text-xs text-emerald-700 dark:text-emerald-400 font-medium">
-                        Se não houver nenhuma forma de identificar numericamente o documento, não preencher este campo.
-                      </p>
+                <div className="space-y-4">
+                  {[
+                    {
+                      code: "A",
+                      title: "Tipo de Documento",
+                      text: "Selecione o tipo que melhor identifica a peça (nota fiscal, extrato, recibo, nota de empenho, ata etc.).",
+                    },
+                    {
+                      code: "B",
+                      title: "Número",
+                      text: "Informe o número do documento quando houver identificação numérica útil. Se não existir forma segura de identificar numericamente a peça, deixe o campo em branco.",
+                      tip: "Evite preencher com dado improvisado apenas para completar o campo.",
+                    },
+                    {
+                      code: "C",
+                      title: "Data do Documento",
+                      text: "Informe a data de emissão que consta no próprio documento, sempre que essa informação estiver disponível.",
+                    },
+                  ].map((item) => (
+                    <div key={item.code} className="rounded-xl border-l-4 border-l-sky-400 bg-muted/50 p-4">
+                      <h5 className="mb-2 flex items-center gap-2 font-semibold text-foreground">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-500 text-xs font-bold text-white">
+                          {item.code}
+                        </span>
+                        {item.title}
+                      </h5>
+                      <p className="text-sm text-muted-foreground">{item.text}</p>
+                      {item.tip ? (
+                        <div className="mt-3 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-3 dark:border-emerald-800 dark:bg-emerald-950/40">
+                          <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                          <p className="text-xs font-medium text-emerald-700 dark:text-emerald-300">{item.tip}</p>
+                        </div>
+                      ) : null}
                     </div>
-                  </div>
+                  ))}
 
-                  {/* C) Data do documento */}
-                  <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-l-sky-400">
-                    <h5 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">C</span>
-                      Data do Documento
-                    </h5>
-                    <p className="text-sm text-muted-foreground">
-                      Informe a <strong className="text-sky-600 dark:text-sky-400">data de emissão do documento</strong> (quando disponível no documento).
-                    </p>
-                  </div>
-
-                  {/* D) Nome na árvore */}
-                  <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-l-primary">
-                    <h5 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs">D</span>
+                  <div className="rounded-xl border-l-4 border-l-primary bg-muted/50 p-4">
+                    <h5 className="mb-3 flex items-center gap-2 font-semibold text-foreground">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-500 text-xs font-bold text-white">
+                        D
+                      </span>
                       Nome na Árvore
                     </h5>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Este campo é <strong className="text-primary">fundamental para identificação singular do documento</strong> e pesquisas futuras para encontrá-lo.
-                    </p>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Cada documento deve ser cuidadosamente nomeado de forma que este seja único e não se confunda com outros similares.
-                    </p>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      <strong className="text-foreground">Exemplos de nomenclatura:</strong>
-                    </p>
-                    <ul className="space-y-2 mb-4">
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal wrap-break-word">NE- 1ª parcela/Janeiro - 2025</code></span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <span><code className="rounded bg-muted px-2 py-0.5 text-foreground whitespace-normal wrap-break-word">Nota de Empenho 2025NE001043 - GAD 4ª CRE</code></span>
-                      </li>
-                    </ul>
 
-                    {/* Observação destacada - reformulado */}
-                    <div className="p-5 bg-linear-to-br from-secondary to-secondary/50 rounded-xl border border-border shadow-xs">
-                      <div className="flex items-center gap-2 mb-4">
-                        <AlertCircle className="w-5 h-5 text-sky-600 dark:text-sky-400" />
-                        <h6 className="font-semibold text-foreground">Observação importante</h6>
-                      </div>
-                      
-                      <div className="space-y-4">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          Na data de elaboração deste documento orientador, <strong className="text-foreground">não há nomenclatura única oficial</strong> estipulada para cada documento.
+                    <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+                      <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                          Função do campo
                         </p>
-                        
-                        <div className="p-3 bg-sky-100/70 dark:bg-sky-900/40 rounded-lg border border-sky-200 dark:border-sky-800">
-                          <p className="text-sm text-sky-800 dark:text-sky-300 font-medium flex items-start gap-2">
-                            <Lightbulb className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
-                            <span><strong>Regra de ouro:</strong> Nomeie cada documento de forma que a escolha seja tanto <em>informativa</em> quanto <em>identificadora</em>.</span>
-                          </p>
-                        </div>
-                        
-                        <div className="p-3 bg-muted rounded-lg">
-                          <p className="text-sm text-foreground mb-2 font-medium">Estrutura sugerida:</p>
-                          <div className="flex items-center gap-2 flex-wrap text-sm">
-                            <span className="px-2 py-1 bg-card rounded border border-border text-muted-foreground">Função do documento</span>
-                            <ArrowRight className="w-4 h-4 text-muted-foreground" />
-                            <span className="px-2 py-1 bg-card rounded border border-border text-muted-foreground">Dados relevantes</span>
-                          </div>
-                          <p className="text-xs text-muted-foreground mt-2">
-                            Ex: Tipo (Ofício, NE, Extrato) → Mês de referência, objetivo, especificação
-                          </p>
-                        </div>
+                        <p className="mt-1 text-sm leading-relaxed text-foreground/80">
+                          Este campo é o principal identificador do documento na árvore do processo e nas pesquisas futuras do SEI!RIO.
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+                          A nomeação deve permitir reconhecer <strong className="text-foreground">o que é o documento</strong> e <strong className="text-foreground">qual dado o singulariza</strong>.
+                        </p>
                       </div>
+
+                      <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                          Estrutura sugerida
+                        </p>
+                        <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+                          <span className="rounded-lg border border-border bg-secondary px-2.5 py-1 text-foreground">Tipo do documento</span>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                          <span className="rounded-lg border border-border bg-secondary px-2.5 py-1 text-foreground">Emissor ou finalidade</span>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                          <span className="rounded-lg border border-border bg-secondary px-2.5 py-1 text-foreground">Mês, parcela ou referência</span>
+                        </div>
+                        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                          Não há, nesta data, nomenclatura única oficial para todos os documentos. O critério recomendável é que o nome seja <strong className="text-foreground">informativo e identificador</strong>.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                        Exemplos recomendados
+                      </p>
+                      <ul className="mt-2 space-y-2">
+                        {[
+                          "NF-e 1234 — Papelaria Alfa — jan/2025",
+                          "Nota de Empenho 2025NE001043 — GAD 4ª CRE",
+                          "Extrato aplicação — conta PDDE — dez/2025",
+                        ].map((example) => (
+                          <li key={example} className="flex items-start gap-2 text-sm text-foreground/85">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                            <code className="rounded bg-background px-2 py-0.5 text-foreground">{example}</code>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Item 4 */}
-            <div className="flex items-start gap-4 p-4 bg-linear-to-r from-secondary to-secondary/50 rounded-xl border border-border">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white font-bold text-sm shrink-0">
+            <div className="flex items-start gap-4 rounded-xl border border-border bg-linear-to-r from-secondary to-secondary/50 p-4">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-500 text-sm font-bold text-white">
                 4
               </div>
               <div>
-                <h4 className="font-semibold text-foreground mb-1">Anexar Arquivo</h4>
+                <h4 className="mb-1 font-semibold text-foreground">Anexar o arquivo</h4>
                 <p className="text-sm text-muted-foreground">
-                  Clique em <strong className="text-foreground">"Escolher arquivo"</strong>, selecione o documento no seu computador e clique em <strong className="text-foreground">"Confirmar Dados"</strong>.
+                  Clique em <strong className="text-foreground">“Escolher arquivo”</strong>, selecione o documento no computador e conclua em <strong className="text-foreground">“Confirmar Dados”</strong>.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Orientações Importantes e Dicas de Digitalização */}
-        <div className="section-card p-5 sm:p-6 border border-sky-200 dark:border-sky-800 bg-linear-to-br from-sky-50/50 dark:from-sky-950/30 to-transparent">
-          <div className="flex items-start gap-4 mb-5">
-            <div className="p-3 rounded-xl bg-sky-100 dark:bg-sky-900/50 shrink-0">
-              <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600 dark:text-sky-400" />
+        <div className="section-card border border-sky-200 bg-linear-to-br from-sky-50/50 to-transparent p-5 sm:p-6 dark:border-sky-800 dark:from-sky-950/30">
+          <div className="mb-5 flex items-start gap-4">
+            <div className="shrink-0 rounded-xl bg-sky-100 p-3 dark:bg-sky-900/50">
+              <Lightbulb className="h-5 w-5 text-sky-600 dark:text-sky-400 sm:h-6 sm:w-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground mb-2">3.5. Orientações Importantes e Dicas de Digitalização</h3>
+              <h3 className="mb-2 font-semibold text-foreground">3.5. Orientações práticas de digitalização e anexação</h3>
               <p className="text-sm text-muted-foreground">
-                Para garantir a integridade e a correta indexação dos documentos no SEI, observe as seguintes práticas:
+                Para preservar legibilidade, rastreabilidade e compatibilidade com o SEI!RIO, observe as orientações a seguir.
               </p>
             </div>
           </div>
 
-          <div className="space-y-4 ml-0 sm:ml-16">
-            {/* Qualidade da Digitalização */}
-            <div className="p-4 bg-card rounded-lg border border-border shadow-xs">
-              <div className="flex items-center gap-2 mb-2">
-                <Image className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                <h4 className="font-semibold text-foreground">Qualidade da Digitalização</h4>
+          <div className="grid gap-4 lg:grid-cols-3">
+            <div className="rounded-xl border border-border bg-card p-4 shadow-xs">
+              <div className="mb-2 flex items-center gap-2">
+                <Image className="h-4 w-4 text-sky-600 dark:text-sky-400" />
+                <h4 className="font-semibold text-foreground">Qualidade da digitalização</h4>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Certifique-se de que o documento físico esteja <strong className="text-foreground">legível antes de digitalizá-lo</strong>. 
-                Configure o scanner para uma resolução equilibrada (recomenda-se <strong className="text-sky-600 dark:text-sky-400">200 a 300 dpi</strong>) para manter nitidez sem gerar arquivos excessivamente pesados.
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Certifique-se de que o documento físico esteja legível antes de digitalizar. Trabalhe, preferencialmente, com <strong className="text-foreground">200 a 300 dpi</strong>, elevando a resolução apenas quando necessário para preservar a leitura.
               </p>
             </div>
 
-            {/* Nome do Arquivo */}
-            <div className="p-4 bg-card rounded-lg border border-border shadow-xs">
-              <div className="flex items-center gap-2 mb-2">
-                <FileDown className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                <h4 className="font-semibold text-foreground">O Preenchimento dos Dados define o Nome do Arquivo</h4>
+            <div className="rounded-xl border border-border bg-card p-4 shadow-xs">
+              <div className="mb-2 flex items-center gap-2">
+                <FileDown className="h-4 w-4 text-sky-600 dark:text-sky-400" />
+                <h4 className="font-semibold text-foreground">Nome do arquivo x Nome na Árvore</h4>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                <strong className="text-foreground">Não é necessário renomear o arquivo</strong> no seu computador antes de anexá-lo (ex: scan001.pdf). 
-                O SEI ignora o nome original e gera automaticamente um novo nome na árvore de processos baseado nos campos que você preencher 
-                na tela de cadastro (Tipo de Documento, Número, Data, etc.).
+              <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
+                O nome local do arquivo no computador pode ajudar a organização da escola, mas a identificação útil no SEI!RIO decorre do preenchimento dos metadados, sobretudo do <strong className="text-foreground">Nome na Árvore</strong>.
               </p>
-              <div className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200 dark:border-amber-800">
-                <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-                <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">
-                  <strong>Atenção:</strong> Por isso, preencha esses campos com exatidão para facilitar a busca futura.
+              <div className="flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950/40">
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
+                <p className="text-sm font-medium text-amber-800 dark:text-amber-300">
+                  Preencha os campos com exatidão: é isso que vai facilitar a busca futura na árvore do processo.
                 </p>
               </div>
             </div>
 
-            {/* Gerenciamento de Tamanho */}
-            <div className="p-4 bg-card rounded-lg border border-border shadow-xs">
-              <div className="flex items-center gap-2 mb-2">
-                <Scissors className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                <h4 className="font-semibold text-foreground">Gerenciamento de Tamanho de Arquivo</h4>
+            <div className="rounded-xl border border-border bg-card p-4 shadow-xs">
+              <div className="mb-2 flex items-center gap-2">
+                <Scissors className="h-4 w-4 text-sky-600 dark:text-sky-400" />
+                <h4 className="font-semibold text-foreground">Tamanho do arquivo</h4>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                Caso o sistema bloqueie o anexo por exceder o limite de tamanho permitido, adote uma das seguintes soluções:
+              <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
+                Se o SEI!RIO bloquear o anexo por excesso de tamanho, reduza a resolução, compacte o PDF ou divida documentos muito extensos em partes menores.
               </p>
-              <ul className="space-y-2 mb-4">
-                <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <ArrowRight className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
-                  <span>Reduza a resolução no momento da digitalização</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <ArrowRight className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
-                  <span>Compacte o arquivo PDF</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <ArrowRight className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
-                  <span>Divida documentos muito longos em blocos menores (Partes 1, 2, etc.)</span>
-                </li>
-              </ul>
-              <div className="flex items-start gap-2 p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800">
-                <Lightbulb className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                <p className="text-sm text-emerald-800 dark:text-emerald-300">
-                  <strong>Ferramenta útil:</strong> Para compactar ou dividir arquivos, você pode utilizar ferramentas gratuitas como o{" "}
-                  <a 
-                    href="https://www.ilovepdf.com/pt" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="font-semibold text-emerald-700 dark:text-emerald-400 underline underline-offset-2 hover:text-emerald-900 dark:hover:text-emerald-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded"
-                  >
-                    iLovePDF
-                    <ExternalLink className="w-3 h-3 inline ml-1" />
-                  </a>.
-                </p>
-              </div>
+              <p className="text-sm text-muted-foreground">
+                Ferramenta útil:{" "}
+                <a
+                  href="https://www.ilovepdf.com/pt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-emerald-700 underline underline-offset-2 hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-300"
+                >
+                  iLovePDF
+                  <ExternalLink className="ml-1 inline h-3 w-3" />
+                </a>
+              </p>
             </div>
           </div>
         </div>

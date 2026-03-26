@@ -29,7 +29,7 @@ export const SectionOne = () => {
           </ProfileCallout>
 
           <ProfileCallout visibleFor="gad" variant="warning">
-            <p>Ao receber o processo, verifique se a <strong className="text-foreground">especificação</strong> segue o padrão obrigatório e se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos fora do padrão devem ser devolvidos para correção.</p>
+            <p>Ao receber o processo, verifique se a <strong className="text-foreground">especificação</strong> segue o padrão interno adotado pela <strong className="text-foreground">4ª CRE/GAD</strong> e se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos fora do padrão devem ser devolvidos para correção.</p>
           </ProfileCallout>
         </div>
 
@@ -101,12 +101,12 @@ export const SectionOne = () => {
           <h3 className="section-heading">1.5. Padrão de identificação do processo (SEI!RIO)</h3>
           <div className="content-spacing">
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
-              O cadastrante deverá obrigatoriamente digitar a especificação seguindo o padrão abaixo, 
+              Para fins de triagem, busca e padronização interna da <strong className="text-foreground">4ª CRE/GAD</strong>, o cadastrante deverá digitar a especificação seguindo o padrão abaixo, 
               incluindo sempre o <strong className="text-sky-600 dark:text-sky-400">EXERCÍCIO</strong> (ano de referência) 
               e a <strong className="text-sky-600 dark:text-sky-400">AÇÃO do PDDE</strong> quando aplicável.
             </p>
 
-            <Callout variant="success" title="Padrão obrigatório:">
+            <Callout variant="success" title="Padrão adotado pela 4ª CRE/GAD:">
               <div className="space-y-3 mt-2">
                 <div>
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Formato básico:</p>
@@ -133,7 +133,7 @@ export const SectionOne = () => {
             </Callout>
 
             <p className="text-sm text-muted-foreground mt-4 p-3 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200/60 dark:border-amber-800/40">
-              <strong className="text-amber-700 dark:text-amber-400">Por que isso importa?</strong> Evita confusão entre anos, ações e prestações de contas diferentes.
+              <strong className="text-amber-700 dark:text-amber-400">Por que isso importa?</strong> Essa padronização interna evita confusão entre anos, ações e prestações de contas diferentes, sem pretensão de fixar nomenclatura única para toda a SME.
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { Menu, FileText, Search, ChevronDown, Check, User, Eye, Printer, Download } from "lucide-react";
 import { SeiIncluirIcon, SeiAssinarIcon, SeiEnviarIcon, SeiPastaIcon, SeiIniciarProcessoIcon, SeiInteressadosIcon } from "./SeiIcons";
+import { PROCESS_TYPE_LABEL, seiProcessTreeDocuments } from "@/lib/guideContent";
 
 interface SeiMockupProps {
   variant: "menu" | "process-tree" | "document-form" | "type-selection" | "icons";
@@ -122,13 +123,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
           
           {/* Documents */}
           <div className="ml-4 space-y-0.5 border-l-2 border-[#e0e0e0] pl-3">
-            {[
-              { name: "Despacho de Encaminhamento", signed: true },
-              { name: "Demonstrativo - ND 435", signed: true },
-              { name: "Demonstrativo - ND 441", signed: true },
-              { name: "NF - Empresa Alpha", signed: true },
-              { name: "NF - Fornecedor Beta", signed: true },
-            ].map((doc, i) => (
+            {seiProcessTreeDocuments.map((doc, i) => (
               <div 
                 key={i} 
                 className="
@@ -141,12 +136,14 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
                 <span className="text-[#616161] group-hover:text-[#212529] text-xs sm:text-sm truncate transition-colors">
                   {doc.name}
                 </span>
-                {doc.signed && (
-                  <div className="ml-auto flex items-center gap-1 px-2 py-0.5 bg-[#e8f5e9] rounded-full">
-                    <Check className="w-3 h-3 text-[#4CAF50]" />
-                    <span className="text-[10px] text-[#2e7d32] font-medium">Assinado</span>
-                  </div>
-                )}
+                <div className={`ml-auto flex items-center gap-1 px-2 py-0.5 rounded-full ${
+                  doc.tone === "signed" ? "bg-[#e8f5e9]" : "bg-[#e3f2fd]"
+                }`}>
+                  <Check className={`w-3 h-3 ${doc.tone === "signed" ? "text-[#4CAF50]" : "text-[#1565C0]"}`} />
+                  <span className={`text-[10px] font-medium ${
+                    doc.tone === "signed" ? "text-[#2e7d32]" : "text-[#1565C0]"
+                  }`}>{doc.statusLabel}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -165,16 +162,16 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
             <Search className="w-4 h-4 text-[#6c757d]" />
             <input 
               type="text" 
-              placeholder="pdde" 
+              placeholder="prestação de contas" 
               className="bg-white border border-[#ced4da] rounded-lg px-3 py-2 text-[#495057] w-full focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0]/20 transition-all outline-none"
-              defaultValue="pdde"
+              defaultValue="prestação de contas"
             />
           </div>
           
           <div className="space-y-1">
             {[
-              { label: "Devolução de Prestação de Contas", active: false },
-              { label: "EXECUÇÃO FINANCEIRA: PROGRAMA DINHEIRO DIRETO NA ESCOLA - PDDE", active: true },
+              { label: PROCESS_TYPE_LABEL, active: true },
+              { label: "GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: TOMADA DE CONTAS ESPECIAL", active: false },
               { label: "Prestação de Contas de Suprimento de Fundos", active: false },
             ].map((item, i) => (
               <div 

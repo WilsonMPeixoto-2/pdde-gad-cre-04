@@ -1,79 +1,67 @@
-const CACHE_NAME = "pdde-guide-v1.6";
-const STATIC_ASSETS = [
-  "/",
-  "/index.html",
-  "/favicon.png",
-  "/manifest.json",
-  "/og-image.png",
-];
+const CACHE_NAME = "pdde-guide-shell-v2";
+const APP_SHELL = ["/", "/index.html", "/favicon.png", "/manifest.json", "/og-image.png"];
+const CACHEABLE_DESTINATIONS = new Set(["script", "style", "image", "font", "manifest"]);
 
-// Install event - cache static assets
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log("[SW] Caching static assets");
-      return cache.addAll(STATIC_ASSETS);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
   );
   self.skipWaiting();
 });
 
-// Activate event - clean old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
         cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => {
-            console.log("[SW] Deleting old cache:", name);
-            return caches.delete(name);
-          })
-      );
-    })
+          .filter((cacheName) => cacheName !== CACHE_NAME)
+          .map((cacheName) => caches.delete(cacheName))
+      )
+    )
   );
   self.clients.claim();
 });
 
-// Fetch event - network first, fallback to cache
 self.addEventListener("fetch", (event) => {
-  // Skip non-GET requests
   if (event.request.method !== "GET") return;
 
   const requestUrl = new URL(event.request.url);
-
-  // Cache only same-origin assets to avoid stale third-party responses
   if (requestUrl.origin !== self.location.origin) return;
 
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put("/index.html", responseClone));
+          }
+          return response;
+        })
+        .catch(() => caches.match("/index.html"))
+    );
+    return;
+  }
+
+  if (!CACHEABLE_DESTINATIONS.has(event.request.destination)) return;
+
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Clone response for caching
-        if (response.status === 200) {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-        }
-        return response;
-      })
-      .catch(() => {
-        // Fallback to cache
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
+    caches.match(event.request).then((cachedResponse) => {
+      const networkResponse = fetch(event.request)
+        .then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
           }
-          // For navigation requests, return cached index.html
-          if (event.request.mode === "navigate") {
-            return caches.match("/index.html");
-          }
-          return new Response("Offline", { status: 503 });
-        });
-      })
+          return response;
+        })
+        .catch(() => cachedResponse);
+
+      return cachedResponse || networkResponse;
+    })
   );
 });
 
-// Handle messages from main thread
 self.addEventListener("message", (event) => {
   if (event.data === "skipWaiting") {
     self.skipWaiting();

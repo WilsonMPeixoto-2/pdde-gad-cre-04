@@ -3,6 +3,7 @@ import { PDDEModelCards } from "./PDDEModelCards";
 import { ProfileCallout } from "./ProfileCallout";
 import { SmartTemplates } from "./SmartTemplates";
 import { ProcessJourneyMap } from "./ProcessJourneyMap";
+import { GUIDE_ANCHORS } from "@/lib/guideContent";
 
 export const SectionTwo = () => {
   return (
@@ -91,7 +92,7 @@ export const SectionTwo = () => {
       </ProfileCallout>
 
       {/* Checklist de Documentos PDDE */}
-      <div className="mb-8">
+      <div id={GUIDE_ANCHORS.checklist} className="mb-8 scroll-mt-28">
         <PDDEChecklist />
       </div>
 
@@ -193,15 +194,17 @@ export const SectionTwo = () => {
       </div>
 
       {/* Modelos de Documentos PDDE - Componente dedicado */}
-      <PDDEModelCards />
+      <div id={GUIDE_ANCHORS.models} className="scroll-mt-28">
+        <PDDEModelCards />
+      </div>
 
       {/* Smart Templates */}
-      <div className="mb-8">
+      <div id={GUIDE_ANCHORS.templates} className="mb-8 scroll-mt-28">
         <SmartTemplates />
       </div>
 
       {/* Process Journey Map */}
-      <div className="mb-8">
+      <div id={GUIDE_ANCHORS.journey} className="mb-8 scroll-mt-28">
         <ProcessJourneyMap />
       </div>
 

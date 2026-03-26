@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { BookOpen, Calendar, Building2, FileText, ChevronDown, ClipboardList } from "lucide-react";
+import { GUIDE_ANCHORS, GUIDE_VERSION } from "@/lib/guideContent";
 
 /**
  * HeroCover — Premium autoral "Institucional Cinemático"
@@ -63,8 +64,8 @@ export const HeroCover = () => {
       </div>
 
       {/* === LAYER 2: Organic topographic lines (SVG) === */}
-      <div className="absolute inset-0 opacity-[0.04]" aria-hidden="true">
-        <svg className="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div className="absolute inset-0 overflow-hidden opacity-[0.04]" aria-hidden="true">
+        <svg className="w-full h-full overflow-hidden" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
           {/* Organic flowing curves — institutional / topographic feel */}
           <path d="M-100,200 C150,150 300,300 500,250 S700,100 900,180 S1100,300 1300,220" stroke="hsl(199, 89%, 60%)" strokeWidth="1" opacity="0.6" />
           <path d="M-50,350 C200,300 350,420 550,380 S750,250 950,340 S1150,450 1350,370" stroke="hsl(199, 89%, 55%)" strokeWidth="0.8" opacity="0.5" />
@@ -200,7 +201,7 @@ export const HeroCover = () => {
             { icon: <Building2 className="w-5 h-5" aria-hidden="true" />, label: "GAD", desc: "Gerência de Administração" },
             { icon: <BookOpen className="w-5 h-5" aria-hidden="true" />, label: "POP", desc: "Procedimento Padrão" },
             { icon: <FileText className="w-5 h-5" aria-hidden="true" />, label: "SEI!RIO", desc: "Sistema Eletrônico" },
-            { icon: <Calendar className="w-5 h-5" aria-hidden="true" />, label: "V. 1.5", desc: "Fevereiro/2026" },
+            { icon: <Calendar className="w-5 h-5" aria-hidden="true" />, label: GUIDE_VERSION.shortLabel, desc: GUIDE_VERSION.cycleLabel },
           ].map((item, i) => (
             <div 
               key={i} 
@@ -231,7 +232,7 @@ export const HeroCover = () => {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 hero-stagger" style={{ animationDelay: '1.1s' }}>
           <button
-            onClick={() => document.getElementById('secao-2')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById(GUIDE_ANCHORS.checklist)?.scrollIntoView({ behavior: 'smooth' })}
             className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium"
             style={{
               background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 40%) 100%)',

@@ -3,6 +3,7 @@ import { SeiMockup } from "./SeiMockup";
 import { CopyButton } from "./CopyButton";
 import { Callout } from "./Callout";
 import { ProfileCallout } from "./ProfileCallout";
+import { GAD_UNIT, PROCESS_CLASSIFICATION_LABEL, PROCESS_TYPE_LABEL } from "@/lib/guideContent";
 
 export const SectionOne = () => {
   return (
@@ -60,11 +61,16 @@ export const SectionOne = () => {
             <Callout variant="info" title="Tipo de Processo Correto:">
               <div className="flex items-center gap-2 mt-2">
                 <p className="text-foreground font-semibold text-sm sm:text-base flex-1">
-                  GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
+                  {PROCESS_TYPE_LABEL}
                 </p>
-                <CopyButton text="GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC" label="Copiado!" />
+                <CopyButton text={PROCESS_TYPE_LABEL} label="Copiado!" />
               </div>
             </Callout>
+
+            <div className="mt-6">
+              <p className="text-sm font-medium text-foreground mb-3">Exemplo da busca no sistema:</p>
+              <SeiMockup variant="type-selection" />
+            </div>
 
           </div>
         </div>
@@ -82,9 +88,9 @@ export const SectionOne = () => {
               <p className="text-sm text-muted-foreground mb-3">Classificação automática:</p>
               <div className="flex items-center gap-2">
                 <code className="flex-1 bg-background px-4 py-3 rounded-lg border border-border text-sm data-code text-foreground break-all shadow-sm">
-                  03.04.01.02 - PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC
+                  {PROCESS_CLASSIFICATION_LABEL}
                 </code>
-                <CopyButton text="03.04.01.02 - PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC" label="Copiado!" />
+                <CopyButton text={PROCESS_CLASSIFICATION_LABEL} label="Copiado!" />
               </div>
             </div>
           </div>
@@ -184,9 +190,9 @@ export const SectionOne = () => {
             <Callout variant="success" title="Adicione a GAD como interessada:">
               <div className="flex items-center gap-2 mt-2">
                 <code className="flex-1 text-foreground data-code text-sm bg-background/50 px-3 py-2 rounded-lg">
-                  10729 - E/4a.CRE/GAD
+                  {GAD_UNIT.displayLabel}
                 </code>
-                <CopyButton text="10729 - E/4a.CRE/GAD" label="Código copiado!" />
+                <CopyButton text={GAD_UNIT.displayLabel} label="Código copiado!" />
               </div>
             </Callout>
             <Callout variant="info" title="Adicione também a Unidade Escolar:" className="mt-4">

@@ -194,6 +194,7 @@ body::before {
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   /* Premium background gradient */
@@ -252,6 +253,7 @@ body::before {
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   p, li, td, th {

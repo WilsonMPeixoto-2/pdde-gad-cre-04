@@ -7,6 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { signatureActionExamples } from "@/lib/guideContent";
 
 interface InfoDrawerProps {
   trigger?: ReactNode;
@@ -227,22 +228,12 @@ export const AutenticacaoVsAssinaturaContent = () => (
     <div className="p-4 bg-card rounded-xl border border-border/50">
       <h4 className="font-semibold text-foreground mb-3">Quando usar cada um?</h4>
       <div className="space-y-2 text-sm">
-        <div className="flex items-center gap-2">
-          <FileCheck className="w-4 h-4 text-primary" />
-          <span className="text-foreground"><strong>Despacho de Encaminhamento:</strong> Assinar</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FileCheck className="w-4 h-4 text-primary" />
-          <span className="text-foreground"><strong>Demonstrativo de Despesas:</strong> Assinar</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FileCheck className="w-4 h-4 text-success" />
-          <span className="text-foreground"><strong>Nota Fiscal (PDF externo):</strong> Autenticar</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FileCheck className="w-4 h-4 text-success" />
-          <span className="text-foreground"><strong>Comprovante de Pagamento:</strong> Autenticar</span>
-        </div>
+        {signatureActionExamples.map((item) => (
+          <div key={item.label} className="flex items-center gap-2">
+            <FileCheck className={`w-4 h-4 ${item.tone === "signature" ? "text-primary" : "text-success"}`} />
+            <span className="text-foreground"><strong>{item.label}:</strong> {item.action}</span>
+          </div>
+        ))}
       </div>
     </div>
 

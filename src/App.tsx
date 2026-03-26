@@ -12,17 +12,25 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Register Service Worker
 const registerSW = () => {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then((registration) => {
-          if (import.meta.env.DEV) console.log('[SW] Registered:', registration.scope);
-        })
-        .catch((error) => {
-          if (import.meta.env.DEV) console.warn('[SW] Registration failed:', error);
-        });
+  if (!("serviceWorker" in navigator)) return;
+
+  if (!import.meta.env.PROD) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      registrations.forEach((registration) => registration.unregister());
     });
+    return;
   }
+
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        if (import.meta.env.DEV) console.log("[SW] Registered:", registration.scope);
+      })
+      .catch((error) => {
+        if (import.meta.env.DEV) console.warn("[SW] Registration failed:", error);
+      });
+  });
 };
 
 const App = () => {

@@ -1,78 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { CheckCircle2, Circle, ChevronRight, AlertTriangle, FileText, Upload, Shield, PenTool, Send, FolderOpen } from "lucide-react";
+import { CheckCircle2, ChevronRight, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
-
-interface JourneyStep {
-  id: string;
-  number: number;
-  title: string;
-  description: string;
-  sectionId: string;
-  icon: React.ReactNode;
-  dependencies: string[];
-  criticalNote?: string;
-}
+import { type ProcessFlowStep, processFlowSteps } from "@/lib/guideContent";
 
 const STORAGE_KEY = "pdde-journey-progress-v1";
-
-const steps: JourneyStep[] = [
-  {
-    id: "abertura",
-    number: 1,
-    title: "Abertura do Processo",
-    description: "Criar processo no SEI!RIO com tipo e numeração corretos",
-    sectionId: "secao-1",
-    icon: <FolderOpen className="w-4 h-4" />,
-    dependencies: [],
-  },
-  {
-    id: "instrucao",
-    number: 2,
-    title: "Instrução Processual",
-    description: "Reunir todos os documentos do checklist mínimo",
-    sectionId: "secao-2",
-    icon: <FileText className="w-4 h-4" />,
-    dependencies: ["abertura"],
-    criticalNote: "Mínimo 3 cotações obrigatórias",
-  },
-  {
-    id: "documentos",
-    number: 3,
-    title: "Inclusão de Documentos",
-    description: "Incluir documentos externos (digitalizados e nato digitais)",
-    sectionId: "secao-3",
-    icon: <Upload className="w-4 h-4" />,
-    dependencies: ["instrucao"],
-  },
-  {
-    id: "autenticacao",
-    number: 4,
-    title: "Autenticação",
-    description: "Autenticar documentos externos no SEI!RIO",
-    sectionId: "secao-4",
-    icon: <Shield className="w-4 h-4" />,
-    dependencies: ["documentos"],
-    criticalNote: "Documentos sem autenticação podem ser glosados",
-  },
-  {
-    id: "assinatura",
-    number: 5,
-    title: "Bloco de Assinatura",
-    description: "Criar bloco e disponibilizar para a escola assinar",
-    sectionId: "secao-5",
-    icon: <PenTool className="w-4 h-4" />,
-    dependencies: ["autenticacao"],
-  },
-  {
-    id: "despacho",
-    number: 6,
-    title: "Despacho e Finalização",
-    description: "Despachos da GAD e do Coordenador para aprovação",
-    sectionId: "secao-6",
-    icon: <Send className="w-4 h-4" />,
-    dependencies: ["assinatura"],
-  },
-];
+const steps = processFlowSteps;
 
 export const ProcessJourneyMap = () => {
   const [completed, setCompleted] = useState<Set<string>>(() => {
@@ -88,11 +20,11 @@ export const ProcessJourneyMap = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
   }, [completed]);
 
-  const canComplete = useCallback((step: JourneyStep) => {
+  const canComplete = useCallback((step: ProcessFlowStep) => {
     return step.dependencies.every(dep => completed.has(dep));
   }, [completed]);
 
-  const toggleStep = useCallback((step: JourneyStep) => {
+  const toggleStep = useCallback((step: ProcessFlowStep) => {
     if (completed.has(step.id)) {
       // Check if any later step depends on this and is completed
       const dependents = steps.filter(s => s.dependencies.includes(step.id) && completed.has(s.id));
@@ -220,7 +152,7 @@ export const ProcessJourneyMap = () => {
                         </p>
                       </div>
                       <span className={`shrink-0 ${isCompleted ? "text-success" : "text-muted-foreground"}`}>
-                        {step.icon}
+                        <step.icon className="w-4 h-4" />
                       </span>
                     </div>
 

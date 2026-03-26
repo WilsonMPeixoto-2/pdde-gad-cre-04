@@ -8,16 +8,17 @@ import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { SectionOne } from "@/components/pop/SectionOne";
-import { SectionTwo } from "@/components/pop/SectionTwo";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
+import { guideSectionIds, guideSectionsById } from "@/lib/guideContent";
 
 // Lazy load non-critical interactive widgets
 const BackToTop = lazy(() => import("@/components/pop/BackToTop").then(m => ({ default: m.BackToTop })));
 const GuidedWizard = lazy(() => import("@/components/pop/GuidedWizard").then(m => ({ default: m.GuidedWizard })));
 
 // Lazy load below-the-fold sections for better initial load performance
+const SectionTwo = lazy(() => import("@/components/pop/SectionTwo").then(m => ({ default: m.SectionTwo })));
 const SectionThree = lazy(() => import("@/components/pop/SectionThree").then(m => ({ default: m.SectionThree })));
 const SectionFour = lazy(() => import("@/components/pop/SectionFour").then(m => ({ default: m.SectionFour })));
 const SectionFive = lazy(() => import("@/components/pop/SectionFive").then(m => ({ default: m.SectionFive })));
@@ -39,6 +40,18 @@ const SectionLoader = () => (
 const Index = () => {
   const [activeSection, setActiveSection] = useState("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const renderSectionDivider = (sectionId: string) => {
+    const section = guideSectionsById[sectionId];
+    return (
+      <SectionDivider
+        number={section.number}
+        title={section.title}
+        subtitle={section.subtitle ?? ""}
+        icon={section.icon}
+      />
+    );
+  };
 
   const handleSectionClick = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -77,7 +90,6 @@ const Index = () => {
 
   // IntersectionObserver replaces scroll listener — no reflows, passive detection
   useEffect(() => {
-    const sectionIds = ["introducao", "secao-1", "secao-2", "secao-3", "secao-4", "secao-5", "secao-6", "contatos", "anexo"];
     const visibleSections = new Map<string, number>();
 
     const observer = new IntersectionObserver(
@@ -90,7 +102,7 @@ const Index = () => {
           }
         }
         // Pick the first visible section in document order
-        for (const id of sectionIds) {
+        for (const id of guideSectionIds) {
           if (visibleSections.has(id)) {
             setActiveSection(id);
             break;
@@ -100,7 +112,7 @@ const Index = () => {
       { rootMargin: '-80px 0px -50% 0px', threshold: [0, 0.1, 0.3] }
     );
 
-    for (const id of sectionIds) {
+    for (const id of guideSectionIds) {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     }
@@ -109,7 +121,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-clip">
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
 
@@ -146,21 +158,23 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="1" title="Abertura do Processo" subtitle="Acesso ao SEI!RIO, criação do processo, numeração e identificação" icon={ClipboardList} />
+                {renderSectionDivider("secao-1")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <SectionOne />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="2" title="Instrução Processual" subtitle="Documentos exigidos para a prestação de contas do PDDE" icon={FileText} />
+                {renderSectionDivider("secao-2")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionTwo />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionTwo />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="3" title="Inclusão de Documentos Externos" subtitle="Como incluir documentos digitalizados e nato digitais no SEI!RIO" icon={Upload} />
+                {renderSectionDivider("secao-3")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <Suspense fallback={<SectionLoader />}>
@@ -169,7 +183,7 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="4" title="Autenticação de Documentos" subtitle="Procedimento para autenticar documentos externos no SEI!RIO" icon={FileText} />
+                {renderSectionDivider("secao-4")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <Suspense fallback={<SectionLoader />}>
@@ -178,7 +192,7 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="5" title="Bloco de Assinatura" subtitle="Criação do bloco de assinatura e disponibilização para a escola" icon={CheckCircle} />
+                {renderSectionDivider("secao-5")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <Suspense fallback={<SectionLoader />}>
@@ -187,7 +201,7 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="6" title="Despacho e Finalização" subtitle="Despachos da GAD e do Coordenador para aprovação" icon={FileText} />
+                {renderSectionDivider("secao-6")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <Suspense fallback={<SectionLoader />}>
@@ -196,7 +210,7 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="7" title="Contatos" subtitle="Canais de atendimento e suporte da GAD/4ª CRE" icon={Phone} />
+                {renderSectionDivider("contatos")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <Suspense fallback={<SectionLoader />}>
@@ -205,7 +219,7 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
-                <SectionDivider number="A" title="Anexo" subtitle="Legislação de referência e documentos exigidos" icon={Scale} />
+                {renderSectionDivider("anexo")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
                 <Suspense fallback={<SectionLoader />}>

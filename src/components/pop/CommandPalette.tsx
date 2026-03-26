@@ -65,7 +65,7 @@ export function CommandPalette() {
             Nenhum resultado para "{query}"
           </p>
           <p className="text-xs text-muted-foreground/70 mt-1">
-            Tente termos como "NUP", "Despacho", "GAD"
+            Tente termos como "tipo de processo", "checklist" ou "GAD"
           </p>
         </CommandEmpty>
 

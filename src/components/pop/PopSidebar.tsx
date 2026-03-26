@@ -1,26 +1,8 @@
-import { ChevronRight, FileText, ClipboardList, Upload, CheckCircle, Phone, X, Scale } from "lucide-react";
+import { ChevronRight, CheckCircle, FileText, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState, useCallback, useRef } from "react";
-
-interface Section {
-  id: string;
-  number: string;
-  title: string;
-  icon: React.ReactNode;
-}
-
-const sections: Section[] = [
-  { id: "introducao", number: "0", title: "Apresentação", icon: <FileText className="w-4 h-4" /> },
-  { id: "secao-1", number: "1", title: "Abertura do Processo", icon: <ClipboardList className="w-4 h-4" /> },
-  { id: "secao-2", number: "2", title: "Instrução Processual", icon: <FileText className="w-4 h-4" /> },
-  { id: "secao-3", number: "3", title: "Inclusão de Documentos", icon: <Upload className="w-4 h-4" /> },
-  { id: "secao-4", number: "4", title: "Autenticação de Documentos", icon: <FileText className="w-4 h-4" /> },
-  { id: "secao-5", number: "5", title: "Conferência e Envio", icon: <CheckCircle className="w-4 h-4" /> },
-  { id: "secao-6", number: "6", title: "Despacho e Finalização", icon: <FileText className="w-4 h-4" /> },
-  { id: "contatos", number: "7", title: "Contatos", icon: <Phone className="w-4 h-4" /> },
-  { id: "anexo", number: "A", title: "Anexo - Legislação", icon: <Scale className="w-4 h-4" /> },
-];
+import { GUIDE_VERSION, guideSections } from "@/lib/guideContent";
 
 /** Uses IntersectionObserver for scroll progress instead of getBoundingClientRect in loop */
 function useSectionProgress() {
@@ -30,7 +12,7 @@ function useSectionProgress() {
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    for (const s of sections) {
+    for (const s of guideSections) {
       const el = document.getElementById(s.id);
       if (!el) continue;
 
@@ -127,7 +109,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
               Sumário
             </p>
             <ul className="space-y-1" role="list" aria-labelledby="nav-heading">
-              {sections.map((section) => {
+              {guideSections.map((section) => {
                 const sectionProgress = progress[section.id] ?? 0;
                 const isActive = activeSection === section.id;
                 const isRead = sectionProgress >= 0.95;
@@ -178,7 +160,10 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                           section.number
                         )}
                       </span>
-                      <span className="flex-1 text-sm font-medium leading-tight">{section.title}</span>
+                      <span className="flex items-center gap-2 flex-1 min-w-0">
+                        <section.icon className="w-4 h-4 shrink-0" aria-hidden="true" />
+                        <span className="text-sm font-medium leading-tight">{section.shortTitle}</span>
+                      </span>
                       <ChevronRight className={cn(
                         "w-4 h-4 transition-all duration-200 opacity-0 group-hover:opacity-100",
                         isActive && "opacity-100 rotate-90"
@@ -194,7 +179,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
           <div className="p-4 border-t border-sidebar-border/30">
             <div className="text-[10px] text-sidebar-foreground/40 text-center space-y-0.5">
               <p className="font-semibold">4ª CRE - GAD</p>
-              <p>Versão 1.5 - Fevereiro/2026</p>
+              <p>{`Versão ${GUIDE_VERSION.number} - ${GUIDE_VERSION.cycleLabel}`}</p>
             </div>
           </div>
         </div>

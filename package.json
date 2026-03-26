@@ -1,7 +1,7 @@
 {
   "name": "pdde-gad-cre-04",
   "private": true,
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Guia institucional da 4a CRE para prestacao de contas do PDDE no SEI!RIO.",
   "type": "module",
   "scripts": {

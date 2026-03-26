@@ -1,4 +1,5 @@
 import { Building2, Calendar, Phone, Mail, Linkedin } from "lucide-react";
+import { GUIDE_VERSION } from "@/lib/guideContent";
 
 export const DocumentFooter = () => {
   return (
@@ -44,7 +45,7 @@ export const DocumentFooter = () => {
           {/* Version Info */}
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Calendar className="w-4 h-4" />
-            <span className="text-sm tracking-wide">Última atualização: Fevereiro de 2026</span>
+            <span className="text-sm tracking-wide">{`Última atualização: ${GUIDE_VERSION.lastUpdatedText}`}</span>
           </div>
 
           {/* Divider */}

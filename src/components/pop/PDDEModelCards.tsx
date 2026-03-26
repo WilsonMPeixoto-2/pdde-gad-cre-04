@@ -15,18 +15,38 @@ interface PDDEModel {
   fileSize: string;
   icon: React.ReactNode;
   category: "instrucao" | "financeiro" | "parecer";
+  status: "atualizado" | "modelo" | "referencia" | "complementar";
 }
 
 const models: PDDEModel[] = [
-  { title: "Ofício de Prestação de Contas PDDE", description: "Modelo para formalização da prestação de contas", href: "/models/MODELO_DE_OFICIO_PDDE.pdf", fileName: "MODELO_DE_OFICIO_PDDE.pdf", fileSize: "~120 KB", icon: <FileText className="w-5 h-5" />, category: "instrucao" },
-  { title: "Planejamento com Ata", description: "Planejamento e ata de reunião do Conselho Escolar", href: "/models/PLANEJAMENTO_COM_ATA.pdf", fileName: "PLANEJAMENTO_COM_ATA.pdf", fileSize: "~95 KB", icon: <ClipboardList className="w-5 h-5" />, category: "instrucao" },
-  { title: "Consolidação de Pesquisa de Preços", description: "Consolidar cotações e justificar escolha de fornecedor", href: "/models/CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf", fileName: "CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf", fileSize: "~110 KB", icon: <FileCheck className="w-5 h-5" />, category: "instrucao" },
-  { title: "Demonstrativo de Despesa", description: "Demonstração das despesas realizadas com recursos do PDDE", href: "/models/DEMONSTRATIVO_DE_DESPESA.pdf", fileName: "DEMONSTRATIVO_DE_DESPESA.pdf", fileSize: "~130 KB", icon: <FileSpreadsheet className="w-5 h-5" />, category: "financeiro" },
-  { title: "Nota Fiscal Eletrônica — DANFE", description: "Referência para Notas Fiscais Eletrônicas", href: "/models/NOTA_FISCAL_ELETRONICA_DANFE.pdf", fileName: "NOTA_FISCAL_ELETRONICA_DANFE.pdf", fileSize: "~85 KB", icon: <Receipt className="w-5 h-5" />, category: "financeiro" },
-  { title: "Extrato de Conta Corrente", description: "Extrato bancário da conta corrente do PDDE", href: "/models/EXTRATO_CONTA_CORRENTE.pdf", fileName: "EXTRATO_CONTA_CORRENTE.pdf", fileSize: "~70 KB", icon: <Building2 className="w-5 h-5" />, category: "financeiro" },
-  { title: "Extrato de Aplicação", description: "Extrato de aplicação financeira dos recursos", href: "/models/EXTRATO_APLICACAO.pdf", fileName: "EXTRATO_APLICACAO.pdf", fileSize: "~65 KB", icon: <Building2 className="w-5 h-5" />, category: "financeiro" },
-  { title: "Parecer do Conselho", description: "Parecer conclusivo do Conselho Escolar", href: "/models/PARECER_DO_CONSELHO.pdf", fileName: "PARECER_DO_CONSELHO.pdf", fileSize: "~100 KB", icon: <FileCheck className="w-5 h-5" />, category: "parecer" },
+  { title: "Ofício de Prestação de Contas PDDE", description: "Modelo enxuto de encaminhamento, alinhado ao núcleo mínimo federal vigente", href: "/models/MODELO_DE_OFICIO_PDDE.pdf", fileName: "MODELO_DE_OFICIO_PDDE.pdf", fileSize: "~120 KB", icon: <FileText className="w-5 h-5" />, category: "instrucao", status: "atualizado" },
+  { title: "Planejamento com Ata", description: "Exemplo de planejamento/ata para definição das prioridades do gasto", href: "/models/PLANEJAMENTO_COM_ATA.pdf", fileName: "PLANEJAMENTO_COM_ATA.pdf", fileSize: "~95 KB", icon: <ClipboardList className="w-5 h-5" />, category: "instrucao", status: "modelo" },
+  { title: "Consolidação de Pesquisa de Preços", description: "Modelo base para consolidar cotações e justificar a escolha do fornecedor", href: "/models/CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf", fileName: "CONSOLIDACAO_DE_PESQUISA_DE_PRECOS.pdf", fileSize: "~110 KB", icon: <FileCheck className="w-5 h-5" />, category: "instrucao", status: "modelo" },
+  { title: "Demonstrativo de Despesa", description: "Referência histórica de demonstrativo; confirme o registro federal exigido no exercício", href: "/models/DEMONSTRATIVO_DE_DESPESA.pdf", fileName: "DEMONSTRATIVO_DE_DESPESA.pdf", fileSize: "~130 KB", icon: <FileSpreadsheet className="w-5 h-5" />, category: "financeiro", status: "referencia" },
+  { title: "Nota Fiscal Eletrônica — DANFE", description: "Referência visual para conferência de Nota Fiscal Eletrônica", href: "/models/NOTA_FISCAL_ELETRONICA_DANFE.pdf", fileName: "NOTA_FISCAL_ELETRONICA_DANFE.pdf", fileSize: "~85 KB", icon: <Receipt className="w-5 h-5" />, category: "financeiro", status: "referencia" },
+  { title: "Extrato de Conta Corrente", description: "Referência visual do extrato bancário da conta corrente do PDDE", href: "/models/EXTRATO_CONTA_CORRENTE.pdf", fileName: "EXTRATO_CONTA_CORRENTE.pdf", fileSize: "~70 KB", icon: <Building2 className="w-5 h-5" />, category: "financeiro", status: "referencia" },
+  { title: "Extrato de Aplicação", description: "Referência visual do extrato de aplicação financeira dos recursos", href: "/models/EXTRATO_APLICACAO.pdf", fileName: "EXTRATO_APLICACAO.pdf", fileSize: "~65 KB", icon: <Building2 className="w-5 h-5" />, category: "financeiro", status: "referencia" },
+  { title: "Parecer do Conselho", description: "Peça complementar/local de deliberação, quando adotada no fluxo da CRE/CEC", href: "/models/PARECER_DO_CONSELHO.pdf", fileName: "PARECER_DO_CONSELHO.pdf", fileSize: "~100 KB", icon: <FileCheck className="w-5 h-5" />, category: "parecer", status: "complementar" },
 ];
+
+const statusMeta: Record<PDDEModel["status"], { label: string; className: string }> = {
+  atualizado: {
+    label: "Atualizado",
+    className: "bg-success/10 text-success border-success/20",
+  },
+  modelo: {
+    label: "Modelo base",
+    className: "bg-primary/10 text-primary border-primary/20",
+  },
+  referencia: {
+    label: "Referência",
+    className: "bg-muted text-muted-foreground border-border/60",
+  },
+  complementar: {
+    label: "Complementar",
+    className: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800/40",
+  },
+};
 
 const categoryLabels: Record<PDDEModel["category"], { label: string; color: string; bgColor: string; iconBg: string; iconColor: string; accent: string }> = {
   instrucao: {
@@ -81,7 +101,7 @@ export const PDDEModelCards = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-8">
         <h3 className="section-heading text-foreground mb-0 border-b-0 pb-0">
-          Modelos de Documentos
+          Modelos e Referências de Documentos
         </h3>
         <TooltipProvider>
           <Tooltip>
@@ -93,7 +113,7 @@ export const PDDEModelCards = () => {
                 className="gap-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary/40 transition-all duration-400 btn-premium hover:scale-[1.02]"
               >
                 <FolderDown className="w-4 h-4" />
-                <span>Baixar todos ({models.length})</span>
+                <span>Abrir todos ({models.length})</span>
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -101,6 +121,10 @@ export const PDDEModelCards = () => {
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
+      </div>
+
+      <div className="mb-6 rounded-[1.35rem] border border-amber-200/70 bg-amber-50/80 p-4 text-sm text-foreground shadow-sm dark:border-amber-800/40 dark:bg-amber-950/25">
+        O <strong className="text-foreground">núcleo mínimo obrigatório</strong> continua sendo o do art. 33 da <strong className="text-foreground">Resolução CD/FNDE nº 15/2021</strong>. Os PDFs abaixo servem como apoio visual e exemplos de peças usuais; quando houver conflito entre um modelo local e a regra federal vigente, prevalece a disciplina do FNDE e o registro federal aplicável ao exercício.
       </div>
 
       {/* Grouped cards */}
@@ -143,9 +167,14 @@ export const PDDEModelCards = () => {
                       </div>
                       {/* Info */}
                       <div className="min-w-0">
-                        <h4 className="font-heading font-semibold text-foreground text-[15px] leading-tight" style={{ letterSpacing: '-0.01em' }}>
-                          {doc.title}
-                        </h4>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h4 className="font-heading font-semibold text-foreground text-[15px] leading-tight" style={{ letterSpacing: '-0.01em' }}>
+                            {doc.title}
+                          </h4>
+                          <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${statusMeta[doc.status].className}`}>
+                            {statusMeta[doc.status].label}
+                          </span>
+                        </div>
                         <p className="text-xs text-muted-foreground leading-relaxed mt-1">
                           {doc.description}
                         </p>
@@ -179,7 +208,7 @@ export const PDDEModelCards = () => {
                               className="flex items-center gap-2"
                             >
                               <Download className="w-3.5 h-3.5" />
-                              <span className="font-medium">Baixar PDF</span>
+                              <span className="font-medium">Abrir PDF</span>
                             </a>
                           </Button>
                         </TooltipTrigger>

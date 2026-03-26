@@ -11,21 +11,21 @@ interface ChecklistItem {
 }
 
 const initialItems: ChecklistItem[] = [
-  // Rol mínimo/essencial (Resolução CD/FNDE nº 15/2021, Art. 33)
+  // Rol mínimo/essencial (Resolução CD/FNDE nº 15/2021, art. 33, somado às rotinas de conferência interna)
   { id: 1, text: "Rol de materiais, bens e serviços priorizados (planejamento do gasto aprovado pelo Conselho/CEC)", checked: false },
-  { id: 2, text: "Consolidação das pesquisas de preços — mínimo 3 cotações por item (ou justificativa pela não realização / uso de SRP)", checked: false },
-  { id: 3, text: "Demonstrativo de execução da receita e da despesa e de pagamentos efetuados — gerado pelo SiGPC/Contas Online", checked: false },
+  { id: 2, text: "Consolidação das pesquisas de preços — 3 orçamentos quando viável, ou justificativa idônea para quantidade inferior / uso documentado de SRP", checked: false },
+  { id: 3, text: "Demonstrativo/registro federal da execução da receita, da despesa e dos pagamentos, conforme a ferramenta exigida pelo FNDE no exercício", checked: false },
   { id: 4, text: "Extratos bancários da conta do PDDE e das aplicações financeiras (período integral do exercício)", checked: false },
   { id: 5, text: "Conciliação bancária (obrigatória quando houver divergência entre extrato e demonstrativo, ou saldo em 31/12)", checked: false },
-  { id: 6, text: "Documentos comprobatórios das despesas (NF/DANFE/cupom fiscal/recibos/RPA) + comprovantes de pagamento", checked: false },
+  { id: 6, text: "Documentos comprobatórios das despesas (NF/DANFE/cupom fiscal/recibos/RPA), com atesto do recebimento/execução e comprovantes de pagamento", checked: false },
   { id: 7, text: "Atas de aprovação do plano de gastos e da prestação de contas pelo Conselho Escolar/CEC", checked: false },
   // Complementares (quando aplicável)
-  { id: 8, text: "Atesto/termo de recebimento e/ou evidência de entrega/execução (carimbo/declaração/fotos)", checked: false, complementar: true },
-  { id: 9, text: "Relação de bens adquiridos ou produzidos (obrigatório quando houver despesa de capital)", checked: false, complementar: true },
-  { id: 10, text: "Controle patrimonial — providência de incorporação dos bens ao patrimônio da escola (despesas de capital)", checked: false, complementar: true },
+  { id: 8, text: "Evidência complementar de entrega/execução (declaração, fotos, laudo ou termo específico), quando o objeto exigir comprovação material adicional", checked: false, complementar: true },
+  { id: 9, text: "Relação de bens adquiridos ou produzidos, quando houver despesa de capital ou bem patrimonializável", checked: false, complementar: true },
+  { id: 10, text: "Controle patrimonial — providência de incorporação/registro do bem conforme a rotina da EEx ou do patrimônio escolar", checked: false, complementar: true },
   { id: 11, text: "Comprovante de devolução/recolhimento de saldo ao FNDE (quando houver restituição)", checked: false, complementar: true },
-  { id: 12, text: "Comprovante/protocolo de envio/registro no SiGPC/Contas Online (print ou recibo do sistema)", checked: false, complementar: true },
-  { id: 13, text: "Termo de doação (quando houver doação de bens à escola pública vinculada)", checked: false, complementar: true },
+  { id: 12, text: "Comprovante do registro federal aplicável ao exercício (por exemplo, BB Gestão Ágil e rotinas correlatas), se exigido pela EEx ou pelo controle interno", checked: false, complementar: true },
+  { id: 13, text: "Termo de doação ou instrumento patrimonial equivalente, quando exigido pela EEx ou pelo controle patrimonial local", checked: false, complementar: true },
 ];
 
 type FilterType = 'todos' | 'pendentes' | 'concluidos' | 'essenciais' | 'complementares';
@@ -186,7 +186,7 @@ export const PDDEChecklist = () => {
 
       {/* Intro */}
       <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-        Este é o <strong className="text-foreground">rol MÍNIMO/ESSENCIAL</strong> de documentos conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 33)</strong>. Podem existir peças complementares conforme a ação do PDDE e orientações do FNDE.
+        Este checklist reúne o <strong className="text-foreground">núcleo documental mínimo</strong> da <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (art. 33)</strong> com pontos usuais de conferência da EEx/controle interno. Pesquisa de preços admite exceções justificadas, e peças patrimoniais ou complementares podem variar conforme a ação do PDDE, o exercício e as orientações federais ou locais vigentes.
       </p>
 
       {/* Progress Bar */}

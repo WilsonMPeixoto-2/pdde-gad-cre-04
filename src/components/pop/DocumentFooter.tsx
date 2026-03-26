@@ -1,4 +1,4 @@
-import { Building2, Calendar, Phone, Mail, Linkedin } from "lucide-react";
+import { Building2, Calendar } from "lucide-react";
 import { GUIDE_VERSION } from "@/lib/guideContent";
 
 export const DocumentFooter = () => {
@@ -81,51 +81,10 @@ export const DocumentFooter = () => {
         </div>
       </div>
 
-      {/* Author Signature */}
-      <div className="mt-10 relative">
-        <div className="relative overflow-hidden rounded-xl text-center py-8 px-6 border border-border/30" style={{
-          background: 'linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--secondary) / 0.5) 100%)',
-        }}>
-          {/* Subtle glow */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] h-[100px] max-sm:w-[100px] max-sm:h-[50px] rounded-full blur-[60px] max-sm:blur-[30px]" style={{
-            background: 'hsl(var(--primary) / 0.06)'
-          }} />
-
-          <div className="relative space-y-3">
-            <div className="w-12 h-0.5 mx-auto rounded-full mb-4" style={{
-              background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.4), transparent)'
-            }} />
-
-            <p className="text-[10px] text-muted-foreground tracking-[0.25em] uppercase font-medium">Desenvolvido por</p>
-            
-            <p className="font-heading font-bold text-foreground tracking-tight text-base" style={{
-              background: 'linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>Wilson M. Peixoto <span className="font-normal text-sm" style={{
-              background: 'none',
-              WebkitBackgroundClip: 'unset',
-              WebkitTextFillColor: 'hsl(var(--muted-foreground))',
-            }}>- SME/RJ</span></p>
-            
-            <p className="text-xs text-muted-foreground italic tracking-wide">Inovação para a Gestão Pública</p>
-
-            <div className="flex items-center justify-center gap-5 pt-3 flex-wrap">
-              <a href="tel:+5521994974132" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
-                <Phone className="w-3.5 h-3.5" />
-                <span>(21) 99497-4132</span>
-              </a>
-              <a href="mailto:wilsonmp2@gmail.com" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
-                <Mail className="w-3.5 h-3.5" />
-                <span>wilsonmp2@gmail.com</span>
-              </a>
-              <a href="https://www.linkedin.com/in/wilson-peixoto/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">
-                <Linkedin className="w-3.5 h-3.5" />
-                <span>LinkedIn</span>
-              </a>
-            </div>
-          </div>
-        </div>
+      <div className="mt-8">
+        <p className="text-center text-xs text-muted-foreground tracking-wide">
+          Guia institucional da 4ª CRE para a instrução processual da prestação de contas do PDDE no SEI!RIO.
+        </p>
       </div>
     </div>
   );

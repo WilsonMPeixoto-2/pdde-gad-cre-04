@@ -72,7 +72,7 @@ const templates: Template[] = [
       `Trata-se de prestação de contas dos recursos do PDDE, exercício ${v.exercicio || "[ANO]"}, ` +
       `encaminhada pela ${v.escola || "[ESCOLA]"}.\n\n` +
       `Após análise da documentação constante nos autos, verificou-se que:\n\n` +
-      `( ) A prestação de contas está REGULAR e em conformidade com a Resolução CD/FNDE nº 15/2021.\n` +
+      `( ) A prestação de contas está REGULAR, com os documentos essenciais apresentados e sem inconsistência aparente em relação aos registros federais aplicáveis.\n` +
       `( ) A prestação de contas apresenta PENDÊNCIA(S), conforme apontamentos abaixo.\n\n` +
       `Observações:\n` +
       `_______________________________________________\n\n` +

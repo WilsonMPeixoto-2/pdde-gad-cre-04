@@ -12,7 +12,7 @@ export const GuidedWizard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [isDockVisible, setIsDockVisible] = useState(() =>
-    typeof window !== "undefined" ? window.matchMedia("(min-width: 640px)").matches || window.scrollY > 320 : true
+    typeof window !== "undefined" ? window.scrollY > 360 : false
   );
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(() => {
     if (typeof window !== "undefined") {
@@ -38,7 +38,7 @@ export const GuidedWizard = () => {
     const mediaQuery = window.matchMedia("(min-width: 640px)");
 
     const syncDockVisibility = () => {
-      setIsDockVisible(mediaQuery.matches || window.scrollY > 320);
+      setIsDockVisible(window.scrollY > (mediaQuery.matches ? 280 : 360));
     };
 
     syncDockVisibility();

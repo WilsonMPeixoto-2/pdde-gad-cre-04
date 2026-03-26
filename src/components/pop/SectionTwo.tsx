@@ -65,7 +65,7 @@ export const SectionTwo = () => {
             <ul className="space-y-1.5 text-foreground/80 text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400">•</span>
-                <span>Não realizar as <strong className="text-foreground">3 pesquisas de preços obrigatórias</strong> (Res. FNDE 15/2021, Art. 17)</span>
+                <span>Não comprovar a <strong className="text-foreground">pesquisa de preços</strong> com 3 orçamentos, justificativa idônea para número inferior ou documentação válida de SRP (Res. FNDE 15/2021, arts. 21 a 23)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400">•</span>
@@ -77,7 +77,7 @@ export const SectionTwo = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400">•</span>
-                <span>Não registrar a prestação de contas no <strong className="text-foreground">SiGPC/Contas Online</strong></span>
+                <span>Não manter coerência entre o processo, o <strong className="text-foreground">BB Gestão Ágil</strong> e os demais registros federais aplicáveis</span>
               </li>
             </ul>
           </div>
@@ -89,7 +89,7 @@ export const SectionTwo = () => {
         Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme for reunindo — o progresso é salvo automaticamente no seu navegador.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-4">
-        Verifique se todas as 3 cotações de preços estão anexadas e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
+        Verifique se a pesquisa de preços está comprovada com 3 orçamentos, justificativa idônea para número inferior ou SRP documentado, e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
       </ProfileCallout>
 
       {/* Checklist de Documentos PDDE */}
@@ -116,15 +116,15 @@ export const SectionTwo = () => {
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Use <strong className="text-foreground">sites nacionais confiáveis</strong> e registre a cotação com print contendo: <strong className="text-sky-600 dark:text-sky-400">descrição completa, preço final e frete</strong>.</span>
+                <span className="text-left sm:text-justify">Use fornecedor <strong className="text-foreground">identificável e compatível com o objeto</strong> e salve a evidência da oferta com <strong className="text-sky-600 dark:text-sky-400">descrição completa, valor total e frete</strong>.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Compare o <strong className="text-foreground">valor total</strong> (incluindo frete) e registre o critério da escolha.</span>
+                <span className="text-left sm:text-justify">Registre o <strong className="text-foreground">critério da escolha</strong>, guarde a confirmação do pedido e mantenha a NF, o comprovante de pagamento e a prova de entrega/execução.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Guarde o <strong className="text-foreground">comprovante de pagamento</strong> identificando o fornecedor vencedor.</span>
+                <span className="text-left sm:text-justify">Fora da hipótese excepcional do <strong className="text-foreground">comércio eletrônico</strong>, evite pagamento antes da entrega/execução devidamente atestada.</span>
               </li>
             </ul>
           </div>
@@ -138,11 +138,11 @@ export const SectionTwo = () => {
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Se a <strong className="text-foreground">UEx/EM</strong> usar SRP (adesão a ata), anexe a <strong className="text-sky-600 dark:text-sky-400">ata/acordo</strong> e os documentos do fornecedor.</span>
+                <span className="text-left sm:text-justify">Se a <strong className="text-foreground">UEx/EM</strong> usar SRP, junte a <strong className="text-sky-600 dark:text-sky-400">ata/acordo correspondente</strong> e confira compatibilidade com preço de mercado e prazo de entrega.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Nesse caso, registre no processo que a <strong className="text-foreground">pesquisa de preços foi dispensada</strong> por uso de SRP.</span>
+                <span className="text-left sm:text-justify">Nesse caso, registre no processo a <strong className="text-foreground">opção pelo SRP</strong> e substitua a consolidação de cotações pela documentação da ata/acordo.</span>
               </li>
             </ul>
           </div>
@@ -151,20 +151,20 @@ export const SectionTwo = () => {
           <div className="mb-5">
             <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-3 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-              Pesquisa de preços — regra das 3 cotações
+              Pesquisa de preços — 3 orçamentos como rotina, com exceções justificadas
             </h3>
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 17)</strong>, é obrigatório obter no mínimo <strong className="text-primary">3 cotações de preços</strong> de fornecedores distintos para cada aquisição.</span>
+                <span className="text-left sm:text-justify">A rotina padrão é consolidar os <strong className="text-primary">3 melhores orçamentos</strong> por item ou lote, com escolha motivada e documentação organizada no processo, observando a <strong className="text-foreground">Resolução CD/FNDE nº 15/2021</strong>.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">Quando houver <strong className="text-foreground">múltiplas ações do PDDE</strong> no mesmo exercício, os gastos devem ser <strong className="text-foreground">separados por ação</strong> (rateio de despesas), com controle individualizado.</span>
+                <span className="text-left sm:text-justify">Se não for possível atingir 3 orçamentos, a redução precisa ser <strong className="text-foreground">justificada nos autos</strong> e aprovada pela autoridade competente da UEx/EM.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">A cotação pode ser dispensada quando a UEx utilizar o <strong className="text-foreground">Sistema de Registro de Preços (SRP)</strong>, desde que devidamente documentado.</span>
+                <span className="text-left sm:text-justify">Quando houver <strong className="text-foreground">múltiplas ações do PDDE</strong> no mesmo exercício, os gastos devem ser <strong className="text-foreground">separados por ação</strong>, com controle individualizado.</span>
               </li>
             </ul>
           </div>
@@ -178,7 +178,7 @@ export const SectionTwo = () => {
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-red-700 dark:text-red-400">Não aplicar</strong> recursos em despesas de <strong className="text-foreground">pessoal, contas recorrentes</strong> (água, luz, telefone, aluguel), <strong className="text-foreground">despesas assistencialistas</strong> ou <strong className="text-foreground">gêneros alimentícios</strong> (cobertos pelo PNAE).</span>
+                <span className="text-left sm:text-justify"><strong className="text-red-700 dark:text-red-400">Não aplicar</strong> recursos em despesas de <strong className="text-foreground">pessoal, contas recorrentes</strong> (água, luz, telefone, aluguel), <strong className="text-foreground">despesas assistencialistas</strong> ou, em regra, <strong className="text-foreground">gêneros alimentícios da merenda escolar</strong>, já cobertos pelo PNAE.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-red-600 dark:text-red-400 font-bold">•</span>
@@ -190,7 +190,7 @@ export const SectionTwo = () => {
           {/* Nota explicativa */}
           <div className="p-3 bg-muted rounded-lg border border-border mt-4">
             <p className="text-muted-foreground text-xs sm:text-sm italic text-center">
-              Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes — reduzindo inconsistências e glosas.
+              Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes, reduzindo inconsistências e glosas. A base normativa federal consolidada está resumida no anexo ao final do guia.
             </p>
           </div>
         </div>

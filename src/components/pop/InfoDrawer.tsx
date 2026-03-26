@@ -272,7 +272,7 @@ export const NaturezasDespesaContent = () => (
           </span>
         </div>
         <p className="text-sm text-muted-foreground mt-2">
-          <strong>Exemplos:</strong> Equipamentos, mobiliário, material permanente com vida útil superior a 2 anos.
+          <strong>Exemplos:</strong> Equipamentos, mobiliário e outros bens permanentes sujeitos a incorporação/controle patrimonial.
         </p>
       </div>
     </div>

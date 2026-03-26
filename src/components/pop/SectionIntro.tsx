@@ -22,6 +22,9 @@ export const SectionIntro = () => {
             e dar mais previsibilidade às rotinas.
           </p>
           <p className="text-foreground/85 leading-relaxed text-sm sm:text-base [text-wrap:pretty]">
+            Este guia tem um objetivo prático e delimitado: orientar a <strong className="text-foreground font-semibold">instrução processual da prestação de contas do PDDE no SEI!RIO</strong>. Ele não se propõe a esgotar todas as regras do programa, mas a mostrar, de forma executável, <strong className="text-foreground font-semibold">quais documentos reunir, como preencher as peças mais usuais e como organizar corretamente os autos</strong>.
+          </p>
+          <p className="text-foreground/85 leading-relaxed text-sm sm:text-base [text-wrap:pretty]">
             Este é o primeiro de uma série de documentos de orientação que a 4ª CRE está construindo 
             para apoiar as direções, tanto nos procedimentos de gestão escolar quanto no uso do novo 
             sistema processual SEI!RIO. A cada novo guia, nossa intenção é a mesma: transformar regras 
@@ -43,16 +46,6 @@ export const SectionIntro = () => {
             <p className="font-heading text-sm font-bold text-foreground sm:text-base">Bianca Barreto da Fonseca Coelho</p>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Gerente – E/4ª CRE/GAD</p>
           </div>
-        </div>
-
-        {/* Subtle author byline */}
-        <div className="mt-6 flex items-center justify-center gap-2 opacity-60 transition-opacity duration-500 hover:opacity-90 sm:justify-end">
-          <div className="h-px flex-1 max-w-[60px]" style={{
-            background: 'linear-gradient(90deg, transparent, hsl(var(--border)))'
-          }} />
-          <p className="text-[10px] tracking-wider text-muted-foreground">
-            Elaborado por <span className="font-semibold">Wilson M. Peixoto</span> · SME/RJ
-          </p>
         </div>
       </div>
     </section>

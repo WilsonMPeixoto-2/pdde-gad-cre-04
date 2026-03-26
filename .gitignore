@@ -16,6 +16,10 @@ dist-ssr
 !.env.example
 bun.lockb
 .lovable
+.playwright-cli/
+tmp/
+output-*.png
+tmp-vite-*.log
 
 # Editor directories and files
 .vscode/*

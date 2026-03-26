@@ -8,7 +8,6 @@ import { ProfileModeSelector } from "./ProfileModeSelector";
 
 interface PopHeaderProps {
   onPrint: () => void;
-  onSearch?: (query: string) => void;
   onOpenMenu?: () => void;
 }
 
@@ -192,10 +191,10 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
                 boxShadow: '0 4px 16px -4px hsl(199, 89%, 48%, 0.4)'
               }}
-              aria-label="Baixar documento como PDF"
+              aria-label="Abrir opção de salvar em PDF"
             >
               <Download className="w-4 h-4 mr-2" aria-hidden="true" />
-              <span className="font-medium">Download</span>
+              <span className="font-medium">Salvar em PDF</span>
             </Button>
           </div>
 
@@ -240,7 +239,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={onPrint}>
                   <Printer className="w-4 h-4 mr-2" />
-                  Imprimir / PDF
+                  Imprimir / Salvar em PDF
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={cycleViewMode}>
                   {getViewModeIcon()}

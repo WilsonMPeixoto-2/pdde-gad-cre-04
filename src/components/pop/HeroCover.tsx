@@ -184,7 +184,7 @@ export const HeroCover = () => {
 
           {/* Subtitle */}
           <p 
-            className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed font-light"
+            className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed font-light"
             style={{ textWrap: "pretty" as CSSProperties["textWrap"] }}
           >
             Guia operacional para diretores(as) e gestores(as) escolares na instrução 
@@ -225,7 +225,7 @@ export const HeroCover = () => {
                 <span className="text-accent">{item.icon}</span>
               </div>
               <p className="text-white font-semibold text-sm tracking-wide">{item.label}</p>
-              <p className="text-white/40 text-[11px] mt-0.5 tracking-wide leading-tight">{item.desc}</p>
+              <p className="text-white/50 text-[11px] mt-0.5 tracking-wide leading-tight">{item.desc}</p>
             </div>
           ))}
         </div>

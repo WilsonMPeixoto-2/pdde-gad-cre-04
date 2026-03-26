@@ -12,11 +12,11 @@ import {
 } from "lucide-react";
 
 export const GUIDE_VERSION = {
-  number: "1.6",
-  shortLabel: "V. 1.6",
+  number: "1.9",
+  shortLabel: "V. 1.9",
   cycleLabel: "Março/2026",
-  lastUpdatedText: "25 de março de 2026",
-  publishedIsoDate: "2026-03-25",
+  lastUpdatedText: "26 de março de 2026",
+  publishedIsoDate: "2026-03-26",
 } as const;
 
 export const PROCESS_TYPE_LABEL =
@@ -117,7 +117,7 @@ export const guideSections: GuideSectionMeta[] = [
     number: "A",
     title: "Anexo",
     shortTitle: "Anexo - Legislação",
-    subtitle: "Legislação de referência e documentos exigidos",
+    subtitle: "Escopo do guia, sistemas federais e marcos rápidos de conferência",
     icon: Scale,
   },
 ];
@@ -138,7 +138,7 @@ export const guideHowToSteps = contentSections
 
 export const seiProcessTreeDocuments = [
   { name: "Ofício de encaminhamento da escola", statusLabel: "Assinado", tone: "signed" as const },
-  { name: "Demonstrativo do SiGPC/Contas Online", statusLabel: "Assinado", tone: "signed" as const },
+  { name: "Demonstrativo ou registro federal aplicável ao exercício", statusLabel: "Assinado", tone: "signed" as const },
   { name: "Ata do CEC digitalizada", statusLabel: "Autenticado", tone: "authenticated" as const },
   { name: "Extrato bancário do exercício", statusLabel: "Autenticado", tone: "authenticated" as const },
   { name: "Notas fiscais e comprovantes", statusLabel: "Autenticado", tone: "authenticated" as const },
@@ -204,7 +204,7 @@ export const processFlowSteps: ProcessFlowStep[] = [
     sectionAnchor: "secao-2",
     icon: FileText,
     dependencies: ["abertura"],
-    criticalNote: "Mínimo de 3 cotações, salvo hipótese devidamente justificada.",
+    criticalNote: "Pesquisa de preços com 3 orçamentos como rotina; número inferior só com justificativa idônea ou uso documentado de SRP.",
     whatToDo: [
       "Conferir o checklist mínimo previsto para a prestação de contas",
       "Reunir extratos, atas, notas fiscais e comprovantes de pagamento",
@@ -212,13 +212,13 @@ export const processFlowSteps: ProcessFlowStep[] = [
       "Consultar modelos e preencher as peças padronizadas quando necessário",
     ],
     documents: [
-      "Demonstrativo do SiGPC/Contas Online",
+      "Demonstrativo ou registro federal aplicável ao exercício",
       "Extratos bancários do exercício",
       "Notas fiscais, comprovantes de pagamento e atas do CEC",
     ],
     commonErrors: [
       "Anexar extratos incompletos ou fora do exercício",
-      "Não comprovar as 3 cotações ou a justificativa de dispensa",
+      "Não comprovar a pesquisa de preços com 3 orçamentos, justificativa idônea para número inferior ou SRP documentado",
       "Misturar documentos de ações ou exercícios diferentes no mesmo processo",
     ],
     nextStep: "Inclusão dos documentos externos no SEI!RIO",

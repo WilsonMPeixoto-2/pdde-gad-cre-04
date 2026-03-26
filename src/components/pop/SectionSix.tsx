@@ -21,7 +21,7 @@ const finalizationFlow = [
     step: "2",
     title: "Análise da GAD",
     description:
-      "A GAD confere integridade documental, coerência entre demonstrativos, extratos, comprovantes e registros do processo.",
+      "A GAD confere integridade documental, coerência entre pesquisa de preços, extratos, comprovantes, atestos e registros do processo.",
   },
   {
     step: "3",

@@ -1,516 +1,219 @@
-import { FileText, ExternalLink, Scale, Clock, Receipt, Users, AlertTriangle, CheckCircle2, BookOpen, Gavel, CalendarClock, Check, Ban, Info } from "lucide-react";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Progress } from "@/components/ui/progress";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useDocumentChecklist } from "@/hooks/useDocumentChecklist";
+  ArrowRight,
+  BookOpen,
+  CalendarClock,
+  CheckCircle2,
+  ExternalLink,
+  Laptop,
+  ListChecks,
+  Scale,
+} from "lucide-react";
 import { ProfileCallout } from "./ProfileCallout";
 
+const scopePoints = [
+  "orientar quais documentos inserir no processo de prestação de contas",
+  "apoiar o preenchimento das peças mais usuais da instrução",
+  "mostrar como organizar, autenticar, assinar e remeter os autos no SEI!RIO",
+];
+
+const systemCards = [
+  {
+    title: "Regra federal do gasto",
+    description:
+      "A base principal continua sendo a Lei nº 11.947/2009 e a Resolução CD/FNDE nº 15/2021. É essa camada que define o núcleo mínimo documental, a pesquisa de preços, os comprovantes e a prestação de contas.",
+  },
+  {
+    title: "Registro federal do exercício",
+    description:
+      "O sistema federal pode variar conforme o exercício. Para recursos recebidos em 2024, o FNDE orientou que a UEx preencha o BB Gestão Ágil e que a EEx analise/julgue e consolide os dados no SiGPC.",
+  },
+  {
+    title: "Rito local no Rio",
+    description:
+      "SEI!RIO, manual e circulares internas organizam a autuação, o saneamento, a análise e a remessa do processo. Eles estruturam o fluxo administrativo, mas não alteram a regra federal do PDDE.",
+  },
+];
+
+const checkpoints = [
+  {
+    title: "Prazo UEx -> EEx",
+    text:
+      "Não há prazo nacional único fixado, de forma geral, para a UEx entregar a pasta à EEx. Esse marco deve seguir a orientação da própria EEx e, no Rio, o rito interno vigente.",
+  },
+  {
+    title: "Prazo EEx -> FNDE",
+    text:
+      "O prazo federal estruturante permanece em 30 de abril do exercício subsequente para a EEx ou a entidade mantenedora encaminhar a prestação de contas ao FNDE.",
+  },
+  {
+    title: "Saldos remanescentes",
+    text:
+      "A regra mais rígida de saldo zerado e estorno automático foi esclarecida pelo FNDE como aplicável a novos repasses somente a partir de fevereiro de 2027. Para o exercício de 2026, a reprogramação permanece possível.",
+  },
+];
+
+const officialLinks = [
+  {
+    title: "Resolução CD/FNDE nº 15/2021",
+    description: "Norma principal do PDDE e do núcleo mínimo da prestação de contas.",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view",
+  },
+  {
+    title: "Comunicado PDDE nº 47/2024",
+    description: "Orientação operacional do BB Gestão Ágil e do SiGPC para os recursos recebidos em 2024.",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2024-1/Comunicadon.47_2024Orientaesparaaprestaodecontasdosrecursosrecebidosem2024.pdf",
+  },
+  {
+    title: "Comunicado PDDE nº 01/2026",
+    description: "Esclarecimento oficial do FNDE sobre saldos, estorno e aplicabilidade a partir de 2027.",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2026/comunicado-n-01_2026-alteracoes-na-resolucao-cd-fnde-no-7-2024-estorno-de-recurso.pdf",
+  },
+  {
+    title: "BB Gestão Ágil",
+    description: "Página oficial do FNDE com manual e orientações da ferramenta.",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil",
+  },
+  {
+    title: "Resoluções e Formulários do PDDE",
+    description: "Repositório oficial para acompanhar normas e materiais vigentes do programa.",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/resolucoes-e-formularios",
+  },
+];
+
 export const SectionAnexo = () => {
-  const documentosExigidos = [
-    { documento: "Demonstrativo de execução da receita e da despesa e de pagamentos efetuados (SiGPC/Contas Online)", obrigatorio: true },
-    { documento: "Extratos bancários da conta corrente do PDDE (período integral do exercício)", obrigatorio: true },
-    { documento: "Extratos de aplicação financeira (quando houver rendimentos)", obrigatorio: true },
-    { documento: "Notas fiscais, cupons fiscais, recibos ou DANFE das despesas realizadas", obrigatorio: true },
-    { documento: "Consolidação de pesquisa de preços (mínimo 3 cotações) ou justificativa de dispensa (SRP)", obrigatorio: true },
-    { documento: "Comprovantes de pagamento (transferência bancária, débito em conta)", obrigatorio: true },
-    { documento: "Atas do Conselho Escolar/CEC (aprovação do plano de gastos e da prestação de contas)", obrigatorio: true },
-    { documento: "Conciliação bancária (quando houver divergência entre extrato e demonstrativo)", obrigatorio: false },
-    { documento: "Relação de bens adquiridos ou produzidos (quando houver despesa de capital)", obrigatorio: false },
-    { documento: "Termo de doação (quando aplicável — bens doados à escola pública)", obrigatorio: false },
-    { documento: "Comprovante de devolução/recolhimento de saldo ao FNDE (quando houver)", obrigatorio: false },
-  ];
-
-  const documentNames = documentosExigidos.map(d => d.documento);
-  const { toggleItem, isChecked, progress, checkedCount, totalCount } = useDocumentChecklist(documentNames);
-
-  const regrasComprovantes = [
-    { regra: "Notas fiscais devem ser emitidas em nome da UEx/CEC (CNPJ da entidade executora)", artigo: "Res. 15/2021, Art. 33" },
-    { regra: "Comprovantes devem conter discriminação clara do serviço/material (sem generalização)", artigo: "Res. 15/2021, Art. 33" },
-    { regra: "Comprovantes aceitos somente com data igual ou posterior ao crédito na conta do PDDE", artigo: "Res. 15/2021, Art. 22" },
-    { regra: "Comprovantes não podem conter rasuras, acréscimos ou emendas", artigo: "Res. 15/2021, Art. 33" },
-    { regra: "Pagamentos devem ser realizados exclusivamente por meio da conta bancária específica do PDDE", artigo: "Res. 15/2021, Art. 19" },
-    { regra: "É obrigatória a realização de, no mínimo, 3 pesquisas de preços para cada aquisição", artigo: "Res. 15/2021, Art. 17" },
-    { regra: "A prestação de contas deve ser aprovada pelo Conselho Escolar/CEC em assembleia", artigo: "Res. 15/2021, Art. 30" },
-  ];
-
-  const prazosPrestacao = [
-    { tipo: "uex", situacao: "Prazo UEx → EEx (Entidade Executora → Secretaria)", prazo: "A UEx deve encaminhar a prestação de contas à EEx (Secretaria de Educação) até 28 de fevereiro do exercício subsequente ao do repasse, conforme Resolução CD/FNDE nº 15/2021." },
-    { tipo: "federal", situacao: "Prazo EEx → FNDE", prazo: "A EEx (Secretaria de Educação) deve consolidar e encaminhar as prestações de contas ao FNDE até 30 de abril do exercício subsequente ao do repasse." },
-    { tipo: "interno", situacao: "Prazo INTERNO (SEI!RIO / 4ª CRE)", prazo: "Após finalizar as etapas federais e organizar os documentos, a escola deve autuar e instruir o processo no SEI!RIO e remeter à GAD dentro do prazo interno divulgado anualmente pela CRE." },
-  ];
-
-  const documentosComprobatorios = [
-    { tipo: "Compra de material e insumos", documentos: "Nota fiscal de venda, cupom fiscal ou DANFE" },
-    { tipo: "Prestação de serviços por PJ", documentos: "Nota fiscal de serviço ou fatura" },
-    { tipo: "Prestação de serviços por PF (sem INSS)", documentos: "Recibo comum com CPF do prestador" },
-    { tipo: "Prestação de serviços por PF (com INSS)", documentos: "Recibo de Pagamento de Autônomo (RPA)" },
-  ];
-
   return (
     <section id="anexo" className="scroll-mt-20">
-      {/* Profile Callouts */}
-      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
-        Use o checklist interativo abaixo para conferir se todos os documentos obrigatórios foram reunidos antes de enviar o processo. Imprima o resumo dos itens pendentes se necessário.
+      <ProfileCallout visibleFor="diretor" variant="info" title="Como usar este anexo" className="mb-6">
+        Use este bloco apenas como <strong>base rápida de conferência</strong>. O foco do guia continua sendo a instrução processual no SEI!RIO, e não um estudo exaustivo da legislação do PDDE.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
-        Ao receber o processo, cruze a lista de documentos obrigatórios com a árvore do SEI. Verifique especialmente: 3 cotações de preço, extratos do período integral e aprovação do Conselho Escolar.
+        Na análise, confirme se o processo reflete três planos sem misturá-los: <strong>execução do gasto</strong>, <strong>registro federal aplicável ao exercício</strong> e <strong>rito interno da SME-RJ</strong>.
       </ProfileCallout>
 
-      {/* Header */}
       <div className="section-card mb-6 border-l-4 border-l-primary bg-gradient-to-br from-card via-card to-primary/5 p-6 sm:p-8">
         <div className="flex items-start gap-4">
-          <div className="p-3 rounded-xl bg-primary/10 shrink-0">
-            <Scale className="w-6 h-6 text-primary" />
+          <div className="rounded-xl bg-primary/10 p-3 shrink-0">
+            <Scale className="h-6 w-6 text-primary" />
           </div>
           <div>
             <h2 className="mb-2 text-2xl font-heading font-bold tracking-tight text-foreground">
-              Anexo – Legislação de Referência
+              Anexo — Base rápida de conferência
             </h2>
             <p className="leading-relaxed text-muted-foreground text-left sm:text-justify [text-wrap:pretty]">
-              Consolidação das principais regras e documentos exigidos conforme <strong>Resolução CD/FNDE nº 15/2021</strong> 
-              e demais normativos do FNDE aplicáveis ao PDDE.
+              Este anexo existe apenas para <strong>não deixar o manual ensinar procedimento errado</strong>. Ele resume a regra federal mínima, separa os sistemas envolvidos e aponta os marcos que mais impactam a conferência da prestação de contas.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Documentos Exigidos - Checklist Interativo */}
       <div className="section-card mb-6 p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2.5 rounded-lg bg-primary/10">
-            <Receipt className="w-5 h-5 text-primary" />
+        <div className="mb-5 flex items-center gap-3">
+          <div className="rounded-lg bg-primary/10 p-2.5">
+            <ListChecks className="h-5 w-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            Documentos que Instruem a Prestação de Contas
-            <span className="mt-1 block text-sm font-normal text-muted-foreground sm:ml-2 sm:mt-0 sm:inline">(Conforme Resolução CD/FNDE nº 15/2021, Art. 33)</span>
-          </h3>
+          <h3 className="text-lg font-semibold text-foreground">Escopo deste guia</h3>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mb-5 rounded-[1.35rem] border border-border/50 bg-gradient-to-r from-secondary to-secondary/50 p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-foreground">
-              Progresso da documentação
-            </span>
-            <span className="text-sm font-semibold text-primary">
-              {checkedCount} de {totalCount} documentos reunidos
-            </span>
-          </div>
-          <Progress value={progress} className="h-2.5" />
-          {progress === 100 && (
-            <p className="text-sm text-success font-medium mt-2 flex items-center gap-1">
-              <Check className="w-4 h-4" />
-              Todos os documentos foram reunidos!
-            </p>
-          )}
-        </div>
-
-        <div className="space-y-2">
-          {documentosExigidos.map((item, index) => {
-            const checked = isChecked(item.documento);
-            return (
-              <div
-                key={index}
-                role="checkbox"
-                aria-checked={checked}
-                tabIndex={0}
-                onClick={() => toggleItem(item.documento)}
-                onKeyDown={(event) => {
-                  if (event.key === " " || event.key === "Enter") {
-                    event.preventDefault();
-                    toggleItem(item.documento);
-                  }
-                }}
-                className={`flex items-start gap-4 rounded-xl border p-4 transition-all duration-200 cursor-pointer ${
-                  checked 
-                    ? 'bg-success/5 border-success/30' 
-                    : 'bg-card border-border/50 hover:border-primary/30 hover:bg-secondary/30'
-                }`}
-              >
-                <Checkbox
-                  checked={checked}
-                  onClick={(event) => event.stopPropagation()}
-                  onCheckedChange={() => toggleItem(item.documento)}
-                  className="shrink-0"
-                />
-                <span className={`flex-1 text-sm sm:text-base transition-all duration-200 ${
-                  checked ? 'text-muted-foreground line-through opacity-60' : 'text-foreground'
-                }`}>
-                  {item.documento}
-                </span>
-                <span className={`text-xs font-medium px-2 py-1 rounded-lg shrink-0 ${
-                  item.obrigatorio 
-                    ? checked 
-                      ? 'bg-success/10 text-success' 
-                      : 'bg-primary/10 text-primary'
-                    : 'bg-secondary text-muted-foreground'
-                }`}>
-                  {item.obrigatorio ? (checked ? '✓ Reunido' : 'Obrigatório') : 'Se houver'}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Prazos */}
-      <div className="section-card mb-6 p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2.5 rounded-lg bg-primary/10">
-            <Clock className="w-5 h-5 text-primary" />
-          </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            Prazos — como cumprir sem erro
-          </h3>
-        </div>
-
-        <div className="space-y-4">
-          {prazosPrestacao.map((item, index) => (
-            <div 
-              key={index} 
-              className={`rounded-[1.35rem] border border-border/50 p-4 ${
-                item.tipo === 'federal' 
-                  ? 'bg-primary/5' 
-                  : item.tipo === 'uex' 
-                    ? 'bg-amber-50 dark:bg-amber-950/30' 
-                    : 'bg-sky-50 dark:bg-sky-950/30'
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold ${
-                  item.tipo === 'federal' 
-                    ? 'bg-primary text-primary-foreground' 
-                    : item.tipo === 'uex' 
-                      ? 'bg-amber-500 text-white' 
-                      : 'bg-blue-500 text-white'
-                }`}>
-                  {index + 1}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground mb-1">{item.situacao}</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.prazo}</p>
-                </div>
-              </div>
+        <div className="space-y-3">
+          {scopePoints.map((item, index) => (
+            <div key={item} className="flex items-start gap-3 rounded-[1.2rem] border border-border/50 bg-card p-4">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+                {index + 1}
+              </span>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Este manual foi feito para <strong className="text-foreground">{item}</strong>.
+              </p>
             </div>
           ))}
         </div>
 
-        {/* Regra de ouro */}
-        <div className="mt-5 p-4 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+        <div className="mt-5 rounded-xl border border-amber-200/70 bg-amber-50/80 p-4 dark:border-amber-800/40 dark:bg-amber-950/25">
+          <p className="text-sm leading-relaxed text-foreground">
+            Ele <strong>não substitui</strong> a leitura da norma federal quando surgir caso incomum, dúvida sobre enquadramento de despesa, ação integrada específica ou situação excepcional de saldo.
+          </p>
+        </div>
+      </div>
+
+      <div className="section-card mb-6 p-6 sm:p-8">
+        <div className="mb-5 flex items-center gap-3">
+          <div className="rounded-lg bg-primary/10 p-2.5">
+            <Laptop className="h-5 w-5 text-primary" />
+          </div>
+          <h3 className="text-lg font-semibold text-foreground">Base mínima para não errar o procedimento</h3>
+        </div>
+
+        <div className="space-y-3">
+          {systemCards.map((item) => (
+            <div key={item.title} className="rounded-[1.2rem] border border-border/50 bg-card p-4">
+              <p className="mb-1 font-semibold text-foreground">{item.title}</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-5 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-primary/5 p-4">
           <div className="flex items-start gap-3">
-            <CalendarClock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-            <p className="text-sm text-foreground leading-relaxed">
-              <strong className="text-primary">Regra de ouro:</strong> não deixe para organizar documentos no fim do ano; mantenha o dossiê atualizado a cada despesa.
+            <ArrowRight className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <p className="text-sm leading-relaxed text-foreground">
+              Regra prática: o dossiê no <strong className="text-primary">SEI!RIO</strong> deve refletir fielmente o que foi executado, comprovado e registrado no <strong className="text-primary">ambiente federal aplicável ao exercício</strong>.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Consequências da Omissão */}
-      <div className="section-card mb-6 border-l-4 border-red-500 bg-gradient-to-r from-red-500/5 to-transparent p-6 sm:p-8">
-        <div className="flex items-start gap-4">
-          <div className="p-2.5 rounded-lg bg-red-500/10 shrink-0">
-            <Ban className="w-5 h-5 text-red-600 dark:text-red-400" />
-          </div>
-          <div>
-            <h4 className="font-semibold text-foreground mb-2">Consequências da Omissão na Prestação de Contas</h4>
-            <p className="mb-3 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-              O não cumprimento dos prazos ou a não apresentação da prestação de contas acarreta, conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021</strong>:
-            </p>
-            <ul className="text-muted-foreground text-sm space-y-2 list-none">
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 font-bold shrink-0">•</span>
-                <span><strong className="text-foreground">Suspensão dos repasses</strong> do PDDE até a regularização</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 font-bold shrink-0">•</span>
-                <span><strong className="text-foreground">Inscrição em inadimplência</strong> no FNDE e restrições no SIAFI</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 font-bold shrink-0">•</span>
-                <span><strong className="text-foreground">Instauração de Tomada de Contas Especial (TCE)</strong> pelo FNDE</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 font-bold shrink-0">•</span>
-                <span>Responsabilização pessoal do dirigente da UEx/CEC</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Documentos Comprobatórios */}
       <div className="section-card mb-6 p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2.5 rounded-lg bg-primary/10">
-            <FileText className="w-5 h-5 text-primary" />
+        <div className="mb-5 flex items-center gap-3">
+          <div className="rounded-lg bg-primary/10 p-2.5">
+            <CalendarClock className="h-5 w-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            Documentos Comprobatórios por Tipo de Despesa
-            <span className="mt-1 block text-sm font-normal text-muted-foreground sm:ml-2 sm:mt-0 sm:inline">(Conforme Resolução CD/FNDE nº 15/2021)</span>
-          </h3>
+          <h3 className="text-lg font-semibold text-foreground">Marcos rápidos de conferência</h3>
         </div>
 
-        <div className="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-          <Table className="table-institutional table-responsive-cards">
-            <TableHeader>
-              <TableRow>
-                <TableHead className="bg-primary text-primary-foreground rounded-tl-lg">Tipo de Despesa</TableHead>
-                <TableHead className="bg-primary text-primary-foreground rounded-tr-lg">Documentos Aceitos</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {documentosComprobatorios.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium" data-label="Tipo de Despesa">{item.tipo}</TableCell>
-                  <TableCell data-label="Documentos Aceitos">{item.documentos}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+        <div className="space-y-3">
+          {checkpoints.map((item) => (
+            <div key={item.title} className="rounded-[1.2rem] border border-border/50 bg-card p-4">
+              <p className="mb-1 font-semibold text-foreground">{item.title}</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Regras dos Comprovantes */}
-      <div className="section-card mb-6 p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2.5 rounded-lg bg-primary/10">
-            <Users className="w-5 h-5 text-primary" />
-          </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            Regras para Comprovantes de Despesa
-            <span className="mt-1 block text-sm font-normal text-muted-foreground sm:ml-2 sm:mt-0 sm:inline">(Conforme Resolução CD/FNDE nº 15/2021)</span>
-          </h3>
-        </div>
-
-        <div className="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-          <Table className="table-institutional table-responsive-cards">
-            <TableHeader>
-              <TableRow>
-                <TableHead className="bg-primary text-primary-foreground rounded-tl-lg">Regra</TableHead>
-                <TableHead className="bg-primary text-primary-foreground w-36 text-center rounded-tr-lg">Referência</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {regrasComprovantes.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell data-label="Regra">{item.regra}</TableCell>
-                  <TableCell className="text-center" data-label="Referência">
-                    <span className="inline-flex max-w-full justify-center rounded-lg bg-primary/10 px-2.5 py-1 text-center text-xs font-semibold leading-tight text-primary">
-                      {item.artigo}
-                    </span>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
-
-      {/* SiGPC/Contas Online */}
-      <div className="section-card mb-6 border-l-4 border-blue-500 bg-gradient-to-r from-blue-500/5 to-transparent p-6 sm:p-8">
-        <div className="flex items-start gap-4">
-          <div className="p-2.5 rounded-lg bg-blue-500/10 shrink-0">
-            <Info className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          </div>
-          <div>
-            <h4 className="font-semibold text-foreground mb-2">SiGPC/Contas Online — Sistema de Prestação de Contas do FNDE</h4>
-            <p className="mb-2 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-              O <strong className="text-foreground">SiGPC (Sistema de Gestão de Prestação de Contas)</strong>, também chamado de Contas Online, é o sistema federal obrigatório para registro e envio da prestação de contas do PDDE ao FNDE.
-            </p>
-            <ul className="text-muted-foreground text-sm space-y-1 list-disc list-inside">
-              <li>O demonstrativo de execução da receita e despesa é gerado pelo SiGPC</li>
-              <li>A UEx deve registrar todas as despesas e pagamentos no sistema</li>
-              <li>Acesse em: <strong className="text-foreground">sigpc.fnde.gov.br</strong></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Alerta Encerramento do Exercício */}
-      <div className="section-card mb-6 border-l-4 border-red-500 bg-gradient-to-r from-red-500/5 to-transparent p-6 sm:p-8">
-        <div className="flex items-start gap-4">
-          <div className="p-2.5 rounded-lg bg-red-500/10 shrink-0">
-            <CalendarClock className="w-5 h-5 text-red-600 dark:text-red-400" />
-          </div>
-          <div>
-            <h4 className="font-semibold text-foreground mb-2">Encerramento do Exercício</h4>
-            <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-              <strong className="text-foreground">Atenção especial em dezembro:</strong> Caso haja saldo remanescente em 31/12, ele deve ser reprogramado para o exercício seguinte conforme orientações do FNDE. 
-              Fique atento às orientações do FNDE sobre <strong className="text-foreground">devolução de saldos</strong> (quando exigida) e encerramento do exercício. 
-              Consulte os <strong className="text-foreground">informativos oficiais do FNDE</strong> para atualizações.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Alerta Vedações PDDE */}
-      <div className="section-card mb-6 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent p-6 sm:p-8">
-        <div className="flex items-start gap-4">
-          <div className="p-2.5 rounded-lg bg-primary/10 shrink-0">
-            <AlertTriangle className="w-5 h-5 text-primary" />
-          </div>
-          <div>
-            <h4 className="font-semibold text-foreground mb-2">Vedações — Despesas Proibidas com Recursos do PDDE</h4>
-            <p className="mb-2 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-              Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 4º, §5º e Art. 17)</strong>, é vedada a aplicação dos recursos do PDDE em:
-            </p>
-            <ul className="text-muted-foreground text-sm space-y-1 list-disc list-inside">
-              <li>Despesas com pessoal (pagamento de servidores, gratificações)</li>
-              <li>Contas de consumo recorrente (água, luz, telefone, aluguel)</li>
-              <li>Despesas assistencialistas ou de caráter individual</li>
-              <li>Obras e reformas estruturais (salvo ações específicas autorizadas pelo FNDE)</li>
-              <li>Aquisição de gêneros alimentícios (cobertos pelo PNAE)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Base Normativa - Reorganizada por finalidade */}
       <div className="section-card p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2.5 rounded-lg bg-primary/10">
-            <BookOpen className="w-5 h-5 text-primary" />
+        <div className="mb-5 flex items-center gap-3">
+          <div className="rounded-lg bg-primary/10 p-2.5">
+            <BookOpen className="h-5 w-5 text-primary" />
           </div>
-          <h2 className="text-xl font-bold text-foreground">
-            Base normativa (organizada por finalidade)
-          </h2>
+          <h3 className="text-lg font-semibold text-foreground">Fontes oficiais para consulta rápida</h3>
         </div>
 
-        {/* A) PDDE — regras federais (FNDE) */}
-        <div className="mb-8">
-          <h3 className="text-base font-semibold text-primary mb-4 flex items-center gap-2">
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold">A</span>
-            PDDE — regras federais (FNDE)
-          </h3>
-          
-          <ul className="space-y-2 mb-5 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2">
-              <Gavel className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Lei nº 11.947/2009</strong> — Dispõe sobre o atendimento da alimentação escolar e do PDDE</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Gavel className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Resolução CD/FNDE nº 15/2021</strong> — Orientações para execução, fiscalização, monitoramento e prestação de contas do PDDE</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Gavel className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Resolução CD/FNDE nº 6/2006</strong> — Cria o Programa Dinheiro Direto na Escola e estabelece suas diretrizes</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <BookOpen className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Manual do SiGPC/Contas Online</strong> — Orientações para uso do sistema de prestação de contas</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <BookOpen className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Guias e capacitações oficiais do FNDE (PDDE)</strong> — Conforme exercício vigente</span>
-            </li>
-          </ul>
-
-          <div className="grid sm:grid-cols-2 gap-3">
-            {/* Resolução CD/FNDE nº 15/2021 */}
+        <div className="grid gap-3 sm:grid-cols-2">
+          {officialLinks.map((item) => (
             <a
-              href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view"
+              key={item.title}
+              href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 border-2 border-primary/40 hover:border-primary/60 transition-all duration-300 group"
-              aria-label="Abrir Resolução CD/FNDE nº 15/2021 no Portal GOV.BR"
+              className="link-card group flex items-center gap-4 rounded-xl border-2 border-border bg-gradient-to-r from-secondary to-secondary/50 p-4 transition-all duration-300 hover:border-primary/40 hover:from-primary/10 hover:to-primary/5"
             >
-              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                <Gavel className="w-5 h-5 text-primary" />
+              <div className="link-card-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <ExternalLink className="h-5 w-5 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="link-card-title font-semibold text-foreground text-sm">Resolução CD/FNDE nº 15/2021</p>
-                <p className="text-xs text-muted-foreground">Texto integral no GOV.BR</p>
+                <p className="link-card-title text-sm font-semibold text-foreground">{item.title}</p>
+                <p className="text-xs text-muted-foreground">{item.description}</p>
               </div>
-              <ExternalLink className="link-card-arrow w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
+              <ExternalLink className="link-card-arrow h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
             </a>
-
-            {/* Portal FNDE - PDDE */}
-            <a
-              href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-border hover:border-primary/40 transition-all duration-300 group"
-              aria-label="Abrir Portal do PDDE no site do FNDE"
-            >
-              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <BookOpen className="w-5 h-5 text-primary" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="link-card-title font-semibold text-foreground text-sm">Portal do PDDE - FNDE</p>
-                <p className="text-xs text-muted-foreground">Guias, manuais e capacitações</p>
-              </div>
-              <ExternalLink className="link-card-arrow w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-            </a>
-
-            {/* SiGPC */}
-            <a
-              href="https://sigpc.fnde.gov.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-border hover:border-primary/40 transition-all duration-300 group"
-              aria-label="Acessar SiGPC/Contas Online"
-            >
-              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <FileText className="w-5 h-5 text-primary" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="link-card-title font-semibold text-foreground text-sm">SiGPC / Contas Online</p>
-                <p className="text-xs text-muted-foreground">Sistema de prestação de contas do FNDE</p>
-              </div>
-              <ExternalLink className="link-card-arrow w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-            </a>
-          </div>
+          ))}
         </div>
 
-        {/* B) Procedimento interno e sistema (SEI!RIO / SME-Rio) */}
-        <div>
-          <h3 className="text-base font-semibold text-amber-700 dark:text-amber-400 mb-4 flex items-center gap-2">
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold">B</span>
-            Procedimento interno e sistema (SEI!RIO / SME-Rio)
-          </h3>
-          
-          <ul className="space-y-2 mb-5 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2">
-              <Scale className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Normas municipais vigentes</strong> — Tramitação processual no SEI!RIO, assinatura eletrônica e autenticação administrativa</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Scale className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Lei nº 12.527/2011 (LAI)</strong> — Classificação de acesso e transparência</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Scale className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-              <span><strong className="text-foreground">Lei nº 13.709/2018 (LGPD)</strong> — Tratamento de dados pessoais</span>
-            </li>
-          </ul>
-
-          <div className="grid sm:grid-cols-2 gap-3">
-            {/* Diário Oficial */}
-            <a
-              href="https://doweb.rio.rj.gov.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-card flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border-2 border-border hover:border-primary/40 transition-all duration-300 group"
-              aria-label="Abrir Diário Oficial do Rio de Janeiro"
-            >
-              <div className="link-card-icon w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <FileText className="w-5 h-5 text-primary" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="link-card-title font-semibold text-foreground text-sm">Diário Oficial do Rio</p>
-                <p className="text-xs text-muted-foreground">Busca por legislação municipal</p>
-              </div>
-              <ExternalLink className="link-card-arrow w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-            </a>
+        <div className="mt-5 rounded-xl border border-success/25 bg-success/10 p-4">
+          <div className="flex items-start gap-3">
+            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-success" />
+            <p className="text-sm leading-relaxed text-foreground">
+              Se houver conflito entre um modelo local, um costume interno e a disciplina material do FNDE, <strong className="text-success">prevalece a norma federal vigente</strong>.
+            </p>
           </div>
         </div>
       </div>

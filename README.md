@@ -39,6 +39,9 @@ npm run lint
 npm run typecheck
 npm run build
 npm run preview
+npm run sync:pdf-manifest
+npm run check:content
+npm run check:all
 ```
 
 ## Estrutura principal
@@ -56,4 +59,6 @@ O deploy de produção é feito pela Vercel a partir deste repositório.
 
 - Mantenha `package-lock.json` sincronizado com `package.json`
 - Use `npm` como gerenciador principal de pacotes
+- Atualize o manifesto de PDFs com `npm run sync:pdf-manifest` sempre que substituir arquivos em `public/models`
+- Rode `npm run check:content` para validar manifesto, âncoras e links oficiais antes de publicar revisões editoriais
 - Revise metadados públicos (`index.html`, `manifest.json`, `robots.txt`, `sitemap.xml`) sempre que o domínio ou a identidade institucional mudarem

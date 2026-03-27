@@ -59,7 +59,7 @@ export const DocumentFooter = () => {
             para auxiliar diretores e gestores escolares na prestação de contas do PDDE.
           </p>
 
-          {/* Logo/Badge with glassmorphism */}
+          {/* Institutional badge */}
           <div className="pt-4">
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-border/40 transition-all duration-300 hover:scale-105" style={{
               background: 'hsl(var(--card) / 0.8)',

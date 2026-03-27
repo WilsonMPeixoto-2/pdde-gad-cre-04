@@ -1,0 +1,115 @@
+import { access, stat } from "node:fs/promises";
+import path from "node:path";
+import { externalResourceList } from "../src/lib/externalResources.ts";
+import { pdfAssetManifest } from "../src/generated/pdfManifest.ts";
+import { GUIDE_ANCHORS, guideSectionIds } from "../src/lib/guideContent.ts";
+import { pddeModels } from "../src/lib/pddeModels.ts";
+import { searchIndex } from "../src/lib/searchIndex.ts";
+
+const httpTimeoutMs = 20000;
+
+const ensurePdfAssetsMatch = async () => {
+  const findings: string[] = [];
+
+  for (const [fileName, manifestEntry] of Object.entries(pdfAssetManifest)) {
+    const filePath = path.resolve("public/models", fileName);
+
+    try {
+      await access(filePath);
+      const fileStat = await stat(filePath);
+
+      if (fileStat.size !== manifestEntry.bytes) {
+        findings.push(
+          `Manifesto desatualizado para ${fileName}: esperado ${manifestEntry.bytes} bytes, encontrado ${fileStat.size}. Rode npm run sync:pdf-manifest.`,
+        );
+      }
+    } catch {
+      findings.push(`Arquivo PDF ausente: ${path.relative(process.cwd(), filePath)}`);
+    }
+  }
+
+  for (const model of pddeModels) {
+    if (!(model.fileName in pdfAssetManifest)) {
+      findings.push(`Modelo ${model.id} referencia ${model.fileName}, mas esse arquivo não está no manifesto.`);
+    }
+  }
+
+  return findings;
+};
+
+const ensureAnchorsStayAligned = () => {
+  const allowedAnchors = new Set([...guideSectionIds, ...Object.values(GUIDE_ANCHORS)]);
+  const findings: string[] = [];
+
+  for (const item of searchIndex) {
+    if (!allowedAnchors.has(item.anchor)) {
+      findings.push(`Âncora não reconhecida no índice de busca: ${item.id} -> ${item.anchor}`);
+    }
+  }
+
+  return findings;
+};
+
+const fetchStatus = async (url: string) => {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), httpTimeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      redirect: "follow",
+      signal: controller.signal,
+      headers: {
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        accept: "text/html,application/pdf,*/*",
+      },
+    });
+
+    return response.status;
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
+const ensureExternalLinksRespond = async () => {
+  const findings: string[] = [];
+
+  for (const resource of externalResourceList) {
+    try {
+      const status = await fetchStatus(resource.href);
+      if (status >= 400) {
+        findings.push(`Link externo com falha (${status}): ${resource.title} -> ${resource.href}`);
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      findings.push(`Link externo inacessível: ${resource.title} -> ${resource.href} (${message})`);
+    }
+  }
+
+  return findings;
+};
+
+const main = async () => {
+  const findings = [
+    ...(await ensurePdfAssetsMatch()),
+    ...ensureAnchorsStayAligned(),
+    ...(await ensureExternalLinksRespond()),
+  ];
+
+  if (findings.length === 0) {
+    console.log("Conteúdo auditado sem inconsistências estruturais.");
+    return;
+  }
+
+  console.error("Foram encontrados problemas na auditoria de conteúdo:");
+  for (const finding of findings) {
+    console.error(`- ${finding}`);
+  }
+  process.exitCode = 1;
+};
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

@@ -1,6 +1,26 @@
-const CACHE_NAME = "pdde-guide-shell-v2";
+const CACHE_NAME = "pdde-guide-shell-v3";
 const APP_SHELL = ["/", "/index.html", "/favicon.png", "/manifest.json", "/og-image.png"];
 const CACHEABLE_DESTINATIONS = new Set(["script", "style", "image", "font", "manifest"]);
+const PDF_PATH_PREFIX = "/models/";
+
+const cacheResponse = async (request, response) => {
+  if (!response || !response.ok) return response;
+
+  const cache = await caches.open(CACHE_NAME);
+  await cache.put(request, response.clone());
+  return response;
+};
+
+const networkFirst = async (request, fallbackKey = request) => {
+  try {
+    const response = await fetch(request);
+    return await cacheResponse(request, response);
+  } catch {
+    const cachedResponse = await caches.match(fallbackKey);
+    if (cachedResponse) return cachedResponse;
+    throw new Error("Network request failed and no cache entry was found.");
+  }
+};
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -29,17 +49,12 @@ self.addEventListener("fetch", (event) => {
   if (requestUrl.origin !== self.location.origin) return;
 
   if (event.request.mode === "navigate") {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          if (response.ok) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put("/index.html", responseClone));
-          }
-          return response;
-        })
-        .catch(() => caches.match("/index.html"))
-    );
+    event.respondWith(networkFirst(event.request, "/index.html"));
+    return;
+  }
+
+  if (requestUrl.pathname.startsWith(PDF_PATH_PREFIX)) {
+    event.respondWith(networkFirst(event.request));
     return;
   }
 
@@ -48,13 +63,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const networkResponse = fetch(event.request)
-        .then((response) => {
-          if (response.ok) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-          }
-          return response;
-        })
+        .then((response) => cacheResponse(event.request, response))
         .catch(() => cachedResponse);
 
       return cachedResponse || networkResponse;

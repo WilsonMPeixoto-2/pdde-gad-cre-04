@@ -15,7 +15,6 @@ dist-ssr
 .env.*
 !.env.example
 bun.lockb
-.lovable
 .playwright-cli/
 tmp/
 output-*.png

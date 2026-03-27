@@ -1,6 +1,7 @@
 import { Phone, Mail, MapPin, Clock, ExternalLink, Monitor, BookOpen, Printer, Calendar, Users, Headset } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "./CopyButton";
+import { externalResources } from "@/lib/externalResources";
 import { GUIDE_VERSION } from "@/lib/guideContent";
 
 type SectionContactsProps = {
@@ -97,7 +98,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
           
           <div className="grid sm:grid-cols-2 gap-4">
             <a
-              href="https://sei.rio/"
+              href={externalResources.seiRioPortal.href}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-4 rounded-xl bg-linear-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
@@ -113,7 +114,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
             </a>
 
             <a
-              href="https://sei.rio/servidor/guias-e-ambiente-de-teste/guia-do-usuario-interno/"
+              href={externalResources.seiRioUserGuide.href}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-4 rounded-xl bg-linear-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
@@ -142,7 +143,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
           </p>
           
           <a
-            href="https://sei.rio/servidor/atendimento/"
+            href={externalResources.seiRioSupport.href}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-4 p-4 rounded-xl bg-linear-to-r from-secondary to-secondary/50 hover:from-primary/10 hover:to-primary/5 border border-border/50 hover:border-primary/30 transition-all duration-300 group mb-4"

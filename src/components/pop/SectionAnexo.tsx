@@ -11,6 +11,7 @@ import {
   Scale,
   ShieldCheck,
 } from "lucide-react";
+import { externalResources, officialReferenceIds } from "@/lib/externalResources";
 import { ProfileCallout } from "./ProfileCallout";
 
 const scopePoints = [
@@ -74,40 +75,9 @@ const checkpoints = [
   },
 ];
 
-const officialLinks = [
-  {
-    title: "Resolução CD/FNDE nº 15/2021",
-    description: "Norma principal do PDDE e do núcleo mínimo da prestação de contas.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view",
-  },
-  {
-    title: "Comunicado PDDE nº 47/2024",
-    description: "Orientação operacional específica para os recursos recebidos em 2024, complementar à adoção do BB Gestão Ágil a partir de 2023.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2024-1/Comunicadon.47_2024Orientaesparaaprestaodecontasdosrecursosrecebidosem2024.pdf",
-  },
-  {
-    title: "Perguntas e Respostas PDDE (BB Gestão Ágil)",
-    description: "Material oficial do FNDE que explicita o recorte dos recursos repassados em 2023 e 2024 e a convivência com o SiGPC.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil/PerguntaseRespostasPDDE.pdf",
-  },
-  {
-    title: "Comunicado PDDE nº 01/2026",
-    description: "Esclarecimento oficial do FNDE sobre saldos, estorno e aplicabilidade a partir de 2027.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2026/comunicado-n-01_2026-alteracoes-na-resolucao-cd-fnde-no-7-2024-estorno-de-recurso.pdf",
-  },
-  {
-    title: "BB Gestão Ágil",
-    description: "Página oficial do FNDE com manual e orientações da ferramenta.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil",
-  },
-  {
-    title: "Resoluções e Formulários do PDDE",
-    description: "Repositório oficial para acompanhar normas e materiais vigentes do programa.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/resolucoes-e-formularios",
-  },
-];
-
 export const SectionAnexo = () => {
+  const officialLinks = officialReferenceIds.map((resourceId) => externalResources[resourceId]);
+
   return (
     <section id="anexo" className="scroll-mt-20">
       <ProfileCallout visibleFor="diretor" variant="info" title="Como usar este anexo" className="mb-6">

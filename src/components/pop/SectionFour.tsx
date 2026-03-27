@@ -12,14 +12,8 @@ import {
 } from "lucide-react";
 import { SeiMockup } from "./SeiMockup";
 import { InfoDrawer, NatoDigitalVsDigitalizadoContent, AutenticacaoVsAssinaturaContent } from "./InfoDrawer";
+import { externalResources } from "@/lib/externalResources";
 import { ProfileCallout } from "./ProfileCallout";
-
-const OFFICIAL_LINKS = {
-  decreto8539:
-    "https://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2015/Decreto/D8539.htm",
-  decretoSeiRio:
-    "https://comlurb.prefeitura.rio/wp-content/uploads/sites/74/2025/11/Decreto-SEI-57250.pdf",
-} as const;
 
 const documentRules = [
   {
@@ -265,7 +259,7 @@ export const SectionFour = () => {
                 O Decreto nº 8.539/2015 diferencia documento <strong className="text-foreground">nato-digital</strong> e documento <strong className="text-foreground">digitalizado</strong>, e estrutura a prática de atos processuais em meio eletrônico.
               </p>
               <a
-                href={OFFICIAL_LINKS.decreto8539}
+                href={externalResources.decreto8539_2015.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-primary underline underline-offset-4"
@@ -285,7 +279,7 @@ export const SectionFour = () => {
                 O Decreto Rio nº 57.250/2025 organiza o SEI!RIO, prevê a tramitação eletrônica dos atos, disciplina a juntada de documento externo e estabelece que apenas <strong className="text-foreground">documentos produzidos no sistema</strong> podem ser assinados eletronicamente no SEI.Rio.
               </p>
               <a
-                href={OFFICIAL_LINKS.decretoSeiRio}
+                href={externalResources.decretoSeiRio_57250_2025.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-primary underline underline-offset-4"

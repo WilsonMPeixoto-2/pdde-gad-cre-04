@@ -16,14 +16,8 @@ import {
 } from "lucide-react";
 import seiIncludeDocIcon from "@/assets/sei-include-doc-icon.png";
 import seiChooseDocType from "@/assets/sei-choose-doc-type.png";
+import { externalResources } from "@/lib/externalResources";
 import { ProfileCallout } from "./ProfileCallout";
-
-const OFFICIAL_LINKS = {
-  decreto8539:
-    "https://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2015/Decreto/D8539.htm",
-  decretoSeiRio:
-    "https://comlurb.prefeitura.rio/wp-content/uploads/sites/74/2025/11/Decreto-SEI-57250.pdf",
-} as const;
 
 const typeCards = [
   {
@@ -92,7 +86,7 @@ export const SectionThree = () => {
 
               <div className="flex flex-wrap gap-2">
                 <a
-                  href={OFFICIAL_LINKS.decreto8539}
+                  href={externalResources.decreto8539_2015.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/12"
@@ -102,7 +96,7 @@ export const SectionThree = () => {
                   <ExternalLink className="h-3 w-3" />
                 </a>
                 <a
-                  href={OFFICIAL_LINKS.decretoSeiRio}
+                  href={externalResources.decretoSeiRio_57250_2025.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 transition hover:bg-sky-100 dark:border-sky-800/40 dark:bg-sky-950/30 dark:text-sky-300"

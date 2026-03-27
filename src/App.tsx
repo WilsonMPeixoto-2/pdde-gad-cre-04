@@ -1,42 +1,18 @@
-import { useEffect, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { ProfileModeProvider } from "@/contexts/ProfileModeContext";
+import { useServiceWorkerLifecycle } from "@/hooks/useServiceWorkerLifecycle";
 import Index from "./pages/Index";
 
 // Lazy-load non-critical components to reduce initial JS bundle
 const CommandPalette = lazy(() => import("@/components/pop/CommandPalette").then(m => ({ default: m.CommandPalette })));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Register Service Worker
-const registerSW = () => {
-  if (!("serviceWorker" in navigator)) return;
-
-  if (!import.meta.env.PROD) {
-    navigator.serviceWorker.getRegistrations().then((registrations) => {
-      registrations.forEach((registration) => registration.unregister());
-    });
-    return;
-  }
-
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then((registration) => {
-        if (import.meta.env.DEV) console.log("[SW] Registered:", registration.scope);
-      })
-      .catch((error) => {
-        if (import.meta.env.DEV) console.warn("[SW] Registration failed:", error);
-      });
-  });
-};
-
 const App = () => {
-  useEffect(() => {
-    registerSW();
-  }, []);
+  useServiceWorkerLifecycle();
 
   return (
     <ErrorBoundary>

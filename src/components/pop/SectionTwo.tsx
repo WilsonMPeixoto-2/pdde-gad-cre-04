@@ -24,7 +24,7 @@ export const SectionTwo = () => {
       className: "text-emerald-700 dark:text-emerald-400",
       body: (
         <>
-          Esta etapa estrutura a análise da prestação de contas. Documentação incompleta, divergente ou fora do padrão pode gerar <strong className="text-foreground font-semibold">exigência, retrabalho e atraso na aprovação</strong>.
+          Esta etapa estrutura a análise da prestação de contas. Documentação incompleta, divergente ou mal classificada entre <strong className="text-foreground font-semibold">modelo, exemplo preenchido e referência visual</strong> pode gerar <strong className="text-foreground font-semibold">exigência, retrabalho e atraso na aprovação</strong>.
         </>
       ),
     },
@@ -35,7 +35,7 @@ export const SectionTwo = () => {
       listClassName: "border-sky-200/60 bg-sky-50/80 dark:border-sky-800/40 dark:bg-sky-950/40",
       items: [
         "Use a Lista de Verificação Interativa para acompanhar o que já foi encartado.",
-        "Consulte os modelos e referências documentais para padronização.",
+        "Consulte os modelos, exemplos preenchidos e referências documentais sem confundir peça editável com arquivo meramente ilustrativo.",
         "Acompanhe o percentual de completude calculado automaticamente.",
       ],
     },
@@ -180,7 +180,7 @@ export const SectionTwo = () => {
           <div className="space-y-3">
             <div className="rounded-xl border border-border/50 bg-card p-4">
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Verifique qual ferramenta o <strong className="text-foreground">FNDE</strong> está exigindo no exercício. Em rotinas recentes, a UEx registrou informações no <strong className="text-foreground">BB Gestão Ágil</strong> e a EEx consolidou ou analisou os dados no sistema federal correspondente.
+                Verifique qual ferramenta o <strong className="text-foreground">FNDE</strong> está exigindo no exercício. Em rotinas recentes, a UEx registrou informações no <strong className="text-foreground">BB Gestão Ágil</strong> e a EEx consolidou ou analisou os dados no sistema federal correspondente, sem dispensar o dossiê probatório local.
               </p>
             </div>
             <div className="rounded-xl border border-border/50 bg-card p-4">

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check } from "lucide-react";
 import confetti from "canvas-confetti";
 import { toast } from "sonner";
+import { externalResources } from "@/lib/externalResources";
 
 interface ChecklistItem {
   id: number;
@@ -373,11 +374,11 @@ export const PDDEChecklist = () => {
             <p className="font-semibold text-primary text-sm mb-1">Autenticação de documento digitalizado</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Quando o documento externo tiver sido <strong className="text-foreground">assinado ou carimbado em meio físico e depois digitalizado</strong>, a autenticação deve ser feita no momento da inserção do anexo por quem o encartar no processo, declarando que a cópia digital <strong className="text-foreground">"confere com o original"</strong>. Os originais e comprovantes devem permanecer arquivados na sede da UEx/escola pelo prazo de <strong className="text-foreground">5 anos</strong>, nos termos dos arts. 28 e 33, § 1º, I, da{" "}
-              <a
-                href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-primary underline underline-offset-4"
+                <a
+                  href={externalResources.resolution15.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary underline underline-offset-4"
               >
                 Resolução CD/FNDE nº 15/2021
               </a>

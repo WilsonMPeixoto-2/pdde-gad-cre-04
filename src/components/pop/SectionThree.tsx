@@ -60,18 +60,6 @@ export const SectionThree = () => {
         Confirme se a unidade classificou corretamente cada item como <strong className="text-foreground">digitalizado</strong> ou <strong className="text-foreground">nato-digital</strong> e se o Nome na Árvore permite busca inequívoca no SEI!RIO.
       </ProfileCallout>
 
-      <div className="mb-6 flex items-center gap-4">
-        <div className="section-number">3</div>
-        <div>
-          <h2 className="text-xl font-heading font-bold text-foreground sm:text-2xl">
-            Inclusão de Documentos <span className="text-sky-600 font-bold uppercase">Externos</span>
-          </h2>
-          <p className="mt-1 text-sm text-muted-foreground sm:text-base">
-            Procedimento para registrar, no SEI!RIO, documentos produzidos fora do sistema, sejam eles digitalizados ou nato-digitais.
-          </p>
-        </div>
-      </div>
-
       <div className="space-y-5">
         <div className="section-card border-l-4 border-l-sky-500 p-5 sm:p-6">
           <div className="flex items-start gap-4">

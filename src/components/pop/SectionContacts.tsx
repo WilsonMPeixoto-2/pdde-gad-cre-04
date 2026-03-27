@@ -11,19 +11,6 @@ type SectionContactsProps = {
 export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
   return (
     <section id="contatos" className="scroll-mt-20 animate-fade-in">
-      {/* Section Header */}
-      <div className="flex items-center gap-4 mb-6">
-        <div className="section-number">7</div>
-        <div>
-          <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
-            Contatos da GAD/4ª CRE
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground mt-1">
-            Canais de atendimento e suporte
-          </p>
-        </div>
-      </div>
-
       <div className="space-y-5">
         {/* Main Contact Card */}
         <div className="section-card overflow-hidden">

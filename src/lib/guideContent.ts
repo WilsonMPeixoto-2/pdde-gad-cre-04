@@ -32,6 +32,8 @@ export const GAD_UNIT = {
   fullLabel: "10729 - Gerência de Administração (E/4a.CRE/GAD)",
 } as const;
 
+export const INTERNAL_PROCESS_TRACKER_LABEL = "Controle de processos 2026";
+
 export const GUIDE_ANCHORS = {
   checklist: "checklist-documentos",
   models: "modelos-documentos",

@@ -1,4 +1,4 @@
-import { FileText, Printer, Download, Moon, Sun, Monitor, Smartphone, Search, MoreVertical, Menu } from "lucide-react";
+import { FileText, Printer, Moon, Sun, Monitor, Smartphone, Search, MoreVertical, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -108,9 +108,9 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
               <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="min-w-0">
-              <h1 className="text-sm sm:text-lg lg:text-xl font-heading font-bold text-white truncate" style={{ letterSpacing: '-0.02em' }}>
+              <p className="text-sm sm:text-lg lg:text-xl font-heading font-bold text-white truncate" style={{ letterSpacing: '-0.02em' }}>
                 Procedimento Operacional Padrão
-              </h1>
+              </p>
               <p className="text-xs sm:text-sm text-white/60 hidden sm:block tracking-wide">
                 4ª Coordenadoria Regional de Educação | GAD
               </p>
@@ -177,16 +177,6 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
               <TooltipContent side="bottom"><p>{isDark ? "Modo claro" : "Modo escuro"}</p></TooltipContent>
             </Tooltip>
             <Button
-              variant="ghost"
-              size="sm"
-              onClick={onPrint}
-              className="text-white/80 hover:text-white hover:bg-white/10 h-10 w-auto px-4 transition-all duration-300 hover:scale-105"
-              aria-label="Imprimir documento"
-            >
-              <Printer className="w-4 h-4 mr-2" aria-hidden="true" />
-              <span>Imprimir</span>
-            </Button>
-            <Button
               size="sm"
               onClick={onPrint}
               className="h-10 w-auto px-4 transition-all duration-300 hover:scale-105 btn-premium text-white border-0"
@@ -194,10 +184,10 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)',
                 boxShadow: '0 4px 16px -4px hsl(199, 89%, 48%, 0.4)'
               }}
-              aria-label="Abrir opção de salvar em PDF"
+              aria-label="Imprimir ou salvar em PDF"
             >
-              <Download className="w-4 h-4 mr-2" aria-hidden="true" />
-              <span className="font-medium">Salvar em PDF</span>
+              <Printer className="w-4 h-4 mr-2" aria-hidden="true" />
+              <span className="font-medium">Imprimir / PDF</span>
             </Button>
           </div>
 

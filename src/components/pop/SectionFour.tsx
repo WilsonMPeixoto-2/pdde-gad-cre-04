@@ -81,18 +81,6 @@ export const SectionFour = () => {
         Ao revisar os autos, confira se a autenticação foi aplicada somente a documentos <strong className="text-foreground">digitalizados</strong>. Documento nato-digital autenticado indevidamente costuma indicar classificação incorreta na etapa anterior.
       </ProfileCallout>
 
-      <div className="mb-6 flex items-center gap-4">
-        <div className="section-number">4</div>
-        <div>
-          <h2 className="text-xl font-heading font-bold text-foreground sm:text-2xl">
-            Autenticação de Documentos Externos
-          </h2>
-          <p className="mt-1 text-sm text-muted-foreground sm:text-base">
-            Etapa destinada à conferência dos documentos externos digitalizados inseridos no processo.
-          </p>
-        </div>
-      </div>
-
       <div className="space-y-5">
         <div className="section-card border-l-4 border-l-primary p-5 sm:p-6">
           <div className="flex items-start gap-4">

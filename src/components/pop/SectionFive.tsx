@@ -25,18 +25,6 @@ const finalChecks = [
 export const SectionFive = () => {
   return (
     <section id="secao-5" className="scroll-mt-20 animate-fade-in">
-      <div className="flex items-center gap-4 mb-6">
-        <div className="section-number">5</div>
-        <div>
-          <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
-            Bloco de Assinatura
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground mt-1">
-            Criação do bloco, assinatura da unidade escolar e conferência final antes da remessa
-          </p>
-        </div>
-      </div>
-
       <div className="space-y-6">
         <div className="section-card p-5 sm:p-6 border-l-4 border-l-primary">
           <div className="flex items-start gap-4">

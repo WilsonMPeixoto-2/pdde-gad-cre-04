@@ -9,7 +9,7 @@ interface SeiMockupProps {
 
 // Professional SEI-style icon button with animations
 const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode; label?: string; active?: boolean }) => (
-  <div role="button" aria-label={label ? `Ação SEI: ${label}` : 'Ação SEI'} aria-pressed={active} className={`
+  <div aria-hidden="true" className={`
     flex flex-col items-center gap-1 p-1.5 rounded cursor-pointer 
     transition-all duration-200 ease-out
     hover:scale-110 hover:shadow-md
@@ -35,7 +35,11 @@ const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode;
 
 // SEI Action Icons Bar with professional styling
 export const SeiIconsBar = () => (
-  <div className="flex items-center gap-0.5 p-2 bg-linear-to-b from-[#fafbfc] to-[#f0f3f5] border border-[#d0d7de] rounded-lg overflow-x-auto shadow-xs">
+  <div
+    role="img"
+    aria-label="Barra ilustrativa de ações do SEI!RIO com opções como incluir, enviar, visualizar e assinar."
+    className="flex items-center gap-0.5 p-2 bg-linear-to-b from-[#fafbfc] to-[#f0f3f5] border border-[#d0d7de] rounded-lg overflow-x-auto shadow-xs"
+  >
     <SeiIconButton icon={<SeiIncluirIcon size={20} />} label="Incluir" active />
     <SeiIconButton icon={<SeiEnviarIcon size={20} />} label="Enviar" />
     <SeiIconButton icon={<Eye className="w-5 h-5" />} label="Visualizar" />
@@ -77,7 +81,11 @@ const SeiHeader = ({ title, showLogo = false }: { title?: string; showLogo?: boo
 export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
   if (variant === "menu") {
     return (
-      <div className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg max-w-sm">
+      <div
+        role="img"
+        aria-label="Exemplo ilustrativo do menu do SEI!RIO com destaque para a opção iniciar processo."
+        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg max-w-sm"
+      >
         <SeiHeader showLogo />
         
         {/* Menu Items */}
@@ -110,7 +118,11 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
 
   if (variant === "process-tree") {
     return (
-      <div className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg">
+      <div
+        role="img"
+        aria-label="Exemplo ilustrativo da árvore do processo no SEI!RIO com documentos autenticados e assinados."
+        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg"
+      >
         <SeiHeader title="Árvore do Processo" />
         
         <div className="p-3 text-sm bg-linear-to-b from-white to-[#fafbfc]">
@@ -154,18 +166,22 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
 
   if (variant === "type-selection") {
     return (
-      <div className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg">
+      <div
+        role="img"
+        aria-label="Exemplo ilustrativo da busca pelo tipo correto de processo no SEI!RIO."
+        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg"
+      >
         <SeiHeader title="Escolha o Tipo de Processo" />
         
         <div className="p-4 space-y-3 bg-linear-to-b from-white to-[#fafbfc]">
           <div className="flex items-center gap-2 text-sm">
             <Search className="w-4 h-4 text-[#6c757d]" />
-            <input 
-              type="text" 
-              placeholder="prestação de contas" 
-              className="bg-white border border-[#ced4da] rounded-lg px-3 py-2 text-[#495057] w-full focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0]/20 transition-all outline-hidden"
-              defaultValue="prestação de contas"
-            />
+            <div
+              aria-hidden="true"
+              className="bg-white border border-[#ced4da] rounded-lg px-3 py-2 text-[#495057] w-full transition-all"
+            >
+              prestação de contas
+            </div>
           </div>
           
           <div className="space-y-1">
@@ -196,7 +212,11 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
 
   if (variant === "document-form") {
     return (
-      <div className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg">
+      <div
+        role="img"
+        aria-label="Exemplo ilustrativo do preenchimento de documento externo no SEI!RIO."
+        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg"
+      >
         <SeiHeader title="Registrar Documento Externo" />
         
         <div className="p-4 space-y-4 text-sm bg-linear-to-b from-white to-[#fafbfc]">
@@ -222,7 +242,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
           ))}
           
           <div className="pt-3 flex items-center gap-3 border-t border-[#e9ecef]">
-            <button className="
+            <div aria-hidden="true" className="
               px-5 py-2.5 bg-linear-to-b from-[#1976D2] to-[#1565C0] text-white rounded-lg text-xs font-semibold 
               cursor-pointer shadow-md
               transition-all duration-200 ease-out
@@ -230,8 +250,8 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
               active:scale-95
             ">
               Confirmar
-            </button>
-            <button className="
+            </div>
+            <div aria-hidden="true" className="
               px-5 py-2.5 bg-linear-to-b from-[#f5f5f5] to-[#e0e0e0] text-[#424242] rounded-lg text-xs font-semibold 
               cursor-pointer border border-[#bdbdbd]
               transition-all duration-200 ease-out
@@ -239,7 +259,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
               active:scale-95
             ">
               Cancelar
-            </button>
+            </div>
           </div>
         </div>
       </div>

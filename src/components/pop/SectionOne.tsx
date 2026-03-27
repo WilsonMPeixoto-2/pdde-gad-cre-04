@@ -1,11 +1,35 @@
-import { ClipboardList } from "lucide-react";
+import { Building2, CalendarClock, ClipboardList, Fingerprint } from "lucide-react";
 import { SeiMockup } from "./SeiMockup";
 import { CopyButton } from "./CopyButton";
 import { Callout } from "./Callout";
 import { ProfileCallout } from "./ProfileCallout";
-import { GAD_UNIT, PROCESS_CLASSIFICATION_LABEL, PROCESS_TYPE_LABEL } from "@/lib/guideContent";
+import { UiLabelChip } from "./UiLabelChip";
+import {
+  GAD_UNIT,
+  INTERNAL_PROCESS_TRACKER_LABEL,
+  PROCESS_CLASSIFICATION_LABEL,
+  PROCESS_TYPE_LABEL,
+} from "@/lib/guideContent";
 
 export const SectionOne = () => {
+  const preflightCards = [
+    {
+      title: "Exercício de referência",
+      description: "Confirme o ano da prestação de contas antes de autuar o processo e preencher a especificação.",
+      icon: CalendarClock,
+    },
+    {
+      title: "CNPJ do CEC/UEx",
+      description: "Tenha o CNPJ correto em mãos para evitar inconsistência na observação da unidade e na conferência posterior.",
+      icon: Fingerprint,
+    },
+    {
+      title: "Identificação da escola",
+      description: "Use a designação correta da unidade para manter coerência entre processo, peças anexadas e análise regional.",
+      icon: Building2,
+    },
+  ];
+
   return (
     <section id="secao-1" className="scroll-mt-20 animate-fade-in">
       <div className="space-y-8">
@@ -31,6 +55,26 @@ export const SectionOne = () => {
           <ProfileCallout visibleFor="gad" variant="warning">
             <p>Ao receber o processo, verifique se a <strong className="text-foreground">especificação</strong> segue o padrão interno adotado pela <strong className="text-foreground">4ª CRE/GAD</strong> e se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos fora do padrão devem ser devolvidos para correção.</p>
           </ProfileCallout>
+
+          <div className="mt-6 grid gap-3 lg:grid-cols-3">
+            {preflightCards.map((card) => {
+              const Icon = card.icon;
+
+              return (
+                <article key={card.title} className="rounded-[1.3rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/55 p-4 shadow-soft">
+                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <h4 className="font-heading text-sm font-bold tracking-tight text-foreground sm:text-base">
+                    {card.title}
+                  </h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {card.description}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
         </div>
 
         {/* Steps */}
@@ -38,8 +82,9 @@ export const SectionOne = () => {
           <h3 className="section-heading">1.2. Iniciando o Processo</h3>
           <div className="content-spacing">
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-              Para abrir um novo processo no SEI!RIO, o usuário deve selecionar a opção 
-              <strong className="text-foreground"> "INICIAR PROCESSO"</strong>, conforme o menu de navegação do sistema.
+              Para abrir um novo processo no SEI!RIO, localize no menu lateral o comando
+              <UiLabelChip className="mx-1 align-middle">Iniciar Processo</UiLabelChip>
+              e use esse atalho para começar a autuação.
             </p>
 
             <div className="mt-6">
@@ -228,12 +273,17 @@ export const SectionOne = () => {
           <h3 className="section-heading">1.9. Salvando o Processo</h3>
           <div className="content-spacing">
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-              Após verificação de todos os campos, clique no botão <strong className="text-foreground">"SALVAR"</strong> para criar o processo.
+              Após verificar todos os campos, conclua a autuação pelo botão
+              <UiLabelChip tone="success" className="mx-1 align-middle">Salvar</UiLabelChip>
+              para criar o processo.
             </p>
             <div className="mt-4">
-              <button className="bg-[#006400] hover:bg-[#005200] text-white font-semibold px-6 py-2 rounded shadow-md transition-colors cursor-default">
+              <span
+                aria-hidden="true"
+                className="inline-flex bg-[#006400] hover:bg-[#005200] text-white font-semibold px-6 py-2 rounded shadow-md transition-colors cursor-default"
+              >
                 Salvar
-              </button>
+              </span>
             </div>
           </div>
         </div>
@@ -247,7 +297,11 @@ export const SectionOne = () => {
             </p>
             
             {/* Mockup da tela de confirmação - Qualidade Profissional */}
-            <div className="mt-4 border border-[#dee2e6] rounded-xl overflow-hidden shadow-xl bg-white">
+            <div
+              role="img"
+              aria-label="Exemplo ilustrativo da tela de confirmação da criação do processo no SEI!RIO."
+              className="mt-4 border border-[#dee2e6] rounded-xl overflow-hidden shadow-xl bg-white"
+            >
               {/* Header verde prefeitura */}
               <div className="bg-linear-to-r from-[#006633] to-[#00802b] text-white text-[10px] sm:text-xs px-4 py-1.5 font-medium tracking-wide">
                 PREFEITURA DA CIDADE DO RIO DE JANEIRO
@@ -273,9 +327,12 @@ export const SectionOne = () => {
                       <svg className="w-5 h-5 text-[#FFB300] drop-shadow-xs" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
                       </svg>
-                      <a href="#" className="text-[#0d6efd] font-bold text-sm sm:text-base hover:text-[#0a58ca] transition-colors cursor-pointer underline decoration-2 underline-offset-2">
+                      <span
+                        aria-hidden="true"
+                        className="text-[#0d6efd] font-bold text-sm sm:text-base hover:text-[#0a58ca] transition-colors cursor-pointer underline decoration-2 underline-offset-2"
+                      >
                         000700.000063/2025-35
-                      </a>
+                      </span>
                       <svg className="w-5 h-5 text-[#198754] drop-shadow-xs" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z"/>
                       </svg>
@@ -340,7 +397,8 @@ export const SectionOne = () => {
             <Callout variant="warning" title="Importante!" className="mt-6">
               <p className="text-sm text-foreground/80 leading-relaxed">
                 Copie o <strong className="text-foreground">número do Processo</strong> que foi gerado e preencha a planilha 
-                <strong className="text-foreground"> "Controle de processos 2026"</strong> enviada pela GCGR.
+                <UiLabelChip className="mx-1 align-middle">{INTERNAL_PROCESS_TRACKER_LABEL}</UiLabelChip>
+                enviada pela GCGR.
               </p>
             </Callout>
           </div>

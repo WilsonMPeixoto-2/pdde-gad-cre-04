@@ -93,9 +93,10 @@ export const SectionAnexo = () => {
             <Scale className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <h2 className="mb-2 text-2xl font-heading font-bold tracking-tight text-foreground">
-              Anexo — Base rápida de conferência
-            </h2>
+            <span className="lede-chip mb-3">Base rápida de conferência</span>
+            <h3 className="mb-2 text-xl font-heading font-bold tracking-tight text-foreground sm:text-2xl">
+              Normas, sistemas e marcos que evitam orientar o procedimento errado
+            </h3>
             <p className="leading-relaxed text-muted-foreground text-left sm:text-justify text-pretty">
               Este anexo existe apenas para <strong>não deixar o manual ensinar procedimento errado</strong>. Ele resume a regra federal mínima, separa os sistemas envolvidos e aponta os marcos que mais impactam a conferência da prestação de contas.
             </p>

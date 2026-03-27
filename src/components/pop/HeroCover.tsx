@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
-import { BookOpen, Calendar, Building2, FileText, ChevronDown, ClipboardList } from "lucide-react";
-import { GUIDE_ANCHORS, GUIDE_VERSION } from "@/lib/guideContent";
+import { BookOpen, Building2, ChevronDown, ClipboardList, FileText, ListChecks, Scale } from "lucide-react";
+import { GUIDE_ANCHORS, GUIDE_VERSION, processFlowSteps } from "@/lib/guideContent";
 
 /**
  * HeroCover — Premium autoral "Institucional Cinemático"
@@ -124,6 +124,41 @@ export const HeroCover = () => {
         }}
       />
 
+      <div className="hero-tech-board" aria-hidden="true">
+        <div className="hero-tech-line" style={{ top: '27%', left: '14%', width: '42%', transform: 'rotate(14deg)' }} />
+        <div className="hero-tech-line" style={{ top: '54%', left: '34%', width: '33%', transform: 'rotate(-10deg)' }} />
+        <div className="hero-tech-line" style={{ top: '70%', left: '20%', width: '48%', transform: 'rotate(8deg)' }} />
+
+        <span className="hero-tech-node" style={{ top: '22%', left: '12%' }} />
+        <span className="hero-tech-node hero-tech-node--warm" style={{ top: '48%', left: '38%' }} />
+        <span className="hero-tech-node" style={{ top: '67%', left: '18%' }} />
+        <span className="hero-tech-node hero-tech-node--warm" style={{ top: '73%', left: '63%' }} />
+
+        <div className="hero-tech-card" style={{ top: '6%', right: '4%', width: '13.5rem', animationDelay: '0.4s' }}>
+          <span className="hero-tech-label">Conferência local</span>
+          <span className="hero-tech-value">Checklist + Modelos</span>
+          <div className="hero-tech-meter">
+            <span style={{ width: '76%' }} />
+          </div>
+        </div>
+
+        <div className="hero-tech-card" style={{ top: '44%', right: '18%', width: '11.5rem', animationDelay: '1.4s' }}>
+          <span className="hero-tech-label">Fluxo guiado</span>
+          <span className="hero-tech-value">{processFlowSteps.length} etapas-chave</span>
+          <div className="hero-tech-meter">
+            <span style={{ width: '62%' }} />
+          </div>
+        </div>
+
+        <div className="hero-tech-card" style={{ bottom: '0%', right: '2%', width: '14rem', animationDelay: '2.2s' }}>
+          <span className="hero-tech-label">Base oficial</span>
+          <span className="hero-tech-value">Normas e fontes vigentes</span>
+          <div className="hero-tech-meter">
+            <span style={{ width: '84%' }} />
+          </div>
+        </div>
+      </div>
+
       {/* === CONTENT === */}
       <div className="relative z-10 text-center px-5 sm:px-6 py-12 sm:py-16 max-w-5xl mx-auto">
         {/* Institution Badge */}
@@ -196,13 +231,13 @@ export const HeroCover = () => {
         <div 
           className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10 sm:mb-12"
           role="list" 
-          aria-label="Informações institucionais"
+          aria-label="Recursos centrais do guia"
         >
           {[
-            { icon: <Building2 className="w-5 h-5" aria-hidden="true" />, label: "GAD", desc: "Gerência de Administração" },
-            { icon: <BookOpen className="w-5 h-5" aria-hidden="true" />, label: "POP", desc: "Procedimento Padrão" },
-            { icon: <FileText className="w-5 h-5" aria-hidden="true" />, label: "SEI!RIO", desc: "Sistema Eletrônico" },
-            { icon: <Calendar className="w-5 h-5" aria-hidden="true" />, label: GUIDE_VERSION.shortLabel, desc: GUIDE_VERSION.cycleLabel },
+            { icon: <ClipboardList className="w-5 h-5" aria-hidden="true" />, label: "Checklist", desc: "conferência mínima" },
+            { icon: <ListChecks className="w-5 h-5" aria-hidden="true" />, label: "Fluxo", desc: `${processFlowSteps.length} etapas práticas` },
+            { icon: <FileText className="w-5 h-5" aria-hidden="true" />, label: "Modelos", desc: "peças e exemplos" },
+            { icon: <Scale className="w-5 h-5" aria-hidden="true" />, label: "Fontes", desc: `${GUIDE_VERSION.shortLabel} • ${GUIDE_VERSION.cycleLabel}` },
           ].map((item, i) => (
             <div 
               key={i} 

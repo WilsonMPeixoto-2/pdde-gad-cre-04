@@ -5,6 +5,7 @@ import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
+import { QuickActionHub } from "@/components/pop/QuickActionHub";
 import { SectionOne } from "@/components/pop/SectionOne";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
@@ -162,6 +163,10 @@ const Index = () => {
 
               <AnimatedSection delay={50}>
                 <ScopeCallout />
+              </AnimatedSection>
+
+              <AnimatedSection delay={75}>
+                <QuickActionHub onPrint={handlePrint} />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>

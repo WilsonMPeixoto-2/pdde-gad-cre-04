@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { ProfileModeProvider } from "@/contexts/ProfileModeContext";
+import { useAssetUpdateRecovery } from "@/hooks/useAssetUpdateRecovery";
 import { useServiceWorkerLifecycle } from "@/hooks/useServiceWorkerLifecycle";
 import Index from "./pages/Index";
 
@@ -15,6 +16,7 @@ const CommandPalette = lazy(loadCommandPalette);
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => {
+  useAssetUpdateRecovery();
   useServiceWorkerLifecycle();
 
   useEffect(() => {

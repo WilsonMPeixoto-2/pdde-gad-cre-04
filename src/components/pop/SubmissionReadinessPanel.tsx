@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   AlertTriangle,
   CheckCircle2,
@@ -11,30 +11,20 @@ import {
 import { toast } from "sonner";
 import { GAD_UNIT, processFlowSteps } from "@/lib/guideContent";
 import {
-  createChecklistItems,
-  emptyProcessWorkspaceProfile,
+  buildOperationalReport,
   formatOperationalTimestamp,
-  hydrateChecklistItems,
-  PDDE_STORAGE_EVENT,
-  PDDE_STORAGE_KEYS,
-  readStorageJson,
-  sanitizeJourneyProgress,
-  sanitizeWorkspaceProfile,
-  type ChecklistItemState,
-  type ProcessWorkspaceProfile,
+  operationalStatusCopy,
 } from "@/lib/pddeOperationalData";
+import { useOperationalSnapshot } from "@/hooks/useOperationalSnapshot";
 
-interface OperationalSnapshot {
-  checklist: ChecklistItemState[];
-  journey: string[];
-  workspace: ProcessWorkspaceProfile;
-}
-
-const getSnapshot = (): OperationalSnapshot => ({
-  checklist: hydrateChecklistItems(readStorageJson(PDDE_STORAGE_KEYS.checklist, createChecklistItems())),
-  journey: sanitizeJourneyProgress(readStorageJson(PDDE_STORAGE_KEYS.journey, [])),
-  workspace: sanitizeWorkspaceProfile(readStorageJson(PDDE_STORAGE_KEYS.workspace, emptyProcessWorkspaceProfile())),
-});
+const toneClasses = {
+  danger: "border-destructive/30 bg-destructive/6 text-destructive",
+  warning:
+    "border-amber-300/50 bg-amber-50/80 text-amber-800 dark:border-amber-800/40 dark:bg-amber-950/20 dark:text-amber-300",
+  success:
+    "border-emerald-300/60 bg-emerald-50/80 text-emerald-800 dark:border-emerald-800/40 dark:bg-emerald-950/20 dark:text-emerald-300",
+  info: "border-sky-300/60 bg-sky-50/80 text-sky-800 dark:border-sky-800/40 dark:bg-sky-950/20 dark:text-sky-300",
+} as const;
 
 const downloadTextFile = (content: string, fileName: string) => {
   const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
@@ -47,104 +37,9 @@ const downloadTextFile = (content: string, fileName: string) => {
 };
 
 export const SubmissionReadinessPanel = () => {
-  const [snapshot, setSnapshot] = useState<OperationalSnapshot>(getSnapshot);
-
-  useEffect(() => {
-    const syncSnapshot = () => setSnapshot(getSnapshot());
-    const handleCustomSync = (event: Event) => {
-      const detail = (event as CustomEvent<{ key?: string }>).detail;
-
-      if (
-        detail?.key &&
-        detail.key !== PDDE_STORAGE_KEYS.checklist &&
-        detail.key !== PDDE_STORAGE_KEYS.journey &&
-        detail.key !== PDDE_STORAGE_KEYS.workspace
-      ) {
-        return;
-      }
-
-      syncSnapshot();
-    };
-
-    window.addEventListener(PDDE_STORAGE_EVENT, handleCustomSync as EventListener);
-    window.addEventListener("storage", syncSnapshot);
-
-    return () => {
-      window.removeEventListener(PDDE_STORAGE_EVENT, handleCustomSync as EventListener);
-      window.removeEventListener("storage", syncSnapshot);
-    };
-  }, []);
-
-  const report = useMemo(() => {
-    const essentialItems = snapshot.checklist.filter((item) => !item.complementar);
-    const complementaryItems = snapshot.checklist.filter((item) => item.complementar);
-    const essentialPending = essentialItems.filter((item) => !item.checked);
-    const complementaryPending = complementaryItems.filter((item) => !item.checked);
-    const completedJourney = new Set(snapshot.journey);
-    const remittanceStep = processFlowSteps.find((step) => step.id === "finalizacao");
-    const preRemittanceSteps = processFlowSteps.filter((step) => step.id !== "finalizacao");
-    const pendingJourney = preRemittanceSteps.filter((step) => !completedJourney.has(step.id));
-
-    const essentialProgress = essentialItems.length === 0 ? 0 : Math.round((100 * (essentialItems.length - essentialPending.length)) / essentialItems.length);
-    const journeyProgress = preRemittanceSteps.length === 0 ? 0 : Math.round((100 * (preRemittanceSteps.length - pendingJourney.length)) / preRemittanceSteps.length);
-    const remittanceDone = remittanceStep ? completedJourney.has(remittanceStep.id) : false;
-
-    let status: "submitted" | "ready" | "flow" | "blocked" = "blocked";
-
-    if (remittanceDone) {
-      status = "submitted";
-    } else if (essentialPending.length === 0 && pendingJourney.length === 0) {
-      status = "ready";
-    } else if (essentialPending.length === 0) {
-      status = "flow";
-    }
-
-    const meta = {
-      blocked: {
-        title: "Pendências críticas antes da remessa",
-        description:
-          "Ainda existem itens essenciais do núcleo mínimo federal em aberto. Resolva essas pendências antes de tramitar para a GAD.",
-        badge: "Núcleo mínimo incompleto",
-        accent: "border-destructive/30 bg-destructive/6 text-destructive",
-      },
-      flow: {
-        title: "Base documental pronta, fluxo ainda em andamento",
-        description:
-          "O núcleo documental mínimo já está reunido, mas a jornada processual ainda indica etapa operacional não concluída antes da remessa.",
-        badge: "Fluxo pendente",
-        accent: "border-amber-300/50 bg-amber-50/80 text-amber-800 dark:border-amber-800/40 dark:bg-amber-950/20 dark:text-amber-300",
-      },
-      ready: {
-        title: complementaryPending.length > 0 ? "Pronto para remeter, com alertas complementares" : "Pronto para remeter à GAD",
-        description:
-          complementaryPending.length > 0
-            ? "O processo já atende ao núcleo mínimo e à sequência operacional para remessa. Restam apenas itens complementares que exigem juízo de aplicabilidade local."
-            : "Checklist essencial concluído e fluxo operacional pré-remessa marcado. O processo pode seguir para a unidade destinatária da GAD.",
-        badge: "Apto para remessa",
-        accent: "border-emerald-300/60 bg-emerald-50/80 text-emerald-800 dark:border-emerald-800/40 dark:bg-emerald-950/20 dark:text-emerald-300",
-      },
-      submitted: {
-        title: "Remessa à GAD já registrada",
-        description:
-          "A jornada indica que a etapa de despacho e finalização já foi marcada. Acompanhe diligências, análise e despacho final da GAD.",
-        badge: "Remessa marcada",
-        accent: "border-sky-300/60 bg-sky-50/80 text-sky-800 dark:border-sky-800/40 dark:bg-sky-950/20 dark:text-sky-300",
-      },
-    } as const;
-
-    return {
-      status,
-      meta: meta[status],
-      essentialItems,
-      complementaryItems,
-      essentialPending,
-      complementaryPending,
-      pendingJourney,
-      essentialProgress,
-      journeyProgress,
-      remittanceDone,
-    };
-  }, [snapshot]);
+  const snapshot = useOperationalSnapshot();
+  const report = useMemo(() => buildOperationalReport(snapshot), [snapshot]);
+  const statusCopy = operationalStatusCopy[report.status];
 
   const buildDiagnosticText = () => {
     const generatedAt = new Date().toLocaleString("pt-BR");
@@ -152,7 +47,7 @@ export const SubmissionReadinessPanel = () => {
       "Diagnóstico operacional — Prestação de Contas PDDE",
       "",
       `Gerado em: ${generatedAt}`,
-      `Situação: ${report.meta.title}`,
+      `Situação: ${statusCopy.title}`,
       `Destino da remessa: ${GAD_UNIT.fullLabel}`,
       "",
       "Dados do processo",
@@ -167,6 +62,10 @@ export const SubmissionReadinessPanel = () => {
       `- Checklist essencial: ${report.essentialItems.length - report.essentialPending.length}/${report.essentialItems.length} (${report.essentialProgress}%)`,
       `- Checklist complementar: ${report.complementaryItems.length - report.complementaryPending.length}/${report.complementaryItems.length}`,
       `- Jornada pré-remessa: ${processFlowSteps.filter((step) => step.id !== "finalizacao").length - report.pendingJourney.length}/${processFlowSteps.filter((step) => step.id !== "finalizacao").length} (${report.journeyProgress}%)`,
+      `- Dados base do processo: ${report.workspaceCompletedFields}/${report.workspaceTotalFields}`,
+      "",
+      "Próxima ação recomendada",
+      `- ${report.nextAction.title}: ${report.nextAction.description}`,
       "",
     ];
 
@@ -195,7 +94,7 @@ export const SubmissionReadinessPanel = () => {
     }
 
     lines.push("Leitura orientativa");
-    lines.push(`- ${report.meta.description}`);
+    lines.push(`- ${statusCopy.description}`);
 
     return lines.join("\n");
   };
@@ -234,12 +133,12 @@ export const SubmissionReadinessPanel = () => {
               <h2 className="font-heading text-lg font-bold tracking-tight text-foreground sm:text-xl">
                 Diagnóstico de prontidão para a GAD
               </h2>
-              <span className={`rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${report.meta.accent}`}>
-                {report.meta.badge}
+              <span className={`rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${toneClasses[statusCopy.tone]}`}>
+                {statusCopy.badge}
               </span>
             </div>
             <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {report.meta.description}
+              {statusCopy.description}
             </p>
           </div>
         </div>

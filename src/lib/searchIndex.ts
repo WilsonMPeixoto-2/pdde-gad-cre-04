@@ -51,6 +51,22 @@ export const searchIndex: SearchItem[] = [
     anchor: "secao-1",
   },
   {
+    id: "central-operacional",
+    title: "Central operacional e backup",
+    content: "Painel para retomar a próxima ação, exportar o progresso em JSON e importar a conferência em outro computador.",
+    keywords: ["backup", "importar", "exportar", "json", "retomar", "próxima ação", "central operacional"],
+    section: sectionTitle("secao-2"),
+    anchor: GUIDE_ANCHORS.commandCenter,
+  },
+  {
+    id: "nomenclatura-documental",
+    title: "Kit de Nomes para Arquivos",
+    content: "Sugestões prontas para nome do arquivo e nome na árvore do processo, com base na unidade escolar e no exercício.",
+    keywords: ["nome do arquivo", "árvore", "padrão de nomes", "nomenclatura", "pdf", "sei", "upload"],
+    section: sectionTitle("secao-2"),
+    anchor: GUIDE_ANCHORS.naming,
+  },
+  {
     id: "checklist",
     title: "Checklist de Documentos",
     content: "Lista mínima e complementar para instrução processual da prestação de contas.",
@@ -187,6 +203,8 @@ export function searchItems(query: string): SearchItem[] {
 export function getQuickSuggestions(): SearchItem[] {
   const quickSuggestionIds = [
     "tipo-processo",
+    "central-operacional",
+    "nomenclatura-documental",
     "checklist",
     "bloco-assinatura",
     "remessa-gad",

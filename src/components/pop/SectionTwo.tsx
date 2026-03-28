@@ -6,6 +6,8 @@ import { SmartTemplates } from "./SmartTemplates";
 import { ProcessJourneyMap } from "./ProcessJourneyMap";
 import { ProcessWorkspacePanel } from "./ProcessWorkspacePanel";
 import { SubmissionReadinessPanel } from "./SubmissionReadinessPanel";
+import { OperationalCommandDeck } from "./OperationalCommandDeck";
+import { DocumentNamingKit } from "./DocumentNamingKit";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 
 export const SectionTwo = () => {
@@ -165,7 +167,15 @@ export const SectionTwo = () => {
       </ProfileCallout>
 
       <div className="mb-8">
+        <OperationalCommandDeck />
+      </div>
+
+      <div className="mb-8">
         <ProcessWorkspacePanel />
+      </div>
+
+      <div className="mb-8">
+        <DocumentNamingKit />
       </div>
 
       {/* Checklist de Documentos PDDE */}

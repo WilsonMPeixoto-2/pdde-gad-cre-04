@@ -1,12 +1,28 @@
 import { expect, test } from "@playwright/test";
 
+test.use({ serviceWorkers: "block" });
+
 const collectConsoleIssues = (page: Parameters<typeof test.beforeEach>[0]["page"]) => {
   const issues: string[] = [];
 
   page.on("console", (message) => {
+    if (message.text().includes("Service Worker registration blocked by Playwright")) {
+      return;
+    }
+
     if (message.type() === "error" || message.type() === "warning") {
       issues.push(`[${message.type()}] ${message.text()}`);
     }
+  });
+
+  return issues;
+};
+
+const collectPageErrors = (page: Parameters<typeof test.beforeEach>[0]["page"]) => {
+  const issues: string[] = [];
+
+  page.on("pageerror", (error) => {
+    issues.push(error.stack || error.message);
   });
 
   return issues;
@@ -24,30 +40,36 @@ test.describe("Fluxo desktop", () => {
 
   test("carrega sem regressões visíveis e mantém os atalhos principais funcionando", async ({ page }) => {
     const consoleIssues = collectConsoleIssues(page);
+    const pageErrors = collectPageErrors(page);
 
     await page.goto("/");
+    await page.waitForTimeout(300);
+    expect(pageErrors).toEqual([]);
+    expect(consoleIssues).toEqual([]);
 
     await expect(page.getByRole("heading", { level: 1, name: /prestação de contas/i })).toBeVisible();
     await expect(page.locator("h1")).toHaveCount(1);
-    await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
 
-    await expect(page.getByRole("button", { name: /abrir busca global/i })).toBeVisible();
+    const searchButton = page.getByRole("button", { name: /abrir busca global/i });
+    await expect(searchButton).toBeVisible();
     await page.waitForTimeout(300);
-    await page.evaluate(() => {
-      document.dispatchEvent(
-        new KeyboardEvent("keydown", {
-          key: "k",
-          ctrlKey: true,
-          bubbles: true,
-        }),
-      );
-    });
+    await searchButton.click();
     const searchInput = page.getByPlaceholder("Buscar seções, documentos, procedimentos...");
     await expect(searchInput).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(searchInput).toBeHidden();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
+    await page.getByRole("button", { name: /Retomar trabalho/i }).click();
+    await expect(page.locator("#central-operacional-pdde")).toBeInViewport();
+    await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
+
+    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: /Padrão de nomes/i }).click();
+    await expect(page.locator("#kit-nomenclatura-pdde")).toBeInViewport();
+    await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
+
     await page.getByRole("button", { name: /Checklist mínimo/i }).click();
     await expect(page.locator("#checklist-documentos")).toBeInViewport();
 
@@ -60,6 +82,7 @@ test.describe("Fluxo desktop", () => {
     });
 
     expect(hasOverflow).toBe(false);
+    expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });
 });
@@ -73,17 +96,28 @@ test.describe("Fluxo mobile", () => {
 
   test("preserva navegação, responsividade e mockups inertes no mobile", async ({ page }) => {
     const consoleIssues = collectConsoleIssues(page);
+    const pageErrors = collectPageErrors(page);
 
     await page.goto("/");
+    await page.waitForTimeout(300);
+    expect(pageErrors).toEqual([]);
+    expect(consoleIssues).toEqual([]);
 
-    await expect(page.getByRole("button", { name: /abrir menu de navegação/i })).toBeVisible();
+    const menuButton = page.getByRole("button", { name: /abrir menu de navegação/i }).first();
+    await expect(menuButton).toBeVisible();
+    await page.waitForTimeout(400);
 
-    await page.getByRole("button", { name: /abrir menu de navegação/i }).click();
+    await menuButton.click();
     await expect(page.getByRole("button", { name: /fechar menu de navegação/i })).toBeVisible();
     await page.getByRole("button", { name: /fechar menu de navegação/i }).click();
     await expect(page.getByRole("button", { name: /fechar menu de navegação/i })).toBeHidden();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: /Retomar trabalho/i }).click();
+    await expect(page.locator("#central-operacional-pdde")).toBeInViewport();
+    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: /Padrão de nomes/i }).click();
+    await expect(page.locator("#kit-nomenclatura-pdde")).toBeInViewport();
     await page.getByRole("button", { name: /Modelos e exemplos/i }).click();
     await expect(page.locator("#modelos-documentos")).toBeInViewport();
 
@@ -106,6 +140,7 @@ test.describe("Fluxo mobile", () => {
     expect(diagnostics.hasOverflow).toBe(false);
     expect(diagnostics.heroTechDisplay).toBe("none");
     expect(diagnostics.focusableInIllustrations).toBe(0);
+    expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });
 });

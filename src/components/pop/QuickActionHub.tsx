@@ -1,4 +1,4 @@
-import { ClipboardList, FileText, ListChecks, Printer, Scale } from "lucide-react";
+import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, Printer, Scale } from "lucide-react";
 import { toast } from "sonner";
 import { GUIDE_ANCHORS, processFlowSteps } from "@/lib/guideContent";
 
@@ -33,11 +33,25 @@ const copyOperationalRoute = async () => {
 export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
   const actions = [
     {
+      title: "Retomar trabalho",
+      description: "Abrir a central operacional com próxima ação recomendada e backup do progresso em JSON.",
+      icon: BriefcaseBusiness,
+      accent: "text-primary",
+      onClick: () => scrollToId(GUIDE_ANCHORS.commandCenter),
+    },
+    {
       title: "Checklist mínimo",
       description: "Ir direto à conferência dos documentos essenciais e complementares.",
       icon: ClipboardList,
       accent: "text-primary",
       onClick: () => scrollToId(GUIDE_ANCHORS.checklist),
+    },
+    {
+      title: "Padrão de nomes",
+      description: "Abrir o kit com nomenclatura sugerida para PDFs e nomes da árvore do processo.",
+      icon: Files,
+      accent: "text-sky-700 dark:text-sky-300",
+      onClick: () => scrollToId(GUIDE_ANCHORS.naming),
     },
     {
       title: "Modelos e exemplos",

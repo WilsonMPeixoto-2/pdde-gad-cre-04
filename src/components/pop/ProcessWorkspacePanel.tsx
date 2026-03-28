@@ -1,46 +1,21 @@
 import { useEffect, useMemo, useState } from "react";
-import { BriefcaseBusiness, FileBadge2, FolderSymlink, RotateCcw, Save } from "lucide-react";
+import { BriefcaseBusiness, Copy, FileBadge2, FolderSymlink, RotateCcw, Save } from "lucide-react";
+import { toast } from "sonner";
+import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import {
+  buildSubmissionSubjectLine,
+  buildWorkspaceIdentitySummary,
   emptyProcessWorkspaceProfile,
   formatOperationalTimestamp,
+  getWorkspaceFieldValidation,
+  normalizeWorkspaceFieldValue,
   PDDE_STORAGE_KEYS,
+  processWorkspaceFieldDefinitions,
   readStorageJson,
   sanitizeWorkspaceProfile,
   writeStorageJson,
   type ProcessWorkspaceProfile,
 } from "@/lib/pddeOperationalData";
-
-const workspaceFields: Array<{
-  key: keyof Omit<ProcessWorkspaceProfile, "updatedAt">;
-  label: string;
-  placeholder: string;
-}> = [
-  {
-    key: "schoolName",
-    label: "Unidade escolar",
-    placeholder: "Ex.: E.M. João Barbalho",
-  },
-  {
-    key: "uexCnpj",
-    label: "CNPJ do CEC/UEx",
-    placeholder: "00.000.000/0001-00",
-  },
-  {
-    key: "exercise",
-    label: "Exercício",
-    placeholder: "2026",
-  },
-  {
-    key: "seiProcessNumber",
-    label: "Processo SEI!RIO",
-    placeholder: "E/4a.CRE/000000/2026",
-  },
-  {
-    key: "responsibleName",
-    label: "Responsável pela conferência",
-    placeholder: "Nome de quem está montando ou conferindo a pasta",
-  },
-];
 
 export const ProcessWorkspacePanel = () => {
   const [workspace, setWorkspace] = useState<ProcessWorkspaceProfile>(() =>
@@ -53,15 +28,42 @@ export const ProcessWorkspacePanel = () => {
 
   const completedFields = useMemo(
     () =>
-      workspaceFields.filter(({ key }) => {
+      processWorkspaceFieldDefinitions.filter(({ key }) => {
         const value = workspace[key];
         return typeof value === "string" && value.trim().length > 0;
       }).length,
     [workspace],
   );
 
+  const fieldsWithState = useMemo(
+    () =>
+      processWorkspaceFieldDefinitions.map((field) => ({
+        ...field,
+        validation: getWorkspaceFieldValidation(field.key, workspace[field.key]),
+      })),
+    [workspace],
+  );
+
+  const copyToClipboard = async (content: string, successMessage: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      toast.success(successMessage);
+    } catch {
+      toast.error("Não foi possível copiar o conteúdo.");
+    }
+  };
+
+  const validationToneClasses = {
+    empty:
+      "border-border/70 bg-muted text-muted-foreground",
+    valid:
+      "border-emerald-300/60 bg-emerald-50/80 text-emerald-800 dark:border-emerald-800/40 dark:bg-emerald-950/20 dark:text-emerald-300",
+    warning:
+      "border-amber-300/60 bg-amber-50/85 text-amber-800 dark:border-amber-800/40 dark:bg-amber-950/20 dark:text-amber-300",
+  } as const;
+
   return (
-    <section id="dados-processo-operacional" className="scroll-mt-28 section-card border-l-4 border-l-primary/70 bg-linear-to-br from-background via-background to-primary/5">
+    <section id={GUIDE_ANCHORS.workspace} className="scroll-mt-28 section-card border-l-4 border-l-primary/70 bg-linear-to-br from-background via-background to-primary/5">
       <div className="mb-5 flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
         <div className="flex items-start gap-3">
           <div className="rounded-2xl bg-primary/10 p-3 text-primary shadow-xs">
@@ -88,9 +90,9 @@ export const ProcessWorkspacePanel = () => {
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
               Campos preenchidos
             </p>
-            <p className="mt-1 text-lg font-bold text-foreground">
-              {completedFields}/{workspaceFields.length}
-            </p>
+              <p className="mt-1 text-lg font-bold text-foreground">
+              {completedFields}/{processWorkspaceFieldDefinitions.length}
+              </p>
           </div>
           <div className="rounded-2xl border border-border/60 bg-card/80 px-4 py-3 text-center shadow-xs">
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
@@ -112,7 +114,7 @@ export const ProcessWorkspacePanel = () => {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {workspaceFields.map((field) => (
+        {fieldsWithState.map((field) => (
           <label key={field.key} className="block">
             <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
               {field.label}
@@ -123,15 +125,56 @@ export const ProcessWorkspacePanel = () => {
               onChange={(event) =>
                 setWorkspace((current) => ({
                   ...current,
-                  [field.key]: event.target.value,
+                  [field.key]: normalizeWorkspaceFieldValue(field.key, event.target.value),
                   updatedAt: new Date().toISOString(),
                 }))
               }
               placeholder={field.placeholder}
+              autoComplete={field.autoComplete}
               className="w-full rounded-2xl border border-border/60 bg-card px-4 py-3 text-sm text-foreground shadow-xs transition-all duration-200 outline-hidden placeholder:text-muted-foreground/55 focus:border-primary/35 focus:ring-2 focus:ring-primary/15"
             />
+            <div className="mt-2 flex items-start justify-between gap-3">
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                {field.validation.status === "valid" ? field.helperText : field.validation.hint}
+              </p>
+              <span
+                className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${validationToneClasses[field.validation.status]}`}
+              >
+                {field.validation.badge}
+              </span>
+            </div>
           </label>
         ))}
+      </div>
+
+      <div className="mt-5 flex flex-col gap-3 lg:flex-row lg:flex-wrap">
+        <button
+          type="button"
+          onClick={() =>
+            void copyToClipboard(
+              buildWorkspaceIdentitySummary(workspace),
+              "Identificação resumida copiada.",
+            )
+          }
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-2.5 text-sm font-semibold text-primary transition-all duration-200 hover:border-primary/35 hover:bg-primary/12 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          <Copy className="h-4 w-4" />
+          Copiar identificação do processo
+        </button>
+
+        <button
+          type="button"
+          onClick={() =>
+            void copyToClipboard(
+              buildSubmissionSubjectLine(workspace),
+              "Assunto sugerido copiado.",
+            )
+          }
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-border/60 bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/30 hover:bg-primary/5 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          <Copy className="h-4 w-4" />
+          Copiar assunto sugerido
+        </button>
       </div>
 
       <div className="mt-5 grid gap-3 lg:grid-cols-2">

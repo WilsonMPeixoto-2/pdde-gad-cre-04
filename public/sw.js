@@ -1,6 +1,7 @@
-const CACHE_NAME = "pdde-guide-shell-v3";
+const SW_VERSION = new URL(self.location.href).searchParams.get("v") ?? "fallback";
+const CACHE_NAME = `pdde-guide-shell-${SW_VERSION}`;
 const APP_SHELL = ["/", "/index.html", "/favicon.png", "/manifest.json", "/og-image.png"];
-const CACHEABLE_DESTINATIONS = new Set(["script", "style", "image", "font", "manifest"]);
+const CACHEABLE_DESTINATIONS = new Set(["image", "font", "manifest"]);
 const PDF_PATH_PREFIX = "/models/";
 
 const cacheResponse = async (request, response) => {
@@ -11,9 +12,15 @@ const cacheResponse = async (request, response) => {
   return response;
 };
 
-const networkFirst = async (request, fallbackKey = request) => {
+const fetchFresh = (request, { bypassBrowserCache = false } = {}) => {
+  if (!bypassBrowserCache) return fetch(request);
+
+  return fetch(new Request(request, { cache: "no-store" }));
+};
+
+const networkFirst = async (request, fallbackKey = request, options) => {
   try {
-    const response = await fetch(request);
+    const response = await fetchFresh(request, options);
     return await cacheResponse(request, response);
   } catch {
     const cachedResponse = await caches.match(fallbackKey);
@@ -49,7 +56,7 @@ self.addEventListener("fetch", (event) => {
   if (requestUrl.origin !== self.location.origin) return;
 
   if (event.request.mode === "navigate") {
-    event.respondWith(networkFirst(event.request, "/index.html"));
+    event.respondWith(networkFirst(event.request, "/index.html", { bypassBrowserCache: true }));
     return;
   }
 

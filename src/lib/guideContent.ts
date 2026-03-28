@@ -35,6 +35,9 @@ export const GAD_UNIT = {
 export const INTERNAL_PROCESS_TRACKER_LABEL = "Controle de processos 2026";
 
 export const GUIDE_ANCHORS = {
+  commandCenter: "central-operacional-pdde",
+  workspace: "dados-processo-operacional",
+  naming: "kit-nomenclatura-pdde",
   checklist: "checklist-documentos",
   readiness: "diagnostico-remessa-gad",
   models: "modelos-documentos",

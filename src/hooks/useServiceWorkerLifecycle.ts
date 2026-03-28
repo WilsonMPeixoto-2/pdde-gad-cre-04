@@ -3,7 +3,7 @@ import { toast } from "@/components/ui/sonner";
 
 const UPDATE_TOAST_ID = "pdde-sw-update";
 
-const getServiceWorkerUrl = () => `${import.meta.env.BASE_URL}sw.js`;
+const getServiceWorkerUrl = () => `${import.meta.env.BASE_URL}sw.js?v=${__APP_BUILD_ID__}`;
 
 export const useServiceWorkerLifecycle = () => {
   const promptForUpdate = useEffectEvent((registration: ServiceWorkerRegistration) => {
@@ -35,6 +35,13 @@ export const useServiceWorkerLifecycle = () => {
     if (!import.meta.env.PROD) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         registrations.forEach((registration) => registration.unregister());
+      });
+      window.caches?.keys().then((cacheKeys) => {
+        cacheKeys
+          .filter((cacheKey) => cacheKey.startsWith("pdde-guide-shell-"))
+          .forEach((cacheKey) => {
+            void window.caches.delete(cacheKey);
+          });
       });
       return;
     }

@@ -77,8 +77,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: "resumo-compartilhavel",
     title: "Resumo Compartilhável da Conferência",
-    content: "Gera um resumo curto da situação do processo, com próxima ação, pendências e assunto sugerido para handoff.",
-    keywords: ["resumo", "handoff", "compartilhar", "whatsapp", "email", "situação atual", "assunto sugerido"],
+    content: "Gera resumo curto, briefing executivo, assunto sugerido e relatório premium pronto para impressão ou PDF.",
+    keywords: ["resumo", "handoff", "compartilhar", "whatsapp", "email", "situação atual", "assunto sugerido", "briefing executivo", "pdf", "impressão", "relatório premium"],
     section: sectionTitle("secao-2"),
     anchor: GUIDE_ANCHORS.sharePack,
   },

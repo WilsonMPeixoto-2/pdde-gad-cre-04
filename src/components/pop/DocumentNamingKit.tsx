@@ -2,21 +2,12 @@ import { useMemo, useState } from "react";
 import { Check, Copy, Download, Files, FolderTree, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
+import { downloadTextFile } from "@/lib/clientFileExports";
 import {
   buildWorkspaceIdentitySummary,
   getDocumentNamingSuggestions,
 } from "@/lib/pddeOperationalData";
 import { useOperationalSnapshot } from "@/hooks/useOperationalSnapshot";
-
-const downloadTextFile = (content: string, fileName: string) => {
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-  const objectUrl = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = objectUrl;
-  anchor.download = fileName;
-  anchor.click();
-  URL.revokeObjectURL(objectUrl);
-};
 
 export const DocumentNamingKit = () => {
   const { workspace } = useOperationalSnapshot();

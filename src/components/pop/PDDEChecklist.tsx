@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check, Download } from "lucide-react";
 import { toast } from "sonner";
+import { downloadTextFile } from "@/lib/clientFileExports";
 import { externalResources } from "@/lib/externalResources";
 import {
   createChecklistItems,
@@ -151,13 +152,7 @@ export const PDDEChecklist = () => {
           ...pending.map((item) => `- ${item.complementar ? "[Complementar]" : `[${item.id}]`} ${item.text}`),
         ].join("\n");
 
-    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = "PDDE_CHECKLIST_PENDENCIAS.txt";
-    anchor.click();
-    URL.revokeObjectURL(url);
+    downloadTextFile(content, "PDDE_CHECKLIST_PENDENCIAS.txt");
     toast.success("Resumo baixado em .txt.");
   }, [items]);
 

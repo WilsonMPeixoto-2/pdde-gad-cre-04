@@ -58,7 +58,7 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
     },
     {
       title: "Resumo da conferência",
-      description: "Abrir o painel com texto curto para repasse, assunto sugerido e pacote compartilhável.",
+      description: "Abrir o painel com resumo curto, briefing executivo e relatório pronto para impressão ou PDF.",
       icon: MessageSquareShare,
       accent: "text-emerald-700 dark:text-emerald-300",
       onClick: () => scrollToId(GUIDE_ANCHORS.sharePack, saveLastSection),

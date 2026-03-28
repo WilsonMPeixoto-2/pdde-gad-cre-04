@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { GAD_UNIT, processFlowSteps } from "@/lib/guideContent";
+import { downloadTextFile } from "@/lib/clientFileExports";
 import {
   buildOperationalTextBundle,
   buildOperationalReport,
@@ -26,16 +27,6 @@ const toneClasses = {
     "border-emerald-300/60 bg-emerald-50/80 text-emerald-800 dark:border-emerald-800/40 dark:bg-emerald-950/20 dark:text-emerald-300",
   info: "border-sky-300/60 bg-sky-50/80 text-sky-800 dark:border-sky-800/40 dark:bg-sky-950/20 dark:text-sky-300",
 } as const;
-
-const downloadTextFile = (content: string, fileName: string) => {
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-  const objectUrl = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = objectUrl;
-  anchor.download = fileName;
-  anchor.click();
-  URL.revokeObjectURL(objectUrl);
-};
 
 export const SubmissionReadinessPanel = () => {
   const snapshot = useOperationalSnapshot();

@@ -97,6 +97,24 @@ test.describe("Fluxo desktop", () => {
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Resumo da conferência/i }).click();
     await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Copiar briefing executivo/i })).toBeVisible();
+
+    const [reportPopup] = await Promise.all([
+      page.waitForEvent("popup"),
+      page.getByRole("button", { name: /Abrir relatório para impressão/i }).click(),
+    ]);
+    await reportPopup.waitForLoadState();
+    await expect(
+      reportPopup.getByRole("heading", { level: 1, name: /relatório operacional para conferência e remessa/i }),
+    ).toBeVisible();
+    await expect(reportPopup.getByText("Próxima ação recomendada", { exact: true })).toBeVisible();
+    await reportPopup.close();
+
+    const [premiumReportDownload] = await Promise.all([
+      page.waitForEvent("download"),
+      page.getByRole("button", { name: /Baixar relatório \.html/i }).click(),
+    ]);
+    expect(await premiumReportDownload.suggestedFilename()).toMatch(/^PDDE_RELATORIO_OPERACIONAL_.*\.html$/);
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Notas do caso/i }).click();

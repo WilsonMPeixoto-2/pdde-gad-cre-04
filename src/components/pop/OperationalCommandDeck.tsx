@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
+import { downloadJsonFile } from "@/lib/clientFileExports";
 import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 import {
   applyOperationalSnapshot,
@@ -33,16 +34,6 @@ const toneClasses = {
 
 const scrollToId = (id: string) => {
   scrollToGuideAnchor(id);
-};
-
-const downloadJsonFile = (content: string, fileName: string) => {
-  const blob = new Blob([content], { type: "application/json;charset=utf-8" });
-  const objectUrl = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = objectUrl;
-  anchor.download = fileName;
-  anchor.click();
-  URL.revokeObjectURL(objectUrl);
 };
 
 export const OperationalCommandDeck = () => {
@@ -79,10 +70,7 @@ export const OperationalCommandDeck = () => {
 
   const handleExport = () => {
     const backup = createOperationalBackup(snapshot);
-    downloadJsonFile(
-      JSON.stringify(backup, null, 2),
-      getOperationalBackupFileName(snapshot),
-    );
+    downloadJsonFile(backup, getOperationalBackupFileName(snapshot));
     toast.success("Progresso exportado em .json.");
   };
 

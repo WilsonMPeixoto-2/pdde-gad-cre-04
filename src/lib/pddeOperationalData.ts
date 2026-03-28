@@ -101,6 +101,7 @@ export interface DocumentNamingSuggestion {
 export interface OperationalTextBundle {
   diagnostic: string;
   shareSummary: string;
+  executiveBrief: string;
   fileName: string;
 }
 
@@ -278,6 +279,21 @@ const slugifyOperationalFileSegment = (value: string) =>
     .replace(/_+/g, "_")
     .toUpperCase();
 
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+const joinHumanList = (items: string[]) => {
+  if (items.length === 0) return "";
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} e ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")} e ${items[items.length - 1]}`;
+};
+
 const validateCnpj = (value: string) => {
   const digits = digitsOnly(value);
 
@@ -422,6 +438,12 @@ export const getOperationalDiagnosticFileName = (workspace: ProcessWorkspaceProf
   const exercise = workspace.exercise.trim() || "sem-exercicio";
   const school = slugifyOperationalFileSegment(workspace.schoolName) || "UNIDADE";
   return `PDDE_DIAGNOSTICO_GAD_${exercise}_${school}.txt`;
+};
+
+export const getOperationalPremiumReportFileName = (workspace: ProcessWorkspaceProfile) => {
+  const exercise = workspace.exercise.trim() || "sem-exercicio";
+  const school = slugifyOperationalFileSegment(workspace.schoolName) || "UNIDADE";
+  return `PDDE_RELATORIO_OPERACIONAL_${exercise}_${school}.html`;
 };
 
 const documentNamingBlueprints = [
@@ -895,12 +917,576 @@ export const buildOperationalShareSummary = (
   ].join("\n");
 };
 
+export const buildOperationalExecutiveHighlights = (
+  snapshot: OperationalSnapshot,
+  report: OperationalReadinessReport = buildOperationalReport(snapshot),
+) => {
+  const pendingJourneyLabels = report.pendingJourney
+    .slice(0, 2)
+    .map((step) => `etapa ${step.number} (${step.title})`);
+  const missingFields = report.missingWorkspaceFields
+    .slice(0, 3)
+    .map((field) => field.label.toLowerCase());
+
+  const highlights = [
+    `Situação atual: ${operationalStatusCopy[report.status].title}.`,
+    `Checklist essencial em ${report.essentialItems.length - report.essentialPending.length}/${report.essentialItems.length} (${report.essentialProgress}%).`,
+    report.pendingJourney.length > 0
+      ? `Fluxo pré-remessa ainda depende de ${joinHumanList(pendingJourneyLabels)}.`
+      : "Fluxo pré-remessa já está marcado até o ponto de remessa.",
+    report.missingWorkspaceFields.length > 0
+      ? `Dados base ainda incompletos: ${joinHumanList(missingFields)}.`
+      : "Dados base do processo preenchidos para reaproveitamento em modelos, relatórios e handoff.",
+    `Próxima ação recomendada: ${report.nextAction.title}. ${report.nextAction.description}`,
+  ];
+
+  if (snapshot.notes.pendingIssue.trim()) {
+    highlights.push(`Pendência focal registrada: ${snapshot.notes.pendingIssue.trim()}.`);
+  }
+
+  if (snapshot.notes.nextCheckpoint.trim()) {
+    highlights.push(`Próxima checagem prevista: ${snapshot.notes.nextCheckpoint.trim()}.`);
+  }
+
+  return highlights;
+};
+
+export const buildOperationalExecutiveBrief = (
+  snapshot: OperationalSnapshot,
+  report: OperationalReadinessReport = buildOperationalReport(snapshot),
+) =>
+  [
+    "Briefing executivo — Prestação de Contas PDDE",
+    "",
+    ...buildOperationalExecutiveHighlights(snapshot, report).map((item) => `- ${item}`),
+  ].join("\n");
+
+const buildOperationalPrintList = (items: string[], emptyMessage: string) => {
+  if (items.length === 0) {
+    return `<p class="empty-state">${escapeHtml(emptyMessage)}</p>`;
+  }
+
+  return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+};
+
+export const buildOperationalPrintHtml = (
+  snapshot: OperationalSnapshot,
+  report: OperationalReadinessReport = buildOperationalReport(snapshot),
+) => {
+  const statusCopy = operationalStatusCopy[report.status];
+  const highlights = buildOperationalExecutiveHighlights(snapshot, report);
+  const generationLabel = formatOperationalTimestamp(new Date().toISOString());
+  const checklistComplete = report.essentialItems.length - report.essentialPending.length;
+  const journeyTotal = processFlowSteps.filter((step) => step.id !== "finalizacao").length;
+  const journeyComplete = journeyTotal - report.pendingJourney.length;
+  const complementaryComplete = report.complementaryItems.length - report.complementaryPending.length;
+  const statusToneClass =
+    statusCopy.tone === "danger"
+      ? "status-danger"
+      : statusCopy.tone === "warning"
+        ? "status-warning"
+        : statusCopy.tone === "success"
+          ? "status-success"
+          : "status-info";
+
+  const noteRows = [
+    ["Pendência focal", snapshot.notes.pendingIssue.trim() || "Sem registro atual"],
+    ["Último andamento", snapshot.notes.lastAction.trim() || "Sem registro atual"],
+    ["Próxima checagem", snapshot.notes.nextCheckpoint.trim() || "Sem registro atual"],
+    ["Responsável / handoff", snapshot.notes.handoffOwner.trim() || "Sem registro atual"],
+    ["Observações", snapshot.notes.observations.trim() || "Sem observação registrada"],
+  ];
+
+  return `<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Relatório operacional PDDE</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #102033;
+        --muted: #5b6b7f;
+        --line: #d8e0ea;
+        --surface: #f5f8fb;
+        --surface-strong: #ffffff;
+        --primary: #0f5bd7;
+        --primary-soft: rgba(15, 91, 215, 0.08);
+        --success: #18794e;
+        --success-soft: rgba(24, 121, 78, 0.1);
+        --warning: #9a5b00;
+        --warning-soft: rgba(154, 91, 0, 0.1);
+        --danger: #b42318;
+        --danger-soft: rgba(180, 35, 24, 0.08);
+        --info: #0c6ac9;
+        --info-soft: rgba(12, 106, 201, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+      html { background: #eef3f8; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top right, rgba(15, 91, 215, 0.08), transparent 32%),
+          linear-gradient(180deg, #f4f7fb 0%, #eef3f8 100%);
+        color: var(--ink);
+        font-family: "Segoe UI", "Inter", system-ui, sans-serif;
+        line-height: 1.55;
+      }
+
+      .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        padding: 14px 18px;
+        backdrop-filter: blur(12px);
+        background: rgba(244, 247, 251, 0.88);
+        border-bottom: 1px solid rgba(216, 224, 234, 0.9);
+      }
+
+      .toolbar button {
+        border: 0;
+        border-radius: 999px;
+        padding: 11px 18px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        background: var(--primary);
+        color: white;
+      }
+
+      .toolbar p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        align-self: center;
+      }
+
+      main {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 28px 24px 48px;
+      }
+
+      .sheet {
+        background: var(--surface-strong);
+        border: 1px solid rgba(216, 224, 234, 0.9);
+        border-radius: 28px;
+        box-shadow: 0 22px 60px rgba(16, 32, 51, 0.08);
+        overflow: hidden;
+      }
+
+      .cover {
+        padding: 36px 36px 28px;
+        background:
+          linear-gradient(135deg, rgba(15, 91, 215, 0.08), rgba(15, 91, 215, 0.02)),
+          linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 34px;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+      }
+
+      .lede {
+        max-width: 760px;
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      .meta-grid,
+      .metric-grid,
+      .panel-grid,
+      .detail-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .meta-grid,
+      .metric-grid {
+        margin-top: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .panel-grid {
+        padding: 28px 36px 0;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      }
+
+      .detail-grid {
+        padding: 20px 36px 36px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card,
+      .status-card,
+      .metric-card,
+      .detail-card {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: #fff;
+      }
+
+      .card,
+      .detail-card {
+        padding: 22px;
+      }
+
+      .status-card {
+        padding: 22px;
+      }
+
+      .status-card strong {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .status-danger strong { color: var(--danger); background: var(--danger-soft); }
+      .status-warning strong { color: var(--warning); background: var(--warning-soft); }
+      .status-success strong { color: var(--success); background: var(--success-soft); }
+      .status-info strong { color: var(--info); background: var(--info-soft); }
+
+      .status-card p,
+      .card p,
+      .detail-card p,
+      .detail-card li {
+        margin: 0;
+      }
+
+      .status-card h2,
+      .card h2,
+      .detail-card h2 {
+        margin: 12px 0 10px;
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      .status-card .hint {
+        color: var(--muted);
+      }
+
+      .metric-card {
+        padding: 18px 20px;
+        background: var(--surface);
+      }
+
+      .metric-card span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .metric-card strong {
+        display: block;
+        margin-top: 10px;
+        font-size: 28px;
+        line-height: 1;
+      }
+
+      .metric-card p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .section-label {
+        margin: 0 0 10px;
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .summary-list,
+      ul {
+        margin: 0;
+        padding-left: 22px;
+      }
+
+      .summary-list li,
+      ul li {
+        margin-top: 10px;
+      }
+
+      .meta-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .meta-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        border-bottom: 1px dashed rgba(216, 224, 234, 0.95);
+        padding-bottom: 10px;
+      }
+
+      .meta-row:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .meta-row span {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .meta-row strong {
+        text-align: right;
+        font-weight: 700;
+      }
+
+      .empty-state {
+        color: var(--muted);
+      }
+
+      footer {
+        padding: 0 36px 36px;
+      }
+
+      .footer-note {
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 860px) {
+        .panel-grid,
+        .detail-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cover,
+        .panel-grid,
+        .detail-grid,
+        footer {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+
+        .meta-row {
+          flex-direction: column;
+        }
+
+        .meta-row strong {
+          text-align: left;
+        }
+      }
+
+      @media print {
+        @page { margin: 14mm; size: A4; }
+
+        html,
+        body {
+          background: #fff;
+        }
+
+        .toolbar {
+          display: none;
+        }
+
+        main {
+          max-width: none;
+          padding: 0;
+        }
+
+        .sheet {
+          border: 0;
+          box-shadow: none;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <button type="button" onclick="window.print()">Imprimir / salvar em PDF</button>
+      <p>Versão limpa para conferência, anexação em PDF ou repasse interno.</p>
+    </div>
+    <main>
+      <article class="sheet">
+        <header class="cover">
+          <p class="eyebrow">Guia PDDE • conferência operacional</p>
+          <h1>Relatório operacional para conferência e remessa</h1>
+          <p class="lede">
+            Documento gerado a partir do estado salvo no guia para apoiar conferência interna,
+            passagem de tarefa e preparação da remessa para ${escapeHtml(GAD_UNIT.fullLabel)}.
+          </p>
+
+          <div class="meta-grid">
+            <div class="metric-card">
+              <span>Unidade escolar</span>
+              <strong>${escapeHtml(snapshot.workspace.schoolName || "Não informado")}</strong>
+              <p>Gerado em ${escapeHtml(generationLabel)}</p>
+            </div>
+            <div class="metric-card">
+              <span>Exercício</span>
+              <strong>${escapeHtml(snapshot.workspace.exercise || "Não informado")}</strong>
+              <p>Processo ${escapeHtml(snapshot.workspace.seiProcessNumber || "Não informado")}</p>
+            </div>
+            <div class="metric-card">
+              <span>Responsável</span>
+              <strong>${escapeHtml(snapshot.workspace.responsibleName || "Não informado")}</strong>
+              <p>CNPJ ${escapeHtml(snapshot.workspace.uexCnpj || "Não informado")}</p>
+            </div>
+          </div>
+        </header>
+
+        <section class="panel-grid">
+          <section class="status-card ${statusToneClass}">
+            <strong>${escapeHtml(statusCopy.badge)}</strong>
+            <h2>${escapeHtml(statusCopy.title)}</h2>
+            <p class="hint">${escapeHtml(statusCopy.description)}</p>
+
+            <div class="metric-grid">
+              <div class="metric-card">
+                <span>Checklist essencial</span>
+                <strong>${checklistComplete}/${report.essentialItems.length}</strong>
+                <p>${report.essentialProgress}% do núcleo mínimo federal.</p>
+              </div>
+              <div class="metric-card">
+                <span>Jornada pré-remessa</span>
+                <strong>${journeyComplete}/${journeyTotal}</strong>
+                <p>${report.journeyProgress}% do fluxo operacional antes da remessa.</p>
+              </div>
+              <div class="metric-card">
+                <span>Itens complementares</span>
+                <strong>${complementaryComplete}/${report.complementaryItems.length}</strong>
+                <p>${report.complementaryPending.length} ainda dependem de avaliação.</p>
+              </div>
+              <div class="metric-card">
+                <span>Dados base do processo</span>
+                <strong>${report.workspaceCompletedFields}/${report.workspaceTotalFields}</strong>
+                <p>Campos aproveitados em modelos, relatórios e handoff.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <p class="section-label">Próxima ação recomendada</p>
+            <h2>${escapeHtml(report.nextAction.title)}</h2>
+            <p>${escapeHtml(report.nextAction.description)}</p>
+
+            <div class="card" style="margin-top: 18px; background: var(--surface);">
+              <p class="section-label">Resumo executivo</p>
+              <ul class="summary-list">
+                ${highlights.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+              </ul>
+            </div>
+          </section>
+        </section>
+
+        <section class="detail-grid">
+          <section class="detail-card">
+            <p class="section-label">Dados do processo</p>
+            <div class="meta-list">
+              <div class="meta-row"><span>Unidade escolar</span><strong>${escapeHtml(snapshot.workspace.schoolName || "Não informado")}</strong></div>
+              <div class="meta-row"><span>CNPJ do CEC/UEx</span><strong>${escapeHtml(snapshot.workspace.uexCnpj || "Não informado")}</strong></div>
+              <div class="meta-row"><span>Exercício</span><strong>${escapeHtml(snapshot.workspace.exercise || "Não informado")}</strong></div>
+              <div class="meta-row"><span>Processo SEI!RIO</span><strong>${escapeHtml(snapshot.workspace.seiProcessNumber || "Não informado")}</strong></div>
+              <div class="meta-row"><span>Responsável pela conferência</span><strong>${escapeHtml(snapshot.workspace.responsibleName || "Não informado")}</strong></div>
+              <div class="meta-row"><span>Última atualização do painel</span><strong>${escapeHtml(formatOperationalTimestamp(snapshot.workspace.updatedAt))}</strong></div>
+            </div>
+          </section>
+
+          <section class="detail-card">
+            <p class="section-label">Notas operacionais</p>
+            <div class="meta-list">
+              ${noteRows
+                .map(
+                  ([label, value]) =>
+                    `<div class="meta-row"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`,
+                )
+                .join("")}
+            </div>
+          </section>
+
+          <section class="detail-card">
+            <p class="section-label">Pendências essenciais</p>
+            ${buildOperationalPrintList(
+              report.essentialPending.map((item) => `${item.id}. ${item.text}`),
+              "Nenhuma pendência essencial em aberto.",
+            )}
+          </section>
+
+          <section class="detail-card">
+            <p class="section-label">Etapas ainda não marcadas</p>
+            ${buildOperationalPrintList(
+              report.pendingJourney.map((step) => `Etapa ${step.number}: ${step.title}`),
+              "Fluxo pré-remessa já marcado integralmente.",
+            )}
+          </section>
+
+          <section class="detail-card">
+            <p class="section-label">Alertas complementares</p>
+            ${buildOperationalPrintList(
+              report.complementaryPending.map((item) => item.text),
+              "Nenhum alerta complementar em aberto no momento.",
+            )}
+          </section>
+
+          <section class="detail-card">
+            <p class="section-label">Destino e uso recomendado</p>
+            <ul>
+              <li>Destino da remessa: ${escapeHtml(GAD_UNIT.fullLabel)}.</li>
+              <li>Use este relatório para conferência interna, repasse entre equipes e geração de PDF institucional.</li>
+              <li>Revise sempre o caso concreto, a norma do exercício e eventuais exigências locais antes de tramitar.</li>
+            </ul>
+          </section>
+        </section>
+
+        <footer>
+          <p class="footer-note">
+            Relatório gerado automaticamente pelo guia operacional PDDE. Este material apoia a conferência e
+            a organização do processo, mas não substitui a análise normativa do caso concreto nem a verificação
+            dos documentos originais e dos registros federais aplicáveis ao exercício.
+          </p>
+        </footer>
+      </article>
+    </main>
+  </body>
+</html>`;
+};
+
 export const buildOperationalTextBundle = (
   snapshot: OperationalSnapshot,
   report: OperationalReadinessReport = buildOperationalReport(snapshot),
 ): OperationalTextBundle => ({
   diagnostic: buildOperationalDiagnosticText(snapshot, report),
   shareSummary: buildOperationalShareSummary(snapshot, report),
+  executiveBrief: buildOperationalExecutiveBrief(snapshot, report),
   fileName: getOperationalDiagnosticFileName(snapshot.workspace),
 });
 

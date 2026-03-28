@@ -1,16 +1,63 @@
+import { lazy } from "react";
 import { AlertTriangle, CircleHelp, ListChecks, ShieldCheck, Sparkles } from "lucide-react";
-import { PDDEChecklist } from "./PDDEChecklist";
-import { PDDEModelCards } from "./PDDEModelCards";
+import { DeferredGuideSection } from "./DeferredGuideSection";
 import { ProfileCallout } from "./ProfileCallout";
-import { SmartTemplates } from "./SmartTemplates";
-import { ProcessJourneyMap } from "./ProcessJourneyMap";
-import { ProcessWorkspacePanel } from "./ProcessWorkspacePanel";
-import { SubmissionReadinessPanel } from "./SubmissionReadinessPanel";
-import { OperationalCommandDeck } from "./OperationalCommandDeck";
-import { DocumentNamingKit } from "./DocumentNamingKit";
-import { OperationalSharePack } from "./OperationalSharePack";
-import { OperationalCaseNotesPanel } from "./OperationalCaseNotesPanel";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
+
+const OperationalCommandDeck = lazy(() =>
+  import("./OperationalCommandDeck").then((m) => ({ default: m.OperationalCommandDeck })),
+);
+const ProcessWorkspacePanel = lazy(() =>
+  import("./ProcessWorkspacePanel").then((m) => ({ default: m.ProcessWorkspacePanel })),
+);
+const DocumentNamingKit = lazy(() =>
+  import("./DocumentNamingKit").then((m) => ({ default: m.DocumentNamingKit })),
+);
+const PDDEChecklist = lazy(() =>
+  import("./PDDEChecklist").then((m) => ({ default: m.PDDEChecklist })),
+);
+const SubmissionReadinessPanel = lazy(() =>
+  import("./SubmissionReadinessPanel").then((m) => ({ default: m.SubmissionReadinessPanel })),
+);
+const OperationalSharePack = lazy(() =>
+  import("./OperationalSharePack").then((m) => ({ default: m.OperationalSharePack })),
+);
+const OperationalCaseNotesPanel = lazy(() =>
+  import("./OperationalCaseNotesPanel").then((m) => ({ default: m.OperationalCaseNotesPanel })),
+);
+const PDDEModelCards = lazy(() =>
+  import("./PDDEModelCards").then((m) => ({ default: m.PDDEModelCards })),
+);
+const SmartTemplates = lazy(() =>
+  import("./SmartTemplates").then((m) => ({ default: m.SmartTemplates })),
+);
+const ProcessJourneyMap = lazy(() =>
+  import("./ProcessJourneyMap").then((m) => ({ default: m.ProcessJourneyMap })),
+);
+
+const SectionTwoBlockLoader = ({
+  density = "regular",
+}: {
+  density?: "compact" | "regular" | "tall";
+}) => (
+  <div
+    className={`section-card border border-border/60 bg-card/85 p-5 shadow-soft ${
+      density === "compact"
+        ? "min-h-[180px]"
+        : density === "tall"
+          ? "min-h-[340px]"
+          : "min-h-[250px]"
+    }`}
+  >
+    <div className="space-y-3">
+      <div className="h-4 w-28 rounded-full skeleton-shimmer" />
+      <div className="h-8 w-3/5 rounded-xl skeleton-shimmer" />
+      <div className="h-4 w-full rounded-lg skeleton-shimmer" />
+      <div className="h-4 w-5/6 rounded-lg skeleton-shimmer" />
+      <div className="h-4 w-2/3 rounded-lg skeleton-shimmer" />
+    </div>
+  </div>
+);
 
 export const SectionTwo = () => {
   const briefingCards = [
@@ -168,34 +215,78 @@ export const SectionTwo = () => {
         Verifique se a pesquisa de preços está comprovada com 3 orçamentos, justificativa idônea para número inferior ou SRP documentado, e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
       </ProfileCallout>
 
-      <div className="mb-8">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.commandCenter}
+        renderId={false}
+        renderSectionSlot={false}
+        className="mb-8"
+        rootMargin="1000px 0px"
+        fallback={<SectionTwoBlockLoader />}
+      >
         <OperationalCommandDeck />
-      </div>
+      </DeferredGuideSection>
 
-      <div className="mb-8">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.workspace}
+        renderId={false}
+        renderSectionSlot={false}
+        className="mb-8"
+        rootMargin="1000px 0px"
+        fallback={<SectionTwoBlockLoader />}
+      >
         <ProcessWorkspacePanel />
-      </div>
+      </DeferredGuideSection>
 
-      <div className="mb-8">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.naming}
+        renderId={false}
+        renderSectionSlot={false}
+        className="mb-8"
+        rootMargin="950px 0px"
+        fallback={<SectionTwoBlockLoader density="regular" />}
+      >
         <DocumentNamingKit />
-      </div>
+      </DeferredGuideSection>
 
-      {/* Checklist de Documentos PDDE */}
-      <div id={GUIDE_ANCHORS.checklist} className="mb-8 scroll-mt-28">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.checklist}
+        className="mb-8 scroll-mt-28"
+        rootMargin="900px 0px"
+        fallback={<SectionTwoBlockLoader density="tall" />}
+      >
         <PDDEChecklist />
-      </div>
+      </DeferredGuideSection>
 
-      <div id={GUIDE_ANCHORS.readiness} className="mb-8 scroll-mt-28">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.readiness}
+        className="mb-8 scroll-mt-28"
+        rootMargin="850px 0px"
+        fallback={<SectionTwoBlockLoader density="regular" />}
+      >
         <SubmissionReadinessPanel />
-      </div>
+      </DeferredGuideSection>
 
-      <div className="mb-8">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.sharePack}
+        renderId={false}
+        renderSectionSlot={false}
+        className="mb-8"
+        rootMargin="800px 0px"
+        fallback={<SectionTwoBlockLoader density="compact" />}
+      >
         <OperationalSharePack />
-      </div>
+      </DeferredGuideSection>
 
-      <div className="mb-8">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.caseNotes}
+        renderId={false}
+        renderSectionSlot={false}
+        className="mb-8"
+        rootMargin="800px 0px"
+        fallback={<SectionTwoBlockLoader density="compact" />}
+      >
         <OperationalCaseNotesPanel />
-      </div>
+      </DeferredGuideSection>
 
       <div className="mb-8 section-card border-l-4 border-l-accent bg-linear-to-br from-accent/5 via-background to-secondary/40 shadow-xs">
         <div className="content-spacing">
@@ -262,20 +353,32 @@ export const SectionTwo = () => {
         </div>
       </div>
 
-      {/* Modelos de Documentos PDDE - Componente dedicado */}
-      <div id={GUIDE_ANCHORS.models} className="scroll-mt-28">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.models}
+        className="scroll-mt-28"
+        rootMargin="750px 0px"
+        fallback={<SectionTwoBlockLoader density="regular" />}
+      >
         <PDDEModelCards />
-      </div>
+      </DeferredGuideSection>
 
-      {/* Smart Templates */}
-      <div id={GUIDE_ANCHORS.templates} className="mb-8 scroll-mt-28">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.templates}
+        className="mb-8 scroll-mt-28"
+        rootMargin="700px 0px"
+        fallback={<SectionTwoBlockLoader density="regular" />}
+      >
         <SmartTemplates />
-      </div>
+      </DeferredGuideSection>
 
-      {/* Process Journey Map */}
-      <div id={GUIDE_ANCHORS.journey} className="mb-8 scroll-mt-28">
+      <DeferredGuideSection
+        anchorId={GUIDE_ANCHORS.journey}
+        className="mb-8 scroll-mt-28"
+        rootMargin="700px 0px"
+        fallback={<SectionTwoBlockLoader density="tall" />}
+      >
         <ProcessJourneyMap />
-      </div>
+      </DeferredGuideSection>
 
       <div className="mb-8 section-card bg-linear-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-xs">
         <div className="content-spacing">

@@ -14,6 +14,7 @@ type GuidePreloadDetail = {
 export const GUIDE_PRELOAD_EVENT = "guide:preload-anchor";
 
 const headingSelector = "h2, h3, [role='heading']";
+const pendingGuidePreloads = new Set<string>();
 
 const findBestScrollTarget = (anchorId: string) => {
   const exactTarget = document.getElementById(anchorId);
@@ -31,6 +32,7 @@ const findBestScrollTarget = (anchorId: string) => {
 };
 
 export const requestGuideAnchorPreload = (anchorId: string) => {
+  pendingGuidePreloads.add(anchorId);
   document.dispatchEvent(
     new CustomEvent<GuidePreloadDetail>(GUIDE_PRELOAD_EVENT, {
       detail: { anchorId },
@@ -38,18 +40,28 @@ export const requestGuideAnchorPreload = (anchorId: string) => {
   );
 };
 
+export const hasPendingGuidePreload = (anchorId: string) => pendingGuidePreloads.has(anchorId);
+export const consumePendingGuidePreload = (anchorId: string) => {
+  pendingGuidePreloads.delete(anchorId);
+};
+
 export const scrollToGuideAnchor = (
   anchorId: string,
   options: ScrollToGuideAnchorOptions = {},
 ) => {
-  const preloadId = guideAnchorParentSections[anchorId] ?? anchorId;
-  requestGuideAnchorPreload(preloadId);
+  requestGuideAnchorPreload(anchorId);
+
+  const parentAnchorId = guideAnchorParentSections[anchorId];
+  if (parentAnchorId && parentAnchorId !== anchorId) {
+    requestGuideAnchorPreload(parentAnchorId);
+  }
 
   const { target } = findBestScrollTarget(anchorId);
   if (!target) return false;
+  const isFallbackTarget = anchorId !== target.id;
 
   target.scrollIntoView({
-    behavior: "smooth",
+    behavior: isFallbackTarget ? "auto" : "smooth",
     block: options.block ?? "start",
   });
 
@@ -58,7 +70,7 @@ export const scrollToGuideAnchor = (
   options.saveLastSection?.(parentSection.id);
 
   const tryResolveNestedTarget = (attempt = 0) => {
-    if (attempt > 7) return target;
+    if (attempt > 11) return target;
 
     const nestedTarget = document.getElementById(anchorId);
     if (nestedTarget) {
@@ -66,12 +78,19 @@ export const scrollToGuideAnchor = (
         behavior: "smooth",
         block: options.block ?? "start",
       });
+
+      window.setTimeout(() => {
+        nestedTarget.scrollIntoView({
+          behavior: "smooth",
+          block: options.block ?? "start",
+        });
+      }, 120);
       return nestedTarget;
     }
 
     window.setTimeout(() => {
       tryResolveNestedTarget(attempt + 1);
-    }, 140);
+    }, 150);
 
     return target;
   };
@@ -85,7 +104,7 @@ export const scrollToGuideAnchor = (
   const tryFocusHeading = (attempt = 0) => {
     const heading = focusTarget.querySelector<HTMLElement>(headingSelector);
     if (!heading) {
-      if (attempt < 7) {
+      if (attempt < 11) {
         window.setTimeout(() => tryFocusHeading(attempt + 1), 120);
       }
       return false;

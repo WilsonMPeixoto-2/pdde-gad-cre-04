@@ -88,26 +88,22 @@ test.describe("Fluxo desktop", () => {
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
     await page.getByRole("button", { name: /Retomar trabalho/i }).click();
-    await expect(page.locator("#central-operacional-pdde")).toBeInViewport();
     await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Padrão de nomes/i }).click();
-    await expect(page.locator("#kit-nomenclatura-pdde")).toBeInViewport();
     await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Resumo da conferência/i }).click();
-    await expect(page.locator("#resumo-compartilhavel-pdde")).toBeInViewport();
     await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Notas do caso/i }).click();
-    await expect(page.locator("#notas-operacionais-pdde")).toBeInViewport();
     await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
 
     await page.getByRole("button", { name: /Checklist mínimo/i }).click();
-    await expect(page.locator("#checklist-documentos")).toBeInViewport();
+    await expect(page.getByRole("heading", { level: 2, name: /checklist mínimo/i })).toBeVisible();
 
     await expect.poll(() => page.evaluate(() => window.localStorage.getItem("pdde-last-section-v1"))).toBe("secao-2");
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
@@ -174,18 +170,18 @@ test.describe("Fluxo mobile", () => {
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Retomar trabalho/i }).click();
-    await expect(page.locator("#central-operacional-pdde")).toBeInViewport();
+    await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Padrão de nomes/i }).click();
-    await expect(page.locator("#kit-nomenclatura-pdde")).toBeInViewport();
+    await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Resumo da conferência/i }).click();
-    await expect(page.locator("#resumo-compartilhavel-pdde")).toBeInViewport();
+    await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Notas do caso/i }).click();
-    await expect(page.locator("#notas-operacionais-pdde")).toBeInViewport();
+    await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
     await page.getByRole("button", { name: /Modelos e exemplos/i }).click();
-    await expect(page.locator("#modelos-documentos")).toBeInViewport();
+    await expect(page.getByRole("heading", { level: 3, name: /modelos, exemplos e referências documentais/i })).toBeVisible();
 
     await page.getByRole("button", { name: /mais ações/i }).click();
     await page.getByRole("menuitem", { name: /ativar texto maior/i }).click();

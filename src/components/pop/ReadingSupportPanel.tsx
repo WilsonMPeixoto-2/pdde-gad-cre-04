@@ -21,6 +21,7 @@ export const ReadingSupportPanel = () => {
     lastSection,
     motionPreference,
     readingScale,
+    resolvedReducedMotion,
     toggleMotionPreference,
     toggleReadingScale,
   } = useReadingExperience();
@@ -137,9 +138,11 @@ export const ReadingSupportPanel = () => {
               <div className="space-y-1.5">
                 <p className="text-sm font-semibold text-foreground">Movimento reduzido</p>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  {motionPreference === "reduced"
+                  {resolvedReducedMotion
                     ? "Ativado para suavizar animações, brilhos e deslocamentos visuais."
-                    : "Ative se quiser uma leitura mais estável, com menos movimento decorativo."}
+                    : motionPreference === "system"
+                      ? "No modo automático, o guia acompanha a preferência do sistema."
+                      : "Ative se quiser uma leitura mais estável, com menos movimento decorativo."}
                 </p>
               </div>
             </div>

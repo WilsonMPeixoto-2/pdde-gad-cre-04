@@ -1008,13 +1008,17 @@
     }
   }
 
-  html.user-reduced-motion {
+  html.user-reduced-motion,
+  html.effective-reduced-motion {
     scroll-behavior: auto;
   }
 
   html.user-reduced-motion *,
   html.user-reduced-motion *::before,
-  html.user-reduced-motion *::after {
+  html.user-reduced-motion *::after,
+  html.effective-reduced-motion *,
+  html.effective-reduced-motion *::before,
+  html.effective-reduced-motion *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -1630,6 +1634,13 @@
   animation: hero-stagger-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+html.effective-reduced-motion .hero-stagger {
+  opacity: 1;
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
 @keyframes scroll-dot {
   0% { opacity: 0.6; transform: translateY(0); }
   50% { opacity: 1; transform: translateY(12px); }
@@ -1856,6 +1867,15 @@
     0 20px 40px -32px hsl(199 89% 48% / 0.55),
     inset 0 1px 0 0 hsl(0 0% 100% / 0.12);
   animation: hero-tech-float 9s ease-in-out infinite;
+}
+
+html.effective-reduced-motion .hero-tech-card,
+html.effective-reduced-motion .hero-tech-card::after,
+html.effective-reduced-motion .hero-tech-line::after,
+html.effective-reduced-motion .hero-tech-node,
+html.effective-reduced-motion #hero-cover [style*="hero-glow-drift"],
+html.effective-reduced-motion #hero-cover [style*="title-shimmer"] {
+  animation: none !important;
 }
 
 .hero-tech-card::after {

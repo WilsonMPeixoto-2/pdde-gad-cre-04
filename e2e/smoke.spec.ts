@@ -65,6 +65,19 @@ test.describe("Fluxo desktop", () => {
     await page.keyboard.press("Escape");
     await expect(searchInput).toBeHidden();
 
+    await page.getByRole("button", { name: /ativar texto maior/i }).click();
+    await page.getByRole("button", { name: /ativar movimento reduzido/i }).click();
+
+    const headerAccessibilityPrefs = await page.evaluate(() => ({
+      scale: document.documentElement.dataset.readingScale,
+      motion: document.documentElement.dataset.motionResolved,
+      reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
+    }));
+
+    expect(headerAccessibilityPrefs.scale).toBe("large");
+    expect(headerAccessibilityPrefs.motion).toBe("reduced");
+    expect(headerAccessibilityPrefs.reducedMotionClass).toBe(true);
+
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
     await page.getByRole("button", { name: /Retomar trabalho/i }).click();
@@ -97,18 +110,18 @@ test.describe("Fluxo desktop", () => {
 
     await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /continue de onde parou/i })).toBeVisible();
-    await page.getByRole("button", { name: /Texto maior/i }).click();
-    await page.getByRole("button", { name: /Movimento reduzido/i }).click();
+    await page.getByRole("button", { name: /Voltar para o tamanho padrão do texto/i }).click();
+    await page.getByRole("button", { name: /Voltar para movimento normal/i }).click();
 
     const readingSettings = await page.evaluate(() => ({
       scale: document.documentElement.dataset.readingScale,
-      motion: document.documentElement.dataset.motionPreference,
-      reducedMotionClass: document.documentElement.classList.contains("user-reduced-motion"),
+      motion: document.documentElement.dataset.motionResolved,
+      reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
     }));
 
-    expect(readingSettings.scale).toBe("large");
-    expect(readingSettings.motion).toBe("reduced");
-    expect(readingSettings.reducedMotionClass).toBe(true);
+    expect(readingSettings.scale).toBe("standard");
+    expect(readingSettings.motion).toBe("full");
+    expect(readingSettings.reducedMotionClass).toBe(false);
 
     const hasOverflow = await page.evaluate(() => {
       const allowance = 1;
@@ -164,8 +177,12 @@ test.describe("Fluxo mobile", () => {
     await page.getByRole("button", { name: /Modelos e exemplos/i }).click();
     await expect(page.locator("#modelos-documentos")).toBeInViewport();
 
+    await page.getByRole("button", { name: /mais ações/i }).click();
+    await page.getByRole("menuitem", { name: /ativar texto maior/i }).click();
+    await page.getByRole("button", { name: /mais ações/i }).click();
+    await page.getByRole("menuitem", { name: /ativar movimento reduzido/i }).click();
+
     await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Texto maior/i }).click();
 
     const diagnostics = await page.evaluate(() => {
       const allowance = 1;
@@ -181,6 +198,7 @@ test.describe("Fluxo mobile", () => {
         heroTechDisplay: heroTechBoard ? window.getComputedStyle(heroTechBoard).display : "missing",
         focusableInIllustrations,
         readingScale: document.documentElement.dataset.readingScale,
+        reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
       };
     });
 
@@ -188,6 +206,7 @@ test.describe("Fluxo mobile", () => {
     expect(diagnostics.heroTechDisplay).toBe("none");
     expect(diagnostics.focusableInIllustrations).toBe(0);
     expect(diagnostics.readingScale).toBe("large");
+    expect(diagnostics.reducedMotionClass).toBe(true);
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });

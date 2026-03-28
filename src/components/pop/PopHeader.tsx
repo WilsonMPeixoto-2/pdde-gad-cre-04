@@ -1,8 +1,9 @@
-import { FileText, Printer, Moon, Sun, Monitor, Smartphone, Search, MoreVertical, Menu } from "lucide-react";
+import { FileText, Printer, Moon, Sun, Monitor, Smartphone, Search, MoreVertical, Menu, Type, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
+import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { ShareQRCode } from "./ShareQRCode";
 import { ProfileModeSelector } from "./ProfileModeSelector";
 
@@ -14,6 +15,12 @@ interface PopHeaderProps {
 type ViewMode = 'auto' | 'desktop' | 'mobile';
 
 export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
+  const {
+    readingScale,
+    resolvedReducedMotion,
+    toggleMotionPreference,
+    toggleReadingScale,
+  } = useReadingExperience();
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark";
@@ -33,7 +40,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
     }
   }
 
-  useEffect(() => {
+  const syncVisualPreferences = useEffectEvent(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
@@ -41,25 +48,27 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
     }
 
     applyViewMode(viewMode);
+  });
+
+  useEffect(() => {
+    syncVisualPreferences();
   }, [isDark, viewMode]);
 
   const toggleDarkMode = () => {
-    setIsDark(!isDark);
-    if (!isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    const nextIsDark = !isDark;
+    startTransition(() => {
+      setIsDark(nextIsDark);
+    });
+    localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
   };
 
   const cycleViewMode = () => {
     const modes: ViewMode[] = ['auto', 'desktop', 'mobile'];
     const currentIndex = modes.indexOf(viewMode);
     const nextMode = modes[(currentIndex + 1) % modes.length];
-    setViewMode(nextMode);
-    applyViewMode(nextMode);
+    startTransition(() => {
+      setViewMode(nextMode);
+    });
     localStorage.setItem('viewMode', nextMode);
   };
 
@@ -82,6 +91,10 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
   const openSearch = () => {
     const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true });
     document.dispatchEvent(event);
+  };
+
+  const openReadingSupport = () => {
+    document.getElementById("retomada-conforto-pdde")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -144,6 +157,42 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 </div>
               </TooltipTrigger>
               <TooltipContent side="bottom"><p>Compartilhar via QR Code</p></TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={toggleReadingScale}
+                  className={`text-white/80 hover:text-white hover:bg-white/10 h-10 w-10 transition-all duration-300 hover:scale-105 ${readingScale === 'large' ? 'bg-white/15 text-white' : ''}`}
+                  aria-label={readingScale === "large" ? "Voltar para o tamanho padrão do texto" : "Ativar texto maior"}
+                  aria-pressed={readingScale === "large"}
+                >
+                  <Type className="w-4 h-4 transition-transform duration-300 active:scale-90" aria-hidden="true" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>{readingScale === "large" ? "Texto maior ativado" : "Ativar texto maior"}</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={toggleMotionPreference}
+                  className={`text-white/80 hover:text-white hover:bg-white/10 h-10 w-10 transition-all duration-300 hover:scale-105 ${resolvedReducedMotion ? 'bg-white/15 text-white' : ''}`}
+                  aria-label={resolvedReducedMotion ? "Voltar para movimento normal" : "Ativar movimento reduzido"}
+                  aria-pressed={resolvedReducedMotion}
+                >
+                  <Wind className="w-4 h-4 transition-transform duration-300 active:scale-90" aria-hidden="true" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>{resolvedReducedMotion ? "Movimento reduzido ativado" : "Ativar movimento reduzido"}</p>
+              </TooltipContent>
             </Tooltip>
 
             <Tooltip>
@@ -229,6 +278,18 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 <DropdownMenuItem onClick={toggleDarkMode}>
                   {isDark ? <Sun className="w-4 h-4 mr-2" /> : <Moon className="w-4 h-4 mr-2" />}
                   {isDark ? "Modo claro" : "Modo escuro"}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={toggleReadingScale}>
+                  <Type className="w-4 h-4 mr-2" />
+                  {readingScale === "large" ? "Voltar texto padrão" : "Ativar texto maior"}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={toggleMotionPreference}>
+                  <Wind className="w-4 h-4 mr-2" />
+                  {resolvedReducedMotion ? "Voltar movimento normal" : "Ativar movimento reduzido"}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={openReadingSupport}>
+                  <Type className="w-4 h-4 mr-2" />
+                  Painel de leitura
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={onPrint}>
                   <Printer className="w-4 h-4 mr-2" />

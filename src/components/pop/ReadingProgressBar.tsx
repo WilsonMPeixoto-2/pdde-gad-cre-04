@@ -1,20 +1,22 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
+import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 
 export const ReadingProgressBar = () => {
   const [progress, setProgress] = useState(0);
+  const { resolvedReducedMotion } = useReadingExperience();
   const scrollRafRef = useRef<number | null>(null);
   const resizeRafRef = useRef<number | null>(null);
   const totalHeightRef = useRef(0);
 
-  const updateTotalHeight = useCallback(() => {
+  const updateTotalHeight = useEffectEvent(() => {
     if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
     resizeRafRef.current = requestAnimationFrame(() => {
       totalHeightRef.current = document.documentElement.scrollHeight - window.innerHeight;
       resizeRafRef.current = null;
     });
-  }, []);
+  });
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = useEffectEvent(() => {
     if (scrollRafRef.current) return;
     scrollRafRef.current = requestAnimationFrame(() => {
       if (totalHeightRef.current > 0) {
@@ -23,20 +25,22 @@ export const ReadingProgressBar = () => {
       }
       scrollRafRef.current = null;
     });
-  }, []);
+  });
 
   useEffect(() => {
     const timeoutId = setTimeout(updateTotalHeight, 0);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", updateTotalHeight, { passive: true });
+    const onScroll = () => handleScroll();
+    const onResize = () => updateTotalHeight();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
     return () => {
       clearTimeout(timeoutId);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateTotalHeight);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
       if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
       if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
     };
-  }, [handleScroll, updateTotalHeight]);
+  }, []);
 
   return (
     <div 
@@ -54,7 +58,7 @@ export const ReadingProgressBar = () => {
           width: `${progress}%`,
           background: 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--accent-glow)), hsl(var(--success)))',
           backgroundSize: '200% 100%',
-          animation: 'shimmer 3s ease-in-out infinite'
+          animation: resolvedReducedMotion ? 'none' : 'shimmer 3s ease-in-out infinite'
         }}
       >
         {/* Leading edge glow */}
@@ -63,7 +67,7 @@ export const ReadingProgressBar = () => {
           style={{
             background: 'linear-gradient(90deg, transparent, hsl(var(--accent-glow) / 0.6))',
             filter: 'blur(4px)',
-            animation: 'leading-glow 2s ease infinite'
+            animation: resolvedReducedMotion ? 'none' : 'leading-glow 2s ease infinite'
           }}
         />
       </div>

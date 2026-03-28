@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useCallback, useEffect, useEffectEvent, useContext, useMemo, useState } from "react";
 import { guideSectionIds, guideSectionsById, type GuideSectionMeta } from "@/lib/guideContent";
 
 export type ReadingScale = "standard" | "large";
@@ -7,6 +7,7 @@ export type MotionPreference = "system" | "reduced";
 interface ReadingExperienceContextType {
   readingScale: ReadingScale;
   motionPreference: MotionPreference;
+  resolvedReducedMotion: boolean;
   lastSectionId: string | null;
   lastSection: GuideSectionMeta | null;
   setReadingScale: (scale: ReadingScale) => void;
@@ -37,6 +38,7 @@ const sectionOrder = new Map(guideSectionIds.map((sectionId, index) => [sectionI
 const ReadingExperienceContext = createContext<ReadingExperienceContextType>({
   readingScale: "standard",
   motionPreference: "system",
+  resolvedReducedMotion: false,
   lastSectionId: null,
   lastSection: null,
   setReadingScale: () => {},
@@ -47,12 +49,18 @@ const ReadingExperienceContext = createContext<ReadingExperienceContextType>({
   clearLastSection: () => {},
 });
 
-const applyReadingPreferences = (readingScale: ReadingScale, motionPreference: MotionPreference) => {
+const applyReadingPreferences = (
+  readingScale: ReadingScale,
+  motionPreference: MotionPreference,
+  resolvedReducedMotion: boolean,
+) => {
   if (typeof document === "undefined") return;
 
   document.documentElement.dataset.readingScale = readingScale;
   document.documentElement.dataset.motionPreference = motionPreference;
+  document.documentElement.dataset.motionResolved = resolvedReducedMotion ? "reduced" : "full";
   document.documentElement.classList.toggle("user-reduced-motion", motionPreference === "reduced");
+  document.documentElement.classList.toggle("effective-reduced-motion", resolvedReducedMotion);
 };
 
 export const ReadingExperienceProvider = ({ children }: { children: React.ReactNode }) => {
@@ -83,9 +91,32 @@ export const ReadingExperienceProvider = ({ children }: { children: React.ReactN
     }
   });
 
+  const [systemReducedMotion, setSystemReducedMotion] = useState(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+
+  const resolvedReducedMotion =
+    motionPreference === "reduced" || (motionPreference === "system" && systemReducedMotion);
+
+  const syncSystemReducedMotion = useEffectEvent(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    setSystemReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  });
+
   useEffect(() => {
-    applyReadingPreferences(readingScale, motionPreference);
-  }, [readingScale, motionPreference]);
+    if (typeof window === "undefined" || !window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => syncSystemReducedMotion();
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    applyReadingPreferences(readingScale, motionPreference, resolvedReducedMotion);
+  }, [readingScale, motionPreference, resolvedReducedMotion]);
 
   const setReadingScale = useCallback((scale: ReadingScale) => {
     setReadingScaleState(scale);
@@ -157,6 +188,7 @@ export const ReadingExperienceProvider = ({ children }: { children: React.ReactN
     () => ({
       readingScale,
       motionPreference,
+      resolvedReducedMotion,
       lastSectionId,
       lastSection: lastSectionId ? guideSectionsById[lastSectionId] ?? null : null,
       setReadingScale,
@@ -170,6 +202,7 @@ export const ReadingExperienceProvider = ({ children }: { children: React.ReactN
       clearLastSection,
       lastSectionId,
       motionPreference,
+      resolvedReducedMotion,
       readingScale,
       saveLastSection,
       setMotionPreference,

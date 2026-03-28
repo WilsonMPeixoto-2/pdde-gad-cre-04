@@ -73,7 +73,7 @@ const registrationCards = [
 
 export const SectionFour = () => {
   return (
-    <section id="secao-4" className="scroll-mt-20 animate-fade-in">
+    <section className="animate-fade-in">
       <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
         <strong className="text-foreground">Autentique apenas os documentos digitalizados.</strong> Arquivos nato-digitais já entram no processo como originais e não seguem essa etapa.
       </ProfileCallout>

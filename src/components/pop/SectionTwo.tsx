@@ -125,7 +125,7 @@ export const SectionTwo = () => {
   ];
 
   return (
-    <section id="secao-2" className="scroll-mt-20 animate-fade-in">
+    <section className="animate-fade-in">
       <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-linear-to-br from-secondary/55 via-background to-sky-50/40 shadow-xs dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
         <div className="grid gap-4 lg:grid-cols-2">
           {briefingCards.map((card) => {

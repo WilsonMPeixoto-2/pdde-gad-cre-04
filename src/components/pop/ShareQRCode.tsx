@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { QrCode, Copy, Download, Check, Share2 } from "lucide-react";
-import QRCode from "qrcode";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,6 +11,13 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
+let qrCodeModulePromise: Promise<typeof import("qrcode")> | null = null;
+
+const loadQrCode = () => {
+  qrCodeModulePromise ??= import("qrcode");
+  return qrCodeModulePromise;
+};
+
 interface ShareQRCodeProps {
   sectionId?: string;
   sectionTitle?: string;
@@ -19,6 +25,7 @@ interface ShareQRCodeProps {
 
 export function ShareQRCode({ sectionId, sectionTitle = "POP PDDE no SEI!RIO" }: ShareQRCodeProps) {
   const [copied, setCopied] = useState(false);
+  const [open, setOpen] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
 
   const shareUrl = sectionId 
@@ -26,17 +33,22 @@ export function ShareQRCode({ sectionId, sectionTitle = "POP PDDE no SEI!RIO" }:
     : window.location.href;
 
   useEffect(() => {
+    if (!open) return;
+
     let isActive = true;
 
-    QRCode.toDataURL(shareUrl, {
-      width: 240,
-      margin: 2,
-      errorCorrectionLevel: "M",
-      color: {
-        dark: "#0369a1",
-        light: "#ffffff",
-      },
-    })
+    void loadQrCode()
+      .then(({ default: QRCode }) =>
+        QRCode.toDataURL(shareUrl, {
+          width: 240,
+          margin: 2,
+          errorCorrectionLevel: "M",
+          color: {
+            dark: "#0369a1",
+            light: "#ffffff",
+          },
+        }),
+      )
       .then((dataUrl) => {
         if (isActive) {
           setQrDataUrl(dataUrl);
@@ -49,10 +61,10 @@ export function ShareQRCode({ sectionId, sectionTitle = "POP PDDE no SEI!RIO" }:
         }
       });
 
-    return () => {
-      isActive = false;
-    };
-  }, [shareUrl]);
+      return () => {
+        isActive = false;
+      };
+  }, [open, shareUrl]);
 
   const copyLink = async () => {
     try {
@@ -94,7 +106,7 @@ export function ShareQRCode({ sectionId, sectionTitle = "POP PDDE no SEI!RIO" }:
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"

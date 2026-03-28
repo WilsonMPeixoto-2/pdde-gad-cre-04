@@ -10,7 +10,7 @@ type SectionContactsProps = {
 
 export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
   return (
-    <section id="contatos" className="scroll-mt-20 animate-fade-in">
+    <section className="animate-fade-in">
       <div className="space-y-5">
         {/* Main Contact Card */}
         <div className="section-card overflow-hidden">

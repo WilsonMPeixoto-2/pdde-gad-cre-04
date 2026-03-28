@@ -79,7 +79,7 @@ export const SectionAnexo = () => {
   const officialLinks = officialReferenceIds.map((resourceId) => externalResources[resourceId]);
 
   return (
-    <section id="anexo" className="scroll-mt-20">
+    <section>
       <ProfileCallout visibleFor="diretor" variant="info" title="Como usar este anexo" className="mb-6">
         Use este bloco apenas como <strong>base rápida de conferência</strong>. O foco do guia continua sendo a instrução processual no SEI!RIO, e não um estudo exaustivo da legislação do PDDE.
       </ProfileCallout>

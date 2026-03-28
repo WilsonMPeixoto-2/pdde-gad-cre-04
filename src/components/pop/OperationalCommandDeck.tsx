@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 import {
   applyOperationalSnapshot,
   buildOperationalReport,
@@ -31,7 +32,7 @@ const toneClasses = {
 } as const;
 
 const scrollToId = (id: string) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  scrollToGuideAnchor(id);
 };
 
 const downloadJsonFile = (content: string, fileName: string) => {

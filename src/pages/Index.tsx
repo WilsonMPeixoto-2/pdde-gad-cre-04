@@ -10,9 +10,11 @@ import { ReadingSupportPanel } from "@/components/pop/ReadingSupportPanel";
 import { SectionOne } from "@/components/pop/SectionOne";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
+import { DeferredGuideSection } from "@/components/pop/DeferredGuideSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
 import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { guideSectionIds, guideSectionsById } from "@/lib/guideContent";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 // Lazy load non-critical interactive widgets
 const BackToTop = lazy(() => import("@/components/pop/BackToTop").then(m => ({ default: m.BackToTop })));
@@ -56,17 +58,13 @@ const Index = () => {
   };
 
   const handleSectionClick = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    const didScroll = scrollToGuideAnchor(sectionId, {
+      focusHeading: true,
+      focusDelayMs: 600,
+    });
+
+    if (didScroll) {
       setActiveSection(sectionId);
-      // A11y: Transfer focus to the section heading after scroll
-      const heading = element.querySelector('h2, h3, [role="heading"]') as HTMLElement;
-      if (heading) {
-        heading.setAttribute('tabindex', '-1');
-        // Delay focus until scroll animation settles
-        setTimeout(() => heading.focus({ preventScroll: true }), 600);
-      }
     }
   }, []);
 
@@ -204,63 +202,63 @@ const Index = () => {
                 {renderSectionDivider("secao-2")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
+                <DeferredGuideSection anchorId="secao-2" fallback={<SectionLoader />}>
                   <SectionTwo />
-                </Suspense>
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-3")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
+                <DeferredGuideSection anchorId="secao-3" fallback={<SectionLoader />}>
                   <SectionThree />
-                </Suspense>
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-4")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
+                <DeferredGuideSection anchorId="secao-4" fallback={<SectionLoader />}>
                   <SectionFour />
-                </Suspense>
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-5")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
+                <DeferredGuideSection anchorId="secao-5" fallback={<SectionLoader />}>
                   <SectionFive />
-                </Suspense>
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-6")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
+                <DeferredGuideSection anchorId="secao-6" fallback={<SectionLoader />}>
                   <SectionSix />
-                </Suspense>
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("contatos")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
+                <DeferredGuideSection anchorId="contatos" fallback={<SectionLoader />}>
                   <SectionContacts onPrint={handlePrint} />
-                </Suspense>
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("anexo")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
+                <DeferredGuideSection anchorId="anexo" fallback={<SectionLoader />}>
                   <SectionAnexo />
-                </Suspense>
+                </DeferredGuideSection>
               </AnimatedSection>
 
               {/* Document Footer */}

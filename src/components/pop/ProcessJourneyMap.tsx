@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { CheckCircle2, ChevronRight, AlertTriangle, ArrowUpRight, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { type ProcessFlowStep, processFlowSteps } from "@/lib/guideContent";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 import {
   PDDE_STORAGE_KEYS,
   readStorageJson,
@@ -75,10 +76,7 @@ export const ProcessJourneyMap = () => {
   }, [completed, canComplete]);
 
   const navigateToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    scrollToGuideAnchor(sectionId);
   };
 
   const completedCount = completed.size;

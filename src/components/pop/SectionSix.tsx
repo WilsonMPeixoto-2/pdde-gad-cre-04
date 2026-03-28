@@ -39,7 +39,7 @@ const finalizationFlow = [
 
 export const SectionSix = () => {
   return (
-    <section id="secao-6" className="scroll-mt-20 animate-fade-in">
+    <section className="animate-fade-in">
       <div className="space-y-6">
         <div className="section-card p-5 sm:p-6 border-l-4 border-l-accent">
           <div className="flex items-start gap-4">

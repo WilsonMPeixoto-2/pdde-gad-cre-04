@@ -48,6 +48,20 @@ export const GUIDE_ANCHORS = {
   journey: "mapa-jornada",
 } as const;
 
+export const guideAnchorParentSections: Record<string, string> = {
+  [GUIDE_ANCHORS.readingSupport]: "introducao",
+  [GUIDE_ANCHORS.commandCenter]: "secao-2",
+  [GUIDE_ANCHORS.workspace]: "secao-2",
+  [GUIDE_ANCHORS.naming]: "secao-2",
+  [GUIDE_ANCHORS.sharePack]: "secao-2",
+  [GUIDE_ANCHORS.caseNotes]: "secao-2",
+  [GUIDE_ANCHORS.checklist]: "secao-2",
+  [GUIDE_ANCHORS.readiness]: "secao-2",
+  [GUIDE_ANCHORS.models]: "secao-2",
+  [GUIDE_ANCHORS.templates]: "secao-2",
+  [GUIDE_ANCHORS.journey]: "secao-2",
+};
+
 export interface GuideSectionMeta {
   id: string;
   number: string;

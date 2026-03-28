@@ -9,6 +9,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { searchItems, getQuickSuggestions, SearchItem } from "@/lib/searchIndex";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 import { Search, FileText, Hash, ArrowRight, Keyboard } from "lucide-react";
 
 export function CommandPalette() {
@@ -45,12 +46,8 @@ export function CommandPalette() {
       setOpen(false);
       setQuery("");
     });
-    
-    // Navigate to section
-    const element = document.getElementById(item.anchor);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+
+    scrollToGuideAnchor(item.anchor);
   }, []);
 
   const quickSuggestions = getQuickSuggestions();

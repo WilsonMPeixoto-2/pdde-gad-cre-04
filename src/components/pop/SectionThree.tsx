@@ -52,7 +52,7 @@ const typeCards = [
 
 export const SectionThree = () => {
   return (
-    <section id="secao-3" className="scroll-mt-20 animate-fade-in">
+    <section className="animate-fade-in">
       <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
         Digitalize preferencialmente em PDF com <strong className="text-foreground">200 a 300 dpi</strong>, preservando a legibilidade. Organize seus arquivos em pasta local, mas lembre que, no SEI!RIO, a identificação relevante será dada pelo preenchimento correto do <strong className="text-foreground">Nome na Árvore</strong>.
       </ProfileCallout>

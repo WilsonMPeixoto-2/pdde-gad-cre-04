@@ -2,18 +2,14 @@ import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, MessageS
 import { toast } from "sonner";
 import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { GUIDE_ANCHORS, processFlowSteps } from "@/lib/guideContent";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 type QuickActionHubProps = {
   onPrint?: () => void;
 };
 
 const scrollToId = (id: string, saveLastSection?: (sectionId: string) => void) => {
-  const target = document.getElementById(id);
-  if (!target) return;
-
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
-  const parentSectionId = target.closest("section[id]")?.id ?? target.id;
-  saveLastSection?.(parentSectionId);
+  scrollToGuideAnchor(id, { saveLastSection });
 };
 
 const copyOperationalRoute = async () => {

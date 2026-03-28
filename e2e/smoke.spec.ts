@@ -65,6 +65,13 @@ test.describe("Fluxo desktop", () => {
     await page.keyboard.press("Escape");
     await expect(searchInput).toBeHidden();
 
+    await page.getByRole("button", { name: /compartilhar via qr code/i }).click();
+    const shareDialog = page.getByRole("dialog", { name: /compartilhar/i });
+    await expect(shareDialog).toBeVisible();
+    await expect(page.getByAltText(/qr code para compartilhar/i)).toBeVisible();
+    await page.getByRole("button", { name: /close/i }).click();
+    await expect(shareDialog).toBeHidden();
+
     await page.getByRole("button", { name: /ativar texto maior/i }).click();
     await page.getByRole("button", { name: /ativar movimento reduzido/i }).click();
 
@@ -107,6 +114,9 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByRole("button", { name: /Continuar leitura/i })).toBeVisible();
     await page.getByRole("button", { name: /Continuar leitura/i }).click();
     await expect(page.locator("#secao-2")).toBeInViewport();
+
+    await page.getByRole("button", { name: /ir para seção 6:/i }).click();
+    await expect(page.getByRole("heading", { name: /encaminhamento e encerramento da fase escolar/i })).toBeVisible();
 
     await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /continue de onde parou/i })).toBeVisible();

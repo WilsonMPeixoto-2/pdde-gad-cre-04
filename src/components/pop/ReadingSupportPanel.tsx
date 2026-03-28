@@ -1,18 +1,10 @@
 import { BookmarkCheck, RotateCcw, Type, Wind } from "lucide-react";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 const scrollToSectionWithFocus = (sectionId: string) => {
-  const section = document.getElementById(sectionId);
-  if (!section) return;
-
-  section.scrollIntoView({ behavior: "smooth", block: "start" });
-  const heading = section.querySelector("h2, h3, [role='heading']") as HTMLElement | null;
-
-  if (heading) {
-    heading.setAttribute("tabindex", "-1");
-    window.setTimeout(() => heading.focus({ preventScroll: true }), 500);
-  }
+  scrollToGuideAnchor(sectionId, { focusHeading: true, focusDelayMs: 500 });
 };
 
 export const ReadingSupportPanel = () => {

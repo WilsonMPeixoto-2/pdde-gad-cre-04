@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check, Download } from "lucide-react";
-import confetti from "canvas-confetti";
 import { toast } from "sonner";
 import { externalResources } from "@/lib/externalResources";
 import {
@@ -13,6 +12,13 @@ import {
 } from "@/lib/pddeOperationalData";
 
 type FilterType = 'todos' | 'pendentes' | 'concluidos' | 'essenciais' | 'complementares';
+
+let confettiModulePromise: Promise<typeof import("canvas-confetti")> | null = null;
+
+const loadConfetti = () => {
+  confettiModulePromise ??= import("canvas-confetti");
+  return confettiModulePromise;
+};
 
 export const PDDEChecklist = () => {
   const hasConfettiFired = useRef(false);
@@ -40,25 +46,37 @@ export const PDDEChecklist = () => {
 
   // Fire confetti when all essential items are completed
   useEffect(() => {
+    let isActive = true;
+
     if (essenciaisCompleted === essenciaisCount && essenciaisCount > 0 && !hasConfettiFired.current) {
       hasConfettiFired.current = true;
       const end = Date.now() + 800;
-      const fire = () => {
-        confetti({
-          particleCount: 30,
-          angle: 60 + Math.random() * 60,
-          spread: 55,
-          origin: { x: Math.random(), y: 0.6 },
-          colors: ['#2563eb', '#10b981', '#f59e0b'],
-          zIndex: 9999,
-        });
-        if (Date.now() < end) requestAnimationFrame(fire);
-      };
-      fire();
+
+      void loadConfetti().then(({ default: confetti }) => {
+        if (!isActive) return;
+
+        const fire = () => {
+          confetti({
+            particleCount: 30,
+            angle: 60 + Math.random() * 60,
+            spread: 55,
+            origin: { x: Math.random(), y: 0.6 },
+            colors: ['#2563eb', '#10b981', '#f59e0b'],
+            zIndex: 9999,
+          });
+          if (Date.now() < end) requestAnimationFrame(fire);
+        };
+
+        fire();
+      });
     }
     if (essenciaisCompleted < essenciaisCount) {
       hasConfettiFired.current = false;
     }
+
+    return () => {
+      isActive = false;
+    };
   }, [essenciaisCompleted, essenciaisCount]);
 
   const resetChecklist = () => {

@@ -6,6 +6,7 @@ import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { ShareQRCode } from "./ShareQRCode";
 import { ProfileModeSelector } from "./ProfileModeSelector";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 interface PopHeaderProps {
   onPrint: () => void;
@@ -94,7 +95,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
   };
 
   const openReadingSupport = () => {
-    document.getElementById("retomada-conforto-pdde")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToGuideAnchor("retomada-conforto-pdde");
   };
 
   return (

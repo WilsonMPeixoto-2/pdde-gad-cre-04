@@ -85,6 +85,17 @@ test.describe("Fluxo desktop", () => {
     expect(headerAccessibilityPrefs.motion).toBe("reduced");
     expect(headerAccessibilityPrefs.reducedMotionClass).toBe(true);
 
+    await page.locator("#novidades-recentes-guia-pdde").scrollIntoViewIfNeeded();
+    await expect(
+      page.getByRole("heading", { level: 2, name: /o que mudou recentemente/i }),
+    ).toBeVisible();
+
+    const [releaseNotesDownload] = await Promise.all([
+      page.waitForEvent("download"),
+      page.getByRole("button", { name: /Baixar histórico recente \.md/i }).click(),
+    ]);
+    expect(await releaseNotesDownload.suggestedFilename()).toMatch(/^GUIA_NOVIDADES_RECENTES_PDDE_.*\.md$/);
+
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
     await page.getByRole("button", { name: "Retomar trabalho", exact: true }).click();

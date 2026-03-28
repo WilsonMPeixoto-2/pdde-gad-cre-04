@@ -67,6 +67,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.capabilities,
   },
   {
+    id: "novidades-recentes",
+    title: "Novidades Recentes da Versão",
+    content: "Linha do tempo das melhorias publicadas recentemente, com foco no que mudou de forma visível para o usuário final.",
+    keywords: ["novidades da versão", "atualizações", "melhorias recentes", "últimas melhorias", "o que mudou", "histórico recente"],
+    section: sectionTitle("introducao"),
+    anchor: GUIDE_ANCHORS.recentUpdates,
+  },
+  {
     id: "central-operacional",
     title: "Central operacional e backup",
     content: "Painel para retomar a próxima ação, exportar o progresso em JSON e importar a conferência em outro computador.",
@@ -237,6 +245,7 @@ export function getQuickSuggestions(): SearchItem[] {
     "tipo-processo",
     "retomada-leitura",
     "capacidades-guia",
+    "novidades-recentes",
     "central-operacional",
     "resumo-compartilhavel",
     "notas-operacionais",

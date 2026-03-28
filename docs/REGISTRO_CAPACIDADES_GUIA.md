@@ -1,8 +1,8 @@
 # Registro de capacidades do guia PDDE no SEI!RIO
 
-- Versão do guia: V. 1.9
+- Versão do guia: V. 2.0
 - Ciclo editorial: Março/2026
-- Última atualização da base: 26 de março de 2026
+- Última atualização da base: 28 de março de 2026
 
 ## Para que serve este registro
 
@@ -10,7 +10,7 @@ Este documento consolida, em linguagem de comunicação e manutenção, as funç
 
 ## Resumo rápido para comunicação
 
-Resumo das capacidades atuais do guia PDDE no SEI!RIO — V. 1.9
+Resumo das capacidades atuais do guia PDDE no SEI!RIO — V. 2.0
 
 O projeto hoje oferece:
 Orientação operacional guiada: O guia não entrega só texto explicativo: ele organiza o fluxo e ajuda a executar o processo com menos improviso.
@@ -118,5 +118,7 @@ Use este resumo para apresentar o guia a diretores, equipes escolares e áreas d
   - Valor para o usuário: Diminui o tempo de navegação e facilita uso por demanda.
 
 ## Observação de governança
+
+Para uma visão cronológica das melhorias publicadas recentemente, consulte também `docs/NOVIDADES_RECENTES_GUIA.md`.
 
 Sempre que uma nova função relevante for incorporada ao guia, atualize a base em `src/lib/guideCapabilities.ts` e regenere este arquivo com `npm run sync:capabilities`.

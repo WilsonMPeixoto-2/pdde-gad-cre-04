@@ -12,11 +12,11 @@ import {
 } from "lucide-react";
 
 export const GUIDE_VERSION = {
-  number: "1.9",
-  shortLabel: "V. 1.9",
+  number: "2.0",
+  shortLabel: "V. 2.0",
   cycleLabel: "Março/2026",
-  lastUpdatedText: "26 de março de 2026",
-  publishedIsoDate: "2026-03-26",
+  lastUpdatedText: "28 de março de 2026",
+  publishedIsoDate: "2026-03-28",
 } as const;
 
 export const PROCESS_TYPE_LABEL =
@@ -37,6 +37,7 @@ export const INTERNAL_PROCESS_TRACKER_LABEL = "Controle de processos 2026";
 export const GUIDE_ANCHORS = {
   readingSupport: "retomada-conforto-pdde",
   capabilities: "capacidades-do-guia-pdde",
+  recentUpdates: "novidades-recentes-guia-pdde",
   commandCenter: "central-operacional-pdde",
   workspace: "dados-processo-operacional",
   naming: "kit-nomenclatura-pdde",
@@ -52,6 +53,7 @@ export const GUIDE_ANCHORS = {
 export const guideAnchorParentSections: Record<string, string> = {
   [GUIDE_ANCHORS.readingSupport]: "introducao",
   [GUIDE_ANCHORS.capabilities]: "introducao",
+  [GUIDE_ANCHORS.recentUpdates]: "introducao",
   [GUIDE_ANCHORS.commandCenter]: "secao-2",
   [GUIDE_ANCHORS.workspace]: "secao-2",
   [GUIDE_ANCHORS.naming]: "secao-2",

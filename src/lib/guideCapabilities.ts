@@ -220,6 +220,10 @@ export const getGuideCapabilitiesMarkdown = () => {
   lines.push("## Observação de governança");
   lines.push("");
   lines.push(
+    "Para uma visão cronológica das melhorias publicadas recentemente, consulte também `docs/NOVIDADES_RECENTES_GUIA.md`.",
+  );
+  lines.push("");
+  lines.push(
     `Sempre que uma nova função relevante for incorporada ao guia, atualize a base em \`src/lib/guideCapabilities.ts\` e regenere este arquivo com \`npm run sync:capabilities\`.`,
   );
 

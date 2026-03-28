@@ -41,14 +41,17 @@ npm run build
 npm run preview
 npm run sync:pdf-manifest
 npm run sync:capabilities
+npm run sync:release-notes
 npm run check:content
 npm run check:all
 ```
 
-## Registro de capacidades
+## Registros do produto
 
 - Registro versionado das funções do guia: [`docs/REGISTRO_CAPACIDADES_GUIA.md`](docs/REGISTRO_CAPACIDADES_GUIA.md)
+- Histórico recente de melhorias visíveis ao usuário: [`docs/NOVIDADES_RECENTES_GUIA.md`](docs/NOVIDADES_RECENTES_GUIA.md)
 - Gere ou atualize esse registro com `npm run sync:capabilities`
+- Gere ou atualize o histórico recente com `npm run sync:release-notes`
 
 ## Estrutura principal
 

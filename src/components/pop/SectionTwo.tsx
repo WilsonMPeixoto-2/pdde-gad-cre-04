@@ -8,6 +8,7 @@ import { ProcessWorkspacePanel } from "./ProcessWorkspacePanel";
 import { SubmissionReadinessPanel } from "./SubmissionReadinessPanel";
 import { OperationalCommandDeck } from "./OperationalCommandDeck";
 import { DocumentNamingKit } from "./DocumentNamingKit";
+import { OperationalSharePack } from "./OperationalSharePack";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 
 export const SectionTwo = () => {
@@ -185,6 +186,10 @@ export const SectionTwo = () => {
 
       <div id={GUIDE_ANCHORS.readiness} className="mb-8 scroll-mt-28">
         <SubmissionReadinessPanel />
+      </div>
+
+      <div className="mb-8">
+        <OperationalSharePack />
       </div>
 
       <div className="mb-8 section-card border-l-4 border-l-accent bg-linear-to-br from-accent/5 via-background to-secondary/40 shadow-xs">

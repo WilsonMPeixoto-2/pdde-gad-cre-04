@@ -88,6 +88,12 @@ export interface DocumentNamingSuggestion {
   note: string;
 }
 
+export interface OperationalTextBundle {
+  diagnostic: string;
+  shareSummary: string;
+  fileName: string;
+}
+
 export const PDDE_STORAGE_KEYS = {
   checklist: "pdde-checklist-state-v5",
   journey: "pdde-journey-progress-v1",
@@ -382,6 +388,12 @@ export const buildSubmissionSubjectLine = (workspace: ProcessWorkspaceProfile) =
   const school = workspace.schoolName.trim() || "[UNIDADE ESCOLAR]";
   const exercise = workspace.exercise.trim() || "[EXERCÍCIO]";
   return `Prestação de Contas PDDE - ${school} - Exercício ${exercise}`;
+};
+
+export const getOperationalDiagnosticFileName = (workspace: ProcessWorkspaceProfile) => {
+  const exercise = workspace.exercise.trim() || "sem-exercicio";
+  const school = slugifyOperationalFileSegment(workspace.schoolName) || "UNIDADE";
+  return `PDDE_DIAGNOSTICO_GAD_${exercise}_${school}.txt`;
 };
 
 const documentNamingBlueprints = [
@@ -715,6 +727,105 @@ export const buildOperationalReport = (snapshot: OperationalSnapshot): Operation
     nextAction,
   };
 };
+
+export const buildOperationalDiagnosticText = (
+  snapshot: OperationalSnapshot,
+  report: OperationalReadinessReport = buildOperationalReport(snapshot),
+) => {
+  const statusCopy = operationalStatusCopy[report.status];
+  const generatedAt = new Date().toLocaleString("pt-BR");
+  const preRemittanceSteps = processFlowSteps.filter((step) => step.id !== "finalizacao");
+  const lines = [
+    "Diagnóstico operacional — Prestação de Contas PDDE",
+    "",
+    `Gerado em: ${generatedAt}`,
+    `Situação: ${statusCopy.title}`,
+    `Destino da remessa: ${GAD_UNIT.fullLabel}`,
+    "",
+    "Dados do processo",
+    `- Unidade escolar: ${snapshot.workspace.schoolName || "Não informado"}`,
+    `- CNPJ do CEC/UEx: ${snapshot.workspace.uexCnpj || "Não informado"}`,
+    `- Exercício: ${snapshot.workspace.exercise || "Não informado"}`,
+    `- Processo SEI!RIO: ${snapshot.workspace.seiProcessNumber || "Não informado"}`,
+    `- Responsável pela conferência: ${snapshot.workspace.responsibleName || "Não informado"}`,
+    `- Última atualização do painel: ${formatOperationalTimestamp(snapshot.workspace.updatedAt)}`,
+    "",
+    "Indicadores",
+    `- Checklist essencial: ${report.essentialItems.length - report.essentialPending.length}/${report.essentialItems.length} (${report.essentialProgress}%)`,
+    `- Checklist complementar: ${report.complementaryItems.length - report.complementaryPending.length}/${report.complementaryItems.length}`,
+    `- Jornada pré-remessa: ${preRemittanceSteps.length - report.pendingJourney.length}/${preRemittanceSteps.length} (${report.journeyProgress}%)`,
+    `- Dados base do processo: ${report.workspaceCompletedFields}/${report.workspaceTotalFields}`,
+    "",
+    "Próxima ação recomendada",
+    `- ${report.nextAction.title}: ${report.nextAction.description}`,
+    "",
+  ];
+
+  if (report.essentialPending.length > 0) {
+    lines.push("Pendências essenciais");
+    for (const item of report.essentialPending) {
+      lines.push(`- ${item.id}. ${item.text}`);
+    }
+    lines.push("");
+  }
+
+  if (report.pendingJourney.length > 0) {
+    lines.push("Etapas operacionais ainda não marcadas");
+    for (const step of report.pendingJourney) {
+      lines.push(`- Etapa ${step.number}: ${step.title}`);
+    }
+    lines.push("");
+  }
+
+  if (report.complementaryPending.length > 0) {
+    lines.push("Itens complementares em aberto");
+    for (const item of report.complementaryPending) {
+      lines.push(`- ${item.text}`);
+    }
+    lines.push("");
+  }
+
+  lines.push("Leitura orientativa");
+  lines.push(`- ${statusCopy.description}`);
+
+  return lines.join("\n");
+};
+
+export const buildOperationalShareSummary = (
+  snapshot: OperationalSnapshot,
+  report: OperationalReadinessReport = buildOperationalReport(snapshot),
+) => {
+  const statusCopy = operationalStatusCopy[report.status];
+  const pendingJourneyLabel =
+    report.pendingJourney.length > 0
+      ? report.pendingJourney
+          .slice(0, 2)
+          .map((step) => `Etapa ${step.number}: ${step.title}`)
+          .join("; ")
+      : "Fluxo pré-remessa marcado";
+
+  return [
+    "Resumo operacional — Prestação de Contas PDDE",
+    `Situação: ${statusCopy.title}`,
+    `Unidade: ${snapshot.workspace.schoolName || "Não informado"}`,
+    `Exercício: ${snapshot.workspace.exercise || "Não informado"}`,
+    `Processo SEI!RIO: ${snapshot.workspace.seiProcessNumber || "Não informado"}`,
+    `Responsável: ${snapshot.workspace.responsibleName || "Não informado"}`,
+    `Próxima ação: ${report.nextAction.title}`,
+    `Pendências essenciais: ${report.essentialPending.length}`,
+    `Etapas pendentes: ${pendingJourneyLabel}`,
+    `Destino: ${GAD_UNIT.fullLabel}`,
+  ].join("\n");
+};
+
+export const buildOperationalTextBundle = (
+  snapshot: OperationalSnapshot,
+  report: OperationalReadinessReport = buildOperationalReport(snapshot),
+): OperationalTextBundle => ({
+  diagnostic: buildOperationalDiagnosticText(snapshot, report),
+  shareSummary: buildOperationalShareSummary(snapshot, report),
+  fileName: getOperationalDiagnosticFileName(snapshot.workspace),
+});
 
 export const formatOperationalTimestamp = (isoDate?: string | null) => {
   if (!isoDate) return "Ainda não registrado";

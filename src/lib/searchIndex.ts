@@ -67,6 +67,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.naming,
   },
   {
+    id: "resumo-compartilhavel",
+    title: "Resumo Compartilhável da Conferência",
+    content: "Gera um resumo curto da situação do processo, com próxima ação, pendências e assunto sugerido para handoff.",
+    keywords: ["resumo", "handoff", "compartilhar", "whatsapp", "email", "situação atual", "assunto sugerido"],
+    section: sectionTitle("secao-2"),
+    anchor: GUIDE_ANCHORS.sharePack,
+  },
+  {
     id: "checklist",
     title: "Checklist de Documentos",
     content: "Lista mínima e complementar para instrução processual da prestação de contas.",
@@ -204,6 +212,7 @@ export function getQuickSuggestions(): SearchItem[] {
   const quickSuggestionIds = [
     "tipo-processo",
     "central-operacional",
+    "resumo-compartilhavel",
     "nomenclatura-documental",
     "checklist",
     "bloco-assinatura",

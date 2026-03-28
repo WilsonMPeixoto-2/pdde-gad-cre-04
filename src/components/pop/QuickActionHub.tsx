@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, Printer, Scale } from "lucide-react";
+import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, MessageSquareShare, Printer, Scale } from "lucide-react";
 import { toast } from "sonner";
 import { GUIDE_ANCHORS, processFlowSteps } from "@/lib/guideContent";
 
@@ -52,6 +52,13 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
       icon: Files,
       accent: "text-sky-700 dark:text-sky-300",
       onClick: () => scrollToId(GUIDE_ANCHORS.naming),
+    },
+    {
+      title: "Resumo da conferência",
+      description: "Abrir o painel com texto curto para repasse, assunto sugerido e pacote compartilhável.",
+      icon: MessageSquareShare,
+      accent: "text-emerald-700 dark:text-emerald-300",
+      onClick: () => scrollToId(GUIDE_ANCHORS.sharePack),
     },
     {
       title: "Modelos e exemplos",

@@ -11,8 +11,9 @@ import {
 import { toast } from "sonner";
 import { GAD_UNIT, processFlowSteps } from "@/lib/guideContent";
 import {
+  buildOperationalTextBundle,
   buildOperationalReport,
-  formatOperationalTimestamp,
+  getOperationalDiagnosticFileName,
   operationalStatusCopy,
 } from "@/lib/pddeOperationalData";
 import { useOperationalSnapshot } from "@/hooks/useOperationalSnapshot";
@@ -40,68 +41,11 @@ export const SubmissionReadinessPanel = () => {
   const snapshot = useOperationalSnapshot();
   const report = useMemo(() => buildOperationalReport(snapshot), [snapshot]);
   const statusCopy = operationalStatusCopy[report.status];
-
-  const buildDiagnosticText = () => {
-    const generatedAt = new Date().toLocaleString("pt-BR");
-    const lines = [
-      "Diagnóstico operacional — Prestação de Contas PDDE",
-      "",
-      `Gerado em: ${generatedAt}`,
-      `Situação: ${statusCopy.title}`,
-      `Destino da remessa: ${GAD_UNIT.fullLabel}`,
-      "",
-      "Dados do processo",
-      `- Unidade escolar: ${snapshot.workspace.schoolName || "Não informado"}`,
-      `- CNPJ do CEC/UEx: ${snapshot.workspace.uexCnpj || "Não informado"}`,
-      `- Exercício: ${snapshot.workspace.exercise || "Não informado"}`,
-      `- Processo SEI!RIO: ${snapshot.workspace.seiProcessNumber || "Não informado"}`,
-      `- Responsável pela conferência: ${snapshot.workspace.responsibleName || "Não informado"}`,
-      `- Última atualização do painel: ${formatOperationalTimestamp(snapshot.workspace.updatedAt)}`,
-      "",
-      "Indicadores",
-      `- Checklist essencial: ${report.essentialItems.length - report.essentialPending.length}/${report.essentialItems.length} (${report.essentialProgress}%)`,
-      `- Checklist complementar: ${report.complementaryItems.length - report.complementaryPending.length}/${report.complementaryItems.length}`,
-      `- Jornada pré-remessa: ${processFlowSteps.filter((step) => step.id !== "finalizacao").length - report.pendingJourney.length}/${processFlowSteps.filter((step) => step.id !== "finalizacao").length} (${report.journeyProgress}%)`,
-      `- Dados base do processo: ${report.workspaceCompletedFields}/${report.workspaceTotalFields}`,
-      "",
-      "Próxima ação recomendada",
-      `- ${report.nextAction.title}: ${report.nextAction.description}`,
-      "",
-    ];
-
-    if (report.essentialPending.length > 0) {
-      lines.push("Pendências essenciais");
-      for (const item of report.essentialPending) {
-        lines.push(`- ${item.id}. ${item.text}`);
-      }
-      lines.push("");
-    }
-
-    if (report.pendingJourney.length > 0) {
-      lines.push("Etapas operacionais ainda não marcadas");
-      for (const step of report.pendingJourney) {
-        lines.push(`- Etapa ${step.number}: ${step.title}`);
-      }
-      lines.push("");
-    }
-
-    if (report.complementaryPending.length > 0) {
-      lines.push("Itens complementares em aberto");
-      for (const item of report.complementaryPending) {
-        lines.push(`- ${item.text}`);
-      }
-      lines.push("");
-    }
-
-    lines.push("Leitura orientativa");
-    lines.push(`- ${statusCopy.description}`);
-
-    return lines.join("\n");
-  };
+  const textBundle = useMemo(() => buildOperationalTextBundle(snapshot, report), [report, snapshot]);
 
   const copyDiagnostic = async () => {
     try {
-      await navigator.clipboard.writeText(buildDiagnosticText());
+      await navigator.clipboard.writeText(textBundle.diagnostic);
       toast.success("Diagnóstico copiado para a área de transferência.");
     } catch {
       toast.error("Não foi possível copiar o diagnóstico.");
@@ -109,11 +53,9 @@ export const SubmissionReadinessPanel = () => {
   };
 
   const downloadDiagnostic = () => {
-    const exercise = snapshot.workspace.exercise.trim() || "sem-exercicio";
-    const school = snapshot.workspace.schoolName.trim().replace(/[^\w-]+/g, "_") || "unidade";
     downloadTextFile(
-      buildDiagnosticText(),
-      `PDDE_DIAGNOSTICO_GAD_${exercise}_${school}.txt`,
+      textBundle.diagnostic,
+      getOperationalDiagnosticFileName(snapshot.workspace),
     );
     toast.success("Relatório baixado em .txt.");
   };

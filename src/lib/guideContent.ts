@@ -38,6 +38,7 @@ export const GUIDE_ANCHORS = {
   commandCenter: "central-operacional-pdde",
   workspace: "dados-processo-operacional",
   naming: "kit-nomenclatura-pdde",
+  sharePack: "resumo-compartilhavel-pdde",
   checklist: "checklist-documentos",
   readiness: "diagnostico-remessa-gad",
   models: "modelos-documentos",

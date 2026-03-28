@@ -1,13 +1,19 @@
-import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, MessageSquareShare, NotebookPen, Printer, Scale } from "lucide-react";
+import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, MessageSquareShare, NotebookPen, Printer, RotateCcw, Scale } from "lucide-react";
 import { toast } from "sonner";
+import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { GUIDE_ANCHORS, processFlowSteps } from "@/lib/guideContent";
 
 type QuickActionHubProps = {
   onPrint?: () => void;
 };
 
-const scrollToId = (id: string) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+const scrollToId = (id: string, saveLastSection?: (sectionId: string) => void) => {
+  const target = document.getElementById(id);
+  if (!target) return;
+
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  const parentSectionId = target.closest("section[id]")?.id ?? target.id;
+  saveLastSection?.(parentSectionId);
 };
 
 const copyOperationalRoute = async () => {
@@ -31,55 +37,56 @@ const copyOperationalRoute = async () => {
 };
 
 export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
+  const { lastSection, saveLastSection } = useReadingExperience();
   const actions = [
     {
       title: "Retomar trabalho",
       description: "Abrir a central operacional com próxima ação recomendada e backup do progresso em JSON.",
       icon: BriefcaseBusiness,
       accent: "text-primary",
-      onClick: () => scrollToId(GUIDE_ANCHORS.commandCenter),
+      onClick: () => scrollToId(GUIDE_ANCHORS.commandCenter, saveLastSection),
     },
     {
       title: "Checklist mínimo",
       description: "Ir direto à conferência dos documentos essenciais e complementares.",
       icon: ClipboardList,
       accent: "text-primary",
-      onClick: () => scrollToId(GUIDE_ANCHORS.checklist),
+      onClick: () => scrollToId(GUIDE_ANCHORS.checklist, saveLastSection),
     },
     {
       title: "Padrão de nomes",
       description: "Abrir o kit com nomenclatura sugerida para PDFs e nomes da árvore do processo.",
       icon: Files,
       accent: "text-sky-700 dark:text-sky-300",
-      onClick: () => scrollToId(GUIDE_ANCHORS.naming),
+      onClick: () => scrollToId(GUIDE_ANCHORS.naming, saveLastSection),
     },
     {
       title: "Resumo da conferência",
       description: "Abrir o painel com texto curto para repasse, assunto sugerido e pacote compartilhável.",
       icon: MessageSquareShare,
       accent: "text-emerald-700 dark:text-emerald-300",
-      onClick: () => scrollToId(GUIDE_ANCHORS.sharePack),
+      onClick: () => scrollToId(GUIDE_ANCHORS.sharePack, saveLastSection),
     },
     {
       title: "Notas do caso",
       description: "Registrar diligências, responsável, próxima checagem e contexto que não pode se perder.",
       icon: NotebookPen,
       accent: "text-amber-700 dark:text-amber-300",
-      onClick: () => scrollToId(GUIDE_ANCHORS.caseNotes),
+      onClick: () => scrollToId(GUIDE_ANCHORS.caseNotes, saveLastSection),
     },
     {
       title: "Modelos e exemplos",
       description: "Abrir o bloco com peças editáveis, exemplos preenchidos e referências visuais.",
       icon: FileText,
       accent: "text-sky-700 dark:text-sky-300",
-      onClick: () => scrollToId(GUIDE_ANCHORS.models),
+      onClick: () => scrollToId(GUIDE_ANCHORS.models, saveLastSection),
     },
     {
       title: "Diagnóstico para GAD",
       description: "Abrir o painel que mostra o que ainda falta antes da remessa e exporta um relatório da conferência.",
       icon: ListChecks,
       accent: "text-emerald-700 dark:text-emerald-300",
-      onClick: () => scrollToId(GUIDE_ANCHORS.readiness),
+      onClick: () => scrollToId(GUIDE_ANCHORS.readiness, saveLastSection),
     },
     {
       title: "Copiar roteiro rápido",
@@ -93,9 +100,19 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
       description: "Ir ao anexo com marcos normativos, sistemas federais e fontes oficiais prioritárias.",
       icon: Scale,
       accent: "text-amber-700 dark:text-amber-300",
-      onClick: () => scrollToId("anexo"),
+      onClick: () => scrollToId("anexo", saveLastSection),
     },
-  ] as const;
+  ];
+
+  if (lastSection) {
+    actions.splice(1, 0, {
+      title: "Continuar leitura",
+      description: `Retomar em ${lastSection.number} • ${lastSection.shortTitle}, sem caçar novamente o ponto onde você parou.`,
+      icon: RotateCcw,
+      accent: "text-sky-700 dark:text-sky-300",
+      onClick: () => scrollToId(lastSection.id, saveLastSection),
+    });
+  }
 
   return (
     <section aria-labelledby="hub-acoes-rapidas" className="quick-action-shell scroll-mt-28">

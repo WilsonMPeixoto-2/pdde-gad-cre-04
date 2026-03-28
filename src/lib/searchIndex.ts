@@ -51,6 +51,14 @@ export const searchIndex: SearchItem[] = [
     anchor: "secao-1",
   },
   {
+    id: "retomada-leitura",
+    title: "Retomada de Leitura e Conforto",
+    content: "Painel para continuar na última seção visitada, ampliar o texto e reduzir movimento visual.",
+    keywords: ["retomar leitura", "ultima seção", "texto maior", "movimento reduzido", "acessibilidade", "conforto"],
+    section: sectionTitle("introducao"),
+    anchor: GUIDE_ANCHORS.readingSupport,
+  },
+  {
     id: "central-operacional",
     title: "Central operacional e backup",
     content: "Painel para retomar a próxima ação, exportar o progresso em JSON e importar a conferência em outro computador.",
@@ -219,6 +227,7 @@ export function searchItems(query: string): SearchItem[] {
 export function getQuickSuggestions(): SearchItem[] {
   const quickSuggestionIds = [
     "tipo-processo",
+    "retomada-leitura",
     "central-operacional",
     "resumo-compartilhavel",
     "notas-operacionais",

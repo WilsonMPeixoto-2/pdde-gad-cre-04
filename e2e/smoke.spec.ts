@@ -47,6 +47,12 @@ test.describe("Fluxo desktop", () => {
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
 
+    await page.keyboard.press("Tab");
+    const skipLink = page.getByRole("link", { name: /ir para o conteúdo principal/i });
+    await expect(skipLink).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect.poll(async () => page.evaluate(() => document.activeElement?.id)).toBe("main-content");
+
     await expect(page.getByRole("heading", { level: 1, name: /prestação de contas/i })).toBeVisible();
     await expect(page.locator("h1")).toHaveCount(1);
 
@@ -82,6 +88,27 @@ test.describe("Fluxo desktop", () => {
 
     await page.getByRole("button", { name: /Checklist mínimo/i }).click();
     await expect(page.locator("#checklist-documentos")).toBeInViewport();
+
+    await expect.poll(() => page.evaluate(() => window.localStorage.getItem("pdde-last-section-v1"))).toBe("secao-2");
+    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await expect(page.getByRole("button", { name: /Continuar leitura/i })).toBeVisible();
+    await page.getByRole("button", { name: /Continuar leitura/i }).click();
+    await expect(page.locator("#secao-2")).toBeInViewport();
+
+    await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
+    await expect(page.getByRole("heading", { level: 2, name: /continue de onde parou/i })).toBeVisible();
+    await page.getByRole("button", { name: /Texto maior/i }).click();
+    await page.getByRole("button", { name: /Movimento reduzido/i }).click();
+
+    const readingSettings = await page.evaluate(() => ({
+      scale: document.documentElement.dataset.readingScale,
+      motion: document.documentElement.dataset.motionPreference,
+      reducedMotionClass: document.documentElement.classList.contains("user-reduced-motion"),
+    }));
+
+    expect(readingSettings.scale).toBe("large");
+    expect(readingSettings.motion).toBe("reduced");
+    expect(readingSettings.reducedMotionClass).toBe(true);
 
     const hasOverflow = await page.evaluate(() => {
       const allowance = 1;
@@ -137,6 +164,9 @@ test.describe("Fluxo mobile", () => {
     await page.getByRole("button", { name: /Modelos e exemplos/i }).click();
     await expect(page.locator("#modelos-documentos")).toBeInViewport();
 
+    await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: /Texto maior/i }).click();
+
     const diagnostics = await page.evaluate(() => {
       const allowance = 1;
       const heroTechBoard = document.querySelector<HTMLElement>(".hero-tech-board");
@@ -150,12 +180,14 @@ test.describe("Fluxo mobile", () => {
           document.body.scrollWidth > window.innerWidth + allowance,
         heroTechDisplay: heroTechBoard ? window.getComputedStyle(heroTechBoard).display : "missing",
         focusableInIllustrations,
+        readingScale: document.documentElement.dataset.readingScale,
       };
     });
 
     expect(diagnostics.hasOverflow).toBe(false);
     expect(diagnostics.heroTechDisplay).toBe("none");
     expect(diagnostics.focusableInIllustrations).toBe(0);
+    expect(diagnostics.readingScale).toBe("large");
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });

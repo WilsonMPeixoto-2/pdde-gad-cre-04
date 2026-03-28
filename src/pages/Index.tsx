@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, lazy, Suspense } from "react";
+import { type MouseEvent, useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
@@ -6,10 +6,12 @@ import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { QuickActionHub } from "@/components/pop/QuickActionHub";
+import { ReadingSupportPanel } from "@/components/pop/ReadingSupportPanel";
 import { SectionOne } from "@/components/pop/SectionOne";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
+import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { guideSectionIds, guideSectionsById } from "@/lib/guideContent";
 
 // Lazy load non-critical interactive widgets
@@ -39,6 +41,7 @@ const SectionLoader = () => (
 const Index = () => {
   const [activeSection, setActiveSection] = useState("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { saveLastSection } = useReadingExperience();
 
   const renderSectionDivider = (sectionId: string) => {
     const section = guideSectionsById[sectionId];
@@ -85,6 +88,15 @@ const Index = () => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => window.print());
     });
+  }, []);
+
+  const handleSkipToMain = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const main = document.getElementById("main-content");
+    if (!main) return;
+
+    main.scrollIntoView({ behavior: "smooth", block: "start" });
+    main.focus({ preventScroll: true });
   }, []);
 
   // IntersectionObserver replaces scroll listener — no reflows, passive detection
@@ -135,8 +147,16 @@ const Index = () => {
     };
   }, [sidebarOpen]);
 
+  useEffect(() => {
+    saveLastSection(activeSection);
+  }, [activeSection, saveLastSection]);
+
   return (
     <div className="min-h-screen bg-background overflow-x-clip">
+      <a href="#main-content" onClick={handleSkipToMain} className="skip-link no-print">
+        Ir para o conteúdo principal
+      </a>
+
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
 
@@ -154,7 +174,7 @@ const Index = () => {
           onClose={() => setSidebarOpen(false)}
         />
 
-        <main className="min-w-0 flex-1 lg:ml-0">
+        <main id="main-content" tabIndex={-1} className="min-w-0 flex-1 lg:ml-0">
           <div className="mx-auto w-full max-w-312 px-4 py-8 sm:px-6 sm:py-10 xl:px-10">
             <div className="space-y-10">
               <AnimatedSection>
@@ -167,6 +187,10 @@ const Index = () => {
 
               <AnimatedSection delay={75}>
                 <QuickActionHub onPrint={handlePrint} />
+              </AnimatedSection>
+
+              <AnimatedSection delay={90}>
+                <ReadingSupportPanel />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>

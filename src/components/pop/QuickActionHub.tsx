@@ -12,6 +12,14 @@ const scrollToId = (id: string, saveLastSection?: (sectionId: string) => void) =
   scrollToGuideAnchor(id, { saveLastSection });
 };
 
+const slugifyActionId = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^\w]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 const copyOperationalRoute = async () => {
   const text = [
     "Roteiro rápido — Prestação de Contas PDDE no SEI!RIO",
@@ -138,22 +146,27 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
       <div className="quick-action-grid">
         {actions.map((action) => {
           const Icon = action.icon;
+          const actionId = slugifyActionId(action.title);
+          const titleId = `quick-action-${actionId}-title`;
+          const descriptionId = `quick-action-${actionId}-description`;
 
           return (
             <button
               key={action.title}
               type="button"
               onClick={action.onClick}
+              aria-labelledby={titleId}
+              aria-describedby={descriptionId}
               className="quick-action-card focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <span className="quick-action-card-icon">
                 <Icon className={`h-5 w-5 ${action.accent}`} aria-hidden="true" />
               </span>
               <div className="space-y-1.5">
-                <p className="font-heading text-base font-bold tracking-tight text-foreground">
+                <p id={titleId} className="font-heading text-base font-bold tracking-tight text-foreground">
                   {action.title}
                 </p>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p id={descriptionId} className="text-sm leading-relaxed text-muted-foreground">
                   {action.description}
                 </p>
               </div>

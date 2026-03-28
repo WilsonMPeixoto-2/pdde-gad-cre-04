@@ -59,6 +59,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.readingSupport,
   },
   {
+    id: "capacidades-guia",
+    title: "Funções e Possibilidades do Guia",
+    content: "Resumo das capacidades atuais da plataforma, com apoio operacional, handoff, memória do caso e registro para comunicação com usuários.",
+    keywords: ["funções do guia", "capacidades", "possibilidades", "novidades", "o que o guia oferece", "recursos disponíveis"],
+    section: sectionTitle("introducao"),
+    anchor: GUIDE_ANCHORS.capabilities,
+  },
+  {
     id: "central-operacional",
     title: "Central operacional e backup",
     content: "Painel para retomar a próxima ação, exportar o progresso em JSON e importar a conferência em outro computador.",
@@ -228,6 +236,7 @@ export function getQuickSuggestions(): SearchItem[] {
   const quickSuggestionIds = [
     "tipo-processo",
     "retomada-leitura",
+    "capacidades-guia",
     "central-operacional",
     "resumo-compartilhavel",
     "notas-operacionais",

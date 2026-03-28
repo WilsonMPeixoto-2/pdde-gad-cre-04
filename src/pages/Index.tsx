@@ -4,6 +4,7 @@ import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
+import { GuideCapabilitiesPanel } from "@/components/pop/GuideCapabilitiesPanel";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { QuickActionHub } from "@/components/pop/QuickActionHub";
 import { ReadingSupportPanel } from "@/components/pop/ReadingSupportPanel";
@@ -181,6 +182,10 @@ const Index = () => {
 
               <AnimatedSection delay={50}>
                 <ScopeCallout />
+              </AnimatedSection>
+
+              <AnimatedSection delay={65}>
+                <GuideCapabilitiesPanel />
               </AnimatedSection>
 
               <AnimatedSection delay={75}>

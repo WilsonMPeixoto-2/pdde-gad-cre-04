@@ -14,6 +14,7 @@
     "test:e2e:ui": "playwright test --ui",
     "typecheck": "tsc --noEmit",
     "sync:pdf-manifest": "tsx scripts/sync-pdf-manifest.ts",
+    "sync:capabilities": "tsx scripts/sync-capability-registry.ts",
     "check:content": "tsx scripts/audit-content.ts",
     "check:pdfs": "tsx scripts/audit-pdfs.ts",
     "check:all": "npm run lint && npm run typecheck && npm run build && npm run check:content",

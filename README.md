@@ -40,9 +40,15 @@ npm run typecheck
 npm run build
 npm run preview
 npm run sync:pdf-manifest
+npm run sync:capabilities
 npm run check:content
 npm run check:all
 ```
+
+## Registro de capacidades
+
+- Registro versionado das funções do guia: [`docs/REGISTRO_CAPACIDADES_GUIA.md`](docs/REGISTRO_CAPACIDADES_GUIA.md)
+- Gere ou atualize esse registro com `npm run sync:capabilities`
 
 ## Estrutura principal
 

@@ -36,6 +36,7 @@ export const INTERNAL_PROCESS_TRACKER_LABEL = "Controle de processos 2026";
 
 export const GUIDE_ANCHORS = {
   readingSupport: "retomada-conforto-pdde",
+  capabilities: "capacidades-do-guia-pdde",
   commandCenter: "central-operacional-pdde",
   workspace: "dados-processo-operacional",
   naming: "kit-nomenclatura-pdde",
@@ -50,6 +51,7 @@ export const GUIDE_ANCHORS = {
 
 export const guideAnchorParentSections: Record<string, string> = {
   [GUIDE_ANCHORS.readingSupport]: "introducao",
+  [GUIDE_ANCHORS.capabilities]: "introducao",
   [GUIDE_ANCHORS.commandCenter]: "secao-2",
   [GUIDE_ANCHORS.workspace]: "secao-2",
   [GUIDE_ANCHORS.naming]: "secao-2",

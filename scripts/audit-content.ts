@@ -7,6 +7,9 @@ import { pddeModels } from "../src/lib/pddeModels.ts";
 import { searchIndex } from "../src/lib/searchIndex.ts";
 
 const httpTimeoutMs = 20000;
+const externalLinkRetryAttempts = 3;
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const ensurePdfAssetsMatch = async () => {
   const findings: string[] = [];
@@ -72,12 +75,36 @@ const fetchStatus = async (url: string) => {
   }
 };
 
+const fetchStatusWithRetry = async (url: string) => {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= externalLinkRetryAttempts; attempt += 1) {
+    try {
+      const status = await fetchStatus(url);
+
+      if (status < 500 || attempt === externalLinkRetryAttempts) {
+        return status;
+      }
+
+      lastError = new Error(`HTTP ${status}`);
+    } catch (error) {
+      lastError = error;
+    }
+
+    if (attempt < externalLinkRetryAttempts) {
+      await sleep(500 * attempt);
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+};
+
 const ensureExternalLinksRespond = async () => {
   const findings: string[] = [];
 
   for (const resource of externalResourceList) {
     try {
-      const status = await fetchStatus(resource.href);
+      const status = await fetchStatusWithRetry(resource.href);
       if (status >= 400) {
         findings.push(`Link externo com falha (${status}): ${resource.title} -> ${resource.href}`);
       }

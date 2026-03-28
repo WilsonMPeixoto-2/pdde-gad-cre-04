@@ -87,15 +87,15 @@ test.describe("Fluxo desktop", () => {
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
-    await page.getByRole("button", { name: /Retomar trabalho/i }).click();
+    await page.getByRole("button", { name: "Retomar trabalho", exact: true }).click();
     await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Padrão de nomes/i }).click();
+    await page.getByRole("button", { name: "Padrão de nomes", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Resumo da conferência/i }).click();
+    await page.getByRole("button", { name: "Resumo da conferência", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
     await expect(page.getByRole("button", { name: /Copiar briefing executivo/i })).toBeVisible();
 
@@ -117,10 +117,10 @@ test.describe("Fluxo desktop", () => {
     expect(await premiumReportDownload.suggestedFilename()).toMatch(/^PDDE_RELATORIO_OPERACIONAL_.*\.html$/);
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Notas do caso/i }).click();
+    await page.getByRole("button", { name: "Notas do caso", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
 
-    await page.getByRole("button", { name: /Checklist mínimo/i }).click();
+    await page.getByRole("button", { name: "Checklist mínimo", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /checklist mínimo/i })).toBeVisible();
 
     await expect.poll(() => page.evaluate(() => window.localStorage.getItem("pdde-last-section-v1"))).toBe("secao-2");
@@ -187,18 +187,18 @@ test.describe("Fluxo mobile", () => {
     await expect(page.getByRole("button", { name: /fechar menu de navegação/i })).toBeHidden();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Retomar trabalho/i }).click();
+    await page.getByRole("button", { name: "Retomar trabalho", exact: true }).click();
     await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Padrão de nomes/i }).click();
+    await page.getByRole("button", { name: "Padrão de nomes", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Resumo da conferência/i }).click();
+    await page.getByRole("button", { name: "Resumo da conferência", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /Notas do caso/i }).click();
+    await page.getByRole("button", { name: "Notas do caso", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
-    await page.getByRole("button", { name: /Modelos e exemplos/i }).click();
+    await page.getByRole("button", { name: "Modelos e exemplos", exact: true }).click();
     await expect(page.getByRole("heading", { level: 3, name: /modelos, exemplos e referências documentais/i })).toBeVisible();
 
     await page.getByRole("button", { name: /mais ações/i }).click();

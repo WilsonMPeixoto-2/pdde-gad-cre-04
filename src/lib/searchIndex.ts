@@ -75,6 +75,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.recentUpdates,
   },
   {
+    id: "rastreabilidade-fontes",
+    title: "Rastreabilidade das Fontes Oficiais",
+    content: "Mapa das referências prioritárias com órgão emissor, aplicação prática, motivo de uso e data da última verificação editorial.",
+    keywords: ["fontes oficiais", "rastreabilidade", "referências verificadas", "normas conferidas", "última verificação", "base normativa"],
+    section: sectionTitle("anexo"),
+    anchor: GUIDE_ANCHORS.referenceGovernance,
+  },
+  {
     id: "central-operacional",
     title: "Central operacional e backup",
     content: "Painel para retomar a próxima ação, exportar o progresso em JSON e importar a conferência em outro computador.",
@@ -246,6 +254,7 @@ export function getQuickSuggestions(): SearchItem[] {
     "retomada-leitura",
     "capacidades-guia",
     "novidades-recentes",
+    "rastreabilidade-fontes",
     "central-operacional",
     "resumo-compartilhavel",
     "notas-operacionais",

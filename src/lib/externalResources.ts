@@ -6,6 +6,11 @@ interface ExternalResource {
   href: string;
   citation?: string;
   category: "norma" | "comunicado" | "sistema" | "servico";
+  issuingBody?: string;
+  appliesTo?: string;
+  whyItMatters?: string;
+  userWhenToUse?: string;
+  lastVerifiedText?: string;
 }
 
 export const externalResources = {
@@ -17,6 +22,11 @@ export const externalResources = {
     href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view",
     citation: "Resolução CD/FNDE nº 15/2021",
     category: "norma",
+    issuingBody: "FNDE",
+    appliesTo: "Núcleo normativo da execução e prestação de contas do PDDE.",
+    whyItMatters: "É a principal base federal para conferir o conteúdo mínimo do processo e os deveres da UEx/EEx.",
+    userWhenToUse: "Use quando surgir dúvida sobre obrigação documental, execução, fiscalização ou prestação de contas.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   comunicado47_2024: {
     id: "comunicado47_2024",
@@ -26,6 +36,11 @@ export const externalResources = {
     href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2024-1/Comunicadon.47_2024Orientaesparaaprestaodecontasdosrecursosrecebidosem2024.pdf",
     citation: "Comunicado PDDE nº 47/2024",
     category: "comunicado",
+    issuingBody: "FNDE",
+    appliesTo: "Orientações operacionais para recursos recebidos em 2024.",
+    whyItMatters: "Ajuda a interpretar o recorte do exercício e detalhes operacionais relevantes para a conferência.",
+    userWhenToUse: "Consulte ao revisar processos do exercício de 2024 e situações específicas daquele ciclo.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   comunicado01_2026: {
     id: "comunicado01_2026",
@@ -35,6 +50,11 @@ export const externalResources = {
     href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2026/comunicado-n-01_2026-alteracoes-na-resolucao-cd-fnde-no-7-2024-estorno-de-recurso.pdf",
     citation: "Comunicado PDDE nº 01/2026",
     category: "comunicado",
+    issuingBody: "FNDE",
+    appliesTo: "Saldos, estorno e efeitos a partir de 2027.",
+    whyItMatters: "Evita orientar incorretamente sobre reprogramação, estorno e vigência das mudanças recentes.",
+    userWhenToUse: "Consulte quando a dúvida envolver saldo remanescente, estorno ou impacto futuro do exercício.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   bbGestaoAgilFaq: {
     id: "bbGestaoAgilFaq",
@@ -43,6 +63,11 @@ export const externalResources = {
     description: "Material oficial do FNDE sobre o recorte dos recursos de 2023 e 2024 e a convivência com o SiGPC.",
     href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil/PerguntaseRespostasPDDE.pdf",
     category: "sistema",
+    issuingBody: "FNDE",
+    appliesTo: "Uso do BB Gestão Ágil e convivência com outros ambientes federais.",
+    whyItMatters: "Ajuda a distinguir execução, registro e análise em sistemas federais diferentes.",
+    userWhenToUse: "Consulte quando houver dúvida sobre o que deve estar no BB Gestão Ágil e como isso dialoga com o processo local.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   bbGestaoAgilHub: {
     id: "bbGestaoAgilHub",
@@ -51,6 +76,11 @@ export const externalResources = {
     description: "Página oficial do FNDE com manual e orientações da ferramenta.",
     href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil",
     category: "sistema",
+    issuingBody: "FNDE",
+    appliesTo: "Página central da solução BB Gestão Ágil.",
+    whyItMatters: "Reúne materiais oficiais úteis para entender o ambiente federal aplicável ao exercício.",
+    userWhenToUse: "Use quando precisar localizar manual, orientação operacional ou acesso ao hub oficial do sistema.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   pddeResolucoes: {
     id: "pddeResolucoes",
@@ -59,6 +89,11 @@ export const externalResources = {
     description: "Repositório oficial para acompanhar normas e materiais vigentes do programa.",
     href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/resolucoes-e-formularios",
     category: "norma",
+    issuingBody: "FNDE",
+    appliesTo: "Repositório oficial de resoluções e formulários do PDDE.",
+    whyItMatters: "Funciona como ponto de atualização para mudanças normativas e materiais vigentes do programa.",
+    userWhenToUse: "Consulte quando precisar verificar se houve nova resolução, formulário ou material oficial.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   decreto8539_2015: {
     id: "decreto8539_2015",
@@ -68,6 +103,11 @@ export const externalResources = {
     href: "https://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2015/Decreto/D8539.htm",
     citation: "Decreto nº 8.539/2015",
     category: "norma",
+    issuingBody: "Presidência da República",
+    appliesTo: "Processo eletrônico e distinção entre documento nato-digital e digitalizado.",
+    whyItMatters: "Sustenta a diferença entre autenticação, original nato-digital e documento digitalizado.",
+    userWhenToUse: "Use quando a dúvida envolver validade documental ou natureza do arquivo inserido no SEI!RIO.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   decretoSeiRio_57250_2025: {
     id: "decretoSeiRio_57250_2025",
@@ -77,6 +117,11 @@ export const externalResources = {
     href: "https://comlurb.prefeitura.rio/wp-content/uploads/sites/74/2025/11/Decreto-SEI-57250.pdf",
     citation: "Decreto Rio nº 57.250/2025",
     category: "norma",
+    issuingBody: "Município do Rio de Janeiro",
+    appliesTo: "Tramitação eletrônica, assinatura e validade documental no SEI!RIO.",
+    whyItMatters: "Dá lastro municipal para assinatura, tramitação e preservação dos documentos no rito local.",
+    userWhenToUse: "Consulte quando a dúvida estiver ligada ao funcionamento jurídico-operacional do SEI!RIO.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   seiRioPortal: {
     id: "seiRioPortal",
@@ -85,6 +130,11 @@ export const externalResources = {
     description: "Acesso ao sistema oficial.",
     href: "https://sei.rio/",
     category: "servico",
+    issuingBody: "Prefeitura do Rio de Janeiro",
+    appliesTo: "Acesso direto ao ambiente oficial do SEI!RIO.",
+    whyItMatters: "É a porta de entrada operacional do fluxo local.",
+    userWhenToUse: "Use para acessar o sistema ou orientar usuários que precisam entrar no ambiente oficial.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   seiRioUserGuide: {
     id: "seiRioUserGuide",
@@ -93,6 +143,11 @@ export const externalResources = {
     description: "Manual oficial do SEI!RIO para uso interno.",
     href: "https://sei.rio/servidor/guias-e-ambiente-de-teste/guia-do-usuario-interno/",
     category: "servico",
+    issuingBody: "Prefeitura do Rio de Janeiro",
+    appliesTo: "Manual institucional do usuário interno do SEI!RIO.",
+    whyItMatters: "Complementa o guia quando a dúvida é sobre uso do sistema e não sobre mérito do PDDE.",
+    userWhenToUse: "Consulte para dúvidas operacionais gerais do SEI!RIO fora do recorte específico deste guia.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
   seiRioSupport: {
     id: "seiRioSupport",
@@ -101,6 +156,11 @@ export const externalResources = {
     description: "Canal oficial de suporte técnico do SEI!RIO.",
     href: "https://sei.rio/servidor/atendimento/",
     category: "servico",
+    issuingBody: "Prefeitura do Rio de Janeiro",
+    appliesTo: "Suporte técnico oficial do SEI!RIO.",
+    whyItMatters: "Ajuda a encaminhar corretamente problemas técnicos que não se resolvem com orientação editorial.",
+    userWhenToUse: "Use quando houver falha de acesso, erro de sistema ou necessidade de atendimento técnico.",
+    lastVerifiedText: "Verificado em 28 de março de 2026",
   },
 } as const satisfies Record<string, ExternalResource>;
 
@@ -113,6 +173,19 @@ export const officialReferenceIds: ExternalResourceId[] = [
   "comunicado01_2026",
   "bbGestaoAgilHub",
   "pddeResolucoes",
+];
+
+export const referenceGovernanceIds: ExternalResourceId[] = [
+  "resolution15",
+  "comunicado47_2024",
+  "comunicado01_2026",
+  "bbGestaoAgilFaq",
+  "bbGestaoAgilHub",
+  "pddeResolucoes",
+  "decreto8539_2015",
+  "decretoSeiRio_57250_2025",
+  "seiRioUserGuide",
+  "seiRioSupport",
 ];
 
 export const externalResourceList = Object.values(externalResources);

@@ -72,6 +72,14 @@ export const guideRecentUpdateGroups: GuideRecentUpdateGroup[] = [
           "Facilita comunicação institucional, onboarding de equipe e apresentação do guia para novos públicos.",
         anchor: GUIDE_ANCHORS.capabilities,
       },
+      {
+        title: "Rastreabilidade visível das fontes oficiais",
+        description:
+          "O anexo passou a mostrar, de forma transparente, quem emitiu cada referência prioritária, para que ela serve e quando foi revalidada.",
+        userImpact:
+          "Dá mais segurança para quem precisa confiar no guia sem sair clicando às cegas por normas e comunicados.",
+        anchor: GUIDE_ANCHORS.referenceGovernance,
+      },
     ],
   },
   {

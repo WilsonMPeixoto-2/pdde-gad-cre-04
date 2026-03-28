@@ -1,6 +1,6 @@
 import { access, stat } from "node:fs/promises";
 import path from "node:path";
-import { externalResourceList } from "../src/lib/externalResources.ts";
+import { externalResourceList, externalResources, referenceGovernanceIds } from "../src/lib/externalResources.ts";
 import { pdfAssetManifest } from "../src/generated/pdfManifest.ts";
 import { GUIDE_ANCHORS, guideSectionIds } from "../src/lib/guideContent.ts";
 import { pddeModels } from "../src/lib/pddeModels.ts";
@@ -47,6 +47,29 @@ const ensureAnchorsStayAligned = () => {
   for (const item of searchIndex) {
     if (!allowedAnchors.has(item.anchor)) {
       findings.push(`Âncora não reconhecida no índice de busca: ${item.id} -> ${item.anchor}`);
+    }
+  }
+
+  return findings;
+};
+
+const ensureReferenceGovernanceMetadata = () => {
+  const findings: string[] = [];
+  const requiredFields = [
+    "issuingBody",
+    "appliesTo",
+    "whyItMatters",
+    "userWhenToUse",
+    "lastVerifiedText",
+  ] as const;
+
+  for (const resourceId of referenceGovernanceIds) {
+    const resource = externalResources[resourceId];
+
+    for (const field of requiredFields) {
+      if (!resource[field] || String(resource[field]).trim().length === 0) {
+        findings.push(`Metadado obrigatório ausente em ${resource.title}: ${field}`);
+      }
     }
   }
 
@@ -121,6 +144,7 @@ const main = async () => {
   const findings = [
     ...(await ensurePdfAssetsMatch()),
     ...ensureAnchorsStayAligned(),
+    ...ensureReferenceGovernanceMetadata(),
     ...(await ensureExternalLinksRespond()),
   ];
 

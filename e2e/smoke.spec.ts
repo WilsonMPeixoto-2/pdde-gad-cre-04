@@ -143,6 +143,13 @@ test.describe("Fluxo desktop", () => {
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();
     await expect(page.getByRole("heading", { name: /encaminhamento e encerramento da fase escolar/i })).toBeVisible();
 
+    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: "Base oficial e conferência", exact: true }).click();
+    await expect(
+      page.getByRole("heading", { level: 3, name: /fontes oficiais verificadas e contextualizadas/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/verificado em 28 de março de 2026/i).first()).toBeVisible();
+
     await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /continue de onde parou/i })).toBeVisible();
     await page.getByRole("button", { name: /Voltar para o tamanho padrão do texto/i }).click();

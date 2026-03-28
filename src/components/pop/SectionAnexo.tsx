@@ -12,6 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { externalResources, officialReferenceIds } from "@/lib/externalResources";
+import { ReferenceGovernancePanel } from "./ReferenceGovernancePanel";
 import { ProfileCallout } from "./ProfileCallout";
 
 const scopePoints = [
@@ -221,6 +222,8 @@ export const SectionAnexo = () => {
           ))}
         </div>
       </div>
+
+      <ReferenceGovernancePanel />
 
       <div className="section-card p-6 sm:p-8">
         <div className="mb-5 flex items-center gap-3">

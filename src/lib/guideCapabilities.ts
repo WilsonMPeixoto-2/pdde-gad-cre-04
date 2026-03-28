@@ -123,6 +123,12 @@ export const guideCapabilityGroups: GuideCapabilityGroup[] = [
         anchor: "anexo",
       },
       {
+        title: "Mapa de rastreabilidade das fontes oficiais",
+        description: "Mostra órgão emissor, aplicação, razão de uso e última checagem das referências prioritárias do anexo.",
+        userValue: "Aumenta a confiança do usuário sobre a base normativa e operacional usada pelo guia.",
+        anchor: GUIDE_ANCHORS.referenceGovernance,
+      },
+      {
         title: "Auditoria do acervo PDF",
         description: "Confere metadados, hash e sinais de conteúdo dos modelos e referências publicados.",
         userValue: "Reduz risco de arquivo errado, trocado ou desatualizado passar despercebido.",

@@ -17,8 +17,10 @@ dist-ssr
 bun.lockb
 .playwright-cli/
 tmp/
+output/
 output-*.png
 tmp-vite-*.log
+playwright/.cache/
 
 # Editor directories and files
 .vscode/*

@@ -2,8 +2,13 @@ import { useState, useEffect, useCallback } from "react";
 import { CheckCircle2, ChevronRight, AlertTriangle, ArrowUpRight, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { type ProcessFlowStep, processFlowSteps } from "@/lib/guideContent";
+import {
+  PDDE_STORAGE_KEYS,
+  readStorageJson,
+  sanitizeJourneyProgress,
+  writeStorageJson,
+} from "@/lib/pddeOperationalData";
 
-const STORAGE_KEY = "pdde-journey-progress-v1";
 const steps = processFlowSteps;
 
 const toneClasses = {
@@ -32,16 +37,11 @@ const toneClasses = {
 
 export const ProcessJourneyMap = () => {
   const [completed, setCompleted] = useState<Set<string>>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? new Set(JSON.parse(saved)) : new Set<string>();
-    } catch {
-      return new Set<string>();
-    }
+    return new Set(sanitizeJourneyProgress(readStorageJson(PDDE_STORAGE_KEYS.journey, [])));
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
+    writeStorageJson(PDDE_STORAGE_KEYS.journey, [...completed]);
   }, [completed]);
 
   const canComplete = useCallback((step: ProcessFlowStep) => {

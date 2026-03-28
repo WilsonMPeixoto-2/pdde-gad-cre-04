@@ -1,58 +1,28 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check } from "lucide-react";
+import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check, Download } from "lucide-react";
 import confetti from "canvas-confetti";
 import { toast } from "sonner";
 import { externalResources } from "@/lib/externalResources";
-
-interface ChecklistItem {
-  id: number;
-  text: string;
-  checked: boolean;
-  complementar?: boolean;
-}
-
-const initialItems: ChecklistItem[] = [
-  // Bloco A — documentos federais mínimos e peças nucleares da comprovação
-  { id: 1, text: "Rol de materiais, bens e serviços priorizados (planejamento do gasto aprovado pelo Conselho/CEC)", checked: false },
-  { id: 2, text: "Consolidação das pesquisas de preços — 3 orçamentos quando viável, ou justificativa idônea para quantidade inferior / uso documentado de SRP", checked: false },
-  { id: 3, text: "Demonstrativo/registro federal da execução da receita, da despesa e dos pagamentos, conforme a ferramenta exigida pelo FNDE no exercício", checked: false },
-  { id: 4, text: "Extratos bancários da conta do PDDE e das aplicações financeiras (período integral do exercício)", checked: false },
-  { id: 5, text: "Conciliação bancária (obrigatória quando houver divergência entre extrato e demonstrativo, ou saldo em 31/12)", checked: false },
-  { id: 6, text: "Documentos comprobatórios das despesas (NF/DANFE/cupom fiscal/recibos/RPA), com atesto do recebimento/execução e comprovantes de pagamento", checked: false },
-  { id: 7, text: "Atas de aprovação do plano de gastos e da prestação de contas pelo Conselho Escolar/CEC", checked: false },
-  // Bloco B — instrução complementar no SEI!RIO e controle interno
-  { id: 8, text: "Evidência complementar de entrega/execução (declaração, fotos, laudo ou termo específico), quando o objeto exigir comprovação material adicional", checked: false, complementar: true },
-  { id: 9, text: "Relação de bens adquiridos ou produzidos, quando houver despesa de capital ou bem patrimonializável", checked: false, complementar: true },
-  { id: 10, text: "Controle patrimonial — providência de incorporação/registro do bem conforme a rotina da EEx ou do patrimônio escolar", checked: false, complementar: true },
-  { id: 11, text: "Comprovante de devolução/recolhimento de saldo ao FNDE (quando houver restituição)", checked: false, complementar: true },
-  { id: 12, text: "Comprovante do registro federal aplicável ao exercício (por exemplo, BB Gestão Ágil e rotinas correlatas), se exigido pela EEx ou pelo controle interno", checked: false, complementar: true },
-  { id: 13, text: "Termo de doação ou instrumento patrimonial equivalente, quando exigido pela EEx ou pelo controle patrimonial local", checked: false, complementar: true },
-  { id: 14, text: "Declaração de autenticidade ou peça interna equivalente, se ainda exigida no fluxo vigente da CRE/SME para documentos digitalizados", checked: false, complementar: true },
-];
+import {
+  createChecklistItems,
+  hydrateChecklistItems,
+  PDDE_STORAGE_KEYS,
+  readStorageJson,
+  writeStorageJson,
+  type ChecklistItemState,
+} from "@/lib/pddeOperationalData";
 
 type FilterType = 'todos' | 'pendentes' | 'concluidos' | 'essenciais' | 'complementares';
-
-const STORAGE_KEY = "pdde-checklist-state-v4";
 
 export const PDDEChecklist = () => {
   const hasConfettiFired = useRef(false);
   const [filter, setFilter] = useState<FilterType>('todos');
-  const [items, setItems] = useState<ChecklistItem[]>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch {
-          return initialItems;
-        }
-      }
-    }
-    return initialItems;
-  });
+  const [items, setItems] = useState<ChecklistItemState[]>(() =>
+    hydrateChecklistItems(readStorageJson(PDDE_STORAGE_KEYS.checklist, createChecklistItems())),
+  );
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    writeStorageJson(PDDE_STORAGE_KEYS.checklist, items);
   }, [items]);
 
   const toggleItem = (id: number) => {
@@ -92,7 +62,7 @@ export const PDDEChecklist = () => {
   }, [essenciaisCompleted, essenciaisCount]);
 
   const resetChecklist = () => {
-    setItems(initialItems);
+    setItems(createChecklistItems());
     hasConfettiFired.current = false;
   };
 
@@ -151,6 +121,26 @@ export const PDDEChecklist = () => {
     }).catch(() => {
       toast.error("Erro ao copiar resumo");
     });
+  }, [items]);
+
+  const downloadSummary = useCallback(() => {
+    const pending = items.filter((item) => !item.checked);
+    const content = pending.length === 0
+      ? "Checklist PDDE — todos os itens estão marcados como concluídos."
+      : [
+          "Checklist PDDE — itens pendentes",
+          "",
+          ...pending.map((item) => `- ${item.complementar ? "[Complementar]" : `[${item.id}]`} ${item.text}`),
+        ].join("\n");
+
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "PDDE_CHECKLIST_PENDENCIAS.txt";
+    anchor.click();
+    URL.revokeObjectURL(url);
+    toast.success("Resumo baixado em .txt.");
   }, [items]);
 
   const filters: { key: FilterType; label: string }[] = [
@@ -228,14 +218,24 @@ export const PDDEChecklist = () => {
 
       {/* Summary Button */}
       {pendingCount > 0 && (
-        <button
-          onClick={generateSummary}
-          className="mb-5 flex w-full items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-all duration-200 hover:bg-primary/10 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          aria-label={`Copiar resumo dos ${pendingCount} itens pendentes`}
-        >
-          <Copy className="w-4 h-4" aria-hidden="true" />
-          Copiar resumo do que falta ({pendingCount} {pendingCount === 1 ? 'item' : 'itens'})
-        </button>
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row">
+          <button
+            onClick={generateSummary}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-all duration-200 hover:bg-primary/10 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label={`Copiar resumo dos ${pendingCount} itens pendentes`}
+          >
+            <Copy className="w-4 h-4" aria-hidden="true" />
+            Copiar resumo do que falta ({pendingCount} {pendingCount === 1 ? 'item' : 'itens'})
+          </button>
+          <button
+            onClick={downloadSummary}
+            className="flex items-center justify-center gap-2 rounded-xl border border-border/60 bg-card px-4 py-3 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/30 hover:bg-primary/5 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label="Baixar resumo dos itens pendentes"
+          >
+            <Download className="w-4 h-4" aria-hidden="true" />
+            Baixar .txt
+          </button>
+        </div>
       )}
 
       {/* Essenciais */}

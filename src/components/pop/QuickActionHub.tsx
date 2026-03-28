@@ -47,10 +47,17 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
       onClick: () => scrollToId(GUIDE_ANCHORS.models),
     },
     {
+      title: "Diagnóstico para GAD",
+      description: "Abrir o painel que mostra o que ainda falta antes da remessa e exporta um relatório da conferência.",
+      icon: ListChecks,
+      accent: "text-emerald-700 dark:text-emerald-300",
+      onClick: () => scrollToId(GUIDE_ANCHORS.readiness),
+    },
+    {
       title: "Copiar roteiro rápido",
       description: "Levar um resumo prático das 6 etapas para trabalhar fora da tela ou no WhatsApp.",
       icon: ListChecks,
-      accent: "text-emerald-700 dark:text-emerald-300",
+      accent: "text-primary",
       onClick: () => void copyOperationalRoute(),
     },
     {

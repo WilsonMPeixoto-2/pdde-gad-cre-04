@@ -163,6 +163,10 @@ export const PDDEModelCards = () => {
                             <span className="data-code text-[10px] text-muted-foreground">
                               {asset.sizeLabel}
                             </span>
+                            <span className="text-muted-foreground/30">·</span>
+                            <span className="data-code text-[10px] text-muted-foreground">
+                              {asset.pageLabel}
+                            </span>
                           </div>
 
                           <div className="mt-3 rounded-2xl border border-border/60 bg-secondary/45 px-3 py-2.5">
@@ -215,7 +219,7 @@ export const PDDEModelCards = () => {
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent side="left">
-                            <p>Abrir {doc.fileName} ({asset.sizeLabel})</p>
+                            <p>Abrir {doc.fileName} ({asset.sizeLabel} · {asset.pageLabel})</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>

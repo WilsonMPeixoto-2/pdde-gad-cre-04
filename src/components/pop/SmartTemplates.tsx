@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { FileText, Copy, Check, RotateCcw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -8,6 +8,15 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  emptyProcessWorkspaceProfile,
+  PDDE_STORAGE_EVENT,
+  PDDE_STORAGE_KEYS,
+  readStorageJson,
+  sanitizeWorkspaceProfile,
+  writeStorageJson,
+  type ProcessWorkspaceProfile,
+} from "@/lib/pddeOperationalData";
 
 interface TemplateField {
   key: string;
@@ -23,8 +32,6 @@ interface Template {
   fields: TemplateField[];
   generate: (values: Record<string, string>) => string;
 }
-
-const STORAGE_KEY = "pdde-smart-templates-v1";
 
 const templates: Template[] = [
   {
@@ -84,10 +91,30 @@ const templates: Template[] = [
 
 const loadSavedValues = (): Record<string, Record<string, string>> => {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : {};
+    return readStorageJson(PDDE_STORAGE_KEYS.templates, {});
   } catch {
     return {};
+  }
+};
+
+const getWorkspaceTemplateDefaults = (templateId: string, workspace: ProcessWorkspaceProfile) => {
+  switch (templateId) {
+    case "oficio":
+      return {
+        escola: workspace.schoolName,
+        cnpj: workspace.uexCnpj,
+        exercicio: workspace.exercise,
+        diretor: workspace.responsibleName,
+      };
+    case "despacho":
+      return {
+        processo: workspace.seiProcessNumber,
+        escola: workspace.schoolName,
+        exercicio: workspace.exercise,
+        servidor: workspace.responsibleName,
+      };
+    default:
+      return {};
   }
 };
 
@@ -97,6 +124,37 @@ export const SmartTemplates = () => {
   const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [workspace, setWorkspace] = useState<ProcessWorkspaceProfile>(() =>
+    sanitizeWorkspaceProfile(readStorageJson(PDDE_STORAGE_KEYS.workspace, emptyProcessWorkspaceProfile())),
+  );
+
+  useEffect(() => {
+    const syncWorkspace = () =>
+      setWorkspace(sanitizeWorkspaceProfile(readStorageJson(PDDE_STORAGE_KEYS.workspace, emptyProcessWorkspaceProfile())));
+
+    const handleCustomSync = (event: Event) => {
+      const detail = (event as CustomEvent<{ key?: string }>).detail;
+      if (detail?.key === PDDE_STORAGE_KEYS.workspace) {
+        syncWorkspace();
+      }
+    };
+
+    window.addEventListener(PDDE_STORAGE_EVENT, handleCustomSync as EventListener);
+    window.addEventListener("storage", syncWorkspace);
+
+    return () => {
+      window.removeEventListener(PDDE_STORAGE_EVENT, handleCustomSync as EventListener);
+      window.removeEventListener("storage", syncWorkspace);
+    };
+  }, []);
+
+  const resolveTemplateValues = useCallback(
+    (templateId: string) => ({
+      ...getWorkspaceTemplateDefaults(templateId, workspace),
+      ...(values[templateId] || {}),
+    }),
+    [values, workspace],
+  );
 
   const updateField = useCallback((templateId: string, key: string, value: string) => {
     setValues(prev => {
@@ -104,7 +162,7 @@ export const SmartTemplates = () => {
         ...prev,
         [templateId]: { ...prev[templateId], [key]: value },
       };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      writeStorageJson(PDDE_STORAGE_KEYS.templates, next);
       return next;
     });
   }, []);
@@ -113,20 +171,20 @@ export const SmartTemplates = () => {
     setValues(prev => {
       const next = { ...prev };
       delete next[templateId];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      writeStorageJson(PDDE_STORAGE_KEYS.templates, next);
       return next;
     });
     toast.success("Campos limpos");
   }, []);
 
   const copyText = useCallback((template: Template) => {
-    const text = template.generate(values[template.id] || {});
+    const text = template.generate(resolveTemplateValues(template.id));
     navigator.clipboard.writeText(text).then(() => {
       setCopiedId(template.id);
       toast.success("Texto copiado para a área de transferência!");
       setTimeout(() => setCopiedId(null), 2000);
     });
-  }, [values]);
+  }, [resolveTemplateValues]);
 
   return (
     <div className="section-card border-l-4 border-l-accent smart-templates">
@@ -146,6 +204,7 @@ export const SmartTemplates = () => {
         {templates.map(template => {
           const isActive = activeTemplate === template.id;
           const templateValues = values[template.id] || {};
+          const effectiveValues = resolveTemplateValues(template.id);
           const isPreviewing = showPreview === template.id;
 
           return (
@@ -182,12 +241,18 @@ export const SmartTemplates = () => {
                           type={field.type || "text"}
                           value={templateValues[field.key] || ""}
                           onChange={e => updateField(template.id, field.key, e.target.value)}
-                          placeholder={field.placeholder}
+                          placeholder={(effectiveValues[field.key] as string) || field.placeholder}
                           className="w-full px-3 py-2 text-sm rounded-lg border border-border/60 bg-background focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all outline-hidden placeholder:text-muted-foreground/50"
                         />
                       </div>
                     ))}
                   </div>
+
+                  {Object.values(getWorkspaceTemplateDefaults(template.id, workspace)).some(Boolean) && (
+                    <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
+                      Campos vazios usam automaticamente os dados salvos no <strong className="text-foreground">Painel do processo</strong>.
+                    </p>
+                  )}
 
                   {/* Actions */}
                   <div className="flex flex-wrap items-center gap-2">
@@ -236,7 +301,7 @@ export const SmartTemplates = () => {
                   {isPreviewing && (
                     <div className="mt-4 p-4 rounded-lg bg-muted/50 border border-border/40 animate-fade-in">
                       <pre className="text-xs text-foreground whitespace-pre-wrap font-mono leading-relaxed">
-                        {template.generate(templateValues)}
+                        {template.generate(effectiveValues)}
                       </pre>
                     </div>
                   )}

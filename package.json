@@ -10,10 +10,14 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test:e2e": "npm run build && playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "typecheck": "tsc --noEmit",
     "sync:pdf-manifest": "tsx scripts/sync-pdf-manifest.ts",
     "check:content": "tsx scripts/audit-content.ts",
-    "check:all": "npm run lint && npm run typecheck && npm run build && npm run check:content"
+    "check:pdfs": "tsx scripts/audit-pdfs.ts",
+    "check:all": "npm run lint && npm run typecheck && npm run build && npm run check:content",
+    "check:ci": "npm run check:all && npm run check:pdfs && npm run test:e2e"
   },
   "dependencies": {
     "@fontsource/plus-jakarta-sans": "^5.2.8",
@@ -37,6 +41,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
@@ -46,6 +51,7 @@
     "eslint-plugin-react-hooks": "^7.1.0-canary-3cb2c420-20260324",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "pdfjs-dist": "^5.5.207",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",

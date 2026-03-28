@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -8,11 +8,18 @@ import { useServiceWorkerLifecycle } from "@/hooks/useServiceWorkerLifecycle";
 import Index from "./pages/Index";
 
 // Lazy-load non-critical components to reduce initial JS bundle
-const CommandPalette = lazy(() => import("@/components/pop/CommandPalette").then(m => ({ default: m.CommandPalette })));
+const loadCommandPalette = () =>
+  import("@/components/pop/CommandPalette").then((m) => ({ default: m.CommandPalette }));
+
+const CommandPalette = lazy(loadCommandPalette);
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => {
   useServiceWorkerLifecycle();
+
+  useEffect(() => {
+    void loadCommandPalette();
+  }, []);
 
   return (
     <ErrorBoundary>

@@ -59,6 +59,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.checklist,
   },
   {
+    id: "diagnostico-gad",
+    title: "Diagnóstico para Remessa à GAD",
+    content: "Painel que cruza checklist, jornada e dados do processo para apontar se a pasta já está pronta para tramitação.",
+    keywords: ["gad", "diagnóstico", "prontidão", "remessa", "pendências", "relatório", "o que falta"],
+    section: sectionTitle("secao-2"),
+    anchor: GUIDE_ANCHORS.readiness,
+  },
+  {
     id: "modelos",
     title: "Modelos e Referências de Documentos",
     content: "PDFs de apoio visual para ofício, pesquisa de preços, demonstrativo e peças complementares, sem substituir o núcleo mínimo federal.",

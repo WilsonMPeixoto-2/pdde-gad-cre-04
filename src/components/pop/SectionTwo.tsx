@@ -4,6 +4,8 @@ import { PDDEModelCards } from "./PDDEModelCards";
 import { ProfileCallout } from "./ProfileCallout";
 import { SmartTemplates } from "./SmartTemplates";
 import { ProcessJourneyMap } from "./ProcessJourneyMap";
+import { ProcessWorkspacePanel } from "./ProcessWorkspacePanel";
+import { SubmissionReadinessPanel } from "./SubmissionReadinessPanel";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 
 export const SectionTwo = () => {
@@ -35,6 +37,7 @@ export const SectionTwo = () => {
       listClassName: "border-sky-200/60 bg-sky-50/80 dark:border-sky-800/40 dark:bg-sky-950/40",
       items: [
         "Use a Lista de Verificação Interativa para acompanhar o que já foi encartado.",
+        "Preencha o Painel do processo para reaproveitar dados nos relatórios, diagnósticos e modelos rápidos.",
         "Consulte os modelos, exemplos preenchidos e referências documentais sem confundir peça editável com arquivo meramente ilustrativo.",
         "Acompanhe o percentual de completude calculado automaticamente.",
       ],
@@ -141,7 +144,7 @@ export const SectionTwo = () => {
                   <ul className="space-y-2 text-sm text-foreground/80 sm:text-base">
                     {card.items.map((item, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <span className="font-bold text-sky-600 dark:text-sky-400">{index + 1 <= 3 && card.title === "Providências Imediatas" ? `${index + 1}.` : "•"}</span>
+                        <span className="font-bold text-sky-600 dark:text-sky-400">{card.title === "Providências Imediatas" ? `${index + 1}.` : "•"}</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -161,9 +164,17 @@ export const SectionTwo = () => {
         Verifique se a pesquisa de preços está comprovada com 3 orçamentos, justificativa idônea para número inferior ou SRP documentado, e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
       </ProfileCallout>
 
+      <div className="mb-8">
+        <ProcessWorkspacePanel />
+      </div>
+
       {/* Checklist de Documentos PDDE */}
       <div id={GUIDE_ANCHORS.checklist} className="mb-8 scroll-mt-28">
         <PDDEChecklist />
+      </div>
+
+      <div id={GUIDE_ANCHORS.readiness} className="mb-8 scroll-mt-28">
+        <SubmissionReadinessPanel />
       </div>
 
       <div className="mb-8 section-card border-l-4 border-l-accent bg-linear-to-br from-accent/5 via-background to-secondary/40 shadow-xs">

@@ -1,22 +1,9 @@
-import { readdir, stat, writeFile } from "node:fs/promises";
+import { readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { analyzePdfFile } from "./lib/pdfAnalysis.ts";
 
 const modelsDir = path.resolve("public/models");
 const outputFile = path.resolve("src/generated/pdfManifest.ts");
-
-const formatBytes = (bytes: number) => {
-  if (bytes < 1024) return `${bytes} B`;
-  const units = ["KB", "MB", "GB"];
-  let value = bytes / 1024;
-  let unitIndex = 0;
-
-  while (value >= 1024 && unitIndex < units.length - 1) {
-    value /= 1024;
-    unitIndex += 1;
-  }
-
-  return `${value.toFixed(1)} ${units[unitIndex]}`;
-};
 
 const main = async () => {
   const entries = (await readdir(modelsDir))
@@ -26,9 +13,9 @@ const main = async () => {
   const manifestEntries = await Promise.all(
     entries.map(async (fileName) => {
       const filePath = path.join(modelsDir, fileName);
-      const fileStat = await stat(filePath);
+      const analysis = await analyzePdfFile(filePath);
 
-      return `  ${JSON.stringify(fileName)}: {\n    bytes: ${fileStat.size},\n    href: ${JSON.stringify(`/models/${fileName}`)},\n    sizeLabel: ${JSON.stringify(formatBytes(fileStat.size))},\n  },`;
+      return `  ${JSON.stringify(fileName)}: {\n    bytes: ${analysis.bytes},\n    href: ${JSON.stringify(`/models/${fileName}`)},\n    pageCount: ${analysis.pageCount},\n    pageLabel: ${JSON.stringify(analysis.pageLabel)},\n    sha256: ${JSON.stringify(analysis.sha256)},\n    sizeLabel: ${JSON.stringify(analysis.sizeLabel)},\n  },`;
     }),
   );
 

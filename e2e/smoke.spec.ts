@@ -75,6 +75,11 @@ test.describe("Fluxo desktop", () => {
     await expect(page.locator("#resumo-compartilhavel-pdde")).toBeInViewport();
     await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
 
+    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: /Notas do caso/i }).click();
+    await expect(page.locator("#notas-operacionais-pdde")).toBeInViewport();
+    await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
+
     await page.getByRole("button", { name: /Checklist mínimo/i }).click();
     await expect(page.locator("#checklist-documentos")).toBeInViewport();
 
@@ -126,6 +131,9 @@ test.describe("Fluxo mobile", () => {
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: /Resumo da conferência/i }).click();
     await expect(page.locator("#resumo-compartilhavel-pdde")).toBeInViewport();
+    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: /Notas do caso/i }).click();
+    await expect(page.locator("#notas-operacionais-pdde")).toBeInViewport();
     await page.getByRole("button", { name: /Modelos e exemplos/i }).click();
     await expect(page.locator("#modelos-documentos")).toBeInViewport();
 

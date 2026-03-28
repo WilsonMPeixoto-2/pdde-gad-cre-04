@@ -33,10 +33,20 @@ export interface WorkspaceFieldValidation {
   hint: string;
 }
 
+export interface OperationalCaseNotes {
+  pendingIssue: string;
+  lastAction: string;
+  nextCheckpoint: string;
+  handoffOwner: string;
+  observations: string;
+  updatedAt: string | null;
+}
+
 export interface OperationalSnapshot {
   checklist: ChecklistItemState[];
   journey: string[];
   workspace: ProcessWorkspaceProfile;
+  notes: OperationalCaseNotes;
 }
 
 export interface OperationalBackupFile {
@@ -98,6 +108,7 @@ export const PDDE_STORAGE_KEYS = {
   checklist: "pdde-checklist-state-v5",
   journey: "pdde-journey-progress-v1",
   workspace: "pdde-process-workspace-v1",
+  notes: "pdde-case-notes-v1",
   templates: "pdde-smart-templates-v1",
 } as const;
 
@@ -216,6 +227,23 @@ export const emptyOperationalSnapshot = (): OperationalSnapshot => ({
   checklist: createChecklistItems(),
   journey: [],
   workspace: emptyProcessWorkspaceProfile(),
+  notes: {
+    pendingIssue: "",
+    lastAction: "",
+    nextCheckpoint: "",
+    handoffOwner: "",
+    observations: "",
+    updatedAt: null,
+  },
+});
+
+export const emptyOperationalCaseNotes = (): OperationalCaseNotes => ({
+  pendingIssue: "",
+  lastAction: "",
+  nextCheckpoint: "",
+  handoffOwner: "",
+  observations: "",
+  updatedAt: null,
 });
 
 const collapseInternalWhitespace = (value: string) => value.replace(/\s+/g, " ").trimStart();
@@ -554,6 +582,28 @@ export const sanitizeWorkspaceProfile = (saved: unknown): ProcessWorkspaceProfil
   };
 };
 
+export const sanitizeOperationalCaseNotes = (saved: unknown): OperationalCaseNotes => {
+  const fallback = emptyOperationalCaseNotes();
+
+  if (!saved || typeof saved !== "object") return fallback;
+
+  const value = saved as Partial<OperationalCaseNotes>;
+
+  return {
+    pendingIssue:
+      typeof value.pendingIssue === "string" ? collapseInternalWhitespace(value.pendingIssue) : fallback.pendingIssue,
+    lastAction:
+      typeof value.lastAction === "string" ? collapseInternalWhitespace(value.lastAction) : fallback.lastAction,
+    nextCheckpoint:
+      typeof value.nextCheckpoint === "string" ? collapseInternalWhitespace(value.nextCheckpoint) : fallback.nextCheckpoint,
+    handoffOwner:
+      typeof value.handoffOwner === "string" ? collapseInternalWhitespace(value.handoffOwner) : fallback.handoffOwner,
+    observations:
+      typeof value.observations === "string" ? collapseInternalWhitespace(value.observations) : fallback.observations,
+    updatedAt: typeof value.updatedAt === "string" ? value.updatedAt : fallback.updatedAt,
+  };
+};
+
 export const sanitizeOperationalSnapshot = (saved: unknown): OperationalSnapshot => {
   if (!saved || typeof saved !== "object") return emptyOperationalSnapshot();
 
@@ -563,6 +613,7 @@ export const sanitizeOperationalSnapshot = (saved: unknown): OperationalSnapshot
     checklist: hydrateChecklistItems(value.checklist),
     journey: sanitizeJourneyProgress(value.journey),
     workspace: sanitizeWorkspaceProfile(value.workspace),
+    notes: sanitizeOperationalCaseNotes(value.notes),
   };
 };
 
@@ -571,6 +622,9 @@ export const getOperationalSnapshot = (): OperationalSnapshot => ({
   journey: sanitizeJourneyProgress(readStorageJson(PDDE_STORAGE_KEYS.journey, [])),
   workspace: sanitizeWorkspaceProfile(
     readStorageJson(PDDE_STORAGE_KEYS.workspace, emptyProcessWorkspaceProfile()),
+  ),
+  notes: sanitizeOperationalCaseNotes(
+    readStorageJson(PDDE_STORAGE_KEYS.notes, emptyOperationalCaseNotes()),
   ),
 });
 
@@ -616,6 +670,7 @@ export const applyOperationalSnapshot = (snapshot: OperationalSnapshot) => {
   writeStorageJson(PDDE_STORAGE_KEYS.checklist, sanitizedSnapshot.checklist);
   writeStorageJson(PDDE_STORAGE_KEYS.journey, sanitizedSnapshot.journey);
   writeStorageJson(PDDE_STORAGE_KEYS.workspace, sanitizedSnapshot.workspace);
+  writeStorageJson(PDDE_STORAGE_KEYS.notes, sanitizedSnapshot.notes);
 };
 
 export const getOperationalBackupFileName = (snapshot: OperationalSnapshot) => {
@@ -750,7 +805,7 @@ export const buildOperationalDiagnosticText = (
     `- Responsável pela conferência: ${snapshot.workspace.responsibleName || "Não informado"}`,
     `- Última atualização do painel: ${formatOperationalTimestamp(snapshot.workspace.updatedAt)}`,
     "",
-    "Indicadores",
+  "Indicadores",
     `- Checklist essencial: ${report.essentialItems.length - report.essentialPending.length}/${report.essentialItems.length} (${report.essentialProgress}%)`,
     `- Checklist complementar: ${report.complementaryItems.length - report.complementaryPending.length}/${report.complementaryItems.length}`,
     `- Jornada pré-remessa: ${preRemittanceSteps.length - report.pendingJourney.length}/${preRemittanceSteps.length} (${report.journeyProgress}%)`,
@@ -760,6 +815,25 @@ export const buildOperationalDiagnosticText = (
     `- ${report.nextAction.title}: ${report.nextAction.description}`,
     "",
   ];
+
+  const notes = snapshot.notes;
+  const hasNotes = [
+    notes.pendingIssue,
+    notes.lastAction,
+    notes.nextCheckpoint,
+    notes.handoffOwner,
+    notes.observations,
+  ].some((value) => value.trim().length > 0);
+
+  if (hasNotes) {
+    lines.push("Notas operacionais do caso");
+    if (notes.pendingIssue.trim()) lines.push(`- Pendência focal: ${notes.pendingIssue}`);
+    if (notes.lastAction.trim()) lines.push(`- Último andamento: ${notes.lastAction}`);
+    if (notes.nextCheckpoint.trim()) lines.push(`- Próxima checagem: ${notes.nextCheckpoint}`);
+    if (notes.handoffOwner.trim()) lines.push(`- Responsável / handoff: ${notes.handoffOwner}`);
+    if (notes.observations.trim()) lines.push(`- Observações: ${notes.observations}`);
+    lines.push("");
+  }
 
   if (report.essentialPending.length > 0) {
     lines.push("Pendências essenciais");
@@ -814,6 +888,9 @@ export const buildOperationalShareSummary = (
     `Próxima ação: ${report.nextAction.title}`,
     `Pendências essenciais: ${report.essentialPending.length}`,
     `Etapas pendentes: ${pendingJourneyLabel}`,
+    `Pendência focal: ${snapshot.notes.pendingIssue.trim() || "Sem observação registrada"}`,
+    `Último andamento: ${snapshot.notes.lastAction.trim() || "Não registrado"}`,
+    `Responsável / handoff: ${snapshot.notes.handoffOwner.trim() || "Não informado"}`,
     `Destino: ${GAD_UNIT.fullLabel}`,
   ].join("\n");
 };

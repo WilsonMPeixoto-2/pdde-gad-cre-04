@@ -75,6 +75,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.sharePack,
   },
   {
+    id: "notas-operacionais",
+    title: "Notas Operacionais do Caso",
+    content: "Bloco para registrar pendência focal, último andamento, responsável e próxima checagem do processo.",
+    keywords: ["notas", "diligência", "pendência focal", "responsável", "handoff", "observações internas"],
+    section: sectionTitle("secao-2"),
+    anchor: GUIDE_ANCHORS.caseNotes,
+  },
+  {
     id: "checklist",
     title: "Checklist de Documentos",
     content: "Lista mínima e complementar para instrução processual da prestação de contas.",
@@ -213,6 +221,7 @@ export function getQuickSuggestions(): SearchItem[] {
     "tipo-processo",
     "central-operacional",
     "resumo-compartilhavel",
+    "notas-operacionais",
     "nomenclatura-documental",
     "checklist",
     "bloco-assinatura",

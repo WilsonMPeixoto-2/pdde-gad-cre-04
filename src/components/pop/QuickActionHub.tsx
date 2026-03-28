@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, MessageSquareShare, Printer, Scale } from "lucide-react";
+import { BriefcaseBusiness, ClipboardList, FileText, Files, ListChecks, MessageSquareShare, NotebookPen, Printer, Scale } from "lucide-react";
 import { toast } from "sonner";
 import { GUIDE_ANCHORS, processFlowSteps } from "@/lib/guideContent";
 
@@ -59,6 +59,13 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
       icon: MessageSquareShare,
       accent: "text-emerald-700 dark:text-emerald-300",
       onClick: () => scrollToId(GUIDE_ANCHORS.sharePack),
+    },
+    {
+      title: "Notas do caso",
+      description: "Registrar diligências, responsável, próxima checagem e contexto que não pode se perder.",
+      icon: NotebookPen,
+      accent: "text-amber-700 dark:text-amber-300",
+      onClick: () => scrollToId(GUIDE_ANCHORS.caseNotes),
     },
     {
       title: "Modelos e exemplos",

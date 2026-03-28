@@ -10,6 +10,7 @@ const watchedKeys = new Set([
   PDDE_STORAGE_KEYS.checklist,
   PDDE_STORAGE_KEYS.journey,
   PDDE_STORAGE_KEYS.workspace,
+  PDDE_STORAGE_KEYS.notes,
 ]);
 
 export const useOperationalSnapshot = (): OperationalSnapshot => {

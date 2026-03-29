@@ -1,4 +1,3 @@
-import { readFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
 
 test.use({ serviceWorkers: "block" });
@@ -60,14 +59,13 @@ test.describe("Fluxo desktop", () => {
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
 
-    await page.keyboard.press("Tab");
-    const skipLink = page.getByRole("link", { name: /ir para o conteúdo principal/i });
-    await expect(skipLink).toBeFocused();
-    await page.keyboard.press("Enter");
-    await expect.poll(async () => page.evaluate(() => document.activeElement?.id)).toBe("main-content");
-
     await expect(page.getByRole("heading", { level: 1, name: /prestação de contas/i })).toBeVisible();
     await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page.getByRole("heading", { level: 2, name: /prezados\(as\) diretores\(as\)/i })).toBeVisible();
+    await expect(page.getByText(/a rotina de uma gestão escolar é intensa/i)).toBeVisible();
+    await expect(page.getByText(/importante — o que este pop cobre/i)).toBeVisible();
+    await expect(page.getByText(/painel do processo/i)).toHaveCount(0);
+    await expect(page.getByText(/resumo compartilhável/i)).toHaveCount(0);
 
     const searchButton = page.getByRole("button", { name: /abrir busca global/i });
     await expect(searchButton).toBeVisible();
@@ -98,53 +96,13 @@ test.describe("Fluxo desktop", () => {
     expect(headerAccessibilityPrefs.motion).toBe("reduced");
     expect(headerAccessibilityPrefs.reducedMotionClass).toBe(true);
 
-    await searchAndOpen(page, "central operacional", /central operacional e backup/i);
-    await expect(page.getByRole("heading", { level: 2, name: /retome o trabalho com a próxima ação certa/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
-
-    await searchAndOpen(page, "kit de nomes", /kit de nomes para arquivos/i);
-    await expect(page.getByRole("heading", { level: 2, name: /kit de nomes para arquivo e árvore do processo/i })).toBeVisible();
-
-    await searchAndOpen(page, "resumo compartilhável", /resumo compartilhável da conferência/i);
-    await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
-
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
-
-    await searchAndOpen(page, "diagnóstico", /diagnóstico para remessa à gad/i);
-    await expect(page.getByRole("heading", { level: 2, name: /diagnóstico de prontidão para a gad/i })).toBeVisible();
-
-    await searchAndOpen(page, "notas operacionais", /notas operacionais do caso/i);
-    await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto do processo/i })).toBeVisible();
-
-    await expect(page.getByRole("button", { name: /Copiar briefing executivo/i })).toBeVisible();
-
-    const [reportPopup] = await Promise.all([
-      page.waitForEvent("popup"),
-      page.getByRole("button", { name: /Abrir relatório para impressão/i }).click(),
-    ]);
-    await reportPopup.waitForLoadState();
-    await expect(
-      reportPopup.getByRole("heading", { level: 1, name: /relatório operacional para conferência e remessa/i }),
-    ).toBeVisible();
-    await expect(reportPopup.getByText("Próxima ação recomendada", { exact: true })).toBeVisible();
-    await reportPopup.close();
-
-    const [premiumReportDownload] = await Promise.all([
-      page.waitForEvent("download"),
-      page.getByRole("button", { name: /Baixar relatório \.html/i }).click(),
-    ]);
-    expect(await premiumReportDownload.suggestedFilename()).toMatch(/^PDDE_RELATORIO_OPERACIONAL_.*\.html$/);
-    const premiumReportPath = await premiumReportDownload.path();
-    expect(premiumReportPath).not.toBeNull();
-    const premiumReportContent = await readFile(premiumReportPath!, "utf8");
-    expect(premiumReportContent).toContain("Assinatura do projeto: Wilson M. Peixoto");
-    expect(premiumReportContent).toContain("Identidade visual e artefatos digitais originais do projeto preservados.");
-
-    await expect.poll(() => page.evaluate(() => window.localStorage.getItem("pdde-last-section-v1"))).toBe("secao-2");
+    await expect(page.getByText(/regras operacionais \(evite glosa\)/i)).toBeVisible();
+    await expect(page.getByText(/roteiro de instrução para as próximas etapas deste guia/i)).toBeVisible();
 
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();
-    await expect(page.getByRole("heading", { name: /despacho e finalização/i })).toBeVisible();
+    await expect(page.locator("h2").filter({ hasText: /despacho e finalização/i }).first()).toBeVisible();
 
     await page.getByRole("button", { name: /ir para seção a: anexo/i }).click();
     await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
@@ -202,24 +160,10 @@ test.describe("Fluxo mobile", () => {
     await expect(page.getByRole("button", { name: /fechar menu de navegação/i })).toBeVisible();
     await page.getByRole("button", { name: /fechar menu de navegação/i }).click();
     await expect(page.getByRole("button", { name: /fechar menu de navegação/i })).toBeHidden();
+    await expect(page.getByRole("heading", { level: 2, name: /prezados\(as\) diretores\(as\)/i })).toBeVisible();
 
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
-
-    await searchAndOpen(page, "central operacional", /central operacional e backup/i);
-    await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
-
-    await searchAndOpen(page, "kit de nomes", /kit de nomes para arquivos/i);
-    await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
-
-    await searchAndOpen(page, "resumo compartilhável", /resumo compartilhável da conferência/i);
-    await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
-
-    await searchAndOpen(page, "notas operacionais", /notas operacionais do caso/i);
-    await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
-
-    await searchAndOpen(page, "diagnóstico", /diagnóstico para remessa à gad/i);
-    await expect(page.getByRole("heading", { level: 2, name: /diagnóstico de prontidão para a gad/i })).toBeVisible();
 
     await page.getByRole("button", { name: /mais ações/i }).click();
     await page.getByRole("menuitem", { name: /ativar texto maior/i }).click();
@@ -245,8 +189,10 @@ test.describe("Fluxo mobile", () => {
         focusableInIllustrations,
         readingScale: document.documentElement.dataset.readingScale,
         reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
-        hasReadingPanelEntry:
-          document.body.textContent?.includes("Continue de onde parou e ajuste a leitura ao seu ritmo") ?? false,
+        hasProcessPanel:
+          document.body.textContent?.includes("Painel do processo") ?? false,
+        hasSharePack:
+          document.body.textContent?.includes("Resumo compartilhável") ?? false,
       };
     });
 
@@ -255,7 +201,8 @@ test.describe("Fluxo mobile", () => {
     expect(diagnostics.focusableInIllustrations).toBe(0);
     expect(diagnostics.readingScale).toBe("large");
     expect(diagnostics.reducedMotionClass).toBe(true);
-    expect(diagnostics.hasReadingPanelEntry).toBe(false);
+    expect(diagnostics.hasProcessPanel).toBe(false);
+    expect(diagnostics.hasSharePack).toBe(false);
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });

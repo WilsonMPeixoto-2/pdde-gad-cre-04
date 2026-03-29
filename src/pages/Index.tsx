@@ -1,24 +1,19 @@
-import { type MouseEvent, useState, useEffect, useCallback, lazy, Suspense } from "react";
+import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
+import { SectionOne } from "@/components/pop/SectionOne";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
-import { DeferredGuideSection } from "@/components/pop/DeferredGuideSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
-import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { guideSectionIds, guideSectionsById } from "@/lib/guideContent";
-import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 // Lazy load non-critical interactive widgets
 const BackToTop = lazy(() => import("@/components/pop/BackToTop").then(m => ({ default: m.BackToTop })));
 const GuidedWizard = lazy(() => import("@/components/pop/GuidedWizard").then(m => ({ default: m.GuidedWizard })));
-const loadSectionOne = () => import("@/components/pop/SectionOne").then(m => ({ default: m.SectionOne }));
-
-const SectionOne = lazy(loadSectionOne);
 
 // Lazy load below-the-fold sections for better initial load performance
 const SectionTwo = lazy(() => import("@/components/pop/SectionTwo").then(m => ({ default: m.SectionTwo })));
@@ -39,10 +34,10 @@ const SectionLoader = () => (
   </div>
 );
 
+
 const Index = () => {
   const [activeSection, setActiveSection] = useState("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { saveLastSection } = useReadingExperience();
 
   const renderSectionDivider = (sectionId: string) => {
     const section = guideSectionsById[sectionId];
@@ -57,13 +52,17 @@ const Index = () => {
   };
 
   const handleSectionClick = useCallback((sectionId: string) => {
-    const didScroll = scrollToGuideAnchor(sectionId, {
-      focusHeading: true,
-      focusDelayMs: 600,
-    });
-
-    if (didScroll) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
       setActiveSection(sectionId);
+      // A11y: Transfer focus to the section heading after scroll
+      const heading = element.querySelector('h2, h3, [role="heading"]') as HTMLElement;
+      if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        // Delay focus until scroll animation settles
+        setTimeout(() => heading.focus({ preventScroll: true }), 600);
+      }
     }
   }, []);
 
@@ -85,15 +84,6 @@ const Index = () => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => window.print());
     });
-  }, []);
-
-  const handleSkipToMain = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    const main = document.getElementById("main-content");
-    if (!main) return;
-
-    main.scrollIntoView({ behavior: "smooth", block: "start" });
-    main.focus({ preventScroll: true });
   }, []);
 
   // IntersectionObserver replaces scroll listener — no reflows, passive detection
@@ -144,30 +134,8 @@ const Index = () => {
     };
   }, [sidebarOpen]);
 
-  useEffect(() => {
-    saveLastSection(activeSection);
-  }, [activeSection, saveLastSection]);
-
-  useEffect(() => {
-    const preloadDeferredPanels = () => {
-      void loadSectionOne();
-    };
-
-    if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(preloadDeferredPanels, { timeout: 3000 });
-      return () => window.cancelIdleCallback(idleId);
-    }
-
-    const timeoutId = window.setTimeout(preloadDeferredPanels, 1800);
-    return () => window.clearTimeout(timeoutId);
-  }, []);
-
   return (
     <div className="min-h-screen bg-background overflow-x-clip">
-      <a href="#main-content" onClick={handleSkipToMain} className="skip-link no-print">
-        Ir para o conteúdo principal
-      </a>
-
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
 
@@ -185,8 +153,8 @@ const Index = () => {
           onClose={() => setSidebarOpen(false)}
         />
 
-        <main id="main-content" tabIndex={-1} className="min-w-0 flex-1 lg:ml-0">
-          <div className="mx-auto w-full max-w-312 px-4 py-8 sm:px-6 sm:py-10 xl:px-10">
+        <main className="min-w-0 flex-1 lg:ml-0">
+          <div className="mx-auto w-full max-w-[78rem] px-4 py-8 sm:px-6 sm:py-10 xl:px-10">
             <div className="space-y-10">
               <AnimatedSection>
                 <SectionIntro />
@@ -200,72 +168,70 @@ const Index = () => {
                 {renderSectionDivider("secao-1")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="secao-1" fallback={<SectionLoader />}>
-                  <SectionOne renderId={false} />
-                </DeferredGuideSection>
+                <SectionOne />
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-2")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="secao-2" fallback={<SectionLoader />}>
+                <Suspense fallback={<SectionLoader />}>
                   <SectionTwo />
-                </DeferredGuideSection>
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-3")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="secao-3" fallback={<SectionLoader />}>
+                <Suspense fallback={<SectionLoader />}>
                   <SectionThree />
-                </DeferredGuideSection>
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-4")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="secao-4" fallback={<SectionLoader />}>
+                <Suspense fallback={<SectionLoader />}>
                   <SectionFour />
-                </DeferredGuideSection>
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-5")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="secao-5" fallback={<SectionLoader />}>
+                <Suspense fallback={<SectionLoader />}>
                   <SectionFive />
-                </DeferredGuideSection>
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-6")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="secao-6" fallback={<SectionLoader />}>
+                <Suspense fallback={<SectionLoader />}>
                   <SectionSix />
-                </DeferredGuideSection>
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("contatos")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="contatos" fallback={<SectionLoader />}>
+                <Suspense fallback={<SectionLoader />}>
                   <SectionContacts onPrint={handlePrint} />
-                </DeferredGuideSection>
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("anexo")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <DeferredGuideSection anchorId="anexo" fallback={<SectionLoader />}>
+                <Suspense fallback={<SectionLoader />}>
                   <SectionAnexo />
-                </DeferredGuideSection>
+                </Suspense>
               </AnimatedSection>
 
               {/* Document Footer */}
@@ -275,7 +241,6 @@ const Index = () => {
             <div className="print-only mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
               <p>Procedimento Operacional Padrão - Prestação de Contas PDDE</p>
               <p>4ª Coordenadoria Regional de Educação | GAD</p>
-              <p>Projeto digital e identidade visual: Wilson M. Peixoto</p>
             </div>
           </div>
         </main>

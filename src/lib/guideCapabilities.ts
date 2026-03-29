@@ -135,6 +135,12 @@ export const guideCapabilityGroups: GuideCapabilityGroup[] = [
         anchor: GUIDE_ANCHORS.referenceGovernance,
       },
       {
+        title: "Governança anual por exercício",
+        description: "Explica o que precisa ser revalidado quando o exercício muda, quando surge novo comunicado do FNDE ou quando o rito local é alterado.",
+        userValue: "Ajuda o usuário a distinguir regra permanente de orientação sensível ao ano ou ao contexto.",
+        anchor: GUIDE_ANCHORS.annualGovernance,
+      },
+      {
         title: "Auditoria do acervo PDF",
         description: "Confere metadados, hash e sinais de conteúdo dos modelos e referências publicados.",
         userValue: "Reduz risco de arquivo errado, trocado ou desatualizado passar despercebido.",

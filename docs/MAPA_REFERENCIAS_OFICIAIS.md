@@ -1,6 +1,6 @@
 # Mapa de referências oficiais do guia PDDE no SEI!RIO
 
-- Versão do guia: V. 2.3
+- Versão do guia: V. 2.4
 - Ciclo editorial: Março/2026
 - Última atualização da base: 28 de março de 2026
 
@@ -10,7 +10,7 @@ Este registro documenta as fontes oficiais mais importantes usadas pelo guia e i
 
 ## Resumo rápido para comunicação
 
-Mapa de referências oficiais verificadas do guia PDDE no SEI!RIO — V. 2.3
+Mapa de referências oficiais verificadas do guia PDDE no SEI!RIO — V. 2.4
 
 O projeto hoje informa, para as fontes prioritárias do anexo:
 - quem emitiu a referência

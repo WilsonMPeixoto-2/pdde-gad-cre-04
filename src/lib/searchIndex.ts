@@ -91,6 +91,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.referenceGovernance,
   },
   {
+    id: "governanca-anual",
+    title: "Governança Anual do Conteúdo",
+    content: "Painel que mostra o que precisa ser revalidado quando o exercício muda, quando surge novo comunicado do FNDE ou quando o rito local é alterado.",
+    keywords: ["governança anual", "vigência", "exercício", "revalidar", "ano", "revisão anual", "mudança de exercício", "2027"],
+    section: sectionTitle("anexo"),
+    anchor: GUIDE_ANCHORS.annualGovernance,
+  },
+  {
     id: "central-operacional",
     title: "Central operacional e backup",
     content: "Painel para retomar a próxima ação, exportar o progresso em JSON e importar a conferência em outro computador.",
@@ -263,6 +271,7 @@ export function getQuickSuggestions(): SearchItem[] {
     "capacidades-guia",
     "novidades-recentes",
     "instalar-aplicativo",
+    "governanca-anual",
     "rastreabilidade-fontes",
     "central-operacional",
     "resumo-compartilhavel",

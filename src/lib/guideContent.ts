@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 export const GUIDE_VERSION = {
-  number: "2.3",
-  shortLabel: "V. 2.3",
+  number: "2.4",
+  shortLabel: "V. 2.4",
   cycleLabel: "Março/2026",
   lastUpdatedText: "28 de março de 2026",
   publishedIsoDate: "2026-03-28",
@@ -39,6 +39,8 @@ export const GUIDE_ANCHORS = {
   capabilities: "capacidades-do-guia-pdde",
   recentUpdates: "novidades-recentes-guia-pdde",
   installApp: "instalar-aplicativo-guia-pdde",
+  quickActions: "hub-acoes-rapidas",
+  annualGovernance: "governanca-anual-do-guia-pdde",
   referenceGovernance: "rastreabilidade-fontes-oficiais-pdde",
   commandCenter: "central-operacional-pdde",
   workspace: "dados-processo-operacional",
@@ -57,6 +59,8 @@ export const guideAnchorParentSections: Record<string, string> = {
   [GUIDE_ANCHORS.capabilities]: "introducao",
   [GUIDE_ANCHORS.recentUpdates]: "introducao",
   [GUIDE_ANCHORS.installApp]: "introducao",
+  [GUIDE_ANCHORS.quickActions]: "introducao",
+  [GUIDE_ANCHORS.annualGovernance]: "anexo",
   [GUIDE_ANCHORS.referenceGovernance]: "anexo",
   [GUIDE_ANCHORS.commandCenter]: "secao-2",
   [GUIDE_ANCHORS.workspace]: "secao-2",

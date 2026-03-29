@@ -7,7 +7,11 @@ const scrollToSectionWithFocus = (sectionId: string) => {
   scrollToGuideAnchor(sectionId, { focusHeading: true, focusDelayMs: 500 });
 };
 
-export const ReadingSupportPanel = () => {
+type ReadingSupportPanelProps = {
+  renderId?: boolean;
+};
+
+export const ReadingSupportPanel = ({ renderId = true }: ReadingSupportPanelProps) => {
   const {
     clearLastSection,
     lastSection,
@@ -20,7 +24,7 @@ export const ReadingSupportPanel = () => {
 
   return (
     <section
-      id={GUIDE_ANCHORS.readingSupport}
+      id={renderId ? GUIDE_ANCHORS.readingSupport : undefined}
       aria-labelledby="retomada-e-conforto"
       className="section-card scroll-mt-28 border-l-4 border-l-sky-500 bg-linear-to-br from-background via-background to-sky-50/35 dark:to-sky-950/10"
     >

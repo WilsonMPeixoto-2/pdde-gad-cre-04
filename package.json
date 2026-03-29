@@ -1,7 +1,7 @@
 {
   "name": "pdde-gad-cre-04",
   "private": true,
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Guia institucional da 4ª CRE para prestação de contas do PDDE no SEI!RIO.",
   "type": "module",
   "scripts": {
@@ -17,6 +17,7 @@
     "sync:capabilities": "tsx scripts/sync-capability-registry.ts",
     "sync:release-notes": "tsx scripts/sync-release-notes.ts",
     "sync:reference-governance": "tsx scripts/sync-reference-governance.ts",
+    "sync:annual-governance": "tsx scripts/sync-annual-governance.ts",
     "sync:brand-assets": "python scripts/generate-brand-assets.py",
     "check:content": "tsx scripts/audit-content.ts",
     "check:pdfs": "tsx scripts/audit-pdfs.ts",

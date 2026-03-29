@@ -4,7 +4,11 @@ import { useInstallPrompt } from "@/hooks/useInstallPrompt";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import { PROJECT_BRANDING } from "@/lib/projectBranding";
 
-export const InstallAppPanel = () => {
+type InstallAppPanelProps = {
+  renderId?: boolean;
+};
+
+export const InstallAppPanel = ({ renderId = true }: InstallAppPanelProps) => {
   const { canPromptInstall, install, installState, isInstalled } = useInstallPrompt();
 
   const handleInstall = async () => {
@@ -25,7 +29,7 @@ export const InstallAppPanel = () => {
 
   return (
     <section
-      id={GUIDE_ANCHORS.installApp}
+      id={renderId ? GUIDE_ANCHORS.installApp : undefined}
       aria-labelledby="instalar-aplicativo-guia"
       className="scroll-mt-28 section-card border-l-4 border-l-primary bg-linear-to-br from-background via-background to-primary/6"
     >

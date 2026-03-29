@@ -12,6 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { externalResources, officialReferenceIds } from "@/lib/externalResources";
+import { AnnualGovernancePanel } from "./AnnualGovernancePanel";
 import { ReferenceGovernancePanel } from "./ReferenceGovernancePanel";
 import { ProfileCallout } from "./ProfileCallout";
 
@@ -222,6 +223,8 @@ export const SectionAnexo = () => {
           ))}
         </div>
       </div>
+
+      <AnnualGovernancePanel />
 
       <ReferenceGovernancePanel />
 

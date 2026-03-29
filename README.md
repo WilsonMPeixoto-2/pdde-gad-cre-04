@@ -43,6 +43,7 @@ npm run sync:pdf-manifest
 npm run sync:capabilities
 npm run sync:release-notes
 npm run sync:reference-governance
+npm run sync:annual-governance
 npm run sync:brand-assets
 npm run check:content
 npm run check:all
@@ -53,9 +54,11 @@ npm run check:all
 - Registro versionado das funções do guia: [`docs/REGISTRO_CAPACIDADES_GUIA.md`](docs/REGISTRO_CAPACIDADES_GUIA.md)
 - Histórico recente de melhorias visíveis ao usuário: [`docs/NOVIDADES_RECENTES_GUIA.md`](docs/NOVIDADES_RECENTES_GUIA.md)
 - Mapa de rastreabilidade das fontes oficiais: [`docs/MAPA_REFERENCIAS_OFICIAIS.md`](docs/MAPA_REFERENCIAS_OFICIAIS.md)
+- Registro de vigência anual e revisão por exercício: [`docs/GOVERNANCA_ANUAL_GUIA.md`](docs/GOVERNANCA_ANUAL_GUIA.md)
 - Gere ou atualize esse registro com `npm run sync:capabilities`
 - Gere ou atualize o histórico recente com `npm run sync:release-notes`
 - Gere ou atualize o mapa de referências com `npm run sync:reference-governance`
+- Gere ou atualize a governança anual com `npm run sync:annual-governance`
 - Gere ou atualize favicon, ícones do app e imagem social com `npm run sync:brand-assets`
 
 ## Estrutura principal

@@ -160,7 +160,8 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByRole("heading", { name: /encaminhamento e encerramento da fase escolar/i })).toBeVisible();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Base oficial e conferência", exact: true }).click();
+    await page.getByRole("button", { name: "Base oficial e vigência", exact: true }).click();
+    await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
     await expect(
       page.getByRole("heading", { level: 3, name: /fontes oficiais verificadas e contextualizadas/i }),
     ).toBeVisible();
@@ -236,6 +237,9 @@ test.describe("Fluxo mobile", () => {
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: "Notas do caso", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
+    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: "Base oficial e vigência", exact: true }).click();
+    await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
     await page.getByRole("button", { name: "Modelos e exemplos", exact: true }).click();
     await expect(page.getByRole("heading", { level: 3, name: /modelos, exemplos e referências documentais/i })).toBeVisible();
 

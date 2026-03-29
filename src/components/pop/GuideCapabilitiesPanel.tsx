@@ -30,7 +30,11 @@ const capabilityIcons: Record<GuideCapabilityIconKey, typeof Sparkles> = {
   reading: BookOpenCheck,
 };
 
-export const GuideCapabilitiesPanel = () => {
+type GuideCapabilitiesPanelProps = {
+  renderId?: boolean;
+};
+
+export const GuideCapabilitiesPanel = ({ renderId = true }: GuideCapabilitiesPanelProps) => {
   const summaryText = useMemo(() => getGuideCapabilitiesSummary(), []);
   const registryMarkdown = useMemo(() => getGuideCapabilitiesMarkdown(), []);
   const registryFileName = useMemo(() => getGuideCapabilitiesFileName(), []);
@@ -51,7 +55,7 @@ export const GuideCapabilitiesPanel = () => {
 
   return (
     <section
-      id={GUIDE_CAPABILITIES_PRIMARY_ANCHOR}
+      id={renderId ? GUIDE_CAPABILITIES_PRIMARY_ANCHOR : undefined}
       aria-labelledby="capacidades-atuais-guia"
       className="scroll-mt-28 section-card border-l-4 border-l-sky-500 bg-linear-to-br from-background via-background to-sky-50/35 dark:to-sky-950/10"
     >

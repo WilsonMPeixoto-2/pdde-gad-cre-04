@@ -89,6 +89,14 @@ export const guideRecentUpdateGroups: GuideRecentUpdateGroup[] = [
         anchor: GUIDE_ANCHORS.sharePack,
       },
       {
+        title: "Governança anual explícita no anexo",
+        description:
+          "O guia passou a mostrar quais referências e orientações envelhecem por exercício, quais são permanentes e quais devem ser revalidadas na abertura do próximo ciclo.",
+        userImpact:
+          "O usuário ganha mais clareza sobre o que continua válido e o que precisa ser conferido de novo antes de aplicar a orientação.",
+        anchor: GUIDE_ANCHORS.annualGovernance,
+      },
+      {
         title: "Rastreabilidade visível das fontes oficiais",
         description:
           "O anexo passou a mostrar, de forma transparente, quem emitiu cada referência prioritária, para que ela serve e quando foi revalidada.",

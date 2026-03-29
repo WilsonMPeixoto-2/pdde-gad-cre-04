@@ -26,7 +26,11 @@ const updateIcons: Record<GuideRecentUpdateIconKey, typeof Rocket> = {
   foundation: MonitorSmartphone,
 };
 
-export const GuideRecentUpdatesPanel = () => {
+type GuideRecentUpdatesPanelProps = {
+  renderId?: boolean;
+};
+
+export const GuideRecentUpdatesPanel = ({ renderId = true }: GuideRecentUpdatesPanelProps) => {
   const summaryText = useMemo(() => getGuideRecentUpdatesSummary(), []);
   const releaseNotesMarkdown = useMemo(() => getGuideRecentUpdatesMarkdown(), []);
   const releaseNotesFileName = useMemo(() => getGuideRecentUpdatesFileName(), []);
@@ -47,7 +51,7 @@ export const GuideRecentUpdatesPanel = () => {
 
   return (
     <section
-      id={GUIDE_RECENT_UPDATES_PRIMARY_ANCHOR}
+      id={renderId ? GUIDE_RECENT_UPDATES_PRIMARY_ANCHOR : undefined}
       aria-labelledby="novidades-recentes-guia"
       className="scroll-mt-28 section-card border-l-4 border-l-emerald-500 bg-linear-to-br from-background via-background to-emerald-50/35 dark:to-emerald-950/10"
     >

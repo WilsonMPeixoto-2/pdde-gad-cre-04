@@ -1,6 +1,6 @@
 # Registro de capacidades do guia PDDE no SEI!RIO
 
-- Versão do guia: V. 2.3
+- Versão do guia: V. 2.4
 - Ciclo editorial: Março/2026
 - Última atualização da base: 28 de março de 2026
 
@@ -10,7 +10,7 @@ Este documento consolida, em linguagem de comunicação e manutenção, as funç
 
 ## Resumo rápido para comunicação
 
-Resumo das capacidades atuais do guia PDDE no SEI!RIO — V. 2.3
+Resumo das capacidades atuais do guia PDDE no SEI!RIO — V. 2.4
 
 O projeto hoje oferece:
 Orientação operacional guiada: O guia não entrega só texto explicativo: ele organiza o fluxo e ajuda a executar o processo com menos improviso.
@@ -32,6 +32,7 @@ Saídas prontas para comunicação e handoff: O guia agora gera materiais práti
 Confiabilidade editorial e governança: A base do guia passou a ter mecanismos objetivos de verificação para conteúdo, anexos e coerência estrutural.
 - Auditoria estrutural de conteúdo: Ajuda a evitar incoerências invisíveis entre texto, navegação e apoio documental.
 - Mapa de rastreabilidade das fontes oficiais: Aumenta a confiança do usuário sobre a base normativa e operacional usada pelo guia.
+- Governança anual por exercício: Ajuda o usuário a distinguir regra permanente de orientação sensível ao ano ou ao contexto.
 - Auditoria do acervo PDF: Reduz risco de arquivo errado, trocado ou desatualizado passar despercebido.
 - CI remoto no GitHub Actions: Diminui o risco de publicar regressões sem verificação automática.
 
@@ -104,6 +105,9 @@ Use este resumo para apresentar o guia a diretores, equipes escolares e áreas d
 - **Mapa de rastreabilidade das fontes oficiais**
   - O que faz: Mostra órgão emissor, aplicação, razão de uso e última checagem das referências prioritárias do anexo.
   - Valor para o usuário: Aumenta a confiança do usuário sobre a base normativa e operacional usada pelo guia.
+- **Governança anual por exercício**
+  - O que faz: Explica o que precisa ser revalidado quando o exercício muda, quando surge novo comunicado do FNDE ou quando o rito local é alterado.
+  - Valor para o usuário: Ajuda o usuário a distinguir regra permanente de orientação sensível ao ano ou ao contexto.
 - **Auditoria do acervo PDF**
   - O que faz: Confere metadados, hash e sinais de conteúdo dos modelos e referências publicados.
   - Valor para o usuário: Reduz risco de arquivo errado, trocado ou desatualizado passar despercebido.

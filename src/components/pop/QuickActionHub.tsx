@@ -6,6 +6,7 @@ import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 type QuickActionHubProps = {
   onPrint?: () => void;
+  renderId?: boolean;
 };
 
 const scrollToId = (id: string, saveLastSection?: (sectionId: string) => void) => {
@@ -40,7 +41,7 @@ const copyOperationalRoute = async () => {
   }
 };
 
-export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
+export const QuickActionHub = ({ onPrint, renderId = true }: QuickActionHubProps) => {
   const { lastSection, saveLastSection } = useReadingExperience();
   const actions = [
     {
@@ -100,8 +101,8 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
       onClick: () => void copyOperationalRoute(),
     },
     {
-      title: "Base oficial e conferência",
-      description: "Ir ao anexo com marcos normativos, sistemas federais e fontes oficiais prioritárias.",
+      title: "Base oficial e vigência",
+      description: "Ir ao anexo com marcos normativos, fontes oficiais prioritárias e pontos que precisam ser revalidados por exercício.",
       icon: Scale,
       accent: "text-amber-700 dark:text-amber-300",
       onClick: () => scrollToId("anexo", saveLastSection),
@@ -119,12 +120,16 @@ export const QuickActionHub = ({ onPrint }: QuickActionHubProps) => {
   }
 
   return (
-    <section aria-labelledby="hub-acoes-rapidas" className="quick-action-shell scroll-mt-28">
+    <section
+      id={renderId ? GUIDE_ANCHORS.quickActions : undefined}
+      aria-labelledby="hub-acoes-rapidas-heading"
+      className="quick-action-shell scroll-mt-28"
+    >
       <div className="relative z-10 mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div className="space-y-2">
           <span className="lede-chip">Ações rápidas</span>
           <div>
-            <h2 id="hub-acoes-rapidas" className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+            <h2 id="hub-acoes-rapidas-heading" className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl">
               O que fazer agora, sem reler o guia inteiro
             </h2>
             <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">

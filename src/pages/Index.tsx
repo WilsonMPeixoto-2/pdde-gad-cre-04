@@ -4,24 +4,31 @@ import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
-import { GuideCapabilitiesPanel } from "@/components/pop/GuideCapabilitiesPanel";
-import { GuideRecentUpdatesPanel } from "@/components/pop/GuideRecentUpdatesPanel";
-import { InstallAppPanel } from "@/components/pop/InstallAppPanel";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
-import { QuickActionHub } from "@/components/pop/QuickActionHub";
-import { ReadingSupportPanel } from "@/components/pop/ReadingSupportPanel";
-import { SectionOne } from "@/components/pop/SectionOne";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DeferredGuideSection } from "@/components/pop/DeferredGuideSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
 import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
-import { guideSectionIds, guideSectionsById } from "@/lib/guideContent";
+import { GUIDE_ANCHORS, guideSectionIds, guideSectionsById } from "@/lib/guideContent";
 import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 // Lazy load non-critical interactive widgets
 const BackToTop = lazy(() => import("@/components/pop/BackToTop").then(m => ({ default: m.BackToTop })));
 const GuidedWizard = lazy(() => import("@/components/pop/GuidedWizard").then(m => ({ default: m.GuidedWizard })));
+const loadGuideCapabilitiesPanel = () => import("@/components/pop/GuideCapabilitiesPanel").then(m => ({ default: m.GuideCapabilitiesPanel }));
+const loadGuideRecentUpdatesPanel = () => import("@/components/pop/GuideRecentUpdatesPanel").then(m => ({ default: m.GuideRecentUpdatesPanel }));
+const loadInstallAppPanel = () => import("@/components/pop/InstallAppPanel").then(m => ({ default: m.InstallAppPanel }));
+const loadQuickActionHub = () => import("@/components/pop/QuickActionHub").then(m => ({ default: m.QuickActionHub }));
+const loadReadingSupportPanel = () => import("@/components/pop/ReadingSupportPanel").then(m => ({ default: m.ReadingSupportPanel }));
+const loadSectionOne = () => import("@/components/pop/SectionOne").then(m => ({ default: m.SectionOne }));
+
+const GuideCapabilitiesPanel = lazy(loadGuideCapabilitiesPanel);
+const GuideRecentUpdatesPanel = lazy(loadGuideRecentUpdatesPanel);
+const InstallAppPanel = lazy(loadInstallAppPanel);
+const QuickActionHub = lazy(loadQuickActionHub);
+const ReadingSupportPanel = lazy(loadReadingSupportPanel);
+const SectionOne = lazy(loadSectionOne);
 
 // Lazy load below-the-fold sections for better initial load performance
 const SectionTwo = lazy(() => import("@/components/pop/SectionTwo").then(m => ({ default: m.SectionTwo })));
@@ -39,6 +46,19 @@ const SectionLoader = () => (
     <div className="h-4 skeleton-shimmer rounded-lg w-full"></div>
     <div className="h-4 skeleton-shimmer rounded-lg w-5/6"></div>
     <div className="h-4 skeleton-shimmer rounded-lg w-1/2"></div>
+  </div>
+);
+
+const PanelLoader = ({ minHeight = 280 }: { minHeight?: number }) => (
+  <div className="space-y-4 rounded-[1.75rem] border border-border/60 bg-card/95 p-6 shadow-soft" style={{ minHeight }}>
+    <div className="h-4 w-32 rounded-full skeleton-shimmer" />
+    <div className="h-8 w-2/3 rounded-xl skeleton-shimmer" />
+    <div className="h-4 w-full rounded-lg skeleton-shimmer" />
+    <div className="h-4 w-5/6 rounded-lg skeleton-shimmer" />
+    <div className="grid gap-3 sm:grid-cols-2">
+      <div className="h-28 rounded-[1.2rem] skeleton-shimmer" />
+      <div className="h-28 rounded-[1.2rem] skeleton-shimmer" />
+    </div>
   </div>
 );
 
@@ -152,6 +172,25 @@ const Index = () => {
     saveLastSection(activeSection);
   }, [activeSection, saveLastSection]);
 
+  useEffect(() => {
+    const preloadDeferredPanels = () => {
+      void loadGuideCapabilitiesPanel();
+      void loadGuideRecentUpdatesPanel();
+      void loadInstallAppPanel();
+      void loadQuickActionHub();
+      void loadReadingSupportPanel();
+      void loadSectionOne();
+    };
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(preloadDeferredPanels, { timeout: 3000 });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(preloadDeferredPanels, 1800);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background overflow-x-clip">
       <a href="#main-content" onClick={handleSkipToMain} className="skip-link no-print">
@@ -187,30 +226,62 @@ const Index = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={65}>
-                <GuideCapabilitiesPanel />
+                <DeferredGuideSection
+                  anchorId={GUIDE_ANCHORS.capabilities}
+                  fallback={<PanelLoader minHeight={430} />}
+                  rootMargin="900px 0px"
+                >
+                  <GuideCapabilitiesPanel renderId={false} />
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={70}>
-                <GuideRecentUpdatesPanel />
+                <DeferredGuideSection
+                  anchorId={GUIDE_ANCHORS.recentUpdates}
+                  fallback={<PanelLoader minHeight={400} />}
+                  rootMargin="900px 0px"
+                >
+                  <GuideRecentUpdatesPanel renderId={false} />
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={72}>
-                <InstallAppPanel />
+                <DeferredGuideSection
+                  anchorId={GUIDE_ANCHORS.installApp}
+                  fallback={<PanelLoader minHeight={320} />}
+                  rootMargin="900px 0px"
+                >
+                  <InstallAppPanel renderId={false} />
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={75}>
-                <QuickActionHub onPrint={handlePrint} />
+                <DeferredGuideSection
+                  anchorId={GUIDE_ANCHORS.quickActions}
+                  fallback={<PanelLoader minHeight={340} />}
+                  rootMargin="900px 0px"
+                >
+                  <QuickActionHub onPrint={handlePrint} renderId={false} />
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={90}>
-                <ReadingSupportPanel />
+                <DeferredGuideSection
+                  anchorId={GUIDE_ANCHORS.readingSupport}
+                  fallback={<PanelLoader minHeight={320} />}
+                  rootMargin="900px 0px"
+                >
+                  <ReadingSupportPanel renderId={false} />
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-1")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionOne />
+                <DeferredGuideSection anchorId="secao-1" fallback={<SectionLoader />}>
+                  <SectionOne renderId={false} />
+                </DeferredGuideSection>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>

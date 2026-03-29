@@ -11,7 +11,11 @@ import {
   PROCESS_TYPE_LABEL,
 } from "@/lib/guideContent";
 
-export const SectionOne = () => {
+type SectionOneProps = {
+  renderId?: boolean;
+};
+
+export const SectionOne = ({ renderId = true }: SectionOneProps) => {
   const preflightCards = [
     {
       title: "Exercício de referência",
@@ -31,7 +35,7 @@ export const SectionOne = () => {
   ];
 
   return (
-    <section id="secao-1" className="scroll-mt-20 animate-fade-in">
+    <section id={renderId ? "secao-1" : undefined} className="scroll-mt-20 animate-fade-in">
       <div className="space-y-8">
         {/* Intro Card */}
         <div className="section-card border-l-4 border-l-accent">

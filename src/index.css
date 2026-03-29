@@ -1848,25 +1848,47 @@ html.effective-reduced-motion .hero-stagger {
   position: absolute;
   right: clamp(1rem, 5vw, 3.5rem);
   bottom: clamp(1rem, 4vw, 2rem);
-  width: min(27rem, 36vw);
-  min-width: 20rem;
-  height: 15rem;
+  width: min(31rem, 40vw);
+  min-width: 23rem;
+  min-height: 19rem;
   pointer-events: none;
   opacity: 0.96;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0.95rem;
+  padding-top: 0.6rem;
 }
 
 .hero-tech-card {
-  position: absolute;
+  position: relative;
   overflow: hidden;
   border-radius: 1.2rem;
   border: 1px solid hsl(0 0% 100% / 0.09);
   background: linear-gradient(180deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.03));
   padding: 0.9rem 1rem;
+  width: 100%;
+  max-width: 18.5rem;
   backdrop-filter: blur(10px);
   box-shadow:
     0 20px 40px -32px hsl(199 89% 48% / 0.55),
     inset 0 1px 0 0 hsl(0 0% 100% / 0.12);
   animation: hero-tech-float 9s ease-in-out infinite;
+}
+
+.hero-tech-card--top {
+  max-width: 19rem;
+}
+
+.hero-tech-card--middle {
+  max-width: 15.4rem;
+  margin-right: 4rem;
+}
+
+.hero-tech-card--bottom {
+  max-width: 20rem;
+  margin-right: 0.35rem;
 }
 
 html.effective-reduced-motion .hero-tech-card,
@@ -1900,10 +1922,12 @@ html.effective-reduced-motion #hero-cover [style*="title-shimmer"] {
 .hero-tech-value {
   display: block;
   font-family: var(--font-heading);
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.15;
   color: hsl(0 0% 100% / 0.95);
+  text-wrap: balance;
 }
 
 .hero-tech-meter {

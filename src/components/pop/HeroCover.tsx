@@ -134,7 +134,7 @@ export const HeroCover = () => {
         <span className="hero-tech-node" style={{ top: '67%', left: '18%' }} />
         <span className="hero-tech-node hero-tech-node--warm" style={{ top: '73%', left: '63%' }} />
 
-        <div className="hero-tech-card" style={{ top: '6%', right: '4%', width: '13.5rem', animationDelay: '0.4s' }}>
+        <div className="hero-tech-card hero-tech-card--top" style={{ animationDelay: '0.4s' }}>
           <span className="hero-tech-label">Conferência local</span>
           <span className="hero-tech-value">Checklist + Modelos</span>
           <div className="hero-tech-meter">
@@ -142,7 +142,7 @@ export const HeroCover = () => {
           </div>
         </div>
 
-        <div className="hero-tech-card" style={{ top: '44%', right: '18%', width: '11.5rem', animationDelay: '1.4s' }}>
+        <div className="hero-tech-card hero-tech-card--middle" style={{ animationDelay: '1.4s' }}>
           <span className="hero-tech-label">Fluxo guiado</span>
           <span className="hero-tech-value">{processFlowSteps.length} etapas-chave</span>
           <div className="hero-tech-meter">
@@ -150,7 +150,7 @@ export const HeroCover = () => {
           </div>
         </div>
 
-        <div className="hero-tech-card" style={{ bottom: '0%', right: '2%', width: '14rem', animationDelay: '2.2s' }}>
+        <div className="hero-tech-card hero-tech-card--bottom" style={{ animationDelay: '2.2s' }}>
           <span className="hero-tech-label">Base oficial</span>
           <span className="hero-tech-value">Normas e fontes vigentes</span>
           <div className="hero-tech-meter">

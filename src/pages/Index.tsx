@@ -225,9 +225,6 @@ const Index = () => {
                 </Suspense>
               </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("anexo")}
-              </AnimatedSection>
               <AnimatedSection delay={150}>
                 <Suspense fallback={<SectionLoader />}>
                   <SectionAnexo />

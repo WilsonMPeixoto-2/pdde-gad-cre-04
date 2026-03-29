@@ -149,10 +149,10 @@ export const guideSections: GuideSectionMeta[] = [
   },
   {
     id: "anexo",
-    number: "A",
-    title: "Anexo",
-    shortTitle: "Anexo - Legislação",
-    subtitle: "Escopo do guia, sistemas federais e marcos rápidos de conferência",
+    number: "8",
+    title: "Referências Normativas",
+    shortTitle: "Referências",
+    subtitle: "Fontes oficiais prioritárias para consulta rápida",
     icon: Scale,
   },
 ];

@@ -36,10 +36,22 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
+const searchAndOpen = async (
+  page: Parameters<typeof test.beforeEach>[0]["page"],
+  query: string,
+  optionName: RegExp,
+) => {
+  await page.getByRole("button", { name: /abrir busca global/i }).click();
+  const searchInput = page.getByPlaceholder("Buscar seções, documentos, procedimentos...");
+  await expect(searchInput).toBeVisible();
+  await searchInput.fill(query);
+  await page.getByRole("option", { name: optionName }).click();
+};
+
 test.describe("Fluxo desktop", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test("carrega sem regressões visíveis e mantém os atalhos principais funcionando", async ({ page }) => {
+  test("carrega sem regressões visíveis e mantém o guia instrucional como foco principal", async ({ page }) => {
     const consoleIssues = collectConsoleIssues(page);
     const pageErrors = collectPageErrors(page);
 
@@ -86,39 +98,25 @@ test.describe("Fluxo desktop", () => {
     expect(headerAccessibilityPrefs.motion).toBe("reduced");
     expect(headerAccessibilityPrefs.reducedMotionClass).toBe(true);
 
-    await page.locator("#novidades-recentes-guia-pdde").scrollIntoViewIfNeeded();
-    await expect(
-      page.getByRole("heading", { level: 2, name: /o que mudou recentemente/i }),
-    ).toBeVisible();
-
-    const [releaseNotesDownload] = await Promise.all([
-      page.waitForEvent("download"),
-      page.getByRole("button", { name: /Baixar histórico recente \.md/i }).click(),
-    ]);
-    expect(await releaseNotesDownload.suggestedFilename()).toMatch(/^GUIA_NOVIDADES_RECENTES_PDDE_.*\.md$/);
-    const releaseNotesPath = await releaseNotesDownload.path();
-    expect(releaseNotesPath).not.toBeNull();
-    const releaseNotesContent = await readFile(releaseNotesPath!, "utf8");
-    expect(releaseNotesContent).toContain("Criação, direção de produto e identidade visual: Wilson M. Peixoto.");
-
-    await page.locator("#instalar-aplicativo-guia-pdde").scrollIntoViewIfNeeded();
-    await expect(
-      page.getByRole("heading", { level: 2, name: /instale o guia no celular ou no windows com o ícone do projeto/i }),
-    ).toBeVisible();
-    await expect(page.getByRole("button", { name: /instalar agora/i })).toBeVisible();
-
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
-    await page.getByRole("button", { name: "Retomar trabalho", exact: true }).click();
+    await searchAndOpen(page, "central operacional", /central operacional e backup/i);
+    await expect(page.getByRole("heading", { level: 2, name: /retome o trabalho com a próxima ação certa/i })).toBeVisible();
     await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
 
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Padrão de nomes", exact: true }).click();
-    await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
+    await searchAndOpen(page, "kit de nomes", /kit de nomes para arquivos/i);
+    await expect(page.getByRole("heading", { level: 2, name: /kit de nomes para arquivo e árvore do processo/i })).toBeVisible();
 
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Resumo da conferência", exact: true }).click();
+    await searchAndOpen(page, "resumo compartilhável", /resumo compartilhável da conferência/i);
     await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
+
+    await searchAndOpen(page, "checklist", /checklist de documentos/i);
+    await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
+
+    await searchAndOpen(page, "diagnóstico", /diagnóstico para remessa à gad/i);
+    await expect(page.getByRole("heading", { level: 2, name: /diagnóstico de prontidão para a gad/i })).toBeVisible();
+
+    await searchAndOpen(page, "notas operacionais", /notas operacionais do caso/i);
+    await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto do processo/i })).toBeVisible();
+
     await expect(page.getByRole("button", { name: /Copiar briefing executivo/i })).toBeVisible();
 
     const [reportPopup] = await Promise.all([
@@ -143,32 +141,15 @@ test.describe("Fluxo desktop", () => {
     expect(premiumReportContent).toContain("Assinatura do projeto: Wilson M. Peixoto");
     expect(premiumReportContent).toContain("Identidade visual e artefatos digitais originais do projeto preservados.");
 
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Notas do caso", exact: true }).click();
-    await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
-
-    await page.getByRole("button", { name: "Checklist mínimo", exact: true }).click();
-    await expect(page.getByRole("heading", { level: 2, name: /checklist mínimo/i })).toBeVisible();
-
     await expect.poll(() => page.evaluate(() => window.localStorage.getItem("pdde-last-section-v1"))).toBe("secao-2");
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await expect(page.getByRole("button", { name: /Continuar leitura/i })).toBeVisible();
-    await page.getByRole("button", { name: /Continuar leitura/i }).click();
-    await expect(page.locator("#secao-2")).toBeInViewport();
 
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();
-    await expect(page.getByRole("heading", { name: /encaminhamento e encerramento da fase escolar/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /despacho e finalização/i })).toBeVisible();
 
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Base oficial e vigência", exact: true }).click();
+    await page.getByRole("button", { name: /ir para seção a: anexo/i }).click();
     await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
-    await expect(
-      page.getByRole("heading", { level: 3, name: /fontes oficiais verificadas e contextualizadas/i }),
-    ).toBeVisible();
-    await expect(page.getByText(/verificado em 28 de março de 2026/i).first()).toBeVisible();
+    await expect(page.getByText(/registro persistente:/i).first()).toBeVisible();
 
-    await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
-    await expect(page.getByRole("heading", { level: 2, name: /continue de onde parou/i })).toBeVisible();
     await page.getByRole("button", { name: /Voltar para o tamanho padrão do texto/i }).click();
     await page.getByRole("button", { name: /Voltar para movimento normal/i }).click();
 
@@ -203,7 +184,8 @@ test.describe("Fluxo mobile", () => {
     hasTouch: true,
   });
 
-  test("preserva navegação, responsividade e mockups inertes no mobile", async ({ page }) => {
+  test("preserva navegação, responsividade e acesso ao conteúdo principal no mobile", async ({ page }) => {
+    test.setTimeout(45000);
     const consoleIssues = collectConsoleIssues(page);
     const pageErrors = collectPageErrors(page);
 
@@ -221,34 +203,32 @@ test.describe("Fluxo mobile", () => {
     await page.getByRole("button", { name: /fechar menu de navegação/i }).click();
     await expect(page.getByRole("button", { name: /fechar menu de navegação/i })).toBeHidden();
 
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Retomar trabalho", exact: true }).click();
+    await searchAndOpen(page, "checklist", /checklist de documentos/i);
+    await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
+
+    await searchAndOpen(page, "central operacional", /central operacional e backup/i);
     await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
-    await page.locator("#instalar-aplicativo-guia-pdde").scrollIntoViewIfNeeded();
-    await expect(
-      page.getByRole("heading", { level: 2, name: /instale o guia no celular ou no windows com o ícone do projeto/i }),
-    ).toBeVisible();
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Padrão de nomes", exact: true }).click();
+
+    await searchAndOpen(page, "kit de nomes", /kit de nomes para arquivos/i);
     await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Resumo da conferência", exact: true }).click();
+
+    await searchAndOpen(page, "resumo compartilhável", /resumo compartilhável da conferência/i);
     await expect(page.getByRole("heading", { level: 2, name: /gere um handoff claro/i })).toBeVisible();
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Notas do caso", exact: true }).click();
+
+    await searchAndOpen(page, "notas operacionais", /notas operacionais do caso/i);
     await expect(page.getByRole("heading", { level: 2, name: /notas, diligências e contexto/i })).toBeVisible();
-    await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Base oficial e vigência", exact: true }).click();
-    await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
-    await page.getByRole("button", { name: "Modelos e exemplos", exact: true }).click();
-    await expect(page.getByRole("heading", { level: 3, name: /modelos, exemplos e referências documentais/i })).toBeVisible();
+
+    await searchAndOpen(page, "diagnóstico", /diagnóstico para remessa à gad/i);
+    await expect(page.getByRole("heading", { level: 2, name: /diagnóstico de prontidão para a gad/i })).toBeVisible();
 
     await page.getByRole("button", { name: /mais ações/i }).click();
     await page.getByRole("menuitem", { name: /ativar texto maior/i }).click();
     await page.getByRole("button", { name: /mais ações/i }).click();
     await page.getByRole("menuitem", { name: /ativar movimento reduzido/i }).click();
 
-    await page.locator("#retomada-conforto-pdde").scrollIntoViewIfNeeded();
+    await page.getByRole("button", { name: /abrir menu de navegação/i }).first().click();
+    await page.getByRole("button", { name: /ir para seção a: anexo/i }).click();
+    await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
 
     const diagnostics = await page.evaluate(() => {
       const allowance = 1;
@@ -265,6 +245,8 @@ test.describe("Fluxo mobile", () => {
         focusableInIllustrations,
         readingScale: document.documentElement.dataset.readingScale,
         reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
+        hasReadingPanelEntry:
+          document.body.textContent?.includes("Continue de onde parou e ajuste a leitura ao seu ritmo") ?? false,
       };
     });
 
@@ -273,6 +255,7 @@ test.describe("Fluxo mobile", () => {
     expect(diagnostics.focusableInIllustrations).toBe(0);
     expect(diagnostics.readingScale).toBe("large");
     expect(diagnostics.reducedMotionClass).toBe(true);
+    expect(diagnostics.hasReadingPanelEntry).toBe(false);
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });

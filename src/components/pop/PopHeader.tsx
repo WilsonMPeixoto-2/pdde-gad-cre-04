@@ -6,7 +6,6 @@ import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
 import { ShareQRCode } from "./ShareQRCode";
 import { ProfileModeSelector } from "./ProfileModeSelector";
-import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 interface PopHeaderProps {
   onPrint: () => void;
@@ -92,10 +91,6 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
   const openSearch = () => {
     const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true });
     document.dispatchEvent(event);
-  };
-
-  const openReadingSupport = () => {
-    scrollToGuideAnchor("retomada-conforto-pdde");
   };
 
   return (
@@ -287,10 +282,6 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 <DropdownMenuItem onClick={toggleMotionPreference}>
                   <Wind className="w-4 h-4 mr-2" />
                   {resolvedReducedMotion ? "Voltar movimento normal" : "Ativar movimento reduzido"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={openReadingSupport}>
-                  <Type className="w-4 h-4 mr-2" />
-                  Painel de leitura
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={onPrint}>
                   <Printer className="w-4 h-4 mr-2" />

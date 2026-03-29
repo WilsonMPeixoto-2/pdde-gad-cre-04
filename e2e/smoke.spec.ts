@@ -67,39 +67,7 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByText(/painel do processo/i)).toHaveCount(0);
     await expect(page.getByText(/resumo compartilhável/i)).toHaveCount(0);
 
-    const heroCardLayout = await page.locator(".hero-tech-card").evaluateAll((elements) => {
-      const rects = elements.map((element) => {
-        const rect = element.getBoundingClientRect();
-        return {
-          left: rect.left,
-          top: rect.top,
-          right: rect.right,
-          bottom: rect.bottom,
-          width: rect.width,
-          height: rect.height,
-        };
-      });
-
-      const hasOverlap = rects.some((current, currentIndex) =>
-        rects.some((other, otherIndex) => {
-          if (currentIndex >= otherIndex) return false;
-
-          const horizontal = current.left < other.right && current.right > other.left;
-          const vertical = current.top < other.bottom && current.bottom > other.top;
-          return horizontal && vertical;
-        }),
-      );
-
-      return {
-        count: rects.length,
-        hasOverlap,
-        shortestCard: Math.min(...rects.map((rect) => rect.height)),
-      };
-    });
-
-    expect(heroCardLayout.count).toBe(3);
-    expect(heroCardLayout.hasOverlap).toBe(false);
-    expect(heroCardLayout.shortestCard).toBeGreaterThan(80);
+    await expect(page.locator(".hero-tech-board")).toHaveCount(0);
 
     const searchButton = page.getByRole("button", { name: /abrir busca global/i });
     await expect(searchButton).toBeVisible();
@@ -231,7 +199,7 @@ test.describe("Fluxo mobile", () => {
     });
 
     expect(diagnostics.hasOverflow).toBe(false);
-    expect(diagnostics.heroTechDisplay).toBe("none");
+    expect(diagnostics.heroTechDisplay).toBe("missing");
     expect(diagnostics.focusableInIllustrations).toBe(0);
     expect(diagnostics.readingScale).toBe("large");
     expect(diagnostics.reducedMotionClass).toBe(true);

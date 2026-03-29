@@ -124,41 +124,6 @@ export const HeroCover = () => {
         }}
       />
 
-      <div className="hero-tech-board" aria-hidden="true">
-        <div className="hero-tech-line" style={{ top: '27%', left: '14%', width: '42%', transform: 'rotate(14deg)' }} />
-        <div className="hero-tech-line" style={{ top: '54%', left: '34%', width: '33%', transform: 'rotate(-10deg)' }} />
-        <div className="hero-tech-line" style={{ top: '70%', left: '20%', width: '48%', transform: 'rotate(8deg)' }} />
-
-        <span className="hero-tech-node" style={{ top: '22%', left: '12%' }} />
-        <span className="hero-tech-node hero-tech-node--warm" style={{ top: '48%', left: '38%' }} />
-        <span className="hero-tech-node" style={{ top: '67%', left: '18%' }} />
-        <span className="hero-tech-node hero-tech-node--warm" style={{ top: '73%', left: '63%' }} />
-
-        <div className="hero-tech-card hero-tech-card--top" style={{ animationDelay: '0.4s' }}>
-          <span className="hero-tech-label">Conferência local</span>
-          <span className="hero-tech-value">Checklist + Modelos</span>
-          <div className="hero-tech-meter">
-            <span style={{ width: '76%' }} />
-          </div>
-        </div>
-
-        <div className="hero-tech-card hero-tech-card--middle" style={{ animationDelay: '1.4s' }}>
-          <span className="hero-tech-label">Fluxo guiado</span>
-          <span className="hero-tech-value">{processFlowSteps.length} etapas-chave</span>
-          <div className="hero-tech-meter">
-            <span style={{ width: '62%' }} />
-          </div>
-        </div>
-
-        <div className="hero-tech-card hero-tech-card--bottom" style={{ animationDelay: '2.2s' }}>
-          <span className="hero-tech-label">Base oficial</span>
-          <span className="hero-tech-value">Normas e fontes vigentes</span>
-          <div className="hero-tech-meter">
-            <span style={{ width: '84%' }} />
-          </div>
-        </div>
-      </div>
-
       {/* === CONTENT === */}
       <div className="relative z-10 text-center px-5 sm:px-6 py-12 sm:py-16 max-w-5xl mx-auto">
         {/* Institution Badge */}

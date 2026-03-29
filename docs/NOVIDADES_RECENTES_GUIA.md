@@ -1,6 +1,6 @@
 # Novidades recentes do guia PDDE no SEI!RIO
 
-- Versão do guia: V. 2.1
+- Versão do guia: V. 2.3
 - Ciclo editorial: Março/2026
 - Última atualização da base: 28 de março de 2026
 - Janela retroativa revisada: publicações em produção entre 26 e 28 de março de 2026
@@ -11,7 +11,7 @@ Este registro resume, em linguagem orientada ao usuário final, as melhorias mai
 
 ## Resumo curto para comunicação
 
-Resumo das novidades recentes do guia PDDE no SEI!RIO — V. 2.1
+Resumo das novidades recentes do guia PDDE no SEI!RIO — V. 2.3
 
 Retrospectiva validada a partir das publicações em produção entre 26 e 28 de março de 2026.
 
@@ -22,6 +22,8 @@ O que mudou de forma visível para o usuário final:
 - Memória local do caso e retomada do trabalho: Ajuda quando o processo fica parado, muda de mãos ou precisa ser retomado depois sem perda de contexto.
 - Carregamento mais leve e navegação mais rápida: A página abre mais leve e o usuário chega mais rápido ao recurso que realmente precisa usar.
 - Registro claro das capacidades e novidades: Facilita comunicação institucional, onboarding de equipe e apresentação do guia para novos públicos.
+- App instalável com ícones próprios e arte de compartilhamento: O usuário passa a reconhecer o projeto com mais facilidade e pode fixá-lo como aplicativo com aparência própria, sem ícones genéricos.
+- Downloads e impressão com crédito preservado: Isso ajuda a manter procedência, autoria e identidade visual mesmo quando o material circula fora do site.
 - Rastreabilidade visível das fontes oficiais: Dá mais segurança para quem precisa confiar no guia sem sair clicando às cegas por normas e comunicados.
 
 27 de março de 2026 — A base editorial e documental ficou mais confiável: O usuário final ganha mais confiança de que texto, links, referências e arquivos realmente batem com o uso esperado.
@@ -61,6 +63,12 @@ Use este resumo para apresentar as melhorias recentes a diretores, equipes escol
 - **Registro claro das capacidades e novidades**
   - O que mudou: O projeto passou a manter uma base explícita do que já oferece e do que mudou recentemente para os usuários.
   - Impacto percebido: Facilita comunicação institucional, onboarding de equipe e apresentação do guia para novos públicos.
+- **App instalável com ícones próprios e arte de compartilhamento**
+  - O que mudou: O guia ganhou favicon, atalhos, telas de instalação e imagem social com identidade visual autoral, além de instruções para instalar no celular ou no Windows.
+  - Impacto percebido: O usuário passa a reconhecer o projeto com mais facilidade e pode fixá-lo como aplicativo com aparência própria, sem ícones genéricos.
+- **Downloads e impressão com crédito preservado**
+  - O que mudou: As saídas geradas pelo próprio guia passaram a carregar assinatura do projeto, nota autoral e metadados de identificação do criador.
+  - Impacto percebido: Isso ajuda a manter procedência, autoria e identidade visual mesmo quando o material circula fora do site.
 - **Rastreabilidade visível das fontes oficiais**
   - O que mudou: O anexo passou a mostrar, de forma transparente, quem emitiu cada referência prioritária, para que ela serve e quando foi revalidada.
   - Impacto percebido: Dá mais segurança para quem precisa confiar no guia sem sair clicando às cegas por normas e comunicados.

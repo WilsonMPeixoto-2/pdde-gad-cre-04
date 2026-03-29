@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
 
 test.use({ serviceWorkers: "block" });
@@ -95,6 +96,16 @@ test.describe("Fluxo desktop", () => {
       page.getByRole("button", { name: /Baixar histórico recente \.md/i }).click(),
     ]);
     expect(await releaseNotesDownload.suggestedFilename()).toMatch(/^GUIA_NOVIDADES_RECENTES_PDDE_.*\.md$/);
+    const releaseNotesPath = await releaseNotesDownload.path();
+    expect(releaseNotesPath).not.toBeNull();
+    const releaseNotesContent = await readFile(releaseNotesPath!, "utf8");
+    expect(releaseNotesContent).toContain("Criação, direção de produto e identidade visual: Wilson M. Peixoto.");
+
+    await page.locator("#instalar-aplicativo-guia-pdde").scrollIntoViewIfNeeded();
+    await expect(
+      page.getByRole("heading", { level: 2, name: /instale o guia no celular ou no windows com o ícone do projeto/i }),
+    ).toBeVisible();
+    await expect(page.getByRole("button", { name: /instalar agora/i })).toBeVisible();
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await expect(page.getByRole("heading", { level: 2, name: /o que fazer agora/i })).toBeVisible();
@@ -126,6 +137,11 @@ test.describe("Fluxo desktop", () => {
       page.getByRole("button", { name: /Baixar relatório \.html/i }).click(),
     ]);
     expect(await premiumReportDownload.suggestedFilename()).toMatch(/^PDDE_RELATORIO_OPERACIONAL_.*\.html$/);
+    const premiumReportPath = await premiumReportDownload.path();
+    expect(premiumReportPath).not.toBeNull();
+    const premiumReportContent = await readFile(premiumReportPath!, "utf8");
+    expect(premiumReportContent).toContain("Assinatura do projeto: Wilson M. Peixoto");
+    expect(premiumReportContent).toContain("Identidade visual e artefatos digitais originais do projeto preservados.");
 
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: "Notas do caso", exact: true }).click();
@@ -207,6 +223,10 @@ test.describe("Fluxo mobile", () => {
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: "Retomar trabalho", exact: true }).click();
     await expect(page.getByRole("button", { name: /Exportar progresso/i })).toBeVisible();
+    await page.locator("#instalar-aplicativo-guia-pdde").scrollIntoViewIfNeeded();
+    await expect(
+      page.getByRole("heading", { level: 2, name: /instale o guia no celular ou no windows com o ícone do projeto/i }),
+    ).toBeVisible();
     await page.locator("#hub-acoes-rapidas").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: "Padrão de nomes", exact: true }).click();
     await expect(page.getByRole("heading", { level: 2, name: /kit de nomes/i })).toBeVisible();

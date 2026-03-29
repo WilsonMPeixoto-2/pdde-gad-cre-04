@@ -1,6 +1,6 @@
 # Registro de capacidades do guia PDDE no SEI!RIO
 
-- Versão do guia: V. 2.1
+- Versão do guia: V. 2.3
 - Ciclo editorial: Março/2026
 - Última atualização da base: 28 de março de 2026
 
@@ -10,7 +10,7 @@ Este documento consolida, em linguagem de comunicação e manutenção, as funç
 
 ## Resumo rápido para comunicação
 
-Resumo das capacidades atuais do guia PDDE no SEI!RIO — V. 2.1
+Resumo das capacidades atuais do guia PDDE no SEI!RIO — V. 2.3
 
 O projeto hoje oferece:
 Orientação operacional guiada: O guia não entrega só texto explicativo: ele organiza o fluxo e ajuda a executar o processo com menos improviso.
@@ -26,6 +26,7 @@ Painel operacional do caso: A etapa 2 virou uma área de trabalho com dados pers
 Saídas prontas para comunicação e handoff: O guia agora gera materiais práticos para repasse interno, impressão e continuidade do trabalho em outros contextos.
 - Resumo compartilhável da conferência: Serve para e-mail, WhatsApp, registro de fechamento do dia e transição entre pessoas.
 - Relatório premium para impressão/PDF: Facilita conferência formal, anexação em PDF e documentação interna da análise.
+- Exportações assinadas com identidade do projeto: Preserva autoria, reforça a procedência do material e ajuda a manter o crédito em circulações internas.
 - Exportação e importação de progresso: Protege a continuidade do trabalho sem depender do mesmo navegador ou máquina.
 
 Confiabilidade editorial e governança: A base do guia passou a ter mecanismos objetivos de verificação para conteúdo, anexos e coerência estrutural.
@@ -37,6 +38,7 @@ Confiabilidade editorial e governança: A base do guia passou a ter mecanismos o
 Leitura assistida e retomada: Além de orientar o processo, o site passou a ajudar o usuário a retomar o trabalho com menos fricção.
 - Retomada da última seção útil: Acelera a volta ao fluxo e reduz esforço cognitivo na reabertura do guia.
 - Texto maior e movimento reduzido: Melhora conforto visual e acessibilidade para perfis diferentes de uso.
+- Instalação como aplicativo com ícones próprios: Facilita acesso recorrente e faz o guia parecer uma ferramenta institucional dedicada, não só um site aberto no navegador.
 - Busca e atalhos rápidos: Diminui o tempo de navegação e facilita uso por demanda.
 
 Use este resumo para apresentar o guia a diretores, equipes escolares e áreas de apoio que precisem entender rapidamente o que a plataforma já entrega.
@@ -84,6 +86,9 @@ Use este resumo para apresentar o guia a diretores, equipes escolares e áreas d
 - **Relatório premium para impressão/PDF**
   - O que faz: Abre uma versão limpa, com métricas, notas do caso e pendências organizadas em layout pronto para PDF.
   - Valor para o usuário: Facilita conferência formal, anexação em PDF e documentação interna da análise.
+- **Exportações assinadas com identidade do projeto**
+  - O que faz: Os arquivos gerados pelo guia saem com crédito do criador, nota autoral e metadados de identidade do projeto.
+  - Valor para o usuário: Preserva autoria, reforça a procedência do material e ajuda a manter o crédito em circulações internas.
 - **Exportação e importação de progresso**
   - O que faz: Permite salvar o andamento em JSON e restaurar o caso em outro computador.
   - Valor para o usuário: Protege a continuidade do trabalho sem depender do mesmo navegador ou máquina.
@@ -117,6 +122,9 @@ Use este resumo para apresentar o guia a diretores, equipes escolares e áreas d
 - **Texto maior e movimento reduzido**
   - O que faz: Oferece preferências persistentes de leitura diretamente na interface.
   - Valor para o usuário: Melhora conforto visual e acessibilidade para perfis diferentes de uso.
+- **Instalação como aplicativo com ícones próprios**
+  - O que faz: Permite instalar o guia no celular e no Windows com ícone, atalhos e telas de instalação personalizados do projeto.
+  - Valor para o usuário: Facilita acesso recorrente e faz o guia parecer uma ferramenta institucional dedicada, não só um site aberto no navegador.
 - **Busca e atalhos rápidos**
   - O que faz: Permite chegar mais rápido aos blocos operacionais e recursos mais usados.
   - Valor para o usuário: Diminui o tempo de navegação e facilita uso por demanda.

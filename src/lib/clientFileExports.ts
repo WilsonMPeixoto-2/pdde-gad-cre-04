@@ -1,3 +1,8 @@
+import {
+  appendProjectDownloadFooter,
+  getProjectJsonBranding,
+} from "@/lib/projectBranding";
+
 const triggerBrowserDownload = (objectUrl: string, fileName: string) => {
   const anchor = document.createElement("a");
   anchor.href = objectUrl;
@@ -22,7 +27,7 @@ export const downloadClientFile = (content: string, fileName: string, mimeType: 
 };
 
 export const downloadTextFile = (content: string, fileName: string) => {
-  downloadClientFile(content, fileName, "text/plain;charset=utf-8");
+  downloadClientFile(appendProjectDownloadFooter(content), fileName, "text/plain;charset=utf-8");
 };
 
 export const downloadHtmlFile = (content: string, fileName: string) => {
@@ -30,7 +35,15 @@ export const downloadHtmlFile = (content: string, fileName: string) => {
 };
 
 export const downloadJsonFile = (value: string | object, fileName: string) => {
-  const content = typeof value === "string" ? value : JSON.stringify(value, null, 2);
+  const brandedValue =
+    typeof value === "string" || Array.isArray(value)
+      ? value
+      : {
+          ...value,
+          projectBranding: getProjectJsonBranding(),
+        };
+
+  const content = typeof brandedValue === "string" ? brandedValue : JSON.stringify(brandedValue, null, 2);
   downloadClientFile(content, fileName, "application/json;charset=utf-8");
 };
 

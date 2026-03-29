@@ -1,3 +1,4 @@
+import { PROJECT_BRANDING } from "@/lib/projectBranding";
 import { Building2, Calendar } from "lucide-react";
 import { GUIDE_VERSION } from "@/lib/guideContent";
 
@@ -59,6 +60,12 @@ export const DocumentFooter = () => {
             para auxiliar diretores e gestores escolares na prestação de contas do PDDE.
           </p>
 
+          <div className="rounded-xl border border-primary/15 bg-primary/6 px-5 py-3">
+            <p className="text-xs leading-relaxed text-foreground/80">
+              <strong className="text-foreground">Assinatura do projeto:</strong> {PROJECT_BRANDING.creatorCreditLine}
+            </p>
+          </div>
+
           {/* Institutional badge */}
           <div className="pt-4">
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-border/40 transition-all duration-300 hover:scale-105" style={{
@@ -84,6 +91,9 @@ export const DocumentFooter = () => {
       <div className="mt-8">
         <p className="text-center text-xs text-muted-foreground tracking-wide">
           Guia institucional da 4ª CRE para a instrução processual da prestação de contas do PDDE no SEI!RIO.
+        </p>
+        <p className="mt-2 text-center text-[11px] text-muted-foreground tracking-wide">
+          {PROJECT_BRANDING.copyrightLine}
         </p>
       </div>
     </div>

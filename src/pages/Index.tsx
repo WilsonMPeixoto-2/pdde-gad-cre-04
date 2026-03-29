@@ -6,6 +6,7 @@ import { SectionDivider } from "@/components/pop/SectionDivider";
 import { SectionIntro } from "@/components/pop/SectionIntro";
 import { GuideCapabilitiesPanel } from "@/components/pop/GuideCapabilitiesPanel";
 import { GuideRecentUpdatesPanel } from "@/components/pop/GuideRecentUpdatesPanel";
+import { InstallAppPanel } from "@/components/pop/InstallAppPanel";
 import { ScopeCallout } from "@/components/pop/ScopeCallout";
 import { QuickActionHub } from "@/components/pop/QuickActionHub";
 import { ReadingSupportPanel } from "@/components/pop/ReadingSupportPanel";
@@ -193,6 +194,10 @@ const Index = () => {
                 <GuideRecentUpdatesPanel />
               </AnimatedSection>
 
+              <AnimatedSection delay={72}>
+                <InstallAppPanel />
+              </AnimatedSection>
+
               <AnimatedSection delay={75}>
                 <QuickActionHub onPrint={handlePrint} />
               </AnimatedSection>
@@ -278,6 +283,7 @@ const Index = () => {
             <div className="print-only mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
               <p>Procedimento Operacional Padrão - Prestação de Contas PDDE</p>
               <p>4ª Coordenadoria Regional de Educação | GAD</p>
+              <p>Projeto digital e identidade visual: Wilson M. Peixoto</p>
             </div>
           </div>
         </main>

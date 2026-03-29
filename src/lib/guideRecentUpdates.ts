@@ -73,6 +73,22 @@ export const guideRecentUpdateGroups: GuideRecentUpdateGroup[] = [
         anchor: GUIDE_ANCHORS.capabilities,
       },
       {
+        title: "App instalável com ícones próprios e arte de compartilhamento",
+        description:
+          "O guia ganhou favicon, atalhos, telas de instalação e imagem social com identidade visual autoral, além de instruções para instalar no celular ou no Windows.",
+        userImpact:
+          "O usuário passa a reconhecer o projeto com mais facilidade e pode fixá-lo como aplicativo com aparência própria, sem ícones genéricos.",
+        anchor: GUIDE_ANCHORS.installApp,
+      },
+      {
+        title: "Downloads e impressão com crédito preservado",
+        description:
+          "As saídas geradas pelo próprio guia passaram a carregar assinatura do projeto, nota autoral e metadados de identificação do criador.",
+        userImpact:
+          "Isso ajuda a manter procedência, autoria e identidade visual mesmo quando o material circula fora do site.",
+        anchor: GUIDE_ANCHORS.sharePack,
+      },
+      {
         title: "Rastreabilidade visível das fontes oficiais",
         description:
           "O anexo passou a mostrar, de forma transparente, quem emitiu cada referência prioritária, para que ela serve e quando foi revalidada.",

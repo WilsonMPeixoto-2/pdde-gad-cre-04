@@ -1,9 +1,11 @@
 {
-  "name": "POP PDDE no SEI!RIO - 4ª CRE",
-  "short_name": "PDDE 4ª CRE",
-  "description": "Guia oficial da 4ª CRE para instruir a prestação de contas do PDDE no SEI!RIO.",
+  "id": "/",
+  "name": "Guia PDDE no SEI!RIO - 4ª CRE",
+  "short_name": "Guia PDDE",
+  "description": "Guia operacional da 4ª CRE para a prestação de contas do PDDE no SEI!RIO, com identidade visual própria e apoio operacional.",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#14233f",
   "theme_color": "#0c7ba3",
   "orientation": "portrait-primary",
@@ -11,28 +13,68 @@
   "lang": "pt-BR",
   "icons": [
     {
-      "src": "/favicon.png",
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "categories": ["education", "productivity"],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "src": "/icons/install-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Visão geral do guia PDDE com central operacional e identidade visual própria"
+    },
+    {
+      "src": "/icons/install-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Versão mobile instalável do guia PDDE com atalho próprio"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Início",
       "short_name": "Início",
       "description": "Ir para o início do guia",
       "url": "/#introducao",
-      "icons": [{ "src": "/favicon.png", "sizes": "512x512" }]
+      "icons": [{ "src": "/icons/shortcut-home.png", "sizes": "192x192" }]
     },
     {
       "name": "Checklist",
       "short_name": "Checklist",
       "description": "Ver checklist de documentos",
       "url": "/#checklist-documentos",
-      "icons": [{ "src": "/favicon.png", "sizes": "512x512" }]
+      "icons": [{ "src": "/icons/shortcut-checklist.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Central operacional",
+      "short_name": "Central",
+      "description": "Abrir o painel operacional do processo",
+      "url": "/#central-operacional-pdde",
+      "icons": [{ "src": "/icons/shortcut-workspace.png", "sizes": "192x192" }]
     }
   ],
   "related_applications": [],

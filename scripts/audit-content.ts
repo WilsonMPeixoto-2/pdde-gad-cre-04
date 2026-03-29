@@ -4,6 +4,7 @@ import { externalResourceList, externalResources, referenceGovernanceIds } from 
 import { pdfAssetManifest } from "../src/generated/pdfManifest.ts";
 import { GUIDE_ANCHORS, guideSectionIds } from "../src/lib/guideContent.ts";
 import { pddeModels } from "../src/lib/pddeModels.ts";
+import { PROJECT_BRANDING } from "../src/lib/projectBranding.ts";
 import { searchIndex } from "../src/lib/searchIndex.ts";
 
 const httpTimeoutMs = 20000;
@@ -34,6 +35,23 @@ const ensurePdfAssetsMatch = async () => {
   for (const model of pddeModels) {
     if (!(model.fileName in pdfAssetManifest)) {
       findings.push(`Modelo ${model.id} referencia ${model.fileName}, mas esse arquivo não está no manifesto.`);
+    }
+  }
+
+  return findings;
+};
+
+const ensureBrandAssetsExist = async () => {
+  const findings: string[] = [];
+  const assetPaths = Object.values(PROJECT_BRANDING.assetPaths).map((assetPath) =>
+    path.resolve("public", assetPath.replace(/^\//, "")),
+  );
+
+  for (const assetPath of assetPaths) {
+    try {
+      await access(assetPath);
+    } catch {
+      findings.push(`Ativo de identidade ausente: ${path.relative(process.cwd(), assetPath)}`);
     }
   }
 
@@ -142,6 +160,7 @@ const ensureExternalLinksRespond = async () => {
 
 const main = async () => {
   const findings = [
+    ...(await ensureBrandAssetsExist()),
     ...(await ensurePdfAssetsMatch()),
     ...ensureAnchorsStayAligned(),
     ...ensureReferenceGovernanceMetadata(),

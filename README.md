@@ -43,6 +43,7 @@ npm run sync:pdf-manifest
 npm run sync:capabilities
 npm run sync:release-notes
 npm run sync:reference-governance
+npm run sync:brand-assets
 npm run check:content
 npm run check:all
 ```
@@ -55,6 +56,7 @@ npm run check:all
 - Gere ou atualize esse registro com `npm run sync:capabilities`
 - Gere ou atualize o histórico recente com `npm run sync:release-notes`
 - Gere ou atualize o mapa de referências com `npm run sync:reference-governance`
+- Gere ou atualize favicon, ícones do app e imagem social com `npm run sync:brand-assets`
 
 ## Estrutura principal
 

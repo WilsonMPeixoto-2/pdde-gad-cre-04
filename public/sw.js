@@ -1,6 +1,26 @@
 const SW_VERSION = new URL(self.location.href).searchParams.get("v") ?? "fallback";
 const CACHE_NAME = `pdde-guide-shell-${SW_VERSION}`;
-const APP_SHELL = ["/", "/index.html", "/favicon.png", "/manifest.json", "/og-image.png"];
+const APP_SHELL = [
+  "/",
+  "/index.html",
+  "/favicon.png",
+  "/favicon.ico",
+  "/browserconfig.xml",
+  "/manifest.json",
+  "/og-image.png",
+  "/icons/favicon-32.png",
+  "/icons/favicon-16.png",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "/icons/icon-maskable-192.png",
+  "/icons/icon-maskable-512.png",
+  "/icons/apple-touch-icon.png",
+  "/icons/shortcut-home.png",
+  "/icons/shortcut-checklist.png",
+  "/icons/shortcut-workspace.png",
+  "/icons/install-desktop.png",
+  "/icons/install-mobile.png",
+];
 const CACHEABLE_DESTINATIONS = new Set(["image", "font", "manifest"]);
 const PDF_PATH_PREFIX = "/models/";
 

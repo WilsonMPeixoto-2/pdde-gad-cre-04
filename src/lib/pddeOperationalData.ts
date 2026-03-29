@@ -4,6 +4,7 @@ import {
   processFlowSteps,
   type ProcessFlowStep,
 } from "@/lib/guideContent";
+import { PROJECT_BRANDING, getProjectJsonBranding } from "@/lib/projectBranding";
 
 export interface ChecklistItemDefinition {
   id: number;
@@ -53,6 +54,7 @@ export interface OperationalBackupFile {
   schemaVersion: 1;
   exportedAt: string;
   snapshot: OperationalSnapshot;
+  projectBranding?: ReturnType<typeof getProjectJsonBranding>;
 }
 
 export type OperationalStatus = "submitted" | "ready" | "flow" | "blocked";
@@ -656,6 +658,7 @@ export const createOperationalBackup = (
   schemaVersion: 1,
   exportedAt: new Date().toISOString(),
   snapshot: sanitizeOperationalSnapshot(snapshot),
+  projectBranding: getProjectJsonBranding(),
 });
 
 export const parseOperationalBackup = (saved: unknown): OperationalBackupFile | null => {
@@ -1002,7 +1005,7 @@ export const buildOperationalPrintHtml = (
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Relatório operacional PDDE</title>
+    <title>${escapeHtml(PROJECT_BRANDING.projectFullName)} • Relatório operacional</title>
     <style>
       :root {
         color-scheme: light;
@@ -1338,11 +1341,14 @@ export const buildOperationalPrintHtml = (
     <main>
       <article class="sheet">
         <header class="cover">
-          <p class="eyebrow">Guia PDDE • conferência operacional</p>
+          <p class="eyebrow">${escapeHtml(PROJECT_BRANDING.projectFullName)} • conferência operacional</p>
           <h1>Relatório operacional para conferência e remessa</h1>
           <p class="lede">
             Documento gerado a partir do estado salvo no guia para apoiar conferência interna,
             passagem de tarefa e preparação da remessa para ${escapeHtml(GAD_UNIT.fullLabel)}.
+          </p>
+          <p class="lede" style="margin-top: 12px; font-size: 14px;">
+            ${escapeHtml(PROJECT_BRANDING.creatorCreditLine)}
           </p>
 
           <div class="meta-grid">
@@ -1472,6 +1478,12 @@ export const buildOperationalPrintHtml = (
             Relatório gerado automaticamente pelo guia operacional PDDE. Este material apoia a conferência e
             a organização do processo, mas não substitui a análise normativa do caso concreto nem a verificação
             dos documentos originais e dos registros federais aplicáveis ao exercício.
+          </p>
+          <p class="footer-note">
+            ${escapeHtml(PROJECT_BRANDING.printSignature)} ${escapeHtml(PROJECT_BRANDING.rightsLine)}
+          </p>
+          <p class="footer-note">
+            ${escapeHtml(PROJECT_BRANDING.copyrightLine)}
           </p>
         </footer>
       </article>

@@ -101,6 +101,12 @@ export const guideCapabilityGroups: GuideCapabilityGroup[] = [
         anchor: GUIDE_ANCHORS.sharePack,
       },
       {
+        title: "Exportações assinadas com identidade do projeto",
+        description: "Os arquivos gerados pelo guia saem com crédito do criador, nota autoral e metadados de identidade do projeto.",
+        userValue: "Preserva autoria, reforça a procedência do material e ajuda a manter o crédito em circulações internas.",
+        anchor: GUIDE_ANCHORS.sharePack,
+      },
+      {
         title: "Exportação e importação de progresso",
         description: "Permite salvar o andamento em JSON e restaurar o caso em outro computador.",
         userValue: "Protege a continuidade do trabalho sem depender do mesmo navegador ou máquina.",
@@ -161,6 +167,12 @@ export const guideCapabilityGroups: GuideCapabilityGroup[] = [
         description: "Oferece preferências persistentes de leitura diretamente na interface.",
         userValue: "Melhora conforto visual e acessibilidade para perfis diferentes de uso.",
         anchor: GUIDE_ANCHORS.readingSupport,
+      },
+      {
+        title: "Instalação como aplicativo com ícones próprios",
+        description: "Permite instalar o guia no celular e no Windows com ícone, atalhos e telas de instalação personalizados do projeto.",
+        userValue: "Facilita acesso recorrente e faz o guia parecer uma ferramenta institucional dedicada, não só um site aberto no navegador.",
+        anchor: GUIDE_ANCHORS.installApp,
       },
       {
         title: "Busca e atalhos rápidos",

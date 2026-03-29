@@ -75,6 +75,14 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.recentUpdates,
   },
   {
+    id: "instalar-aplicativo",
+    title: "Instalar o Guia como Aplicativo",
+    content: "Explica como instalar o projeto no celular ou no Windows com ícone próprio e atalho do Guia PDDE.",
+    keywords: ["instalar aplicativo", "pwa", "baixar app", "instalar no celular", "instalar no windows", "tela inicial"],
+    section: sectionTitle("introducao"),
+    anchor: GUIDE_ANCHORS.installApp,
+  },
+  {
     id: "rastreabilidade-fontes",
     title: "Rastreabilidade das Fontes Oficiais",
     content: "Mapa das referências prioritárias com órgão emissor, aplicação prática, motivo de uso e data da última verificação editorial.",
@@ -254,6 +262,7 @@ export function getQuickSuggestions(): SearchItem[] {
     "retomada-leitura",
     "capacidades-guia",
     "novidades-recentes",
+    "instalar-aplicativo",
     "rastreabilidade-fontes",
     "central-operacional",
     "resumo-compartilhavel",

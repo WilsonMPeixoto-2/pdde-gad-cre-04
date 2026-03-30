@@ -124,7 +124,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
             <Headset className="w-5 h-5 text-primary" />
             Suporte ao SEI!RIO
           </h3>
-          <p className="text-muted-foreground mb-4 text-sm sm:text-base text-justified leading-relaxed">
+          <p className="text-muted-foreground mb-4 text-sm sm:text-base text-left sm:text-justify leading-relaxed">
             Para questões técnicas relacionadas ao sistema SEI!RIO, entre em contato com 
             o suporte técnico da plataforma através dos canais oficiais da Prefeitura.
           </p>
@@ -152,7 +152,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
             <Users className="w-5 h-5 text-primary" />
             Administradores Locais SEI!RIO
           </h3>
-          <p className="text-muted-foreground mb-4 text-sm sm:text-base text-justified leading-relaxed">
+          <p className="text-muted-foreground mb-4 text-sm sm:text-base text-left sm:text-justify leading-relaxed">
             Para dúvidas específicas sobre o uso do SEI!RIO na Secretaria Municipal de Educação, 
             entre em contato com os administradores locais do sistema através dos e-mails abaixo.
           </p>
@@ -214,7 +214,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
             <BookOpen className="w-5 h-5 text-primary" />
             Recursos úteis deste guia
           </h3>
-          <p className="mb-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="mb-4 text-sm leading-relaxed text-muted-foreground sm:text-base text-left sm:text-justify">
             Além do conteúdo instrucional, este projeto oferece alguns apoios simples para facilitar o uso no dia a dia, sem substituir a leitura das etapas e das referências oficiais.
           </p>
 
@@ -224,7 +224,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
                 <Search className="h-4 w-4 text-primary" />
                 <h4 className="font-semibold text-foreground">Busca rápida</h4>
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
                 Use a busca do topo para localizar etapas, documentos e referências sem precisar percorrer a página inteira.
               </p>
             </div>
@@ -234,7 +234,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
                 <Printer className="h-4 w-4 text-primary" />
                 <h4 className="font-semibold text-foreground">Impressão e PDF</h4>
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
                 O botão do topo abre a versão para impressão e também permite salvar o guia em PDF para consulta offline.
               </p>
             </div>
@@ -244,7 +244,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
                 <Moon className="h-4 w-4 text-primary" />
                 <h4 className="font-semibold text-foreground">Modo claro ou escuro</h4>
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
                 Você pode alternar o tema visual no topo, conforme o ambiente e o conforto de leitura.
               </p>
             </div>
@@ -259,7 +259,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
                 <ExternalLink className="h-4 w-4 text-primary" />
                 <h4 className="font-semibold text-foreground">Compacta.pdf</h4>
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
                 Se precisar compactar ou juntar PDFs antes de inserir no SEI!RIO, use o projeto complementar{" "}
                 <span className="font-medium text-primary">Compacta.pdf</span>.
               </p>
@@ -272,7 +272,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
           <p className="text-center text-muted-foreground leading-relaxed">
             <strong className="text-foreground text-base sm:text-lg">Antes de solicitar apoio</strong><br />
             <span className="text-sm">
-              Informe o número do processo SEI, o exercício de referência e, se houver, a pendência específica identificada pela escola ou pela CRE.
+              Informe o número do processo SEI, o exercício de referência e, se houver, a pendência específica identificada pela unidade escolar ou pela CRE.
             </span><br />
             <span className="text-xs text-muted-foreground/70 mt-3 inline-flex items-center gap-2">
               <Calendar className="w-3 h-3" />

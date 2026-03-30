@@ -28,8 +28,8 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
       icon: Fingerprint,
     },
     {
-      title: "Identificação da escola",
-      description: "Use a designação correta da unidade para manter coerência entre processo, peças anexadas e análise regional.",
+      title: "Identificação da unidade escolar",
+      description: "Use a designação correta da unidade escolar para manter coerência entre processo, peças anexadas e análise regional.",
       icon: Building2,
     },
   ];
@@ -45,7 +45,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
             </div>
             <div className="content-spacing">
               <h3 className="section-heading">1.1. Sobre esta etapa</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
                 A etapa inicial compreende a autuação do processo administrativo eletrônico, 
                 no qual serão inseridos todos os documentos comprobatórios da prestação de contas do PDDE.
               </p>
@@ -53,7 +53,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
           </div>
 
           <ProfileCallout visibleFor="diretor" variant="info">
-            <p>Certifique-se de ter em mãos o <strong className="text-foreground">CNPJ do CEC</strong>, a <strong className="text-foreground">designação da escola</strong> e o <strong className="text-foreground">exercício de referência</strong> antes de iniciar a autuação.</p>
+            <p>Certifique-se de ter em mãos o <strong className="text-foreground">CNPJ do CEC</strong>, a <strong className="text-foreground">designação da unidade escolar</strong> e o <strong className="text-foreground">exercício de referência</strong> antes de iniciar a autuação.</p>
           </ProfileCallout>
 
           <ProfileCallout visibleFor="gad" variant="warning">
@@ -72,7 +72,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
                   <h4 className="font-heading text-sm font-bold tracking-tight text-foreground sm:text-base">
                     {card.title}
                   </h4>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
                     {card.description}
                   </p>
                 </article>
@@ -85,7 +85,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
         <div className="section-card">
           <h3 className="section-heading">1.2. Iniciando o Processo</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               Para abrir um novo processo no SEI!RIO, localize no menu lateral o comando
               <UiLabelChip className="mx-1 align-middle">Iniciar Processo</UiLabelChip>
               e use esse atalho para começar a autuação.
@@ -102,7 +102,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
         <div className="section-card">
           <h3 className="section-heading">1.3. Seleção do Tipo de Processo</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               Ao selecionar essa opção, o usuário deverá indicar o TIPO DE PROCESSO a ser instaurado. 
               Os tipos de processo disponíveis serão exibidos de acordo com os termos informados na busca.
             </p>
@@ -128,7 +128,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
         <div className="section-card">
           <h3 className="section-heading">1.4. Classificação por Assuntos</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               Este campo será preenchido automaticamente pelo sistema, em conformidade com o Tipo de 
               Processo selecionado pelo usuário na etapa anterior.
             </p>
@@ -160,13 +160,13 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
                 <div>
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Formato básico:</p>
                   <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
-                    PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ da UEx/CEC
+                    PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA UNIDADE ESCOLAR — CNPJ da UEx/CEC
                   </code>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground mb-1 font-medium">Com mais de uma ação:</p>
                   <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm text-foreground whitespace-normal wrap-break-word data-code">
-                    PDDE (Básico + Ações Integradas) — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA — CNPJ
+                    PDDE (Básico + Ações Integradas) — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA UNIDADE ESCOLAR — CNPJ
                   </code>
                 </div>
               </div>
@@ -182,7 +182,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
             </Callout>
 
             <p className="text-sm text-muted-foreground mt-4 p-3 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200/60 dark:border-amber-800/40">
-              <strong className="text-amber-700 dark:text-amber-400">Por que isso importa?</strong> Essa padronização interna evita confusão entre anos, ações e prestações de contas diferentes, sem pretensão de fixar nomenclatura única para toda a SME.
+              <strong className="text-amber-700 dark:text-amber-400">Finalidade da padronização.</strong> Essa padronização interna evita confusão entre anos, ações e prestações de contas diferentes, sem pretensão de fixar nomenclatura única para toda a SME.
             </p>
           </div>
         </div>
@@ -233,7 +233,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
         <div className="section-card">
           <h3 className="section-heading">1.7. Interessados</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               Este campo é utilizado para registrar unidades ou entidades que possuam interesse no processo.
             </p>
             <Callout variant="success" title="Adicione a GAD como interessada:">
@@ -256,7 +256,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
         <div className="section-card">
           <h3 className="section-heading">1.8. Observações da Unidade</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               O campo "Observações desta unidade" poderá ser preenchido por cada unidade em que o processo 
               tramitar. As observações inseridas por outras unidades aparecerão, na tela Alterar Processo, 
               separadamente, na Lista de observações de outras unidades.
@@ -276,7 +276,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
         <div className="section-card">
           <h3 className="section-heading">1.9. Salvando o Processo</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               Após verificar todos os campos, conclua a autuação pelo botão
               <UiLabelChip tone="success" className="mx-1 align-middle">Salvar</UiLabelChip>
               para criar o processo.
@@ -296,7 +296,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
         <div className="section-card">
           <h3 className="section-heading">1.10. Confirmação da Criação</h3>
           <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               A criação do Processo será confirmada com a tela abaixo:
             </p>
             

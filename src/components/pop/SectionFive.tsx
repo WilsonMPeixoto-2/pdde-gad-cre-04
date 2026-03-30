@@ -5,7 +5,7 @@ import { ProfileCallout } from "./ProfileCallout";
 import { SeiMockup } from "./SeiMockup";
 
 const blockDocuments = [
-  "Ofício de encaminhamento da escola gerado no SEI!RIO",
+  "Ofício de encaminhamento da unidade escolar gerado no SEI!RIO",
   "Despachos ou declarações internas produzidas pela unidade",
   "Qualquer outra peça interna que exija assinatura eletrônica antes da remessa",
 ];
@@ -166,7 +166,7 @@ export const SectionFive = () => {
 
         <ProfileCallout visibleFor="gad" variant="warning">
           <p>
-            Ao receber o processo, verifique se a escola utilizou o bloco apenas para peças internas.
+            Ao receber o processo, verifique se a unidade escolar utilizou o bloco apenas para peças internas.
             Quando nota fiscal ou ata digitalizada aparece como documento assinado, isso costuma indicar
             uso incorreto do fluxo.
           </p>

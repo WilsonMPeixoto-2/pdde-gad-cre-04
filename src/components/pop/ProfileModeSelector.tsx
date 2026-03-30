@@ -6,8 +6,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 const modes: { value: ProfileMode; label: string; shortLabel: string; icon: typeof School; description: string }[] = [
   {
     value: "diretor",
-    label: "Diretor(a) / Escola",
-    shortLabel: "Escola",
+    label: "Diretor(a) / Unidade Escolar",
+    shortLabel: "Unidade Escolar",
     icon: School,
     description: "Foco em ações da unidade escolar, checklist e modelos",
   },

@@ -39,7 +39,7 @@ const templates: Template[] = [
     title: "Ofício de Encaminhamento",
     description: "Ofício padrão para encaminhamento da prestação de contas PDDE",
     fields: [
-      { key: "escola", label: "Nome da Escola", placeholder: "E.M. João da Silva" },
+      { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
       { key: "cnpj", label: "CNPJ da UEx", placeholder: "00.000.000/0001-00" },
       { key: "exercicio", label: "Exercício Financeiro", placeholder: "2025" },
       { key: "diretor", label: "Nome do(a) Diretor(a)", placeholder: "Maria Oliveira" },
@@ -47,7 +47,7 @@ const templates: Template[] = [
     ],
     generate: (v) =>
       `OFÍCIO Nº ____/${v.exercicio || "____"}\n\n` +
-      `${v.escola || "[NOME DA ESCOLA]"}\n` +
+      `${v.escola || "[NOME DA UNIDADE ESCOLAR]"}\n` +
       `CNPJ: ${v.cnpj || "[CNPJ]"}\n\n` +
       `À Gerência de Administração — GAD\n` +
       `4ª Coordenadoria Regional de Educação\n\n` +
@@ -55,12 +55,12 @@ const templates: Template[] = [
       `Senhor(a) Gerente,\n\n` +
       `Encaminho, para análise e aprovação, a prestação de contas referente aos recursos do ` +
       `Programa Dinheiro Direto na Escola (PDDE), exercício ${v.exercicio || "[ANO]"}, ` +
-      `da ${v.escola || "[NOME DA ESCOLA]"}, CNPJ ${v.cnpj || "[CNPJ]"}, ` +
+      `da unidade escolar ${v.escola || "[NOME DA UNIDADE ESCOLAR]"}, CNPJ ${v.cnpj || "[CNPJ]"}, ` +
       `conforme documentação acostada aos autos.\n\n` +
       `Atenciosamente,\n\n` +
       `${v.diretor || "[NOME DO(A) DIRETOR(A)]"}\n` +
       `Matrícula: ${v.matricula || "[MATRÍCULA]"}\n` +
-      `Diretor(a) da ${v.escola || "[NOME DA ESCOLA]"}`,
+      `Diretor(a) da unidade escolar ${v.escola || "[NOME DA UNIDADE ESCOLAR]"}`,
   },
   {
     id: "despacho",
@@ -68,16 +68,16 @@ const templates: Template[] = [
     description: "Despacho padrão da GAD para conferência de documentos",
     fields: [
       { key: "processo", label: "Nº do Processo SEI", placeholder: "SEI-000000/000000/2025" },
-      { key: "escola", label: "Nome da Escola", placeholder: "E.M. João da Silva" },
+      { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
       { key: "exercicio", label: "Exercício Financeiro", placeholder: "2025" },
       { key: "servidor", label: "Nome do Servidor GAD", placeholder: "Carlos Souza" },
     ],
     generate: (v) =>
       `DESPACHO\n\n` +
       `Processo: ${v.processo || "[Nº PROCESSO SEI]"}\n` +
-      `Assunto: Prestação de Contas PDDE — ${v.escola || "[ESCOLA]"} — Exercício ${v.exercicio || "[ANO]"}\n\n` +
+      `Assunto: Prestação de Contas PDDE — ${v.escola || "[UNIDADE ESCOLAR]"} — Exercício ${v.exercicio || "[ANO]"}\n\n` +
       `Trata-se de prestação de contas dos recursos do PDDE, exercício ${v.exercicio || "[ANO]"}, ` +
-      `encaminhada pela ${v.escola || "[ESCOLA]"}.\n\n` +
+      `encaminhada pela unidade escolar ${v.escola || "[UNIDADE ESCOLAR]"}.\n\n` +
       `Após análise da documentação constante nos autos, verificou-se que:\n\n` +
       `( ) A prestação de contas está REGULAR, com os documentos essenciais apresentados e sem inconsistência aparente em relação aos registros federais aplicáveis.\n` +
       `( ) A prestação de contas apresenta PENDÊNCIA(S), conforme apontamentos abaixo.\n\n` +

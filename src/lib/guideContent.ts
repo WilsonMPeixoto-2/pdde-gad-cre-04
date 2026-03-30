@@ -163,7 +163,7 @@ export const guideHowToSteps = contentSections
   }));
 
 export const seiProcessTreeDocuments = [
-  { name: "Ofício de encaminhamento da escola", statusLabel: "Assinado", tone: "signed" as const },
+  { name: "Ofício de encaminhamento da unidade escolar", statusLabel: "Assinado", tone: "signed" as const },
   { name: "Demonstrativo ou registro federal aplicável ao exercício", statusLabel: "Assinado", tone: "signed" as const },
   { name: "Ata do CEC digitalizada", statusLabel: "Autenticado", tone: "authenticated" as const },
   { name: "Extrato bancário do exercício", statusLabel: "Autenticado", tone: "authenticated" as const },
@@ -171,7 +171,7 @@ export const seiProcessTreeDocuments = [
 ];
 
 export const signatureActionExamples = [
-  { label: "Ofício de encaminhamento da escola", action: "Assinar", tone: "signature" as const },
+  { label: "Ofício de encaminhamento da unidade escolar", action: "Assinar", tone: "signature" as const },
   { label: "Despacho de análise ou aprovação da GAD", action: "Assinar", tone: "signature" as const },
   { label: "Ata do CEC digitalizada", action: "Autenticar", tone: "authentication" as const },
   { label: "Nota fiscal em PDF ou escaneada", action: "Autenticar", tone: "authentication" as const },
@@ -217,7 +217,7 @@ export const processFlowSteps: ProcessFlowStep[] = [
     commonErrors: [
       "Selecionar tipo de processo diferente do fluxo de prestação de contas do CEC",
       "Não incluir a GAD e a unidade escolar como interessadas",
-      "Usar especificação sem exercício, escola ou CNPJ",
+      "Usar especificação sem exercício, unidade escolar ou CNPJ",
     ],
     nextStep: "Instrução processual com o checklist mínimo da prestação de contas",
   },
@@ -318,7 +318,7 @@ export const processFlowSteps: ProcessFlowStep[] = [
       "Conferir o retorno das assinaturas antes de seguir para a remessa",
     ],
     documents: [
-      "Ofício de encaminhamento da escola",
+      "Ofício de encaminhamento da unidade escolar",
       "Despachos ou declarações internas produzidas no SEI!RIO",
     ],
     commonErrors: [

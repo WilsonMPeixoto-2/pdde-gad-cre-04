@@ -187,7 +187,7 @@ export const HeroCover = () => {
             className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed font-light"
             style={{ textWrap: "pretty" as CSSProperties["textWrap"] }}
           >
-            Guia operacional para diretores(as) e gestores(as) escolares na instrução 
+            Guia operacional para diretores(as) e gestores(as) de unidades escolares na instrução 
             da Prestação de Contas do PDDE diretamente no SEI!RIO.
           </p>
         </div>

@@ -16,7 +16,7 @@ export const SectionTwo = () => {
           <div className="rounded-[1.35rem] border border-border/60 bg-background/80 p-4 shadow-soft">
             <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-sky-700 dark:text-sky-400">
               <CircleHelp className="h-4 w-4" />
-              O que é
+              Escopo da etapa
             </h3>
             <p className="text-sm leading-relaxed text-foreground/80 sm:text-base text-left sm:text-justify">
               O <strong className="text-foreground font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-foreground font-semibold">autuação do processo</strong>.
@@ -27,7 +27,7 @@ export const SectionTwo = () => {
           <div className="rounded-[1.35rem] border border-border/60 bg-background/80 p-4 shadow-soft">
             <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
               <ShieldCheck className="h-4 w-4" />
-              Por que importa
+              Importância da etapa
             </h3>
             <p className="text-sm leading-relaxed text-foreground/80 sm:text-base text-left sm:text-justify">
               Esta etapa é <strong className="text-foreground font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
@@ -38,7 +38,7 @@ export const SectionTwo = () => {
           <div className="rounded-[1.35rem] border border-sky-200/60 bg-sky-50/80 p-4 shadow-soft dark:border-sky-800/40 dark:bg-sky-950/40">
             <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary">
               <ListChecks className="h-4 w-4" />
-              O que você precisa fazer
+              Providências imediatas
             </h3>
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
@@ -85,7 +85,7 @@ export const SectionTwo = () => {
       </div>
 
       {/* Profile Callouts */}
-      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola">
+      <ProfileCallout visibleFor="diretor" variant="info">
         Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme for reunindo — o progresso é salvo automaticamente no seu navegador.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-4">
@@ -209,46 +209,6 @@ export const SectionTwo = () => {
       {/* Process Journey Map */}
       <div id={GUIDE_ANCHORS.journey} className="mb-8 scroll-mt-28">
         <ProcessJourneyMap />
-      </div>
-
-      {/* Bloco 2: Roteiro de Instrução - AGORA APÓS MODELOS */}
-      <div className="mb-8 section-card bg-gradient-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-sm">
-        <div className="content-spacing">
-          <h3 className="section-heading text-primary border-b-primary/20">
-            Roteiro de Instrução para as próximas etapas deste guia
-          </h3>
-          <p className="mb-5 text-sm leading-relaxed text-foreground/80 sm:text-base text-left sm:text-justify">
-            A sequência deste manual detalhará os procedimentos técnicos para a composição dos autos, divididos conforme a origem do documento:
-          </p>
-          <div className="space-y-4">
-            <div className="p-5 bg-gradient-to-r from-card to-sky-50/50 dark:to-sky-950/20 rounded-xl border border-sky-200/60 dark:border-sky-800/40 shadow-sm hover:shadow-md transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 text-white font-bold text-sm shrink-0 shadow-md">
-                  3
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-foreground mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 dark:text-sky-400 font-bold uppercase tracking-wide">EXTERNOS</span></h4>
-                  <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-                    Documentos gerados fora do ambiente do sistema <strong className="text-foreground">SEI!RIO</strong> (<strong className="text-sky-600 dark:text-sky-400">digitalizados</strong> ou <strong className="text-emerald-600 dark:text-emerald-400 uppercase">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="p-5 bg-gradient-to-r from-card to-primary/5 rounded-xl border border-primary/20 shadow-sm hover:shadow-md transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-sm shrink-0 shadow-md">
-                  4
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-foreground mb-2">Tópico 4 – Autenticação de Documentos</h4>
-                  <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-                    Procedimento para <strong className="text-foreground">autenticar documentos externos</strong> incluídos no processo, validando sua integridade e conformidade.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
     </section>

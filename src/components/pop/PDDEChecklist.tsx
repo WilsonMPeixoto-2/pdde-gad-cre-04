@@ -359,7 +359,7 @@ export const PDDEChecklist = () => {
         <div className="p-3.5 bg-warning/5 border border-warning/20 rounded-xl mb-4 flex items-start gap-3 animate-fade-in">
           <AlertTriangle className="w-4 h-4 text-warning shrink-0 mt-0.5" />
           <div>
-            <p className="font-semibold text-warning text-xs mb-0.5">Despesa de capital detectada?</p>
+                      <p className="font-semibold text-warning text-xs mb-0.5">Despesa de capital identificada</p>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Se houver despesa de capital, lembre-se de preencher a <strong className="text-foreground">Relação de bens</strong> e providenciar a <strong className="text-foreground">incorporação patrimonial</strong>.
             </p>
@@ -386,7 +386,7 @@ export const PDDEChecklist = () => {
           <div>
             <p className="font-semibold text-primary text-sm mb-1">Autenticação de documento digitalizado</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Quando o documento externo tiver sido <strong className="text-foreground">assinado ou carimbado em meio físico e depois digitalizado</strong>, a autenticação deve ser feita no momento da inserção do anexo por quem o encartar no processo, declarando que a cópia digital <strong className="text-foreground">"confere com o original"</strong>. Os originais e comprovantes devem permanecer arquivados na sede da UEx/escola pelo prazo de <strong className="text-foreground">5 anos</strong>, nos termos dos arts. 28 e 33, § 1º, I, da{" "}
+                Quando o documento externo tiver sido <strong className="text-foreground">assinado ou carimbado em meio físico e depois digitalizado</strong>, a autenticação deve ser feita no momento da inserção do anexo por quem o encartar no processo, declarando que a cópia digital <strong className="text-foreground">"confere com o original"</strong>. Os originais e comprovantes devem permanecer arquivados na sede da UEx/unidade escolar pelo prazo de <strong className="text-foreground">5 anos</strong>, nos termos dos arts. 28 e 33, § 1º, I, da{" "}
                 <a
                   href={externalResources.resolution15.href}
                   target="_blank"

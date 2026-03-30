@@ -74,7 +74,7 @@ const registrationCards = [
 export const SectionFour = () => {
   return (
     <section className="animate-fade-in">
-      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Unidade Escolar" className="mb-6">
         <strong className="text-foreground">Autentique apenas os documentos digitalizados.</strong> Arquivos nato-digitais já entram no processo como originais e não seguem essa etapa.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
@@ -128,13 +128,13 @@ export const SectionFour = () => {
                     <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                       Caracterização
                     </p>
-                    <p className="mt-1 text-sm leading-relaxed text-foreground/80">{rule.description}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-foreground/80 text-left sm:text-justify">{rule.description}</p>
                   </div>
                   <div className="rounded-2xl border border-border/50 bg-background/80 p-4">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                       Consequência prática
                     </p>
-                    <p className="mt-1 text-sm leading-relaxed text-foreground/80">{rule.practical}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-foreground/80 text-left sm:text-justify">{rule.practical}</p>
                   </div>
                 </div>
               </article>
@@ -179,7 +179,7 @@ export const SectionFour = () => {
                 </div>
                 <div>
                   <h4 className="mb-1 font-semibold text-foreground">{item.title}</h4>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">{item.text}</p>
                 </div>
               </div>
             ))}
@@ -218,7 +218,7 @@ export const SectionFour = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">{item.title}</h4>
-                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">{item.description}</p>
                     </div>
                   </div>
                 </div>
@@ -243,7 +243,7 @@ export const SectionFour = () => {
                   Base federal
                 </span>
               </div>
-              <p className="text-sm leading-relaxed text-foreground/80">
+              <p className="text-sm leading-relaxed text-foreground/80 text-left sm:text-justify">
                 O Decreto nº 8.539/2015 diferencia documento <strong className="text-foreground">nato-digital</strong> e documento <strong className="text-foreground">digitalizado</strong>, e estrutura a prática de atos processuais em meio eletrônico.
               </p>
               <a
@@ -263,7 +263,7 @@ export const SectionFour = () => {
                   Base municipal
                 </span>
               </div>
-              <p className="text-sm leading-relaxed text-foreground/80">
+              <p className="text-sm leading-relaxed text-foreground/80 text-left sm:text-justify">
                 O Decreto Rio nº 57.250/2025 organiza o SEI!RIO, prevê a tramitação eletrônica dos atos, disciplina a juntada de documento externo e estabelece que apenas <strong className="text-foreground">documentos produzidos no sistema</strong> podem ser assinados eletronicamente no SEI.Rio.
               </p>
               <a
@@ -281,7 +281,7 @@ export const SectionFour = () => {
           <div className="mt-4 rounded-[1.35rem] border border-border/60 bg-secondary/35 p-4">
             <div className="flex items-start gap-3">
               <Shield className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-              <p className="text-sm leading-relaxed text-foreground/80">
+              <p className="text-sm leading-relaxed text-foreground/80 text-left sm:text-justify">
                 Em termos práticos: <strong className="text-foreground">documento interno do SEI!RIO</strong> é assinado eletronicamente; <strong className="text-foreground">documento externo digitalizado</strong> é autenticado; <strong className="text-foreground">documento externo nato-digital</strong> é juntado como original.
               </p>
             </div>

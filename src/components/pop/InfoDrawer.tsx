@@ -235,7 +235,7 @@ export const AutenticacaoVsAssinaturaContent = () => (
     />
 
     <div className="p-4 bg-card rounded-xl border border-border/50">
-      <h4 className="font-semibold text-foreground mb-3">Quando usar cada um?</h4>
+      <h4 className="font-semibold text-foreground mb-3">Uso adequado de cada procedimento</h4>
       <div className="space-y-2 text-sm">
         {signatureActionExamples.map((item) => (
           <div key={item.label} className="flex items-center gap-2">

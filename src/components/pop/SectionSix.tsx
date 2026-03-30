@@ -15,7 +15,7 @@ const finalizationFlow = [
     step: "1",
     title: "Tramitação para a GAD",
     description:
-      "A escola encaminha o processo completo para a Gerência de Administração da 4ª CRE, encerrando a fase operacional da unidade.",
+      "A unidade escolar encaminha o processo completo para a Gerência de Administração da 4ª CRE, encerrando a fase operacional da unidade.",
   },
   {
     step: "2",
@@ -47,9 +47,9 @@ export const SectionSix = () => {
               <Send className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
             </div>
             <div className="space-y-3">
-              <h3 className="font-semibold text-foreground">Encaminhamento e encerramento da fase escolar</h3>
+              <h3 className="font-semibold text-foreground">Encaminhamento e encerramento da fase da unidade escolar</h3>
               <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
-                Com a assinatura eletrônica concluída, a escola deve tramitar o processo para a GAD/4ª CRE.
+                Com a assinatura eletrônica concluída, a unidade escolar deve tramitar o processo para a GAD/4ª CRE.
                 A partir desse ponto, o fluxo passa para análise técnica da CRE, mas a unidade escolar precisa
                 continuar acompanhando o andamento para responder eventuais exigências ou pedidos de complemento.
               </p>
@@ -89,7 +89,7 @@ export const SectionSix = () => {
                 <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                 <p className="text-sm text-foreground leading-relaxed">
                   Se houver assinatura pendente ou documento essencial faltando, não faça a remessa. Corrigir
-                  antes de enviar evita devolução do processo e retrabalho para a escola e para a GAD.
+                  antes de enviar evita devolução do processo e retrabalho para a unidade escolar e para a GAD.
                 </p>
               </div>
             </div>
@@ -97,7 +97,7 @@ export const SectionSix = () => {
         </div>
 
         <div className="section-card p-5 sm:p-6">
-          <h3 className="font-semibold text-foreground mb-5">6.2. O que acontece após o envio</h3>
+          <h3 className="font-semibold text-foreground mb-5">6.2. Fluxo após o envio</h3>
 
           <div className="space-y-4">
             {finalizationFlow.map((item) => (
@@ -123,7 +123,7 @@ export const SectionSix = () => {
         </Callout>
 
         <Callout variant="info" title="Acompanhamento do processo" icon={UserCheck}>
-          A escola pode acompanhar o andamento diretamente no SEI!RIO. Caso a GAD identifique pendências,
+          A unidade escolar pode acompanhar o andamento diretamente no SEI!RIO. Caso a GAD identifique pendências,
           o processo poderá retornar para ajuste documental, complementação ou correção de fluxo.
         </Callout>
 

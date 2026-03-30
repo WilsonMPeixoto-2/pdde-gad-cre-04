@@ -1,9 +1,9 @@
 import { useEffect, useEffectEvent, useRef, useState } from "react";
-import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export const ReadingProgressBar = () => {
   const [progress, setProgress] = useState(0);
-  const { resolvedReducedMotion } = useReadingExperience();
+  const reducedMotion = useReducedMotion();
   const scrollRafRef = useRef<number | null>(null);
   const resizeRafRef = useRef<number | null>(null);
   const totalHeightRef = useRef(0);
@@ -58,7 +58,7 @@ export const ReadingProgressBar = () => {
           width: `${progress}%`,
           background: 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--accent-glow)), hsl(var(--success)))',
           backgroundSize: '200% 100%',
-          animation: resolvedReducedMotion ? 'none' : 'shimmer 3s ease-in-out infinite'
+          animation: reducedMotion ? 'none' : 'shimmer 3s ease-in-out infinite'
         }}
       >
         {/* Leading edge glow */}
@@ -67,7 +67,7 @@ export const ReadingProgressBar = () => {
           style={{
             background: 'linear-gradient(90deg, transparent, hsl(var(--accent-glow) / 0.6))',
             filter: 'blur(4px)',
-            animation: resolvedReducedMotion ? 'none' : 'leading-glow 2s ease infinite'
+            animation: reducedMotion ? 'none' : 'leading-glow 2s ease infinite'
           }}
         />
       </div>

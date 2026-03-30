@@ -1,10 +1,15 @@
 import {
   GAD_UNIT,
-  LEGACY_GUIDE_ANCHORS as GUIDE_ANCHORS,
+  GUIDE_ANCHORS,
   processFlowSteps,
   type ProcessFlowStep,
 } from "@/lib/guideContent";
 import { PROJECT_BRANDING, getProjectJsonBranding } from "@/lib/projectBranding";
+
+const OPERATIONAL_GUIDE_ANCHORS = {
+  workspace: "dados-processo-operacional",
+  readiness: "diagnostico-remessa-gad",
+} as const;
 
 export interface ChecklistItemDefinition {
   id: number;
@@ -748,7 +753,7 @@ export const buildOperationalReport = (snapshot: OperationalSnapshot): Operation
   const nextAction =
     missingWorkspaceFields.length > 0
       ? {
-          anchor: GUIDE_ANCHORS.workspace,
+      anchor: OPERATIONAL_GUIDE_ANCHORS.workspace,
           title: "Completar os dados base do processo",
           description: `Preencha ${missingWorkspaceFields
             .slice(0, 2)
@@ -772,20 +777,20 @@ export const buildOperationalReport = (snapshot: OperationalSnapshot): Operation
             }
           : complementaryPending.length > 0
             ? {
-                anchor: GUIDE_ANCHORS.readiness,
+      anchor: OPERATIONAL_GUIDE_ANCHORS.readiness,
                 title: "Revisar alertas complementares antes de enviar",
                 description: `O processo já está apto no núcleo mínimo, mas ainda há ${complementaryPending.length} alerta(s) complementar(es) para avaliar conforme o caso.`,
                 ctaLabel: "Abrir diagnóstico",
               }
             : remittanceDone
               ? {
-                  anchor: GUIDE_ANCHORS.readiness,
+      anchor: OPERATIONAL_GUIDE_ANCHORS.readiness,
                   title: "Acompanhar análise e diligências da GAD",
                   description: "A remessa já foi marcada. Use o diagnóstico e o despacho final para acompanhar pendências supervenientes.",
                   ctaLabel: "Revisar situação atual",
                 }
               : {
-                  anchor: GUIDE_ANCHORS.readiness,
+      anchor: OPERATIONAL_GUIDE_ANCHORS.readiness,
                   title: "Gerar o diagnóstico final da remessa",
                   description: "Checklist essencial e jornada pré-remessa estão completos. Agora vale exportar o diagnóstico antes de tramitar.",
                   ctaLabel: "Gerar diagnóstico",

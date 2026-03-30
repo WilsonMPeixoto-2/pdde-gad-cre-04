@@ -41,23 +41,6 @@ export const GUIDE_ANCHORS = {
   journey: "mapa-jornada",
 } as const;
 
-export const LEGACY_GUIDE_ANCHORS = {
-  ...GUIDE_ANCHORS,
-  readingSupport: "retomada-conforto-pdde",
-  capabilities: "capacidades-do-guia-pdde",
-  recentUpdates: "novidades-recentes-guia-pdde",
-  installApp: "instalar-aplicativo-guia-pdde",
-  quickActions: "hub-acoes-rapidas",
-  annualGovernance: "governanca-anual-do-guia-pdde",
-  referenceGovernance: "rastreabilidade-fontes-oficiais-pdde",
-  commandCenter: "central-operacional-pdde",
-  workspace: "dados-processo-operacional",
-  naming: "kit-nomenclatura-pdde",
-  sharePack: "resumo-compartilhavel-pdde",
-  caseNotes: "notas-operacionais-pdde",
-  readiness: "diagnostico-remessa-gad",
-} as const;
-
 export const guideAnchorParentSections: Record<string, string> = {
   [GUIDE_ANCHORS.checklist]: "secao-2",
   [GUIDE_ANCHORS.models]: "secao-2",

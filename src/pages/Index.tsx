@@ -3,9 +3,6 @@ import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
-import { SectionIntro } from "@/components/pop/SectionIntro";
-import { ScopeCallout } from "@/components/pop/ScopeCallout";
-import { SectionOne } from "@/components/pop/SectionOne";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
@@ -14,6 +11,9 @@ import { guideSectionIds, guideSectionsById } from "@/lib/guideContent";
 // Lazy load non-critical interactive widgets
 const BackToTop = lazy(() => import("@/components/pop/BackToTop").then(m => ({ default: m.BackToTop })));
 const GuidedWizard = lazy(() => import("@/components/pop/GuidedWizard").then(m => ({ default: m.GuidedWizard })));
+const SectionIntro = lazy(() => import("@/components/pop/SectionIntro").then(m => ({ default: m.SectionIntro })));
+const ScopeCallout = lazy(() => import("@/components/pop/ScopeCallout").then(m => ({ default: m.ScopeCallout })));
+const SectionOne = lazy(() => import("@/components/pop/SectionOne").then(m => ({ default: m.SectionOne })));
 
 // Lazy load below-the-fold sections for better initial load performance
 const SectionTwo = lazy(() => import("@/components/pop/SectionTwo").then(m => ({ default: m.SectionTwo })));
@@ -157,18 +157,24 @@ const Index = () => {
           <div className="mx-auto w-full max-w-[78rem] px-4 py-8 sm:px-6 sm:py-10 xl:px-10">
             <div className="space-y-10">
               <AnimatedSection>
-                <SectionIntro />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionIntro />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={50}>
-                <ScopeCallout />
+                <Suspense fallback={<SectionLoader />}>
+                  <ScopeCallout />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>
                 {renderSectionDivider("secao-1")}
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <SectionOne />
+                <Suspense fallback={<SectionLoader />}>
+                  <SectionOne />
+                </Suspense>
               </AnimatedSection>
 
               <AnimatedSection delay={100}>

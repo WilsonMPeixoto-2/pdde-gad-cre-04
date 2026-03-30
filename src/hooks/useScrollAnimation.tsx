@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useReadingExperience } from "@/contexts/ReadingExperienceContext";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -10,11 +10,11 @@ interface UseScrollAnimationOptions {
 export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
   const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", triggerOnce = true } = options;
   const ref = useRef<HTMLDivElement>(null);
-  const { resolvedReducedMotion } = useReadingExperience();
-  const [isVisible, setIsVisible] = useState(() => resolvedReducedMotion);
+  const reducedMotion = useReducedMotion();
+  const [isVisible, setIsVisible] = useState(() => reducedMotion);
 
   useEffect(() => {
-    if (resolvedReducedMotion) return;
+    if (reducedMotion) return;
 
     const element = ref.current;
     if (!element) return;
@@ -35,7 +35,7 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [resolvedReducedMotion, threshold, rootMargin, triggerOnce]);
+  }, [reducedMotion, threshold, rootMargin, triggerOnce]);
 
-  return { ref, isVisible: resolvedReducedMotion || isVisible };
+  return { ref, isVisible: reducedMotion || isVisible };
 };

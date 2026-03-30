@@ -11,6 +11,9 @@ const standardFontDataUrl = `${pathToFileURL(path.join(pdfjsDistRoot, "standard_
 
 export interface PdfAnalysis {
   bytes: number;
+  metadataAuthor: string;
+  metadataSubject: string;
+  metadataTitle: string;
   pageCount: number;
   pageLabel: string;
   sha256: string;
@@ -55,8 +58,22 @@ export const analyzePdfFile = async (filePath: string): Promise<PdfAnalysis> => 
     verbosity: VerbosityLevel.ERRORS,
   });
   const pdf = await loadingTask.promise;
+  let metadataTitle = "";
+  let metadataAuthor = "";
+  let metadataSubject = "";
 
   let text = "";
+
+  try {
+    const metadata = await pdf.getMetadata();
+    const info = metadata.info as Record<string, unknown> | undefined;
+
+    metadataTitle = typeof info?.Title === "string" ? info.Title.trim() : "";
+    metadataAuthor = typeof info?.Author === "string" ? info.Author.trim() : "";
+    metadataSubject = typeof info?.Subject === "string" ? info.Subject.trim() : "";
+  } catch {
+    // Alguns PDFs do acervo não trazem metadados consistentes; a auditoria segue pelo binário e pelos sinais textuais.
+  }
 
   for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
     const page = await pdf.getPage(pageNumber);
@@ -66,6 +83,9 @@ export const analyzePdfFile = async (filePath: string): Promise<PdfAnalysis> => 
 
   return {
     bytes,
+    metadataAuthor,
+    metadataSubject,
+    metadataTitle,
     pageCount: pdf.numPages,
     pageLabel: formatPageLabel(pdf.numPages),
     sha256,

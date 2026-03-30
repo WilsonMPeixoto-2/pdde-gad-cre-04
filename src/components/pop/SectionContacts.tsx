@@ -212,69 +212,83 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
         <div className="section-card p-5 sm:p-6 no-print">
           <h3 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
             <BookOpen className="w-5 h-5 text-primary" />
-            Recursos úteis deste guia
+            Apoios rápidos de consulta
           </h3>
-          <p className="mb-4 text-sm leading-relaxed text-muted-foreground sm:text-base text-left sm:text-justify">
-            Além do conteúdo instrucional, este projeto oferece alguns apoios simples para facilitar o uso no dia a dia, sem substituir a leitura das etapas e das referências oficiais.
+          <p className="mb-5 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base text-left sm:text-justify">
+            Estes recursos ajudam a localizar informações, ajustar a leitura e preparar arquivos de apoio, mas não substituem a leitura integral do procedimento nem das referências oficiais.
           </p>
 
-          <div className="grid gap-3 md:grid-cols-2">
-            <div className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4">
-              <div className="mb-2 flex items-center gap-2">
-                <Search className="h-4 w-4 text-primary" />
-                <h4 className="font-semibold text-foreground">Busca rápida</h4>
-              </div>
-              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-                Use a busca do topo para localizar etapas, documentos e referências sem precisar percorrer a página inteira.
-              </p>
-            </div>
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]">
+            <div className="rounded-[1.4rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/55 p-5 shadow-soft">
+              <div className="space-y-4">
+                {[
+                  {
+                    icon: Search,
+                    title: "Busca no guia",
+                    text: "Use a busca do topo para localizar etapas, documentos e referências sem percorrer toda a página.",
+                  },
+                  {
+                    icon: Printer,
+                    title: "Impressão e PDF",
+                    text: "O botão do topo abre a versão para impressão e também permite salvar o guia em PDF para consulta fora da internet.",
+                  },
+                  {
+                    icon: Moon,
+                    title: "Modo claro ou escuro",
+                    text: "Você pode alternar o tema visual no topo para adequar a leitura ao ambiente de trabalho.",
+                  },
+                ].map((item) => {
+                  const Icon = item.icon;
 
-            <div className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4">
-              <div className="mb-2 flex items-center gap-2">
-                <Printer className="h-4 w-4 text-primary" />
-                <h4 className="font-semibold text-foreground">Impressão e PDF</h4>
+                  return (
+                    <div key={item.title} className="flex items-start gap-3 border-b border-border/45 pb-4 last:border-b-0 last:pb-0">
+                      <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                        <Icon className="h-4.5 w-4.5" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground">{item.title}</h4>
+                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
+                          {item.text}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-                O botão do topo abre a versão para impressão e também permite salvar o guia em PDF para consulta offline.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4">
-              <div className="mb-2 flex items-center gap-2">
-                <Moon className="h-4 w-4 text-primary" />
-                <h4 className="font-semibold text-foreground">Modo claro ou escuro</h4>
-              </div>
-              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-                Você pode alternar o tema visual no topo, conforme o ambiente e o conforto de leitura.
-              </p>
             </div>
 
             <a
               href="https://compacta02.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4 transition-all duration-300 hover:border-primary/30 hover:from-primary/10 hover:to-primary/5"
+              className="group rounded-[1.4rem] border border-primary/15 bg-linear-to-br from-primary/6 via-background to-emerald-50/65 p-5 shadow-soft transition-all duration-300 hover:border-primary/30 hover:shadow-[0_18px_36px_-28px_rgba(8,32,76,0.28)] dark:to-emerald-950/20"
             >
-              <div className="mb-2 flex items-center gap-2">
-                <ExternalLink className="h-4 w-4 text-primary" />
-                <h4 className="font-semibold text-foreground">Compacta.pdf</h4>
+              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/14">
+                <ExternalLink className="h-5 w-5" />
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
-                Se precisar compactar ou juntar PDFs antes de inserir no SEI!RIO, use o projeto complementar{" "}
-                <span className="font-medium text-primary">Compacta.pdf</span>.
+              <h4 className="font-heading text-lg font-bold tracking-tight text-foreground">
+                Compacta.pdf
+              </h4>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
+                Se for necessário compactar ou reunir PDFs antes da inserção no SEI!RIO, utilize o{" "}
+                <span className="font-semibold text-primary">Compacta.pdf</span>.
+              </p>
+              <p className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                Abrir ferramenta
+                <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </p>
             </a>
           </div>
         </div>
 
         {/* Footer Note */}
-        <div className="p-6 bg-linear-to-br from-primary/10 via-primary/5 to-secondary rounded-xl border border-border/50">
-          <p className="text-center text-muted-foreground leading-relaxed">
-            <strong className="text-foreground text-base sm:text-lg">Antes de solicitar apoio</strong><br />
+        <div className="rounded-[1.6rem] border border-border/50 bg-linear-to-br from-primary/10 via-primary/4 to-secondary p-6">
+          <p className="text-center leading-relaxed text-muted-foreground">
+            <strong className="text-base text-foreground sm:text-lg">Antes de solicitar apoio</strong><br />
             <span className="text-sm">
               Informe o número do processo SEI, o exercício de referência e, se houver, a pendência específica identificada pela unidade escolar ou pela CRE.
             </span><br />
-            <span className="text-xs text-muted-foreground/70 mt-3 inline-flex items-center gap-2">
+            <span className="mt-3 inline-flex items-center gap-2 text-xs text-muted-foreground/70">
               <Calendar className="w-3 h-3" />
               {`Última atualização: ${GUIDE_VERSION.lastUpdatedText}`}
             </span>

@@ -34,14 +34,19 @@ export const SectionIntro = () => {
         </div>
 
         {/* Signatures */}
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mt-8 pt-6 border-t border-border">
-          <div className="rounded-[1.4rem] border border-border/60 bg-gradient-to-br from-secondary/60 to-background p-5 text-center shadow-soft dark:from-secondary/30 dark:to-background sm:p-6">
-            <p className="font-heading text-sm font-bold text-foreground sm:text-base">Fátima das Graças Lima Barros</p>
-            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Coordenadora – E/4ª CRE</p>
-          </div>
-          <div className="rounded-[1.4rem] border border-border/60 bg-gradient-to-br from-secondary/60 to-background p-5 text-center shadow-soft dark:from-secondary/30 dark:to-background sm:p-6">
-            <p className="font-heading text-sm font-bold text-foreground sm:text-base">Bianca Barreto da Fonseca Coelho</p>
-            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Gerente – E/4ª CRE/GAD</p>
+        <div className="mt-8 border-t border-border/55 pt-6">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Assinaturas institucionais
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+            <div className="rounded-[1.45rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/50 p-5 shadow-soft sm:p-6">
+              <p className="font-heading text-sm font-bold text-foreground sm:text-base">Fátima das Graças Lima Barros</p>
+              <p className="mt-1 text-xs text-muted-foreground sm:text-sm">Coordenadora – E/4ª CRE</p>
+            </div>
+            <div className="rounded-[1.45rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/50 p-5 shadow-soft sm:p-6">
+              <p className="font-heading text-sm font-bold text-foreground sm:text-base">Bianca Barreto da Fonseca Coelho</p>
+              <p className="mt-1 text-xs text-muted-foreground sm:text-sm">Gerente – E/4ª CRE/GAD</p>
+            </div>
           </div>
         </div>
 

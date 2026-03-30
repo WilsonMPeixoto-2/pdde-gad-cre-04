@@ -7,8 +7,8 @@ import {
 import { PROJECT_BRANDING, getProjectJsonBranding } from "@/lib/projectBranding";
 
 const OPERATIONAL_GUIDE_ANCHORS = {
-  workspace: "dados-processo-operacional",
-  readiness: "diagnostico-remessa-gad",
+  workspace: GUIDE_ANCHORS.templates,
+  readiness: GUIDE_ANCHORS.journey,
 } as const;
 
 export interface ChecklistItemDefinition {
@@ -759,7 +759,7 @@ export const buildOperationalReport = (snapshot: OperationalSnapshot): Operation
             .slice(0, 2)
             .map((field) => field.label.toLowerCase())
             .join(" e ")} para melhorar os modelos rápidos e o diagnóstico de remessa.`,
-          ctaLabel: "Ir ao painel do processo",
+          ctaLabel: "Abrir modelos de texto",
         }
       : essentialPending.length > 0
         ? {

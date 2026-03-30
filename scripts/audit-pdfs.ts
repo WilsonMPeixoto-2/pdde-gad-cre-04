@@ -72,7 +72,7 @@ const main = async () => {
     }
 
     summaries.push(
-      `${fileName}: ${analysis.pageLabel}, ${manifestEntry.sizeLabel}, revisão ${auditRule.reviewMethod} em ${auditRule.reviewedAt}.`,
+      `${fileName}: ${analysis.pageLabel}, ${manifestEntry.sizeLabel}, revisão ${auditRule.reviewMethod} em ${auditRule.reviewedAt}${analysis.metadataTitle ? `, título PDF "${analysis.metadataTitle}"` : ""}${analysis.metadataAuthor ? `, autor "${analysis.metadataAuthor}"` : ""}.`,
     );
   }
 

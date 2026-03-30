@@ -51,7 +51,7 @@
     "eslint-plugin-react-hooks": "7.1.0-canary-9627b5a1-20260327",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
-    "pdfjs-dist": "^5.5.207",
+    "pdfjs-dist": "^5.6.205",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",

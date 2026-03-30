@@ -15,7 +15,7 @@ interface ProfileCalloutProps {
 }
 
 const modeConfig: Record<ProfileMode, { icon: LucideIcon; badge: string }> = {
-  diretor: { icon: School, badge: "Dica para a Unidade Escolar" },
+  diretor: { icon: School, badge: "Orientação para a unidade escolar" },
   gad: { icon: ShieldCheck, badge: "Ponto de Atenção — GAD" },
 };
 

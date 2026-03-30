@@ -194,9 +194,9 @@ export const SmartTemplates = () => {
         </div>
         <div>
           <h2 className="font-bold text-foreground text-base sm:text-lg">
-            Modelos com Preenchimento Rápido
+            Modelos de texto de apoio
           </h2>
-          <p className="text-xs text-muted-foreground">Preencha, visualize e copie — seus dados ficam salvos no navegador</p>
+          <p className="text-xs text-muted-foreground">Preencha os campos necessários, visualize o texto e copie a minuta para uso no processo.</p>
         </div>
       </div>
 
@@ -250,7 +250,7 @@ export const SmartTemplates = () => {
 
                   {Object.values(getWorkspaceTemplateDefaults(template.id, workspace)).some(Boolean) && (
                     <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
-                      Campos vazios usam automaticamente os dados salvos no <strong className="text-foreground">Painel do processo</strong>.
+                      Se houver informações já registradas neste equipamento, os campos em branco poderão ser aproveitados automaticamente como referência.
                     </p>
                   )}
 

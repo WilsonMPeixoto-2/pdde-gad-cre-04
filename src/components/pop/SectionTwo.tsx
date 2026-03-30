@@ -9,33 +9,29 @@ import { GUIDE_ANCHORS } from "@/lib/guideContent";
 export const SectionTwo = () => {
   return (
     <section id="secao-2" className="scroll-mt-20 animate-fade-in">
-      {/* Bloco 1: Introdução ao Checklist - Estruturado para escaneabilidade */}
-      <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-gradient-to-br from-secondary/55 via-background to-sky-50/40 shadow-sm dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
-        <div className="space-y-5">
-          {/* O que é */}
-          <div className="rounded-[1.35rem] border border-border/60 bg-background/80 p-4 shadow-soft">
+      <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-gradient-to-br from-secondary/50 via-background to-sky-50/35 shadow-sm dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-[1.4rem] border border-border/60 bg-background/82 p-4 shadow-soft">
             <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-sky-700 dark:text-sky-400">
               <CircleHelp className="h-4 w-4" />
-              Escopo da etapa
+              Objeto da etapa
             </h3>
             <p className="text-sm leading-relaxed text-foreground/80 sm:text-base text-left sm:text-justify">
               O <strong className="text-foreground font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-foreground font-semibold">autuação do processo</strong>.
             </p>
           </div>
 
-          {/* Por que importa */}
-          <div className="rounded-[1.35rem] border border-border/60 bg-background/80 p-4 shadow-soft">
+          <div className="rounded-[1.4rem] border border-border/60 bg-background/82 p-4 shadow-soft">
             <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
               <ShieldCheck className="h-4 w-4" />
-              Importância da etapa
+              Critério de atenção
             </h3>
             <p className="text-sm leading-relaxed text-foreground/80 sm:text-base text-left sm:text-justify">
               Esta etapa é <strong className="text-foreground font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
             </p>
           </div>
 
-          {/* O que você precisa fazer */}
-          <div className="rounded-[1.35rem] border border-sky-200/60 bg-sky-50/80 p-4 shadow-soft dark:border-sky-800/40 dark:bg-sky-950/40">
+          <div className="rounded-[1.4rem] border border-sky-200/60 bg-sky-50/78 p-4 shadow-soft dark:border-sky-800/40 dark:bg-sky-950/40">
             <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary">
               <ListChecks className="h-4 w-4" />
               Providências imediatas
@@ -43,24 +39,23 @@ export const SectionTwo = () => {
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-sky-600 dark:text-sky-400 font-bold">1.</span>
-                <span>Use a <strong className="text-sky-600 dark:text-sky-400 font-semibold">Lista de Verificação Interativa</strong> abaixo para monitorar os itens já encartados</span>
+                <span>Use a <strong className="text-sky-600 dark:text-sky-400 font-semibold">lista de verificação</strong> abaixo para acompanhar os itens já juntados aos autos</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-sky-600 dark:text-sky-400 font-bold">2.</span>
-                <span>Consulte os <strong className="text-sky-600 dark:text-sky-400 font-semibold">Modelos de Documentos</strong> para padronização</span>
+                <span>Consulte os <strong className="text-sky-600 dark:text-sky-400 font-semibold">modelos e referências documentais</strong> para padronização</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-sky-600 dark:text-sky-400 font-bold">3.</span>
-                <span>Acompanhe o percentual de completude automaticamente calculado</span>
+                <span>Use o percentual de conferência como apoio para identificar pendências essenciais</span>
               </li>
             </ul>
           </div>
 
-          {/* Erros comuns */}
-          <div className="rounded-[1.35rem] border border-amber-200/60 bg-amber-50/80 p-4 shadow-soft dark:border-amber-800/40 dark:bg-amber-950/40">
+          <div className="rounded-[1.4rem] border border-amber-200/60 bg-amber-50/78 p-4 shadow-soft dark:border-amber-800/40 dark:bg-amber-950/40">
             <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400">
               <AlertTriangle className="h-4 w-4" />
-              Erros comuns a evitar
+              Falhas recorrentes
             </h3>
             <ul className="space-y-1.5 text-foreground/80 text-sm">
               <li className="flex items-start gap-2">
@@ -86,7 +81,7 @@ export const SectionTwo = () => {
 
       {/* Profile Callouts */}
       <ProfileCallout visibleFor="diretor" variant="info">
-        Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme for reunindo — o progresso é salvo automaticamente no seu navegador.
+        Use o checklist abaixo para acompanhar cada documento. As marcações permanecem registradas neste equipamento para facilitar a retomada da conferência.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-4">
         Verifique se todas as 3 cotações de preços estão anexadas e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
@@ -188,8 +183,8 @@ export const SectionTwo = () => {
           </div>
 
           {/* Nota explicativa */}
-          <div className="p-3 bg-muted rounded-lg border border-border mt-4">
-            <p className="text-muted-foreground text-xs sm:text-sm italic text-center">
+          <div className="editorial-note mt-4">
+            <p className="text-center text-xs italic text-muted-foreground sm:text-sm">
               Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes — reduzindo inconsistências e glosas.
             </p>
           </div>

@@ -17,9 +17,6 @@ const APP_SHELL = [
   "/icons/apple-touch-icon.png",
   "/icons/shortcut-home.png",
   "/icons/shortcut-checklist.png",
-  "/icons/shortcut-workspace.png",
-  "/icons/install-desktop.png",
-  "/icons/install-mobile.png",
 ];
 const CACHEABLE_DESTINATIONS = new Set(["image", "font", "manifest"]);
 const PDF_PATH_PREFIX = "/models/";

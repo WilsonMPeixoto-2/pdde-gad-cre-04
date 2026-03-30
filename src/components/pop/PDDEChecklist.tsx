@@ -153,7 +153,7 @@ export const PDDEChecklist = () => {
         ].join("\n");
 
     downloadTextFile(content, "PDDE_CHECKLIST_PENDENCIAS.txt");
-    toast.success("Resumo baixado em .txt.");
+      toast.success("Lista baixada com sucesso.");
   }, [items]);
 
   const filters: { key: FilterType; label: string }[] = [
@@ -246,7 +246,7 @@ export const PDDEChecklist = () => {
             aria-label="Baixar resumo dos itens pendentes"
           >
             <Download className="w-4 h-4" aria-hidden="true" />
-            Baixar .txt
+            Baixar lista
           </button>
         </div>
       )}

@@ -10,23 +10,20 @@ interface SeiMockupProps {
 // Professional SEI-style icon button with animations
 const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode; label?: string; active?: boolean }) => (
   <div aria-hidden="true" className={`
-    flex flex-col items-center gap-1 p-1.5 rounded cursor-pointer 
-    transition-all duration-200 ease-out
-    hover:scale-110 hover:shadow-md
-    active:scale-95
+    flex flex-col items-center gap-1 rounded-xl p-1.5
     ${active 
-      ? 'bg-linear-to-b from-[#e8f4fd] to-[#d0e8f9] shadow-xs border border-[#b8d4ea]' 
-      : 'hover:bg-linear-to-b hover:from-[#f5f8fa] hover:to-[#e8eef2]'
+      ? 'border border-[#b8d4ea] bg-linear-to-b from-[#eaf5fd] to-[#d8eaf8] shadow-xs' 
+      : 'border border-transparent bg-transparent'
     }
   `}>
     <div className={`
-      w-6 h-6 flex items-center justify-center transition-transform duration-200
-      ${active ? 'text-[#1565C0]' : 'text-[#546E7A] hover:text-[#37474F]'}
+      flex h-6 w-6 items-center justify-center
+      ${active ? 'text-[#1565C0]' : 'text-[#546E7A]'}
     `}>
       {icon}
     </div>
     {label && (
-      <span className={`text-[10px] transition-colors duration-200 ${active ? 'text-[#1565C0] font-medium' : 'text-[#78909C]'}`}>
+      <span className={`text-[10px] ${active ? 'font-medium text-[#1565C0]' : 'text-[#78909C]'}`}>
         {label}
       </span>
     )}
@@ -38,7 +35,7 @@ export const SeiIconsBar = () => (
   <div
     role="img"
     aria-label="Barra ilustrativa de ações do SEI!RIO com opções como incluir, enviar, visualizar e assinar."
-    className="flex items-center gap-0.5 p-2 bg-linear-to-b from-[#fafbfc] to-[#f0f3f5] border border-[#d0d7de] rounded-lg overflow-x-auto shadow-xs"
+    className="flex items-center gap-1 overflow-x-auto rounded-[1.35rem] border border-[#d0d7de] bg-linear-to-b from-[#fbfcfd] via-white to-[#eef2f6] p-2.5 shadow-[0_18px_36px_-28px_rgba(15,23,42,0.34)]"
   >
     <SeiIconButton icon={<SeiIncluirIcon size={20} />} label="Incluir" active />
     <SeiIconButton icon={<SeiEnviarIcon size={20} />} label="Enviar" />
@@ -52,13 +49,13 @@ export const SeiIconsBar = () => (
 
 // Professional SEI Header Component
 const SeiHeader = ({ title, showLogo = false }: { title?: string; showLogo?: boolean }) => (
-  <div className="sei-mockup-header-pro">
+  <div className="sei-mockup-header-pro border-b border-[#d9e2ec]">
     {/* Green bar */}
     <div className="bg-linear-to-r from-[#006633] to-[#00802b] text-white text-[10px] px-3 py-1 font-medium tracking-wide">
       PREFEITURA DA CIDADE DO RIO DE JANEIRO
     </div>
     {/* SEI bar */}
-    <div className="bg-linear-to-b from-[#f8f9fa] to-[#e9ecef] border-b border-[#dee2e6] px-3 py-2">
+    <div className="border-b border-[#dee2e6] bg-linear-to-b from-[#f8f9fa] to-[#eceff2] px-3 py-2.5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-baseline">
@@ -84,7 +81,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
       <div
         role="img"
         aria-label="Exemplo ilustrativo do menu do SEI!RIO com destaque para a opção iniciar processo."
-        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg max-w-sm"
+        className="sei-mockup max-w-sm overflow-hidden rounded-[1.7rem] border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eff4f8] shadow-[0_22px_44px_-30px_rgba(15,23,42,0.38)]"
       >
         <SeiHeader showLogo />
         
@@ -99,11 +96,10 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
             <div 
               key={item.key}
               className={`
-                flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm cursor-pointer
-                transition-all duration-200 ease-out
+                flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm
                 ${highlight === item.key 
-                  ? "bg-linear-to-r from-[#1565C0] to-[#1976D2] text-white font-semibold shadow-md transform scale-[1.02]" 
-                  : "text-[#495057] hover:bg-[#e9ecef] hover:translate-x-1"
+                  ? "bg-linear-to-r from-[#1565C0] to-[#1976D2] text-white font-semibold shadow-md" 
+                  : "text-[#495057] bg-white/70"
                 }
               `}
             >
@@ -121,7 +117,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
       <div
         role="img"
         aria-label="Exemplo ilustrativo da árvore do processo no SEI!RIO com documentos autenticados e assinados."
-        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg"
+        className="sei-mockup overflow-hidden rounded-[1.7rem] border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eef3f7] shadow-[0_22px_44px_-30px_rgba(15,23,42,0.38)]"
       >
         <SeiHeader title="Árvore do Processo" />
         
@@ -139,13 +135,12 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
               <div 
                 key={i} 
                 className="
-                  flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer group
-                  transition-all duration-200 ease-out
-                  hover:bg-[#f5f5f5] hover:translate-x-1 hover:shadow-xs
+                  flex items-center gap-2 rounded-lg px-3 py-2 group
+                  bg-white/70
                 "
               >
-                <FileText className="w-4 h-4 text-[#90a4ae] group-hover:text-[#546e7a] transition-colors" />
-                <span className="text-[#616161] group-hover:text-[#212529] text-xs sm:text-sm truncate transition-colors">
+                <FileText className="h-4 w-4 text-[#78909C]" />
+                <span className="truncate text-xs text-[#616161] sm:text-sm">
                   {doc.name}
                 </span>
                 <div className={`ml-auto flex items-center gap-1 px-2 py-0.5 rounded-full ${
@@ -169,7 +164,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
       <div
         role="img"
         aria-label="Exemplo ilustrativo da busca pelo tipo correto de processo no SEI!RIO."
-        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg"
+        className="sei-mockup overflow-hidden rounded-[1.7rem] border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eef3f7] shadow-[0_22px_44px_-30px_rgba(15,23,42,0.38)]"
       >
         <SeiHeader title="Escolha o Tipo de Processo" />
         
@@ -197,7 +192,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
                   transition-all duration-200 ease-out
                   ${item.active 
                     ? "bg-linear-to-r from-[#1565C0] to-[#1976D2] text-white font-semibold shadow-md" 
-                    : "text-[#495057] hover:bg-[#e9ecef] hover:translate-x-1"
+                    : "bg-white/70 text-[#495057]"
                   }
                 `}
               >
@@ -215,7 +210,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
       <div
         role="img"
         aria-label="Exemplo ilustrativo do preenchimento de documento externo no SEI!RIO."
-        className="bg-white border border-[#dee2e6] rounded-xl overflow-hidden shadow-lg"
+        className="sei-mockup overflow-hidden rounded-[1.7rem] border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eef3f7] shadow-[0_22px_44px_-30px_rgba(15,23,42,0.38)]"
       >
         <SeiHeader title="Registrar Documento Externo" />
         
@@ -230,10 +225,10 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
             <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 group">
               <span className="text-[#6c757d] w-36 shrink-0 text-xs sm:text-sm font-medium">{field.label}:</span>
               <span className={`
-                font-semibold text-xs sm:text-sm px-2 py-1 rounded transition-all duration-200
+                rounded px-2 py-1 text-xs font-semibold sm:text-sm
                 ${field.highlight 
                   ? "text-[#1565C0] bg-[#e3f2fd]" 
-                  : "text-[#212529] group-hover:bg-[#f5f5f5]"
+                  : "text-[#212529] bg-white/65"
                 }
               `}>
                 {field.value}
@@ -242,21 +237,13 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
           ))}
           
           <div className="pt-3 flex items-center gap-3 border-t border-[#e9ecef]">
-            <div aria-hidden="true" className="
-              px-5 py-2.5 bg-linear-to-b from-[#1976D2] to-[#1565C0] text-white rounded-lg text-xs font-semibold 
-              cursor-pointer shadow-md
-              transition-all duration-200 ease-out
-              hover:shadow-lg hover:from-[#1e88e5] hover:to-[#1976D2] hover:scale-105
-              active:scale-95
+              <div aria-hidden="true" className="
+              rounded-lg bg-linear-to-b from-[#1976D2] to-[#1565C0] px-5 py-2.5 text-xs font-semibold text-white shadow-md
             ">
               Confirmar
             </div>
             <div aria-hidden="true" className="
-              px-5 py-2.5 bg-linear-to-b from-[#f5f5f5] to-[#e0e0e0] text-[#424242] rounded-lg text-xs font-semibold 
-              cursor-pointer border border-[#bdbdbd]
-              transition-all duration-200 ease-out
-              hover:from-[#eeeeee] hover:to-[#e0e0e0] hover:scale-105
-              active:scale-95
+              rounded-lg border border-[#bdbdbd] bg-linear-to-b from-[#f5f5f5] to-[#e0e0e0] px-5 py-2.5 text-xs font-semibold text-[#424242]
             ">
               Cancelar
             </div>

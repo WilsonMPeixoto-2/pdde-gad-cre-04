@@ -16,9 +16,9 @@ export const DocumentFooter = () => {
         </p>
       </div>
 
-      <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-primary/15 bg-primary/6 px-5 py-4 text-center">
-        <p className="text-sm leading-relaxed text-foreground/85">
-          <strong className="text-foreground">Assinatura do projeto:</strong> {PROJECT_BRANDING.creatorCreditLine}
+      <div className="mx-auto mt-6 max-w-3xl rounded-[1.4rem] border border-border/55 bg-linear-to-br from-background via-background to-secondary/50 px-5 py-4 text-center shadow-soft">
+        <p className="text-sm leading-relaxed text-foreground/82">
+          <strong className="text-foreground">Elaboração:</strong> {PROJECT_BRANDING.creatorCreditLine}
         </p>
       </div>
     </div>

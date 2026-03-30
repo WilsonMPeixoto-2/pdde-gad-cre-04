@@ -22,15 +22,15 @@ export const SectionAnexo = () => {
             href={item.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-[1.75rem] border border-border/60 bg-card px-5 py-5 transition-all duration-300 hover:border-primary/35 hover:bg-primary/5"
+            className="group flex items-center gap-4 rounded-[1.75rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/45 px-5 py-5 transition-all duration-300 hover:border-primary/35 hover:shadow-[0_18px_36px_-30px_rgba(8,32,76,0.2)]"
           >
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-primary/8 text-primary">
-              <ExternalLink className="h-7 w-7" />
+            <div className="flex h-[3.75rem] w-[3.75rem] shrink-0 items-center justify-center rounded-2xl border border-primary/10 bg-primary/8 text-primary">
+              <ExternalLink className="h-6 w-6" />
             </div>
 
             <div className="min-w-0 flex-1">
               <p className="text-lg font-semibold leading-tight text-foreground">{item.title}</p>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">{item.description}</p>
             </div>
 
             <ExternalLink className="h-5 w-5 shrink-0 text-muted-foreground transition-colors duration-300 group-hover:text-primary" />

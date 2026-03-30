@@ -201,7 +201,7 @@ export const SectionThree = () => {
                   </span>{" "}
                   na barra de ferramentas.
                 </p>
-                <div className="max-w-md rounded-[1.35rem] border border-sky-200/70 bg-linear-to-br from-slate-50 via-card to-sky-50/60 p-4 shadow-soft dark:border-sky-800/30 dark:from-slate-950/40 dark:via-card dark:to-sky-950/20">
+                <div className="mockup-frame max-w-md p-4">
                   <div className="mb-3 flex items-center justify-between rounded-xl border border-border/60 bg-background/80 px-3 py-2">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Barra de ferramentas
@@ -242,7 +242,7 @@ export const SectionThree = () => {
                 <p className="mb-3 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
                   Na tela de seleção de tipo de documento, escolha <strong className="text-foreground">“Externo”</strong> para indicar que o arquivo não foi produzido dentro do SEI!RIO.
                 </p>
-                <div className="max-w-2xl rounded-[1.35rem] border border-slate-200/70 bg-linear-to-br from-slate-50 via-card to-slate-100/70 p-4 shadow-soft dark:border-slate-800/40 dark:from-slate-950/30 dark:via-card dark:to-slate-900/20">
+                <div className="mockup-frame max-w-2xl p-4">
                   <div className="mb-3 flex items-center justify-between rounded-xl border border-border/60 bg-background/80 px-3 py-2">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Seleção do tipo de documento
@@ -252,19 +252,21 @@ export const SectionThree = () => {
                     </span>
                   </div>
                   <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-xs dark:bg-slate-950/80">
-                    <img
-                      src={seiChooseDocType}
-                      alt="Escolha o Tipo do Documento Externo no SEI!RIO"
-                      className="w-full object-contain"
-                      width={448}
-                      height={187}
-                    />
+                    <div className="flex justify-center bg-linear-to-b from-white via-white to-slate-50/80 px-4 py-3">
+                      <img
+                        src={seiChooseDocType}
+                        alt="Escolha o Tipo do Documento Externo no SEI!RIO"
+                        className="max-h-[220px] w-auto object-contain"
+                        width={448}
+                        height={187}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-2xl border-2 border-dashed border-emerald-300 bg-linear-to-r from-emerald-50 to-emerald-100/60 p-5 text-center dark:border-emerald-700 dark:from-emerald-950/40 dark:to-emerald-900/20">
+            <div className="rounded-[1.6rem] border border-emerald-200/70 bg-linear-to-r from-emerald-50/95 via-emerald-50 to-emerald-100/70 p-5 text-center shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/40 dark:via-emerald-950/35 dark:to-emerald-900/20">
               <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 dark:bg-emerald-800">
                 <Lightbulb className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </div>
@@ -272,7 +274,7 @@ export const SectionThree = () => {
                 <h4 className="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-400">
                   Orientação prática
                 </h4>
-                <p className="text-sm font-medium leading-relaxed text-emerald-800 dark:text-emerald-300">
+                <p className="mx-auto max-w-2xl text-sm font-medium leading-relaxed text-emerald-800 dark:text-emerald-300">
                   Se o arquivo veio de fora do sistema, a porta de entrada correta é “Documento Externo”.
                 </p>
               </div>
@@ -414,7 +416,7 @@ export const SectionThree = () => {
           </div>
 
           <div className="grid gap-4 lg:grid-cols-3">
-            <div className="rounded-xl border border-border bg-card p-4 shadow-xs">
+            <div className="rounded-[1.35rem] border border-border bg-card p-4 shadow-xs">
               <div className="mb-2 flex items-center gap-2">
                 <Image className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Qualidade da digitalização</h4>
@@ -424,7 +426,7 @@ export const SectionThree = () => {
               </p>
             </div>
 
-            <div className="rounded-xl border border-border bg-card p-4 shadow-xs">
+            <div className="rounded-[1.35rem] border border-border bg-card p-4 shadow-xs">
               <div className="mb-2 flex items-center gap-2">
                 <FileDown className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Nome do arquivo x Nome na Árvore</h4>
@@ -432,17 +434,17 @@ export const SectionThree = () => {
               <p className="mb-3 text-sm leading-relaxed text-muted-foreground text-left sm:text-justify">
                 O nome local do arquivo no computador pode ajudar a organização da unidade escolar, mas a identificação útil no SEI!RIO decorre do preenchimento dos metadados, sobretudo do <strong className="text-foreground">Nome na Árvore</strong>.
               </p>
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-center dark:border-amber-800 dark:bg-amber-950/40">
+              <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-center dark:border-amber-800 dark:bg-amber-950/40">
                 <div className="mb-2 flex justify-center">
                   <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                 </div>
-                <p className="text-sm font-medium leading-relaxed text-amber-800 dark:text-amber-300">
+                <p className="mx-auto max-w-[26rem] text-sm font-medium leading-relaxed text-amber-800 dark:text-amber-300">
                   Preencha os campos com exatidão: é isso que vai facilitar a busca futura na árvore do processo.
                 </p>
               </div>
             </div>
 
-            <div className="rounded-xl border border-border bg-card p-4 shadow-xs">
+            <div className="rounded-[1.35rem] border border-border bg-card p-4 shadow-xs">
               <div className="mb-2 flex items-center gap-2">
                 <Scissors className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Tamanho do arquivo</h4>

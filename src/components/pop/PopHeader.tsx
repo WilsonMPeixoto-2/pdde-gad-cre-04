@@ -42,53 +42,45 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
         className="sticky top-0 z-50 no-print header-backdrop"
         style={{
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
-          boxShadow: "0 4px 30px -4px rgba(0, 0, 0, 0.3), inset 0 -1px 0 0 rgba(255, 255, 255, 0.05)",
+          boxShadow: "0 12px 34px -28px rgba(1, 10, 29, 0.9), inset 0 -1px 0 0 rgba(255, 255, 255, 0.04)",
         }}
       >
-        <div
-          className="absolute bottom-0 left-0 right-0 h-px"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, hsl(199, 89%, 48%, 0.5), hsl(215, 75%, 45%, 0.3), hsl(199, 89%, 48%, 0.5), transparent)",
-            backgroundSize: "200% 100%",
-            animation: "gradient-shift 4s ease infinite",
-          }}
-        />
-
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
               <div
-                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl shrink-0 transition-all duration-300 hover:scale-105"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] sm:h-11 sm:w-11"
                 style={{
-                  background: "linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)",
-                  boxShadow: "0 4px 16px -4px hsl(199, 89%, 48%, 0.4), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)",
+                  boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.08), 0 12px 30px -24px rgba(0,0,0,0.82)",
                 }}
               >
-                <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                <FileText className="h-5 w-5 text-accent sm:h-[1.35rem] sm:w-[1.35rem]" />
               </div>
               <div className="min-w-0">
-                <p className="text-sm sm:text-lg lg:text-xl font-heading font-bold text-white truncate" style={{ letterSpacing: "-0.02em" }}>
-                  Procedimento Operacional Padrão
+                <p className="truncate font-heading text-sm font-bold text-white sm:text-lg lg:text-[1.15rem]" style={{ letterSpacing: "-0.02em" }}>
+                  Prestação de Contas do PDDE no SEI!RIO
                 </p>
-                <p className="text-xs sm:text-sm text-white/60 hidden sm:block tracking-wide">
+                <p className="hidden text-xs tracking-[0.12em] text-white/55 sm:block">
                   4ª Coordenadoria Regional de Educação | GAD
                 </p>
               </div>
             </div>
 
-            <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+            <div className="hidden shrink-0 items-center gap-2 sm:flex">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={openSearch}
-                    className="text-white/80 hover:text-white hover:bg-white/10 h-10 w-auto px-3 transition-all duration-300 hover:scale-105"
+                    className="h-10 rounded-full border border-white/8 bg-white/[0.04] px-3.5 text-white/78 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                     aria-label="Abrir busca global (Ctrl+K)"
                   >
-                    <Search className="w-4 h-4 mr-2 transition-transform duration-300 active:scale-90" aria-hidden="true" />
-                    <span className="text-xs font-mono opacity-60">Ctrl K</span>
+                    <Search className="mr-2 h-4 w-4" aria-hidden="true" />
+                    <span className="text-xs font-semibold tracking-[0.08em] uppercase">Buscar</span>
+                    <span className="ml-2 rounded-full border border-white/10 px-2 py-0.5 text-[10px] font-mono text-white/45">
+                      Ctrl K
+                    </span>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
@@ -102,14 +94,14 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                     variant="ghost"
                     size="sm"
                     onClick={toggleDarkMode}
-                    className="text-white/80 hover:text-white hover:bg-white/10 h-10 w-10 transition-all duration-300 hover:scale-105"
+                    className="h-10 w-10 rounded-full border border-white/8 bg-white/[0.04] text-white/78 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                     aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
                     aria-pressed={isDark}
                   >
                     {isDark ? (
-                      <Sun className="w-4 h-4 transition-transform duration-300 active:scale-90" aria-hidden="true" />
+                      <Sun className="h-4 w-4" aria-hidden="true" />
                     ) : (
-                      <Moon className="w-4 h-4 transition-transform duration-300 active:scale-90" aria-hidden="true" />
+                      <Moon className="h-4 w-4" aria-hidden="true" />
                     )}
                   </Button>
                 </TooltipTrigger>
@@ -121,15 +113,14 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
               <Button
                 size="sm"
                 onClick={onPrint}
-                className="h-10 w-auto px-4 transition-all duration-300 hover:scale-105 btn-premium text-white border-0"
+                className="btn-premium h-10 rounded-full border border-white/10 bg-white/[0.07] px-4 text-white transition-all duration-300 hover:border-white/18 hover:bg-white/[0.11]"
                 style={{
-                  background: "linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 45%) 100%)",
-                  boxShadow: "0 4px 16px -4px hsl(199, 89%, 48%, 0.4)",
+                  boxShadow: "0 14px 32px -26px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255,255,255,0.08)",
                 }}
                 aria-label="Imprimir ou salvar em PDF"
               >
                 <Printer className="w-4 h-4 mr-2" aria-hidden="true" />
-                <span className="font-medium">Imprimir / PDF</span>
+                <span className="font-medium">PDF</span>
               </Button>
             </div>
 
@@ -138,7 +129,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 variant="ghost"
                 size="sm"
                 onClick={onOpenMenu}
-                className="text-white/85 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl transition-all duration-300"
+                className="h-9 w-9 rounded-full border border-white/8 bg-white/[0.04] text-white/85 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                 aria-label="Abrir menu de navegação"
               >
                 <Menu className="w-4 h-4" aria-hidden="true" />
@@ -148,7 +139,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 variant="ghost"
                 size="sm"
                 onClick={openSearch}
-                className="text-white/85 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl transition-all duration-300"
+                className="h-9 w-9 rounded-full border border-white/8 bg-white/[0.04] text-white/85 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                 aria-label="Abrir busca global"
               >
                 <Search className="w-4 h-4" aria-hidden="true" />
@@ -159,7 +150,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-white/85 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl"
+                    className="h-9 w-9 rounded-full border border-white/8 bg-white/[0.04] text-white/85 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                     aria-label="Mais ações"
                   >
                     <MoreVertical className="w-4 h-4" aria-hidden="true" />

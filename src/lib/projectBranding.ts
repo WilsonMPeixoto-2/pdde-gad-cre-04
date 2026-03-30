@@ -4,16 +4,14 @@ export const PROJECT_BRANDING = {
   appName: "Guia PDDE 4ª CRE",
   appShortName: "Guia PDDE",
   creatorName: "Wilson M. Peixoto",
-  creatorCreditLine: "Criação, direção de produto e identidade visual: Wilson M. Peixoto.",
+  creatorCreditLine: "Elaboração editorial, estruturação visual e identidade do projeto: Wilson M. Peixoto.",
   creatorShortLine: "Projeto criado por Wilson M. Peixoto.",
   rightsLine:
     "Projeto autoral com identidade visual própria. Preserve o crédito do criador em reproduções, redistribuições e artefatos derivados.",
   copyrightLine:
     "© 2026 Wilson M. Peixoto. Identidade visual e artefatos digitais originais do projeto preservados.",
   printSignature:
-    "Assinatura do projeto: Wilson M. Peixoto • criação, direção de produto e identidade visual.",
-  installPromptLine:
-    "Você pode instalar este guia no celular ou no Windows para acesso mais rápido, com ícone próprio do projeto.",
+    "Assinatura do projeto: Wilson M. Peixoto • elaboração editorial e identidade visual.",
   appDescription:
     "Guia institucional da 4ª CRE para a prestação de contas do PDDE no SEI!RIO, com checklist, referências oficiais e identidade visual própria.",
   canonicalUrl: "https://pdde-gad-cre-04.vercel.app/",
@@ -29,10 +27,7 @@ export const PROJECT_BRANDING = {
     appleTouchIcon: "/icons/apple-touch-icon.png",
     shortcutHome: "/icons/shortcut-home.png",
     shortcutChecklist: "/icons/shortcut-checklist.png",
-    shortcutWorkspace: "/icons/shortcut-workspace.png",
     msTile150: "/icons/mstile-150x150.png",
-    installScreenshotDesktop: "/icons/install-desktop.png",
-    installScreenshotMobile: "/icons/install-mobile.png",
     ogImage: "/og-image.png",
     browserConfig: "/browserconfig.xml",
   },

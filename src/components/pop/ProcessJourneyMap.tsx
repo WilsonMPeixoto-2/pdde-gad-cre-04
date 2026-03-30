@@ -94,14 +94,14 @@ export const ProcessJourneyMap = () => {
             <div className="space-y-2">
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">
-                  Mapa da Jornada Processual
+                  Mapa das etapas do processo
                 </h2>
                 <span className="rounded-full border border-primary/20 bg-primary/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
-                  Painel interativo
+                  Consulta rápida
                 </span>
               </div>
               <p className="max-w-2xl text-sm leading-relaxed text-foreground/75">
-                Use este painel para acompanhar a ordem lógica das etapas. Cada bloco pode ser marcado como concluído e também funciona como atalho para a seção correspondente do guia.
+                Use este quadro para acompanhar a sequência lógica das etapas. Cada bloco também funciona como atalho para a seção correspondente do guia.
               </p>
             </div>
           </div>

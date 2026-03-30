@@ -64,6 +64,8 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByRole("heading", { level: 2, name: /prezados\(as\) diretores\(as\)/i })).toBeVisible();
     await expect(page.getByText(/a rotina de uma gestão escolar é intensa/i)).toBeVisible();
     await expect(page.getByText(/importante — o que este pop cobre/i)).toBeVisible();
+    await expect(page.getByRole("list", { name: /recursos centrais do guia/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /ler guia completo/i })).toHaveCount(0);
     await expect(page.getByText(/painel do processo/i)).toHaveCount(0);
     await expect(page.getByText(/resumo compartilhável/i)).toHaveCount(0);
 
@@ -78,25 +80,11 @@ test.describe("Fluxo desktop", () => {
     await page.keyboard.press("Escape");
     await expect(searchInput).toBeHidden();
 
-    await page.getByRole("button", { name: /compartilhar via qr code/i }).click();
-    const shareDialog = page.getByRole("dialog", { name: /compartilhar/i });
-    await expect(shareDialog).toBeVisible();
-    await expect(page.getByAltText(/qr code para compartilhar/i)).toBeVisible();
-    await page.getByRole("button", { name: /close/i }).click();
-    await expect(shareDialog).toBeHidden();
-
-    await page.getByRole("button", { name: /ativar texto maior/i }).click();
-    await page.getByRole("button", { name: /ativar movimento reduzido/i }).click();
-
-    const headerAccessibilityPrefs = await page.evaluate(() => ({
-      scale: document.documentElement.dataset.readingScale,
-      motion: document.documentElement.dataset.motionResolved,
-      reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
-    }));
-
-    expect(headerAccessibilityPrefs.scale).toBe("large");
-    expect(headerAccessibilityPrefs.motion).toBe("reduced");
-    expect(headerAccessibilityPrefs.reducedMotionClass).toBe(true);
+    await expect(page.getByRole("button", { name: /compartilhar via qr code/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /ativar texto maior/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /ativar movimento reduzido/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /visualização automática/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /modo diretor\(a\) \/ escola/i })).toHaveCount(0);
 
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
@@ -106,22 +94,9 @@ test.describe("Fluxo desktop", () => {
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();
     await expect(page.locator("h2").filter({ hasText: /despacho e finalização/i }).first()).toBeVisible();
 
-    await page.getByRole("button", { name: /ir para seção a: anexo/i }).click();
-    await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
-    await expect(page.getByText(/registro persistente:/i).first()).toBeVisible();
-
-    await page.getByRole("button", { name: /Voltar para o tamanho padrão do texto/i }).click();
-    await page.getByRole("button", { name: /Voltar para movimento normal/i }).click();
-
-    const readingSettings = await page.evaluate(() => ({
-      scale: document.documentElement.dataset.readingScale,
-      motion: document.documentElement.dataset.motionResolved,
-      reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
-    }));
-
-    expect(readingSettings.scale).toBe("standard");
-    expect(readingSettings.motion).toBe("full");
-    expect(readingSettings.reducedMotionClass).toBe(false);
+    await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
+    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais prioritárias para consulta rápida/i })).toBeVisible();
+    await expect(page.getByText(/central operacional/i)).toHaveCount(0);
 
     const hasOverflow = await page.evaluate(() => {
       const allowance = 1;
@@ -168,13 +143,16 @@ test.describe("Fluxo mobile", () => {
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
 
     await page.getByRole("button", { name: /mais ações/i }).click();
-    await page.getByRole("menuitem", { name: /ativar texto maior/i }).click();
-    await page.getByRole("button", { name: /mais ações/i }).click();
-    await page.getByRole("menuitem", { name: /ativar movimento reduzido/i }).click();
+    await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toBeVisible();
+    await expect(page.getByRole("menuitem", { name: /imprimir \/ salvar em pdf/i })).toBeVisible();
+    await expect(page.getByRole("menuitem", { name: /ativar texto maior/i })).toHaveCount(0);
+    await expect(page.getByRole("menuitem", { name: /ativar movimento reduzido/i })).toHaveCount(0);
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toHaveCount(0);
 
     await page.getByRole("button", { name: /abrir menu de navegação/i }).first().click();
-    await page.getByRole("button", { name: /ir para seção a: anexo/i }).click();
-    await expect(page.getByRole("heading", { level: 3, name: /o que revalidar quando o exercício mudar/i })).toBeVisible();
+    await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
+    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais prioritárias para consulta rápida/i })).toBeVisible();
 
     const diagnostics = await page.evaluate(() => {
       const allowance = 1;
@@ -189,8 +167,6 @@ test.describe("Fluxo mobile", () => {
           document.body.scrollWidth > window.innerWidth + allowance,
         heroTechDisplay: heroTechBoard ? window.getComputedStyle(heroTechBoard).display : "missing",
         focusableInIllustrations,
-        readingScale: document.documentElement.dataset.readingScale,
-        reducedMotionClass: document.documentElement.classList.contains("effective-reduced-motion"),
         hasProcessPanel:
           document.body.textContent?.includes("Painel do processo") ?? false,
         hasSharePack:
@@ -201,8 +177,6 @@ test.describe("Fluxo mobile", () => {
     expect(diagnostics.hasOverflow).toBe(false);
     expect(diagnostics.heroTechDisplay).toBe("missing");
     expect(diagnostics.focusableInIllustrations).toBe(0);
-    expect(diagnostics.readingScale).toBe("large");
-    expect(diagnostics.reducedMotionClass).toBe(true);
     expect(diagnostics.hasProcessPanel).toBe(false);
     expect(diagnostics.hasSharePack).toBe(false);
     expect(pageErrors).toEqual([]);

@@ -1,6 +1,6 @@
 import {
   GAD_UNIT,
-  GUIDE_ANCHORS,
+  LEGACY_GUIDE_ANCHORS as GUIDE_ANCHORS,
   processFlowSteps,
   type ProcessFlowStep,
 } from "@/lib/guideContent";

@@ -35,6 +35,14 @@ export const GAD_UNIT = {
 export const INTERNAL_PROCESS_TRACKER_LABEL = "Controle de processos 2026";
 
 export const GUIDE_ANCHORS = {
+  checklist: "checklist-documentos",
+  models: "modelos-documentos",
+  templates: "templates-rapidos",
+  journey: "mapa-jornada",
+} as const;
+
+export const LEGACY_GUIDE_ANCHORS = {
+  ...GUIDE_ANCHORS,
   readingSupport: "retomada-conforto-pdde",
   capabilities: "capacidades-do-guia-pdde",
   recentUpdates: "novidades-recentes-guia-pdde",
@@ -47,28 +55,11 @@ export const GUIDE_ANCHORS = {
   naming: "kit-nomenclatura-pdde",
   sharePack: "resumo-compartilhavel-pdde",
   caseNotes: "notas-operacionais-pdde",
-  checklist: "checklist-documentos",
   readiness: "diagnostico-remessa-gad",
-  models: "modelos-documentos",
-  templates: "templates-rapidos",
-  journey: "mapa-jornada",
 } as const;
 
 export const guideAnchorParentSections: Record<string, string> = {
-  [GUIDE_ANCHORS.readingSupport]: "introducao",
-  [GUIDE_ANCHORS.capabilities]: "introducao",
-  [GUIDE_ANCHORS.recentUpdates]: "introducao",
-  [GUIDE_ANCHORS.installApp]: "introducao",
-  [GUIDE_ANCHORS.quickActions]: "introducao",
-  [GUIDE_ANCHORS.annualGovernance]: "anexo",
-  [GUIDE_ANCHORS.referenceGovernance]: "anexo",
-  [GUIDE_ANCHORS.commandCenter]: "secao-2",
-  [GUIDE_ANCHORS.workspace]: "secao-2",
-  [GUIDE_ANCHORS.naming]: "secao-2",
-  [GUIDE_ANCHORS.sharePack]: "secao-2",
-  [GUIDE_ANCHORS.caseNotes]: "secao-2",
   [GUIDE_ANCHORS.checklist]: "secao-2",
-  [GUIDE_ANCHORS.readiness]: "secao-2",
   [GUIDE_ANCHORS.models]: "secao-2",
   [GUIDE_ANCHORS.templates]: "secao-2",
   [GUIDE_ANCHORS.journey]: "secao-2",

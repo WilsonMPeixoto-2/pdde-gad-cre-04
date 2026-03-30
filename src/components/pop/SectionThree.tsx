@@ -404,12 +404,12 @@ export const SectionThree = () => {
               <p className="text-sm text-muted-foreground">
                 Ferramenta útil:{" "}
                 <a
-                  href="https://www.ilovepdf.com/pt"
+                  href="https://compacta02.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold text-emerald-700 underline underline-offset-2 hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-300"
                 >
-                  iLovePDF
+                  Compacta.pdf
                   <ExternalLink className="ml-1 inline h-3 w-3" />
                 </a>
               </p>

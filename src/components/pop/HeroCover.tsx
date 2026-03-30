@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
-import { BookOpen, Building2, ChevronDown, ClipboardList, FileText, ListChecks, Scale } from "lucide-react";
-import { GUIDE_ANCHORS, GUIDE_VERSION, processFlowSteps } from "@/lib/guideContent";
+import { Building2, ChevronDown, ClipboardList, FileText } from "lucide-react";
+import { GUIDE_ANCHORS } from "@/lib/guideContent";
 
 /**
  * HeroCover — Premium autoral "Institucional Cinemático"
@@ -192,46 +192,20 @@ export const HeroCover = () => {
           </p>
         </div>
         
-        {/* Info Cards — refined chips */}
-        <div 
-          className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-10 sm:mb-12"
-          role="list" 
-          aria-label="Recursos centrais do guia"
+        <div
+          className="mx-auto mb-10 max-w-3xl rounded-[1.75rem] border border-white/10 bg-white/[0.03] px-5 py-5 text-left shadow-[0_20px_60px_-40px_rgba(5,18,41,0.85)] backdrop-blur-sm hero-stagger sm:px-6"
+          style={{ animationDelay: "0.7s" }}
         >
-          {[
-            { icon: <ClipboardList className="w-5 h-5" aria-hidden="true" />, label: "Checklist", desc: "conferência mínima" },
-            { icon: <ListChecks className="w-5 h-5" aria-hidden="true" />, label: "Fluxo", desc: `${processFlowSteps.length} etapas práticas` },
-            { icon: <FileText className="w-5 h-5" aria-hidden="true" />, label: "Modelos", desc: "peças e exemplos" },
-            { icon: <Scale className="w-5 h-5" aria-hidden="true" />, label: "Fontes", desc: `${GUIDE_VERSION.shortLabel} • ${GUIDE_VERSION.cycleLabel}` },
-          ].map((item, i) => (
-            <div 
-              key={i} 
-              role="listitem"
-              className="group rounded-xl p-4 text-center hero-stagger transition-all duration-300 hover:translate-y-[-2px]"
-              style={{ 
-                animationDelay: `${0.7 + i * 0.1}s`,
-                background: 'hsl(0 0% 100% / 0.04)',
-                border: '1px solid hsl(0 0% 100% / 0.08)',
-                backdropFilter: 'blur(8px)',
-              }}
-            >
-              <div 
-                className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-2.5 transition-all duration-300 group-hover:scale-110"
-                style={{
-                  background: 'linear-gradient(135deg, hsl(199, 89%, 48%, 0.15), hsl(215, 75%, 45%, 0.1))',
-                  border: '1px solid hsl(199, 89%, 48%, 0.12)',
-                }}
-              >
-                <span className="text-accent">{item.icon}</span>
-              </div>
-              <p className="text-white font-semibold text-sm tracking-wide">{item.label}</p>
-              <p className="text-white/50 text-[11px] mt-0.5 tracking-wide leading-tight">{item.desc}</p>
-            </div>
-          ))}
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45 sm:text-xs">
+            Uso institucional
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/68 sm:text-base">
+            Este POP organiza o fluxo principal da prestação de contas do PDDE no SEI!RIO, com foco em
+            autuação, instrução processual, autenticação, assinatura e remessa à GAD.
+          </p>
         </div>
         
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 hero-stagger" style={{ animationDelay: '1.1s' }}>
+        <div className="flex items-center justify-center hero-stagger" style={{ animationDelay: '1.1s' }}>
           <button
             onClick={() => document.getElementById(GUIDE_ANCHORS.checklist)?.scrollIntoView({ behavior: 'smooth' })}
             className="group inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium sm:w-auto"
@@ -243,18 +217,6 @@ export const HeroCover = () => {
             <ClipboardList className="w-4 h-4" aria-hidden="true" />
             Começar pelo Checklist
             <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
-          </button>
-          <button
-            onClick={() => document.getElementById('introducao')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white/80 transition-all duration-300 hover:text-white hover:scale-[1.02] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent sm:w-auto"
-            style={{
-              background: 'hsl(0 0% 100% / 0.06)',
-              border: '1px solid hsl(0 0% 100% / 0.12)',
-              backdropFilter: 'blur(8px)',
-            }}
-          >
-            <BookOpen className="w-4 h-4" aria-hidden="true" />
-            Ler Guia Completo
           </button>
         </div>
 

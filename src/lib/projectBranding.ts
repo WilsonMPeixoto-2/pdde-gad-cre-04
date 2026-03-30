@@ -15,7 +15,7 @@ export const PROJECT_BRANDING = {
   installPromptLine:
     "Você pode instalar este guia no celular ou no Windows para acesso mais rápido, com ícone próprio do projeto.",
   appDescription:
-    "Guia operacional da 4ª CRE para a prestação de contas do PDDE no SEI!RIO, com identidade visual própria, apoio operacional e base oficial rastreada.",
+    "Guia institucional da 4ª CRE para a prestação de contas do PDDE no SEI!RIO, com checklist, referências oficiais e identidade visual própria.",
   canonicalUrl: "https://pdde-gad-cre-04.vercel.app/",
   assetPaths: {
     faviconPng: "/favicon.png",

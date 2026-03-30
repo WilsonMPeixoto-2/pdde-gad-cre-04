@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Guia PDDE no SEI!RIO - 4ª CRE",
   "short_name": "Guia PDDE",
-  "description": "Guia operacional da 4ª CRE para a prestação de contas do PDDE no SEI!RIO, com identidade visual própria e apoio operacional.",
+  "description": "Guia institucional da 4ª CRE para a prestação de contas do PDDE no SEI!RIO, com checklist, referências oficiais e identidade visual própria.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
@@ -38,22 +38,6 @@
     }
   ],
   "categories": ["education", "productivity"],
-  "screenshots": [
-    {
-      "src": "/icons/install-desktop.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Visão geral do guia PDDE com central operacional e identidade visual própria"
-    },
-    {
-      "src": "/icons/install-mobile.png",
-      "sizes": "720x1280",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Versão mobile instalável do guia PDDE com atalho próprio"
-    }
-  ],
   "shortcuts": [
     {
       "name": "Início",
@@ -68,13 +52,6 @@
       "description": "Ver checklist de documentos",
       "url": "/#checklist-documentos",
       "icons": [{ "src": "/icons/shortcut-checklist.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Central operacional",
-      "short_name": "Central",
-      "description": "Abrir o painel operacional do processo",
-      "url": "/#central-operacional-pdde",
-      "icons": [{ "src": "/icons/shortcut-workspace.png", "sizes": "192x192" }]
     }
   ],
   "related_applications": [],

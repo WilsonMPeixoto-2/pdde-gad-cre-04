@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Clock, ExternalLink, Monitor, BookOpen, Printer, Calendar, Users, Headset } from "lucide-react";
+import { Phone, Mail, MapPin, ExternalLink, Monitor, BookOpen, Printer, Calendar, Users, Headset, Search, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "./CopyButton";
 import { externalResources } from "@/lib/externalResources";
@@ -206,6 +206,64 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
               <Printer className="w-4 h-4 mr-2" />
               Imprimir Documento
             </Button>
+          </div>
+        </div>
+
+        <div className="section-card p-5 sm:p-6 no-print">
+          <h3 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
+            <BookOpen className="w-5 h-5 text-primary" />
+            Recursos úteis deste guia
+          </h3>
+          <p className="mb-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Além do conteúdo instrucional, este projeto oferece alguns apoios simples para facilitar o uso no dia a dia, sem substituir a leitura das etapas e das referências oficiais.
+          </p>
+
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4">
+              <div className="mb-2 flex items-center gap-2">
+                <Search className="h-4 w-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Busca rápida</h4>
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Use a busca do topo para localizar etapas, documentos e referências sem precisar percorrer a página inteira.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4">
+              <div className="mb-2 flex items-center gap-2">
+                <Printer className="h-4 w-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Impressão e PDF</h4>
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                O botão do topo abre a versão para impressão e também permite salvar o guia em PDF para consulta offline.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4">
+              <div className="mb-2 flex items-center gap-2">
+                <Moon className="h-4 w-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Modo claro ou escuro</h4>
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Você pode alternar o tema visual no topo, conforme o ambiente e o conforto de leitura.
+              </p>
+            </div>
+
+            <a
+              href="https://compacta02.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-border/50 bg-linear-to-r from-secondary to-secondary/50 p-4 transition-all duration-300 hover:border-primary/30 hover:from-primary/10 hover:to-primary/5"
+            >
+              <div className="mb-2 flex items-center gap-2">
+                <ExternalLink className="h-4 w-4 text-primary" />
+                <h4 className="font-semibold text-foreground">Compacta.pdf</h4>
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Se precisar compactar ou juntar PDFs antes de inserir no SEI!RIO, use o projeto complementar{" "}
+                <span className="font-medium text-primary">Compacta.pdf</span>.
+              </p>
+            </a>
           </div>
         </div>
 

@@ -8,7 +8,7 @@ import { GUIDE_ANCHORS } from "@/lib/guideContent";
 
 export const SectionTwo = () => {
   return (
-    <section id="secao-2" className="scroll-mt-20 animate-fade-in">
+    <section className="scroll-mt-20 animate-fade-in">
       <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-gradient-to-br from-secondary/50 via-background to-sky-50/35 shadow-sm dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="rounded-[1.4rem] border border-border/60 bg-background/82 p-4 shadow-soft">

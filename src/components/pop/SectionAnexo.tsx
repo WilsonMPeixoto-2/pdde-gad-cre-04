@@ -5,7 +5,7 @@ export const SectionAnexo = () => {
   const officialLinks = officialReferenceIds.map((resourceId) => externalResources[resourceId]);
 
   return (
-    <section id="anexo" className="scroll-mt-28 section-card p-6 sm:p-8">
+    <section className="scroll-mt-28 section-card p-6 sm:p-8">
       <div className="mb-6 flex items-center gap-4">
         <div className="rounded-2xl bg-primary/10 p-3">
           <ShieldCheck className="h-6 w-6 text-primary" />

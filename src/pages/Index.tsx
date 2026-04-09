@@ -153,93 +153,113 @@ const Index = () => {
           onClose={() => setSidebarOpen(false)}
         />
 
-        <main className="min-w-0 flex-1 lg:ml-0">
-          <div className="mx-auto w-full max-w-[76rem] px-4 py-9 sm:px-6 sm:py-11 xl:px-10">
-            <div className="space-y-12">
-              <AnimatedSection>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionIntro />
-                </Suspense>
-              </AnimatedSection>
+        <main className="min-w-0 flex-1 lg:ml-0 bg-slate-50/50">
+          <div className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6 lg:px-8 pb-36 sm:pb-40">
+            <article className="prose prose-slate md:prose-lg max-w-none bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-200/60">
+              <div className="space-y-12">
+                <AnimatedSection>
+                  <div id="introducao" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionIntro />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={50}>
-                <Suspense fallback={<SectionLoader />}>
-                  <ScopeCallout />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={50}>
+                  <Suspense fallback={<SectionLoader />}>
+                    <ScopeCallout />
+                  </Suspense>
+                </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("secao-1")}
-              </AnimatedSection>
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionOne />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={100}>
+                  {renderSectionDivider("secao-1")}
+                </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="secao-1" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionOne renderId={false} />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("secao-2")}
-              </AnimatedSection>
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionTwo />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={100}>
+                  {renderSectionDivider("secao-2")}
+                </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="secao-2" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionTwo />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("secao-3")}
-              </AnimatedSection>
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionThree />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={100}>
+                  {renderSectionDivider("secao-3")}
+                </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="secao-3" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionThree />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("secao-4")}
-              </AnimatedSection>
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionFour />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={100}>
+                  {renderSectionDivider("secao-4")}
+                </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="secao-4" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionFour />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("secao-5")}
-              </AnimatedSection>
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionFive />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={100}>
+                  {renderSectionDivider("secao-5")}
+                </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="secao-5" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionFive />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("secao-6")}
-              </AnimatedSection>
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionSix />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={100}>
+                  {renderSectionDivider("secao-6")}
+                </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="secao-6" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionSix />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={100}>
-                {renderSectionDivider("contatos")}
-              </AnimatedSection>
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionContacts onPrint={handlePrint} />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={100}>
+                  {renderSectionDivider("contatos")}
+                </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="contatos" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionContacts onPrint={handlePrint} />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              <AnimatedSection delay={150}>
-                <Suspense fallback={<SectionLoader />}>
-                  <SectionAnexo />
-                </Suspense>
-              </AnimatedSection>
+                <AnimatedSection delay={150}>
+                  <div id="anexo" className="scroll-mt-20">
+                    <Suspense fallback={<SectionLoader />}>
+                      <SectionAnexo />
+                    </Suspense>
+                  </div>
+                </AnimatedSection>
 
-              {/* Document Footer */}
-              <DocumentFooter />
-            </div>
+                {/* Document Footer */}
+                <DocumentFooter />
+              </div>
+            </article>
 
             <div className="print-only mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
               <p>Procedimento Operacional Padrão - Prestação de Contas PDDE</p>
@@ -247,6 +267,7 @@ const Index = () => {
             </div>
           </div>
         </main>
+
       </div>
       <Suspense fallback={null}>
         <BackToTop />

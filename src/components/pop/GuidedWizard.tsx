@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { startTransition, useCallback, useEffect, useEffectEvent, useState } from "react";
 import { CheckCircle2, Circle, ChevronRight, ChevronLeft, AlertTriangle, FileText, X, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { processFlowSteps } from "@/lib/guideContent";
+import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 const steps = processFlowSteps;
 
@@ -27,9 +28,18 @@ export const GuidedWizard = () => {
     }
     return new Set();
   });
+  const persistCompletedSteps = useEffectEvent((nextCompletedSteps: Set<number>) => {
+    localStorage.setItem(WIZARD_STORAGE_KEY, JSON.stringify([...nextCompletedSteps]));
+  });
+  const syncDockVisibility = useEffectEvent((isLargeViewport: boolean) => {
+    setIsDockVisible(window.scrollY > (isLargeViewport ? 280 : 360));
+  });
+  const goToSection = useCallback((anchor: string) => {
+    scrollToGuideAnchor(anchor, { focusHeading: true });
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem(WIZARD_STORAGE_KEY, JSON.stringify([...completedSteps]));
+    persistCompletedSteps(completedSteps);
   }, [completedSteps]);
 
   useEffect(() => {
@@ -37,17 +47,17 @@ export const GuidedWizard = () => {
 
     const mediaQuery = window.matchMedia("(min-width: 640px)");
 
-    const syncDockVisibility = () => {
-      setIsDockVisible(window.scrollY > (mediaQuery.matches ? 280 : 360));
+    const updateDockVisibility = () => {
+      syncDockVisibility(mediaQuery.matches);
     };
 
-    syncDockVisibility();
-    window.addEventListener("scroll", syncDockVisibility, { passive: true });
-    mediaQuery.addEventListener("change", syncDockVisibility);
+    updateDockVisibility();
+    window.addEventListener("scroll", updateDockVisibility, { passive: true });
+    mediaQuery.addEventListener("change", updateDockVisibility);
 
     return () => {
-      window.removeEventListener("scroll", syncDockVisibility);
-      mediaQuery.removeEventListener("change", syncDockVisibility);
+      window.removeEventListener("scroll", updateDockVisibility);
+      mediaQuery.removeEventListener("change", updateDockVisibility);
     };
   }, []);
 
@@ -63,21 +73,18 @@ export const GuidedWizard = () => {
     });
   }, []);
 
-  const goToSection = (anchor: string) => {
-    const el = document.getElementById(anchor);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-      const heading = el.querySelector('h2, h3') as HTMLElement;
-      if (heading) {
-        heading.setAttribute('tabindex', '-1');
-        setTimeout(() => heading.focus({ preventScroll: true }), 600);
-      }
-    }
-  };
-
   const step = steps[currentStep];
   const completedCount = completedSteps.size;
   const progressPercent = (completedCount / steps.length) * 100;
+
+  useEffect(() => {
+    requestGuideAnchorPreload(step.sectionAnchor);
+
+    const nextStep = steps[currentStep + 1];
+    if (nextStep) {
+      requestGuideAnchorPreload(nextStep.sectionAnchor);
+    }
+  }, [currentStep, step.sectionAnchor]);
 
   if (!isOpen && !isDockVisible) {
     return null;
@@ -87,7 +94,11 @@ export const GuidedWizard = () => {
     return (
       <div className="fixed bottom-4 right-4 z-40 no-print sm:bottom-24 sm:right-6 sm:top-auto xl:right-[max(1.5rem,calc(50vw-39rem))] opacity-85 hover:opacity-100 transition-opacity">
         <Button
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            startTransition(() => {
+              setIsOpen(true);
+            });
+          }}
           className="rounded-full shadow-xl gap-2 px-4 py-3 h-auto text-sm font-medium transition-all duration-300 hover:scale-[1.03] sm:px-5"
           style={{
             background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gradient-mid)) 100%)',
@@ -155,7 +166,12 @@ export const GuidedWizard = () => {
           {steps.map((s, i) => (
             <button
               key={s.id}
-              onClick={() => setCurrentStep(i)}
+              onClick={() => {
+                requestGuideAnchorPreload(s.sectionAnchor);
+                startTransition(() => {
+                  setCurrentStep(i);
+                });
+              }}
               className={cn(
                 "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-hidden",
                 i === currentStep
@@ -238,7 +254,11 @@ export const GuidedWizard = () => {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
+            onClick={() => {
+              startTransition(() => {
+                setCurrentStep(Math.max(0, currentStep - 1));
+              });
+            }}
             disabled={currentStep === 0}
             className="gap-1 text-xs"
             aria-label="Etapa anterior"
@@ -271,10 +291,12 @@ export const GuidedWizard = () => {
             variant="outline"
             size="sm"
             onClick={() => {
-              if (currentStep < steps.length - 1) {
-                setCurrentStep(currentStep + 1);
-              }
               goToSection(step.sectionAnchor);
+              if (currentStep < steps.length - 1) {
+                startTransition(() => {
+                  setCurrentStep(currentStep + 1);
+                });
+              }
             }}
             className="gap-1 text-xs"
             aria-label={currentStep < steps.length - 1 ? "Próxima etapa" : "Ir para seção"}

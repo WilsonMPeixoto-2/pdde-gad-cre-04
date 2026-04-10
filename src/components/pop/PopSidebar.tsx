@@ -1,13 +1,24 @@
 import { ChevronRight, CheckCircle, FileText, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { GUIDE_VERSION, guideSections } from "@/lib/guideContent";
+import { requestGuideAnchorPreload } from "@/lib/guideNavigation";
 
 /** Uses IntersectionObserver for scroll progress instead of getBoundingClientRect in loop */
 function useSectionProgress() {
   const [progress, setProgress] = useState<Record<string, number>>({});
   const progressRef = useRef<Record<string, number>>({});
+  const syncProgress = useEffectEvent((entries: IntersectionObserverEntry[]) => {
+    for (const entry of entries) {
+      const id = entry.target.id;
+      if (entry.isIntersecting) {
+        progressRef.current[id] = Math.max(progressRef.current[id] ?? 0, entry.intersectionRatio);
+      }
+    }
+
+    setProgress({ ...progressRef.current });
+  });
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -21,16 +32,7 @@ function useSectionProgress() {
 
       const observer = new IntersectionObserver(
         (entries) => {
-          for (const entry of entries) {
-            const id = entry.target.id;
-            if (entry.isIntersecting) {
-              progressRef.current[id] = Math.max(
-                progressRef.current[id] ?? 0,
-                entry.intersectionRatio
-              );
-            }
-          }
-          setProgress({ ...progressRef.current });
+          syncProgress(entries);
         },
         { threshold: thresholds }
       );
@@ -59,31 +61,39 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
   const [isDesktop, setIsDesktop] = useState(() =>
     typeof window !== "undefined" ? window.matchMedia("(min-width: 1024px)").matches : true
   );
+  const syncDesktop = useEffectEvent((matches: boolean) => {
+    setIsDesktop(matches);
+  });
+  const handleEscape = useEffectEvent((event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      onClose();
+    }
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const syncDesktop = () => setIsDesktop(mediaQuery.matches);
+    const updateDesktopState = () => {
+      syncDesktop(mediaQuery.matches);
+    };
 
-    syncDesktop();
-    mediaQuery.addEventListener("change", syncDesktop);
+    updateDesktopState();
+    mediaQuery.addEventListener("change", updateDesktopState);
 
-    return () => mediaQuery.removeEventListener("change", syncDesktop);
+    return () => mediaQuery.removeEventListener("change", updateDesktopState);
   }, []);
 
   useEffect(() => {
     if (!isOpen || isDesktop || typeof window === "undefined") return;
 
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
+    const onKeyDown = (event: KeyboardEvent) => {
+      handleEscape(event);
     };
 
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [isDesktop, isOpen, onClose]);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isDesktop, isOpen]);
 
   const mobileHidden = !isOpen && !isDesktop;
 
@@ -164,6 +174,8 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                     </div>
 
                     <button
+                      onMouseEnter={() => requestGuideAnchorPreload(section.id)}
+                      onFocus={() => requestGuideAnchorPreload(section.id)}
                       onClick={() => {
                         onSectionClick(section.id);
                         onClose();

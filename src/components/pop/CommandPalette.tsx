@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/command";
 import { searchItems, getQuickSuggestions, SearchItem } from "@/lib/searchIndex";
 import { scrollToGuideAnchor } from "@/lib/guideNavigation";
+import { COMMAND_PALETTE_OPEN_EVENT } from "@/lib/commandPaletteEvents";
 import { Search, FileText, Hash, ArrowRight, Keyboard } from "lucide-react";
 
 export function CommandPalette() {
@@ -21,17 +22,29 @@ export function CommandPalette() {
     setOpen(true);
   });
 
-  // Listen for Cmd+K / Ctrl+K
+  const handleKeyboardShortcut = useEffectEvent((event: KeyboardEvent) => {
+    if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+      event.preventDefault();
+      openPalette();
+    }
+  });
+
+  // Listen for Cmd+K / Ctrl+K and explicit open requests from the UI.
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        openPalette();
-      }
+    const handleKeyDown = (event: KeyboardEvent) => {
+      handleKeyboardShortcut(event);
+    };
+    const handleExplicitOpen = () => {
+      openPalette();
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener(COMMAND_PALETTE_OPEN_EVENT, handleExplicitOpen);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener(COMMAND_PALETTE_OPEN_EVENT, handleExplicitOpen);
+    };
   }, []);
 
   const results = useMemo<SearchItem[]>(() => {
@@ -47,7 +60,7 @@ export function CommandPalette() {
       setQuery("");
     });
 
-    scrollToGuideAnchor(item.anchor);
+    scrollToGuideAnchor(item.anchor, { focusHeading: true });
   }, []);
 
   const quickSuggestions = getQuickSuggestions();

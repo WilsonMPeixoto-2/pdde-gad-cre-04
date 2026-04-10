@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { startTransition, useEffect, useState } from "react";
+import { requestCommandPaletteOpen } from "@/lib/commandPaletteEvents";
 
 interface PopHeaderProps {
   onPrint: () => void;
@@ -32,8 +33,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
   };
 
   const openSearch = () => {
-    const event = new KeyboardEvent("keydown", { key: "k", metaKey: true, ctrlKey: true, bubbles: true });
-    document.dispatchEvent(event);
+    requestCommandPaletteOpen();
   };
 
   return (

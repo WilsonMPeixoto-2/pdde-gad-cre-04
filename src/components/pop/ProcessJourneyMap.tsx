@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { CheckCircle2, ChevronRight, AlertTriangle, ArrowUpRight, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { type ProcessFlowStep, processFlowSteps } from "@/lib/guideContent";
-import { scrollToGuideAnchor } from "@/lib/guideNavigation";
+import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
 import {
   PDDE_STORAGE_KEYS,
   readStorageJson,
@@ -76,7 +76,7 @@ export const ProcessJourneyMap = () => {
   }, [completed, canComplete]);
 
   const navigateToSection = (sectionId: string) => {
-    scrollToGuideAnchor(sectionId);
+    scrollToGuideAnchor(sectionId, { focusHeading: true });
   };
 
   const completedCount = completed.size;
@@ -226,6 +226,8 @@ export const ProcessJourneyMap = () => {
 
                     <div className="flex shrink-0 flex-wrap gap-2">
                       <button
+                        onMouseEnter={() => requestGuideAnchorPreload(step.sectionId)}
+                        onFocus={() => requestGuideAnchorPreload(step.sectionId)}
                         onClick={() => navigateToSection(step.sectionId)}
                         className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
                       >

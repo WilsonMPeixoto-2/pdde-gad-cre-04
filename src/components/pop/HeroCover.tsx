@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { Building2, ChevronDown, ClipboardList, FileText } from "lucide-react";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
+import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 /**
  * HeroCover — Premium autoral "Institucional Cinemático"
@@ -190,7 +191,9 @@ export const HeroCover = () => {
         
         <div className="hero-stagger flex items-center justify-center" style={{ animationDelay: '1s' }}>
           <button
-            onClick={() => document.getElementById(GUIDE_ANCHORS.checklist)?.scrollIntoView({ behavior: 'smooth' })}
+            onMouseEnter={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
+            onFocus={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
+            onClick={() => scrollToGuideAnchor(GUIDE_ANCHORS.checklist, { focusHeading: true })}
             className="group inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium sm:w-auto"
             style={{
               background: 'linear-gradient(135deg, hsl(197, 82%, 43%) 0%, hsl(211, 64%, 24%) 100%)',

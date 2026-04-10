@@ -7,7 +7,7 @@ type ScrollToGuideAnchorOptions = {
   saveLastSection?: (sectionId: string) => void;
 };
 
-type GuidePreloadDetail = {
+export type GuidePreloadDetail = {
   anchorId: string;
 };
 
@@ -32,6 +32,8 @@ const findBestScrollTarget = (anchorId: string) => {
 };
 
 export const requestGuideAnchorPreload = (anchorId: string) => {
+  if (typeof document === "undefined") return;
+
   pendingGuidePreloads.add(anchorId);
   document.dispatchEvent(
     new CustomEvent<GuidePreloadDetail>(GUIDE_PRELOAD_EVENT, {

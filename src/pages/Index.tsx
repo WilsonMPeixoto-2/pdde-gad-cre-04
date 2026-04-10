@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, lazy, Suspense } from "react";
+import { type ReactNode, lazy, Suspense, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
@@ -6,23 +6,49 @@ import { SectionDivider } from "@/components/pop/SectionDivider";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
-import { guideSectionIds, guideSectionsById } from "@/lib/guideContent";
+import {
+  GUIDE_ANCHORS,
+  guideAnchorParentSections,
+  guideSectionIds,
+  guideSectionsById,
+} from "@/lib/guideContent";
+import {
+  consumePendingGuidePreload,
+  GUIDE_PRELOAD_EVENT,
+  hasPendingGuidePreload,
+  scrollToGuideAnchor,
+  type GuidePreloadDetail,
+} from "@/lib/guideNavigation";
 
 // Lazy load non-critical interactive widgets
-const BackToTop = lazy(() => import("@/components/pop/BackToTop").then(m => ({ default: m.BackToTop })));
-const GuidedWizard = lazy(() => import("@/components/pop/GuidedWizard").then(m => ({ default: m.GuidedWizard })));
-const SectionIntro = lazy(() => import("@/components/pop/SectionIntro").then(m => ({ default: m.SectionIntro })));
-const ScopeCallout = lazy(() => import("@/components/pop/ScopeCallout").then(m => ({ default: m.ScopeCallout })));
-const SectionOne = lazy(() => import("@/components/pop/SectionOne").then(m => ({ default: m.SectionOne })));
+const loadBackToTop = () => import("@/components/pop/BackToTop").then((m) => ({ default: m.BackToTop }));
+const loadGuidedWizard = () => import("@/components/pop/GuidedWizard").then((m) => ({ default: m.GuidedWizard }));
+const loadSectionIntro = () => import("@/components/pop/SectionIntro").then((m) => ({ default: m.SectionIntro }));
+const loadScopeCallout = () => import("@/components/pop/ScopeCallout").then((m) => ({ default: m.ScopeCallout }));
+const loadSectionOne = () => import("@/components/pop/SectionOne").then((m) => ({ default: m.SectionOne }));
+
+const BackToTop = lazy(loadBackToTop);
+const GuidedWizard = lazy(loadGuidedWizard);
+const SectionIntro = lazy(loadSectionIntro);
+const ScopeCallout = lazy(loadScopeCallout);
+const SectionOne = lazy(loadSectionOne);
 
 // Lazy load below-the-fold sections for better initial load performance
-const SectionTwo = lazy(() => import("@/components/pop/SectionTwo").then(m => ({ default: m.SectionTwo })));
-const SectionThree = lazy(() => import("@/components/pop/SectionThree").then(m => ({ default: m.SectionThree })));
-const SectionFour = lazy(() => import("@/components/pop/SectionFour").then(m => ({ default: m.SectionFour })));
-const SectionFive = lazy(() => import("@/components/pop/SectionFive").then(m => ({ default: m.SectionFive })));
-const SectionSix = lazy(() => import("@/components/pop/SectionSix").then(m => ({ default: m.SectionSix })));
-const SectionContacts = lazy(() => import("@/components/pop/SectionContacts").then(m => ({ default: m.SectionContacts })));
-const SectionAnexo = lazy(() => import("@/components/pop/SectionAnexo").then(m => ({ default: m.SectionAnexo })));
+const loadSectionTwo = () => import("@/components/pop/SectionTwo").then((m) => ({ default: m.SectionTwo }));
+const loadSectionThree = () => import("@/components/pop/SectionThree").then((m) => ({ default: m.SectionThree }));
+const loadSectionFour = () => import("@/components/pop/SectionFour").then((m) => ({ default: m.SectionFour }));
+const loadSectionFive = () => import("@/components/pop/SectionFive").then((m) => ({ default: m.SectionFive }));
+const loadSectionSix = () => import("@/components/pop/SectionSix").then((m) => ({ default: m.SectionSix }));
+const loadSectionContacts = () => import("@/components/pop/SectionContacts").then((m) => ({ default: m.SectionContacts }));
+const loadSectionAnexo = () => import("@/components/pop/SectionAnexo").then((m) => ({ default: m.SectionAnexo }));
+
+const SectionTwo = lazy(loadSectionTwo);
+const SectionThree = lazy(loadSectionThree);
+const SectionFour = lazy(loadSectionFour);
+const SectionFive = lazy(loadSectionFive);
+const SectionSix = lazy(loadSectionSix);
+const SectionContacts = lazy(loadSectionContacts);
+const SectionAnexo = lazy(loadSectionAnexo);
 
 // Premium shimmer skeleton loader with min-height to prevent CLS
 const SectionLoader = () => (
@@ -34,10 +60,78 @@ const SectionLoader = () => (
   </div>
 );
 
+const deferredSectionLoaders = {
+  "secao-2": loadSectionTwo,
+  "secao-3": loadSectionThree,
+  "secao-4": loadSectionFour,
+  "secao-5": loadSectionFive,
+  "secao-6": loadSectionSix,
+  contatos: loadSectionContacts,
+  anexo: loadSectionAnexo,
+} satisfies Record<string, () => Promise<unknown>>;
+
+const preloadableGuideAnchors = [
+  ...Object.keys(deferredSectionLoaders),
+  ...Object.keys(guideAnchorParentSections),
+];
+
+const resolveDeferredSectionId = (anchorId: string) => guideAnchorParentSections[anchorId] ?? anchorId;
+
+type DeferredSectionSlotProps = {
+  children: ReactNode;
+  isReady: boolean;
+  onActivate: (sectionId: string) => void;
+  sectionId: string;
+};
+
+const DeferredSectionSlot = ({
+  children,
+  isReady,
+  onActivate,
+  sectionId,
+}: DeferredSectionSlotProps) => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (isReady) return;
+
+    const element = sectionRef.current;
+    if (!element || typeof IntersectionObserver === "undefined") {
+      onActivate(sectionId);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          onActivate(sectionId);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "420px 0px" },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [isReady, onActivate, sectionId]);
+
+  return (
+    <div
+      ref={sectionRef}
+      id={sectionId}
+      className="scroll-mt-20"
+      data-guide-section-slot="true"
+    >
+      {isReady ? <Suspense fallback={<SectionLoader />}>{children}</Suspense> : <SectionLoader />}
+    </div>
+  );
+};
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [readySections, setReadySections] = useState(() => new Set<string>());
+  const activatedSectionsRef = useRef(new Set<string>());
 
   const renderSectionDivider = (sectionId: string) => {
     const section = guideSectionsById[sectionId];
@@ -52,18 +146,10 @@ const Index = () => {
   };
 
   const handleSectionClick = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(sectionId);
-      // A11y: Transfer focus to the section heading after scroll
-      const heading = element.querySelector('h2, h3, [role="heading"]') as HTMLElement;
-      if (heading) {
-        heading.setAttribute('tabindex', '-1');
-        // Delay focus until scroll animation settles
-        setTimeout(() => heading.focus({ preventScroll: true }), 600);
-      }
-    }
+    scrollToGuideAnchor(sectionId, {
+      focusHeading: true,
+      saveLastSection: setActiveSection,
+    });
   }, []);
 
   const handlePrint = useCallback(() => {
@@ -86,6 +172,36 @@ const Index = () => {
     });
   }, []);
 
+  const activateDeferredSection = useCallback((anchorId: string) => {
+    const sectionId = resolveDeferredSectionId(anchorId);
+    const loadSection = deferredSectionLoaders[sectionId];
+
+    consumePendingGuidePreload(anchorId);
+    if (sectionId !== anchorId) {
+      consumePendingGuidePreload(sectionId);
+    }
+
+    if (!loadSection || activatedSectionsRef.current.has(sectionId)) {
+      return;
+    }
+
+    activatedSectionsRef.current.add(sectionId);
+    void loadSection();
+    setReadySections((current) => {
+      if (current.has(sectionId)) return current;
+      return new Set(current).add(sectionId);
+    });
+  }, []);
+
+  const syncVisibleSection = useEffectEvent((visibleSections: Map<string, number>) => {
+    for (const id of guideSectionIds) {
+      if (visibleSections.has(id)) {
+        setActiveSection(id);
+        break;
+      }
+    }
+  });
+
   // IntersectionObserver replaces scroll listener — no reflows, passive detection
   useEffect(() => {
     const visibleSections = new Map<string, number>();
@@ -99,13 +215,7 @@ const Index = () => {
             visibleSections.delete(entry.target.id);
           }
         }
-        // Pick the first visible section in document order
-        for (const id of guideSectionIds) {
-          if (visibleSections.has(id)) {
-            setActiveSection(id);
-            break;
-          }
-        }
+        syncVisibleSection(visibleSections);
       },
       { rootMargin: '-80px 0px -50% 0px', threshold: [0, 0.1, 0.3] }
     );
@@ -116,7 +226,39 @@ const Index = () => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [activateDeferredSection]);
+
+  useEffect(() => {
+    const handleGuidePreload = (event: Event) => {
+      const customEvent = event as CustomEvent<GuidePreloadDetail>;
+      if (!customEvent.detail?.anchorId) return;
+      activateDeferredSection(customEvent.detail.anchorId);
+    };
+
+    document.addEventListener(GUIDE_PRELOAD_EVENT, handleGuidePreload);
+
+    for (const anchorId of preloadableGuideAnchors) {
+      if (hasPendingGuidePreload(anchorId)) {
+        activateDeferredSection(anchorId);
+      }
+    }
+
+    return () => document.removeEventListener(GUIDE_PRELOAD_EVENT, handleGuidePreload);
+  }, [activateDeferredSection]);
+
+  useEffect(() => {
+    const warmInstructionSection = () => {
+      activateDeferredSection(GUIDE_ANCHORS.checklist);
+    };
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(warmInstructionSection, { timeout: 2500 });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(warmInstructionSection, 1600);
+    return () => window.clearTimeout(timeoutId);
+  }, [activateDeferredSection]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
@@ -186,74 +328,88 @@ const Index = () => {
                   {renderSectionDivider("secao-2")}
                 </AnimatedSection>
                 <AnimatedSection delay={150}>
-                  <div id="secao-2" className="scroll-mt-20">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionTwo />
-                    </Suspense>
-                  </div>
+                  <DeferredSectionSlot
+                    sectionId="secao-2"
+                    isReady={readySections.has("secao-2")}
+                    onActivate={activateDeferredSection}
+                  >
+                    <SectionTwo />
+                  </DeferredSectionSlot>
                 </AnimatedSection>
 
                 <AnimatedSection delay={100}>
                   {renderSectionDivider("secao-3")}
                 </AnimatedSection>
                 <AnimatedSection delay={150}>
-                  <div id="secao-3" className="scroll-mt-20">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionThree />
-                    </Suspense>
-                  </div>
+                  <DeferredSectionSlot
+                    sectionId="secao-3"
+                    isReady={readySections.has("secao-3")}
+                    onActivate={activateDeferredSection}
+                  >
+                    <SectionThree />
+                  </DeferredSectionSlot>
                 </AnimatedSection>
 
                 <AnimatedSection delay={100}>
                   {renderSectionDivider("secao-4")}
                 </AnimatedSection>
                 <AnimatedSection delay={150}>
-                  <div id="secao-4" className="scroll-mt-20">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionFour />
-                    </Suspense>
-                  </div>
+                  <DeferredSectionSlot
+                    sectionId="secao-4"
+                    isReady={readySections.has("secao-4")}
+                    onActivate={activateDeferredSection}
+                  >
+                    <SectionFour />
+                  </DeferredSectionSlot>
                 </AnimatedSection>
 
                 <AnimatedSection delay={100}>
                   {renderSectionDivider("secao-5")}
                 </AnimatedSection>
                 <AnimatedSection delay={150}>
-                  <div id="secao-5" className="scroll-mt-20">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionFive />
-                    </Suspense>
-                  </div>
+                  <DeferredSectionSlot
+                    sectionId="secao-5"
+                    isReady={readySections.has("secao-5")}
+                    onActivate={activateDeferredSection}
+                  >
+                    <SectionFive />
+                  </DeferredSectionSlot>
                 </AnimatedSection>
 
                 <AnimatedSection delay={100}>
                   {renderSectionDivider("secao-6")}
                 </AnimatedSection>
                 <AnimatedSection delay={150}>
-                  <div id="secao-6" className="scroll-mt-20">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionSix />
-                    </Suspense>
-                  </div>
+                  <DeferredSectionSlot
+                    sectionId="secao-6"
+                    isReady={readySections.has("secao-6")}
+                    onActivate={activateDeferredSection}
+                  >
+                    <SectionSix />
+                  </DeferredSectionSlot>
                 </AnimatedSection>
 
                 <AnimatedSection delay={100}>
                   {renderSectionDivider("contatos")}
                 </AnimatedSection>
                 <AnimatedSection delay={150}>
-                  <div id="contatos" className="scroll-mt-20">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionContacts onPrint={handlePrint} />
-                    </Suspense>
-                  </div>
+                  <DeferredSectionSlot
+                    sectionId="contatos"
+                    isReady={readySections.has("contatos")}
+                    onActivate={activateDeferredSection}
+                  >
+                    <SectionContacts onPrint={handlePrint} />
+                  </DeferredSectionSlot>
                 </AnimatedSection>
 
                 <AnimatedSection delay={150}>
-                  <div id="anexo" className="scroll-mt-20">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionAnexo />
-                    </Suspense>
-                  </div>
+                  <DeferredSectionSlot
+                    sectionId="anexo"
+                    isReady={readySections.has("anexo")}
+                    onActivate={activateDeferredSection}
+                  >
+                    <SectionAnexo />
+                  </DeferredSectionSlot>
                 </AnimatedSection>
 
                 {/* Document Footer */}

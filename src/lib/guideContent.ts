@@ -41,12 +41,7 @@ export const GUIDE_ANCHORS = {
   journey: "mapa-jornada",
 } as const;
 
-export const guideAnchorParentSections: Record<string, string> = {
-  [GUIDE_ANCHORS.checklist]: "secao-2",
-  [GUIDE_ANCHORS.models]: "secao-2",
-  [GUIDE_ANCHORS.templates]: "secao-2",
-  [GUIDE_ANCHORS.journey]: "secao-2",
-};
+export type GuideNestedAnchorId = (typeof GUIDE_ANCHORS)[keyof typeof GUIDE_ANCHORS];
 
 export interface GuideSectionMeta {
   id: string;
@@ -57,7 +52,7 @@ export interface GuideSectionMeta {
   icon: LucideIcon;
 }
 
-export const guideSections: GuideSectionMeta[] = [
+export const guideSections = [
   {
     id: "introducao",
     number: "0",
@@ -129,13 +124,23 @@ export const guideSections: GuideSectionMeta[] = [
     subtitle: "Fontes oficiais prioritárias para consulta rápida",
     icon: Scale,
   },
-];
+] as const satisfies readonly GuideSectionMeta[];
+
+export type GuideSectionId = (typeof guideSections)[number]["id"];
+export type GuideAnchorId = GuideSectionId | GuideNestedAnchorId;
+
+export const guideAnchorParentSections: Record<GuideNestedAnchorId, GuideSectionId> = {
+  [GUIDE_ANCHORS.checklist]: "secao-2",
+  [GUIDE_ANCHORS.models]: "secao-2",
+  [GUIDE_ANCHORS.templates]: "secao-2",
+  [GUIDE_ANCHORS.journey]: "secao-2",
+};
 
 export const contentSections = guideSections.filter((section) => section.subtitle);
 export const guideSectionIds = guideSections.map((section) => section.id);
 export const guideSectionsById = Object.fromEntries(
   guideSections.map((section) => [section.id, section])
-) as Record<string, GuideSectionMeta>;
+) as Record<GuideSectionId, GuideSectionMeta>;
 
 export const guideHowToSteps = contentSections
   .filter((section) => /^[1-6]$/.test(section.number))

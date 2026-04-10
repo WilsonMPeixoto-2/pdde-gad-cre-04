@@ -3,6 +3,8 @@ import {
   GUIDE_ANCHORS,
   PROCESS_CLASSIFICATION_LABEL,
   PROCESS_TYPE_LABEL,
+  type GuideAnchorId,
+  type GuideSectionId,
   guideSectionsById,
 } from "@/lib/guideContent";
 
@@ -12,10 +14,10 @@ export interface SearchItem {
   content: string;
   keywords: string[];
   section: string;
-  anchor: string;
+  anchor: GuideAnchorId;
 }
 
-const sectionTitle = (sectionId: string) => guideSectionsById[sectionId].title;
+const sectionTitle = (sectionId: GuideSectionId) => guideSectionsById[sectionId].title;
 
 export const searchIndex: SearchItem[] = [
   {

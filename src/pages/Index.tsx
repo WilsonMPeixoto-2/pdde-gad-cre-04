@@ -1,4 +1,5 @@
 import { type ReactNode, lazy, Suspense, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
@@ -11,6 +12,8 @@ import {
   guideAnchorParentSections,
   guideSectionIds,
   guideSectionsById,
+  type GuideAnchorId,
+  type GuideSectionId,
 } from "@/lib/guideContent";
 import {
   consumePendingGuidePreload,
@@ -19,6 +22,10 @@ import {
   scrollToGuideAnchor,
   type GuidePreloadDetail,
 } from "@/lib/guideNavigation";
+import {
+  readGuideTargetFromSearchParams,
+  withGuideTarget,
+} from "@/lib/guideRoutes";
 
 // Lazy load non-critical interactive widgets
 const loadBackToTop = () => import("@/components/pop/BackToTop").then((m) => ({ default: m.BackToTop }));
@@ -73,15 +80,17 @@ const deferredSectionLoaders = {
 const preloadableGuideAnchors = [
   ...Object.keys(deferredSectionLoaders),
   ...Object.keys(guideAnchorParentSections),
-];
+] as GuideAnchorId[];
 
-const resolveDeferredSectionId = (anchorId: string) => guideAnchorParentSections[anchorId] ?? anchorId;
+const resolveDeferredSectionId = (anchorId: GuideAnchorId): GuideSectionId =>
+  guideAnchorParentSections[anchorId as keyof typeof guideAnchorParentSections] ??
+  anchorId;
 
 type DeferredSectionSlotProps = {
   children: ReactNode;
   isReady: boolean;
-  onActivate: (sectionId: string) => void;
-  sectionId: string;
+  onActivate: (sectionId: GuideAnchorId) => void;
+  sectionId: GuideSectionId;
 };
 
 const DeferredSectionSlot = ({
@@ -128,15 +137,36 @@ const DeferredSectionSlot = ({
 };
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState("introducao");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeSection, setActiveSection] = useState<GuideSectionId>("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [readySections, setReadySections] = useState(() => new Set<string>());
-  const activatedSectionsRef = useRef(new Set<string>());
+  const [readySections, setReadySections] = useState(() => new Set<GuideSectionId>());
+  const activatedSectionsRef = useRef(new Set<GuideSectionId>());
+  const lastHandledGuideTargetRef = useRef<GuideAnchorId | null>(null);
 
-  const renderSectionDivider = (sectionId: string) => {
+  const syncGuideUrl = useCallback(
+    (target: GuideAnchorId, replace = true) => {
+      lastHandledGuideTargetRef.current = target;
+      setSearchParams(
+        (current) => {
+          const currentTarget = readGuideTargetFromSearchParams(current);
+          if (currentTarget === target) {
+            return current;
+          }
+
+          return withGuideTarget(current, target);
+        },
+        { replace },
+      );
+    },
+    [setSearchParams],
+  );
+
+  const renderSectionDivider = (sectionId: GuideSectionId) => {
     const section = guideSectionsById[sectionId];
     return (
       <SectionDivider
+        sectionId={sectionId}
         number={section.number}
         title={section.title}
         subtitle={section.subtitle ?? ""}
@@ -145,12 +175,13 @@ const Index = () => {
     );
   };
 
-  const handleSectionClick = useCallback((sectionId: string) => {
+  const handleSectionClick = useCallback((sectionId: GuideSectionId) => {
+    syncGuideUrl(sectionId);
     scrollToGuideAnchor(sectionId, {
       focusHeading: true,
       saveLastSection: setActiveSection,
     });
-  }, []);
+  }, [syncGuideUrl]);
 
   const handlePrint = useCallback(() => {
     const originalTitle = document.title;
@@ -172,7 +203,7 @@ const Index = () => {
     });
   }, []);
 
-  const activateDeferredSection = useCallback((anchorId: string) => {
+  const activateDeferredSection = useCallback((anchorId: GuideAnchorId) => {
     const sectionId = resolveDeferredSectionId(anchorId);
     const loadSection = deferredSectionLoaders[sectionId];
 
@@ -197,10 +228,19 @@ const Index = () => {
     for (const id of guideSectionIds) {
       if (visibleSections.has(id)) {
         setActiveSection(id);
+        syncGuideUrl(id);
         break;
       }
     }
   });
+
+  const applyGuideTargetFromUrl = useCallback((target: GuideAnchorId) => {
+    activateDeferredSection(target);
+    scrollToGuideAnchor(target, {
+      focusHeading: true,
+      saveLastSection: setActiveSection,
+    });
+  }, [activateDeferredSection]);
 
   // IntersectionObserver replaces scroll listener — no reflows, passive detection
   useEffect(() => {
@@ -259,6 +299,20 @@ const Index = () => {
     const timeoutId = window.setTimeout(warmInstructionSection, 1600);
     return () => window.clearTimeout(timeoutId);
   }, [activateDeferredSection]);
+
+  useEffect(() => {
+    const targetFromUrl = readGuideTargetFromSearchParams(searchParams);
+    if (!targetFromUrl || lastHandledGuideTargetRef.current === targetFromUrl) {
+      return;
+    }
+
+    lastHandledGuideTargetRef.current = targetFromUrl;
+    const frameId = window.requestAnimationFrame(() => {
+      applyGuideTargetFromUrl(targetFromUrl);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [applyGuideTargetFromUrl, searchParams]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;

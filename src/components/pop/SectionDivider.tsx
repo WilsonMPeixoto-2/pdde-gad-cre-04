@@ -1,7 +1,12 @@
-import { forwardRef } from "react";
-import { LucideIcon } from "lucide-react";
+import { forwardRef, useCallback } from "react";
+import { Check, Copy, Link2, type LucideIcon } from "lucide-react";
+import { toast } from "sonner";
+import { useClipboardAction } from "@/hooks/useClipboardAction";
+import { buildGuideShareUrl } from "@/lib/guideRoutes";
+import type { GuideSectionId } from "@/lib/guideContent";
 
 interface SectionDividerProps {
+  sectionId: GuideSectionId;
   number: string;
   title: string;
   subtitle: string;
@@ -9,7 +14,20 @@ interface SectionDividerProps {
 }
 
 export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
-  ({ number, title, subtitle, icon: Icon }, ref) => {
+  ({ sectionId, number, title, subtitle, icon: Icon }, ref) => {
+    const { copiedValue, copyText } = useClipboardAction<GuideSectionId>();
+
+    const handleCopySectionLink = useCallback(async () => {
+      const didCopy = await copyText(sectionId, buildGuideShareUrl(sectionId));
+
+      if (didCopy) {
+        toast.success("Link da seção copiado.");
+        return;
+      }
+
+      toast.error("Não foi possível copiar o link desta seção.");
+    }, [copyText, sectionId]);
+
     return (
       <div ref={ref} className="relative py-16 sm:py-20 my-10 sm:my-14 -mx-4 sm:mx-0 section-divider-print overflow-hidden">
         {/* Premium Background — matches Hero art direction */}
@@ -59,6 +77,29 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
           
           {/* Content */}
           <div className="text-center sm:text-left flex-1">
+            <div className="mb-4 flex justify-center sm:justify-end no-print">
+              <button
+                type="button"
+                onClick={() => {
+                  void handleCopySectionLink();
+                }}
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs font-medium text-white/80 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.09] hover:text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                aria-label={`Copiar link da seção ${number}: ${title}`}
+              >
+                <Link2 className="h-3.5 w-3.5" />
+                {copiedValue === sectionId ? (
+                  <>
+                    <Check className="h-3.5 w-3.5" />
+                    Link copiado
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    Copiar link
+                  </>
+                )}
+              </button>
+            </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-white mb-2.5 flex items-center justify-center sm:justify-start gap-3 tracking-tight">
               <div 
                 className="hidden sm:flex items-center justify-center w-10 h-10 rounded-xl"

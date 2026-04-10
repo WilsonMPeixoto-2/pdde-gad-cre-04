@@ -1,4 +1,4 @@
-import { guideAnchorParentSections } from "@/lib/guideContent";
+import { guideAnchorParentSections, type GuideAnchorId } from "@/lib/guideContent";
 
 type ScrollToGuideAnchorOptions = {
   block?: ScrollLogicalPosition;
@@ -8,15 +8,15 @@ type ScrollToGuideAnchorOptions = {
 };
 
 export type GuidePreloadDetail = {
-  anchorId: string;
+  anchorId: GuideAnchorId;
 };
 
 export const GUIDE_PRELOAD_EVENT = "guide:preload-anchor";
 
 const headingSelector = "h2, h3, [role='heading']";
-const pendingGuidePreloads = new Set<string>();
+const pendingGuidePreloads = new Set<GuideAnchorId>();
 
-const findBestScrollTarget = (anchorId: string) => {
+const findBestScrollTarget = (anchorId: GuideAnchorId) => {
   const exactTarget = document.getElementById(anchorId);
   if (exactTarget) {
     return { target: exactTarget, resolvedId: anchorId, parentId: anchorId };
@@ -31,7 +31,7 @@ const findBestScrollTarget = (anchorId: string) => {
   return { target: parentTarget, resolvedId: parentSectionId, parentId: parentSectionId };
 };
 
-export const requestGuideAnchorPreload = (anchorId: string) => {
+export const requestGuideAnchorPreload = (anchorId: GuideAnchorId) => {
   if (typeof document === "undefined") return;
 
   pendingGuidePreloads.add(anchorId);
@@ -42,13 +42,13 @@ export const requestGuideAnchorPreload = (anchorId: string) => {
   );
 };
 
-export const hasPendingGuidePreload = (anchorId: string) => pendingGuidePreloads.has(anchorId);
-export const consumePendingGuidePreload = (anchorId: string) => {
+export const hasPendingGuidePreload = (anchorId: GuideAnchorId) => pendingGuidePreloads.has(anchorId);
+export const consumePendingGuidePreload = (anchorId: GuideAnchorId) => {
   pendingGuidePreloads.delete(anchorId);
 };
 
 export const scrollToGuideAnchor = (
-  anchorId: string,
+  anchorId: GuideAnchorId,
   options: ScrollToGuideAnchorOptions = {},
 ) => {
   requestGuideAnchorPreload(anchorId);

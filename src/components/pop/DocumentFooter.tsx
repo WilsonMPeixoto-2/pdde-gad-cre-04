@@ -2,6 +2,15 @@ import { PROJECT_BRANDING } from "@/lib/projectBranding";
 import { GUIDE_VERSION } from "@/lib/guideContent";
 
 export const DocumentFooter = () => {
+  const canonicalHost = new URL(PROJECT_BRANDING.canonicalUrl).hostname;
+  const runtimeHost = typeof window === "undefined" ? canonicalHost : window.location.hostname;
+  const environmentLabel =
+    runtimeHost === canonicalHost
+      ? "Produção"
+      : import.meta.env.DEV
+        ? "Desenvolvimento"
+        : "Preview";
+
   return (
     <div className="mt-16 mb-8 border-t border-border/50 pt-8">
       <div className="space-y-2 text-center">
@@ -13,6 +22,9 @@ export const DocumentFooter = () => {
         </h3>
         <p className="text-sm tracking-wide text-muted-foreground">
           {`Última atualização: ${GUIDE_VERSION.lastUpdatedText}`}
+        </p>
+        <p className="text-xs tracking-[0.12em] text-muted-foreground/85">
+          {`Build ${__APP_BUILD_ID__.slice(0, 12)} · ${environmentLabel}`}
         </p>
       </div>
 

@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { FileText, Copy, Check, RotateCcw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useClipboardAction } from "@/hooks/useClipboardAction";
 import {
   Tooltip,
   TooltipContent,
@@ -123,10 +124,10 @@ export const SmartTemplates = () => {
   const [values, setValues] = useState<Record<string, Record<string, string>>>(savedValues);
   const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState<string | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [workspace, setWorkspace] = useState<ProcessWorkspaceProfile>(() =>
     sanitizeWorkspaceProfile(readStorageJson(PDDE_STORAGE_KEYS.workspace, emptyProcessWorkspaceProfile())),
   );
+  const { copiedValue: copiedId, copyText: copyTemplateToClipboard } = useClipboardAction<string>();
 
   useEffect(() => {
     const syncWorkspace = () =>
@@ -179,12 +180,15 @@ export const SmartTemplates = () => {
 
   const copyText = useCallback((template: Template) => {
     const text = template.generate(resolveTemplateValues(template.id));
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedId(template.id);
-      toast.success("Texto copiado para a área de transferência!");
-      setTimeout(() => setCopiedId(null), 2000);
+    void copyTemplateToClipboard(template.id, text).then((didCopy) => {
+      if (didCopy) {
+        toast.success("Texto copiado para a área de transferência!");
+        return;
+      }
+
+      toast.error("Erro ao copiar texto.");
     });
-  }, [resolveTemplateValues]);
+  }, [copyTemplateToClipboard, resolveTemplateValues]);
 
   return (
     <div className="section-card border-l-4 border-l-accent smart-templates">

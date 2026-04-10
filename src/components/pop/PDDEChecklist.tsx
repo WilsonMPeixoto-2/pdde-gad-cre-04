@@ -3,6 +3,7 @@ import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter,
 import { toast } from "sonner";
 import { downloadTextFile } from "@/lib/clientFileExports";
 import { externalResources } from "@/lib/externalResources";
+import { useClipboardAction } from "@/hooks/useClipboardAction";
 import {
   createChecklistItems,
   hydrateChecklistItems,
@@ -27,6 +28,7 @@ export const PDDEChecklist = () => {
   const [items, setItems] = useState<ChecklistItemState[]>(() =>
     hydrateChecklistItems(readStorageJson(PDDE_STORAGE_KEYS.checklist, createChecklistItems())),
   );
+  const { copiedValue: copiedKey, copyText } = useClipboardAction<"pending-summary">();
 
   useEffect(() => {
     writeStorageJson(PDDE_STORAGE_KEYS.checklist, items);
@@ -135,12 +137,15 @@ export const PDDEChecklist = () => {
 
     text += `\nTotal pendente: ${pending.length} item(ns) — ${essenciaisPending.length} essencial(is), ${complementaresPending.length} complementar(es)`;
 
-    navigator.clipboard.writeText(text).then(() => {
-      toast.success("Resumo copiado para a área de transferência!");
-    }).catch(() => {
+    void copyText("pending-summary", text).then((didCopy) => {
+      if (didCopy) {
+        toast.success("Resumo copiado para a área de transferência!");
+        return;
+      }
+
       toast.error("Erro ao copiar resumo");
     });
-  }, [items]);
+  }, [copyText, items]);
 
   const downloadSummary = useCallback(() => {
     const pending = items.filter((item) => !item.checked);
@@ -238,7 +243,9 @@ export const PDDEChecklist = () => {
             aria-label={`Copiar resumo dos ${pendingCount} itens pendentes`}
           >
             <Copy className="w-4 h-4" aria-hidden="true" />
-            Copiar resumo do que falta ({pendingCount} {pendingCount === 1 ? 'item' : 'itens'})
+            {copiedKey === "pending-summary"
+              ? "Resumo copiado"
+              : `Copiar resumo do que falta (${pendingCount} ${pendingCount === 1 ? "item" : "itens"})`}
           </button>
           <button
             onClick={downloadSummary}

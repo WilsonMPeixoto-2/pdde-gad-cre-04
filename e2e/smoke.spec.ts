@@ -50,6 +50,18 @@ const searchAndOpen = async (
 test.describe("Fluxo desktop", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
+  test("restaura a seção compartilhada a partir da URL", async ({ page }) => {
+    const consoleIssues = collectConsoleIssues(page);
+    const pageErrors = collectPageErrors(page);
+
+    await page.goto("/?secao=secao-4");
+    await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
+    await expect(page.getByText(/procedimento para autenticar documentos externos/i)).toBeVisible();
+    await expect(page.getByText(/build [a-f0-9]{12} ·/i)).toBeVisible();
+    expect(pageErrors).toEqual([]);
+    expect(consoleIssues).toEqual([]);
+  });
+
   test("carrega sem regressões visíveis e mantém o guia instrucional como foco principal", async ({ page }) => {
     const consoleIssues = collectConsoleIssues(page);
     const pageErrors = collectPageErrors(page);

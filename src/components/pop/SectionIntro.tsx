@@ -12,8 +12,8 @@ export const SectionIntro = () => {
         <h2 className="section-heading text-xl sm:text-2xl">
           Prezados(as) Diretores(as),
         </h2>
-        <div className="content-spacing">
-          <p className="drop-cap text-foreground/90 leading-relaxed text-sm sm:text-[15px] sm:leading-loose text-left sm:text-justify [text-wrap:pretty]">
+        <div className="prose-institutional">
+          <p className="lead-text drop-cap text-left sm:text-justify">
             A rotina de uma unidade escolar é intensa. Entre demandas pedagógicas, cuidado com pessoas 
             e urgências do dia a dia, sabemos que a organização administrativa exige tempo, atenção e, 
             muitas vezes, decisões rápidas.
@@ -32,73 +32,77 @@ export const SectionIntro = () => {
             </p>
           </div>
 
-          <p className="text-foreground/85 leading-relaxed text-sm sm:text-[15px] sm:leading-loose text-left sm:text-justify [text-wrap:pretty]">
-            A chegada do <strong className="font-semibold text-foreground">SEI!RIO</strong> representa uma mudança importante na forma como registramos, 
+          <p className="text-left sm:text-justify">
+            A chegada do <strong>SEI!RIO</strong> representa uma mudança importante na forma como registramos, 
             acompanhamos e formalizamos os processos administrativos. Toda transição traz desafios, 
             e é exatamente nesse momento que a parceria entre a CRE e as unidades escolares faz diferença. 
           </p>
+
+          <div className="divider-soft" />
           
-          <p className="text-foreground/85 leading-relaxed text-sm sm:text-[15px] sm:leading-loose text-left sm:text-justify [text-wrap:pretty]">
+          <p className="text-left sm:text-justify">
             Este documento foi pensado para facilitar seu caminho. Nossa intenção é transformar regras e 
             etapas sistêmicas em rotinas mais simples, prevendo:
           </p>
           
-          <ul className="grid gap-3 sm:grid-cols-2 mt-4 mb-6">
-            <li className="info-panel flex items-start gap-3 !p-4">
+          <ul className="grid gap-3 sm:grid-cols-2 mt-4 mb-6 !pl-0 list-none !space-y-0">
+            <li className="info-panel flex items-start gap-3 !p-4 !leading-normal !text-inherit">
               <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
                 <ShieldCheck className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Redução de inseguranças</p>
-                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                <p className="text-sm font-semibold text-foreground !mb-0">Redução de inseguranças</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72 !mb-0 !max-w-none">
                   Orientações mais claras para executar cada etapa com menos dúvidas.
                 </p>
               </div>
             </li>
-            <li className="info-panel flex items-start gap-3 !p-4">
+            <li className="info-panel flex items-start gap-3 !p-4 !leading-normal !text-inherit">
               <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
                 <Sparkles className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Evitar retrabalho comum</p>
-                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                <p className="text-sm font-semibold text-foreground !mb-0">Evitar retrabalho comum</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72 !mb-0 !max-w-none">
                   Menos correções posteriores por falhas de instrução e padronização.
                 </p>
               </div>
             </li>
-            <li className="info-panel flex items-start gap-3 !p-4">
+            <li className="info-panel flex items-start gap-3 !p-4 !leading-normal !text-inherit">
               <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
                 <BadgeCheck className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Maior previsibilidade de rotinas</p>
-                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                <p className="text-sm font-semibold text-foreground !mb-0">Maior previsibilidade de rotinas</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72 !mb-0 !max-w-none">
                   Um fluxo mais estável para consulta, conferência e remessa processual.
                 </p>
               </div>
             </li>
-            <li className="info-panel flex items-start gap-3 !p-4">
+            <li className="info-panel flex items-start gap-3 !p-4 !leading-normal !text-inherit">
               <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
                 <HeartHandshake className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Execução respeitando seu contexto</p>
-                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                <p className="text-sm font-semibold text-foreground !mb-0">Execução respeitando seu contexto</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72 !mb-0 !max-w-none">
                   Aplicação prática pensada para a realidade cotidiana das unidades escolares.
                 </p>
               </div>
             </li>
           </ul>
 
-          <p className="text-foreground/85 italic leading-relaxed text-sm sm:text-base text-left sm:text-justify mt-6 border-l-2 border-primary/40 pl-4 py-1">
-            Conte com a 4ª CRE/GAD. Seguimos à disposição para orientar, ouvir e aprimorar continuamente 
-            esses materiais, em parceria com vocês.
-          </p>
+          <div className="rule-card mt-6 pl-5">
+            <p className="italic text-foreground/85 text-sm sm:text-base text-left sm:text-justify !mb-0">
+              Conte com a 4ª CRE/GAD. Seguimos à disposição para orientar, ouvir e aprimorar continuamente 
+              esses materiais, em parceria com vocês.
+            </p>
+          </div>
         </div>
 
         {/* Signatures */}
         <div className="mt-8 border-t border-border/55 pt-6">
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <p className="subsection-title mb-4">
             Assinaturas institucionais
           </p>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">

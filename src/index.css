@@ -364,6 +364,126 @@
   @apply inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground;
 }
 
+/* ===== PREMIUM READABILITY UTILITIES ===== */
+
+@utility lead-text {
+  /* Opening paragraph with visual emphasis */
+  @apply text-[1.06rem] leading-[2] text-foreground/88 sm:text-[1.1rem];
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  text-wrap: pretty;
+  hyphens: auto;
+  max-width: 72ch;
+}
+
+@utility subsection-title {
+  /* Internal h4 sub-headings within content blocks */
+  @apply font-heading text-[0.82rem] font-bold uppercase tracking-[0.13em] text-foreground/72;
+  letter-spacing: 0.14em;
+  &::before {
+    content: '';
+    @apply inline-block w-1.5 h-1.5 rounded-full bg-accent/60 mr-2;
+    vertical-align: middle;
+  }
+}
+
+@utility rule-card {
+  /* Card for regulation rules / vedações with left accent bar */
+  @apply relative rounded-[1.35rem] border border-border/50 p-4 sm:p-5 transition-all duration-300;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--background)) 0%,
+    hsl(var(--secondary) / 0.4) 100%
+  );
+  box-shadow:
+    0 16px 30px -26px hsl(221 31% 20% / 0.10),
+    inset 0 1px 0 0 hsl(0 0% 100% / 0.5);
+
+  &::before {
+    content: '';
+    @apply absolute left-0 top-4 bottom-4 w-1 rounded-full;
+    background: linear-gradient(180deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 100%);
+  }
+
+  &:hover {
+    transform: translateX(2px);
+    box-shadow:
+      0 20px 34px -24px hsl(221 31% 20% / 0.14),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.55);
+  }
+
+  & p, & li {
+    @apply text-sm leading-7 text-foreground/82 sm:text-[0.95rem];
+    text-wrap: pretty;
+  }
+}
+
+@utility divider-soft {
+  /* Subtle internal section separator */
+  @apply my-6 h-px w-full;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--border) / 0.5) 20%,
+    hsl(var(--border) / 0.7) 50%,
+    hsl(var(--border) / 0.5) 80%,
+    transparent 100%
+  );
+}
+
+@utility prose-institutional {
+  /* Opt-in prose-like typography for long-form blocks, 
+     leveraging @tailwindcss/typography foundations */
+  @apply leading-[1.88] text-foreground/84;
+  font-size: 0.98rem;
+  
+  & h3 {
+    @apply font-heading text-[1.1rem] font-bold text-foreground mt-8 mb-3;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  & h4 {
+    @apply font-heading text-[0.95rem] font-semibold text-foreground mt-6 mb-2;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  & p {
+    @apply mb-4 max-w-[72ch];
+    text-wrap: pretty;
+    hyphens: auto;
+  }
+
+  & p + p {
+    @apply mt-0;
+  }
+
+  & ul, & ol {
+    @apply my-4 space-y-2 pl-5;
+  }
+
+  & li {
+    @apply text-[0.94rem] leading-[1.82] text-foreground/80;
+  }
+
+  & strong {
+    @apply text-foreground font-semibold;
+  }
+
+  & a {
+    @apply text-primary font-medium underline-offset-4 hover:underline transition-colors;
+  }
+
+  & blockquote {
+    @apply border-l-3 border-accent/40 pl-4 italic text-foreground/72;
+  }
+
+  & code {
+    @apply rounded-md bg-secondary/60 px-1.5 py-0.5 text-[0.88rem] font-medium text-foreground;
+  }
+}
+
+
 @utility section-number {
   /* ===== SECTION NUMBER BADGE ===== */
   @apply inline-flex items-center justify-center w-11 h-11 rounded-xl text-primary-foreground font-bold text-base transition-all duration-500;

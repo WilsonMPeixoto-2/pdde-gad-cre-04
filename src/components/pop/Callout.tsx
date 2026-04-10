@@ -12,12 +12,22 @@ interface CalloutProps {
   icon?: LucideIcon;
 }
 
-const variantStyles: Record<CalloutVariant, { bg: string; borderGradient: string; icon: string; iconBg: string; iconComponent: LucideIcon }> = {
+const variantStyles: Record<CalloutVariant, {
+  bg: string;
+  borderGradient: string;
+  icon: string;
+  iconBg: string;
+  pill: string;
+  label: string;
+  iconComponent: LucideIcon;
+}> = {
   info: {
-    bg: "border border-primary/12 bg-linear-to-br from-primary/6 via-background to-primary/4 dark:from-primary/10 dark:via-card dark:to-primary/6",
+    bg: "border border-primary/12 bg-linear-to-br from-primary/7 via-background to-primary/4 dark:from-primary/10 dark:via-card dark:to-primary/6",
     borderGradient: "from-primary to-accent dark:from-accent dark:to-primary",
     icon: "text-primary dark:text-accent",
     iconBg: "bg-primary/10 dark:bg-accent/15",
+    pill: "border-primary/15 bg-primary/8 text-primary dark:border-accent/20 dark:bg-accent/12 dark:text-accent",
+    label: "Orientação",
     iconComponent: Info,
   },
   warning: {
@@ -25,6 +35,8 @@ const variantStyles: Record<CalloutVariant, { bg: string; borderGradient: string
     borderGradient: "from-warning to-warning/60",
     icon: "text-warning",
     iconBg: "bg-warning/15 dark:bg-warning/15",
+    pill: "border-warning/20 bg-warning/10 text-warning",
+    label: "Atenção",
     iconComponent: AlertTriangle,
   },
   success: {
@@ -32,6 +44,8 @@ const variantStyles: Record<CalloutVariant, { bg: string; borderGradient: string
     borderGradient: "from-success to-success/60",
     icon: "text-success",
     iconBg: "bg-success/10 dark:bg-success/15",
+    pill: "border-success/20 bg-success/10 text-success",
+    label: "Referência",
     iconComponent: CheckCircle,
   },
 };
@@ -45,32 +59,40 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
       <div
         ref={ref}
         className={cn(
-          "relative rounded-[1.55rem] p-4 sm:p-6 transition-all duration-300",
+          "relative overflow-hidden rounded-[1.6rem] p-4.5 sm:p-6 transition-all duration-300",
           styles.bg,
           className
         )}
         style={{
-          boxShadow: '0 18px 36px -30px hsl(var(--primary) / 0.16), inset 0 1px 0 0 hsl(0 0% 100% / 0.32)'
+          boxShadow: "0 24px 42px -34px hsl(var(--primary) / 0.16), inset 0 1px 0 0 hsl(0 0% 100% / 0.38)"
         }}
       >
-        {/* Gradient left border */}
         <div className={cn(
           "absolute left-0 top-5 bottom-5 w-1 rounded-full bg-linear-to-b",
           styles.borderGradient
         )} />
+        <div className={cn("absolute inset-x-6 top-0 h-px bg-linear-to-r opacity-70", styles.borderGradient)} />
 
         <div className="flex items-start gap-3.5 pl-2.5 sm:gap-4 sm:pl-3">
           <div className={cn(
-            "mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/35 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)]",
+            "mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/35 shadow-[0_18px_28px_-24px_rgba(15,23,42,0.35),inset_0_1px_0_0_rgba(255,255,255,0.3)]",
             styles.iconBg
           )}>
-            <IconComponent className={cn("w-4.5 h-4.5", styles.icon)} />
+            <IconComponent className={cn("h-4.5 w-4.5", styles.icon)} />
           </div>
-          <div className="flex-1 min-w-0">
-            {title && (
-              <p className="mb-1.5 font-heading text-sm font-bold text-foreground sm:text-base" style={{ letterSpacing: '-0.01em' }}>{title}</p>
-            )}
-            <div className="text-sm leading-6 text-foreground/80 text-left text-pretty sm:leading-relaxed sm:text-justify">
+          <div className="min-w-0 flex-1">
+            <div className="mb-2.5 flex flex-wrap items-center gap-2.5">
+              <span className={cn("meta-pill", styles.pill)}>{styles.label}</span>
+              {title ? (
+                <p
+                  className="font-heading text-[0.98rem] font-bold text-foreground sm:text-[1.02rem]"
+                  style={{ letterSpacing: "-0.015em" }}
+                >
+                  {title}
+                </p>
+              ) : null}
+            </div>
+            <div className="text-left text-[0.95rem] leading-7 text-foreground/80 text-pretty [&_p+p]:mt-3 [&_ul]:mt-3 [&_li+li]:mt-2 [&_strong]:text-foreground">
               {children}
             </div>
           </div>

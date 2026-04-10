@@ -10,29 +10,39 @@ export const SectionTwo = () => {
   return (
     <section className="scroll-mt-20 animate-fade-in">
       <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-gradient-to-br from-secondary/50 via-background to-sky-50/35 shadow-sm dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
+        <div className="mb-5">
+          <span className="kicker-label">
+            <ListChecks className="h-3.5 w-3.5" />
+            Organização da instrução
+          </span>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/76 sm:text-[0.98rem]">
+            Esta etapa concentra a conferência documental mínima, os alertas de conformidade e os
+            materiais de apoio para padronizar a montagem do processo no SEI!RIO.
+          </p>
+        </div>
         <div className="grid gap-4 lg:grid-cols-2">
-          <div className="rounded-[1.4rem] border border-border/60 bg-background/82 p-4 shadow-soft">
-            <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-sky-700 dark:text-sky-400">
+          <div className="info-panel">
+            <h3 className="info-panel-title text-sky-700 dark:text-sky-400">
               <CircleHelp className="h-4 w-4" />
               Objeto da etapa
             </h3>
-            <p className="text-sm leading-relaxed text-foreground/80 sm:text-base text-left sm:text-justify">
+            <p className="info-panel-copy text-left sm:text-justify">
               O <strong className="text-foreground font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-foreground font-semibold">autuação do processo</strong>.
             </p>
           </div>
 
-          <div className="rounded-[1.4rem] border border-border/60 bg-background/82 p-4 shadow-soft">
-            <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
+          <div className="info-panel">
+            <h3 className="info-panel-title text-emerald-700 dark:text-emerald-400">
               <ShieldCheck className="h-4 w-4" />
               Critério de atenção
             </h3>
-            <p className="text-sm leading-relaxed text-foreground/80 sm:text-base text-left sm:text-justify">
+            <p className="info-panel-copy text-left sm:text-justify">
               Esta etapa é <strong className="text-foreground font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
             </p>
           </div>
 
-          <div className="rounded-[1.4rem] border border-sky-200/60 bg-sky-50/78 p-4 shadow-soft dark:border-sky-800/40 dark:bg-sky-950/40">
-            <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary">
+          <div className="info-panel border-sky-200/60 bg-sky-50/78 dark:border-sky-800/40 dark:bg-sky-950/40">
+            <h3 className="info-panel-title text-primary">
               <ListChecks className="h-4 w-4" />
               Providências imediatas
             </h3>
@@ -52,8 +62,8 @@ export const SectionTwo = () => {
             </ul>
           </div>
 
-          <div className="rounded-[1.4rem] border border-amber-200/60 bg-amber-50/78 p-4 shadow-soft dark:border-amber-800/40 dark:bg-amber-950/40">
-            <h3 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400">
+          <div className="info-panel border-amber-200/60 bg-amber-50/78 dark:border-amber-800/40 dark:bg-amber-950/40">
+            <h3 className="info-panel-title text-amber-700 dark:text-amber-400">
               <AlertTriangle className="h-4 w-4" />
               Falhas recorrentes
             </h3>
@@ -95,12 +105,20 @@ export const SectionTwo = () => {
       {/* Regras Operacionais - Evitar Glosa */}
       <div className="mb-8 section-card border-l-4 border-l-amber-500 bg-gradient-to-br from-amber-50/50 via-background to-orange-50/30 shadow-sm dark:from-amber-950/30 dark:to-orange-950/20">
         <div className="content-spacing">
+          <span className="kicker-label border-amber-200/70 bg-amber-50/80 text-amber-700 shadow-none dark:border-amber-800/40 dark:bg-amber-950/30 dark:text-amber-300">
+            <Sparkles className="h-3.5 w-3.5" />
+            Governança e prevenção de glosa
+          </span>
           <h2 className="mb-5 flex items-center gap-3 text-lg font-bold text-foreground sm:text-xl">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md">
               <Sparkles className="h-4 w-4" />
             </span>
             Regras operacionais (evite glosa)
           </h2>
+          <p className="max-w-3xl text-sm leading-7 text-foreground/76 sm:text-[0.98rem]">
+            Este bloco concentra os critérios que mais impactam a regularidade da prestação de contas:
+            compras, pesquisa de preços, SRP, vedações e consistência documental.
+          </p>
 
           {/* Compras pela internet */}
           <div className="mb-5">

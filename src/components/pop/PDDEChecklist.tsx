@@ -180,9 +180,14 @@ export const PDDEChecklist = () => {
             <ClipboardCheck className="w-5 h-5 text-primary" />
           </div>
           <div>
+            <span className="meta-pill mb-2">Conferência mínima</span>
             <h2 className="font-bold text-foreground text-base sm:text-lg">
               Checklist mínimo — Prestação de Contas do PDDE (SEI!RIO)
             </h2>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-foreground/74">
+              Use este quadro para separar o núcleo documental essencial dos anexos complementares e
+              retomar a conferência sem perder o contexto do processo.
+            </p>
           </div>
         </div>
         <button
@@ -195,7 +200,7 @@ export const PDDEChecklist = () => {
       </div>
 
       {/* Intro */}
-      <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+      <p className="mb-5 text-sm leading-7 text-muted-foreground">
         O <strong className="text-foreground">Bloco A</strong> destaca o núcleo documental federal mínimo e as peças nucleares da comprovação. O <strong className="text-foreground">Bloco B</strong> reúne documentos complementares úteis para a instrução no <strong className="text-foreground">SEI!RIO</strong> e para o controle interno da CRE/SME. Pesquisa de preços admite exceções justificadas, e itens adicionais podem variar conforme a ação do PDDE, o exercício e as orientações locais vigentes.
       </p>
 

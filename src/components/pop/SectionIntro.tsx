@@ -1,8 +1,14 @@
+import { BadgeCheck, HeartHandshake, ShieldCheck, Sparkles } from "lucide-react";
+
 export const SectionIntro = () => {
   return (
     <section id="introducao" className="scroll-mt-20 animate-fade-in">
       {/* Welcome Message */}
       <div className="section-card">
+        <span className="kicker-label mb-4">
+          <HeartHandshake className="h-3.5 w-3.5" />
+          Mensagem de abertura
+        </span>
         <h2 className="section-heading text-xl sm:text-2xl">
           Prezados(as) Diretores(as),
         </h2>
@@ -13,14 +19,16 @@ export const SectionIntro = () => {
             muitas vezes, decisões rápidas.
           </p>
           
-          <div className="p-4 sm:p-5 rounded-2xl bg-secondary/30 border border-border/50 shadow-xs my-6">
-            <p className="text-foreground/90 font-medium text-sm sm:text-base leading-relaxed text-left sm:text-center [text-wrap:balance]">
-              Por isso, a <strong className="text-primary font-bold">4ª Coordenadoria Regional de Educação</strong>, por meio 
-              da Gerência de Administração (GAD), reafirma seu compromisso:
-              <br className="hidden sm:block" />
-              <span className="inline-block mt-2 sm:mt-3 px-4 py-1.5 rounded-lg bg-primary/10 text-primary-foreground/90 dark:text-primary-glow font-semibold border border-primary/20 text-sm">
-                estar ao lado das equipes gestoras com orientação clara, apoio contínuo e diálogo.
-              </span>
+          <div className="info-panel my-6">
+            <p className="info-panel-title text-primary">
+              <ShieldCheck className="h-4 w-4" />
+              Compromisso institucional
+            </p>
+            <p className="info-panel-copy text-left sm:text-center">
+              A <strong className="text-primary font-bold">4ª Coordenadoria Regional de Educação</strong>, por
+              meio da Gerência de Administração (GAD), reafirma seu compromisso de{" "}
+              <strong className="text-foreground">estar ao lado das equipes gestoras</strong> com orientação
+              clara, apoio contínuo e diálogo.
             </p>
           </div>
 
@@ -36,29 +44,49 @@ export const SectionIntro = () => {
           </p>
           
           <ul className="grid gap-3 sm:grid-cols-2 mt-4 mb-6">
-            <li className="flex items-start gap-3 p-3 rounded-xl bg-background border border-border/40 shadow-xs hover:border-primary/30 transition-colors">
-              <div className="p-1.5 rounded-lg bg-success/10 text-success shrink-0 mt-0.5">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"/></svg>
+            <li className="info-panel flex items-start gap-3 !p-4">
+              <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
+                <ShieldCheck className="h-4 w-4" />
               </div>
-              <span className="text-sm font-medium text-foreground/80">Redução de inseguranças</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Redução de inseguranças</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                  Orientações mais claras para executar cada etapa com menos dúvidas.
+                </p>
+              </div>
             </li>
-            <li className="flex items-start gap-3 p-3 rounded-xl bg-background border border-border/40 shadow-xs hover:border-primary/30 transition-colors">
-              <div className="p-1.5 rounded-lg bg-success/10 text-success shrink-0 mt-0.5">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"/></svg>
+            <li className="info-panel flex items-start gap-3 !p-4">
+              <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
+                <Sparkles className="h-4 w-4" />
               </div>
-              <span className="text-sm font-medium text-foreground/80">Evitar retrabalho comum</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Evitar retrabalho comum</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                  Menos correções posteriores por falhas de instrução e padronização.
+                </p>
+              </div>
             </li>
-            <li className="flex items-start gap-3 p-3 rounded-xl bg-background border border-border/40 shadow-xs hover:border-primary/30 transition-colors">
-              <div className="p-1.5 rounded-lg bg-success/10 text-success shrink-0 mt-0.5">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"/></svg>
+            <li className="info-panel flex items-start gap-3 !p-4">
+              <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
+                <BadgeCheck className="h-4 w-4" />
               </div>
-              <span className="text-sm font-medium text-foreground/80">Maior previsibilidade de rotinas</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Maior previsibilidade de rotinas</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                  Um fluxo mais estável para consulta, conferência e remessa processual.
+                </p>
+              </div>
             </li>
-            <li className="flex items-start gap-3 p-3 rounded-xl bg-background border border-border/40 shadow-xs hover:border-primary/30 transition-colors">
-              <div className="p-1.5 rounded-lg bg-success/10 text-success shrink-0 mt-0.5">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"/></svg>
+            <li className="info-panel flex items-start gap-3 !p-4">
+              <div className="mt-0.5 shrink-0 rounded-xl bg-success/12 p-2 text-success">
+                <HeartHandshake className="h-4 w-4" />
               </div>
-              <span className="text-sm font-medium text-foreground/80">Execução respeitando seu contexto</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Execução respeitando seu contexto</p>
+                <p className="mt-1 text-sm leading-6 text-foreground/72">
+                  Aplicação prática pensada para a realidade cotidiana das unidades escolares.
+                </p>
+              </div>
             </li>
           </ul>
 
@@ -74,11 +102,11 @@ export const SectionIntro = () => {
             Assinaturas institucionais
           </p>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            <div className="rounded-[1.45rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/50 p-5 shadow-soft sm:p-6">
+            <div className="info-panel">
               <p className="font-heading text-sm font-bold text-foreground sm:text-base">Fátima das Graças Lima Barros</p>
               <p className="mt-1 text-xs text-muted-foreground sm:text-sm">Coordenadora – E/4ª CRE</p>
             </div>
-            <div className="rounded-[1.45rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/50 p-5 shadow-soft sm:p-6">
+            <div className="info-panel">
               <p className="font-heading text-sm font-bold text-foreground sm:text-base">Bianca Barreto da Fonseca Coelho</p>
               <p className="mt-1 text-xs text-muted-foreground sm:text-sm">Gerente – E/4ª CRE/GAD</p>
             </div>

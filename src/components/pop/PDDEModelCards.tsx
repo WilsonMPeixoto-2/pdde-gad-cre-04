@@ -1,4 +1,4 @@
-import { Download, ExternalLink, FolderDown } from "lucide-react";
+import { Download, ExternalLink, FileText, FolderDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -52,10 +52,23 @@ export const PDDEModelCards = () => {
 
   return (
     <div className="mb-8">
-      <div className="mb-8 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-        <h3 className="section-heading mb-0 border-b-0 pb-0 text-foreground">
-          Modelos, Exemplos e Referências Documentais
-        </h3>
+      <div className="mb-8 flex flex-col items-start justify-between gap-4 xl:flex-row xl:items-end">
+        <div>
+          <span className="kicker-label">
+            <FileText className="h-3.5 w-3.5" />
+            Acervo documental
+          </span>
+          <div className="mt-3">
+            <h3 className="section-heading mb-0 border-b-0 pb-0 text-foreground">
+              Modelos, exemplos e referências documentais
+            </h3>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/76 sm:text-[0.98rem]">
+              Use este acervo para diferenciar o que serve como modelo editável, o que deve ser lido
+              apenas como exemplo preenchido e o que funciona como referência de conferência ou
+              rastreabilidade.
+            </p>
+          </div>
+        </div>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -76,13 +89,55 @@ export const PDDEModelCards = () => {
         </TooltipProvider>
       </div>
 
-      <div className="mb-6 rounded-[1.35rem] border border-amber-200/70 bg-amber-50/80 p-4 text-sm text-foreground shadow-xs dark:border-amber-800/40 dark:bg-amber-950/25">
-        Este acervo combina{" "}
-        <strong className="text-foreground">{modelResourceSummary.template} modelo editável</strong>,{" "}
-        <strong className="text-foreground">{modelResourceSummary.filledExample} exemplos preenchidos</strong>,{" "}
-        <strong className="text-foreground">{modelResourceSummary.visualReference} referências visuais</strong> e{" "}
-        <strong className="text-foreground">{modelResourceSummary.complementaryReference} peça(s) complementar(es)</strong>.
-        Use cada arquivo de acordo com a sua natureza: nem todo PDF deste bloco deve ser preenchido ou reutilizado como modelo em branco.
+      <div className="mb-6 grid gap-3 lg:grid-cols-4">
+        <div className="info-panel">
+          <p className="info-panel-title text-primary">
+            <FileText className="h-4 w-4" />
+            Modelos editáveis
+          </p>
+          <p className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground">
+            {modelResourceSummary.template}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">Arquivo-base para reutilização.</p>
+        </div>
+        <div className="info-panel">
+          <p className="info-panel-title text-emerald-700 dark:text-emerald-300">
+            <FileText className="h-4 w-4" />
+            Exemplos preenchidos
+          </p>
+          <p className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground">
+            {modelResourceSummary.filledExample}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">Mostram padrão final esperado.</p>
+        </div>
+        <div className="info-panel">
+          <p className="info-panel-title text-sky-700 dark:text-sky-300">
+            <ExternalLink className="h-4 w-4" />
+            Referências visuais
+          </p>
+          <p className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground">
+            {modelResourceSummary.visualReference}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">Apoio para conferência e leitura.</p>
+        </div>
+        <div className="info-panel">
+          <p className="info-panel-title text-amber-700 dark:text-amber-300">
+            <FolderDown className="h-4 w-4" />
+            Complementares
+          </p>
+          <p className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground">
+            {modelResourceSummary.complementaryReference}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">Peças auxiliares de rastreabilidade.</p>
+        </div>
+      </div>
+
+      <div className="editorial-note mb-8">
+        <p className="text-sm leading-7 text-foreground/78">
+          Nem todo PDF deste bloco deve ser preenchido ou reutilizado como modelo em branco. Leia a
+          categoria e a descrição de cada item antes de abrir ou copiar o documento para uso no
+          processo.
+        </p>
       </div>
 
       <div className="space-y-10">
@@ -90,12 +145,12 @@ export const PDDEModelCards = () => {
           <div key={group.category}>
             <div className="mb-5 flex items-center gap-3">
               <div
-                className="h-6 w-1 rounded-full"
+                className="h-7 w-1.5 rounded-full"
                 style={{
                   background: `linear-gradient(180deg, ${group.accent}, ${group.accent}40)`,
                 }}
               />
-              <span className={`text-xs font-bold uppercase tracking-[0.15em] ${group.color}`}>
+              <span className={`text-[0.72rem] font-bold uppercase tracking-[0.16em] ${group.color}`}>
                 {group.label}
               </span>
               <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold ${group.bgColor} ${group.color}`}>
@@ -119,12 +174,12 @@ export const PDDEModelCards = () => {
                 return (
                   <div
                     key={doc.id}
-                    className="group relative rounded-3xl border border-border/60 bg-card p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg"
+                    className="group relative rounded-[1.75rem] border border-border/60 bg-card p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg sm:p-6"
                   >
                     <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                       <div className="flex min-w-0 flex-1 items-center gap-4">
                         <div
-                          className={`relative shrink-0 rounded-xl border border-border/20 p-3 transition-all duration-400 group-hover:scale-105 ${group.iconBg}`}
+                          className={`relative shrink-0 rounded-2xl border border-border/20 p-3.5 transition-all duration-400 group-hover:scale-105 ${group.iconBg}`}
                         >
                           <Icon className={`h-5 w-5 ${group.iconColor}`} />
                           <span
@@ -139,8 +194,8 @@ export const PDDEModelCards = () => {
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-center gap-2">
                             <h4
-                              className="font-heading text-[15px] font-semibold leading-tight text-foreground"
-                              style={{ letterSpacing: "-0.01em" }}
+                              className="font-heading text-[1rem] font-semibold leading-tight text-foreground sm:text-[1.08rem]"
+                              style={{ letterSpacing: "-0.015em" }}
                             >
                               {doc.title}
                             </h4>
@@ -151,26 +206,24 @@ export const PDDEModelCards = () => {
                             </span>
                           </div>
 
-                          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                          <p className="mt-2 max-w-3xl text-sm leading-7 text-foreground/75">
                             {doc.description}
                           </p>
 
-                          <div className="mt-2 flex items-center gap-2 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
-                            <span className="data-code max-w-[240px] truncate text-[10px] text-muted-foreground">
+                          <div className="mt-3 flex flex-wrap items-center gap-2 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                            <span className="meta-pill max-w-[240px] truncate">
                               {doc.fileName}
                             </span>
-                            <span className="text-muted-foreground/30">·</span>
-                            <span className="data-code text-[10px] text-muted-foreground">
+                            <span className="meta-pill">
                               {asset.sizeLabel}
                             </span>
-                            <span className="text-muted-foreground/30">·</span>
-                            <span className="data-code text-[10px] text-muted-foreground">
+                            <span className="meta-pill">
                               {asset.pageLabel}
                             </span>
                           </div>
 
-                          <div className="mt-3 rounded-2xl border border-border/60 bg-secondary/45 px-3 py-2.5">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                          <div className="info-panel mt-4">
+                            <p className="info-panel-title">
                               {doc.sourceKindLabel}
                             </p>
 
@@ -189,7 +242,7 @@ export const PDDEModelCards = () => {
                               ))}
                             </div>
 
-                            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                            <p className="mt-3 text-sm leading-7 text-foreground/72">
                               {doc.traceabilityNote}
                             </p>
                           </div>

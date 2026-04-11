@@ -1,4 +1,3 @@
-import { AlertTriangle, CircleHelp, ListChecks, ShieldCheck, Sparkles } from "lucide-react";
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
 import { ProfileCallout } from "./ProfileCallout";
@@ -9,63 +8,58 @@ import { GUIDE_ANCHORS } from "@/lib/guideContent";
 export const SectionTwo = () => {
   return (
     <section className="scroll-mt-20 animate-fade-in">
-      <div className="mb-8 section-card border-l-4 border-l-sky-500 bg-gradient-to-br from-secondary/50 via-background to-sky-50/35 shadow-sm dark:from-secondary/20 dark:via-background dark:to-sky-950/20">
-        <div className="mb-5">
-          <span className="kicker-label">
-            <ListChecks className="h-3.5 w-3.5" />
-            Organização da instrução
-          </span>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/76 sm:text-[0.98rem]">
-            Esta etapa concentra a conferência documental mínima, os alertas de conformidade e os
-            materiais de apoio para padronizar a montagem do processo no SEI!RIO.
-          </p>
-        </div>
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div className="info-panel">
-            <h3 className="info-panel-title text-sky-700 dark:text-sky-400">
-              <CircleHelp className="h-4 w-4" />
-              Objeto da etapa
+      {/* Bloco 1: Introdução ao Checklist - Estruturado para escaneabilidade */}
+      <div className="mb-8 section-card bg-gradient-to-br from-secondary/50 via-background to-sky-50/40 dark:from-secondary/20 dark:via-background dark:to-sky-950/20 border-l-4 border-l-sky-500 shadow-sm">
+        <div className="space-y-5">
+          {/* O que é */}
+          <div className="p-4 bg-background/80 rounded-lg border border-border/60">
+            <h3 className="text-sm font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+              O que é
             </h3>
-            <p className="info-panel-copy text-left sm:text-justify">
+            <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               O <strong className="text-foreground font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-foreground font-semibold">autuação do processo</strong>.
             </p>
           </div>
 
-          <div className="info-panel">
-            <h3 className="info-panel-title text-emerald-700 dark:text-emerald-400">
-              <ShieldCheck className="h-4 w-4" />
-              Critério de atenção
+          {/* Por que importa */}
+          <div className="p-4 bg-background/80 rounded-lg border border-border/60">
+            <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Por que importa
             </h3>
-            <p className="info-panel-copy text-left sm:text-justify">
+            <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-left sm:text-justify">
               Esta etapa é <strong className="text-foreground font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
             </p>
           </div>
 
-          <div className="info-panel border-sky-200/60 bg-sky-50/78 dark:border-sky-800/40 dark:bg-sky-950/40">
-            <h3 className="info-panel-title text-primary">
-              <ListChecks className="h-4 w-4" />
-              Providências imediatas
+          {/* O que você precisa fazer */}
+          <div className="p-4 bg-sky-50/80 dark:bg-sky-950/40 rounded-lg border border-sky-200/60 dark:border-sky-800/40">
+            <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              O que você precisa fazer
             </h3>
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-sky-600 dark:text-sky-400 font-bold">1.</span>
-                <span>Use a <strong className="text-sky-600 dark:text-sky-400 font-semibold">lista de verificação</strong> abaixo para acompanhar os itens já juntados aos autos</span>
+                <span>Use a <strong className="text-sky-600 dark:text-sky-400 font-semibold">Lista de Verificação Interativa</strong> abaixo para monitorar os itens já encartados</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-sky-600 dark:text-sky-400 font-bold">2.</span>
-                <span>Consulte os <strong className="text-sky-600 dark:text-sky-400 font-semibold">modelos e referências documentais</strong> para padronização</span>
+                <span>Consulte os <strong className="text-sky-600 dark:text-sky-400 font-semibold">Modelos de Documentos</strong> para padronização</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-sky-600 dark:text-sky-400 font-bold">3.</span>
-                <span>Use o percentual de conferência como apoio para identificar pendências essenciais</span>
+                <span>Acompanhe o percentual de completude automaticamente calculado</span>
               </li>
             </ul>
           </div>
 
-          <div className="info-panel border-amber-200/60 bg-amber-50/78 dark:border-amber-800/40 dark:bg-amber-950/40">
-            <h3 className="info-panel-title text-amber-700 dark:text-amber-400">
-              <AlertTriangle className="h-4 w-4" />
-              Falhas recorrentes
+          {/* Erros comuns */}
+          <div className="p-4 bg-amber-50/80 dark:bg-amber-950/40 rounded-lg border border-amber-200/60 dark:border-amber-800/40">
+            <h3 className="text-sm font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              Erros comuns a evitar
             </h3>
             <ul className="space-y-1.5 text-foreground/80 text-sm">
               <li className="flex items-start gap-2">
@@ -90,8 +84,8 @@ export const SectionTwo = () => {
       </div>
 
       {/* Profile Callouts */}
-      <ProfileCallout visibleFor="diretor" variant="info">
-        Use o checklist abaixo para acompanhar cada documento. As marcações permanecem registradas neste equipamento para facilitar a retomada da conferência.
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola">
+        Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme for reunindo — o progresso é salvo automaticamente no seu navegador.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-4">
         Verifique se todas as 3 cotações de preços estão anexadas e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
@@ -103,22 +97,12 @@ export const SectionTwo = () => {
       </div>
 
       {/* Regras Operacionais - Evitar Glosa */}
-      <div className="mb-8 section-card border-l-4 border-l-amber-500 bg-gradient-to-br from-amber-50/50 via-background to-orange-50/30 shadow-sm dark:from-amber-950/30 dark:to-orange-950/20">
+      <div className="mb-8 section-card bg-gradient-to-br from-amber-50/50 dark:from-amber-950/30 via-background to-orange-50/30 dark:to-orange-950/20 border-l-4 border-l-amber-500 shadow-sm">
         <div className="content-spacing">
-          <span className="kicker-label border-amber-200/70 bg-amber-50/80 text-amber-700 shadow-none dark:border-amber-800/40 dark:bg-amber-950/30 dark:text-amber-300">
-            <Sparkles className="h-3.5 w-3.5" />
-            Governança e prevenção de glosa
-          </span>
-          <h2 className="mb-5 flex items-center gap-3 text-lg font-bold text-foreground sm:text-xl">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md">
-              <Sparkles className="h-4 w-4" />
-            </span>
+          <h2 className="text-lg sm:text-xl font-bold text-foreground mb-5 flex items-center gap-3">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm shadow-md">⚠</span>
             Regras operacionais (evite glosa)
           </h2>
-          <p className="max-w-3xl text-sm leading-7 text-foreground/76 sm:text-[0.98rem]">
-            Este bloco concentra os critérios que mais impactam a regularidade da prestação de contas:
-            compras, pesquisa de preços, SRP, vedações e consistência documental.
-          </p>
 
           {/* Compras pela internet */}
           <div className="mb-5">
@@ -201,8 +185,8 @@ export const SectionTwo = () => {
           </div>
 
           {/* Nota explicativa */}
-          <div className="editorial-note mt-4">
-            <p className="text-center text-xs italic text-muted-foreground sm:text-sm">
+          <div className="p-3 bg-muted rounded-lg border border-border mt-4">
+            <p className="text-muted-foreground text-xs sm:text-sm italic text-center">
               Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes — reduzindo inconsistências e glosas.
             </p>
           </div>
@@ -222,6 +206,46 @@ export const SectionTwo = () => {
       {/* Process Journey Map */}
       <div id={GUIDE_ANCHORS.journey} className="mb-8 scroll-mt-28">
         <ProcessJourneyMap />
+      </div>
+
+      {/* Bloco 2: Roteiro de Instrução - AGORA APÓS MODELOS */}
+      <div className="mb-8 section-card bg-gradient-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-sm">
+        <div className="content-spacing">
+          <h3 className="section-heading text-primary border-b-primary/20">
+            Roteiro de Instrução para as próximas etapas deste guia
+          </h3>
+          <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-left sm:text-justify mb-5">
+            A sequência deste manual detalhará os procedimentos técnicos para a composição dos autos, divididos conforme a origem do documento:
+          </p>
+          <div className="space-y-4">
+            <div className="p-5 bg-gradient-to-r from-card to-sky-50/50 dark:to-sky-950/20 rounded-xl border border-sky-200/60 dark:border-sky-800/40 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 text-white font-bold text-sm shrink-0 shadow-md">
+                  3
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 dark:text-sky-400 font-bold uppercase tracking-wide">EXTERNOS</span></h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed text-left sm:text-justify">
+                    Documentos gerados fora do ambiente do sistema <strong className="text-foreground">SEI!RIO</strong> (<strong className="text-sky-600 dark:text-sky-400">digitalizados</strong> ou <strong className="text-emerald-600 dark:text-emerald-400 uppercase">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="p-5 bg-gradient-to-r from-card to-primary/5 rounded-xl border border-primary/20 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-sm shrink-0 shadow-md">
+                  4
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground mb-2">Tópico 4 – Autenticação de Documentos</h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed text-left sm:text-justify">
+                    Procedimento para <strong className="text-foreground">autenticar documentos externos</strong> incluídos no processo, validando sua integridade e conformidade.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </section>

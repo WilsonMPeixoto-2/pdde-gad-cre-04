@@ -53,11 +53,11 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
           </div>
 
           <ProfileCallout visibleFor="diretor" variant="info">
-            <p>Certifique-se de ter em mãos o <strong className="text-foreground">CNPJ do CEC</strong>, a <strong className="text-foreground">designação da unidade escolar</strong> e o <strong className="text-foreground">exercício de referência</strong> antes de iniciar a autuação.</p>
+            <p>Certifique-se de ter em mãos o <strong className="text-foreground">CNPJ do CEC</strong>, a <strong className="text-foreground">designação da escola</strong> e o <strong className="text-foreground">exercício de referência</strong> antes de iniciar a autuação.</p>
           </ProfileCallout>
 
           <ProfileCallout visibleFor="gad" variant="warning">
-            <p>Ao receber o processo, verifique se a <strong className="text-foreground">especificação</strong> segue o padrão interno adotado pela <strong className="text-foreground">4ª CRE/GAD</strong> e se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos fora do padrão devem ser devolvidos para correção.</p>
+            <p>Ao receber o processo, verifique se a <strong className="text-foreground">especificação</strong> segue o padrão <strong className="text-foreground">obrigatório</strong> e se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos fora do padrão devem ser devolvidos para correção.</p>
           </ProfileCallout>
 
           <div className="mt-6 grid gap-3 lg:grid-cols-3">

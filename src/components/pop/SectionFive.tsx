@@ -1,181 +1,174 @@
-import { AlertCircle, CircleCheck, FileCheck, FolderTree, PenTool, Users } from "lucide-react";
-import { Callout } from "./Callout";
-import { InfoDrawer, AutenticacaoVsAssinaturaContent } from "./InfoDrawer";
-import { ProfileCallout } from "./ProfileCallout";
+import { CheckCircle, Send, FileCheck, AlertCircle, FolderTree } from "lucide-react";
 import { SeiMockup } from "./SeiMockup";
-
-const blockDocuments = [
-  "Ofício de encaminhamento da unidade escolar gerado no SEI!RIO",
-  "Despachos ou declarações internas produzidas pela unidade",
-  "Qualquer outra peça interna que exija assinatura eletrônica antes da remessa",
-];
-
-const externalDocuments = [
-  "Notas fiscais, DANFE, recibos e comprovantes de pagamento",
-  "Atas, extratos bancários e demais documentos apenas digitalizados",
-  "Arquivos externos já autenticados ou nato-digitais recebidos de outros sistemas",
-];
-
-const finalChecks = [
-  "Todos os documentos internos do bloco retornaram assinados",
-  "Documentos externos permanecem corretamente autenticados, sem entrar no bloco",
-  "A árvore do processo está organizada e sem duplicidades antes da remessa",
-];
+import { CopyButton } from "./CopyButton";
+import { ProfileCallout } from "./ProfileCallout";
 
 export const SectionFive = () => {
+  const gadCodes = [
+    { code: "10714", name: "E/1a.CRE/GAD" },
+    { code: "10719", name: "E/2a.CRE/GAD" },
+    { code: "10724", name: "E/3a.CRE/GAD" },
+    { code: "10729", name: "E/4a.CRE/GAD", highlight: true },
+    { code: "10734", name: "E/5a.CRE/GAD" },
+    { code: "10739", name: "E/6a.CRE/GAD" },
+    { code: "10709", name: "E/10a.CRE/GAD" },
+  ];
+
   return (
-    <section className="animate-fade-in">
-      <div className="space-y-6">
-        <div className="section-card p-5 sm:p-6 border-l-4 border-l-primary">
+    <section className="scroll-mt-20 animate-fade-in">
+      {/* Section Header */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className="section-number">5</div>
+        <div>
+          <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
+            Conferência Final e Envio
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
+            Verificação dos documentos e envio para a GAD
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-5">
+        {/* Intro */}
+        <div className="section-card p-5 sm:p-6 border-l-4 border-l-success">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-primary/10 shrink-0">
-              <PenTool className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+            <div className="p-3 rounded-xl bg-success/10 shrink-0">
+              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-success" />
             </div>
-            <div className="space-y-3">
-              <h3 className="font-semibold text-foreground">O objetivo desta etapa</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-justify">
-                Depois que toda a documentação estiver inserida e autenticada, a unidade escolar deve
-                concluir as <strong className="text-foreground">peças internas</strong> do processo e
-                disponibilizá-las em bloco para assinatura eletrônica. O foco aqui não é anexar novos PDFs,
-                e sim <strong className="text-foreground">garantir a assinatura correta do que foi produzido
-                dentro do SEI!RIO</strong>.
+            <div>
+              <h3 className="font-semibold text-foreground mb-2">Verificação Essencial</h3>
+              <p className="text-muted-foreground text-sm sm:text-base text-left sm:text-justify leading-relaxed">
+                Após inserir todos os documentos, é fundamental fazer uma verificação final
+                antes de enviar o processo para garantir que tudo está correto.
               </p>
             </div>
           </div>
         </div>
 
-        <Callout variant="warning" title="Regra-chave desta etapa">
-          No bloco de assinatura entram apenas <strong className="text-foreground">documentos internos</strong>.
-          Documentos externos permanecem fora do bloco e, quando digitalizados, devem estar
-          <strong className="text-foreground"> autenticados</strong>.
-        </Callout>
-
+        {/* Verification Steps */}
         <div className="section-card p-5 sm:p-6">
-          <h3 className="font-semibold text-foreground mb-5">5.1. Montagem e disponibilização do bloco</h3>
+          <h3 className="font-semibold text-foreground mb-4">Checklist de Verificação</h3>
 
           <div className="space-y-4">
-            {[
-              {
-                step: "1",
-                title: "Criar o bloco no processo",
-                description:
-                  "Abra o processo no SEI!RIO, crie um bloco de assinatura vinculado aos autos e dê um nome que facilite a conferência pela unidade escolar.",
-              },
-              {
-                step: "2",
-                title: "Adicionar apenas as peças internas",
-                description:
-                  "Inclua no bloco somente documentos produzidos dentro do SEI!RIO, como ofícios e despachos. PDFs externos não devem ser enviados para assinatura eletrônica.",
-              },
-              {
-                step: "3",
-                title: "Disponibilizar e acompanhar o retorno",
-                description:
-                  "Envie o bloco para a unidade escolar responsável e acompanhe a devolução até que todas as assinaturas estejam concluídas antes da remessa à GAD.",
-              },
-            ].map((item) => (
-              <div key={item.step} className="flex gap-4 p-4 bg-muted/30 rounded-xl">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <span className="text-sm font-bold text-primary">{item.step}</span>
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+              <div className="step-indicator shrink-0 bg-success text-sm">
+                <FolderTree className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">5.1. Verifique a Árvore do Processo</h4>
+                <p className="text-sm text-muted-foreground mb-3 text-left sm:text-justify leading-relaxed">
+                  Confira o menu lateral esquerdo que mostra a lista de arquivos. Todos os documentos
+                  devem estar listados corretamente.
+                </p>
+                <SeiMockup variant="process-tree" />
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+              <div className="step-indicator shrink-0 bg-success text-sm">
+                <FileCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">5.2. Confira Assinaturas</h4>
+                <p className="text-sm text-muted-foreground text-left sm:text-justify leading-relaxed">
+                  Verifique se todos os documentos estão autenticados/assinados.
+                  Devem ter um <strong className="text-foreground">ícone de check</strong> ao lado
+                  indicando a autenticação.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Send Process */}
+        <div className="section-card p-5 sm:p-6">
+          <h3 className="font-semibold text-foreground mb-4">5.3. Envio para a GAD</h3>
+
+          <div className="space-y-4">
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl border border-primary/20">
+              <div className="p-3 rounded-xl bg-primary/10 shrink-0">
+                <Send className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Procedimento de Envio</h4>
+                <p className="text-sm text-muted-foreground text-left sm:text-justify leading-relaxed">
+                  Após a conferência completa, clique no ícone de envio (representado por um envelope).
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 bg-gradient-to-r from-secondary to-secondary/50 rounded-xl">
+              <h4 className="font-semibold text-foreground mb-3">5.4. Campo "Destinatários"</h4>
+              <p className="text-sm text-muted-foreground mb-3 text-left sm:text-justify leading-relaxed">
+                Digite <strong className="text-foreground">"GAD"</strong> e selecione a unidade correspondente:
+              </p>
+
+              <div className="bg-card p-4 rounded-xl border border-border/50">
+                <div className="flex items-center justify-between gap-2">
+                  <code className="text-sm data-code text-primary break-all font-semibold">
+                    10729 - Gerência de Administração (E/4a.CRE/GAD)
+                  </code>
+                  <CopyButton text="10729 - Gerência de Administração (E/4a.CRE/GAD)" label="Código copiado!" />
                 </div>
-                <div>
-                  <p className="font-medium text-foreground">{item.title}</p>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed text-justify">
-                    {item.description}
-                  </p>
-                </div>
+                <p className="text-xs text-primary flex items-center gap-1 mt-2">
+                  <AlertCircle className="w-3 h-3" />
+                  Certifique-se de selecionar a GAD da 4ª CRE
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Other GADs Reference */}
+        <div className="section-card p-5 sm:p-6">
+          <h3 className="font-semibold text-foreground mb-4">Referência: Códigos das GADs</h3>
+          <p className="text-sm text-muted-foreground mb-4 text-left sm:text-justify leading-relaxed">
+            Para referência, seguem os códigos das Gerências de Administração das CREs:
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {gadCodes.map((gad, i) => (
+              <div
+                key={i}
+                className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm data-code transition-all ${
+                  gad.highlight
+                    ? "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-md"
+                    : "bg-card text-foreground border border-border/50 hover:border-primary/30"
+                }`}
+              >
+                <span>{gad.code} - {gad.name}</span>
+                <CopyButton
+                  text={`${gad.code} - ${gad.name}`}
+                  label="Código copiado!"
+                  className={gad.highlight ? "hover:bg-primary-foreground/20" : ""}
+                />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-4">
-          <div className="section-card p-5 sm:p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-xl bg-success/10">
-                <FileCheck className="w-5 h-5 text-success" />
-              </div>
-              <h3 className="font-semibold text-foreground">Entram no bloco</h3>
-            </div>
-
-            <div className="space-y-3">
-              {blockDocuments.map((item) => (
-                <div key={item} className="flex items-start gap-3 p-3 rounded-xl bg-success/5 border border-success/20">
-                  <CircleCheck className="w-4 h-4 text-success shrink-0 mt-0.5" />
-                  <p className="text-sm text-foreground leading-relaxed">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="section-card p-5 sm:p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-xl bg-amber-500/10">
-                <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
-              </div>
-              <h3 className="font-semibold text-foreground">Ficam fora do bloco</h3>
-            </div>
-
-            <div className="space-y-3">
-              {externalDocuments.map((item) => (
-                <div key={item} className="flex items-start gap-3 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40">
-                  <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-                  <p className="text-sm text-foreground leading-relaxed">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="section-card p-5 sm:p-6">
-          <div className="flex items-center gap-3 flex-wrap mb-4">
-            <h3 className="font-semibold text-foreground">5.2. Conferência antes da remessa</h3>
-            <InfoDrawer title="Assinatura vs Autenticação" triggerLabel="Entenda a diferença">
-              <AutenticacaoVsAssinaturaContent />
-            </InfoDrawer>
-          </div>
-
-          <p className="text-sm text-muted-foreground mb-4 leading-relaxed text-justify">
-            Assim que a unidade escolar devolver o bloco concluído, faça uma última leitura da árvore do
-            processo. O ideal é que os documentos internos apareçam como assinados e que os documentos
-            externos permaneçam organizados, legíveis e autenticados quando necessário.
-          </p>
-
-          <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] gap-4 items-start">
-            <div className="min-w-0">
-              <SeiMockup variant="process-tree" />
-            </div>
-
-            <div className="space-y-3">
-              {finalChecks.map((item) => (
-                <div key={item} className="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/15">
-                  <FolderTree className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                  <p className="text-sm text-foreground leading-relaxed">{item}</p>
-                </div>
-              ))}
+        {/* Final Alert */}
+        <div className="highlight-box">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-foreground mb-1">Antes de Enviar</p>
+              <p className="text-sm text-muted-foreground text-left sm:text-justify leading-relaxed">
+                Revise cuidadosamente todos os documentos e informações. Após o envio,
+                alterações só poderão ser feitas mediante solicitação à GAD.
+              </p>
             </div>
           </div>
         </div>
 
         <ProfileCallout visibleFor="diretor" variant="success">
-          <p>
-            Antes de liberar a remessa, confira se o bloco voltou totalmente assinado pela unidade e se o
-            ofício interno aparece corretamente na árvore do processo.
-          </p>
+          <p>Antes de enviar, peça a um colega que revise a árvore do processo. Um segundo par de olhos ajuda a evitar retrabalho e devoluções pela GAD.</p>
         </ProfileCallout>
 
         <ProfileCallout visibleFor="gad" variant="warning">
-          <p>
-            Ao receber o processo, verifique se a unidade escolar utilizou o bloco apenas para peças internas.
-            Quando nota fiscal ou ata digitalizada aparece como documento assinado, isso costuma indicar
-            uso incorreto do fluxo.
-          </p>
+          <p>Na conferência do processo recebido, verifique: <strong className="text-foreground">ordem dos documentos na árvore</strong>, <strong className="text-foreground">autenticações válidas</strong> e <strong className="text-foreground">correspondência entre valores do extrato e do demonstrativo</strong>.</p>
         </ProfileCallout>
-
-        <Callout variant="info" title="Pronto para a próxima etapa" icon={Users}>
-          Se a árvore estiver íntegra, as autenticações válidas e o bloco concluído, o processo já pode
-          seguir para a <strong className="text-foreground">remessa à GAD/4ª CRE</strong>.
-        </Callout>
       </div>
     </section>
   );

@@ -53,11 +53,11 @@ const typeCards = [
 export const SectionThree = () => {
   return (
     <section className="animate-fade-in">
-      <ProfileCallout visibleFor="diretor" variant="info" className="mb-6">
-        Digitalize preferencialmente em PDF com <strong className="text-foreground">200 a 300 dpi</strong>, preservando a legibilidade. Organize seus arquivos em pasta local, mas lembre que, no SEI!RIO, a identificação relevante será dada pelo preenchimento correto do <strong className="text-foreground">Nome na Árvore</strong>.
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
+        Digitalize documentos em PDF com resolução mínima de 200 DPI. Nomeie cada arquivo de forma descritiva antes de anexar (ex.: "NF_001_Jan2025_Papelaria.pdf").
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
-        Confirme se a unidade classificou corretamente cada item como <strong className="text-foreground">digitalizado</strong> ou <strong className="text-foreground">nato-digital</strong> e se o Nome na Árvore permite busca inequívoca no SEI!RIO.
+        Confirme que todos os documentos externos estão com o tipo correto (digitalizado vs. nato digital) e que o "Nome na Árvore" permite identificação inequívoca na busca do SEI.
       </ProfileCallout>
 
       <div className="space-y-5">

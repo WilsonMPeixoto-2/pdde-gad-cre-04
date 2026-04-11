@@ -74,11 +74,11 @@ const registrationCards = [
 export const SectionFour = () => {
   return (
     <section className="animate-fade-in">
-      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Unidade Escolar" className="mb-6">
-        <strong className="text-foreground">Autentique apenas os documentos digitalizados.</strong> Arquivos nato-digitais já entram no processo como originais e não seguem essa etapa.
+      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola" className="mb-6">
+        Autentique cada documento imediatamente após incluí-lo. Não deixe para autenticar todos de uma vez — isso reduz o risco de esquecer algum item.
       </ProfileCallout>
       <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-6">
-        Ao revisar os autos, confira se a autenticação foi aplicada somente a documentos <strong className="text-foreground">digitalizados</strong>. Documento nato-digital autenticado indevidamente costuma indicar classificação incorreta na etapa anterior.
+        Verifique se todos os documentos externos foram devidamente autenticados (selo preto com check). Documentos sem autenticação invalidam a instrução processual.
       </ProfileCallout>
 
       <div className="space-y-5">

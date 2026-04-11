@@ -1,21 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const STORAGE_KEY = "pdde-document-checklist";
 
 export const useDocumentChecklist = (items: string[]) => {
-  const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
-
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        setCheckedItems(new Set(parsed));
-      } catch {
-        // ignore corrupt localStorage
-      }
+  const [checkedItems, setCheckedItems] = useState<Set<string>>(() => {
+    if (typeof window === "undefined") {
+      return new Set();
     }
-  }, []);
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) {
+      return new Set();
+    }
+
+    try {
+      const parsed = JSON.parse(saved);
+      return new Set(parsed);
+    } catch {
+      return new Set();
+    }
+  });
 
   const toggleItem = (item: string) => {
     setCheckedItems((prev) => {

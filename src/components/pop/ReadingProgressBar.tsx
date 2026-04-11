@@ -44,8 +44,8 @@ export const ReadingProgressBar = () => {
 
   return (
     <div 
-      className="fixed top-0 left-0 right-0 z-60 h-1 no-print"
-      style={{ background: 'hsl(var(--secondary) / 0.3)' }}
+      className="fixed top-0 left-0 right-0 z-60 h-[3px] no-print"
+      style={{ background: "hsl(var(--primary) / 0.08)" }}
       role="progressbar"
       aria-label="Progresso de leitura do documento"
       aria-valuenow={Math.round(progress)}
@@ -56,7 +56,7 @@ export const ReadingProgressBar = () => {
         className="h-full transition-all duration-150 ease-out relative"
         style={{ 
           width: `${progress}%`,
-          background: 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--accent-glow)), hsl(var(--success)))',
+          background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--accent-glow)))",
           backgroundSize: '200% 100%',
           animation: reducedMotion ? 'none' : 'shimmer 3s ease-in-out infinite'
         }}
@@ -65,16 +65,16 @@ export const ReadingProgressBar = () => {
         <div 
           className="absolute right-0 top-[-2px] bottom-[-2px] w-16"
           style={{
-            background: 'linear-gradient(90deg, transparent, hsl(var(--accent-glow) / 0.6))',
+            background: 'linear-gradient(90deg, transparent, hsl(var(--accent-glow) / 0.5))',
             filter: 'blur(4px)',
             animation: reducedMotion ? 'none' : 'leading-glow 2s ease infinite'
           }}
         />
       </div>
       {/* Shadow below */}
-      <div className="absolute bottom-0 left-0 h-[3px] opacity-30" style={{ 
+      <div className="absolute bottom-0 left-0 h-[4px] opacity-20" style={{ 
         width: `${progress}%`,
-        background: 'linear-gradient(90deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.5))',
+        background: 'linear-gradient(90deg, hsl(var(--primary) / 0.24), hsl(var(--accent) / 0.36))',
         filter: 'blur(3px)'
       }} />
     </div>

@@ -1,5 +1,6 @@
 import { type ReactNode, lazy, Suspense, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { CalendarClock, LibraryBig, ListChecks } from "lucide-react";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
@@ -8,10 +9,12 @@ import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
 import {
+  GUIDE_VERSION,
   GUIDE_ANCHORS,
   guideAnchorParentSections,
   guideSectionIds,
   guideSectionsById,
+  guideHowToSteps,
   type GuideAnchorId,
   type GuideSectionId,
 } from "@/lib/guideContent";
@@ -31,12 +34,14 @@ import {
 const loadBackToTop = () => import("@/components/pop/BackToTop").then((m) => ({ default: m.BackToTop }));
 const loadGuidedWizard = () => import("@/components/pop/GuidedWizard").then((m) => ({ default: m.GuidedWizard }));
 const loadSectionIntro = () => import("@/components/pop/SectionIntro").then((m) => ({ default: m.SectionIntro }));
+const loadOperationalLanding = () => import("@/components/pop/OperationalLanding").then((m) => ({ default: m.OperationalLanding }));
 const loadScopeCallout = () => import("@/components/pop/ScopeCallout").then((m) => ({ default: m.ScopeCallout }));
 const loadSectionOne = () => import("@/components/pop/SectionOne").then((m) => ({ default: m.SectionOne }));
 
 const BackToTop = lazy(loadBackToTop);
 const GuidedWizard = lazy(loadGuidedWizard);
 const SectionIntro = lazy(loadSectionIntro);
+const OperationalLanding = lazy(loadOperationalLanding);
 const ScopeCallout = lazy(loadScopeCallout);
 const SectionOne = lazy(loadSectionOne);
 
@@ -143,6 +148,7 @@ const Index = () => {
   const [readySections, setReadySections] = useState(() => new Set<GuideSectionId>());
   const activatedSectionsRef = useRef(new Set<GuideSectionId>());
   const lastHandledGuideTargetRef = useRef<GuideAnchorId | null>(null);
+  const waypoints = guideHowToSteps.slice(0, 3);
 
   const syncGuideUrl = useCallback(
     (target: GuideAnchorId, replace = true) => {
@@ -300,25 +306,6 @@ const Index = () => {
     return () => window.clearTimeout(timeoutId);
   }, [activateDeferredSection]);
 
-  // Pre-activate all deferred sections to prevent visibility deadlock
-  // (AnimatedSection starts at opacity-0 and waits for IntersectionObserver,
-  //  but DeferredSectionSlot also waits for IntersectionObserver — neither fires)
-  useEffect(() => {
-    const activateAll = () => {
-      for (const sectionId of Object.keys(deferredSectionLoaders) as GuideSectionId[]) {
-        activateDeferredSection(sectionId);
-      }
-    };
-
-    if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(activateAll, { timeout: 1500 });
-      return () => window.cancelIdleCallback(idleId);
-    }
-
-    const timeoutId2 = window.setTimeout(activateAll, 800);
-    return () => window.clearTimeout(timeoutId2);
-  }, [activateDeferredSection]);
-
   useEffect(() => {
     const targetFromUrl = readGuideTargetFromSearchParams(searchParams);
     if (!targetFromUrl || lastHandledGuideTargetRef.current === targetFromUrl) {
@@ -368,11 +355,99 @@ const Index = () => {
           onClose={() => setSidebarOpen(false)}
         />
 
-        <main className="min-w-0 flex-1 lg:ml-0">
-          <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 lg:px-10 pb-36 sm:pb-40">
-            <article className="max-w-none">
-              <div className="space-y-10 sm:space-y-14">
+        <main className="min-w-0 flex-1 lg:ml-0 bg-transparent">
+          <div className="mx-auto w-full max-w-[1180px] px-4 py-10 pb-36 sm:px-6 sm:py-12 sm:pb-40 lg:px-8">
+            <article className="article-frame">
+              <section className="article-intro-panel mb-10">
+                <div className="grid gap-6 lg:grid-cols-[minmax(0,1.14fr)_minmax(18rem,0.86fr)]">
+                  <div className="min-w-0">
+                    <span className="article-kicker">
+                      <LibraryBig className="h-3.5 w-3.5" aria-hidden="true" />
+                      Leitura orientada
+                    </span>
+                    <h2 className="article-display-title mt-4">
+                      Manual organizado para consulta rápida, escaneamento e execução segura
+                    </h2>
+                    <p className="mt-4 max-w-3xl text-[1rem] leading-8 text-foreground/82 sm:text-[1.04rem]">
+                      Use o sumário lateral, os marcos de etapa e os blocos destacados para localizar com rapidez o que é checklist, procedimento, observação operacional e referência normativa sem perder a lógica do fluxo.
+                    </p>
+
+                    <div className="mt-6 grid gap-3 md:grid-cols-3">
+                      <div className="article-summary-card">
+                        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          Formato
+                        </p>
+                        <p className="mt-2 text-sm font-semibold text-foreground">Procedimento operacional</p>
+                        <p className="mt-1 text-sm leading-7 text-muted-foreground">Leitura integral e consulta pontual.</p>
+                      </div>
+                      <div className="article-summary-card">
+                        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          Capítulos operacionais
+                        </p>
+                        <p className="mt-2 text-sm font-semibold text-foreground">{guideHowToSteps.length} etapas principais</p>
+                        <p className="mt-1 text-sm leading-7 text-muted-foreground">Da autuação até a finalização na GAD.</p>
+                      </div>
+                      <div className="article-summary-card">
+                        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          Atualização
+                        </p>
+                        <p className="mt-2 text-sm font-semibold text-foreground">{GUIDE_VERSION.lastUpdatedText}</p>
+                        <p className="mt-1 text-sm leading-7 text-muted-foreground">{GUIDE_VERSION.cycleLabel}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-3">
+                    <div className="article-summary-card">
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                          <ListChecks className="h-4.5 w-4.5" aria-hidden="true" />
+                        </div>
+                        <div>
+                          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                            Melhor forma de começar
+                          </p>
+                          <p className="mt-2 text-sm leading-7 text-foreground/82">
+                            Consulte primeiro o checklist documental, depois avance pelo fluxo técnico das etapas.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="article-summary-card">
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-accent/12 text-accent">
+                          <CalendarClock className="h-4.5 w-4.5" aria-hidden="true" />
+                        </div>
+                        <div>
+                          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                            Percurso de leitura
+                          </p>
+                          <div className="mt-3 space-y-3">
+                            {waypoints.map((waypoint) => (
+                              <div key={waypoint.position} className="rounded-[1.1rem] border border-border/55 bg-background/80 px-3.5 py-3">
+                                <p className="text-sm font-semibold text-foreground">
+                                  {`${waypoint.position}. ${waypoint.name}`}
+                                </p>
+                                <p className="mt-1 text-sm leading-6 text-muted-foreground">{waypoint.text}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <div className="space-y-10 sm:space-y-12">
                 <AnimatedSection>
+                  <Suspense fallback={<SectionLoader />}>
+                    <OperationalLanding />
+                  </Suspense>
+                </AnimatedSection>
+
+                <AnimatedSection delay={35}>
                   <div id="introducao" className="scroll-mt-20">
                     <Suspense fallback={<SectionLoader />}>
                       <SectionIntro />
@@ -380,7 +455,7 @@ const Index = () => {
                   </div>
                 </AnimatedSection>
 
-                <AnimatedSection delay={50}>
+                <AnimatedSection delay={70}>
                   <Suspense fallback={<SectionLoader />}>
                     <ScopeCallout />
                   </Suspense>

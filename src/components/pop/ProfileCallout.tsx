@@ -27,8 +27,10 @@ export const ProfileCallout = ({ visibleFor, variant = "info", title, children, 
   const config = modeConfig[visibleFor];
 
   return (
-    <Callout variant={variant} title={title || config.badge} icon={config.icon} className={className}>
-      {children}
-    </Callout>
+    <div data-profile-callout="true">
+      <Callout variant={variant} title={title || config.badge} icon={config.icon} className={className}>
+        {children}
+      </Callout>
+    </div>
   );
 };

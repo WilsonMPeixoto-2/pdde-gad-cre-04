@@ -1,253 +1,329 @@
+import {
+  AlertTriangle,
+  CalendarClock,
+  ChevronRight,
+  ClipboardCheck,
+  FileCheck,
+  ShieldCheck,
+} from "lucide-react";
+import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
+import { ProcessJourneyMap } from "./ProcessJourneyMap";
 import { ProfileCallout } from "./ProfileCallout";
 import { SmartTemplates } from "./SmartTemplates";
-import { ProcessJourneyMap } from "./ProcessJourneyMap";
-import { GUIDE_ANCHORS } from "@/lib/guideContent";
+
+const quickAccessPanels = [
+  {
+    anchor: GUIDE_ANCHORS.checklist,
+    title: "Checklist mínimo",
+    description:
+      "Conferência do núcleo documental e dos anexos complementares antes da remessa.",
+  },
+  {
+    anchor: GUIDE_ANCHORS.models,
+    title: "Modelos e referências",
+    description:
+      "Acervo para distinguir peças editáveis, exemplos preenchidos e material de consulta.",
+  },
+  {
+    anchor: GUIDE_ANCHORS.templates,
+    title: "Minutas rápidas",
+    description:
+      "Textos de apoio para encaminhamento e conferência, com reaproveitamento dos dados do processo.",
+  },
+  {
+    anchor: GUIDE_ANCHORS.journey,
+    title: "Mapa da jornada",
+    description:
+      "Sequência lógica das etapas até a remessa, útil para retomada e passagem de tarefa.",
+  },
+] as const;
+
+const operationalSignals = [
+  {
+    tone: "info",
+    kicker: "Compras pela internet",
+    title: "Registre a cotação com o valor final da aquisição",
+    items: [
+      "Use sites nacionais confiáveis e registre a cotação com descrição completa, preço final e frete.",
+      "Compare o valor total da aquisição, inclusive o frete, e registre o critério da escolha.",
+      "Guarde o comprovante de pagamento identificando o fornecedor vencedor.",
+    ],
+  },
+  {
+    tone: "success",
+    kicker: "Sistema de Registro de Preços",
+    title: "O SRP pode substituir a pesquisa de preços quando estiver devidamente documentado",
+    items: [
+      "Se a UEx/EM utilizar SRP, anexe a ata, o acordo ou o instrumento equivalente, juntamente com os documentos do fornecedor.",
+      "Registre no processo que a pesquisa de preços foi dispensada em razão do uso de SRP.",
+    ],
+  },
+  {
+    tone: "warning",
+    kicker: "Regra das 3 cotações",
+    title: "A pesquisa de preços continua sendo a rotina padrão",
+    items: [
+      "Conforme a Resolução CD/FNDE nº 15/2021, art. 17, obtenha no mínimo 3 cotações de fornecedores distintos para cada aquisição.",
+      "Quando houver múltiplas ações do PDDE no mesmo exercício, mantenha os gastos separados por ação, com controle individualizado.",
+      "Número inferior de cotações somente deve aparecer com justificativa idônea ou com uso documentado de SRP.",
+    ],
+  },
+  {
+    tone: "danger",
+    kicker: "Vedações",
+    title: "Há despesas que não podem ser executadas com recursos do PDDE",
+    items: [
+      "Não aplique recursos em despesas com pessoal, contas recorrentes, despesas assistencialistas ou gêneros alimentícios cobertos pelo PNAE.",
+      "Em caso de dúvida sobre o enquadramento da despesa, consulte a GAD antes da execução.",
+    ],
+  },
+  {
+    tone: "warning",
+    kicker: "Erros comuns a evitar",
+    title: "Os problemas mais recorrentes começam na organização documental",
+    items: [
+      "Não realizar as 3 pesquisas de preços obrigatórias quando não houver justificativa idônea ou SRP documentado.",
+      "Nomear documentos de forma genérica, dificultando a identificação futura na árvore do processo.",
+      "Anexar extratos de período diferente do exercício financeiro.",
+      "Não registrar a prestação de contas no SiGPC/Contas Online.",
+    ],
+  },
+] as const;
+
+const nextSteps = [
+  {
+    number: "3",
+    title: "Inclusão de Documentos Externos",
+    description:
+      "A próxima etapa mostra como inserir documentos digitalizados e nato-digitais no SEI!RIO com identificação clara e classificação correta.",
+  },
+  {
+    number: "4",
+    title: "Autenticação de Documentos",
+    description:
+      "Em seguida, o manual detalha como autenticar apenas os documentos digitalizados e preservar a distinção entre autenticação e assinatura.",
+  },
+] as const;
 
 export const SectionTwo = () => {
   return (
     <section className="scroll-mt-20 animate-fade-in">
-      {/* Bloco 1: Introdução ao Checklist - Estruturado para escaneabilidade */}
-      <div className="mb-8 section-card bg-gradient-to-br from-secondary/50 via-background to-sky-50/40 dark:from-secondary/20 dark:via-background dark:to-sky-950/20 border-l-4 border-l-sky-500 shadow-sm">
-        <div className="space-y-5">
-          {/* O que é */}
-          <div className="p-4 bg-background/80 rounded-lg border border-border/60">
-            <h3 className="text-sm font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wide mb-2 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
-              O que é
-            </h3>
-            <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-left sm:text-justify">
-              O <strong className="text-foreground font-semibold">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, apresentado após a devida <strong className="text-foreground font-semibold">autuação do processo</strong>.
-            </p>
+      <section className="article-intro-panel mb-8">
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)]">
+          <div className="min-w-0">
+            <span className="article-kicker">
+              <ClipboardCheck className="h-3.5 w-3.5" aria-hidden="true" />
+              Etapa 2 · Instrução processual
+            </span>
+            <h2
+              className="mt-4 text-[1.9rem] text-foreground sm:text-[2.45rem]"
+              style={{
+                fontFamily: "var(--font-display)",
+                lineHeight: "1.01",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Como transformar documentos dispersos em um processo claro, conferível e pronto para seguir fluxo
+            </h2>
+
+            <div className="editorial-hairline mt-5" />
+
+            <div className="content-spacing mt-6">
+              <p className="lead-text text-left sm:text-justify">
+                Esta etapa reúne o <strong className="text-foreground">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, sempre após a <strong className="text-foreground">autuação do processo</strong>. É aqui que a conferência deixa de ser apenas reunião de arquivos e passa a funcionar como organização lógica dos autos.
+              </p>
+              <p className="text-left sm:text-justify">
+                A instrução é <strong className="text-foreground">crítica para assegurar a conformidade</strong> da prestação de contas. Documentação incompleta, fora do exercício ou apresentada sem padronização adequada tende a gerar retrabalho, retardar a aprovação e comprometer a leitura técnica pela GAD.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-3 md:grid-cols-3">
+              <div className="article-summary-card">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  O que fazer agora
+                </p>
+                <p className="mt-3 text-sm leading-7 text-foreground/82">
+                  Conferir o checklist, reunir documentos por ordem lógica e utilizar os modelos apenas quando fizerem sentido para o caso.
+                </p>
+              </div>
+              <div className="article-summary-card">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Foco da análise
+                </p>
+                <p className="mt-3 text-sm leading-7 text-foreground/82">
+                  Extratos do exercício, comprovação da despesa, atas do CEC e pesquisa de preços compatível com a norma.
+                </p>
+              </div>
+              <div className="article-summary-card">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Resultado esperado
+                </p>
+                <p className="mt-3 text-sm leading-7 text-foreground/82">
+                  Processo organizado para inclusão no SEI!RIO, autenticação e remessa sem perda de contexto.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Por que importa */}
-          <div className="p-4 bg-background/80 rounded-lg border border-border/60">
-            <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide mb-2 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Por que importa
-            </h3>
-            <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-left sm:text-justify">
-              Esta etapa é <strong className="text-foreground font-semibold">crítica para garantir a conformidade</strong> da prestação de contas. Documentação incompleta ou fora do padrão pode atrasar a aprovação.
-            </p>
-          </div>
+          <aside className="grid gap-3">
+            <div className="article-summary-card">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <ShieldCheck className="h-4.5 w-4.5" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    Critério de qualidade
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-foreground/82">
+                    A boa instrução separa o que é obrigatório, o que é complementar e o que precisa ser conferido antes da etapa seguinte.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          {/* O que você precisa fazer */}
-          <div className="p-4 bg-sky-50/80 dark:bg-sky-950/40 rounded-lg border border-sky-200/60 dark:border-sky-800/40">
-            <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-              O que você precisa fazer
-            </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-sky-600 dark:text-sky-400 font-bold">1.</span>
-                <span>Use a <strong className="text-sky-600 dark:text-sky-400 font-semibold">Lista de Verificação Interativa</strong> abaixo para monitorar os itens já encartados</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sky-600 dark:text-sky-400 font-bold">2.</span>
-                <span>Consulte os <strong className="text-sky-600 dark:text-sky-400 font-semibold">Modelos de Documentos</strong> para padronização</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sky-600 dark:text-sky-400 font-bold">3.</span>
-                <span>Acompanhe o percentual de completude automaticamente calculado</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Erros comuns */}
-          <div className="p-4 bg-amber-50/80 dark:bg-amber-950/40 rounded-lg border border-amber-200/60 dark:border-amber-800/40">
-            <h3 className="text-sm font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-2 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-              Erros comuns a evitar
-            </h3>
-            <ul className="space-y-1.5 text-foreground/80 text-sm">
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400">•</span>
-                <span>Não realizar as <strong className="text-foreground">3 pesquisas de preços obrigatórias</strong> (Res. FNDE 15/2021, Art. 17)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400">•</span>
-                <span>Nomear documentos de forma genérica, dificultando identificação futura</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400">•</span>
-                <span>Anexar extratos de período diferente do exercício financeiro</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400">•</span>
-                <span>Não registrar a prestação de contas no <strong className="text-foreground">SiGPC/Contas Online</strong></span>
-              </li>
-            </ul>
-          </div>
+            <div className="article-summary-card">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Percurso sugerido nesta etapa
+              </p>
+              <div className="mt-3 space-y-3">
+                {quickAccessPanels.map((panel) => (
+                  <a
+                    key={panel.anchor}
+                    href={`#${panel.anchor}`}
+                    className="group flex items-start gap-3 rounded-[1.2rem] border border-border/55 bg-background/82 px-4 py-4 transition-all duration-200 hover:border-primary/25 hover:bg-primary/4"
+                  >
+                    <div className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-primary/8 text-primary">
+                      <ChevronRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-foreground">{panel.title}</p>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{panel.description}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </aside>
         </div>
-      </div>
+      </section>
 
-      {/* Profile Callouts */}
-      <ProfileCallout visibleFor="diretor" variant="info" title="Dica para a Escola">
-        Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme for reunindo — o progresso é salvo automaticamente no seu navegador.
+      <ProfileCallout visibleFor="diretor" variant="info" title="Leitura prática para a unidade escolar" className="mb-4">
+        Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme forem sendo reunidos: o progresso permanece salvo no navegador e facilita a retomada da conferência sem perda do contexto do processo.
       </ProfileCallout>
-      <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de Atenção — GAD" className="mb-4">
-        Verifique se todas as 3 cotações de preços estão anexadas e se os extratos cobrem o período integral do exercício. Atenção especial ao enquadramento correto de despesas de custeio vs. capital.
+      <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de atenção para conferência na GAD" className="mb-8">
+        Verifique se há comprovação da pesquisa de preços com 3 orçamentos, justificativa idônea para número inferior ou uso documentado de SRP. Confirme também se os extratos bancários cobrem o período integral do exercício e se o enquadramento entre custeio e capital está coerente.
       </ProfileCallout>
 
-      {/* Checklist de Documentos PDDE */}
       <div id={GUIDE_ANCHORS.checklist} className="mb-8 scroll-mt-28">
         <PDDEChecklist />
       </div>
 
-      {/* Regras Operacionais - Evitar Glosa */}
-      <div className="mb-8 section-card bg-gradient-to-br from-amber-50/50 dark:from-amber-950/30 via-background to-orange-50/30 dark:to-orange-950/20 border-l-4 border-l-amber-500 shadow-sm">
-        <div className="content-spacing">
-          <h2 className="text-lg sm:text-xl font-bold text-foreground mb-5 flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm shadow-md">⚠</span>
-            Regras operacionais (evite glosa)
-          </h2>
-
-          {/* Compras pela internet */}
-          <div className="mb-5">
-            <h3 className="text-sm font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-              Compras pela internet (quando aplicável)
+      <section className="section-card mb-8">
+        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div className="min-w-0">
+            <span className="kicker-label">
+              <AlertTriangle className="h-3.5 w-3.5" aria-hidden="true" />
+              Regras operacionais
+            </span>
+            <h3 className="mt-4 text-[1.55rem] text-foreground sm:text-[1.9rem]" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.035em", lineHeight: "1.04" }}>
+              Pontos que mais reduzem glosas, inconsistências e retrabalho
             </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Use <strong className="text-foreground">sites nacionais confiáveis</strong> e registre a cotação com print contendo: <strong className="text-sky-600 dark:text-sky-400">descrição completa, preço final e frete</strong>.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Compare o <strong className="text-foreground">valor total</strong> (incluindo frete) e registre o critério da escolha.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Guarde o <strong className="text-foreground">comprovante de pagamento</strong> identificando o fornecedor vencedor.</span>
-              </li>
-            </ul>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-[0.98rem]">
+              Use este quadro como camada de leitura rápida: ele resume regras recorrentes da etapa de instrução e destaca os pontos que costumam gerar dúvida, atraso ou fragilidade documental.
+            </p>
           </div>
 
-          {/* Sistema de Registro de Preços */}
-          <div className="mb-5">
-            <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Sistema de Registro de Preços (SRP) — alternativa à pesquisa de preços
-            </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Se a <strong className="text-foreground">UEx/EM</strong> usar SRP (adesão a ata), anexe a <strong className="text-sky-600 dark:text-sky-400">ata/acordo</strong> e os documentos do fornecedor.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Nesse caso, registre no processo que a <strong className="text-foreground">pesquisa de preços foi dispensada</strong> por uso de SRP.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Pesquisa de Preços */}
-          <div className="mb-5">
-            <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-              Pesquisa de preços — regra das 3 cotações
-            </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 17)</strong>, é obrigatório obter no mínimo <strong className="text-primary">3 cotações de preços</strong> de fornecedores distintos para cada aquisição.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">Quando houver <strong className="text-foreground">múltiplas ações do PDDE</strong> no mesmo exercício, os gastos devem ser <strong className="text-foreground">separados por ação</strong> (rateio de despesas), com controle individualizado.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">A cotação pode ser dispensada quando a UEx utilizar o <strong className="text-foreground">Sistema de Registro de Preços (SRP)</strong>, desde que devidamente documentado.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Vedações */}
-          <div className="mb-3">
-            <h3 className="text-sm font-bold text-red-700 dark:text-red-400 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-              Vedações — despesas proibidas (Res. FNDE 15/2021)
-            </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-red-700 dark:text-red-400">Não aplicar</strong> recursos em despesas de <strong className="text-foreground">pessoal, contas recorrentes</strong> (água, luz, telefone, aluguel), <strong className="text-foreground">despesas assistencialistas</strong> ou <strong className="text-foreground">gêneros alimentícios</strong> (cobertos pelo PNAE).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Em caso de dúvida sobre enquadramento, <strong className="text-primary">consulte a GAD antes de executar</strong> a despesa.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Nota explicativa */}
-          <div className="p-3 bg-muted rounded-lg border border-border mt-4">
-            <p className="text-muted-foreground text-xs sm:text-sm italic text-center">
-              Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes — reduzindo inconsistências e glosas.
+          <div className="rounded-[1.3rem] border border-border/60 bg-secondary/35 px-4 py-3">
+            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Regra de ouro
+            </p>
+            <p className="mt-2 text-sm leading-6 text-foreground/82">
+              Não misture exercícios, ações ou peças comprobatórias com origens diferentes no mesmo encadeamento documental.
             </p>
           </div>
         </div>
-      </div>
 
-      {/* Modelos de Documentos PDDE - Componente dedicado */}
+        <div className="grid gap-4 xl:grid-cols-2">
+          {operationalSignals.map((signal) => (
+            <div key={signal.title} className="signal-card" data-tone={signal.tone}>
+              <p className="signal-card-kicker">{signal.kicker}</p>
+              <h4 className="signal-card-title">{signal.title}</h4>
+              <ul className="signal-card-copy mt-3 space-y-2">
+                {signal.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="article-summary-card mt-5">
+          <div className="flex items-start gap-3">
+            <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <CalendarClock className="h-4.5 w-4.5" aria-hidden="true" />
+            </div>
+            <div>
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Orientação final desta etapa
+              </p>
+              <p className="mt-2 text-sm leading-7 text-foreground/82">
+                Seguir essas regras evita confusão entre anos, ações e prestações de contas distintas, reduz inconsistências e melhora a leitura técnica dos autos antes da inclusão no sistema.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div id={GUIDE_ANCHORS.models} className="scroll-mt-28">
         <PDDEModelCards />
       </div>
 
-      {/* Smart Templates */}
       <div id={GUIDE_ANCHORS.templates} className="mb-8 scroll-mt-28">
         <SmartTemplates />
       </div>
 
-      {/* Process Journey Map */}
       <div id={GUIDE_ANCHORS.journey} className="mb-8 scroll-mt-28">
         <ProcessJourneyMap />
       </div>
 
-      {/* Bloco 2: Roteiro de Instrução - AGORA APÓS MODELOS */}
-      <div className="mb-8 section-card bg-gradient-to-br from-secondary via-card to-primary/5 border-l-4 border-l-primary shadow-sm">
-        <div className="content-spacing">
-          <h3 className="section-heading text-primary border-b-primary/20">
-            Roteiro de Instrução para as próximas etapas deste guia
-          </h3>
-          <p className="text-foreground/80 text-sm sm:text-base leading-relaxed text-left sm:text-justify mb-5">
-            A sequência deste manual detalhará os procedimentos técnicos para a composição dos autos, divididos conforme a origem do documento:
-          </p>
-          <div className="space-y-4">
-            <div className="p-5 bg-gradient-to-r from-card to-sky-50/50 dark:to-sky-950/20 rounded-xl border border-sky-200/60 dark:border-sky-800/40 shadow-sm hover:shadow-md transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 text-white font-bold text-sm shrink-0 shadow-md">
-                  3
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-foreground mb-2">Tópico 3 – Inclusão de Documentos <span className="text-sky-600 dark:text-sky-400 font-bold uppercase tracking-wide">EXTERNOS</span></h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed text-left sm:text-justify">
-                    Documentos gerados fora do ambiente do sistema <strong className="text-foreground">SEI!RIO</strong> (<strong className="text-sky-600 dark:text-sky-400">digitalizados</strong> ou <strong className="text-emerald-600 dark:text-emerald-400 uppercase">nato digitais</strong>), acompanhados de notas explicativas sobre a finalidade de cada item.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="p-5 bg-gradient-to-r from-card to-primary/5 rounded-xl border border-primary/20 shadow-sm hover:shadow-md transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-sm shrink-0 shadow-md">
-                  4
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-foreground mb-2">Tópico 4 – Autenticação de Documentos</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed text-left sm:text-justify">
-                    Procedimento para <strong className="text-foreground">autenticar documentos externos</strong> incluídos no processo, validando sua integridade e conformidade.
-                  </p>
-                </div>
-              </div>
-            </div>
+      <section className="section-card">
+        <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="min-w-0">
+            <span className="kicker-label">
+              <FileCheck className="h-3.5 w-3.5" aria-hidden="true" />
+              Continuidade do fluxo
+            </span>
+            <h3 className="mt-4 text-[1.48rem] text-foreground sm:text-[1.82rem]" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em", lineHeight: "1.05" }}>
+              O que vem depois da instrução documental
+            </h3>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-[0.98rem]">
+              As próximas etapas do guia detalham os procedimentos técnicos para a composição dos autos conforme a origem do documento e a necessidade de autenticação.
+            </p>
           </div>
         </div>
-      </div>
 
+        <div className="grid gap-4 lg:grid-cols-2">
+          {nextSteps.map((step) => (
+            <div key={step.number} className="article-summary-card">
+              <div className="flex items-start gap-4">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-sm font-bold text-primary-foreground shadow-soft">
+                  {step.number}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-foreground">{step.title}</p>
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground">{step.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </section>
   );
 };

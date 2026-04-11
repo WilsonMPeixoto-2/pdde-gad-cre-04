@@ -300,6 +300,25 @@ const Index = () => {
     return () => window.clearTimeout(timeoutId);
   }, [activateDeferredSection]);
 
+  // Pre-activate all deferred sections to prevent visibility deadlock
+  // (AnimatedSection starts at opacity-0 and waits for IntersectionObserver,
+  //  but DeferredSectionSlot also waits for IntersectionObserver — neither fires)
+  useEffect(() => {
+    const activateAll = () => {
+      for (const sectionId of Object.keys(deferredSectionLoaders) as GuideSectionId[]) {
+        activateDeferredSection(sectionId);
+      }
+    };
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(activateAll, { timeout: 1500 });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId2 = window.setTimeout(activateAll, 800);
+    return () => window.clearTimeout(timeoutId2);
+  }, [activateDeferredSection]);
+
   useEffect(() => {
     const targetFromUrl = readGuideTargetFromSearchParams(searchParams);
     if (!targetFromUrl || lastHandledGuideTargetRef.current === targetFromUrl) {
@@ -350,8 +369,8 @@ const Index = () => {
         />
 
         <main className="min-w-0 flex-1 lg:ml-0 bg-slate-50/50">
-          <div className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6 lg:px-8 pb-36 sm:pb-40">
-            <article className="prose prose-slate md:prose-lg max-w-none bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-200/60">
+          <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8 pb-36 sm:pb-40">
+            <article className="max-w-none bg-white p-6 sm:p-8 md:p-12 rounded-2xl shadow-sm border border-slate-200/60">
               <div className="space-y-12">
                 <AnimatedSection>
                   <div id="introducao" className="scroll-mt-20">

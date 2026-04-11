@@ -106,7 +106,7 @@ export const SectionThree = () => {
               const Icon = card.icon;
 
               return (
-                <article key={card.title} className={`rounded-[1.4rem] border p-5 shadow-soft ${card.accent}`}>
+                <article key={card.title} className={`rounded-2xl border p-5 shadow-soft ${card.accent}`}>
                   <div className="mb-4 flex items-center gap-3">
                     <div className={`rounded-xl p-2.5 ${card.iconBg}`}>
                       <Icon className={`h-5 w-5 ${card.iconColor}`} />
@@ -155,7 +155,7 @@ export const SectionThree = () => {
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base text-left sm:text-justify">
                 O uso de assinatura física seguida de digitalização fica reservado às hipóteses em que a elaboração e a assinatura no sistema <strong className="text-foreground">não sejam possíveis</strong> ou precisem ocorrer externamente de forma imediata. Essa lógica decorre do art. 20, do art. 23 e do art. 26, § 2º, do Decreto Rio nº 57.250/2025.
               </p>
-              <div className="rounded-[1.35rem] border border-sky-200/70 bg-linear-to-br from-sky-50 to-sky-100/60 p-4 shadow-soft dark:border-sky-800/40 dark:from-sky-950/40 dark:to-sky-900/20">
+              <div className="rounded-2xl border border-sky-200/70 bg-linear-to-br from-sky-50 to-sky-100/60 p-4 shadow-soft dark:border-sky-800/40 dark:from-sky-950/40 dark:to-sky-900/20">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700 dark:text-sky-300">
                   Citação normativa
                 </p>
@@ -266,7 +266,7 @@ export const SectionThree = () => {
               </div>
             </div>
 
-            <div className="rounded-[1.6rem] border border-emerald-200/70 bg-linear-to-r from-emerald-50/95 via-emerald-50 to-emerald-100/70 p-5 text-center shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/40 dark:via-emerald-950/35 dark:to-emerald-900/20">
+            <div className="rounded-2xl border border-emerald-200/70 bg-linear-to-r from-emerald-50/95 via-emerald-50 to-emerald-100/70 p-5 text-center shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/40 dark:via-emerald-950/35 dark:to-emerald-900/20">
               <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 dark:bg-emerald-800">
                 <Lightbulb className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </div>
@@ -416,7 +416,7 @@ export const SectionThree = () => {
           </div>
 
           <div className="grid gap-4 lg:grid-cols-3">
-            <div className="rounded-[1.35rem] border border-border bg-card p-4 shadow-xs">
+            <div className="rounded-2xl border border-border bg-card p-4 shadow-xs">
               <div className="mb-2 flex items-center gap-2">
                 <Image className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Qualidade da digitalização</h4>
@@ -426,7 +426,7 @@ export const SectionThree = () => {
               </p>
             </div>
 
-            <div className="rounded-[1.35rem] border border-border bg-card p-4 shadow-xs">
+            <div className="rounded-2xl border border-border bg-card p-4 shadow-xs">
               <div className="mb-2 flex items-center gap-2">
                 <FileDown className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Nome do arquivo x Nome na Árvore</h4>
@@ -444,7 +444,7 @@ export const SectionThree = () => {
               </div>
             </div>
 
-            <div className="rounded-[1.35rem] border border-border bg-card p-4 shadow-xs">
+            <div className="rounded-2xl border border-border bg-card p-4 shadow-xs">
               <div className="mb-2 flex items-center gap-2">
                 <Scissors className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                 <h4 className="font-semibold text-foreground">Tamanho do arquivo</h4>

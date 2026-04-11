@@ -121,7 +121,7 @@ export const GuidedWizard = () => {
 
   return (
     <div className="fixed inset-x-3 bottom-3 z-50 no-print sm:inset-auto sm:right-6 sm:bottom-24 sm:top-auto sm:w-[420px] xl:right-[max(1.5rem,calc(50vw-39rem))]">
-      <div className="guided-wizard rounded-[1.75rem] border border-border/60 shadow-2xl overflow-hidden" style={{
+      <div className="guided-wizard rounded-2xl border border-border/60 shadow-2xl overflow-hidden" style={{
         background: 'hsl(var(--card))',
         backdropFilter: 'blur(20px)',
       }}>

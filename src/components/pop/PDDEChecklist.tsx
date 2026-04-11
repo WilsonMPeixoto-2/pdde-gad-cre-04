@@ -205,7 +205,7 @@ export const PDDEChecklist = () => {
       </p>
 
       {/* Progress Bar */}
-      <div className="mb-4 rounded-[1.35rem] border border-border/50 bg-secondary/35 p-4">
+      <div className="mb-4 rounded-2xl border border-border/50 bg-secondary/35 p-4">
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="text-muted-foreground">Bloco A — base federal mínima</span>
           <span className="font-semibold text-primary">

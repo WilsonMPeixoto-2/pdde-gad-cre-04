@@ -8,7 +8,7 @@ interface SeiMockupProps {
 }
 
 const mockupShellClassName =
-  "sei-mockup overflow-hidden rounded-[1.8rem] border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eef3f7] shadow-[0_34px_58px_-42px_rgba(15,23,42,0.42),0_16px_30px_-26px_rgba(15,23,42,0.18)]";
+  "sei-mockup overflow-hidden rounded-2xl border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eef3f7] shadow-[0_34px_58px_-42px_rgba(15,23,42,0.42),0_16px_30px_-26px_rgba(15,23,42,0.18)]";
 
 // Professional SEI-style icon button with animations
 const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode; label?: string; active?: boolean }) => (
@@ -38,7 +38,7 @@ export const SeiIconsBar = () => (
   <div
     role="img"
     aria-label="Barra ilustrativa de ações do SEI!RIO com opções como incluir, enviar, visualizar e assinar."
-    className="flex items-center gap-1.5 overflow-x-auto rounded-[1.45rem] border border-[#d0d7de] bg-linear-to-b from-[#fbfcfd] via-white to-[#eef2f6] p-3 shadow-[0_22px_40px_-30px_rgba(15,23,42,0.34),inset_0_1px_0_0_rgba(255,255,255,0.6)]"
+    className="flex items-center gap-1.5 overflow-x-auto rounded-2xl border border-[#d0d7de] bg-linear-to-b from-[#fbfcfd] via-white to-[#eef2f6] p-3 shadow-[0_22px_40px_-30px_rgba(15,23,42,0.34),inset_0_1px_0_0_rgba(255,255,255,0.6)]"
   >
     <SeiIconButton icon={<SeiIncluirIcon size={20} />} label="Incluir" active />
     <SeiIconButton icon={<SeiEnviarIcon size={20} />} label="Enviar" />

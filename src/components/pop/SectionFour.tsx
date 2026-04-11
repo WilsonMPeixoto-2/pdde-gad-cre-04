@@ -110,7 +110,7 @@ export const SectionFour = () => {
             const Icon = rule.icon;
 
             return (
-              <article key={rule.title} className={`rounded-[1.4rem] border p-5 shadow-soft ${rule.accent}`}>
+              <article key={rule.title} className={`rounded-2xl border p-5 shadow-soft ${rule.accent}`}>
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className={`rounded-xl p-2.5 ${rule.iconBg}`}>
@@ -185,7 +185,7 @@ export const SectionFour = () => {
             ))}
           </div>
 
-          <div className="mt-5 rounded-[1.35rem] border border-amber-200/80 bg-amber-50/80 p-4 dark:border-amber-800/40 dark:bg-amber-950/20">
+          <div className="mt-5 rounded-2xl border border-amber-200/80 bg-amber-50/80 p-4 dark:border-amber-800/40 dark:bg-amber-950/20">
             <div className="flex items-start gap-3">
               <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-300" />
               <div className="space-y-2">
@@ -226,7 +226,7 @@ export const SectionFour = () => {
             })}
           </div>
 
-          <div className="mt-4 rounded-[1.35rem] border border-primary/20 bg-primary/5 p-4">
+          <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 p-4">
             <p className="text-sm leading-relaxed text-foreground/80">
               Em documentos externos do PDDE sem conteúdo sigiloso, o nível de acesso costuma permanecer <strong className="text-foreground">público</strong>. Havendo dados pessoais sensíveis ou restrição específica, aplique a classificação compatível com a regra de acesso do processo.
             </p>
@@ -237,7 +237,7 @@ export const SectionFour = () => {
           <h3 className="mb-4 font-semibold text-foreground">4.4. Base normativa e fundamento procedimental</h3>
 
           <div className="grid gap-4 xl:grid-cols-2">
-            <div className="rounded-[1.35rem] border border-border/60 bg-card p-5 shadow-soft">
+            <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-soft">
               <div className="mb-3 flex items-center gap-2">
                 <span className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
                   Base federal
@@ -257,7 +257,7 @@ export const SectionFour = () => {
               </a>
             </div>
 
-            <div className="rounded-[1.35rem] border border-border/60 bg-card p-5 shadow-soft">
+            <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-soft">
               <div className="mb-3 flex items-center gap-2">
                 <span className="rounded-full bg-sky-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-700 dark:bg-sky-900/40 dark:text-sky-300">
                   Base municipal
@@ -278,7 +278,7 @@ export const SectionFour = () => {
             </div>
           </div>
 
-          <div className="mt-4 rounded-[1.35rem] border border-border/60 bg-secondary/35 p-4">
+          <div className="mt-4 rounded-2xl border border-border/60 bg-secondary/35 p-4">
             <div className="flex items-start gap-3">
               <Shield className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
               <p className="text-sm leading-relaxed text-foreground/80 text-left sm:text-justify">

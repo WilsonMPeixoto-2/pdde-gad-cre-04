@@ -173,7 +173,7 @@ export const HeroCover = () => {
         </div>
         
         <div
-          className="hero-stagger mx-auto mb-10 max-w-3xl rounded-[1.75rem] border border-white/10 bg-white/[0.035] px-5 py-5 text-left shadow-[0_20px_60px_-42px_rgba(5,18,41,0.82)] backdrop-blur-sm sm:px-6"
+          className="hero-stagger mx-auto mb-10 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-5 text-left shadow-[0_20px_60px_-42px_rgba(5,18,41,0.82)] backdrop-blur-sm sm:px-6"
           style={{ animationDelay: "0.7s" }}
         >
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/42 sm:text-xs">

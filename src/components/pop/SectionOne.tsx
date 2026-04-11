@@ -65,7 +65,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
               const Icon = card.icon;
 
               return (
-                <article key={card.title} className="rounded-[1.3rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/55 p-4 shadow-soft">
+                <article key={card.title} className="rounded-2xl border border-border/60 bg-linear-to-br from-background via-background to-secondary/55 p-4 shadow-soft">
                   <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
@@ -133,7 +133,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
               Processo selecionado pelo usuário na etapa anterior.
             </p>
 
-            <div className="rounded-[1.35rem] bg-secondary/50 p-5 dark:bg-secondary/30">
+            <div className="rounded-2xl bg-secondary/50 p-5 dark:bg-secondary/30">
               <p className="text-sm text-muted-foreground mb-3">Classificação automática:</p>
               <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
                 <code className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-xs whitespace-normal wrap-break-word data-code">

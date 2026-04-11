@@ -174,21 +174,14 @@ export const PDDEModelCards = () => {
                 return (
                   <div
                     key={doc.id}
-                    className="group relative rounded-[1.75rem] border border-border/60 bg-card p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg sm:p-6"
+                    className="group relative rounded-2xl border border-border/60 bg-card p-5 transition-colors duration-300 hover:border-primary/20 sm:p-6"
                   >
                     <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                       <div className="flex min-w-0 flex-1 items-center gap-4">
                         <div
-                          className={`relative shrink-0 rounded-2xl border border-border/20 p-3.5 transition-all duration-400 group-hover:scale-105 ${group.iconBg}`}
+                          className={`relative shrink-0 rounded-2xl border border-border/20 p-3.5 transition-colors duration-300 ${group.iconBg}`}
                         >
                           <Icon className={`h-5 w-5 ${group.iconColor}`} />
-                          <span
-                            className="absolute inset-[-3px] rounded-xl border-2 opacity-0 transition-opacity duration-400 group-hover:opacity-30"
-                            style={{
-                              borderColor: group.accent,
-                              animation: "pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-                            }}
-                          />
                         </div>
 
                         <div className="min-w-0">

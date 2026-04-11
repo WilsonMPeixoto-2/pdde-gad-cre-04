@@ -219,7 +219,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
           </p>
 
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]">
-            <div className="rounded-[1.4rem] border border-border/60 bg-linear-to-br from-background via-background to-secondary/55 p-5 shadow-soft">
+            <div className="rounded-2xl border border-border/60 bg-linear-to-br from-background via-background to-secondary/55 p-5 shadow-soft">
               <div className="space-y-4">
                 {[
                   {
@@ -261,7 +261,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
               href="https://compacta02.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-[1.4rem] border border-primary/15 bg-linear-to-br from-primary/6 via-background to-emerald-50/65 p-5 shadow-soft transition-all duration-300 hover:border-primary/30 hover:shadow-[0_18px_36px_-28px_rgba(8,32,76,0.28)] dark:to-emerald-950/20"
+              className="group rounded-2xl border border-primary/15 bg-linear-to-br from-primary/6 via-background to-emerald-50/65 p-5 shadow-soft transition-all duration-300 hover:border-primary/30 hover:shadow-[0_18px_36px_-28px_rgba(8,32,76,0.28)] dark:to-emerald-950/20"
             >
               <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/14">
                 <ExternalLink className="h-5 w-5" />
@@ -282,7 +282,7 @@ export const SectionContacts = ({ onPrint }: SectionContactsProps) => {
         </div>
 
         {/* Footer Note */}
-        <div className="rounded-[1.6rem] border border-border/50 bg-linear-to-br from-primary/10 via-primary/4 to-secondary p-6">
+        <div className="rounded-2xl border border-border/50 bg-linear-to-br from-primary/10 via-primary/4 to-secondary p-6">
           <p className="text-center leading-relaxed text-muted-foreground">
             <strong className="text-base text-foreground sm:text-lg">Antes de solicitar apoio</strong><br />
             <span className="text-sm">

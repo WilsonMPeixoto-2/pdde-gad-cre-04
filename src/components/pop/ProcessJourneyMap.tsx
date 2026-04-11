@@ -85,7 +85,7 @@ export const ProcessJourneyMap = () => {
 
   return (
     <div className="section-card border-l-4 border-l-primary process-journey-map bg-linear-to-br from-background via-background to-primary/5">
-      <div className="mb-6 rounded-[1.6rem] border border-border/60 bg-card/90 p-5 shadow-soft">
+      <div className="mb-6 rounded-2xl border border-border/60 bg-card/90 p-5 shadow-soft">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-start gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-accent text-white shadow-lg shadow-primary/20">
@@ -167,7 +167,7 @@ export const ProcessJourneyMap = () => {
                 </button>
 
                 <div
-                  className={`flex-1 rounded-[1.5rem] border p-5 shadow-soft transition-all duration-300 ${tone.card}`}
+                  className={`flex-1 rounded-2xl border p-5 shadow-soft transition-all duration-300 ${tone.card}`}
                 >
                   <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div className="min-w-0 flex-1">
@@ -244,7 +244,7 @@ export const ProcessJourneyMap = () => {
       </div>
 
       {completedCount === totalSteps ? (
-        <div className="mt-6 rounded-[1.5rem] border border-emerald-300/70 bg-linear-to-r from-emerald-50 to-emerald-100/70 p-5 text-center shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/25 dark:to-emerald-900/15">
+        <div className="mt-6 rounded-2xl border border-emerald-300/70 bg-linear-to-r from-emerald-50 to-emerald-100/70 p-5 text-center shadow-soft dark:border-emerald-800/40 dark:from-emerald-950/25 dark:to-emerald-900/15">
           <CheckCircle2 className="mx-auto mb-2 h-9 w-9 text-emerald-600 dark:text-emerald-300" />
           <p className="text-base font-bold text-emerald-700 dark:text-emerald-300">
             Jornada concluída

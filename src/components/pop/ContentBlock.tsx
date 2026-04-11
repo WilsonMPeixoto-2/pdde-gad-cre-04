@@ -74,10 +74,8 @@ export const ContentBlock = ({
   return (
     <article
       className={cn(
-        "rounded-[1.6rem] border p-5 sm:p-6 transition-all duration-300",
-        "shadow-[0_3px_10px_-5px_hsl(221_31%_20%/0.05),0_24px_56px_-40px_hsl(221_31%_20%/0.10),inset_0_1px_0_0_hsl(0_0%_100%/0.45)]",
-        "hover:shadow-[0_10px_24px_-18px_hsl(221_31%_20%/0.09),0_22px_46px_-34px_hsl(221_31%_20%/0.14),inset_0_1px_0_0_hsl(0_0%_100%/0.55)]",
-        "hover:-translate-y-0.5",
+        "rounded-2xl border p-5 sm:p-6 transition-colors duration-300",
+        "shadow-[0_1px_3px_-1px_hsl(221_31%_20%/0.04),0_4px_16px_-8px_hsl(221_31%_20%/0.06),inset_0_1px_0_0_hsl(0_0%_100%/0.45)]",
         p.border,
         p.bg,
         className,

@@ -3,10 +3,10 @@ export const SectionIntro = () => {
     <section id="introducao" className="scroll-mt-20 animate-fade-in">
       {/* Welcome Message */}
       <div className="section-card">
-        <h2 className="section-heading text-xl sm:text-2xl">
+        <h2 className="section-heading">
           Prezados(as) Diretores(as),
         </h2>
-        <div className="content-spacing space-y-5">
+        <div className="content-spacing">
           <p className="drop-cap text-foreground leading-relaxed text-sm sm:text-base text-left sm:text-justify">
             A rotina de uma gestão escolar é intensa. Entre demandas pedagógicas, cuidado com pessoas
             e urgências do dia a dia, sabemos que a organização administrativa exige tempo, atenção e,
@@ -34,14 +34,14 @@ export const SectionIntro = () => {
         </div>
 
         {/* Signatures */}
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mt-8 pt-6 border-t border-border">
-          <div className="text-center p-5 sm:p-6 bg-secondary/50 dark:bg-secondary/30 rounded-xl">
-            <p className="font-bold text-foreground text-sm sm:text-base">Fátima das Graças Lima Barros</p>
-            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Coordenadora – E/4ª CRE</p>
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mt-8 pt-7 border-t border-border/50">
+          <div className="text-center p-5 sm:p-6 bg-secondary/40 dark:bg-secondary/30 rounded-2xl border border-border/30">
+            <p className="font-heading font-bold text-foreground text-sm sm:text-base">Fátima das Graças Lima Barros</p>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 font-medium">Coordenadora – E/4ª CRE</p>
           </div>
-          <div className="text-center p-5 sm:p-6 bg-secondary/50 dark:bg-secondary/30 rounded-xl">
-            <p className="font-bold text-foreground text-sm sm:text-base">Bianca Barreto da Fonseca Coelho</p>
-            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Gerente – E/4ª CRE/GAD</p>
+          <div className="text-center p-5 sm:p-6 bg-secondary/40 dark:bg-secondary/30 rounded-2xl border border-border/30">
+            <p className="font-heading font-bold text-foreground text-sm sm:text-base">Bianca Barreto da Fonseca Coelho</p>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 font-medium">Gerente – E/4ª CRE/GAD</p>
           </div>
         </div>
 

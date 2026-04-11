@@ -59,19 +59,18 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
       <div
         ref={ref}
         className={cn(
-          "relative overflow-hidden rounded-[1.6rem] p-4.5 sm:p-6 transition-all duration-300",
+          "relative overflow-hidden rounded-2xl p-4.5 sm:p-6 transition-colors duration-300",
           styles.bg,
           className
         )}
         style={{
-          boxShadow: "0 24px 42px -34px hsl(var(--primary) / 0.16), inset 0 1px 0 0 hsl(0 0% 100% / 0.38)"
+          boxShadow: "0 1px 3px -1px hsl(var(--primary) / 0.06), inset 0 1px 0 0 hsl(0 0% 100% / 0.35)"
         }}
       >
         <div className={cn(
           "absolute left-0 top-5 bottom-5 w-1 rounded-full bg-linear-to-b",
           styles.borderGradient
         )} />
-        <div className={cn("absolute inset-x-6 top-0 h-px bg-linear-to-r opacity-70", styles.borderGradient)} />
 
         <div className="flex items-start gap-3.5 pl-2.5 sm:gap-4 sm:pl-3">
           <div className={cn(

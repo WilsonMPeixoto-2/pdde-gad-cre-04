@@ -368,10 +368,10 @@ const Index = () => {
           onClose={() => setSidebarOpen(false)}
         />
 
-        <main className="min-w-0 flex-1 lg:ml-0 bg-slate-50/50">
-          <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8 pb-36 sm:pb-40">
-            <article className="max-w-none bg-white p-6 sm:p-8 md:p-12 rounded-2xl shadow-sm border border-slate-200/60">
-              <div className="space-y-12">
+        <main className="min-w-0 flex-1 lg:ml-0">
+          <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 lg:px-10 pb-36 sm:pb-40">
+            <article className="max-w-none">
+              <div className="space-y-10 sm:space-y-14">
                 <AnimatedSection>
                   <div id="introducao" className="scroll-mt-20">
                     <Suspense fallback={<SectionLoader />}>

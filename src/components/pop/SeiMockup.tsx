@@ -3,7 +3,7 @@ import { SeiIncluirIcon, SeiAssinarIcon, SeiEnviarIcon, SeiPastaIcon, SeiIniciar
 import { PROCESS_TYPE_LABEL, seiProcessTreeDocuments } from "@/lib/guideContent";
 
 interface SeiMockupProps {
-  variant: "menu" | "process-tree" | "document-form" | "type-selection" | "icons";
+  variant: "menu" | "process-tree" | "document-form" | "type-selection" | "icons" | "signature-block";
   highlight?: string;
 }
 
@@ -259,6 +259,74 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
 
   if (variant === "icons") {
     return <SeiIconsBar />;
+  }
+
+  if (variant === "signature-block") {
+    return (
+      <div
+        role="img"
+        aria-label="Exemplo ilustrativo de bloco de assinatura no SEI!RIO com documentos internos e status de assinatura."
+        className={mockupShellClassName}
+      >
+        <SeiHeader title="Bloco de Assinatura" />
+
+        <div className="space-y-4 bg-linear-to-b from-white to-[#fafbfc] p-4">
+          <div className="rounded-2xl border border-[#d8e7f1] bg-[#eef7fd] p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)]">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5f7285]">
+                  Descrição do bloco
+                </p>
+                <p className="mt-1 text-sm font-semibold text-[#1f2937]">
+                  Assinatura — Prestação de Contas PDDE — Exercício 2026 — Escola Exemplo
+                </p>
+              </div>
+              <span className="rounded-full border border-[#b9d4e8] bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#1565C0]">
+                Em andamento
+              </span>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            {[
+              { label: "Ofício de encaminhamento da unidade escolar", status: "Assinado" },
+              { label: "Despacho de encaminhamento da prestação de contas", status: "Pendente" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-3 rounded-xl border border-[#dde6ee] bg-white px-4 py-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.65)]"
+              >
+                <FileText className="h-4 w-4 text-[#78909C]" />
+                <span className="flex-1 text-sm text-[#334155]">{item.label}</span>
+                <span
+                  className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+                    item.status === "Assinado"
+                      ? "bg-[#e8f5e9] text-[#2e7d32]"
+                      : "bg-[#fff4e5] text-[#c77700]"
+                  }`}
+                >
+                  {item.status}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between rounded-2xl border border-[#d9e2ec] bg-white px-4 py-3">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6b7280]">
+                Destino do bloco
+              </p>
+              <p className="mt-1 text-sm font-medium text-[#1f2937]">
+                Própria unidade ou unidade destinatária da assinatura
+              </p>
+            </div>
+            <span className="rounded-full border border-[#d8e7f1] bg-[#eef7fd] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#1565C0]">
+              Disponibilizado
+            </span>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return null;

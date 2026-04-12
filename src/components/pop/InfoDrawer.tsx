@@ -151,7 +151,8 @@ export const InfoHighlight = ({ children, variant = "info" }: { children: ReactN
 export const NatoDigitalVsDigitalizadoContent = () => (
   <>
     <p className="text-muted-foreground text-sm leading-relaxed">
-      Entender essa distinção evita dois erros comuns no SEI!RIO: autenticar arquivo que já é original eletrônico e tratar como nato-digital um documento que, na verdade, veio do papel.
+      Entender essa distinção evita dois erros comuns no SEI!RIO: autenticar arquivo que já é
+      original eletrônico e tratar como nato-digital um documento que, na verdade, veio do papel.
     </p>
 
     <InfoVisualCompare
@@ -172,7 +173,7 @@ export const NatoDigitalVsDigitalizadoContent = () => (
     <InfoBlock
       icon={FileDigit}
       title="Documento Nato-Digital"
-      description="Criado originalmente em meio eletrônico. Quando a peça puder ser produzida no SEI!RIO e precisar de assinatura da própria unidade, a preferência é elaborá-la no sistema para assinatura eletrônica."
+      description="Criado originalmente em meio eletrônico. No processo, entra como original e não passa pela etapa de autenticação administrativa."
       variant="primary"
     />
 
@@ -186,11 +187,6 @@ export const NatoDigitalVsDigitalizadoContent = () => (
     <InfoQuote
       text="Considera-se documento nato-digital o documento produzido originariamente em meio eletrônico e documento digitalizado aquele obtido a partir da conversão de um documento não digital."
       source="Decreto nº 8.539/2015, art. 2º, II"
-    />
-
-    <InfoQuote
-      text="Apenas os documentos produzidos no sistema poderão ser assinados eletronicamente no SEI.Rio."
-      source="Decreto Rio nº 57.250/2025, art. 26, § 2º"
     />
 
     <InfoHighlight variant="warning">

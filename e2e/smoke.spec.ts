@@ -56,8 +56,8 @@ test.describe("Fluxo desktop", () => {
 
     await page.goto("/?secao=secao-4");
     await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
-    await expect(page.getByText(/procedimento para autenticar documentos externos/i)).toBeVisible();
-    await expect(page.getByText(/build [a-f0-9]{12} ·/i)).toBeVisible();
+    await expect(page.locator("main").getByText(/procedimento para autenticar documentos externos/i)).toBeVisible();
+    await expect(page.locator("footer").getByText(/^build [a-f0-9]{12}$/i)).toBeVisible();
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });
@@ -74,8 +74,8 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByRole("heading", { level: 1, name: /prestação de contas/i })).toBeVisible();
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.getByRole("heading", { level: 2, name: /prezados\(as\) diretores\(as\)/i })).toBeVisible();
-    await expect(page.getByText(/a rotina de uma unidade escolar é intensa/i)).toBeVisible();
-    await expect(page.getByText(/importante — alcance deste pop/i)).toBeVisible();
+    await expect(page.getByText(/a rotina de uma gestão escolar é intensa/i)).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: /o que este manual cobre com precisão/i })).toBeVisible();
     await expect(page.getByRole("list", { name: /recursos centrais do guia/i })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /ler guia completo/i })).toHaveCount(0);
     await expect(page.getByText(/painel do processo/i)).toHaveCount(0);
@@ -100,7 +100,7 @@ test.describe("Fluxo desktop", () => {
 
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
-    await expect(page.getByText(/regras operacionais \(evite glosa\)/i)).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: /consulta rápida para não montar os autos com fragilidade documental/i })).toBeVisible();
     await expect(page.getByText(/roteiro de instrução para as próximas etapas deste guia/i)).toHaveCount(0);
 
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();

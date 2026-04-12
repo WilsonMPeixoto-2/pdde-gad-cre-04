@@ -155,6 +155,27 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
               e a <strong className="text-sky-600 dark:text-sky-400">AÇÃO do PDDE</strong> quando aplicável.
             </p>
 
+            <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
+              <table className="table-institutional text-sm w-full">
+                <thead>
+                  <tr>
+                    <th className="rounded-tl-lg w-44">Se a situação for</th>
+                    <th className="rounded-tr-lg">Use este padrão</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="font-medium text-foreground">1 ação do PDDE</td>
+                    <td className="text-muted-foreground">Formato básico</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-foreground">Mais de uma ação</td>
+                    <td className="text-muted-foreground">Formato com ações integradas</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <Callout variant="success" title="Padrão adotado pela 4ª CRE/GAD:">
               <div className="space-y-3 mt-2">
                 <div>

@@ -61,6 +61,23 @@ export const searchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.checklist,
   },
   {
+    id: "regras-operacionais",
+    title: "Regras Operacionais da Instrução",
+    content:
+      "Orientações curtas que afetam diretamente a montagem do processo no SEI!RIO, sem substituir o conteúdo completo sobre execução da verba.",
+    keywords: [
+      "regras operacionais",
+      "pesquisa de preços",
+      "srp",
+      "vedações",
+      "compras",
+      "instrução",
+      "sei-rio",
+    ],
+    section: sectionTitle("secao-2"),
+    anchor: GUIDE_ANCHORS.rules,
+  },
+  {
     id: "modelos",
     title: "Modelos e Referências de Documentos",
     content: "PDFs de apoio visual para ofício, pesquisa de preços, demonstrativo e peças complementares, sem substituir o núcleo mínimo federal.",
@@ -103,16 +120,26 @@ export const searchIndex: SearchItem[] = [
   {
     id: "bloco-assinatura",
     title: "Bloco de Assinatura",
-    content: "Crie o bloco, inclua apenas documentos internos e acompanhe a conclusão das assinaturas.",
-    keywords: ["bloco de assinatura", "assinar", "documento interno", "disponibilizar"],
+    content:
+      "Crie o bloco, inclua apenas documentos internos, acompanhe as assinaturas e conclua a conferência antes da remessa.",
+    keywords: ["bloco de assinatura", "assinar", "documento interno", "disponibilizar", "despacho"],
     section: sectionTitle("secao-5"),
     anchor: "secao-5",
   },
   {
     id: "remessa-gad",
     title: "Remessa para a GAD",
-    content: `Envie o processo para ${GAD_UNIT.fullLabel} após concluir as assinaturas.`,
-    keywords: ["enviar", "tramitar", "gad", "10729", "remessa", "finalização"],
+    content: `Envie o processo para ${GAD_UNIT.fullLabel} somente após concluir as assinaturas e assinar o despacho de encaminhamento.`,
+    keywords: ["enviar", "tramitar", "gad", "10729", "remessa", "despacho", "encaminhamento"],
+    section: sectionTitle("secao-5"),
+    anchor: "secao-5",
+  },
+  {
+    id: "pos-envio-gad",
+    title: "Análise e Finalização pela GAD",
+    content:
+      "Depois da remessa, acompanhe a análise da GAD, eventuais diligências e os despachos finais de aprovação.",
+    keywords: ["pós-envio", "gad", "análise", "diligência", "aprovação", "finalização"],
     section: sectionTitle("secao-6"),
     anchor: "secao-6",
   },

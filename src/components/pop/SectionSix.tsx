@@ -1,263 +1,110 @@
-import { FileText, Send, UserCheck, PenLine } from "lucide-react";
+import { CheckCircle2, FileText, Package, Send, UserCheck } from "lucide-react";
 import { Callout } from "./Callout";
-import { InfoDrawer, AutenticacaoVsAssinaturaContent } from "./InfoDrawer";
 import { ProfileCallout } from "./ProfileCallout";
+
+const finalizationSteps = [
+  {
+    number: "1",
+    title: "Análise pela GAD",
+    description:
+      "A GAD verifica a conformidade dos documentos e informações do processo. Se houver pendência, o processo poderá ser devolvido para complementação ou correção.",
+    icon: Send,
+  },
+  {
+    number: "2",
+    title: "Despacho de Aprovação",
+    description:
+      "Se a instrução estiver regular, a GAD emite o despacho de aprovação da prestação de contas.",
+    icon: FileText,
+  },
+  {
+    number: "3",
+    title: "Despacho do Coordenador",
+    description:
+      "Após a aprovação, o processo segue para a manifestação da autoridade competente, com a formalização final cabível.",
+    icon: CheckCircle2,
+  },
+  {
+    number: "4",
+    title: "Controle Patrimonial — PDDE Capital",
+    description:
+      "Quando houver aquisição de bens permanentes com recursos de capital do PDDE, a unidade deve incluir a relação de bens no processo e seguir o encaminhamento patrimonial indicado pela GAD.",
+    icon: Package,
+  },
+] as const;
 
 export const SectionSix = () => {
   return (
     <section className="scroll-mt-20 space-y-6">
-      {/* Introdução */}
       <div className="section-card">
         <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
           <FileText className="w-5 h-5 text-primary" />
-          Despacho da GAD e Finalização
+          Fluxo pós-envio
         </h3>
-        <p className="text-muted-foreground leading-relaxed text-left sm:text-justify">
-          Após a instrução completa do processo pela escola, a GAD realizará a análise da prestação de contas.
-          Em caso de aprovação, será elaborado o despacho de aprovação e o processo seguirá para o Coordenador
-          para publicação.
+        <p className="text-muted-foreground leading-relaxed">
+          Após a remessa do processo pela unidade escolar, a GAD realiza a análise da prestação de
+          contas. Havendo conformidade, o processo segue para aprovação e formalização final.
         </p>
       </div>
 
-      {/* Etapas do Despacho */}
       <div className="section-card">
         <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
           <Send className="w-4 h-4 text-primary" />
-          Etapas da Finalização
+          Etapas da finalização
         </h4>
 
         <div className="space-y-4">
-          <div className="flex gap-4 p-4 bg-muted/30 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-              <span className="text-sm font-bold text-primary">1</span>
-            </div>
-            <div>
-              <p className="font-medium text-foreground">Análise pela GAD</p>
-              <p className="text-sm text-muted-foreground mt-1 text-left sm:text-justify">
-                A GAD verifica a conformidade de todos os documentos da prestação de contas.
-              </p>
-            </div>
-          </div>
+          {finalizationSteps.map((step) => {
+            const Icon = step.icon;
 
-          <div className="flex gap-4 p-4 bg-muted/30 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-              <span className="text-sm font-bold text-primary">2</span>
-            </div>
-            <div>
-              <p className="font-medium text-foreground">Despacho de Aprovação</p>
-              <p className="text-sm text-muted-foreground mt-1 text-left sm:text-justify">
-                Em caso de conformidade, a GAD elabora o despacho de aprovação da prestação de contas.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 p-4 bg-muted/30 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-              <span className="text-sm font-bold text-primary">3</span>
-            </div>
-            <div>
-              <p className="font-medium text-foreground">Despacho do Coordenador</p>
-              <p className="text-sm text-muted-foreground mt-1 text-left sm:text-justify">
-                O Coordenador elabora despacho com "Publique-se" para oficialização da aprovação.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 p-4 bg-muted/30 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-              <span className="text-sm font-bold text-primary">4</span>
-            </div>
-            <div>
-              <p className="font-medium text-foreground">Controle Patrimonial — PDDE Capital</p>
-              <p className="text-sm text-muted-foreground mt-1 text-left sm:text-justify">
-                Quando houver aquisição de bens com recursos de capital do PDDE, a escola deve providenciar a incorporação dos bens ao patrimônio escolar, conforme Resolução CD/FNDE nº 15/2021. A relação de bens adquiridos deve constar da prestação de contas.
-              </p>
-            </div>
-          </div>
+            return (
+              <div key={step.number} className="flex gap-4 rounded-xl bg-muted/30 p-4">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <span className="text-sm font-bold text-primary">{step.number}</span>
+                </div>
+                <div className="space-y-1">
+                  <p className="font-medium text-foreground flex items-center gap-2">
+                    <Icon className="w-4 h-4 text-primary" />
+                    {step.title}
+                  </p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Callout */}
       <Callout variant="info" icon={UserCheck}>
-        <p className="font-medium">Acompanhamento do Processo</p>
-        <p className="text-sm mt-1">
-          A escola pode acompanhar o andamento do processo diretamente no SEI!RIO.
-          Em caso de pendências, a GAD entrará em contato para as devidas correções.
+        <p className="font-medium">Acompanhamento do processo</p>
+        <p className="mt-1 text-sm">
+          A unidade escolar deve acompanhar a tramitação no SEI!RIO e atender tempestivamente
+          eventual diligência ou devolução.
         </p>
       </Callout>
 
       <ProfileCallout visibleFor="diretor" variant="info">
-        <p>Após o envio, acompanhe o andamento no SEI!RIO. Se a GAD solicitar correções, atenda no prazo indicado para evitar atrasos na aprovação.</p>
+        <p>
+          Após o envio, acompanhe o processo no SEI!RIO. Havendo diligência, regularize o que for
+          solicitado com rapidez para evitar atraso na conclusão.
+        </p>
       </ProfileCallout>
 
       <ProfileCallout visibleFor="gad" variant="info">
-        <p>Ao elaborar o despacho de aprovação, registre os valores conferidos e o percentual de execução. Processos com <strong className="text-foreground">despesa de capital</strong> exigem verificação adicional de incorporação patrimonial.</p>
+        <p>
+          Na análise, registre com objetividade o resultado da conferência e as pendências
+          identificadas. Processos com despesa de capital exigem verificação patrimonial adicional.
+        </p>
       </ProfileCallout>
 
-      {/* ============ CONTEÚDO TRANSFERIDO DA SEÇÃO 2 ============ */}
-      <div className="space-y-8 mt-8 pt-8 border-t border-border">
-        <h3 className="section-heading text-primary">Conteúdo Adicional - Despacho de Encaminhamento</h3>
-
-        {/* Definition Card */}
-        <div className="section-card border-l-4 border-l-accent">
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-accent/10 shrink-0">
-              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
-            </div>
-            <div className="content-spacing">
-              <h3 className="section-heading">O Despacho de Encaminhamento</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
-                O Despacho de Encaminhamento é o documento que formaliza a prestação de contas
-                do PDDE para a <strong className="text-sky-600 dark:text-sky-400">Gerência de Administração (GAD)</strong>.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Functions */}
-        <div className="section-card">
-          <h3 className="section-heading">Funções Principais</h3>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              "Formaliza a prestação de contas da unidade gestora do PDDE",
-              "Registra os valores e datas de liberação dos recursos",
-              "Documenta o percentual de recursos consumidos",
-              "Estabelece a base documental para análise e aprovação pela GAD",
-            ].map((func, i) => (
-              <Callout key={i} variant="success" className="p-4">
-                {func}
-              </Callout>
-            ))}
-          </div>
-        </div>
-
-        {/* Procedure Steps - Timeline */}
-        <div className="section-card">
-          <h3 className="section-heading">Procedimentos para Criar o Despacho</h3>
-
-          <div className="space-y-4 timeline-steps">
-            <div className="flex items-start gap-4 p-5 bg-muted/50 rounded-xl timeline-step">
-              <div className="step-indicator shrink-0 text-sm">1</div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-1">Incluir Documento</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed text-left sm:text-justify">
-                  Com o processo aberto, clique no ícone <strong className="text-sky-600 dark:text-sky-400">"INCLUIR DOCUMENTO"</strong> na barra de ferramentas do SEI.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 p-5 bg-muted/50 rounded-xl timeline-step">
-              <div className="step-indicator shrink-0 text-sm">2</div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-1">Escolha do Tipo de Documento</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed text-left sm:text-justify">
-                  Selecione o tipo: <strong className="text-sky-600 dark:text-sky-400">"Encaminhamento da Prestação de Contas PDDE"</strong>
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 p-5 bg-muted/50 rounded-xl timeline-step">
-              <div className="step-indicator shrink-0 text-sm">3</div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-1">Preenchimento do Editor</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed text-left sm:text-justify">
-                  No corpo do documento, digite o conteúdo do despacho ou cole o texto padronizado
-                  utilizado pela sua unidade.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="section-card">
-          <h3 className="section-heading">Especificação do Documento</h3>
-          <div className="content-spacing">
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed text-left sm:text-justify">
-              O campo deve ser preenchido seguindo o formato padronizado, incluindo o <strong className="text-sky-600 dark:text-sky-400">exercício</strong>:
-            </p>
-
-            <Callout variant="info" title="Formato obrigatório:">
-              <code className="block bg-card px-4 py-3 rounded-lg border border-border text-sm data-code text-foreground break-all shadow-sm mt-2">
-                PDDE — Exercício AAAA — E/CRE (04.xx.xxx) — NOME DA ESCOLA
-              </code>
-            </Callout>
-          </div>
-        </div>
-
-        <div className="section-card">
-          <h3 className="section-heading">Modelo de Execução Resumida</h3>
-
-          <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
-            <table className="table-institutional text-sm w-full">
-              <thead>
-                <tr>
-                  <th className="rounded-tl-lg">Saldos e Movimentações</th>
-                  <th className="text-right w-28 rounded-tr-lg">Valor (R$)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="text-muted-foreground">Saldo total inicial em 00/00/202X</td>
-                  <td className="text-right data-code">-</td>
-                </tr>
-                <tr>
-                  <td className="pl-6 sm:pl-8 text-muted-foreground">Saldo Custeio</td>
-                  <td className="text-right data-code">-</td>
-                </tr>
-                <tr>
-                  <td className="pl-6 sm:pl-8 text-muted-foreground">Saldo Capital</td>
-                  <td className="text-right data-code">-</td>
-                </tr>
-                <tr>
-                  <td className="text-muted-foreground">Total dos Créditos (repasses)</td>
-                  <td className="text-right data-code">-</td>
-                </tr>
-                <tr>
-                  <td className="text-muted-foreground">Despesas realizadas</td>
-                  <td className="text-right data-code">-</td>
-                </tr>
-                <tr className="font-semibold bg-accent/10">
-                  <td className="text-foreground">Saldo total final em 00/00/202X</td>
-                  <td className="text-right data-code">-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Signature */}
-        <div className="section-card">
-          <div className="flex items-center gap-3 flex-wrap mb-6">
-            <h3 className="section-heading mb-0 pb-0 border-b-0">Assinatura e Verificação</h3>
-            <InfoDrawer title="Assinatura vs Autenticação" triggerLabel="Entenda a diferença">
-              <AutenticacaoVsAssinaturaContent />
-            </InfoDrawer>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex items-start gap-3 p-5 bg-muted/50 rounded-xl">
-              <PenLine className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-              <div>
-                <p className="font-semibold text-foreground">1. Assinar</p>
-                <p className="text-sm text-muted-foreground leading-relaxed text-left sm:text-justify">
-                  Clique no ícone <strong className="text-sky-600 dark:text-sky-400">Assinar Documento</strong> (representado por uma caneta preta na barra de ferramentas).
-                </p>
-              </div>
-            </div>
-            <Callout variant="success" title="2. Verificar">
-              <span className="text-left sm:text-justify block">Certifique-se de que o despacho assinado apareceu corretamente na <strong className="text-emerald-700 dark:text-emerald-400">árvore do processo</strong> (menu lateral esquerdo), indicando que o documento foi gerado e assinado com sucesso.</span>
-            </Callout>
-          </div>
-
-          <div className="mt-6">
-            <Callout variant="warning">
-              <span className="text-left sm:text-justify block">Caso o documento não apareça como assinado ou não esteja visível na árvore,
-              atualize a página e confira novamente. Persistindo a inconsistência, acione
-              o suporte responsável pelo <strong className="text-sky-600 dark:text-sky-400">SEI!RIO</strong> antes de dar prosseguimento.</span>
-            </Callout>
-          </div>
-        </div>
-      </div>
+      <Callout variant="warning" icon={Package} title="Nota sobre controle patrimonial">
+        <span className="block text-left sm:text-justify">
+          O procedimento completo de incorporação patrimonial está fora do escopo deste POP. Em
+          caso de dúvida, siga a orientação específica da GAD.
+        </span>
+      </Callout>
     </section>
   );
 };

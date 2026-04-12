@@ -82,7 +82,7 @@ export const SectionAnexo = () => {
                 letterSpacing: "-0.04em",
               }}
             >
-              Referência consolidada para conferência documental, prazos e regras críticas do PDDE
+              Fontes oficiais prioritárias para consulta rápida
             </h2>
 
             <div className="editorial-hairline mt-5" />

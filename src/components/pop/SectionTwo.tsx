@@ -4,9 +4,13 @@ import {
   ChevronRight,
   ClipboardCheck,
   FileCheck,
+  FolderKanban,
+  Route,
   ShieldCheck,
 } from "lucide-react";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
+import { Callout } from "./Callout";
+import { InfoDrawer } from "./InfoDrawer";
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
 import { ProcessJourneyMap } from "./ProcessJourneyMap";
@@ -17,77 +21,60 @@ const quickAccessPanels = [
   {
     anchor: GUIDE_ANCHORS.checklist,
     title: "Checklist mínimo",
-    description:
-      "Conferência do núcleo documental e dos anexos complementares antes da remessa.",
+    description: "Núcleo documental e peças complementares para a instrução do processo.",
+  },
+  {
+    anchor: GUIDE_ANCHORS.rules,
+    title: "Regras operacionais",
+    description: "Lembretes rápidos sobre pontos que afetam a montagem dos autos no SEI!RIO.",
   },
   {
     anchor: GUIDE_ANCHORS.models,
-    title: "Modelos e referências",
-    description:
-      "Acervo para distinguir peças editáveis, exemplos preenchidos e material de consulta.",
-  },
-  {
-    anchor: GUIDE_ANCHORS.templates,
-    title: "Minutas rápidas",
-    description:
-      "Textos de apoio para encaminhamento e conferência, com reaproveitamento dos dados do processo.",
+    title: "Modelos e templates",
+    description: "Referências visuais e minutas de apoio para acelerar a instrução.",
   },
   {
     anchor: GUIDE_ANCHORS.journey,
     title: "Mapa da jornada",
-    description:
-      "Sequência lógica das etapas até a remessa, útil para retomada e passagem de tarefa.",
+    description: "Visão geral das etapas antes de avançar para documentos externos e autenticação.",
   },
 ] as const;
 
-const operationalSignals = [
+const operationalReferences = [
   {
-    tone: "info",
-    kicker: "Compras pela internet",
-    title: "Registre a cotação com o valor final da aquisição",
-    items: [
-      "Use sites nacionais confiáveis e registre a cotação com descrição completa, preço final e frete.",
-      "Compare o valor total da aquisição, inclusive o frete, e registre o critério da escolha.",
-      "Guarde o comprovante de pagamento identificando o fornecedor vencedor.",
+    title: "Pesquisa de preços e SRP",
+    summary: "Use como referência rápida apenas para não montar o processo com documentação insuficiente.",
+    details: [
+      "A pesquisa de preços continua sendo a rotina padrão quando não houver uso documentado de SRP ou justificativa idônea.",
+      "Se houver SRP, anexe a ata, o acordo ou instrumento equivalente com os documentos do fornecedor.",
+      "No processo, deixe claro qual foi a base usada para justificar a contratação.",
     ],
   },
   {
-    tone: "success",
-    kicker: "Sistema de Registro de Preços",
-    title: "O SRP pode substituir a pesquisa de preços quando estiver devidamente documentado",
-    items: [
-      "Se a UEx/EM utilizar SRP, anexe a ata, o acordo ou o instrumento equivalente, juntamente com os documentos do fornecedor.",
-      "Registre no processo que a pesquisa de preços foi dispensada em razão do uso de SRP.",
+    title: "Compras pela internet",
+    summary: "Registre o valor final da aquisição e preserve os comprovantes que sustentam a peça juntada.",
+    details: [
+      "A cotação deve refletir o valor total da aquisição, inclusive frete quando houver.",
+      "Guarde comprovante de pagamento e identificação do fornecedor vencedor.",
+      "No SEI!RIO, a preocupação central é que a peça juntada permita leitura clara da compra realizada.",
     ],
   },
   {
-    tone: "warning",
-    kicker: "Regra das 3 cotações",
-    title: "A pesquisa de preços continua sendo a rotina padrão",
-    items: [
-      "Conforme a Resolução CD/FNDE nº 15/2021, art. 17, obtenha no mínimo 3 cotações de fornecedores distintos para cada aquisição.",
-      "Quando houver múltiplas ações do PDDE no mesmo exercício, mantenha os gastos separados por ação, com controle individualizado.",
-      "Número inferior de cotações somente deve aparecer com justificativa idônea ou com uso documentado de SRP.",
+    title: "Vedações e enquadramento",
+    summary: "O guia não substitui a análise material da despesa, mas sinaliza quando a documentação exige cuidado adicional.",
+    details: [
+      "Não use este POP como referência exaustiva de enquadramento da despesa; em caso de dúvida, consulte a GAD.",
+      "Se a despesa suscitar dúvida de enquadramento, registre essa cautela antes de montar a instrução final.",
+      "Evite misturar peças de ações, exercícios ou naturezas de despesa diferentes no mesmo encadeamento documental.",
     ],
   },
   {
-    tone: "danger",
-    kicker: "Vedações",
-    title: "Há despesas que não podem ser executadas com recursos do PDDE",
-    items: [
-      "Não aplique recursos em despesas com pessoal, contas recorrentes, despesas assistencialistas ou gêneros alimentícios cobertos pelo PNAE.",
-      "Em caso de dúvida sobre o enquadramento da despesa, consulte a GAD antes da execução.",
-    ],
-  },
-  {
-    tone: "warning",
-    kicker: "Erros comuns a evitar",
-    title: "Os problemas mais recorrentes começam na organização documental",
-    items: [
-      "Não realizar as 3 pesquisas de preços obrigatórias quando não houver justificativa idônea ou SRP documentado.",
-      "Nomear documentos de forma genérica, dificultando a identificação futura na árvore do processo.",
-      "Anexar extratos de período diferente do exercício financeiro.",
-      "Não registrar a prestação de contas no SiGPC/Contas Online.",
+    title: "Erros recorrentes na instrução",
+    summary: "Os problemas mais comuns começam na organização da árvore e na ausência de documentos básicos.",
+    details: [
+      "Nomear arquivos de forma genérica dificulta a leitura posterior pela GAD.",
+      "Extratos de período incorreto e comprovantes sem vínculo claro com a despesa geram retrabalho imediato.",
+      "Antes de avançar, confira se a instrução acompanha o exercício correto e se o checklist essencial está completo.",
     ],
   },
 ] as const;
@@ -97,20 +84,20 @@ const nextSteps = [
     number: "3",
     title: "Inclusão de Documentos Externos",
     description:
-      "A próxima etapa mostra como inserir documentos digitalizados e nato-digitais no SEI!RIO com identificação clara e classificação correta.",
+      "A próxima etapa mostra como inserir documentos digitalizados e nato-digitais no SEI!RIO com classificação correta e nome claro na árvore.",
   },
   {
     number: "4",
     title: "Autenticação de Documentos",
     description:
-      "Em seguida, o manual detalha como autenticar apenas os documentos digitalizados e preservar a distinção entre autenticação e assinatura.",
+      "Em seguida, o guia detalha quando autenticar, quando não autenticar e como preservar a diferença entre autenticação e assinatura.",
   },
 ] as const;
 
 export const SectionTwo = () => {
   return (
-    <section className="scroll-mt-20 animate-fade-in">
-      <section className="article-intro-panel mb-8">
+    <section className="scroll-mt-20 animate-fade-in space-y-8">
+      <section className="article-intro-panel">
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)]">
           <div className="min-w-0">
             <span className="article-kicker">
@@ -125,43 +112,44 @@ export const SectionTwo = () => {
                 letterSpacing: "-0.04em",
               }}
             >
-              Como transformar documentos dispersos em um processo claro, conferível e pronto para seguir fluxo
+              Organize os autos com clareza antes de entrar nas etapas técnicas de inclusão,
+              autenticação e remessa
             </h2>
 
             <div className="editorial-hairline mt-5" />
 
             <div className="content-spacing mt-6">
-              <p className="lead-text text-left sm:text-justify">
-                Esta etapa reúne o <strong className="text-foreground">rol mínimo/essencial</strong> de documentos necessários para a instrução processual, sempre após a <strong className="text-foreground">autuação do processo</strong>. É aqui que a conferência deixa de ser apenas reunião de arquivos e passa a funcionar como organização lógica dos autos.
+              <p className="lead-text">
+                Esta etapa reúne o <strong className="text-foreground">núcleo documental</strong> da
+                instrução processual e separa o que é essencial do que funciona apenas como apoio.
               </p>
-              <p className="text-left sm:text-justify">
-                A instrução é <strong className="text-foreground">crítica para assegurar a conformidade</strong> da prestação de contas. Documentação incompleta, fora do exercício ou apresentada sem padronização adequada tende a gerar retrabalho, retardar a aprovação e comprometer a leitura técnica pela GAD.
+              <p>
+                O foco aqui não é ensinar toda a prestação de contas do PDDE em profundidade. O foco
+                é montar um processo inteligível, rastreável e pronto para seguir corretamente o
+                fluxo do SEI!RIO.
               </p>
             </div>
 
             <div className="mt-6 grid gap-3 md:grid-cols-3">
               <div className="article-summary-card">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  O que fazer agora
-                </p>
+                <p className="meta-pill">O que fazer agora</p>
                 <p className="mt-3 text-sm leading-7 text-foreground/82">
-                  Conferir o checklist, reunir documentos por ordem lógica e utilizar os modelos apenas quando fizerem sentido para o caso.
+                  Conferir o checklist, separar documentos por função no processo e identificar o que
+                  ainda precisa ser produzido internamente.
                 </p>
               </div>
               <div className="article-summary-card">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  Foco da análise
-                </p>
+                <p className="meta-pill">Foco desta etapa</p>
                 <p className="mt-3 text-sm leading-7 text-foreground/82">
-                  Extratos do exercício, comprovação da despesa, atas do CEC e pesquisa de preços compatível com a norma.
+                  Organização da instrução, não detalhamento exaustivo sobre execução da verba ou
+                  redação completa das peças.
                 </p>
               </div>
               <div className="article-summary-card">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  Resultado esperado
-                </p>
+                <p className="meta-pill">Resultado esperado</p>
                 <p className="mt-3 text-sm leading-7 text-foreground/82">
-                  Processo organizado para inclusão no SEI!RIO, autenticação e remessa sem perda de contexto.
+                  Processo preparado para inclusão de documentos externos, autenticação e bloco de
+                  assinatura sem perda de contexto.
                 </p>
               </div>
             </div>
@@ -174,20 +162,17 @@ export const SectionTwo = () => {
                   <ShieldCheck className="h-4.5 w-4.5" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    Critério de qualidade
-                  </p>
+                  <p className="meta-pill">Critério de qualidade</p>
                   <p className="mt-2 text-sm leading-7 text-foreground/82">
-                    A boa instrução separa o que é obrigatório, o que é complementar e o que precisa ser conferido antes da etapa seguinte.
+                    Uma boa instrução distingue o que precisa estar nos autos, o que é apoio de
+                    consulta e o que só deve ser incluído quando o caso exigir.
                   </p>
                 </div>
               </div>
             </div>
 
             <div className="article-summary-card">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Percurso sugerido nesta etapa
-              </p>
+              <p className="meta-pill">Percurso sugerido</p>
               <div className="mt-3 space-y-3">
                 {quickAccessPanels.map((panel) => (
                   <a
@@ -200,7 +185,9 @@ export const SectionTwo = () => {
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-foreground">{panel.title}</p>
-                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{panel.description}</p>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                        {panel.description}
+                      </p>
                     </div>
                   </a>
                 ))}
@@ -210,119 +197,180 @@ export const SectionTwo = () => {
         </div>
       </section>
 
-      <ProfileCallout visibleFor="diretor" variant="info" title="Leitura prática para a unidade escolar" className="mb-4">
-        Use o checklist abaixo para acompanhar cada documento. Marque os itens conforme forem sendo reunidos: o progresso permanece salvo no navegador e facilita a retomada da conferência sem perda do contexto do processo.
-      </ProfileCallout>
-      <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de atenção para conferência na GAD" className="mb-8">
-        Verifique se há comprovação da pesquisa de preços com 3 orçamentos, justificativa idônea para número inferior ou uso documentado de SRP. Confirme também se os extratos bancários cobrem o período integral do exercício e se o enquadramento entre custeio e capital está coerente.
+      <ProfileCallout
+        visibleFor="diretor"
+        variant="info"
+        title="Leitura prática para a unidade escolar"
+      >
+        Comece pelo checklist e volte aos modelos apenas quando precisar acelerar a produção ou
+        conferir o padrão de uma peça. O objetivo é evitar retrabalho na montagem dos autos.
       </ProfileCallout>
 
-      <div id={GUIDE_ANCHORS.checklist} className="mb-8 scroll-mt-28">
+      <ProfileCallout
+        visibleFor="gad"
+        variant="warning"
+        title="Ponto de atenção para conferência na GAD"
+      >
+        Nesta etapa, a leitura principal é: núcleo documental mínimo completo, peças identificadas
+        com clareza e coerência entre exercício, pesquisa de preços, extratos e comprovação da
+        despesa.
+      </ProfileCallout>
+
+      <div id={GUIDE_ANCHORS.checklist} className="scroll-mt-28">
         <PDDEChecklist />
       </div>
 
-      <section className="section-card mb-8">
+      <section id={GUIDE_ANCHORS.rules} className="section-card scroll-mt-28">
         <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0">
             <span className="kicker-label">
               <AlertTriangle className="h-3.5 w-3.5" aria-hidden="true" />
               Regras operacionais
             </span>
-            <h3 className="mt-4 text-[1.55rem] text-foreground sm:text-[1.9rem]" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.035em", lineHeight: "1.04" }}>
-              Pontos que mais reduzem glosas, inconsistências e retrabalho
+            <h3
+              className="mt-4 text-[1.55rem] text-foreground sm:text-[1.9rem]"
+              style={{
+                fontFamily: "var(--font-display)",
+                letterSpacing: "-0.035em",
+                lineHeight: "1.04",
+              }}
+            >
+              Consulta rápida para não montar os autos com fragilidade documental
             </h3>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-[0.98rem]">
-              Use este quadro como camada de leitura rápida: ele resume regras recorrentes da etapa de instrução e destaca os pontos que costumam gerar dúvida, atraso ou fragilidade documental.
+              Estes pontos aparecem aqui apenas porque impactam a instrução do processo. Quando o
+              tema exigir análise detalhada sobre execução da verba, a referência deve ser outro
+              material ou orientação específica da GAD.
             </p>
           </div>
 
           <div className="rounded-[1.3rem] border border-border/60 bg-secondary/35 px-4 py-3">
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Regra de ouro
-            </p>
+            <p className="meta-pill">Regra de ouro</p>
             <p className="mt-2 text-sm leading-6 text-foreground/82">
-              Não misture exercícios, ações ou peças comprobatórias com origens diferentes no mesmo encadeamento documental.
+              Não misture exercícios, ações ou peças comprobatórias com origens diferentes no mesmo
+              encadeamento documental.
             </p>
           </div>
         </div>
 
         <div className="grid gap-4 xl:grid-cols-2">
-          {operationalSignals.map((signal) => (
-            <div key={signal.title} className="signal-card" data-tone={signal.tone}>
-              <p className="signal-card-kicker">{signal.kicker}</p>
-              <h4 className="signal-card-title">{signal.title}</h4>
-              <ul className="signal-card-copy mt-3 space-y-2">
-                {signal.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="article-summary-card mt-5">
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <CalendarClock className="h-4.5 w-4.5" aria-hidden="true" />
-            </div>
-            <div>
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Orientação final desta etapa
-              </p>
-              <p className="mt-2 text-sm leading-7 text-foreground/82">
-                Seguir essas regras evita confusão entre anos, ações e prestações de contas distintas, reduz inconsistências e melhora a leitura técnica dos autos antes da inclusão no sistema.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div id={GUIDE_ANCHORS.models} className="scroll-mt-28">
-        <PDDEModelCards />
-      </div>
-
-      <div id={GUIDE_ANCHORS.templates} className="mb-8 scroll-mt-28">
-        <SmartTemplates />
-      </div>
-
-      <div id={GUIDE_ANCHORS.journey} className="mb-8 scroll-mt-28">
-        <ProcessJourneyMap />
-      </div>
-
-      <section className="section-card">
-        <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div className="min-w-0">
-            <span className="kicker-label">
-              <FileCheck className="h-3.5 w-3.5" aria-hidden="true" />
-              Continuidade do fluxo
-            </span>
-            <h3 className="mt-4 text-[1.48rem] text-foreground sm:text-[1.82rem]" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em", lineHeight: "1.05" }}>
-              O que vem depois da instrução documental
-            </h3>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-[0.98rem]">
-              As próximas etapas do guia detalham os procedimentos técnicos para a composição dos autos conforme a origem do documento e a necessidade de autenticação.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid gap-4 lg:grid-cols-2">
-          {nextSteps.map((step) => (
-            <div key={step.number} className="article-summary-card">
-              <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-sm font-bold text-primary-foreground shadow-soft">
-                  {step.number}
-                </div>
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold text-foreground">{step.title}</p>
-                  <p className="mt-2 text-sm leading-7 text-muted-foreground">{step.description}</p>
-                </div>
+          {operationalReferences.map((reference) => (
+            <div key={reference.title} className="article-summary-card">
+              <p className="text-sm font-semibold text-foreground">{reference.title}</p>
+              <p className="mt-2 text-sm leading-7 text-muted-foreground">{reference.summary}</p>
+              <div className="mt-4">
+                <InfoDrawer title={reference.title} triggerLabel="Ver orientação resumida">
+                  <div className="space-y-3">
+                    {reference.details.map((detail) => (
+                      <div
+                        key={detail}
+                        className="rounded-xl border border-border/60 bg-card px-4 py-3 text-sm leading-7 text-muted-foreground"
+                      >
+                        {detail}
+                      </div>
+                    ))}
+                  </div>
+                </InfoDrawer>
               </div>
             </div>
           ))}
         </div>
+
+        <Callout variant="info" icon={CalendarClock} className="mt-5">
+          <p className="font-medium">Uso correto desta subseção</p>
+          <p className="mt-1 text-sm">
+            Consulte essas regras para evitar erros de instrução. Não use esta página como substituta
+            de uma orientação completa sobre execução financeira do PDDE.
+          </p>
+        </Callout>
+      </section>
+
+      <section id={GUIDE_ANCHORS.models} className="scroll-mt-28 space-y-6">
+        <div className="section-card">
+          <div className="mb-4 flex items-start gap-3">
+            <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <FolderKanban className="h-4.5 w-4.5" aria-hidden="true" />
+            </div>
+            <div>
+              <span className="kicker-label">Modelos e templates</span>
+              <h3
+                className="mt-3 text-[1.48rem] text-foreground sm:text-[1.82rem]"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: "1.05",
+                }}
+              >
+                Referências para acelerar a montagem do processo
+              </h3>
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-[0.98rem]">
+                Use os modelos como apoio visual e as minutas rápidas apenas quando ajudarem na
+                produção das peças internas. Eles não substituem a conferência do caso concreto.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <PDDEModelCards />
+
+        <div id={GUIDE_ANCHORS.templates} className="scroll-mt-28">
+          <SmartTemplates />
+        </div>
+      </section>
+
+      <section id={GUIDE_ANCHORS.journey} className="scroll-mt-28 space-y-6">
+        <ProcessJourneyMap />
+
+        <section className="section-card">
+          <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div className="min-w-0">
+              <span className="kicker-label">
+                <Route className="h-3.5 w-3.5" aria-hidden="true" />
+                Continuidade do fluxo
+              </span>
+              <h3
+                className="mt-4 text-[1.48rem] text-foreground sm:text-[1.82rem]"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: "1.05",
+                }}
+              >
+                O que vem depois da organização documental
+              </h3>
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-[0.98rem]">
+                Com a instrução organizada, o guia passa a tratar das etapas técnicas de inserção,
+                classificação e autenticação dos documentos no sistema.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            {nextSteps.map((step) => (
+              <div key={step.number} className="article-summary-card">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-sm font-bold text-primary-foreground shadow-soft">
+                    {step.number}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-foreground">{step.title}</p>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <Callout variant="success" icon={FileCheck} className="mt-5">
+            <p className="font-medium">Saída esperada da Etapa 2</p>
+            <p className="mt-1 text-sm">
+              Ao concluir esta etapa, você já deve saber quais peças entram no processo, quais ainda
+              precisam ser produzidas no SEI!RIO e quais exigirão autenticação na sequência.
+            </p>
+          </Callout>
+        </section>
       </section>
     </section>
   );

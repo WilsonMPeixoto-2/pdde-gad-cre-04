@@ -12,11 +12,11 @@ import {
 } from "lucide-react";
 
 export const GUIDE_VERSION = {
-  number: "2.4",
-  shortLabel: "V. 2.4",
-  cycleLabel: "Março/2026",
-  lastUpdatedText: "28 de março de 2026",
-  publishedIsoDate: "2026-03-28",
+  number: "2.5",
+  shortLabel: "V. 2.5",
+  cycleLabel: "Abril/2026",
+  lastUpdatedText: "12 de abril de 2026",
+  publishedIsoDate: "2026-04-12",
 } as const;
 
 export const PROCESS_TYPE_LABEL =
@@ -36,6 +36,7 @@ export const INTERNAL_PROCESS_TRACKER_LABEL = "Controle de processos 2026";
 
 export const GUIDE_ANCHORS = {
   checklist: "checklist-documentos",
+  rules: "regras-operacionais",
   models: "modelos-documentos",
   templates: "templates-rapidos",
   journey: "mapa-jornada",
@@ -73,7 +74,7 @@ export const guideSections = [
     number: "2",
     title: "Instrução Processual",
     shortTitle: "Instrução Processual",
-    subtitle: "Checklist mínimo, modelos e organização documental",
+    subtitle: "Checklist mínimo, regras operacionais, modelos e continuidade do fluxo",
     icon: FileText,
   },
   {
@@ -97,7 +98,7 @@ export const guideSections = [
     number: "5",
     title: "Bloco de Assinatura",
     shortTitle: "Bloco de Assinatura",
-    subtitle: "Criação do bloco, assinatura da unidade escolar e conferência final",
+    subtitle: "Criação do bloco, despacho de encaminhamento, conferência final e remessa",
     icon: PenTool,
   },
   {
@@ -105,7 +106,7 @@ export const guideSections = [
     number: "6",
     title: "Despacho e Finalização",
     shortTitle: "Despacho e Finalização",
-    subtitle: "Remessa à GAD e etapas finais de análise e aprovação",
+    subtitle: "Análise pela GAD, aprovação e etapas finais do processo",
     icon: Send,
   },
   {
@@ -131,6 +132,7 @@ export type GuideAnchorId = GuideSectionId | GuideNestedAnchorId;
 
 export const guideAnchorParentSections: Record<GuideNestedAnchorId, GuideSectionId> = {
   [GUIDE_ANCHORS.checklist]: "secao-2",
+  [GUIDE_ANCHORS.rules]: "secao-2",
   [GUIDE_ANCHORS.models]: "secao-2",
   [GUIDE_ANCHORS.templates]: "secao-2",
   [GUIDE_ANCHORS.journey]: "secao-2",
@@ -152,15 +154,15 @@ export const guideHowToSteps = contentSections
 
 export const seiProcessTreeDocuments = [
   { name: "Ofício de encaminhamento da unidade escolar", statusLabel: "Assinado", tone: "signed" as const },
-  { name: "Demonstrativo ou registro federal aplicável ao exercício", statusLabel: "Assinado", tone: "signed" as const },
+  { name: "Despacho de encaminhamento da prestação de contas", statusLabel: "Assinado", tone: "signed" as const },
   { name: "Ata do CEC digitalizada", statusLabel: "Autenticado", tone: "authenticated" as const },
   { name: "Extrato bancário do exercício", statusLabel: "Autenticado", tone: "authenticated" as const },
-  { name: "Notas fiscais e comprovantes", statusLabel: "Autenticado", tone: "authenticated" as const },
+  { name: "Demonstrativo ou registro federal aplicável ao exercício", statusLabel: "Autenticado", tone: "authenticated" as const },
 ];
 
 export const signatureActionExamples = [
   { label: "Ofício de encaminhamento da unidade escolar", action: "Assinar", tone: "signature" as const },
-  { label: "Despacho de análise ou aprovação da GAD", action: "Assinar", tone: "signature" as const },
+  { label: "Despacho de encaminhamento da prestação de contas", action: "Assinar", tone: "signature" as const },
   { label: "Ata do CEC digitalizada", action: "Autenticar", tone: "authentication" as const },
   { label: "Nota fiscal em PDF ou escaneada", action: "Autenticar", tone: "authentication" as const },
 ];
@@ -213,7 +215,7 @@ export const processFlowSteps: ProcessFlowStep[] = [
     id: "instrucao",
     number: 2,
     title: "Instrução Processual",
-    description: "Reunir o checklist mínimo, modelos e evidências que instruem os autos.",
+    description: "Conferir o checklist mínimo, organizar as peças e separar o que seguirá para inclusão no SEI!RIO.",
     sectionId: "secao-2",
     sectionAnchor: "secao-2",
     icon: FileText,
@@ -221,9 +223,9 @@ export const processFlowSteps: ProcessFlowStep[] = [
     criticalNote: "Pesquisa de preços com 3 orçamentos como rotina; número inferior só com justificativa idônea ou uso documentado de SRP.",
     whatToDo: [
       "Conferir o checklist mínimo previsto para a prestação de contas",
-      "Reunir extratos, atas, notas fiscais e comprovantes de pagamento",
-      "Separar documentos obrigatórios e complementares por ordem lógica",
-      "Consultar modelos e preencher as peças padronizadas quando necessário",
+      "Separar documentos externos, peças internas e comprovantes complementares por ordem lógica",
+      "Registrar apenas as regras operacionais que impactam a instrução do processo",
+      "Consultar modelos e minutas apenas quando isso ajudar a completar a instrução",
     ],
     documents: [
       "Demonstrativo ou registro federal aplicável ao exercício",
@@ -293,53 +295,53 @@ export const processFlowSteps: ProcessFlowStep[] = [
     id: "assinatura",
     number: 5,
     title: "Bloco de Assinatura",
-    description: "Criar o bloco, incluir apenas documentos internos e acompanhar a conclusão das assinaturas.",
+    description: "Criar o bloco, concluir as assinaturas internas, gerar o despacho de encaminhamento e remeter o processo à GAD.",
     sectionId: "secao-5",
     sectionAnchor: "secao-5",
     icon: PenTool,
     dependencies: ["autenticacao"],
     criticalNote: "No bloco entram apenas documentos internos do SEI!RIO.",
     whatToDo: [
-      "Criar um bloco de assinatura vinculado ao processo",
-      "Adicionar somente peças internas que exigem assinatura eletrônica",
-      "Disponibilizar o bloco para a unidade escolar responsável",
-      "Conferir o retorno das assinaturas antes de seguir para a remessa",
+      "Criar ou alimentar o bloco de assinatura com as peças internas obrigatórias",
+      "Acompanhar a conclusão das assinaturas antes de prosseguir",
+      "Incluir e assinar o despacho de encaminhamento da prestação de contas",
+      `Conferir a árvore final e tramitar o processo para ${GAD_UNIT.fullLabel}`,
     ],
     documents: [
       "Ofício de encaminhamento da unidade escolar",
-      "Despachos ou declarações internas produzidas no SEI!RIO",
+      "Despacho de encaminhamento da prestação de contas",
     ],
     commonErrors: [
       "Adicionar documento externo ao bloco de assinatura",
-      "Disponibilizar o bloco para unidade incorreta",
       "Encaminhar o processo sem confirmar todas as assinaturas pendentes",
+      "Enviar o processo sem o despacho de encaminhamento assinado",
     ],
-    nextStep: "Encaminhamento do processo para a GAD e acompanhamento da análise final",
+    nextStep: "Acompanhamento da análise da GAD, de eventuais diligências e da finalização do processo",
   },
   {
     id: "finalizacao",
     number: 6,
     title: "Despacho e Finalização",
-    description: "Encaminhar à GAD, acompanhar a análise e registrar as etapas finais de aprovação.",
+    description: "Acompanhar a análise da GAD, atender diligências e aguardar as etapas finais de aprovação.",
     sectionId: "secao-6",
     sectionAnchor: "secao-6",
     icon: Send,
     dependencies: ["assinatura"],
-    criticalNote: `O destinatário correto da remessa é ${GAD_UNIT.displayLabel}.`,
+    criticalNote: "Após a remessa, acompanhe o processo no SEI!RIO e trate rapidamente qualquer devolução ou diligência.",
     whatToDo: [
-      "Conferir a integridade da árvore do processo após o bloco de assinatura",
-      `Tramitar o processo para ${GAD_UNIT.fullLabel}`,
-      "Registrar observações relevantes, quando necessário, antes da remessa",
-      "Acompanhar diligências, despacho da GAD e despacho final do Coordenador",
+      "Acompanhar a análise da GAD no SEI!RIO",
+      "Atender diligências ou devoluções com rapidez, quando houver",
+      "Aguardar o despacho de aprovação e a formalização final da autoridade competente",
+      "Observar o fluxo patrimonial quando houver despesa de capital",
     ],
     documents: [
-      "Processo íntegro, com assinaturas concluídas e autenticações válidas",
+      "Processo já remetido à GAD, com histórico íntegro das peças juntadas",
     ],
     commonErrors: [
-      "Tramitar o processo para unidade errada",
-      "Enviar o processo com assinatura pendente",
-      "Deixar de acompanhar as exigências apontadas após a remessa",
+      "Deixar de acompanhar o processo após a remessa",
+      "Não atender diligência no prazo indicado",
+      "Ignorar providências patrimoniais quando houver aquisição de bens permanentes",
     ],
-    nextStep: "Aguardar análise da GAD/4ª CRE e eventual publicação do ato final",
+    nextStep: "Registrar o encerramento do fluxo e manter a documentação de apoio organizada para conferências futuras",
   },
 ];

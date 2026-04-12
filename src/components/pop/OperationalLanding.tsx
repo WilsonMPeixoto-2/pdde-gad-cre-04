@@ -4,16 +4,16 @@ import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavig
 
 const readinessItems = [
   "Acesso ao SEI!RIO",
-  "Extratos bancários do exercício",
-  "Atas e documentos que precisam ser juntados",
-  "Notas fiscais e comprovantes",
-  "Demonstrativo pertinente ao exercício",
-  "Identificação da unidade executora, quando aplicável",
+  "Extratos do exercício",
+  "Atas e peças para juntada",
+  "Notas e comprovantes",
+  "Demonstrativo do exercício",
+  "Identificação da UEx",
 ] as const;
 
 export const OperationalLanding = () => {
   return (
-    <section className="article-intro-panel">
+    <section id="entrada-operacional" className="article-intro-panel scroll-mt-20">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start">
         <div className="min-w-0">
           <span className="article-kicker">
@@ -31,37 +31,37 @@ export const OperationalLanding = () => {
             Onde começar quando a urgência é montar o processo no SEI!RIO
           </h3>
 
-          <div className="mt-5 grid gap-3 md:grid-cols-2">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <div className="article-summary-card">
               <p className="text-sm font-semibold text-foreground">Para quem é este guia</p>
               <p className="mt-2 text-sm leading-7 text-foreground/84">
-                Diretores, secretários escolares e equipes gestoras das unidades da 4ª CRE.
+                Diretores, secretários e equipes gestoras da 4ª CRE.
               </p>
             </div>
             <div className="article-summary-card">
               <p className="text-sm font-semibold text-foreground">Quando usar</p>
               <p className="mt-2 text-sm leading-7 text-foreground/84">
-                Ao instruir o processo de prestação de contas do PDDE no SEI!RIO, da abertura até a remessa à GAD.
+                Ao instruir o processo no SEI!RIO, da abertura à remessa.
               </p>
             </div>
             <div className="article-summary-card">
               <p className="text-sm font-semibold text-foreground">O que este guia cobre</p>
               <p className="mt-2 text-sm leading-7 text-foreground/84">
-                Autuação, juntada de documentos, autenticação administrativa, assinatura eletrônica e remessa.
+                Autuação, juntada, autenticação, assinatura e remessa.
               </p>
             </div>
             <div className="article-summary-card">
               <p className="text-sm font-semibold text-foreground">O que este guia não cobre</p>
               <p className="mt-2 text-sm leading-7 text-foreground/84">
-                A prestação de contas federal nos sistemas do FNDE nem a elaboração exaustiva de cada peça documental.
+                FNDE/SiGPC nem a elaboração detalhada das peças.
               </p>
             </div>
           </div>
 
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-5 flex flex-col gap-3">
             <button
               onClick={() => scrollToGuideAnchor("secao-1", { focusHeading: true })}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/92 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/92 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:w-auto"
             >
               <FolderOpen className="h-4 w-4" aria-hidden="true" />
               Começar pela Etapa 1
@@ -72,7 +72,7 @@ export const OperationalLanding = () => {
               onMouseEnter={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
               onFocus={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
               onClick={() => scrollToGuideAnchor(GUIDE_ANCHORS.checklist, { focusHeading: true })}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border/65 bg-background/82 px-6 py-3.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:border-primary/25 hover:bg-primary/5 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 self-start rounded-full px-1 py-1 text-sm font-medium text-foreground/72 transition-colors duration-200 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <ClipboardList className="h-4 w-4" aria-hidden="true" />
               Ir direto ao Checklist
@@ -89,10 +89,9 @@ export const OperationalLanding = () => {
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Tenha em mãos
               </p>
-              <ul className="mt-3 space-y-2 text-sm leading-7 text-foreground/84">
+              <ul className="mt-3 grid grid-cols-2 gap-2 text-sm text-foreground/84">
                 {readinessItems.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-[0.7rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/75" aria-hidden="true" />
+                  <li key={item} className="rounded-[1rem] border border-border/55 bg-background/72 px-3 py-2 leading-6">
                     <span>{item}</span>
                   </li>
                 ))}

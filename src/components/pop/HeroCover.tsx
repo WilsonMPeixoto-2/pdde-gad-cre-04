@@ -1,7 +1,12 @@
 import type { CSSProperties } from "react";
-import { Building2, ChevronDown, ClipboardList, FileText } from "lucide-react";
-import { GUIDE_ANCHORS } from "@/lib/guideContent";
-import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
+import { Building2, ChevronDown, Compass, FileText } from "lucide-react";
+
+const scrollToOperationalLanding = () => {
+  const landing = document.getElementById("entrada-operacional");
+  if (!landing) return;
+
+  landing.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 /**
  * HeroCover — Premium autoral "Institucional Cinemático"
@@ -141,7 +146,8 @@ export const HeroCover = () => {
           </div>
 
           {/* Title */}
-          <h1 
+          <h1
+            aria-label="Prestação de Contas PDDE no SEI!RIO"
             className="font-heading font-extrabold text-white leading-[1.08] mb-6 sm:mb-8 hero-stagger"
             style={{ 
               animationDelay: '0.4s', 
@@ -191,17 +197,15 @@ export const HeroCover = () => {
         
         <div className="hero-stagger flex items-center justify-center" style={{ animationDelay: '1s' }}>
           <button
-            onMouseEnter={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
-            onFocus={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
-            onClick={() => scrollToGuideAnchor(GUIDE_ANCHORS.checklist, { focusHeading: true })}
+            onClick={scrollToOperationalLanding}
             className="group inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium sm:w-auto"
             style={{
               background: 'linear-gradient(135deg, hsl(197, 82%, 43%) 0%, hsl(211, 64%, 24%) 100%)',
               boxShadow: '0 4px 20px -4px hsl(197, 82%, 43%, 0.4), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
             }}
           >
-            <ClipboardList className="w-4 h-4" aria-hidden="true" />
-            Começar pelo Checklist
+            <Compass className="w-4 h-4" aria-hidden="true" />
+            Ver orientação inicial
             <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
           </button>
         </div>

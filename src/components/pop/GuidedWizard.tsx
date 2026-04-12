@@ -12,6 +12,9 @@ const WIZARD_STORAGE_KEY = "pdde-wizard-progress-v1";
 export const GuidedWizard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const [isLargeViewport, setIsLargeViewport] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(min-width: 640px)").matches : true
+  );
   const [isDockVisible, setIsDockVisible] = useState(() =>
     typeof window !== "undefined" ? window.scrollY > 360 : false
   );
@@ -48,6 +51,7 @@ export const GuidedWizard = () => {
     const mediaQuery = window.matchMedia("(min-width: 640px)");
 
     const updateDockVisibility = () => {
+      setIsLargeViewport(mediaQuery.matches);
       syncDockVisibility(mediaQuery.matches);
     };
 
@@ -85,6 +89,10 @@ export const GuidedWizard = () => {
       requestGuideAnchorPreload(nextStep.sectionAnchor);
     }
   }, [currentStep, step.sectionAnchor]);
+
+  if (!isLargeViewport) {
+    return null;
+  }
 
   if (!isOpen && !isDockVisible) {
     return null;

@@ -81,6 +81,10 @@ export const SectionFive = () => {
               Se o bloco for usado apenas para assinatura em lote na própria unidade, ele pode seguir sem disponibilização a outra unidade.
               Se a assinatura depender de outra unidade, aí sim o bloco deve ser disponibilizado ao destino correspondente.
             </p>
+            <p>
+              Em termos práticos: se a assinatura ficar na própria unidade, conclua as assinaturas no próprio bloco e avance para a conferência final.
+              Se depender de outra unidade, disponibilize o bloco, acompanhe o retorno e só prossiga depois que todas as assinaturas obrigatórias estiverem concluídas.
+            </p>
             <Callout variant="info" title="Sugestão de descrição do bloco">
               <code className="block rounded-lg border border-border bg-card px-4 py-3 text-sm data-code text-foreground break-all">
                 Assinatura — Prestação de Contas PDDE — Exercício AAAA — Nome da Escola

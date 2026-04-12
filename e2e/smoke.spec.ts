@@ -57,6 +57,8 @@ test.describe("Fluxo desktop", () => {
     await page.goto("/?secao=secao-4");
     await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
     await expect(page.locator("main").getByText(/procedimento para autenticar documentos externos/i)).toBeVisible();
+    await page.waitForTimeout(1800);
+    await expect(page).toHaveURL(/[?&]secao=secao-4$/i);
     await expect(page.getByText(/^build [a-f0-9]{12} · (produção|preview|desenvolvimento)$/i)).toBeVisible();
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
@@ -153,6 +155,8 @@ test.describe("Fluxo mobile", () => {
 
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
+    await page.waitForTimeout(1800);
+    await expect(page).toHaveURL(/[?&]secao=secao-2$/i);
 
     await page.getByRole("button", { name: /mais ações/i }).click();
     await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toBeVisible();
@@ -165,6 +169,11 @@ test.describe("Fluxo mobile", () => {
     await page.getByRole("button", { name: /abrir menu de navegação/i }).first().click();
     await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
     await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais prioritárias para consulta rápida/i })).toBeVisible();
+
+    await page.goto("/?secao=secao-4");
+    await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
+    await page.waitForTimeout(1800);
+    await expect(page).toHaveURL(/[?&]secao=secao-4$/i);
 
     const diagnostics = await page.evaluate(() => {
       const allowance = 1;
@@ -191,6 +200,7 @@ test.describe("Fluxo mobile", () => {
     expect(diagnostics.focusableInIllustrations).toBe(0);
     expect(diagnostics.hasProcessPanel).toBe(false);
     expect(diagnostics.hasSharePack).toBe(false);
+    await expect(page.getByRole("button", { name: /abrir modo guiado da prestação de contas/i })).toHaveCount(0);
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });

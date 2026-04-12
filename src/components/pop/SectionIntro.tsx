@@ -2,7 +2,7 @@ export const SectionIntro = () => {
   return (
     <section className="animate-fade-in">
       <div className="section-card">
-        <div className="grid gap-8 xl:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] xl:items-start">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.22fr)_minmax(23rem,0.78fr)] min-[1900px]:grid-cols-[minmax(0,1.24fr)_minmax(25rem,0.76fr)]">
           <div className="min-w-0">
             <span className="article-kicker">Apresentação institucional</span>
             <h2

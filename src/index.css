@@ -376,6 +376,17 @@
     0 44px 80px -56px hsl(219 35% 18% / 0.35),
     0 18px 34px -26px hsl(219 35% 18% / 0.14),
     inset 0 1px 0 0 hsl(0 0% 100% / 0.9);
+
+  @media (width >= 1800px) {
+    padding-inline: 3.25rem;
+    padding-block: 3rem;
+    border-radius: 2.15rem;
+  }
+
+  @media (width >= 2200px) {
+    padding-inline: 3.75rem;
+    padding-block: 3.3rem;
+  }
 }
 
 @utility article-kicker {
@@ -398,6 +409,11 @@
   box-shadow:
     0 22px 40px -34px hsl(219 35% 18% / 0.22),
     inset 0 1px 0 0 hsl(0 0% 100% / 0.72);
+
+  @media (width >= 1800px) {
+    padding: 2rem;
+    border-radius: 1.95rem;
+  }
 }
 
 @utility article-summary-card {
@@ -407,6 +423,66 @@
   box-shadow:
     0 18px 28px -24px hsl(219 35% 18% / 0.14),
     inset 0 1px 0 0 hsl(0 0% 100% / 0.7);
+
+  @media (width >= 1800px) {
+    padding: 1.4rem;
+    border-radius: 1.55rem;
+  }
+}
+
+@utility guide-shell {
+  @apply mx-auto w-full px-4 py-10 pb-36 sm:px-6 sm:py-12 sm:pb-40 lg:px-8;
+  max-width: 1320px;
+
+  @media (width >= 1280px) {
+    max-width: 1480px;
+  }
+
+  @media (width >= 1536px) {
+    max-width: 1720px;
+  }
+
+  @media (width >= 1920px) {
+    max-width: 1860px;
+  }
+
+  @media (width >= 2400px) {
+    max-width: 1980px;
+  }
+}
+
+@utility hero-shell {
+  @apply relative z-10 mx-auto px-5 py-14 text-center sm:px-6 sm:py-18;
+  max-width: 72rem;
+
+  @media (width >= 1280px) {
+    max-width: 82rem;
+  }
+
+  @media (width >= 1536px) {
+    max-width: 96rem;
+  }
+
+  @media (width >= 1920px) {
+    max-width: 108rem;
+  }
+}
+
+@utility section-divider-shell {
+  @apply relative z-10 mx-auto flex flex-col items-center gap-6 px-6 sm:flex-row sm:gap-8 sm:px-10;
+  max-width: 72rem;
+
+  @media (width >= 1280px) {
+    max-width: 82rem;
+  }
+
+  @media (width >= 1536px) {
+    max-width: 96rem;
+  }
+
+  @media (width >= 1920px) {
+    max-width: 108rem;
+  }
 }
 
 @utility editorial-hairline {

@@ -100,7 +100,7 @@ export const GuidedWizard = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-4 right-4 z-40 no-print sm:bottom-24 sm:right-6 sm:top-auto xl:right-[max(1.5rem,calc(50vw-39rem))] opacity-85 hover:opacity-100 transition-opacity">
+      <div className="fixed bottom-4 right-4 z-40 no-print sm:bottom-24 sm:right-6 sm:top-auto xl:right-[max(1.5rem,calc(50vw-54rem))] opacity-85 hover:opacity-100 transition-opacity">
         <Button
           onClick={() => {
             startTransition(() => {
@@ -128,7 +128,7 @@ export const GuidedWizard = () => {
   }
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-50 no-print sm:inset-auto sm:right-6 sm:bottom-24 sm:top-auto sm:w-[420px] xl:right-[max(1.5rem,calc(50vw-39rem))]">
+    <div className="fixed inset-x-3 bottom-3 z-50 no-print sm:inset-auto sm:right-6 sm:bottom-24 sm:top-auto sm:w-[420px] xl:right-[max(1.5rem,calc(50vw-54rem))]">
       <div className="guided-wizard rounded-2xl border border-border/60 shadow-2xl overflow-hidden" style={{
         background: 'hsl(var(--card))',
         backdropFilter: 'blur(20px)',

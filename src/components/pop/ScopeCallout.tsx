@@ -3,7 +3,7 @@ import { AlertTriangle, Scale, ShieldCheck } from "lucide-react";
 export const ScopeCallout = () => {
   return (
     <section className="article-intro-panel">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)] lg:items-start">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.24fr)_minmax(22rem,0.76fr)] min-[1900px]:grid-cols-[minmax(0,1.28fr)_minmax(24rem,0.72fr)]">
         <div className="min-w-0">
           <span className="article-kicker">
             <AlertTriangle className="h-3.5 w-3.5" aria-hidden="true" />
@@ -19,7 +19,7 @@ export const ScopeCallout = () => {
           >
             O que este manual cobre com precisão
           </h3>
-          <p className="mt-4 max-w-3xl text-[1rem] leading-8 text-foreground/82 sm:text-[1.04rem]">
+          <p className="mt-4 max-w-3xl text-[1rem] leading-8 text-foreground/82 sm:text-[1.04rem] 2xl:max-w-4xl">
             Este <strong className="text-foreground">POP (Procedimento Operacional Padrão)</strong> orienta a <strong className="text-foreground">AUTUAÇÃO</strong> e a <strong className="text-foreground">INSTRUÇÃO</strong> do processo administrativo no SEI!RIO para fins de controle interno, rastreabilidade e acompanhamento pela 4ª CRE/GAD. Ele <strong className="text-foreground">NÃO substitui</strong> a prestação de contas federal do PDDE nos sistemas oficiais do FNDE (SiGPC/Contas Online) e <strong className="text-foreground">NÃO altera</strong> prazos e exigências definidos pelo FNDE. O dossiê no SEI!RIO deve refletir fielmente o que foi executado e registrado para o PDDE.
           </p>
         </div>

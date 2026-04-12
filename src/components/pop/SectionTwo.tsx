@@ -98,7 +98,7 @@ export const SectionTwo = () => {
   return (
     <section className="scroll-mt-20 animate-fade-in space-y-8">
       <section className="article-intro-panel">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)]">
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] 2xl:grid-cols-[minmax(0,1.16fr)_minmax(23rem,0.84fr)] min-[1900px]:grid-cols-[minmax(0,1.2fr)_minmax(25rem,0.8fr)]">
           <div className="min-w-0">
             <span className="article-kicker">
               <ClipboardCheck className="h-3.5 w-3.5" aria-hidden="true" />
@@ -130,7 +130,7 @@ export const SectionTwo = () => {
               </p>
             </div>
 
-            <div className="mt-6 grid gap-3 md:grid-cols-3">
+            <div className="mt-6 grid gap-3 md:grid-cols-3 min-[1900px]:grid-cols-[repeat(3,minmax(0,1fr))]">
               <div className="article-summary-card">
                 <p className="meta-pill">O que fazer agora</p>
                 <p className="mt-3 text-sm leading-7 text-foreground/82">

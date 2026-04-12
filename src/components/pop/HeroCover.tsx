@@ -113,7 +113,7 @@ export const HeroCover = () => {
       />
 
       {/* === CONTENT === */}
-      <div className="relative z-10 mx-auto max-w-4xl px-5 py-14 text-center sm:px-6 sm:py-18">
+      <div className="hero-shell">
         {/* Institution Badge */}
         <div 
           className="hero-stagger mb-8 inline-flex items-center gap-2.5 rounded-full px-4.5 py-2.5 sm:mb-9"
@@ -152,7 +152,7 @@ export const HeroCover = () => {
             style={{ 
               animationDelay: '0.4s', 
               letterSpacing: '-0.03em', 
-              fontSize: 'clamp(2.25rem, 5vw + 0.5rem, 5.5rem)',
+              fontSize: 'clamp(2.25rem, 5vw + 0.5rem, 7rem)',
               textWrap: "balance" as CSSProperties["textWrap"],
             }}
           >
@@ -170,7 +170,7 @@ export const HeroCover = () => {
 
           {/* Subtitle */}
           <p 
-            className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed font-light"
+            className="mx-auto max-w-2xl text-lg leading-relaxed font-light text-white/70 sm:text-xl xl:max-w-3xl 2xl:max-w-4xl min-[1900px]:max-w-[58rem]"
             style={{ textWrap: "pretty" as CSSProperties["textWrap"] }}
           >
             Manual institucional para orientar a autuação, a instrução documental, a assinatura
@@ -179,7 +179,7 @@ export const HeroCover = () => {
         </div>
         
         <div
-          className="hero-stagger mx-auto mb-10 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-5 text-left shadow-[0_20px_60px_-42px_rgba(5,18,41,0.82)] backdrop-blur-sm sm:px-6"
+          className="hero-stagger mx-auto mb-10 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-5 text-left shadow-[0_20px_60px_-42px_rgba(5,18,41,0.82)] backdrop-blur-sm sm:px-6 xl:max-w-4xl 2xl:max-w-5xl min-[1900px]:max-w-[64rem]"
           style={{ animationDelay: "0.7s" }}
         >
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/42 sm:text-xs">

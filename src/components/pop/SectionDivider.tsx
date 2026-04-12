@@ -61,7 +61,7 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
           }} />
         </div>
         
-        <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 px-6 sm:px-10 max-w-4xl mx-auto">
+        <div className="section-divider-shell">
           {/* Number Badge — premium with subtle glow */}
           <div 
             className="flex items-center justify-center rounded-2xl font-heading font-extrabold text-2xl sm:text-3xl shrink-0 text-white transition-transform duration-300 hover:scale-105"

@@ -32,7 +32,7 @@ export const BackToTop = () => {
         <TooltipTrigger asChild>
           <button
             onClick={scrollToTop}
-            className="fixed bottom-28 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full no-print opacity-90 transition-all duration-500 group hover:-translate-y-1 hover:opacity-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:bottom-6 sm:right-6 sm:h-12 sm:w-12 xl:right-[max(1.5rem,calc(50vw-39rem))]"
+            className="fixed bottom-28 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full no-print opacity-90 transition-all duration-500 group hover:-translate-y-1 hover:opacity-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:bottom-6 sm:right-6 sm:h-12 sm:w-12 xl:right-[max(1.5rem,calc(50vw-54rem))]"
             style={{
               background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gradient-mid)) 100%)',
               boxShadow: '0 16px 34px -18px hsl(var(--primary) / 0.45), 0 8px 16px -12px hsl(var(--primary) / 0.28)',

@@ -147,6 +147,7 @@ const Index = () => {
   const lastHandledGuideTargetRef = useRef<GuideAnchorId | null>(null);
   const lockedGuideTargetRef = useRef<GuideAnchorId | null>(null);
   const suspendVisibleSyncUntilRef = useRef(0);
+  const activeSectionTriggerOffset = 140;
 
   const syncGuideUrl = useCallback(
     (target: GuideAnchorId, replace = true) => {
@@ -235,7 +236,9 @@ const Index = () => {
     });
   }, []);
 
-  const syncVisibleSection = useEffectEvent((visibleSections: Map<string, number>) => {
+  const syncVisibleSection = useEffectEvent((
+    visibleSections: Map<string, { ratio: number; top: number }>,
+  ) => {
     if (Date.now() < suspendVisibleSyncUntilRef.current) {
       const lockedTarget = lockedGuideTargetRef.current;
       if (lockedTarget) {
@@ -245,13 +248,28 @@ const Index = () => {
     }
 
     lockedGuideTargetRef.current = null;
-    for (const id of guideSectionIds) {
-      if (visibleSections.has(id)) {
-        setActiveSection(id);
-        syncGuideUrl(id);
-        break;
-      }
+    const candidates = guideSectionIds
+      .map((id) => {
+        const metrics = visibleSections.get(id);
+        if (!metrics) return null;
+        return { id, ...metrics };
+      })
+      .filter((candidate): candidate is { id: GuideSectionId; ratio: number; top: number } => candidate !== null);
+
+    if (candidates.length === 0) {
+      return;
     }
+
+    const reachedSections = candidates
+      .filter((candidate) => candidate.top <= activeSectionTriggerOffset)
+      .sort((left, right) => right.top - left.top || right.ratio - left.ratio);
+
+    const nextSection =
+      reachedSections[0] ??
+      candidates.sort((left, right) => left.top - right.top || right.ratio - left.ratio)[0];
+
+    setActiveSection(nextSection.id);
+    syncGuideUrl(nextSection.id);
   });
 
   const applyGuideTargetFromUrl = useCallback((target: GuideAnchorId) => {
@@ -266,13 +284,16 @@ const Index = () => {
 
   // IntersectionObserver replaces scroll listener — no reflows, passive detection
   useEffect(() => {
-    const visibleSections = new Map<string, number>();
+    const visibleSections = new Map<string, { ratio: number; top: number }>();
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            visibleSections.set(entry.target.id, entry.intersectionRatio);
+            visibleSections.set(entry.target.id, {
+              ratio: entry.intersectionRatio,
+              top: entry.boundingClientRect.top,
+            });
           } else {
             visibleSections.delete(entry.target.id);
           }
@@ -372,7 +393,7 @@ const Index = () => {
         />
 
         <main className="min-w-0 flex-1 lg:ml-0 bg-transparent">
-          <div className="mx-auto w-full max-w-[1180px] px-4 py-10 pb-36 sm:px-6 sm:py-12 sm:pb-40 lg:px-8">
+          <div className="guide-shell">
             <article className="article-frame">
               <div className="space-y-10 sm:space-y-12">
                 <AnimatedSection>

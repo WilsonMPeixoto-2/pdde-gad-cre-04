@@ -14,7 +14,7 @@ const readinessItems = [
 export const OperationalLanding = () => {
   return (
     <section id="entrada-operacional" className="article-intro-panel scroll-mt-20">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.18fr)_minmax(24rem,0.82fr)] min-[1900px]:grid-cols-[minmax(0,1.22fr)_minmax(26rem,0.78fr)]">
         <div className="min-w-0">
           <span className="article-kicker">
             <ClipboardList className="h-3.5 w-3.5" aria-hidden="true" />
@@ -89,7 +89,7 @@ export const OperationalLanding = () => {
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Tenha em mãos
               </p>
-              <ul className="mt-3 grid grid-cols-2 gap-2 text-sm text-foreground/84">
+              <ul className="mt-3 grid grid-cols-2 gap-2 text-sm text-foreground/84 2xl:grid-cols-3">
                 {readinessItems.map((item) => (
                   <li key={item} className="rounded-[1rem] border border-border/55 bg-background/72 px-3 py-2 leading-6">
                     <span>{item}</span>

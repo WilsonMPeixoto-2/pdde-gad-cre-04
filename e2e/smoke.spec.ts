@@ -57,7 +57,7 @@ test.describe("Fluxo desktop", () => {
     await page.goto("/?secao=secao-4");
     await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
     await expect(page.locator("main").getByText(/procedimento para autenticar documentos externos/i)).toBeVisible();
-    await expect(page.locator("footer").getByText(/^build [a-f0-9]{12}$/i)).toBeVisible();
+    await expect(page.getByText(/^build [a-f0-9]{12} · (produção|preview|desenvolvimento)$/i)).toBeVisible();
     expect(pageErrors).toEqual([]);
     expect(consoleIssues).toEqual([]);
   });

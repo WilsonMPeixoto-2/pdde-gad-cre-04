@@ -333,12 +333,12 @@ const Index = () => {
     };
 
     if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(warmInstructionSection, { timeout: 2500 });
-      return () => window.cancelIdleCallback(idleId);
+      const idleId = (window as Window).requestIdleCallback(warmInstructionSection, { timeout: 2500 });
+      return () => (window as Window).cancelIdleCallback(idleId);
     }
 
-    const timeoutId = window.setTimeout(warmInstructionSection, 1600);
-    return () => window.clearTimeout(timeoutId);
+    const timeoutId = setTimeout(warmInstructionSection, 1600);
+    return () => clearTimeout(timeoutId);
   }, [activateDeferredSection]);
 
   useEffect(() => {

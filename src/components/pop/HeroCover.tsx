@@ -179,7 +179,7 @@ export const HeroCover = () => {
         </div>
         
         <div
-          className="hero-stagger mx-auto mb-10 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-5 text-left shadow-[0_20px_60px_-42px_rgba(5,18,41,0.82)] backdrop-blur-sm sm:px-6 xl:max-w-4xl 2xl:max-w-5xl min-[1900px]:max-w-[64rem]"
+          className="hero-stagger mx-auto mb-10 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-5 text-left shadow-[0_20px_60px_-42px_rgba(5,18,41,0.82)] backdrop-blur-sm sm:px-6 xl:max-w-[52rem] 2xl:max-w-[56rem]"
           style={{ animationDelay: "0.7s" }}
         >
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/42 sm:text-xs">
@@ -188,11 +188,8 @@ export const HeroCover = () => {
           <p className="mt-3 text-sm leading-relaxed text-white/72 sm:text-base">
             Se você estiver iniciando a montagem do processo, percorra a leitura na ordem do
             documento: apresentação institucional, escopo do procedimento e Seção 1. Se a consulta
-            for pontual, use o sumário lateral para retomar diretamente a etapa desejada.
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-white/56 sm:text-[0.95rem]">
-            Priorize os campos padronizados, os exemplos de preenchimento e as visualizações do
-            sistema para conferir cada decisão antes de salvar ou tramitar o processo.
+            for pontual, use o sumário lateral e confira sempre os campos padronizados e os
+            exemplos de preenchimento antes de salvar ou tramitar.
           </p>
         </div>
         

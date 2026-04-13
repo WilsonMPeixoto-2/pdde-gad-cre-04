@@ -4,19 +4,14 @@ export const PROJECT_BRANDING = {
   appName: "Guia PDDE 4ª CRE",
   appShortName: "Guia PDDE",
   creatorName: "Wilson M. Peixoto",
-  creatorCreditLine: "Desenvolvido por Wilson M. Peixoto — SME/RJ.",
-  creatorShortLine: "Desenvolvido por Wilson M. Peixoto.",
-  creatorTagline: "Inovação para a Gestão Pública",
-  creatorPhone: "(21) 99497-4132",
-  creatorEmail: "wilsonmp2@gmail.com",
-  creatorLinkedinLabel: "LinkedIn",
-  creatorSecurityLabel: "Sobre / Segurança",
+  creatorCreditLine: "Créditos editoriais e identidade visual: Wilson M. Peixoto — SME/RJ.",
+  creatorShortLine: "Wilson M. Peixoto — SME/RJ.",
   rightsLine:
-    "Projeto autoral com identidade visual própria. Preserve o crédito do criador em reproduções, redistribuições e artefatos derivados.",
+    "Preserve os créditos do projeto em reproduções, redistribuições e artefatos derivados.",
   copyrightLine:
-    "© 2026 Wilson M. Peixoto. Identidade visual e artefatos digitais originais do projeto preservados.",
+    "© 2026 Wilson M. Peixoto. Projeto gráfico e artefatos digitais originais do guia.",
   printSignature:
-    "Assinatura do projeto: Wilson M. Peixoto • elaboração editorial e identidade visual.",
+    "Créditos do projeto: Wilson M. Peixoto — SME/RJ.",
   appDescription:
     "Guia institucional da 4ª CRE para a prestação de contas do PDDE no SEI!RIO, com checklist, referências oficiais e identidade visual própria.",
   canonicalUrl: "https://pdde-gad-cre-04.vercel.app/",

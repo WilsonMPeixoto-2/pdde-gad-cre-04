@@ -11,7 +11,7 @@ const main = async () => {
   const summaries: string[] = [];
 
   for (const [fileName, manifestEntry] of Object.entries(pdfAssetManifest)) {
-    const auditRule = pdfAuditCatalog[fileName];
+    const auditRule = (pdfAuditCatalog as Record<string, (typeof pdfAuditCatalog)[keyof typeof pdfAuditCatalog]>)[fileName];
 
     if (!auditRule) {
       findings.push(formatFinding(fileName, "arquivo sem regra de auditoria editorial."));

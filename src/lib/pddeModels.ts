@@ -10,6 +10,7 @@ import {
 import { pdfAssetManifest, type PdfAssetKey } from "@/generated/pdfManifest";
 import { externalResources, type ExternalResourceId } from "@/lib/externalResources";
 
+
 export interface PDDEModelResource {
   id: string;
   title: string;

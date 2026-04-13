@@ -8,6 +8,7 @@ import {
   guideSectionsById,
 } from "@/lib/guideContent";
 
+
 export interface SearchItem {
   id: string;
   title: string;

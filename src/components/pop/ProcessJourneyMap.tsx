@@ -3,6 +3,7 @@ import { CheckCircle2, ChevronRight, AlertTriangle, ArrowUpRight, RotateCcw } fr
 import { toast } from "sonner";
 import { type ProcessFlowStep, processFlowSteps } from "@/lib/guideContent";
 import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
+import type { GuideAnchorId } from "@/lib/guideContent";
 import {
   PDDE_STORAGE_KEYS,
   readStorageJson,
@@ -75,7 +76,7 @@ export const ProcessJourneyMap = () => {
     setCompleted((prev) => new Set([...prev, step.id]));
   }, [completed, canComplete]);
 
-  const navigateToSection = (sectionId: string) => {
+  const navigateToSection = (sectionId: GuideAnchorId) => {
     scrollToGuideAnchor(sectionId, { focusHeading: true });
   };
 

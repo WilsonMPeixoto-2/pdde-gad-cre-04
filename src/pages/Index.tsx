@@ -83,8 +83,8 @@ const preloadableGuideAnchors = [
 ] as GuideAnchorId[];
 
 const resolveDeferredSectionId = (anchorId: GuideAnchorId): GuideSectionId =>
-  guideAnchorParentSections[anchorId as keyof typeof guideAnchorParentSections] ??
-  anchorId;
+  (guideAnchorParentSections[anchorId as keyof typeof guideAnchorParentSections] ??
+  anchorId) as GuideSectionId;
 
 type DeferredSectionSlotProps = {
   children: ReactNode;
@@ -189,7 +189,7 @@ const Index = () => {
     syncGuideUrl(sectionId);
     scrollToGuideAnchor(sectionId, {
       focusHeading: true,
-      saveLastSection: setActiveSection,
+      saveLastSection: (id) => setActiveSection(id as GuideSectionId),
     });
   }, [lockGuideTargetSync, syncGuideUrl]);
 
@@ -276,7 +276,7 @@ const Index = () => {
     activateDeferredSection(target);
     scrollToGuideAnchor(target, {
       focusHeading: true,
-      saveLastSection: setActiveSection,
+      saveLastSection: (id) => setActiveSection(id as GuideSectionId),
     });
   }, [activateDeferredSection, lockGuideTargetSync]);
 
@@ -333,12 +333,12 @@ const Index = () => {
     };
 
     if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(warmInstructionSection, { timeout: 2500 });
-      return () => window.cancelIdleCallback(idleId);
+      const idleId = (window as Window).requestIdleCallback(warmInstructionSection, { timeout: 2500 });
+      return () => (window as Window).cancelIdleCallback(idleId);
     }
 
-    const timeoutId = window.setTimeout(warmInstructionSection, 1600);
-    return () => window.clearTimeout(timeoutId);
+    const timeoutId = setTimeout(warmInstructionSection, 1600);
+    return () => clearTimeout(timeoutId);
   }, [activateDeferredSection]);
 
   useEffect(() => {

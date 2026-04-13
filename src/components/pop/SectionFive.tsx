@@ -14,13 +14,13 @@ import { ProfileCallout } from "./ProfileCallout";
 import { SeiMockup } from "./SeiMockup";
 
 const gadCodes = [
-  { code: "10714", name: "E/1a.CRE/GAD" },
-  { code: "10719", name: "E/2a.CRE/GAD" },
-  { code: "10724", name: "E/3a.CRE/GAD" },
+  { code: "10714", name: "E/1a.CRE/GAD", highlight: false },
+  { code: "10719", name: "E/2a.CRE/GAD", highlight: false },
+  { code: "10724", name: "E/3a.CRE/GAD", highlight: false },
   { code: "10729", name: "E/4a.CRE/GAD", highlight: true },
-  { code: "10734", name: "E/5a.CRE/GAD" },
-  { code: "10739", name: "E/6a.CRE/GAD" },
-  { code: "10709", name: "E/10a.CRE/GAD" },
+  { code: "10734", name: "E/5a.CRE/GAD", highlight: false },
+  { code: "10739", name: "E/6a.CRE/GAD", highlight: false },
+  { code: "10709", name: "E/10a.CRE/GAD", highlight: false },
 ] as const;
 
 const signedDocuments = [

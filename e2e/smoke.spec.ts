@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.use({ serviceWorkers: "block" });
 
-const collectConsoleIssues = (page: Parameters<typeof test.beforeEach>[0]["page"]) => {
+const collectConsoleIssues = (page: import("@playwright/test").Page) => {
   const issues: string[] = [];
 
   page.on("console", (message) => {
@@ -18,7 +18,7 @@ const collectConsoleIssues = (page: Parameters<typeof test.beforeEach>[0]["page"
   return issues;
 };
 
-const collectPageErrors = (page: Parameters<typeof test.beforeEach>[0]["page"]) => {
+const collectPageErrors = (page: import("@playwright/test").Page) => {
   const issues: string[] = [];
 
   page.on("pageerror", (error) => {
@@ -36,7 +36,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 const searchAndOpen = async (
-  page: Parameters<typeof test.beforeEach>[0]["page"],
+  page: import("@playwright/test").Page,
   query: string,
   optionName: RegExp,
 ) => {

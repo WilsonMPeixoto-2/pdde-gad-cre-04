@@ -276,7 +276,7 @@ export const GuidedWizard = () => {
           </Button>
 
           <Button
-            variant={completedSteps.has(currentStep) ? "outline-solid" : "default"}
+            variant={completedSteps.has(currentStep) ? "outline" : "default"}
             size="sm"
             onClick={() => toggleStepComplete(currentStep)}
             className={cn("gap-1.5 text-xs", completedSteps.has(currentStep) && "text-success border-success/30")}

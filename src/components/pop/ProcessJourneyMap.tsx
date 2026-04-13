@@ -75,7 +75,7 @@ export const ProcessJourneyMap = () => {
     setCompleted((prev) => new Set([...prev, step.id]));
   }, [completed, canComplete]);
 
-  const navigateToSection = (sectionId: string) => {
+  const navigateToSection = (sectionId: GuideAnchorId) => {
     scrollToGuideAnchor(sectionId, { focusHeading: true });
   };
 

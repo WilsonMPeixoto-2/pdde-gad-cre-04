@@ -186,8 +186,7 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
           <div className="space-y-1">
             {[
               { label: PROCESS_TYPE_LABEL, active: true },
-              { label: "GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: TOMADA DE CONTAS ESPECIAL", active: false },
-              { label: "Prestação de Contas de Suprimento de Fundos", active: false },
+              { label: "Outros resultados da busca permanecem disponíveis no sistema.", active: false },
             ].map((item, i) => (
               <div 
                 key={i}

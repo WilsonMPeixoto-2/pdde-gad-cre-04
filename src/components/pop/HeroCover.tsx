@@ -1,11 +1,11 @@
 import type { CSSProperties } from "react";
 import { Building2, ChevronDown, Compass, FileText } from "lucide-react";
 
-const scrollToOperationalLanding = () => {
-  const landing = document.getElementById("entrada-operacional");
-  if (!landing) return;
+const scrollToIntroduction = () => {
+  const introduction = document.getElementById("introducao");
+  if (!introduction) return;
 
-  landing.scrollIntoView({ behavior: "smooth", block: "start" });
+  introduction.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
 /**
@@ -183,21 +183,22 @@ export const HeroCover = () => {
           style={{ animationDelay: "0.7s" }}
         >
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/42 sm:text-xs">
-            Aplicação imediata
+            Como usar este manual
           </p>
           <p className="mt-3 text-sm leading-relaxed text-white/72 sm:text-base">
-            Este material organiza o fluxo principal da prestação de contas do PDDE com foco em
-            conferência, instrução processual, autenticação, assinatura e remessa à GAD.
+            Se você estiver iniciando a montagem do processo, percorra a leitura na ordem do
+            documento: apresentação institucional, escopo do procedimento e Seção 1. Se a consulta
+            for pontual, use o sumário lateral para retomar diretamente a etapa desejada.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-white/56 sm:text-[0.95rem]">
-            Para começar com segurança, consulte primeiro o checklist documental e use as referências normativas
-            ao longo das etapas.
+            Priorize os campos padronizados, os exemplos de preenchimento e as visualizações do
+            sistema para conferir cada decisão antes de salvar ou tramitar o processo.
           </p>
         </div>
         
         <div className="hero-stagger flex items-center justify-center" style={{ animationDelay: '1s' }}>
           <button
-            onClick={scrollToOperationalLanding}
+            onClick={scrollToIntroduction}
             className="group inline-flex w-full max-w-sm items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent btn-premium sm:w-auto"
             style={{
               background: 'linear-gradient(135deg, hsl(197, 82%, 43%) 0%, hsl(211, 64%, 24%) 100%)',
@@ -205,7 +206,7 @@ export const HeroCover = () => {
             }}
           >
             <Compass className="w-4 h-4" aria-hidden="true" />
-            Ver orientação inicial
+            Ler apresentação institucional
             <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
           </button>
         </div>

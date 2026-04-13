@@ -4,8 +4,13 @@ export const PROJECT_BRANDING = {
   appName: "Guia PDDE 4ª CRE",
   appShortName: "Guia PDDE",
   creatorName: "Wilson M. Peixoto",
-  creatorCreditLine: "Elaboração editorial, estruturação visual e identidade do projeto: Wilson M. Peixoto.",
-  creatorShortLine: "Projeto criado por Wilson M. Peixoto.",
+  creatorCreditLine: "Desenvolvido por Wilson M. Peixoto — SME/RJ.",
+  creatorShortLine: "Desenvolvido por Wilson M. Peixoto.",
+  creatorTagline: "Inovação para a Gestão Pública",
+  creatorPhone: "(21) 99497-4132",
+  creatorEmail: "wilsonmp2@gmail.com",
+  creatorLinkedinLabel: "LinkedIn",
+  creatorSecurityLabel: "Sobre / Segurança",
   rightsLine:
     "Projeto autoral com identidade visual própria. Preserve o crédito do criador em reproduções, redistribuições e artefatos derivados.",
   copyrightLine:

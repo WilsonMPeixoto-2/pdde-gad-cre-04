@@ -31,14 +31,12 @@ import {
 const loadBackToTop = () => import("@/components/pop/BackToTop").then((m) => ({ default: m.BackToTop }));
 const loadGuidedWizard = () => import("@/components/pop/GuidedWizard").then((m) => ({ default: m.GuidedWizard }));
 const loadSectionIntro = () => import("@/components/pop/SectionIntro").then((m) => ({ default: m.SectionIntro }));
-const loadOperationalLanding = () => import("@/components/pop/OperationalLanding").then((m) => ({ default: m.OperationalLanding }));
 const loadScopeCallout = () => import("@/components/pop/ScopeCallout").then((m) => ({ default: m.ScopeCallout }));
 const loadSectionOne = () => import("@/components/pop/SectionOne").then((m) => ({ default: m.SectionOne }));
 
 const BackToTop = lazy(loadBackToTop);
 const GuidedWizard = lazy(loadGuidedWizard);
 const SectionIntro = lazy(loadSectionIntro);
-const OperationalLanding = lazy(loadOperationalLanding);
 const ScopeCallout = lazy(loadScopeCallout);
 const SectionOne = lazy(loadSectionOne);
 
@@ -396,12 +394,6 @@ const Index = () => {
           <div className="guide-shell">
             <article className="article-frame">
               <div className="space-y-10 sm:space-y-12">
-                <AnimatedSection>
-                  <Suspense fallback={<SectionLoader />}>
-                    <OperationalLanding />
-                  </Suspense>
-                </AnimatedSection>
-
                 <AnimatedSection delay={35}>
                   <div id="introducao" className="scroll-mt-20">
                     <Suspense fallback={<SectionLoader />}>

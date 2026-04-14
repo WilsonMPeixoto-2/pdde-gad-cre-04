@@ -31,13 +31,11 @@ import {
 const loadBackToTop = () => import("@/components/pop/BackToTop").then((m) => ({ default: m.BackToTop }));
 const loadGuidedWizard = () => import("@/components/pop/GuidedWizard").then((m) => ({ default: m.GuidedWizard }));
 const loadSectionIntro = () => import("@/components/pop/SectionIntro").then((m) => ({ default: m.SectionIntro }));
-const loadScopeCallout = () => import("@/components/pop/ScopeCallout").then((m) => ({ default: m.ScopeCallout }));
 const loadSectionOne = () => import("@/components/pop/SectionOne").then((m) => ({ default: m.SectionOne }));
 
 const BackToTop = lazy(loadBackToTop);
 const GuidedWizard = lazy(loadGuidedWizard);
 const SectionIntro = lazy(loadSectionIntro);
-const ScopeCallout = lazy(loadScopeCallout);
 const SectionOne = lazy(loadSectionOne);
 
 // Lazy load below-the-fold sections for better initial load performance
@@ -400,12 +398,6 @@ const Index = () => {
                       <SectionIntro />
                     </Suspense>
                   </div>
-                </AnimatedSection>
-
-                <AnimatedSection delay={70}>
-                  <Suspense fallback={<SectionLoader />}>
-                    <ScopeCallout />
-                  </Suspense>
                 </AnimatedSection>
 
                 <AnimatedSection delay={100}>

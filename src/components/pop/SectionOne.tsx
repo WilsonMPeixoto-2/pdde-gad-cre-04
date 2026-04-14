@@ -57,111 +57,6 @@ const ProcessFieldPanel = ({
 );
 
 const ProcessCreationResultPreview = () => (
-<<<<<<< HEAD
-  <div
-    role="img"
-    aria-label="Esquema ilustrativo e simplificado do estado esperado após salvar o processo, com NUP gerado e a árvore inicial do processo no SEI!RIO."
-    className="overflow-hidden rounded-[1.55rem] border border-[#d7dfe7] bg-white shadow-[0_22px_40px_-30px_rgba(15,23,42,0.28)]"
-  >
-    <div className="border-b border-[#dde3ea] bg-linear-to-b from-[#fafafa] to-[#f3f5f7] px-4 py-3">
-      <div className="flex items-center gap-2">
-        <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#c7d0d9]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#d8dee5]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#e3e8ed]" />
-        </div>
-        <p className="ml-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#6b7280]">
-          SEI!RIO · processo recém-criado
-        </p>
-      </div>
-    </div>
-
-    <div className="grid gap-0 xl:grid-cols-[minmax(18rem,20rem)_minmax(0,1fr)]">
-      <div className="border-b border-[#e0e6ec] bg-[#f8fafc] p-4 xl:border-r xl:border-b-0">
-        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#7b8a99]">
-          Árvore do processo
-        </p>
-
-        <div className="mt-3 rounded-xl border border-[#d8e0e7] bg-white px-3 py-3">
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#7b8a99]">
-            NUP gerado
-          </p>
-          <p className="mt-1 text-sm font-semibold text-[#245ea7]">000704.000123/2026-45</p>
-        </div>
-
-        <div className="mt-3 space-y-2 text-sm text-[#334155]">
-          <div className="rounded-lg border border-[#e0e6ec] bg-white px-3 py-2.5">
-            <p>Processo principal exibido na árvore lateral</p>
-          </div>
-          <div className="rounded-lg border border-[#e0e6ec] bg-white px-3 py-2.5">
-            <p>Cadastro concluído e pronto para continuidade da instrução</p>
-          </div>
-          <div className="rounded-lg border border-dashed border-[#d7dfe7] bg-[#fbfcfd] px-3 py-2.5 text-xs leading-6 text-[#6b7280]">
-            O NUP passa a identificar formalmente o processo para consulta, controle interno e
-            tramitação posterior.
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white p-4">
-        <div className="rounded-xl border border-[#d9e2ea] bg-[#f7fbff] px-4 py-3">
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#7b8a99]">
-            Mensagem do sistema
-          </p>
-          <p className="mt-2 text-sm font-semibold text-[#334155]">Processo criado com sucesso.</p>
-          <p className="mt-2 text-sm leading-6 text-[#526071]">
-            O número único já pode ser consultado e registrado para as próximas etapas do fluxo.
-          </p>
-        </div>
-
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-[#dde4eb] bg-[#fbfcfd] p-4">
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#7b8a99]">
-              Situação
-            </p>
-            <p className="mt-2 text-sm font-semibold text-[#334155]">Cadastro concluído</p>
-            <div className="mt-3 h-2.5 w-24 rounded-full bg-[#dce5ee]" aria-hidden="true" />
-          </div>
-          <div className="rounded-xl border border-[#dde4eb] bg-[#fbfcfd] p-4">
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#7b8a99]">
-              Providência imediata
-            </p>
-            <p className="mt-2 text-sm font-semibold text-[#334155]">
-              Registrar o NUP no controle interno
-            </p>
-            <div className="mt-3 h-2.5 w-32 rounded-full bg-[#e6edf4]" aria-hidden="true" />
-          </div>
-        </div>
-
-        <div className="mt-4 rounded-[1.2rem] border border-[#dde4eb] bg-[#fbfcfd] p-4">
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#7b8a99]">
-            Leitura esperada na tela
-          </p>
-          <div className="mt-3 space-y-3">
-            <div className="rounded-lg border border-[#e0e6ec] bg-white px-3 py-2.5">
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#7b8a99]">
-                Processo
-              </p>
-              <div className="mt-2 h-3 w-[72%] rounded-full bg-[#e5ebf1]" aria-hidden="true" />
-            </div>
-            <div className="rounded-lg border border-[#e0e6ec] bg-white px-3 py-2.5">
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#7b8a99]">
-                Unidade geradora
-              </p>
-              <div className="mt-2 h-3 w-[56%] rounded-full bg-[#edf2f6]" aria-hidden="true" />
-            </div>
-            <div className="rounded-lg border border-[#e0e6ec] bg-white px-3 py-2.5">
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#7b8a99]">
-                Situação do expediente
-              </p>
-              <div className="mt-2 h-3 w-[64%] rounded-full bg-[#edf2f6]" aria-hidden="true" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-=======
   <Callout variant="success" title="Processo criado com sucesso">
     <div className="space-y-3 text-sm leading-7 text-foreground/82">
       <p>
@@ -177,7 +72,6 @@ const ProcessCreationResultPreview = () => (
       </p>
     </div>
   </Callout>
->>>>>>> 300306cb4e34f7270365f98e23d6b14cb7c003a9
 );
 
 export const SectionOne = ({ renderId = true }: SectionOneProps) => {

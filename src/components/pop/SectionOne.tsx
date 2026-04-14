@@ -57,6 +57,7 @@ const ProcessFieldPanel = ({
 );
 
 const ProcessCreationResultPreview = () => (
+<<<<<<< HEAD
   <div
     role="img"
     aria-label="Esquema ilustrativo e simplificado do estado esperado após salvar o processo, com NUP gerado e a árvore inicial do processo no SEI!RIO."
@@ -160,6 +161,23 @@ const ProcessCreationResultPreview = () => (
       </div>
     </div>
   </div>
+=======
+  <Callout variant="success" title="Processo criado com sucesso">
+    <div className="space-y-3 text-sm leading-7 text-foreground/82">
+      <p>
+        Após salvar, o sistema exibirá o <strong className="text-foreground">NUP</strong> (Número
+        Único de Protocolo) que identificará formalmente o processo. Exemplo:
+      </p>
+      <code className="block rounded-lg bg-background/50 px-3 py-2 text-sm font-semibold text-foreground">
+        000704.000123/2026-45
+      </code>
+      <p>
+        O NUP passa a identificar formalmente o processo para consulta, controle interno e
+        tramitação posterior.
+      </p>
+    </div>
+  </Callout>
+>>>>>>> 300306cb4e34f7270365f98e23d6b14cb7c003a9
 );
 
 export const SectionOne = ({ renderId = true }: SectionOneProps) => {

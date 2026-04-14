@@ -138,7 +138,7 @@ export const guideAnchorParentSections: Record<GuideNestedAnchorId, GuideSection
   [GUIDE_ANCHORS.journey]: "secao-2",
 };
 
-export const contentSections = guideSections.filter((section) => section.subtitle);
+export const contentSections = guideSections.filter((section): section is (typeof guideSections)[number] & { subtitle: string } => "subtitle" in section);
 export const guideSectionIds = guideSections.map((section) => section.id);
 export const guideSectionsById = Object.fromEntries(
   guideSections.map((section) => [section.id, section])
@@ -149,7 +149,7 @@ export const guideHowToSteps = contentSections
   .map((section, index) => ({
     position: index + 1,
     name: section.title,
-    text: section.subtitle ?? "",
+    text: section.subtitle,
   }));
 
 export const seiProcessTreeDocuments = [
@@ -172,8 +172,8 @@ export interface ProcessFlowStep {
   number: number;
   title: string;
   description: string;
-  sectionId: string;
-  sectionAnchor: string;
+  sectionId: GuideSectionId;
+  sectionAnchor: GuideAnchorId;
   icon: LucideIcon;
   dependencies: string[];
   criticalNote?: string;

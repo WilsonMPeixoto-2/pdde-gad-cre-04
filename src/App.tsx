@@ -25,12 +25,12 @@ const App = () => {
     };
 
     if ("requestIdleCallback" in window) {
-      const idleCallbackId = window.requestIdleCallback(preloadCommandPalette, { timeout: 2500 });
-      return () => window.cancelIdleCallback(idleCallbackId);
+      const idleCallbackId = (window as Window).requestIdleCallback(preloadCommandPalette, { timeout: 2500 });
+      return () => (window as Window).cancelIdleCallback(idleCallbackId);
     }
 
-    const timeoutId = window.setTimeout(preloadCommandPalette, 1800);
-    return () => window.clearTimeout(timeoutId);
+    const timeoutId = setTimeout(preloadCommandPalette, 1800);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (

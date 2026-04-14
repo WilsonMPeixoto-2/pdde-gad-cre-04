@@ -2,7 +2,7 @@ import { startTransition, useCallback, useEffect, useEffectEvent, useState } fro
 import { CheckCircle2, Circle, ChevronRight, ChevronLeft, AlertTriangle, FileText, X, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { processFlowSteps } from "@/lib/guideContent";
+import { processFlowSteps, type GuideAnchorId } from "@/lib/guideContent";
 import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
 
 const steps = processFlowSteps;
@@ -37,7 +37,7 @@ export const GuidedWizard = () => {
   const syncDockVisibility = useEffectEvent((isLargeViewport: boolean) => {
     setIsDockVisible(window.scrollY > (isLargeViewport ? 280 : 360));
   });
-  const goToSection = useCallback((anchor: string) => {
+  const goToSection = useCallback((anchor: GuideAnchorId) => {
     scrollToGuideAnchor(anchor, { focusHeading: true });
   }, []);
 
@@ -276,7 +276,7 @@ export const GuidedWizard = () => {
           </Button>
 
           <Button
-            variant={completedSteps.has(currentStep) ? "outline-solid" : "default"}
+            variant={completedSteps.has(currentStep) ? "outline" : "default"}
             size="sm"
             onClick={() => toggleStepComplete(currentStep)}
             className={cn("gap-1.5 text-xs", completedSteps.has(currentStep) && "text-success border-success/30")}

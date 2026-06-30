@@ -38,8 +38,8 @@ const operationalReferences = [
     title: "Vedações e enquadramento",
     summary: "O guia não substitui a análise material da despesa, mas sinaliza quando a documentação exige cuidado adicional.",
     details: [
-      "Não use este POP como referência exaustiva de enquadramento da despesa; em caso de dúvida, consulte a GAD.",
-      "Se a despesa suscitar dúvida de enquadramento, registre essa cautela antes de montar a instrução final.",
+      "Não aplicar recursos indevidamente em despesas de pessoal, contas recorrentes (água, luz, telefone, aluguel), despesas assistencialistas ou gêneros alimentícios.",
+      "Em caso de dúvida sobre enquadramento de custeio vs capital, consulte a GAD antes de executar a despesa.",
       "Evite misturar peças de ações, exercícios ou naturezas de despesa diferentes no mesmo encadeamento documental.",
     ],
   },
@@ -47,9 +47,20 @@ const operationalReferences = [
     title: "Erros recorrentes na instrução",
     summary: "Os problemas mais comuns começam na organização da árvore e na ausência de documentos básicos.",
     details: [
-      "Nomear arquivos de forma genérica dificulta a leitura posterior pela GAD.",
-      "Extratos de período incorreto e comprovantes sem vínculo claro com a despesa geram retrabalho imediato.",
-      "Antes de avançar, confira se a instrução acompanha o exercício correto e se o checklist essencial está completo.",
+      "Nomear arquivos de forma genérica (ex.: 'documento 1') dificulta a leitura posterior pela GAD.",
+      "Extratos de período incorreto ou incompletos e comprovantes sem vínculo claro com a despesa geram retrabalho imediato.",
+      "Enviar atas do CEC digitalizadas sem as devidas assinaturas dos membros do conselho.",
+      "Divergência entre os saldos finais do demonstrativo e os extratos bancários de 31/12.",
+      "Não registrar a prestação de contas no SiGPC/Contas Online.",
+    ],
+  },
+  {
+    title: "Bens de Capital e SISBENS",
+    summary: "Ao adquirir bens permanentes, a escola deve seguir o fluxo de incorporação patrimonial local.",
+    details: [
+      "Formalize a doação dos bens móveis permanentes do CEC para a SME através do Termo de Doação (disponível nos Smart Templates).",
+      "Junte ao processo a Relação de Bens Adquiridos ou Produzidos e as cópias das Notas Fiscais (DANFE) correspondentes.",
+      "Cadastre a Solicitação de Inventário no sistema municipal SISBENS e anexe o respectivo despacho de tombamento patrimonial ao processo SEI.",
     ],
   },
 ] as const;
@@ -139,35 +150,116 @@ export const SectionTwo = () => {
           Estes pontos aparecem aqui apenas porque impactam a instrução do processo.
         </p>
 
-        <div className="mt-6 grid gap-4 xl:grid-cols-2">
-          {operationalReferences.map((reference) => (
-            <div key={reference.title} className="article-summary-card">
-              <p className="text-sm font-semibold text-foreground">{reference.title}</p>
-              <p className="mt-2 text-sm leading-7 text-muted-foreground">{reference.summary}</p>
-              <div className="mt-4">
-                <InfoDrawer title={reference.title} triggerLabel="Ver orientação resumida">
-                  <div className="space-y-3">
-                    {reference.details.map((detail) => (
-                      <div
-                        key={detail}
-                        className="rounded-xl border border-border/60 bg-card px-4 py-3 text-sm leading-7 text-muted-foreground"
-                      >
-                        {detail}
-                      </div>
-                    ))}
-                  </div>
-                </InfoDrawer>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="mt-6">
+          {/* Compras pela internet */}
+          <div className="mb-5">
+            <h3 className="text-sm font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              Compras pela internet (quando aplicável)
+            </h3>
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Use <strong className="text-foreground">sites nacionais confiáveis</strong> e registre a cotação com print contendo: <strong className="text-sky-600 dark:text-sky-400">descrição completa, preço final e frete</strong>.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Compare o <strong className="text-foreground">valor total</strong> (incluindo frete) e registre o critério da escolha.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Guarde o <strong className="text-foreground">comprovante de pagamento</strong> identificando o fornecedor vencedor.</span>
+              </li>
+            </ul>
+          </div>
 
-        <Callout variant="info" icon={CalendarClock} className="mt-5">
-          <p className="text-sm">
-            Consulte essas regras para evitar erros de instrução. Não use esta página como substituta
-            de uma orientação completa sobre execução financeira do PDDE.
-          </p>
-        </Callout>
+          {/* Sistema de Registro de Preços */}
+          <div className="mb-5">
+            <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Sistema de Registro de Preços (SRP) — alternativa à pesquisa de preços
+            </h3>
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Se a <strong className="text-foreground">UEx/EM</strong> usar SRP (adesão a ata), anexe a <strong className="text-sky-600 dark:text-sky-400">ata/acordo</strong> e os documentos do fornecedor.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Nesse caso, registre no processo que a <strong className="text-foreground">pesquisa de preços foi dispensada</strong> por uso de SRP.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Pesquisa de Preços */}
+          <div className="mb-5">
+            <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Pesquisa de preços — regra das 3 cotações
+            </h3>
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-primary font-bold">•</span>
+                <span className="text-left sm:text-justify">Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 17)</strong>, é obrigatório obter no mínimo <strong className="text-primary">3 cotações de preços</strong> de fornecedores distintos para cada aquisição.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary font-bold">•</span>
+                <span className="text-left sm:text-justify">Quando houver <strong className="text-foreground">múltiplas ações do PDDE</strong> no mesmo exercício, os gastos devem ser <strong className="text-foreground">separados por ação</strong> (rateio de despesas), com controle individualizado.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary font-bold">•</span>
+                <span className="text-left sm:text-justify">A cotação pode ser dispensada quando a UEx utilizar o <strong className="text-foreground">Sistema de Registro de Preços (SRP)</strong>, desde que devidamente documentado.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Vedações */}
+          <div className="mb-5">
+            <h3 className="text-sm font-bold text-red-700 dark:text-red-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+              Vedações — despesas proibidas (Res. FNDE 15/2021)
+            </h3>
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-red-700 dark:text-red-400">Não aplicar</strong> recursos indevidamente em despesas de <strong className="text-foreground">pessoal, contas recorrentes</strong> (água, luz, telefone, aluguel), <strong className="text-foreground">despesas assistencialistas</strong> ou <strong className="text-foreground">gêneros alimentícios</strong> (cobertos pelo PNAE).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Em caso de dúvida sobre enquadramento, <strong className="text-primary">consulte a GAD antes de executar</strong> a despesa.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Bens de Capital (SISBENS) */}
+          <div className="mb-3 border-t border-border/40 pt-5">
+            <h3 className="text-sm font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+              Despesas de capital — controle patrimonial (SISBENS)
+            </h3>
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-sky-600 dark:text-sky-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Ao adquirir <strong className="text-foreground">bens permanentes</strong> (móveis, eletrônicos, equipamentos), a escola deve formalizar a doação do CEC para a SME por meio do <strong className="text-sky-600 dark:text-sky-400">Termo de Doação</strong>.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-sky-600 dark:text-sky-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Além do termo de doação, anexe a <strong className="text-foreground">Relação de Bens Adquiridos ou Produzidos</strong> e a cópia da Nota Fiscal (DANFE) correspondente ao bem.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-sky-600 dark:text-sky-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Formalize a <strong className="text-foreground">Solicitação de Inventário</strong> e junte o respectivo despacho de tombamento do sistema <strong className="text-foreground">SISBENS</strong> ao processo eletrônico para fins de patrimonialização.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Nota explicativa */}
+          <div className="editorial-note mt-4">
+            <p className="text-center text-xs italic text-muted-foreground sm:text-sm">
+              Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes — reduzindo inconsistências e glosas.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section id={GUIDE_ANCHORS.models} className="scroll-mt-28 space-y-6">

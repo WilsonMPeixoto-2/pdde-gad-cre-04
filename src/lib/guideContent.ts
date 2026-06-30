@@ -14,9 +14,9 @@ import {
 export const GUIDE_VERSION = {
   number: "2.5",
   shortLabel: "V. 2.5",
-  cycleLabel: "Abril/2026",
-  lastUpdatedText: "12 de abril de 2026",
-  publishedIsoDate: "2026-04-12",
+  cycleLabel: "Junho/2026",
+  lastUpdatedText: "30 de junho de 2026",
+  publishedIsoDate: "2026-06-30",
 } as const;
 
 export const PROCESS_TYPE_LABEL =

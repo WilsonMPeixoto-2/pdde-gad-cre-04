@@ -88,6 +88,40 @@ const templates: Template[] = [
       `Gerência de Administração — GAD\n` +
       `4ª Coordenadoria Regional de Educação`,
   },
+  {
+    id: "termo-doacao",
+    title: "Termo de Doação (Bens de Capital)",
+    description: "Termo oficial de doação de bens móveis permanentes adquiridos pelo CEC para incorporação patrimonial (SISBENS)",
+    fields: [
+      { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
+      { key: "cnpj", label: "CNPJ da UEx", placeholder: "00.000.000/0001-00" },
+      { key: "exercicio", label: "Exercício Financeiro", placeholder: "2025" },
+      { key: "diretor", label: "Nome do(a) Diretor(a)", placeholder: "Maria Oliveira" },
+      { key: "matricula", label: "Matrícula", placeholder: "12/345.678-9" },
+      { key: "notaFiscal", label: "Nº da Nota Fiscal", placeholder: "1234" },
+      { key: "dataNota", label: "Data de Emissão da NF", placeholder: "29/08/2025" },
+      { key: "fornecedor", label: "Fornecedor / Razão Social", placeholder: "Kalunga S.A." },
+      { key: "descricaoBem", label: "Descrição Detalhada do Bem", placeholder: "05 computadores marca X, modelo Y" },
+      { key: "valorTotal", label: "Valor Total (R$)", placeholder: "15.000,00" },
+    ],
+    generate: (v) =>
+      `TERMO DE DOAÇÃO DE BENS MÓVEIS\n\n` +
+      `Pelo presente instrumento, o CONSELHO ESCOLA COMUNIDADE (CEC) da unidade escolar ${v.escola || "[NOME DA UNIDADE ESCOLAR]"}, ` +
+      `CNPJ: ${v.cnpj || "[CNPJ]"}, neste ato representado por seu Diretor Executivo ${v.diretor || "[NOME DO(A) DIRETOR(A)]"}, ` +
+      `matrícula: ${v.matricula || "[MATRÍCULA]"}, resolve DOAR à Secretaria Municipal de Educação do Rio de Janeiro (SME/RJ), ` +
+      `para incorporação ao patrimônio público municipal e uso exclusivo da referida unidade de ensino, os bens patrimoniais abaixo descritos, ` +
+      `adquiridos com recursos do Programa Dinheiro Direto na Escola (PDDE) — Exercício ${v.exercicio || "[ANO]"}, conforme Nota(s) Fiscal(is) nº ` +
+      `${v.notaFiscal || "[NÚMERO DA NF-e]"} emitida em ${v.dataNota || "[DATA]"} por ${v.fornecedor || "[FORNECEDOR]"}:\n\n` +
+      `1. Especificação do(s) bem(ns):\n` +
+      `   - Descrição: ${v.descricaoBem || "[DESCRIÇÃO COMPLETA DOS BENS E MARCA]"}\n` +
+      `   - Valor Total da Doação: R$ ${v.valorTotal || "[VALOR TOTAL]"}\n\n` +
+      `Os bens acima mencionados foram recebidos em perfeitas condições de uso e funcionamento e passam a integrar o acervo patrimonial ` +
+      `do Município do Rio de Janeiro, sob a responsabilidade e guarda desta Unidade Escolar.\n\n` +
+      `Rio de Janeiro, [DATA]\n\n` +
+      `______________________________________________\n` +
+      `${v.diretor || "[NOME DO(A) DIRETOR(A)]"}\n` +
+      `Diretor(a) Executivo(a) do CEC`,
+  },
 ];
 
 const loadSavedValues = (): Record<string, Record<string, string>> => {
@@ -113,6 +147,13 @@ const getWorkspaceTemplateDefaults = (templateId: string, workspace: ProcessWork
         escola: workspace.schoolName,
         exercicio: workspace.exercise,
         servidor: workspace.responsibleName,
+      };
+    case "termo-doacao":
+      return {
+        escola: workspace.schoolName,
+        cnpj: workspace.uexCnpj,
+        exercicio: workspace.exercise,
+        diretor: workspace.responsibleName,
       };
     default:
       return {};

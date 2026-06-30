@@ -33,14 +33,12 @@ const loadGuidedWizard = () => import("@/components/pop/GuidedWizard").then((m) 
 const loadSectionIntro = () => import("@/components/pop/SectionIntro").then((m) => ({ default: m.SectionIntro }));
 const loadSectionOne = () => import("@/components/pop/SectionOne").then((m) => ({ default: m.SectionOne }));
 const loadDeadlinesCalculator = () => import("@/components/pop/DeadlinesCalculator").then((m) => ({ default: m.DeadlinesCalculator }));
-const loadPwaRegister = () => import("@/components/pop/PwaRegister").then((m) => ({ default: m.PwaRegister }));
 
 const BackToTop = lazy(loadBackToTop);
 const GuidedWizard = lazy(loadGuidedWizard);
 const SectionIntro = lazy(loadSectionIntro);
 const SectionOne = lazy(loadSectionOne);
 const DeadlinesCalculator = lazy(loadDeadlinesCalculator);
-const PwaRegister = lazy(loadPwaRegister);
 
 // Lazy load below-the-fold sections for better initial load performance
 const loadSectionTwo = () => import("@/components/pop/SectionTwo").then((m) => ({ default: m.SectionTwo }));
@@ -375,11 +373,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-clip">
-      {/* PWA Lifecycle Management */}
-      <Suspense fallback={null}>
-        <PwaRegister />
-      </Suspense>
-
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
 

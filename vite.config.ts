@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { execSync } from "node:child_process";
-import { VitePWA } from "vite-plugin-pwa";
 
 const resolveBuildId = () => {
   const commitSha =
@@ -34,54 +33,11 @@ export default defineConfig({
   define: {
     __APP_BUILD_ID__: JSON.stringify(buildId),
   },
-  plugins: [
-    react(),
-    VitePWA({
-      registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "favicon.png", "robots.txt", "apple-touch-icon.png"],
-      manifest: {
-        name: "Guia PDDE no SEI!RIO • 4ª CRE",
-        short_name: "Guia PDDE",
-        description: "Guia institucional da 4ª CRE para prestação de contas do PDDE no SEI!RIO.",
-        theme_color: "#0284c7",
-        background_color: "#ffffff",
-        display: "standalone",
-        orientation: "portrait",
-        start_url: "/",
-        icons: [
-          {
-            src: "/icons/icon-192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/icons/icon-512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-          {
-            src: "/icons/icon-maskable-192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "maskable",
-          },
-          {
-            src: "/icons/icon-maskable-512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "maskable",
-          },
-        ],
-      },
-      workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
-        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3MB limit
-      },
-    }),
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
 });
+

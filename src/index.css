@@ -146,14 +146,15 @@
 }
 
 @utility section-card {
-  @apply rounded-[1.65rem] border border-border/65 p-5 sm:p-7 lg:p-8 transition-all duration-400;
+  @apply rounded-[1.65rem] border border-border/80 p-5 sm:p-7 lg:p-8 transition-all duration-400;
   background:
     linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--card-hover)) 100%),
-    linear-gradient(135deg, hsl(var(--accent) / 0.018), transparent 52%);
+    linear-gradient(135deg, hsl(var(--accent) / 0.025), transparent 52%);
   box-shadow:
-    0 24px 48px -42px hsl(219 35% 18% / 0.22),
-    0 12px 22px -18px hsl(219 35% 18% / 0.1),
-    inset 0 1px 0 0 hsl(0 0% 100% / 0.72);
+    0 1px 2px 0 hsl(215 25% 20% / 0.06),
+    0 6px 16px -6px hsl(219 35% 18% / 0.1),
+    0 20px 40px -30px hsl(219 35% 18% / 0.14),
+    inset 0 1px 0 0 hsl(0 0% 100% / 0.82);
 
   &::before {
     content: '';
@@ -1228,27 +1229,27 @@
 
 @layer base {
   :root {
-    /* Modern Government Design System */
-    --background: 210 26% 97%;
-    --foreground: 220 33% 18%;
+    /* Modern Government Design System — High-Contrast Light Mode */
+    --background: 214 32% 94%;
+    --foreground: 220 33% 16%;
 
-    --card: 210 40% 99%;
-    --card-foreground: 220 33% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 33% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 33% 18%;
+    --popover-foreground: 220 33% 16%;
 
     /* Primary - Deep Navy */
     --primary: 219 48% 18%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Soft Slate */
-    --secondary: 210 22% 93%;
-    --secondary-foreground: 220 33% 18%;
+    /* Secondary - Visible Slate */
+    --secondary: 212 28% 89%;
+    --secondary-foreground: 220 33% 16%;
 
     /* Muted - Refined Slate Gray */
-    --muted: 210 18% 90%;
-    --muted-foreground: 217 17% 36%;
+    --muted: 212 22% 86%;
+    --muted-foreground: 217 19% 32%;
 
     /* Accent - Institutional Teal */
     --accent: 194 77% 39%;
@@ -1265,19 +1266,19 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 22% 84%;
-    --input: 215 22% 84%;
+    --border: 215 24% 78%;
+    --input: 215 24% 78%;
     --ring: 194 77% 39%;
 
     --radius: 0.875rem;
 
     /* Premium depth tokens */
     --accent-glow: 194 72% 57%;
-    --card-hover: 210 32% 98%;
+    --card-hover: 210 30% 97%;
     --gradient-start: 219 48% 18%;
     --gradient-mid: 205 55% 28%;
     --gradient-end: 194 77% 39%;
-    --surface-elevated: 210 40% 99%;
+    --surface-elevated: 0 0% 100%;
     --primary-glow: 206 58% 30%;
 
     /* Sidebar - Deep Navy Gradient */
@@ -1291,14 +1292,14 @@
     --sidebar-ring: 194 77% 39%;
 
     /* Custom tokens */
-    --section-header: 220 33% 18%;
+    --section-header: 220 33% 16%;
     --section-number: 194 77% 39%;
-    --highlight-bg: 194 55% 95%;
-    --table-header: 220 33% 18%;
-    --table-stripe: 210 28% 97%;
+    --highlight-bg: 194 48% 92%;
+    --table-header: 220 33% 16%;
+    --table-stripe: 212 28% 95%;
 
     /* Premium accent variations */
-    --accent-soft: 194 56% 94%;
+    --accent-soft: 194 48% 92%;
     --accent-medium: 194 69% 58%;
     --accent-intense: 194 77% 36%;
 

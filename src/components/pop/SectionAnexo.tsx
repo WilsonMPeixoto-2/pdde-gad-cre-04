@@ -1,4 +1,6 @@
 import {
+  BookOpen,
+  ExternalLink,
   FileText,
   Gavel,
   Scale,

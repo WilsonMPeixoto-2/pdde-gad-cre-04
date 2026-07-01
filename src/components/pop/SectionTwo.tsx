@@ -219,14 +219,67 @@ export const SectionTwo = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
               Vedações — despesas proibidas (Res. FNDE 15/2021)
             </h3>
+            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+              Conforme a Resolução CD/FNDE nº 15/2021, é expressamente proibida a aplicação de recursos do PDDE em:
+            </p>
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-red-700 dark:text-red-400">Não aplicar</strong> recursos indevidamente em despesas de <strong className="text-foreground">pessoal, contas recorrentes</strong> (água, luz, telefone, aluguel), <strong className="text-foreground">despesas assistencialistas</strong> ou <strong className="text-foreground">gêneros alimentícios</strong> (cobertos pelo PNAE).</span>
+                <span className="text-left sm:text-justify">Despesas com <strong className="text-foreground">pessoal</strong>, inclusive pagamento de servidores, prestadores e gratificações.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Em caso de dúvida sobre enquadramento, <strong className="text-primary">consulte a GAD antes de executar</strong> a despesa.</span>
+                <span className="text-left sm:text-justify">Contas de <strong className="text-foreground">consumo recorrente</strong>, como tarifas de água, luz, telefone, internet e aluguel.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Despesas <strong className="text-foreground">assistencialistas</strong> ou de caráter eminentemente individual.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-foreground">Obras e reformas estruturais</strong>, salvo ações específicas de ampliação autorizadas pelo FNDE.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Aquisição de <strong className="text-foreground">gêneros alimentícios</strong> (que possuem cobertura orçamentária própria via PNAE).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
+                <span className="text-left sm:text-justify">Em caso de dúvida sobre enquadramento, <strong className="text-primary font-semibold">consulte a GAD antes de executar a despesa</strong>.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Comprovantes de despesa */}
+          <div className="mb-5 border-t border-border/40 pt-5">
+            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              Emissão e liquidação de comprovantes (Res. FNDE 15/2021)
+            </h3>
+            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
+              <li className="flex items-start gap-2">
+                <span className="text-slate-500 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-foreground">Emissão em nome da UEx/CEC:</strong> Notas fiscais e recibos devem ser obrigatoriamente emitidos com a razão social e o CNPJ da UEx/CEC (Art. 33).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-slate-500 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-foreground">Discriminação clara:</strong> O documento fiscal deve detalhar os materiais ou serviços contratados (evite termos genéricos como "prestação de serviços" ou "diversos") (Art. 33).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-slate-500 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-foreground">Nexo temporal:</strong> As despesas devem possuir data igual ou posterior ao crédito dos recursos na conta bancária (Art. 22).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-slate-500 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-foreground">Integridade física:</strong> Comprovantes não podem conter rasuras, emendas ou borrões (Art. 33).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-slate-500 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-foreground">Conta bancária específica:</strong> Todos os pagamentos devem ser efetuados exclusivamente via transferência bancária, débito ou documento bancário a partir da conta do PDDE (Art. 19).</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-slate-500 font-bold">•</span>
+                <span className="text-left sm:text-justify"><strong className="text-foreground">Aprovação do Conselho:</strong> A aprovação da prestação de contas pelo Conselho Escolar/CEC em assembleia é requisito de regularidade (Art. 30).</span>
               </li>
             </ul>
           </div>

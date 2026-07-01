@@ -1,9 +1,4 @@
 import {
-  BookOpen,
-  CalendarClock,
-  Check,
-  Clock,
-  ExternalLink,
   FileText,
   Gavel,
   Scale,
@@ -26,33 +21,7 @@ export const SectionAnexo = () => {
     { documento: "Comprovante de devolução/recolhimento de saldo ao FNDE (quando houver)", obrigatorio: false },
   ];
 
-  const regrasComprovantes = [
-    { regra: "Notas fiscais devem ser emitidas em nome da UEx/CEC (CNPJ da entidade executora)", artigo: "Res. 15/2021, Art. 33" },
-    { regra: "Comprovantes devem conter discriminação clara do serviço/material (sem generalização)", artigo: "Res. 15/2021, Art. 33" },
-    { regra: "Comprovantes aceitos somente com data igual ou posterior ao crédito na conta do PDDE", artigo: "Res. 15/2021, Art. 22" },
-    { regra: "Comprovantes não podem conter rasuras, acréscimos ou emendas", artigo: "Res. 15/2021, Art. 33" },
-    { regra: "Pagamentos devem ser realizados exclusivamente por meio da conta bancária específica do PDDE", artigo: "Res. 15/2021, Art. 19" },
-    { regra: "É obrigatória a realização de, no mínimo, 3 pesquisas de preços para cada aquisição", artigo: "Res. 15/2021, Art. 17" },
-    { regra: "A prestação de contas deve ser aprovada pelo Conselho Escolar/CEC in assembleia", artigo: "Res. 15/2021, Art. 30" },
-  ];
 
-  const prazosPrestacao = [
-    {
-      situacao: "Prazo UEx → EEx (Entidade Executora → Secretaria)",
-      prazo:
-        "A UEx deve encaminhar a prestação de contas à EEx (Secretaria de Educação) até 28 de fevereiro do exercício subsequente ao do repasse, conforme Resolução CD/FNDE nº 15/2021.",
-    },
-    {
-      situacao: "Prazo EEx → FNDE",
-      prazo:
-        "A EEx (Secretaria de Educação) deve consolidar e encaminhar as prestações de contas ao FNDE até 30 de abril do exercício subsequente ao do repasse.",
-    },
-    {
-      situacao: "Prazo interno (SEI!RIO / 4ª CRE)",
-      prazo:
-        "Após finalizar as etapas federais e organizar os documentos, a escola deve autuar e instruir o processo no SEI!RIO e remetê-lo à GAD dentro do prazo interno divulgado anualmente pela CRE.",
-    },
-  ];
 
   const documentosComprobatorios = [
     { tipo: "Compra de material e insumos", documentos: "Nota fiscal de venda, cupom fiscal ou DANFE" },
@@ -191,136 +160,7 @@ export const SectionAnexo = () => {
         </div>
       </div>
 
-      <div className="section-card mb-6">
-        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-          <div className="min-w-0">
-            <span className="kicker-label">
-              <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-              Consulta rápida
-            </span>
-            <h3
-              className="mt-4 text-[1.55rem] text-foreground sm:text-[1.9rem]"
-              style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.035em", lineHeight: "1.04" }}
-            >
-              Prazos, consequências e alertas que merecem leitura imediata
-            </h3>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground/78 sm:text-[0.98rem]">
-              Esta camada de leitura resume os pontos que mais impactam regularidade, prazo e conferência final da prestação de contas.
-            </p>
-          </div>
-        </div>
 
-        <div className="grid gap-4 xl:grid-cols-2">
-          <div className="signal-card" data-tone="warning">
-            <p className="signal-card-kicker">Prazos</p>
-            <h4 className="signal-card-title">Como cumprir os marcos do fluxo sem erro</h4>
-            <div className="mt-4 space-y-3">
-              {prazosPrestacao.map((item, index) => (
-                <div key={item.situacao} className="rounded-[1.15rem] border border-border/55 bg-background/82 px-4 py-4">
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                      {index + 1}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-foreground">{item.situacao}</p>
-                      <p className="mt-1 text-sm leading-7 text-muted-foreground">{item.prazo}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="signal-card" data-tone="info">
-              <p className="signal-card-kicker">Organização contínua</p>
-              <h4 className="signal-card-title">Regra de ouro para evitar atraso no encerramento</h4>
-              <p className="signal-card-copy">
-                <strong className="text-primary">Regra de ouro:</strong> não deixe para organizar os documentos ao final do ano; mantenha o dossiê atualizado a cada despesa.
-              </p>
-            </div>
-
-            <div className="signal-card" data-tone="danger">
-              <p className="signal-card-kicker">Consequências da omissão</p>
-              <h4 className="signal-card-title">O não cumprimento dos prazos ou a não apresentação da prestação de contas acarreta</h4>
-              <ul className="signal-card-copy mt-3 space-y-2">
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span><strong className="text-foreground">Suspensão dos repasses</strong> do PDDE até a regularização.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span><strong className="text-foreground">Inscrição em inadimplência</strong> no FNDE e restrições no SIAFI.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span><strong className="text-foreground">Instauração de Tomada de Contas Especial (TCE)</strong> pelo FNDE.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span>Responsabilização pessoal do dirigente da UEx/CEC.</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="grid gap-4 lg:grid-cols-2">
-              <div className="signal-card" data-tone="info">
-                <p className="signal-card-kicker">SiGPC / Contas Online</p>
-                <h4 className="signal-card-title">Sistema federal obrigatório para registro e envio</h4>
-                <ul className="signal-card-copy mt-3 space-y-2">
-                  <li className="flex items-start gap-2">
-                    <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                    <span>O demonstrativo de execução da receita e da despesa é gerado pelo SiGPC.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                    <span>A UEx deve registrar todas as despesas e pagamentos no sistema.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                    <span>Acesse em: <strong className="text-foreground">sigpc.fnde.gov.br</strong>.</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="signal-card" data-tone="warning">
-                <p className="signal-card-kicker">Encerramento do exercício</p>
-                <h4 className="signal-card-title">Atenção especial no fechamento de dezembro</h4>
-                <p className="signal-card-copy">
-                  Caso haja saldo remanescente em 31/12, ele deve ser reprogramado para o exercício seguinte conforme orientações do FNDE. Observe também as orientações sobre <strong className="text-foreground">devolução de saldos</strong> (quando exigida) e encerramento do exercício, consultando sempre os <strong className="text-foreground">informativos oficiais do FNDE</strong>.
-                </p>
-              </div>
-            </div>
-
-            <div className="signal-card" data-tone="danger">
-              <p className="signal-card-kicker">Vedações</p>
-              <h4 className="signal-card-title">Despesas proibidas com recursos do PDDE</h4>
-              <ul className="signal-card-copy mt-3 space-y-2">
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span>Despesas com pessoal, inclusive pagamento de servidores e gratificações.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span>Contas de consumo recorrente, como água, luz, telefone e aluguel.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span>Despesas assistencialistas ou de caráter individual.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span>Obras e reformas estruturais, salvo ações específicas autorizadas pelo FNDE.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-70" aria-hidden="true" />
-                  <span>Aquisição de gêneros alimentícios cobertos pelo PNAE.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div className="section-card p-6 sm:p-8 mb-6">
         <div className="flex items-center gap-3 mb-5">
@@ -363,48 +203,7 @@ export const SectionAnexo = () => {
         </div>
       </div>
 
-      <div className="section-card p-6 sm:p-8 mb-6">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2.5 rounded-lg bg-primary/10">
-            <Scale className="w-5 h-5 text-primary" />
-          </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            Regras para comprovantes de despesa
-            <span className="ml-2 text-sm font-normal text-muted-foreground">
-              (Conforme Resolução CD/FNDE nº 15/2021)
-            </span>
-          </h3>
-        </div>
 
-        <div className="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-          <table className="table-institutional table-responsive-cards w-full text-sm">
-            <thead>
-              <tr>
-                <th className="bg-primary text-primary-foreground rounded-tl-lg px-4 py-3 text-left">
-                  Regra
-                </th>
-                <th className="bg-primary text-primary-foreground rounded-tr-lg px-4 py-3 text-center w-36">
-                  Referência
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {regrasComprovantes.map((item, index) => (
-                <tr key={index} className="border-b border-border/40">
-                  <td data-label="Regra" className="px-4 py-3">
-                    {item.regra}
-                  </td>
-                  <td data-label="Referência" className="text-center px-4 py-3">
-                    <span className="inline-block px-2.5 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-lg">
-                      {item.artigo}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
 
       <div className="section-card p-6 sm:p-8">
         <div className="mb-6 flex items-center gap-3">

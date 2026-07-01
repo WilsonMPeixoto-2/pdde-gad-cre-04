@@ -1,22 +1,23 @@
 export const SectionIntro = () => {
   return (
     <section className="animate-fade-in">
-      <div className="section-card">
-        <div className="min-w-0">
+      <div className="editorial-letter">
+        <div className="editorial-spread">
+          <div className="min-w-0">
           <span className="article-kicker">Apresentação institucional</span>
           <h2
-            className="mt-4 font-display text-[2rem] font-bold text-foreground sm:text-[2.45rem]"
+            className="mt-5 font-display text-[2.55rem] font-bold text-foreground sm:text-[3.25rem] lg:text-[3.75rem]"
             style={{
-              lineHeight: "1.06",
-              letterSpacing: "-0.022em",
+              lineHeight: "1.02",
+              letterSpacing: "0",
             }}
           >
             Prezados(as) Diretores(as),
           </h2>
 
-          <div className="editorial-hairline mt-5" />
+          <div className="editorial-hairline mt-6" />
 
-          <div className="content-spacing prose-institutional mt-6 text-justify">
+          <div className="content-spacing prose-institutional mt-7 text-justify">
             <p className="drop-cap lead-text">
               A rotina de uma gestão escolar é intensa. Entre demandas pedagógicas, cuidado com pessoas
               e urgências do dia a dia, sabemos que a organização administrativa exige tempo, atenção e,
@@ -58,6 +59,24 @@ export const SectionIntro = () => {
               </div>
             </div>
           </div>
+          </div>
+
+          <aside className="editorial-aside hidden lg:block" aria-label="Síntese institucional">
+            <span className="editorial-quote-mark" aria-hidden="true">“</span>
+            <p className="editorial-quote">
+              Estar ao lado das equipes gestoras, com orientação clara, apoio contínuo e diálogo.
+            </p>
+            <p className="editorial-aside-caption">4ª Coordenadoria Regional de Educação</p>
+
+            <div className="mt-16 border-l border-border/75 pl-4">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary">
+                Sobre este guia
+              </p>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                Guia prático para a tramitação da Prestação de Contas do PDDE no SEI!RIO.
+              </p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>

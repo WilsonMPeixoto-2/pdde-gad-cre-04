@@ -96,68 +96,90 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
   return (
     <section id={renderId ? "secao-1" : undefined} className="scroll-mt-20 animate-fade-in">
       <div className="space-y-8">
-        <div className="section-card border-l-[3px] border-l-accent/75">
-          <div className="flex items-start gap-4">
-            <div className="shrink-0 rounded-xl bg-accent/10 p-3">
-              <ClipboardList className="h-5 w-5 text-accent sm:h-6 sm:w-6" />
+        <div className="section-card chapter-opening">
+          <div className="chapter-grid">
+            <div aria-hidden="true">
+              <span className="chapter-index">01</span>
+              <span className="chapter-index-label">Primeira etapa</span>
             </div>
-            <div className="content-spacing">
-              <h3 className="section-heading">1.1. Sobre esta etapa</h3>
-              <p className="text-left text-sm leading-relaxed text-muted-foreground sm:text-base sm:text-justify">
+
+            <div className="min-w-0">
+              <div className="mb-3 flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-primary">
+                <ClipboardList className="h-4 w-4" aria-hidden="true" />
+                1.1. Sobre esta etapa
+              </div>
+              <h3 className="chapter-title">Abertura do Processo</h3>
+              <p className="chapter-lead mt-5 text-left sm:text-justify">
                 A etapa inicial compreende a autuação do processo administrativo eletrônico em que
                 serão registrados os dados básicos da prestação de contas, definidos os campos de
                 identificação e criada a base formal sobre a qual a instrução seguirá nas etapas
                 posteriores.
               </p>
+
+              <div className="mt-7 grid gap-4 xl:grid-cols-[minmax(0,1fr)_17rem]">
+                <ProfileCallout visibleFor="diretor" variant="info">
+                  <p>
+                    Certifique-se de ter em mãos o <strong className="text-foreground">CNPJ do CEC</strong>,
+                    a <strong className="text-foreground">designação da escola</strong> e o{" "}
+                    <strong className="text-foreground">exercício de referência</strong> antes de iniciar a
+                    autuação.
+                  </p>
+                </ProfileCallout>
+
+                <ProfileCallout visibleFor="gad" variant="warning">
+                  <p>
+                    Ao receber o processo, verifique se a{" "}
+                    <strong className="text-foreground">especificação</strong> segue o padrão obrigatório e
+                    se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos
+                    fora do padrão devem ser devolvidos para correção.
+                  </p>
+                </ProfileCallout>
+              </div>
             </div>
           </div>
 
-          <ProfileCallout visibleFor="diretor" variant="info">
-            <p>
-              Certifique-se de ter em mãos o <strong className="text-foreground">CNPJ do CEC</strong>,
-              a <strong className="text-foreground">designação da escola</strong> e o{" "}
-              <strong className="text-foreground">exercício de referência</strong> antes de iniciar a
-              autuação.
-            </p>
-          </ProfileCallout>
-
-          <ProfileCallout visibleFor="gad" variant="warning">
-            <p>
-              Ao receber o processo, verifique se a{" "}
-              <strong className="text-foreground">especificação</strong> segue o padrão obrigatório e
-              se a <strong className="text-foreground">GAD consta como interessada</strong>. Processos
-              fora do padrão devem ser devolvidos para correção.
-            </p>
-          </ProfileCallout>
-
-          <div className="mt-6 grid gap-3 lg:grid-cols-3">
+          <div className="preflight-grid mt-8">
             {preflightCards.map((card) => {
               const Icon = card.icon;
 
               return (
                 <article
                   key={card.title}
-                  className="rounded-2xl border border-border/60 bg-linear-to-br from-background via-background to-secondary/55 p-4 shadow-soft"
+                  className="preflight-card"
                 >
-                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <div className="preflight-icon">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <h4 className="font-heading text-sm font-bold tracking-tight text-foreground sm:text-base">
-                    {card.title}
-                  </h4>
-                  <p className="mt-2 text-left text-sm leading-relaxed text-muted-foreground sm:text-justify">
-                    {card.description}
-                  </p>
+                  <div>
+                    <h4 className="font-heading text-sm font-bold tracking-tight text-foreground sm:text-base">
+                      {card.title}
+                    </h4>
+                    <p className="mt-2 text-left text-sm leading-7 text-muted-foreground sm:text-justify">
+                      {card.description}
+                    </p>
+                  </div>
                 </article>
               );
             })}
           </div>
         </div>
 
-        <div className="section-card">
-          <h3 className="section-heading">1.2. Iniciando o Processo</h3>
+        <div className="section-card process-spread">
           <div className="grid gap-6 xl:grid-cols-[minmax(0,0.94fr)_minmax(22rem,1.06fr)] xl:items-start">
             <div className="content-spacing">
+              <div className="mb-5 flex items-end gap-4 border-b border-primary/18 pb-4">
+                <span className="font-display text-[3.4rem] font-bold leading-none text-primary/18" aria-hidden="true">
+                  02
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary">
+                    1.2. Primeira ação no SEI!RIO
+                  </p>
+                  <h3 className="font-display text-[1.9rem] font-bold leading-[1.04] text-foreground sm:text-[2.35rem]">
+                    Iniciando o Processo
+                  </h3>
+                </div>
+              </div>
               <p className="text-left text-sm leading-relaxed text-muted-foreground sm:text-base sm:text-justify">
                 Para abrir um novo processo no SEI!RIO, localize no menu lateral o comando{" "}
                 <UiLabelChip className="mx-1 align-middle">Iniciar Processo</UiLabelChip> e use esse
@@ -173,7 +195,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
             </div>
 
             <div className="space-y-3">
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="text-[0.72rem] font-bold uppercase tracking-[0.18em] text-primary/75">
                 Visualização do sistema
               </p>
               <SeiMockup variant="menu" highlight="iniciar" />

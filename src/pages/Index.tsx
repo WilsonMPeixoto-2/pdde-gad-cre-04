@@ -416,7 +416,7 @@ const Index = () => {
   }, [sidebarOpen]);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-clip">
+    <div className="min-h-screen bg-background">
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
 

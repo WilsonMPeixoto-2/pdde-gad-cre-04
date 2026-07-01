@@ -42,15 +42,15 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
       <header
         className="sticky top-0 z-50 no-print header-backdrop"
         style={{
-          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
-          boxShadow: "0 18px 42px -34px rgba(1, 10, 29, 0.95), inset 0 -1px 0 0 rgba(255, 255, 255, 0.04)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          boxShadow: "0 16px 34px -32px rgba(1, 10, 29, 0.95), inset 0 -1px 0 0 rgba(255, 255, 255, 0.04)",
         }}
       >
-        <div className="container mx-auto px-3 py-3 sm:px-4 sm:py-3.5">
+        <div className="mx-auto max-w-[1480px] px-4 py-3 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2.5 sm:gap-3.5">
               <div
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] sm:h-11 sm:w-11"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.035] sm:h-10 sm:w-10"
                 style={{
                   boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.08), 0 18px 32px -28px rgba(0,0,0,0.85)",
                 }}
@@ -58,10 +58,10 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 <FileText className="h-5 w-5 text-accent sm:h-[1.35rem] sm:w-[1.35rem]" />
               </div>
               <div className="min-w-0">
-                <p className="truncate font-heading text-sm font-bold text-white sm:text-base lg:text-[1rem]" style={{ letterSpacing: "-0.004em", wordSpacing: "0.04em" }}>
+                <p className="truncate font-heading text-sm font-bold text-white sm:text-base lg:text-[1rem]" style={{ letterSpacing: "0", wordSpacing: "0.04em" }}>
                   Guia PDDE no SEI!RIO
                 </p>
-                <div className="hidden items-center gap-2 text-xs tracking-[0.12em] text-white/55 sm:flex">
+                <div className="hidden items-center gap-2 text-xs tracking-[0.1em] text-white/55 sm:flex">
                   <span>4ª Coordenadoria Regional de Educação | GAD</span>
                   <span className="inline-flex rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/52">
                     {GUIDE_VERSION.shortLabel}
@@ -77,7 +77,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                     variant="ghost"
                     size="sm"
                     onClick={openSearch}
-                    className="h-10 rounded-lg border border-white/8 bg-white/[0.04] px-3.5 text-white/76 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
+                    className="h-10 rounded-md border-0 bg-transparent px-3.5 text-white/82 transition-colors duration-200 hover:bg-white/[0.06] hover:text-white"
                     aria-label="Abrir busca global (Ctrl+K)"
                   >
                     <Search className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -95,7 +95,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                     variant="ghost"
                     size="sm"
                     onClick={toggleDarkMode}
-                    className="h-10 w-10 rounded-lg border border-white/8 bg-white/[0.04] text-white/76 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
+                    className="h-10 w-10 rounded-md border-0 bg-transparent text-white/82 transition-colors duration-200 hover:bg-white/[0.06] hover:text-white"
                     aria-label={isDark ? "Alternar para modo claro" : "Alternar para modo escuro"}
                     aria-pressed={isDark}
                   >
@@ -114,7 +114,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
               <Button
                 size="sm"
                 onClick={onPrint}
-                className="btn-premium h-10 rounded-lg border border-white/10 bg-white/[0.07] px-4 text-white transition-all duration-300 hover:border-white/18 hover:bg-white/[0.11]"
+                className="btn-premium h-10 rounded-md border border-white/12 bg-white/[0.06] px-4 text-white transition-colors duration-200 hover:border-white/18 hover:bg-white/[0.1]"
                 style={{
                   boxShadow: "0 18px 36px -28px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255,255,255,0.08)",
                 }}
@@ -130,7 +130,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 variant="ghost"
                 size="sm"
                 onClick={onOpenMenu}
-                className="h-9 w-9 rounded-lg border border-white/8 bg-white/[0.04] text-white/85 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
+                className="h-9 w-9 rounded-md border border-white/8 bg-white/[0.035] text-white/85 transition-colors duration-200 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                 aria-label="Abrir menu de navegação"
               >
                 <Menu className="w-4 h-4" aria-hidden="true" />
@@ -140,7 +140,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                 variant="ghost"
                 size="sm"
                 onClick={openSearch}
-                className="h-9 w-9 rounded-lg border border-white/8 bg-white/[0.04] text-white/85 transition-all duration-300 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
+                className="h-9 w-9 rounded-md border border-white/8 bg-white/[0.035] text-white/85 transition-colors duration-200 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                 aria-label="Abrir busca global"
               >
                 <Search className="w-4 h-4" aria-hidden="true" />
@@ -151,7 +151,7 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-9 w-9 rounded-lg border border-white/8 bg-white/[0.04] text-white/85 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
+                    className="h-9 w-9 rounded-md border border-white/8 bg-white/[0.035] text-white/85 hover:border-white/14 hover:bg-white/[0.08] hover:text-white"
                     aria-label="Mais ações"
                   >
                     <MoreVertical className="w-4 h-4" aria-hidden="true" />

@@ -1242,78 +1242,78 @@
 @layer base {
   :root {
     /* Modern Government Design System — High-Contrast Light Mode */
-    --background: 214 32% 94%;
-    --foreground: 220 33% 16%;
+    --background: 210 20% 97%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 33% 16%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 33% 16%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Primary - Deep Navy */
-    --primary: 219 48% 18%;
+    /* Primary - Deep Midnight Ink */
+    --primary: 222 47% 11%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Visible Slate */
-    --secondary: 212 28% 89%;
-    --secondary-foreground: 220 33% 16%;
+    /* Secondary - Light Slate Blue */
+    --secondary: 210 20% 94%;
+    --secondary-foreground: 222 47% 11%;
 
     /* Muted - Refined Slate Gray */
-    --muted: 212 22% 86%;
-    --muted-foreground: 217 19% 32%;
+    --muted: 210 16% 91%;
+    --muted-foreground: 217 19% 36%;
 
-    /* Accent - Institutional Teal */
-    --accent: 194 77% 39%;
+    /* Accent - Institutional Vibrant Blue */
+    --accent: 221 83% 45%;
     --accent-foreground: 0 0% 100%;
 
     /* Success - Professional Emerald */
-    --success: 154 52% 34%;
+    --success: 142 70% 36%;
     --success-foreground: 0 0% 100%;
 
     /* Warning - Civic Amber */
-    --warning: 38 76% 47%;
+    --warning: 38 92% 44%;
     --warning-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 347 77% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 24% 78%;
-    --input: 215 24% 78%;
-    --ring: 194 77% 39%;
+    --border: 210 16% 87%;
+    --input: 210 16% 87%;
+    --ring: 221 83% 45%;
 
     --radius: 0.875rem;
 
     /* Premium depth tokens */
-    --accent-glow: 194 72% 57%;
-    --card-hover: 210 30% 97%;
-    --gradient-start: 219 48% 18%;
-    --gradient-mid: 205 55% 28%;
-    --gradient-end: 194 77% 39%;
+    --accent-glow: 221 83% 65%;
+    --card-hover: 210 30% 99%;
+    --gradient-start: 222 47% 11%;
+    --gradient-mid: 219 48% 18%;
+    --gradient-end: 221 83% 45%;
     --surface-elevated: 0 0% 100%;
-    --primary-glow: 206 58% 30%;
+    --primary-glow: 222 47% 18%;
 
-    /* Sidebar - Deep Navy Gradient */
-    --sidebar-background: 221 46% 13%;
+    /* Sidebar - Deep Midnight Ink Gradient */
+    --sidebar-background: 222 47% 9%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 194 77% 39%;
+    --sidebar-primary: 221 83% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 30% 18%;
+    --sidebar-accent: 222 47% 12%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 220 26% 21%;
-    --sidebar-ring: 194 77% 39%;
+    --sidebar-border: 222 47% 15%;
+    --sidebar-ring: 221 83% 45%;
 
     /* Custom tokens */
-    --section-header: 220 33% 16%;
-    --section-number: 194 77% 39%;
-    --highlight-bg: 194 48% 92%;
-    --table-header: 220 33% 16%;
-    --table-stripe: 212 28% 95%;
+    --section-header: 222 47% 11%;
+    --section-number: 221 83% 45%;
+    --highlight-bg: 221 83% 97.5%;
+    --table-header: 222 47% 11%;
+    --table-stripe: 210 25% 96.5%;
 
     /* Premium accent variations */
-    --accent-soft: 194 48% 92%;
-    --accent-medium: 194 69% 58%;
-    --accent-intense: 194 77% 36%;
+    --accent-soft: 221 83% 97%;
+    --accent-medium: 221 83% 65%;
+    --accent-intense: 221 83% 40%;
 
     /* Typography */
     --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -1322,63 +1322,63 @@
   }
 
   .dark {
-    --background: 221 36% 9%;
-    --foreground: 210 36% 96%;
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
 
-    --card: 221 30% 12%;
-    --card-foreground: 210 40% 96%;
+    --card: 224 71% 7%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 221 35% 12%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 224 71% 7%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 194 77% 52%;
-    --primary-foreground: 222 47% 8%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 224 71% 4%;
 
-    --secondary: 220 22% 16%;
-    --secondary-foreground: 210 40% 96%;
+    --secondary: 224 71% 8%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 220 22% 16%;
-    --muted-foreground: 214 18% 82%;
+    --muted: 224 71% 10%;
+    --muted-foreground: 215 20% 70%;
 
-    --accent: 194 77% 58%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 154 52% 44%;
-    --success-foreground: 222 47% 8%;
+    --success: 142 70% 45%;
+    --success-foreground: 224 71% 4%;
 
-    --warning: 38 82% 58%;
-    --warning-foreground: 222 47% 8%;
+    --warning: 38 92% 52%;
+    --warning-foreground: 224 71% 4%;
 
-    --destructive: 0 62% 50%;
+    --destructive: 347 77% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 18% 23%;
-    --input: 220 18% 23%;
-    --ring: 194 77% 52%;
+    --border: 224 71% 13%;
+    --input: 224 71% 13%;
+    --ring: 217 91% 60%;
 
     /* Premium depth tokens - dark */
-    --accent-glow: 194 77% 62%;
-    --card-hover: 221 26% 14%;
-    --gradient-start: 221 46% 7%;
-    --gradient-mid: 211 56% 19%;
-    --gradient-end: 194 77% 58%;
-    --surface-elevated: 221 35% 13%;
-    --primary-glow: 194 77% 54%;
+    --accent-glow: 217 91% 68%;
+    --card-hover: 224 71% 9.5%;
+    --gradient-start: 224 71% 3%;
+    --gradient-mid: 224 71% 5.5%;
+    --gradient-end: 217 91% 60%;
+    --surface-elevated: 224 71% 8%;
+    --primary-glow: 217 91% 58%;
 
-    --sidebar-background: 221 42% 9%;
-    --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 194 77% 52%;
-    --sidebar-primary-foreground: 222 47% 8%;
-    --sidebar-accent: 220 20% 17%;
-    --sidebar-accent-foreground: 210 40% 96%;
-    --sidebar-border: 220 18% 24%;
-    --sidebar-ring: 194 77% 58%;
+    --sidebar-background: 224 71% 3%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 224 71% 4%;
+    --sidebar-accent: 224 71% 6%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 224 71% 9%;
+    --sidebar-ring: 217 91% 68%;
 
-    --section-header: 194 77% 58%;
-    --section-number: 194 77% 52%;
-    --highlight-bg: 220 22% 16%;
-    --table-header: 222 47% 15%;
-    --table-stripe: 222 47% 11%;
+    --section-header: 217 91% 60%;
+    --section-number: 217 91% 60%;
+    --highlight-bg: 224 71% 8%;
+    --table-header: 224 71% 6%;
+    --table-stripe: 224 71% 5%;
   }
 }
 

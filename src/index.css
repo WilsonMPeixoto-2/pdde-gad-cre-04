@@ -1538,16 +1538,16 @@
 
   /* Header backdrop with @supports fallback */
   .header-backdrop {
-    background: rgba(12, 20, 36, 0.92);
+    background: rgba(9, 18, 33, 0.98);
   }
 
   @supports (backdrop-filter: blur(20px)) {
     .header-backdrop {
       background: linear-gradient(
         135deg,
-        rgba(12, 20, 36, 0.9) 0%,
-        rgba(18, 30, 52, 0.82) 42%,
-        rgba(13, 24, 42, 0.9) 100%
+        rgba(9, 18, 33, 0.98) 0%,
+        rgba(15, 27, 48, 0.97) 42%,
+        rgba(9, 18, 33, 0.98) 100%
       );
       backdrop-filter: blur(20px) saturate(150%);
       -webkit-backdrop-filter: blur(20px) saturate(150%);

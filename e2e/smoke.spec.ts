@@ -77,7 +77,9 @@ test.describe("Fluxo desktop", () => {
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.getByRole("heading", { level: 2, name: /prezados\(as\) diretores\(as\)/i })).toBeVisible();
     await expect(page.getByText(/a rotina de uma gestão escolar é intensa/i)).toBeVisible();
-    await expect(page.getByRole("heading", { level: 3, name: /escopo da orientação processual/i })).toBeVisible();
+    await expect(page.getByText(/assinam esta apresentação/i)).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: /calculadora de prazos operacionais/i })).toBeVisible();
+    await expect(page.getByText(/planeje as etapas do processo com base na data de crédito da verba/i)).toBeVisible();
     await expect(page.getByRole("list", { name: /recursos centrais do guia/i })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /ler guia completo/i })).toHaveCount(0);
     await expect(page.getByText(/painel do processo/i)).toHaveCount(0);

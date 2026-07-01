@@ -74,8 +74,8 @@ export const ContentBlock = ({
   return (
     <article
       className={cn(
-        "rounded-2xl border p-5 sm:p-6 transition-colors duration-300",
-        "shadow-[0_1px_3px_-1px_hsl(221_31%_20%/0.04),0_4px_16px_-8px_hsl(221_31%_20%/0.06),inset_0_1px_0_0_hsl(0_0%_100%/0.45)]",
+        "rounded-xl border p-5 transition-colors duration-300 sm:p-6",
+        "shadow-[0_1px_2px_0_hsl(221_31%_20%/0.035),0_12px_28px_-26px_hsl(221_31%_20%/0.13),inset_0_1px_0_0_hsl(0_0%_100%/0.45)]",
         p.border,
         p.bg,
         className,
@@ -86,7 +86,7 @@ export const ContentBlock = ({
         {Icon && (
           <div
             className={cn(
-              "mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl",
+              "mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
               p.iconWrap,
             )}
           >
@@ -96,7 +96,7 @@ export const ContentBlock = ({
 
         <div className="min-w-0 flex-1 space-y-1">
           {kicker && (
-            <span className="block text-[0.68rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="block text-[0.67rem] font-bold uppercase tracking-[0.15em] text-muted-foreground">
               {kicker}
             </span>
           )}
@@ -105,7 +105,7 @@ export const ContentBlock = ({
               "font-heading text-[1.05rem] font-bold leading-snug sm:text-[1.15rem]",
               p.titleColor,
             )}
-            style={{ letterSpacing: "-0.02em" }}
+            style={{ letterSpacing: "-0.012em" }}
           >
             {title}
           </h3>
@@ -113,7 +113,7 @@ export const ContentBlock = ({
       </div>
 
       {/* ── Body zone ───────────────────────────────────────── */}
-      <div className="mt-4 space-y-4 text-[0.94rem] leading-[1.85] text-foreground/82 [&_p]:text-pretty [&_p]:hyphens-auto [&_strong]:text-foreground [&_strong]:font-semibold [&_ul]:space-y-2.5 [&_li]:leading-[1.8]">
+      <div className="mt-4 space-y-4 text-[0.95rem] leading-[1.82] text-foreground/82 [&_p]:text-pretty [&_p]:hyphens-auto [&_strong]:text-foreground [&_strong]:font-semibold [&_ul]:space-y-2.5 [&_li]:leading-[1.78]">
         {children}
       </div>
 

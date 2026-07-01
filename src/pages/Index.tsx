@@ -86,6 +86,14 @@ const resolveDeferredSectionId = (anchorId: GuideAnchorId): GuideSectionId =>
   (guideAnchorParentSections[anchorId as keyof typeof guideAnchorParentSections] ??
   anchorId) as GuideSectionId;
 
+const getDeferredSectionIdsThroughTarget = (anchorId: GuideAnchorId) => {
+  const targetSectionId = resolveDeferredSectionId(anchorId);
+  const targetIndex = guideSectionIds.indexOf(targetSectionId);
+  const sectionIds = targetIndex >= 0 ? guideSectionIds.slice(0, targetIndex + 1) : [targetSectionId];
+
+  return sectionIds.filter((sectionId) => sectionId in deferredSectionLoaders);
+};
+
 type DeferredSectionSlotProps = {
   children: ReactNode;
   isReady: boolean;
@@ -144,6 +152,7 @@ const Index = () => {
   const activatedSectionsRef = useRef(new Set<GuideSectionId>());
   const lastHandledGuideTargetRef = useRef<GuideAnchorId | null>(null);
   const lockedGuideTargetRef = useRef<GuideAnchorId | null>(null);
+  const pendingGuideTargetScrollRef = useRef<GuideAnchorId | null>(null);
   const suspendVisibleSyncUntilRef = useRef(0);
   const activeSectionTriggerOffset = 140;
 
@@ -184,6 +193,7 @@ const Index = () => {
   }, []);
 
   const handleSectionClick = useCallback((sectionId: GuideSectionId) => {
+    pendingGuideTargetScrollRef.current = null;
     lockGuideTargetSync(sectionId);
     setActiveSection(sectionId);
     syncGuideUrl(sectionId);
@@ -213,7 +223,7 @@ const Index = () => {
     });
   }, []);
 
-  const activateDeferredSection = useCallback((anchorId: GuideAnchorId) => {
+  const activateDeferredSection = useCallback((anchorId: GuideAnchorId): Promise<void> => {
     const sectionId = resolveDeferredSectionId(anchorId);
     const loadSection = deferredSectionLoaders[sectionId];
 
@@ -223,25 +233,42 @@ const Index = () => {
     }
 
     if (!loadSection || activatedSectionsRef.current.has(sectionId)) {
-      return;
+      return Promise.resolve();
     }
 
     activatedSectionsRef.current.add(sectionId);
-    void loadSection();
-    setReadySections((current) => {
-      if (current.has(sectionId)) return current;
-      return new Set(current).add(sectionId);
-    });
+
+    return loadSection()
+      .catch(() => undefined)
+      .then(() => {
+        setReadySections((current) => {
+          if (current.has(sectionId)) return current;
+          return new Set(current).add(sectionId);
+        });
+      });
   }, []);
+
+  const activateDeferredSectionsThroughTarget = useCallback((anchorId: GuideAnchorId) => {
+    const sectionIds = getDeferredSectionIdsThroughTarget(anchorId);
+    const loadTasks = sectionIds.map((sectionId) => activateDeferredSection(sectionId));
+
+    if (resolveDeferredSectionId(anchorId) !== anchorId) {
+      loadTasks.push(activateDeferredSection(anchorId));
+    }
+
+    return Promise.all(loadTasks).then(() => undefined);
+  }, [activateDeferredSection]);
 
   const syncVisibleSection = useEffectEvent((
     visibleSections: Map<string, { ratio: number; top: number }>,
   ) => {
-    if (Date.now() < suspendVisibleSyncUntilRef.current) {
-      const lockedTarget = lockedGuideTargetRef.current;
-      if (lockedTarget) {
-        setActiveSection(resolveDeferredSectionId(lockedTarget));
-      }
+    const lockedTarget = lockedGuideTargetRef.current;
+    if (
+      lockedTarget &&
+      (Date.now() < suspendVisibleSyncUntilRef.current ||
+        pendingGuideTargetScrollRef.current === lockedTarget)
+    ) {
+      setActiveSection(resolveDeferredSectionId(lockedTarget));
       return;
     }
 
@@ -271,14 +298,31 @@ const Index = () => {
   });
 
   const applyGuideTargetFromUrl = useCallback((target: GuideAnchorId) => {
-    lockGuideTargetSync(target);
+    pendingGuideTargetScrollRef.current = target;
+    lockGuideTargetSync(target, 6000);
     setActiveSection(resolveDeferredSectionId(target));
-    activateDeferredSection(target);
+    void activateDeferredSectionsThroughTarget(target).then(() => {
+      if (lockedGuideTargetRef.current !== target) return;
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          if (lockedGuideTargetRef.current !== target) return;
+
+          scrollToGuideAnchor(target, {
+            focusHeading: true,
+            saveLastSection: (id) => setActiveSection(id as GuideSectionId),
+          });
+          pendingGuideTargetScrollRef.current = null;
+          lockGuideTargetSync(target);
+        });
+      });
+    });
+
     scrollToGuideAnchor(target, {
       focusHeading: true,
       saveLastSection: (id) => setActiveSection(id as GuideSectionId),
     });
-  }, [activateDeferredSection, lockGuideTargetSync]);
+  }, [activateDeferredSectionsThroughTarget, lockGuideTargetSync]);
 
   // IntersectionObserver replaces scroll listener — no reflows, passive detection
   useEffect(() => {

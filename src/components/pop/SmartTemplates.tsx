@@ -232,7 +232,7 @@ export const SmartTemplates = () => {
   }, [copyTemplateToClipboard, resolveTemplateValues]);
 
   return (
-    <div className="section-card border-l-4 border-l-accent smart-templates">
+    <div className="section-card border-l-[3px] border-l-accent/75 smart-templates">
       <div className="flex items-center gap-3 mb-5">
         <div className="p-2.5 rounded-xl bg-accent/10">
           <FileText className="w-5 h-5 text-accent" />

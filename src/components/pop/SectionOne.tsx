@@ -96,7 +96,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
   return (
     <section id={renderId ? "secao-1" : undefined} className="scroll-mt-20 animate-fade-in">
       <div className="space-y-8">
-        <div className="section-card border-l-4 border-l-accent">
+        <div className="section-card border-l-[3px] border-l-accent/75">
           <div className="flex items-start gap-4">
             <div className="shrink-0 rounded-xl bg-accent/10 p-3">
               <ClipboardList className="h-5 w-5 text-accent sm:h-6 sm:w-6" />

@@ -51,7 +51,7 @@ export const SectionFive = () => {
       </div>
 
       <div className="space-y-5">
-        <div className="section-card border-l-4 border-l-primary">
+        <div className="section-card border-l-[3px] border-l-primary/75">
           <div className="flex items-start gap-4">
             <div className="p-3 rounded-xl bg-primary/10 shrink-0">
               <PenLine className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />

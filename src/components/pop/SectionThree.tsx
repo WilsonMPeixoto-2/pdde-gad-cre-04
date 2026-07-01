@@ -68,7 +68,7 @@ export const SectionThree = () => {
         permite identificar a peça sem abrir vários arquivos.
       </ProfileCallout>
 
-      <div className="section-card border-l-4 border-l-sky-500 p-5 sm:p-6">
+      <div className="section-card border-l-[3px] border-l-sky-500/75 p-5 sm:p-6">
         <div className="flex items-start gap-4">
           <div className="shrink-0 rounded-xl bg-sky-100 p-3 dark:bg-sky-900/50">
             <Upload className="h-5 w-5 text-sky-600 dark:text-sky-400 sm:h-6 sm:w-6" />
@@ -150,7 +150,7 @@ export const SectionThree = () => {
         </Callout>
       </div>
 
-      <div className="section-card border-l-4 border-l-primary p-5 sm:p-6">
+      <div className="section-card border-l-[3px] border-l-primary/75 p-5 sm:p-6">
         <h3 className="mb-4 font-semibold text-foreground">3.3. Inclusão do documento externo no SEI!RIO</h3>
 
         <div className="space-y-4">

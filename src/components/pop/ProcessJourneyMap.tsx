@@ -85,7 +85,7 @@ export const ProcessJourneyMap = () => {
   const progressPercent = (completedCount / totalSteps) * 100;
 
   return (
-    <div className="section-card border-l-4 border-l-primary process-journey-map bg-linear-to-br from-background via-background to-primary/5">
+    <div className="section-card border-l-[3px] border-l-primary/75 process-journey-map bg-linear-to-br from-background via-background to-primary/5">
       <div className="mb-6 rounded-2xl border border-border/60 bg-card/90 p-5 shadow-soft">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-start gap-4">

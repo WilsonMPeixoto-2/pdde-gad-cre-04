@@ -172,7 +172,7 @@ export const PDDEChecklist = () => {
   const pendingCount = items.filter(i => !i.checked).length;
 
   return (
-    <div className="section-card border-l-4 border-l-primary">
+    <div className="section-card border-l-[3px] border-l-primary/75">
       {/* Header */}
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-3">

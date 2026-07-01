@@ -65,7 +65,7 @@ export const SectionFour = () => {
         indevida de arquivo nato-digital.
       </ProfileCallout>
 
-      <div className="section-card border-l-4 border-l-primary p-5 sm:p-6">
+      <div className="section-card border-l-[3px] border-l-primary/75 p-5 sm:p-6">
         <div className="flex items-start gap-4">
           <div className="shrink-0 rounded-xl bg-primary/10 p-3">
             <Upload className="h-5 w-5 text-primary sm:h-6 sm:w-6" />

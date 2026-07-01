@@ -5,11 +5,10 @@ export const SectionIntro = () => {
         <div className="min-w-0">
           <span className="article-kicker">Apresentação institucional</span>
           <h2
-            className="mt-4 text-[2rem] text-foreground sm:text-[2.4rem]"
+            className="mt-4 font-display text-[2rem] font-bold text-foreground sm:text-[2.45rem]"
             style={{
-              fontFamily: "var(--font-display)",
-              lineHeight: "1.02",
-              letterSpacing: "-0.04em",
+              lineHeight: "1.06",
+              letterSpacing: "-0.022em",
             }}
           >
             Prezados(as) Diretores(as),

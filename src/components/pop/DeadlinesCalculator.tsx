@@ -78,7 +78,7 @@ export const DeadlinesCalculator = () => {
   };
 
   return (
-    <div className="section-card border-l-4 border-l-sky-500 bg-linear-to-br from-secondary/40 via-background to-sky-50/20 p-5 sm:p-6 dark:from-secondary/15 dark:to-sky-950/15">
+    <div className="section-card border-l-[3px] border-l-sky-500/75 bg-linear-to-br from-secondary/40 via-background to-sky-50/20 p-5 sm:p-6 dark:from-secondary/15 dark:to-sky-950/15">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-sky-100 dark:bg-sky-950/50">

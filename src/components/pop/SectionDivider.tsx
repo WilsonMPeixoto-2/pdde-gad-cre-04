@@ -29,27 +29,34 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
     }, [copyText, sectionId]);
 
     return (
-      <div ref={ref} className="relative py-14 sm:py-16 my-8 sm:my-12 -mx-4 sm:mx-0 section-divider-print overflow-hidden">
-        {/* Premium Background — matches Hero art direction */}
+      <div ref={ref} className="relative my-9 -mx-4 overflow-hidden py-10 section-divider-print sm:mx-0 sm:my-12 sm:py-12">
+        {/* Editorial background — restrained dark civic band */}
         <div className="absolute inset-0 print-hide-effects" style={{ 
-          background: 'linear-gradient(135deg, hsl(222, 47%, 8%) 0%, hsl(215, 55%, 18%) 40%, hsl(218, 50%, 14%) 70%, hsl(222, 47%, 8%) 100%)'
+          background: 'linear-gradient(135deg, hsl(222, 45%, 8%) 0%, hsl(216, 48%, 15%) 54%, hsl(222, 45%, 8%) 100%)'
         }}>
-          {/* Radial glows (same language as Hero) */}
-          <div className="absolute top-[-20%] right-[-10%] w-[400px] h-[400px] rounded-full" style={{ 
-            background: 'radial-gradient(circle, hsl(199, 89%, 48%, 0.1) 0%, transparent 65%)',
-            filter: 'blur(60px)',
-          }} />
-          <div className="absolute bottom-[-30%] left-[-5%] w-[300px] h-[300px] rounded-full" style={{ 
-            background: 'radial-gradient(circle, hsl(230, 50%, 45%, 0.06) 0%, transparent 60%)',
-            filter: 'blur(50px)',
-          }} />
+          <div
+            className="absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, hsl(199, 89%, 68%, 0.3) 0 1px, transparent 1px), linear-gradient(180deg, hsl(0, 0%, 100%, 0.16) 0 1px, transparent 1px)",
+              backgroundSize: "88px 88px",
+            }}
+          />
           
-          {/* Organic lines (topographic, matching Hero) */}
+          {/* Organic lines (same language as Hero) */}
           <svg className="absolute inset-0 w-full h-full opacity-[0.03]" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice" fill="none">
             <path d="M-50,50 C100,30 200,80 350,60 S500,30 650,65 S800,90 950,55" stroke="hsl(199, 89%, 60%)" strokeWidth="0.8" />
             <path d="M-50,120 C100,100 250,150 400,130 S550,90 700,125 S850,160 950,130" stroke="hsl(215, 75%, 55%)" strokeWidth="0.6" />
             <path d="M-50,170 C150,155 300,190 450,175 S600,145 750,170 S900,200 1050,180" stroke="hsl(199, 89%, 55%)" strokeWidth="0.5" />
           </svg>
+
+          <div
+            className="absolute inset-x-0 top-0 h-px"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent 0%, hsl(199, 89%, 70%, 0.36) 18%, hsl(0, 0%, 100%, 0.35) 50%, hsl(199, 89%, 70%, 0.26) 82%, transparent 100%)",
+            }}
+          />
 
           {/* Grain texture */}
           <div className="absolute inset-0 pointer-events-none" style={{
@@ -62,14 +69,14 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
         </div>
         
         <div className="section-divider-shell">
-          {/* Number Badge — premium with subtle glow */}
+          {/* Number Badge */}
           <div 
-            className="flex items-center justify-center rounded-2xl font-heading font-extrabold text-2xl sm:text-3xl shrink-0 text-white transition-transform duration-300 hover:scale-105"
+            className="flex shrink-0 items-center justify-center rounded-xl font-heading text-2xl font-extrabold text-white transition-transform duration-300 hover:scale-[1.03] sm:text-3xl"
             style={{ 
-              width: '4.5rem', 
-              height: '4.5rem',
-              background: 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(215, 75%, 40%) 100%)',
-              boxShadow: '0 6px 24px -4px hsl(199, 89%, 48%, 0.35), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
+              width: '4.25rem',
+              height: '4.25rem',
+              background: 'linear-gradient(135deg, hsl(201, 82%, 42%) 0%, hsl(214, 68%, 30%) 100%)',
+              boxShadow: '0 12px 28px -20px hsl(201, 82%, 42%, 0.55), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
             }}
           >
             {number}
@@ -100,19 +107,19 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
                 )}
               </button>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-white mb-2.5 flex items-center justify-center sm:justify-start gap-3 tracking-tight">
+            <h2 className="mb-2.5 flex items-center justify-center gap-3 font-display text-2xl font-bold tracking-normal text-white sm:justify-start sm:text-3xl lg:text-4xl">
               <div 
-                className="hidden sm:flex items-center justify-center w-10 h-10 rounded-xl"
+                className="hidden h-10 w-10 items-center justify-center rounded-lg sm:flex"
                 style={{
-                  background: 'hsl(199, 89%, 48%, 0.12)',
-                  border: '1px solid hsl(199, 89%, 48%, 0.15)',
+                  background: 'hsl(199, 89%, 48%, 0.1)',
+                  border: '1px solid hsl(199, 89%, 48%, 0.14)',
                 }}
               >
                 <Icon className="w-6 h-6 text-accent" />
               </div>
               {title}
             </h2>
-            <p className="text-white/55 text-base sm:text-lg font-light tracking-wide">
+            <p className="max-w-3xl text-base font-normal leading-7 tracking-normal text-white/62 sm:text-lg">
               {subtitle}
             </p>
           </div>

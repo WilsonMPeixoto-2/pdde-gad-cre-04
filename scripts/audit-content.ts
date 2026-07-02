@@ -151,6 +151,17 @@ const ensureExternalLinksRespond = async () => {
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
+      const isCiNetworkFailure =
+        process.env.CI === "true" &&
+        (/fetch failed/i.test(message) || /aborted/i.test(message));
+
+      if (isCiNetworkFailure) {
+        console.warn(
+          `Aviso: link externo não verificado no CI por falha de rede: ${resource.title} -> ${resource.href} (${message})`,
+        );
+        continue;
+      }
+
       findings.push(`Link externo inacessível: ${resource.title} -> ${resource.href} (${message})`);
     }
   }

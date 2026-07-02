@@ -8,7 +8,7 @@ interface SeiMockupProps {
 }
 
 const mockupShellClassName =
-  "sei-mockup overflow-hidden rounded-2xl border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eef3f7] shadow-[0_34px_58px_-42px_rgba(15,23,42,0.42),0_16px_30px_-26px_rgba(15,23,42,0.18)]";
+  "sei-mockup w-full max-w-full overflow-hidden rounded-2xl border border-[#d9e2ec] bg-linear-to-br from-white via-[#fbfcfd] to-[#eef3f7] shadow-xl";
 
 // Professional SEI-style icon button with animations
 const SeiIconButton = ({ icon, label, active = false }: { icon: React.ReactNode; label?: string; active?: boolean }) => (
@@ -140,14 +140,14 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
               <div 
                 key={i} 
                 className="
-                  group flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2.5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6)]
+                  group flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2.5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.65)] min-w-0 w-full
                 "
               >
-                <FileText className="h-4 w-4 text-[#78909C]" />
-                <span className="truncate text-xs text-[#616161] sm:text-sm">
+                <FileText className="h-4 w-4 text-[#78909C] shrink-0" />
+                <span className="truncate text-xs text-[#616161] sm:text-sm min-w-0 flex-1">
                   {doc.name}
                 </span>
-                <div className={`ml-auto flex items-center gap-1 px-2 py-0.5 rounded-full ${
+                <div className={`ml-auto flex items-center gap-1 px-2 py-0.5 rounded-full shrink-0 ${
                   doc.tone === "signed" ? "bg-[#e8f5e9]" : "bg-[#e3f2fd]"
                 }`}>
                   <Check className={`w-3 h-3 ${doc.tone === "signed" ? "text-[#4CAF50]" : "text-[#1565C0]"}`} />
@@ -293,12 +293,12 @@ export const SeiMockup = ({ variant, highlight }: SeiMockupProps) => {
             ].map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-3 rounded-xl border border-[#dde6ee] bg-white px-4 py-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.65)]"
+                className="flex items-center gap-3 rounded-xl border border-[#dde6ee] bg-white px-4 py-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.65)] min-w-0 w-full"
               >
-                <FileText className="h-4 w-4 text-[#78909C]" />
-                <span className="flex-1 text-sm text-[#334155]">{item.label}</span>
+                <FileText className="h-4 w-4 text-[#78909C] shrink-0" />
+                <span className="flex-1 text-sm text-[#334155] truncate min-w-0">{item.label}</span>
                 <span
-                  className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+                  className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] shrink-0 ${
                     item.status === "Assinado"
                       ? "bg-[#e8f5e9] text-[#2e7d32]"
                       : "bg-[#fff4e5] text-[#c77700]"

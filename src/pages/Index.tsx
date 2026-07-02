@@ -5,7 +5,6 @@ import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
 import { ScopeNotice } from "@/components/pop/ScopeNotice";
-import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
 import {
@@ -418,9 +417,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Reading Progress Bar */}
-      <ReadingProgressBar />
-
       {/* Hero Cover */}
       <HeroCover />
 

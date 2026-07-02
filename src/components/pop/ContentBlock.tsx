@@ -34,6 +34,31 @@ const palettes = {
     titleColor: "text-foreground",
     iconWrap: "bg-primary/10 text-primary",
   },
+  /* ══ Government Spheres — Legal Design System v3 ══ */
+  federal: {
+    border: "border-[rgba(29,78,216,0.18)] dark:border-[rgba(29,78,216,0.3)]",
+    bg: "bg-gradient-to-br from-[rgba(29,78,216,0.03)] to-[rgba(29,78,216,0.005)] dark:from-[rgba(29,78,216,0.08)] dark:to-[rgba(29,78,216,0.02)]",
+    titleColor: "text-[hsl(var(--gov-federal))] dark:text-blue-300",
+    iconWrap: "bg-[rgba(29,78,216,0.08)] text-[hsl(var(--gov-federal))] dark:bg-[rgba(29,78,216,0.2)] dark:text-blue-300",
+  },
+  municipal: {
+    border: "border-[rgba(15,118,110,0.18)] dark:border-[rgba(15,118,110,0.3)]",
+    bg: "bg-gradient-to-br from-[rgba(15,118,110,0.03)] to-[rgba(15,118,110,0.005)] dark:from-[rgba(15,118,110,0.08)] dark:to-[rgba(15,118,110,0.02)]",
+    titleColor: "text-[hsl(var(--gov-municipal))] dark:text-teal-300",
+    iconWrap: "bg-[rgba(15,118,110,0.08)] text-[hsl(var(--gov-municipal))] dark:bg-[rgba(15,118,110,0.2)] dark:text-teal-300",
+  },
+  local: {
+    border: "border-[rgba(109,40,217,0.18)] dark:border-[rgba(109,40,217,0.3)]",
+    bg: "bg-gradient-to-br from-[rgba(109,40,217,0.03)] to-[rgba(109,40,217,0.005)] dark:from-[rgba(109,40,217,0.08)] dark:to-[rgba(109,40,217,0.02)]",
+    titleColor: "text-[hsl(var(--gov-local))] dark:text-violet-300",
+    iconWrap: "bg-[rgba(109,40,217,0.08)] text-[hsl(var(--gov-local))] dark:bg-[rgba(109,40,217,0.2)] dark:text-violet-300",
+  },
+  sei: {
+    border: "border-[rgba(2,132,199,0.18)] dark:border-[rgba(2,132,199,0.3)]",
+    bg: "bg-gradient-to-br from-[rgba(2,132,199,0.03)] to-[rgba(2,132,199,0.005)] dark:from-[rgba(2,132,199,0.08)] dark:to-[rgba(2,132,199,0.02)]",
+    titleColor: "text-[hsl(var(--gov-sei))] dark:text-sky-300",
+    iconWrap: "bg-[rgba(2,132,199,0.08)] text-[hsl(var(--gov-sei))] dark:bg-[rgba(2,132,199,0.2)] dark:text-sky-300",
+  },
 } as const;
 
 type Palette = keyof typeof palettes;
@@ -74,19 +99,22 @@ export const ContentBlock = ({
   return (
     <article
       className={cn(
-        "rounded-xl border p-5 transition-colors duration-300 sm:p-6",
-        "shadow-[0_1px_2px_0_hsl(221_31%_20%/0.035),0_12px_28px_-26px_hsl(221_31%_20%/0.13),inset_0_1px_0_0_hsl(0_0%_100%/0.45)]",
+        "rounded-xl border p-5 transition-all duration-300 sm:p-6",
+        "shadow-sm",
         p.border,
         p.bg,
         className,
       )}
+      style={{
+        boxShadow: "var(--shadow-card-rest)",
+      }}
     >
       {/* ── Header zone ─────────────────────────────────────── */}
       <div className="flex items-start gap-3.5 sm:gap-4">
         {Icon && (
           <div
             className={cn(
-              "mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
+              "mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/20",
               p.iconWrap,
             )}
           >
@@ -113,7 +141,7 @@ export const ContentBlock = ({
       </div>
 
       {/* ── Body zone ───────────────────────────────────────── */}
-      <div className="mt-4 space-y-4 text-[0.95rem] leading-[1.82] text-foreground/82 [&_p]:text-pretty [&_p]:hyphens-auto [&_strong]:text-foreground [&_strong]:font-semibold [&_ul]:space-y-2.5 [&_li]:leading-[1.78]">
+      <div className="mt-4 space-y-4 text-[0.92rem] leading-relaxed text-foreground/80 [&_p]:text-pretty [&_p]:hyphens-auto [&_strong]:text-foreground [&_strong]:font-semibold [&_ul]:space-y-2.5 [&_li]:leading-[1.78]">
         {children}
       </div>
 
@@ -121,7 +149,7 @@ export const ContentBlock = ({
       {footer && (
         <>
           <div className="my-4 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
-          <div className="text-sm text-muted-foreground">{footer}</div>
+          <div className="text-xs text-muted-foreground">{footer}</div>
         </>
       )}
     </article>

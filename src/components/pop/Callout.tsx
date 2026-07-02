@@ -1,8 +1,8 @@
 import React from "react";
-import { Info, AlertTriangle, CheckCircle, LucideIcon } from "lucide-react";
+import { Info, AlertTriangle, CheckCircle, AlertOctagon, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type CalloutVariant = "info" | "warning" | "success";
+type CalloutVariant = "info" | "warning" | "success" | "danger";
 
 interface CalloutProps {
   variant?: CalloutVariant;
@@ -48,6 +48,15 @@ const variantStyles: Record<CalloutVariant, {
     label: "Referência",
     iconComponent: CheckCircle,
   },
+  danger: {
+    bg: "border-y border-destructive/16 bg-destructive/[0.04] dark:bg-destructive/10",
+    borderGradient: "from-destructive to-destructive/70",
+    icon: "text-destructive",
+    iconBg: "bg-destructive/10 dark:bg-destructive/15",
+    pill: "border-destructive/18 bg-background/70 text-destructive",
+    label: "Vedação",
+    iconComponent: AlertOctagon,
+  },
 };
 
 export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
@@ -59,29 +68,31 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
       <div
         ref={ref}
         className={cn(
-          "relative overflow-hidden rounded-none px-4 py-4 sm:px-5 sm:py-5 transition-colors duration-300",
+          "relative overflow-hidden rounded-xl border-l-4 px-4 py-4 sm:px-5 sm:py-5 transition-all duration-300",
           styles.bg,
           className
         )}
         style={{
-          boxShadow: "none"
+          borderLeftColor: "transparent", // Handled by inline indicator line below
+          boxShadow: "var(--shadow-card-rest)",
         }}
       >
+        {/* Left vertical gradient accent line */}
         <div className={cn(
-          "absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-linear-to-b",
+          "absolute left-0 top-3 bottom-3 w-[4px] rounded-full bg-linear-to-b",
           styles.borderGradient
         )} />
 
         <div className="flex items-start gap-3.5 pl-2.5 sm:gap-4 sm:pl-3">
           <div className={cn(
-            "mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/35",
+            "mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/20",
             styles.iconBg
           )}>
             <IconComponent className={cn("h-4.5 w-4.5", styles.icon)} />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="mb-2.5 flex flex-wrap items-center gap-2.5">
-              <span className={cn("meta-pill", styles.pill)}>{styles.label}</span>
+            <div className="mb-2 flex flex-wrap items-center gap-2.5">
+              <span className={cn("meta-pill font-bold", styles.pill)}>{styles.label}</span>
               {title ? (
                 <p
                   className="font-heading text-[0.98rem] font-bold text-foreground sm:text-[1.02rem]"
@@ -91,7 +102,7 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
                 </p>
               ) : null}
             </div>
-            <div className="text-left text-[0.95rem] leading-7 text-foreground/80 text-pretty [&_p+p]:mt-3 [&_ul]:mt-3 [&_li+li]:mt-2 [&_strong]:text-foreground">
+            <div className="text-left text-[0.92rem] leading-relaxed text-foreground/80 text-pretty [&_p+p]:mt-3 [&_ul]:mt-3 [&_li+li]:mt-2 [&_strong]:text-foreground [&_strong]:font-semibold">
               {children}
             </div>
           </div>

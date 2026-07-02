@@ -146,14 +146,11 @@
 }
 
 @utility section-card {
-  @apply rounded-xl border border-border/55 p-5 sm:p-7 lg:p-8 transition-colors duration-300;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  @apply w-full max-w-full rounded-xl border border-border/55 p-5 sm:p-7 lg:p-8 transition-all duration-300;
+  transition-timing-function: var(--ease-premium);
   background:
     linear-gradient(180deg, hsl(0 0% 100% / 0.96) 0%, hsl(var(--card-hover) / 0.74) 100%);
-  box-shadow:
-    0 1px 2px 0 hsl(215 25% 20% / 0.035),
-    0 16px 34px -32px hsl(219 35% 18% / 0.16),
-    inset 0 1px 0 0 hsl(0 0% 100% / 0.82);
+  box-shadow: var(--shadow-card-rest);
 
   &::before {
     content: '';
@@ -178,7 +175,7 @@
     mask-composite: exclude;
     pointer-events: none;
     opacity: 0.4;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.25s var(--ease-premium);
   }
   position: relative;
   overflow: hidden;
@@ -199,17 +196,12 @@
   }
 
   .dark & {
-    box-shadow:
-      0 26px 48px -40px hsl(0 0% 0% / 0.52),
-      0 14px 24px -18px hsl(0 0% 0% / 0.28),
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.04);
+    box-shadow: var(--shadow-card-rest);
   }
 
   &:hover {
-    box-shadow:
-      0 18px 36px -30px hsl(219 35% 18% / 0.2),
-      0 0 0 1px hsl(var(--primary) / 0.025),
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.78);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
     border-color: hsl(var(--border) / 0.78);
   }
 
@@ -218,11 +210,7 @@
   }
 
   .dark &:hover {
-    box-shadow:
-      0 22px 42px -24px hsl(0 0% 0% / 0.4),
-      0 12px 26px -18px hsl(0 0% 0% / 0.36),
-      0 0 0 1px hsl(var(--accent) / 0.08),
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.06);
+    box-shadow: var(--shadow-card-hover);
   }
 }
 
@@ -1464,6 +1452,51 @@
     --accent-medium: 221 83% 65%;
     --accent-intense: 221 83% 40%;
 
+    /* ══ Legal Design System v3 — Governmental Semantic Palette ══ */
+    --gov-federal: 224 76% 48%;       /* #1D4ED8 — Federal blue */
+    --gov-federal-surface: 224 76% 97%;
+    --gov-federal-border: 224 76% 88%;
+    --gov-municipal: 173 58% 26%;     /* #0F766E — Municipal teal */
+    --gov-municipal-surface: 173 58% 96%;
+    --gov-municipal-border: 173 58% 85%;
+    --gov-local: 263 70% 50%;         /* #6D28D9 — Local/4ª CRE violet */
+    --gov-local-surface: 263 70% 97%;
+    --gov-local-border: 263 70% 88%;
+    --gov-sei: 200 90% 39%;           /* #0284C7 — SEI!RIO blue */
+    --gov-sei-surface: 200 90% 96%;
+    --gov-sei-border: 200 90% 85%;
+
+    /* Normative surfaces */
+    --normative-bg: 214 28% 96.5%;
+    --normative-border: 214 22% 88%;
+    --caution-surface: 347 77% 97%;
+    --caution-border: 347 77% 88%;
+    --prohibition-surface: 347 77% 96%;
+    --prohibition-border: 347 50% 82%;
+
+    /* Premium shadow scale */
+    --shadow-card-rest:
+      0 1px 2px 0 hsl(215 25% 15% / 0.04),
+      0 8px 24px -16px hsl(219 35% 18% / 0.1),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.6);
+    --shadow-card-hover:
+      0 4px 12px -4px hsl(219 35% 18% / 0.1),
+      0 16px 40px -20px hsl(219 35% 18% / 0.16),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.7);
+    --shadow-card-elevated:
+      0 8px 20px -6px hsl(219 35% 18% / 0.12),
+      0 24px 56px -24px hsl(219 35% 18% / 0.2),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.8);
+
+    /* Premium easing */
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+    /* Editorial gold accent (for premium elements) */
+    --gold: 40 76% 52%;
+    --gold-surface: 40 76% 96%;
+    --gold-muted: 40 40% 72%;
+
     /* Typography */
     --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-display: 'Source Serif 4', Georgia, serif;
@@ -1528,6 +1561,47 @@
     --highlight-bg: 224 71% 8%;
     --table-header: 224 71% 6%;
     --table-stripe: 224 71% 5%;
+
+    /* Legal Design v3 — Dark overrides */
+    --gov-federal: 224 76% 62%;
+    --gov-federal-surface: 224 76% 8%;
+    --gov-federal-border: 224 76% 22%;
+    --gov-municipal: 173 58% 45%;
+    --gov-municipal-surface: 173 58% 8%;
+    --gov-municipal-border: 173 58% 22%;
+    --gov-local: 263 70% 65%;
+    --gov-local-surface: 263 70% 8%;
+    --gov-local-border: 263 70% 22%;
+    --gov-sei: 200 90% 55%;
+    --gov-sei-surface: 200 90% 8%;
+    --gov-sei-border: 200 90% 22%;
+
+    --normative-bg: 224 71% 6%;
+    --normative-border: 224 71% 14%;
+    --caution-surface: 347 77% 8%;
+    --caution-border: 347 77% 18%;
+    --prohibition-surface: 347 77% 7%;
+    --prohibition-border: 347 50% 20%;
+
+    --shadow-card-rest:
+      0 1px 3px -1px hsl(0 0% 0% / 0.2),
+      0 8px 24px -16px hsl(0 0% 0% / 0.3),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.04);
+    --shadow-card-hover:
+      0 4px 14px -6px hsl(0 0% 0% / 0.28),
+      0 16px 40px -20px hsl(0 0% 0% / 0.36),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.06);
+    --shadow-card-elevated:
+      0 8px 24px -8px hsl(0 0% 0% / 0.32),
+      0 24px 56px -24px hsl(0 0% 0% / 0.4),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.08);
+
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+    --gold: 40 76% 62%;
+    --gold-surface: 40 76% 8%;
+    --gold-muted: 40 40% 45%;
   }
 }
 
@@ -1804,6 +1878,211 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.025em;
+  }
+}
+
+/* ══ Legal Design System v3 — New Utilities ══ */
+
+@utility normative-excerpt {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  line-height: 1.88;
+  font-style: italic;
+  font-weight: 450;
+  color: hsl(var(--foreground) / 0.82);
+  padding: 1.25rem 1.5rem 1.25rem 2rem;
+  border-left: 3px solid hsl(var(--gov-federal) / 0.5);
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: hsl(var(--normative-bg));
+  box-shadow:
+    inset 3px 0 12px -6px hsl(var(--gov-federal) / 0.08),
+    0 2px 8px -4px hsl(215 25% 15% / 0.04);
+
+  &::before {
+    content: '§';
+    position: absolute;
+    top: 0.9rem;
+    left: 0.65rem;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-style: normal;
+    color: hsl(var(--gov-federal) / 0.35);
+    line-height: 1;
+  }
+
+  & strong {
+    font-weight: 650;
+    color: hsl(var(--foreground));
+    font-style: normal;
+  }
+
+  & cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: hsl(var(--gov-federal) / 0.7);
+  }
+}
+
+@utility gov-badge-federal {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.12em];
+  background: hsl(var(--gov-federal-surface));
+  border: 1px solid hsl(var(--gov-federal-border));
+  color: hsl(var(--gov-federal));
+}
+
+@utility gov-badge-municipal {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.12em];
+  background: hsl(var(--gov-municipal-surface));
+  border: 1px solid hsl(var(--gov-municipal-border));
+  color: hsl(var(--gov-municipal));
+}
+
+@utility gov-badge-local {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.12em];
+  background: hsl(var(--gov-local-surface));
+  border: 1px solid hsl(var(--gov-local-border));
+  color: hsl(var(--gov-local));
+}
+
+@utility gov-badge-sei {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.12em];
+  background: hsl(var(--gov-sei-surface));
+  border: 1px solid hsl(var(--gov-sei-border));
+  color: hsl(var(--gov-sei));
+}
+
+@utility card-juridico {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid hsl(var(--border) / 0.55);
+  padding: 1.5rem;
+  background:
+    linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--secondary) / 0.4) 100%);
+  box-shadow: var(--shadow-card-rest);
+  transition: all 0.4s var(--ease-premium);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--border) / 0.5),
+      hsl(var(--border) / 0.15) 40%,
+      hsl(var(--gov-federal) / 0.1) 80%,
+      hsl(var(--border) / 0.4)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: opacity 0.4s var(--ease-premium);
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+    border-color: hsl(var(--border) / 0.7);
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  @media (min-width: 640px) {
+    padding: 1.75rem;
+  }
+}
+
+@utility prohibition-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid hsl(var(--prohibition-border));
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  background: hsl(var(--prohibition-surface));
+  box-shadow:
+    inset 3px 0 0 0 hsl(var(--destructive) / 0.6),
+    0 2px 8px -4px hsl(var(--destructive) / 0.08);
+
+  @media (min-width: 640px) {
+    padding: 1.4rem 1.5rem 1.4rem 1.75rem;
+  }
+}
+
+/* ══ Legal Design v3 — Reveal Animation ══ */
+
+@keyframes reveal-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes shimmer-gold {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes number-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--accent) / 0.4); }
+  50% { box-shadow: 0 0 0 6px hsl(var(--accent) / 0); }
+}
+
+@keyframes border-glow {
+  0%, 100% { border-color: hsl(var(--border) / 0.5); }
+  50% { border-color: hsl(var(--accent) / 0.3); }
+}
+
+.reveal-animated {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  filter: blur(3px);
+  width: 100%;
+  max-width: 100%;
+  transition: opacity 0.7s var(--ease-premium),
+              transform 0.7s var(--ease-premium),
+              filter 0.7s var(--ease-premium);
+}
+
+.reveal-animated.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-animated {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }
 

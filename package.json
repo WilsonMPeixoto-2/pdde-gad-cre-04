@@ -16,8 +16,9 @@
     "sync:pdf-manifest": "tsx scripts/sync-pdf-manifest.ts",
     "sync:brand-assets": "python scripts/generate-brand-assets.py",
     "check:content": "tsx scripts/audit-content.ts",
+    "check:normative": "tsx scripts/audit-normative.ts",
     "check:pdfs": "tsx scripts/audit-pdfs.ts",
-    "check:all": "npm run lint && npm run typecheck && npm run build && npm run check:content",
+    "check:all": "npm run lint && npm run typecheck && npm run build && npm run check:content && npm run check:normative",
     "check:ci": "npm run check:all && npm run check:pdfs && npm run test:e2e"
   },
   "dependencies": {

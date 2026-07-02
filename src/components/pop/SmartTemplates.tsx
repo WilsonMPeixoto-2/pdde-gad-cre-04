@@ -91,7 +91,7 @@ const templates: Template[] = [
   {
     id: "termo-doacao",
     title: "Termo de Doação (Bens de Capital)",
-    description: "Termo oficial de doação de bens móveis permanentes adquiridos pelo CEC para incorporação patrimonial (SISBENS)",
+    description: "Minuta de apoio para doação de bens móveis permanentes adquiridos pelo CEC; conferir com o modelo institucional vigente antes da utilização.",
     fields: [
       { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
       { key: "cnpj", label: "CNPJ da UEx", placeholder: "00.000.000/0001-00" },

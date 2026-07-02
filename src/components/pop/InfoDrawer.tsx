@@ -173,14 +173,14 @@ export const NatoDigitalVsDigitalizadoContent = () => (
     <InfoBlock
       icon={FileDigit}
       title="Documento Nato-Digital"
-      description="Criado originalmente em meio eletrônico. No processo, entra como original e não passa pela etapa de autenticação administrativa."
+      description="Criado ou recebido originalmente por meio eletrônico. No processo, entra como original eletrônico e não recebe conferência de documento em papel."
       variant="primary"
     />
 
     <InfoBlock
       icon={ScanLine}
       title="Documento Digitalizado"
-      description="Documento originalmente em papel, assinado ou carimbado fisicamente, que foi escaneado e transformado em PDF. Ao ser inserido no processo, exige autenticação administrativa para declarar que confere com o original."
+      description="Documento originalmente em papel, assinado ou carimbado fisicamente, que foi escaneado e transformado em PDF. Ao ser inserido, exige indicação do tipo de conferência aplicável."
       variant="success"
     />
 
@@ -190,7 +190,7 @@ export const NatoDigitalVsDigitalizadoContent = () => (
     />
 
     <InfoHighlight variant="warning">
-      Documento em papel digitalizado = anexar e autenticar | Documento nato-digital = anexar como original
+      Documento em papel digitalizado = informar tipo de conferência | Documento nato-digital = juntar como original eletrônico
     </InfoHighlight>
   </>
 );
@@ -211,7 +211,7 @@ export const AutenticacaoVsAssinaturaContent = () => (
       item2={{
         icon: ShieldCheck,
         label: "Autenticação",
-        description: "Confere com original",
+        description: "Confirma conferência",
         color: "bg-success/10 text-success border border-success/20",
       }}
     />
@@ -226,7 +226,7 @@ export const AutenticacaoVsAssinaturaContent = () => (
     <InfoBlock
       icon={ShieldCheck}
       title="Autenticação"
-      description="Usada para documento externo digitalizado. Atesta que a cópia digital confere com o original físico mantido pela unidade. Ícone: selo preto com check."
+      description="Usada para documento externo digitalizado. Deve refletir o tipo de conferência informado na inclusão do documento. Ícone: selo preto com check."
       variant="success"
     />
 
@@ -243,7 +243,7 @@ export const AutenticacaoVsAssinaturaContent = () => (
     </div>
 
     <InfoHighlight variant="info">
-      Documento interno do SEI = assinatura | Documento externo digitalizado = autenticação | Documento externo nato-digital = juntada como original
+      Documento interno do SEI = assinatura | Documento externo digitalizado = conferência/autenticação | Documento externo nato-digital = juntada como original eletrônico
     </InfoHighlight>
   </>
 );

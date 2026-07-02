@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 export const GUIDE_VERSION = {
-  number: "2.5.1",
-  shortLabel: "V. 2.5.1",
+  number: "2.6.0",
+  shortLabel: "V. 2.6.0",
   cycleLabel: "Julho/2026",
   lastUpdatedText: "2 de julho de 2026",
   publishedIsoDate: "2026-07-02",
@@ -104,9 +104,9 @@ export const guideSections = [
   {
     id: "secao-6",
     number: "6",
-    title: "Despacho e Finalização",
-    shortTitle: "Despacho e Finalização",
-    subtitle: "Análise pela GAD, aprovação e etapas finais do processo",
+    title: "Análise e Providências Posteriores",
+    shortTitle: "Pós-remessa",
+    subtitle: "Análise pela GAD, diligências e providências posteriores conforme fluxo formal vigente",
     icon: Send,
   },
   {
@@ -155,16 +155,16 @@ export const guideHowToSteps = contentSections
 export const seiProcessTreeDocuments = [
   { name: "Ofício de encaminhamento da unidade escolar", statusLabel: "Assinado", tone: "signed" as const },
   { name: "Despacho de encaminhamento da prestação de contas", statusLabel: "Assinado", tone: "signed" as const },
-  { name: "Ata do CEC digitalizada", statusLabel: "Autenticado", tone: "authenticated" as const },
-  { name: "Extrato bancário do exercício", statusLabel: "Autenticado", tone: "authenticated" as const },
-  { name: "Demonstrativo ou registro federal aplicável ao exercício", statusLabel: "Autenticado", tone: "authenticated" as const },
+  { name: "Ata do CEC assinada em papel e escaneada", statusLabel: "Conferência informada", tone: "authenticated" as const },
+  { name: "Extrato bancário baixado do Banco do Brasil", statusLabel: "Nato-digital", tone: "authenticated" as const },
+  { name: "Demonstrativo ou registro federal emitido por sistema oficial", statusLabel: "Nato-digital", tone: "authenticated" as const },
 ];
 
 export const signatureActionExamples = [
   { label: "Ofício de encaminhamento da unidade escolar", action: "Assinar", tone: "signature" as const },
   { label: "Despacho de encaminhamento da prestação de contas", action: "Assinar", tone: "signature" as const },
-  { label: "Ata do CEC digitalizada", action: "Autenticar", tone: "authentication" as const },
-  { label: "Nota fiscal em PDF ou escaneada", action: "Autenticar", tone: "authentication" as const },
+  { label: "Extrato bancário baixado do Banco do Brasil", action: "Juntar como original eletrônico", tone: "authentication" as const },
+  { label: "Ata do CEC assinada em papel e escaneada", action: "Informar o tipo de conferência", tone: "authentication" as const },
 ];
 
 export interface ProcessFlowStep {
@@ -274,10 +274,10 @@ export const processFlowSteps: ProcessFlowStep[] = [
     sectionAnchor: "secao-4",
     icon: Shield,
     dependencies: ["inclusao"],
-    criticalNote: "Documento digitalizado exige autenticação; documento nato-digital é juntado como original e não segue essa etapa.",
+    criticalNote: "Documento digitalizado exige tipo de conferência; documento nato-digital é juntado como original eletrônico e não segue essa etapa.",
     whatToDo: [
       "Selecionar cada documento digitalizado na árvore",
-      "Usar o comando de autenticação com a expressão 'confere com o original'",
+      "Conferir se o tipo de conferência informado corresponde ao documento apresentado",
       "Assinar eletronicamente as autenticações geradas pelo sistema",
       "Manter os originais físicos arquivados na unidade escolar",
     ],
@@ -321,8 +321,8 @@ export const processFlowSteps: ProcessFlowStep[] = [
   {
     id: "finalizacao",
     number: 6,
-    title: "Despacho e Finalização",
-    description: "Acompanhar a análise da GAD, atender diligências e aguardar as etapas finais de aprovação.",
+    title: "Análise e providências posteriores",
+    description: "Acompanhar a análise da GAD, atender diligências e observar o fluxo formal vigente para o ciclo.",
     sectionId: "secao-6",
     sectionAnchor: "secao-6",
     icon: Send,
@@ -330,17 +330,17 @@ export const processFlowSteps: ProcessFlowStep[] = [
     criticalNote: "Após a remessa, acompanhe o processo no SEI!RIO e trate rapidamente qualquer devolução ou diligência.",
     whatToDo: [
       "Acompanhar a análise da GAD no SEI!RIO",
-      "Atender diligências ou devoluções com rapidez, quando houver",
-      "Aguardar o despacho de aprovação e a formalização final da autoridade competente",
-      "Observar o fluxo patrimonial quando houver despesa de capital",
+      "Atender diligências ou devoluções quando houver",
+      "Observar a orientação formal da SME-Rio e da 4ª CRE para as etapas posteriores",
+      "Tratar providências patrimoniais conforme fonte local validada quando houver despesa de capital",
     ],
     documents: [
       "Processo já remetido à GAD, com histórico íntegro das peças juntadas",
     ],
     commonErrors: [
       "Deixar de acompanhar o processo após a remessa",
-      "Não atender diligência no prazo indicado",
-      "Ignorar providências patrimoniais quando houver aquisição de bens permanentes",
+      "Não atender diligência no prazo formalmente indicado",
+      "Presumir autoridade decisória ou fluxo final sem orientação local validada",
     ],
     nextStep: "Registrar o encerramento do fluxo e manter a documentação de apoio organizada para conferências futuras",
   },

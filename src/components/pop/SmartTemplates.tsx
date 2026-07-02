@@ -54,7 +54,7 @@ const templates: Template[] = [
       `4ª Coordenadoria Regional de Educação\n\n` +
       `Assunto: Encaminhamento da Prestação de Contas do PDDE — Exercício ${v.exercicio || "[ANO]"}\n\n` +
       `Senhor(a) Gerente,\n\n` +
-      `Encaminho, para análise e aprovação, a prestação de contas referente aos recursos do ` +
+      `Encaminho, para análise e providências cabíveis, a prestação de contas referente aos recursos do ` +
       `Programa Dinheiro Direto na Escola (PDDE), exercício ${v.exercicio || "[ANO]"}, ` +
       `da unidade escolar ${v.escola || "[NOME DA UNIDADE ESCOLAR]"}, CNPJ ${v.cnpj || "[CNPJ]"}, ` +
       `conforme documentação acostada aos autos.\n\n` +
@@ -68,7 +68,7 @@ const templates: Template[] = [
     title: "Despacho de Conferência",
     description: "Despacho padrão da GAD para conferência de documentos",
     fields: [
-      { key: "processo", label: "Nº do Processo SEI", placeholder: "SEI-000000/000000/2025" },
+      { key: "processo", label: "NUP do processo no SEI!RIO", placeholder: "000704.000123/2026-45" },
       { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
       { key: "exercicio", label: "Exercício Financeiro", placeholder: "2025" },
       { key: "servidor", label: "Nome do Servidor GAD", placeholder: "Carlos Souza" },

@@ -28,7 +28,7 @@ const documentRules = [
     badgeClass:
       "border-sky-300 bg-sky-100 text-sky-800 dark:border-sky-700 dark:bg-sky-900/40 dark:text-sky-300",
     description:
-      "Arquivo derivado de original físico. Depois de inserido no processo, exige autenticação administrativa.",
+      "Arquivo produzido a partir de documento em papel. Ao incluir no SEI!RIO, informe o tipo de conferência que corresponde ao documento apresentado.",
   },
   {
     title: "Documento nato-digital",
@@ -41,14 +41,14 @@ const documentRules = [
     badgeClass:
       "border-emerald-300 bg-emerald-100 text-emerald-800 dark:border-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
     description:
-      "Arquivo originalmente eletrônico. Entra no processo como original e não passa por autenticação administrativa.",
+      "Arquivo criado ou recebido por meio eletrônico. Entra no processo como original eletrônico e não deve receber conferência de documento em papel.",
   },
 ] as const;
 
 const authenticationSteps = [
   "Na árvore do processo, localize o documento externo que foi classificado como digitalizado.",
   "Acione o comando de autenticação do SEI!RIO apenas para esse tipo de arquivo.",
-  "Confirme a declaração administrativa de que a cópia digital confere com o original físico mantido na unidade.",
+  "Confira se o tipo de conferência informado corresponde ao documento apresentado: documento original, cópia autenticada administrativamente, cópia autenticada por cartório ou cópia simples.",
   "Finalize a operação e confira se o registro da autenticação ficou visível na árvore do processo.",
 ] as const;
 
@@ -79,9 +79,9 @@ export const SectionFour = () => {
             </div>
 
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-              No fluxo do SEI!RIO, a autenticação administrativa serve para declarar que um
-              <strong className="text-foreground"> documento digitalizado</strong> confere com o
-              original físico mantido pela unidade.
+              No fluxo do SEI!RIO, a autenticação administrativa se aplica ao
+              <strong className="text-foreground"> documento digitalizado nesta unidade</strong> e
+              deve refletir o tipo de conferência informado no ato de inclusão.
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
               Quando o arquivo é <strong className="text-foreground">nato-digital</strong>, ele já
@@ -179,7 +179,7 @@ export const SectionFour = () => {
           <p className="font-medium">Regra final desta etapa</p>
           <p className="mt-1 text-sm">
             Documento interno do SEI!RIO é assinado; documento externo digitalizado é autenticado;
-            documento externo nato-digital é apenas juntado como original.
+            documento externo nato-digital é apenas juntado como original eletrônico.
           </p>
         </Callout>
 

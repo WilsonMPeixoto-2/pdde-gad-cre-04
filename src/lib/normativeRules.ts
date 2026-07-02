@@ -89,6 +89,118 @@ export const normativeRules = [
     lastVerifiedAt: "2026-07-02",
   },
   {
+    id: "allowed-expense-categories",
+    title: "Categorias de aplicação dos recursos",
+    summary:
+      "Os recursos do PDDE e das Ações Integradas possuem categorias positivas de aplicação condicionadas à finalidade, ação e categoria econômica.",
+    practicalGuidance: [
+      "Verificar a finalidade do programa ou ação integrada antes da execução.",
+      "Distinguir possibilidade normativa de aprovação automática da despesa.",
+      "Conferir custeio, capital e eventual normativo específico da ação.",
+    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["4"] }],
+    appliesTo: ["UEx", "CEC", "EM", "EEx"],
+    actionScope: ["execução", "despesa", "custeio", "capital"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-02",
+  },
+  {
+    id: "general-federal-prohibitions",
+    title: "Vedações federais gerais",
+    summary:
+      "O rol federal geral de vedações não deve ser ampliado por inferência para itens que dependem de ação, exercício ou orientação específica.",
+    practicalGuidance: [
+      "Apresentar como vedações gerais apenas as hipóteses expressas na norma federal.",
+      "Tratar internet, alimentação, intervenção predial e objeto não usual como dúvidas de enquadramento quando não houver fonte específica.",
+      "Publicar vedação local adicional somente com fonte formal, aplicação e vigência.",
+    ],
+    prohibitedActions: [
+      "Publicar internet como vedação federal genérica sem fonte específica.",
+      "Publicar gêneros alimentícios como vedação federal genérica sem recorte normativo específico.",
+      "Apresentar toda intervenção predial como obra ou reforma estrutural vedada sem fonte específica.",
+    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["4"] }],
+    appliesTo: ["UEx", "CEC", "EM"],
+    actionScope: ["vedações", "despesa", "enquadramento"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-02",
+  },
+  {
+    id: "payment-movement-identifiable-beneficiary",
+    title: "Movimentação e pagamento com favorecido identificado",
+    summary:
+      "A movimentação dos recursos deve permitir a identificação do favorecido e permanecer vinculada à conta específica do programa.",
+    practicalGuidance: [
+      "Manter os recursos na conta específica do programa.",
+      "Utilizar meio eletrônico que identifique o favorecido sempre que aplicável.",
+      "Tratar cheque nominativo e pagamento em espécie como hipóteses excepcionais condicionadas à norma.",
+    ],
+    prohibitedActions: [
+      "Efetuar pagamentos por conta particular.",
+      "Fragmentar artificialmente a despesa.",
+      "Usar forma de pagamento que impeça a identificação do favorecido.",
+    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["17"] }],
+    appliesTo: ["UEx", "CEC", "EM"],
+    actionScope: ["pagamento", "movimentação financeira"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-02",
+  },
+  {
+    id: "expense-voucher-minimum-elements",
+    title: "Elementos mínimos dos comprovantes",
+    summary:
+      "As despesas devem ser comprovadas por documentos fiscais originais ou equivalentes admitidos pela legislação aplicável.",
+    practicalGuidance: [
+      "Emitir o comprovante em nome da UEx/CEC, EEx ou EM responsável.",
+      "Registrar FNDE, PDDE e ação integrada quando aplicável.",
+      "Vincular documento fiscal, atesto, quitação, pagamento e objeto executado.",
+    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["26"] }],
+    appliesTo: ["UEx", "CEC", "EM", "EEx"],
+    actionScope: ["comprovantes", "documento fiscal", "pagamento"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-02",
+  },
+  {
+    id: "permanent-goods-incorporation",
+    title: "Aquisição e incorporação de bens permanentes",
+    summary:
+      "Bens permanentes adquiridos ou produzidos com recursos do PDDE devem ser incorporados ao patrimônio da EEx e destinados à unidade escolar beneficiária.",
+    practicalGuidance: [
+      "Preencher e encaminhar o Termo de Doação no momento do recebimento do bem.",
+      "Aguardar o tombamento pela EEx e o respectivo número de registro patrimonial.",
+      "Tratar detalhes de SISBENS como fluxo local pendente de validação formal quando não houver fonte municipal registrada.",
+    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["47"] }],
+    appliesTo: ["UEx", "CEC", "EEx"],
+    actionScope: ["patrimônio", "bens permanentes", "capital"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-02",
+  },
+  {
+    id: "external-document-format-classification",
+    title: "Classificação de documento externo no SEI!RIO",
+    summary:
+      "Documento nato-digital e documento digitalizado nesta unidade devem ser classificados conforme a origem real do arquivo.",
+    practicalGuidance: [
+      "Classificar como nato-digital arquivo criado ou recebido por meio eletrônico.",
+      "Classificar como digitalizado nesta unidade arquivo produzido a partir de documento em papel.",
+      "Informar o tipo de conferência somente quando o documento for digitalizado.",
+    ],
+    legalReferences: [{ sourceId: "seiRioIncluirDocumentos", sections: ["Documento Externo", "Formato", "Tipo de conferência"] }],
+    appliesTo: ["UEx", "CEC", "GAD"],
+    actionScope: ["SEI!RIO", "documento externo", "autenticação"],
+    level: "municipal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-02",
+  },
+  {
     id: "individual-service-tax-consultation",
     title: "Contratação de pessoa física exige consulta prévia",
     summary:

@@ -370,22 +370,23 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
                   <tr>
                     <td className="font-semibold text-accent">Público</td>
                     <td className="leading-relaxed text-muted-foreground">
-                      Documentos acessíveis a qualquer pessoa, seja usuário interno ou externo via
-                      Consulta Pública.
+                      Acessível aos usuários internos do SEI!RIO, sem prejuízo das regras de
+                      consulta e transparência aplicáveis.
                     </td>
                   </tr>
                   <tr>
                     <td className="font-semibold text-warning">Restrito</td>
                     <td className="leading-relaxed text-muted-foreground">
-                      Acessíveis apenas para a unidade que criou o processo e por unidades que
-                      recebam o processo para instrução.
+                      Acessível à unidade que criou o processo e às unidades que o recebam para
+                      participar da instrução. A restrição deve possuir fundamento legal.
                     </td>
                   </tr>
                   <tr>
                     <td className="font-semibold text-destructive">Sigiloso</td>
                     <td className="leading-relaxed text-muted-foreground">
-                      Classificação atribuída a informações confidenciais, com acesso controlado por
-                      Credenciais de Acesso.
+                      Reservado a informações cuja proteção exija credencial individual de acesso.
+                      Processos e documentos sigilosos possuem fluxo específico e não tramitam pelo
+                      procedimento ordinário.
                     </td>
                   </tr>
                 </tbody>
@@ -395,14 +396,13 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
             <Callout variant="info" title="Diretriz para decidir corretamente" className="mt-6">
               <div className="space-y-3 text-sm leading-7 text-foreground/82">
                 <p>
-                  <strong className="text-foreground">Regra geral:</strong> a prestação de contas
-                  deve privilegiar publicidade e transparência, especialmente nos demonstrativos,
-                  atas e sínteses de execução.
+                  O nível de acesso deve ser definido de acordo com o conteúdo efetivo do processo
+                  ou documento e com o fundamento jurídico aplicável.
                 </p>
                 <p>
-                  <strong className="text-foreground">Ressalva:</strong> documentos com dados
-                  pessoais, dados bancários, endereços, assinaturas ou outras informações sensíveis
-                  exigem avaliação específica e, quando necessário, restrição de acesso.
+                  Documentos com dados pessoais, dados bancários, endereços residenciais, assinaturas
+                  ou outras informações legalmente protegidas exigem avaliação específica e, quando
+                  cabível, restrição de acesso.
                 </p>
                 <p>
                   <strong className="text-foreground">Boa prática:</strong> mantenha públicos os
@@ -410,10 +410,9 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
                   anexos que realmente demandem proteção.
                 </p>
                 <p className="font-semibold text-foreground">
-                  Diretriz operacional final: selecione <span className="text-accent">Público</span>{" "}
-                  como regra, use <span className="text-warning">Restrito</span> quando houver dados
-                  pessoais sensíveis e justifique o tratamento adotado sempre que a documentação
-                  exigir cautela adicional.
+                  Use a expressão "dados pessoais sensíveis" apenas nas hipóteses específicas da
+                  LGPD. Para os demais casos, prefira "dados pessoais ou informações legalmente
+                  protegidas".
                 </p>
               </div>
             </Callout>
@@ -446,6 +445,13 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
                 <p className="text-sm leading-7 text-foreground/82">
                   Busque pela <strong className="text-foreground">designação oficial</strong> da
                   unidade escolar para adicioná-la como interessada no cadastro inicial do processo.
+                </p>
+              </Callout>
+              <Callout variant="warning" title="Cuidado com o campo Interessados" className="mt-4">
+                <p className="text-sm leading-7 text-foreground/82">
+                  As informações inseridas nesse campo podem aparecer na pesquisa pública do
+                  sistema. Não inclua CPF, dados bancários, matrícula funcional, endereço residencial
+                  ou outros dados pessoais desnecessários.
                 </p>
               </Callout>
             </div>

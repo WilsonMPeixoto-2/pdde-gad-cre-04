@@ -186,7 +186,7 @@ export const SectionTwo = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Nesse caso, registre no processo que a <strong className="text-foreground">pesquisa de preços foi dispensada</strong> por uso de SRP.</span>
+                <span className="text-left sm:text-justify">Nesse caso, registre no processo a ata válida, a possibilidade de utilização e a compatibilidade dos preços, sem apresentar o SRP apenas como dispensa automática de cotação.</span>
               </li>
             </ul>
           </div>
@@ -200,7 +200,7 @@ export const SectionTwo = () => {
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021 (Art. 17)</strong>, é obrigatório obter no mínimo <strong className="text-primary">3 cotações de preços</strong> de fornecedores distintos para cada aquisição.</span>
+                <span className="text-left sm:text-justify">Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021, arts. 23 e 27</strong>, registre os três melhores orçamentos obtidos e explicite o critério de escolha da proposta.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
@@ -219,14 +219,25 @@ export const SectionTwo = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
               Vedações — despesas proibidas (Res. FNDE 15/2021)
             </h3>
+            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50/70 p-4 text-sm leading-7 text-amber-950 dark:border-amber-900/45 dark:bg-amber-950/20 dark:text-amber-100">
+              <p className="font-bold">
+                Gastos com pessoal e contratação de serviços não são conceitos equivalentes.
+              </p>
+              <p className="mt-2">
+                É vedada a utilização dos recursos em gastos com pessoal e nos pagamentos
+                especificamente proibidos pelo art. 4º, § 2º, da Resolução CD/FNDE nº 15/2021.
+              </p>
+              <p className="mt-2">
+                A contratação de fornecedor ou prestador privado é admitida quando o material ou
+                serviço estiver vinculado às finalidades do PDDE ou da ação integrada, não houver
+                impedimento jurídico e forem observados os procedimentos de escolha, documentação,
+                execução e pagamento.
+              </p>
+            </div>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-              Conforme a Resolução CD/FNDE nº 15/2021, é expressamente proibida a aplicação de recursos do PDDE em:
+              Conforme a Resolução CD/FNDE nº 15/2021, art. 4º, § 2º, não aplique recursos do PDDE em:
             </p>
             <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Despesas com <strong className="text-foreground">pessoal</strong>, inclusive pagamento de servidores, prestadores e gratificações.</span>
-              </li>
               <li className="flex items-start gap-2">
                 <span className="text-red-600 dark:text-red-400 font-bold">•</span>
                 <span className="text-left sm:text-justify">Contas de <strong className="text-foreground">consumo recorrente</strong>, como tarifas de água, luz, telefone, internet e aluguel.</span>

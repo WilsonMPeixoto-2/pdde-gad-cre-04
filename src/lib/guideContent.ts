@@ -12,11 +12,11 @@ import {
 } from "lucide-react";
 
 export const GUIDE_VERSION = {
-  number: "2.5",
-  shortLabel: "V. 2.5",
-  cycleLabel: "Junho/2026",
-  lastUpdatedText: "30 de junho de 2026",
-  publishedIsoDate: "2026-06-30",
+  number: "2.5.1",
+  shortLabel: "V. 2.5.1",
+  cycleLabel: "Julho/2026",
+  lastUpdatedText: "2 de julho de 2026",
+  publishedIsoDate: "2026-07-02",
 } as const;
 
 export const PROCESS_TYPE_LABEL =

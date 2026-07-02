@@ -128,7 +128,7 @@ export const checklistItemDefinitions: ChecklistItemDefinition[] = [
   { id: 3, text: "Demonstrativo/registro federal da execução da receita, da despesa e dos pagamentos, conforme a ferramenta exigida pelo FNDE no exercício" },
   { id: 4, text: "Extratos bancários da conta do PDDE e das aplicações financeiras (período integral do exercício)" },
   { id: 5, text: "Conciliação bancária (obrigatória quando houver divergência entre extrato e demonstrativo, ou saldo em 31/12)" },
-  { id: 6, text: "Documentos comprobatórios das despesas (NF/DANFE/cupom fiscal/recibos/RPA), com atesto do recebimento/execução e comprovantes de pagamento" },
+  { id: 6, text: "Documentos comprobatórios das despesas, válidos conforme a legislação aplicável, com atesto do recebimento/execução e comprovantes de pagamento" },
   { id: 7, text: "Atas de aprovação do plano de gastos e da prestação de contas pelo Conselho Escolar/CEC" },
   { id: 8, text: "Evidência complementar de entrega/execução (declaração, fotos, laudo ou termo específico), quando o objeto exigir comprovação material adicional", complementar: true },
   { id: 9, text: "Relação de bens adquiridos ou produzidos, quando houver despesa de capital ou bem patrimonializável", complementar: true },

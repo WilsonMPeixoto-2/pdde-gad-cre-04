@@ -25,13 +25,6 @@ export const SectionAnexo = () => {
 
 
 
-  const documentosComprobatorios = [
-    { tipo: "Compra de material e insumos", documentos: "Nota fiscal de venda, cupom fiscal ou DANFE" },
-    { tipo: "Prestação de serviços por PJ", documentos: "Nota fiscal de serviço ou fatura" },
-    { tipo: "Prestação de serviços por PF (sem INSS)", documentos: "Recibo comum com CPF do prestador" },
-    { tipo: "Prestação de serviços por PF (com INSS)", documentos: "Recibo de Pagamento de Autônomo (RPA)" },
-  ];
-
   return (
     <section id="anexo" className="scroll-mt-20">
       <section className="article-intro-panel mb-8">
@@ -170,38 +163,25 @@ export const SectionAnexo = () => {
             <FileText className="w-5 h-5 text-primary" />
           </div>
           <h3 className="text-lg font-semibold text-foreground">
-            Documentos comprobatórios por tipo de despesa
-            <span className="ml-2 text-sm font-normal text-muted-foreground">
-              (Conforme Resolução CD/FNDE nº 15/2021)
-            </span>
+            Contratação de pessoa física — consulta prévia obrigatória
           </h3>
         </div>
 
-        <div className="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-          <table className="table-institutional table-responsive-cards w-full text-sm">
-            <thead>
-              <tr>
-                <th className="bg-primary text-primary-foreground rounded-tl-lg px-4 py-3 text-left">
-                  Tipo de despesa
-                </th>
-                <th className="bg-primary text-primary-foreground rounded-tr-lg px-4 py-3 text-left">
-                  Documentos aceitos
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {documentosComprobatorios.map((item, index) => (
-                <tr key={index} className="border-b border-border/40">
-                  <td data-label="Tipo de despesa" className="font-medium px-4 py-3">
-                    {item.tipo}
-                  </td>
-                  <td data-label="Documentos aceitos" className="px-4 py-3">
-                    {item.documentos}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-3 text-sm leading-7 text-foreground/82 sm:text-base">
+          <p>
+            Este guia não define, isoladamente, o documento fiscal, o tratamento previdenciário, as
+            retenções tributárias ou as obrigações acessórias decorrentes da contratação de pessoa
+            física.
+          </p>
+          <p>
+            Antes da contratação, a UEx/CEC deverá consultar a GAD ou a área contábil competente e
+            observar a legislação tributária, previdenciária, trabalhista e municipal aplicável ao
+            caso concreto.
+          </p>
+          <p>
+            O documento comprobatório deverá ser válido segundo a legislação à qual a entidade
+            estiver sujeita e conter os elementos exigidos para comprovação da despesa.
+          </p>
         </div>
       </div>
 

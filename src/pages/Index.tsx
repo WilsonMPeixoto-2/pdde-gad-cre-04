@@ -4,6 +4,7 @@ import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
+import { ScopeNotice } from "@/components/pop/ScopeNotice";
 import { ReadingProgressBar } from "@/components/pop/ReadingProgressBar";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
@@ -443,6 +444,7 @@ const Index = () => {
                     <Suspense fallback={<SectionLoader />}>
                       <SectionIntro />
                     </Suspense>
+                    <ScopeNotice />
                     <Suspense fallback={<SectionLoader />}>
                       <DeadlinesCalculator />
                     </Suspense>

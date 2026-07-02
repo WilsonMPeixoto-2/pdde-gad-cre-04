@@ -113,8 +113,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: "autenticacao",
     title: "Autenticação de Documentos",
-    content: "Autentique os documentos digitalizados com a expressão 'confere com o original' e verifique se há exigência local de declaração complementar.",
-    keywords: ["autenticação", "confere com o original", "declaração de autenticidade", "digitalizado", "selo", "fé pública"],
+    content: "Documentos digitalizados exigem tipo de conferência compatível com o documento apresentado; nato-digitais entram como original eletrônico.",
+    keywords: ["autenticação", "tipo de conferência", "digitalizado", "nato-digital", "original eletrônico"],
     section: sectionTitle("secao-4"),
     anchor: "secao-4",
   },
@@ -137,17 +137,17 @@ export const searchIndex: SearchItem[] = [
   },
   {
     id: "pos-envio-gad",
-    title: "Análise e Finalização pela GAD",
+    title: "Análise e Providências Posteriores",
     content:
-      "Depois da remessa, acompanhe a análise da GAD, eventuais diligências e os despachos finais de aprovação.",
-    keywords: ["pós-envio", "gad", "análise", "diligência", "aprovação", "finalização"],
+      "Depois da remessa, acompanhe a análise da GAD, eventuais diligências e a manifestação cabível conforme o fluxo local vigente.",
+    keywords: ["pós-envio", "gad", "análise", "diligência", "manifestação", "fluxo local"],
     section: sectionTitle("secao-6"),
     anchor: "secao-6",
   },
   {
     id: "sigpc",
     title: "BB Gestão Ágil e SiGPC",
-    content: "Ferramentas federais que precisam ser distinguidas na comprovação da execução, no registro do exercício e na consolidação das contas do PDDE, com uso do BB Gestão Ágil no fluxo dos repasses a partir de 2023.",
+    content: "SEI!RIO, BB Gestão Ágil e SiGPC cumprem funções distintas; o BB Gestão Ágil não substitui a documentação exigida pela Resolução nº 15/2021.",
     keywords: ["bb gestão ágil", "sigpc", "contas online", "registro federal", "fnde", "demonstrativo", "prestação", "2023", "2024", "eex", "uex"],
     section: sectionTitle("anexo"),
     anchor: "anexo",
@@ -163,7 +163,7 @@ export const searchIndex: SearchItem[] = [
   {
     id: "legislacao",
     title: "Legislação de Referência",
-    content: "Base rápida de conferência para não ensinar procedimento errado: Lei nº 11.947/2009, Resolução nº 15/2021 e atos operacionais vigentes do FNDE.",
+    content: "Base rápida de conferência: Lei nº 11.947/2009, Resolução nº 15/2021, Resolução nº 7/2024, Comunicado PDDE nº 01/2026 e normativos específicos das ações integradas.",
     keywords: ["legislação", "lei 11.947/2009", "resolução 15/2021", "resolução 7/2024", "resolução 22/2024", "resolução 18/2025", "comunicado 47/2024", "comunicado 01/2026", "fnde", "normativos", "escopo"],
     section: sectionTitle("anexo"),
     anchor: "anexo",
@@ -171,8 +171,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: "norma-municipal",
     title: "Fluxo Municipal SME-RJ",
-    content: "Portaria Conjunta nº 01/2016, SEI!RIO, Comitês Regionais e orientações internas organizam o rito local sem substituir a regra federal do PDDE.",
-    keywords: ["manual", "portaria conjunta 01/2016", "sme-rj", "cre", "gad", "comitês regionais", "circulares", "prazo interno", "sei-rio", "rito local", "cec"],
+    content: "SEI!RIO, Decreto Rio nº 47.769/2020 e guias oficiais organizam o rito municipal sem substituir a regra federal do PDDE.",
+    keywords: ["manual", "decreto rio 47.769/2020", "sme-rj", "cre", "gad", "circulares", "prazo interno", "sei-rio", "rito local", "cec"],
     section: sectionTitle("anexo"),
     anchor: "anexo",
   },

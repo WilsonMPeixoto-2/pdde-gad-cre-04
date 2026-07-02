@@ -1,4 +1,4 @@
-import { CheckCircle2, FileText, Package, Send, UserCheck } from "lucide-react";
+import { FileText, Package, Send, UserCheck } from "lucide-react";
 import { Callout } from "./Callout";
 import { ProfileCallout } from "./ProfileCallout";
 
@@ -7,28 +7,28 @@ const finalizationSteps = [
     number: "1",
     title: "Análise pela GAD",
     description:
-      "A GAD verifica a conformidade dos documentos e informações do processo. Se houver pendência, o processo poderá ser devolvido para complementação ou correção.",
+      "A GAD analisará a instrução e poderá solicitar complementação, devolver o processo para correção ou emitir a manifestação cabível, conforme o fluxo interno vigente.",
     icon: Send,
   },
   {
     number: "2",
-    title: "Despacho de Aprovação",
+    title: "Providência cabível",
     description:
-      "Se a instrução estiver regular, a GAD emite o despacho de aprovação da prestação de contas.",
+      "A manifestação registrada deverá observar a orientação formal da SME-Rio e da 4ª CRE em vigor para o respectivo ciclo.",
     icon: FileText,
   },
   {
     number: "3",
-    title: "Despacho do Coordenador",
+    title: "Etapas subsequentes",
     description:
-      "Após a aprovação, o processo segue para a manifestação da autoridade competente, com a formalização final cabível.",
-    icon: CheckCircle2,
+      "A autoridade responsável pela decisão final e os procedimentos de arquivamento ou encaminhamento dependem do fluxo local formalmente vigente.",
+    icon: UserCheck,
   },
   {
     number: "4",
     title: "Controle Patrimonial — PDDE Capital",
     description:
-      "Quando houver aquisição de bens permanentes com recursos de capital do PDDE, a unidade deve incluir a relação de bens no processo e seguir o encaminhamento patrimonial indicado pela GAD.",
+      "Quando houver aquisição de bens permanentes com recursos de capital do PDDE, a unidade deve incluir a documentação patrimonial cabível e seguir o procedimento local formalmente validado.",
     icon: Package,
   },
 ] as const;
@@ -42,8 +42,9 @@ export const SectionSix = () => {
           Fluxo pós-envio
         </h3>
         <p className="text-muted-foreground leading-relaxed">
-          Após a remessa do processo pela unidade escolar, a GAD realiza a análise da prestação de
-          contas. Havendo conformidade, o processo segue para aprovação e formalização final.
+          Após a remessa, a GAD analisará a instrução e poderá solicitar complementação, devolver o
+          processo para correção ou emitir a manifestação cabível, conforme o fluxo interno vigente.
+          As etapas subsequentes devem seguir orientação formal da SME-Rio e da 4ª CRE para o ciclo.
         </p>
       </div>
 

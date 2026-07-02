@@ -108,7 +108,7 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByText(/roteiro de instrução para as próximas etapas deste guia/i)).toHaveCount(0);
 
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();
-    await expect(page.locator("h2").filter({ hasText: /despacho e finalização/i }).first()).toBeVisible();
+    await expect(page.locator("h2").filter({ hasText: /análise e providências posteriores/i }).first()).toBeVisible();
 
     await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
     await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais prioritárias para consulta rápida/i })).toBeVisible();

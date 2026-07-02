@@ -122,21 +122,25 @@ export const PDDE_STORAGE_KEYS = {
 
 export const PDDE_STORAGE_EVENT = "pdde-storage-sync";
 
+export const NUP_PATTERN = /^\d{6}\.\d{6}\/\d{4}-\d{2}$/;
+
 export const checklistItemDefinitions: ChecklistItemDefinition[] = [
-  { id: 1, text: "Rol de materiais, bens e serviços priorizados (planejamento do gasto aprovado pelo Conselho/CEC)" },
-  { id: 2, text: "Consolidação das pesquisas de preços — 3 orçamentos quando viável, ou justificativa idônea para quantidade inferior / uso documentado de SRP" },
-  { id: 3, text: "Demonstrativo/registro federal da execução da receita, da despesa e dos pagamentos, conforme a ferramenta exigida pelo FNDE no exercício" },
-  { id: 4, text: "Extratos bancários da conta do PDDE e das aplicações financeiras (período integral do exercício)" },
-  { id: 5, text: "Conciliação bancária (obrigatória quando houver divergência entre extrato e demonstrativo, ou saldo em 31/12)" },
-  { id: 6, text: "Documentos comprobatórios das despesas, válidos conforme a legislação aplicável, com atesto do recebimento/execução e comprovantes de pagamento" },
-  { id: 7, text: "Atas de aprovação do plano de gastos e da prestação de contas pelo Conselho Escolar/CEC" },
-  { id: 8, text: "Evidência complementar de entrega/execução (declaração, fotos, laudo ou termo específico), quando o objeto exigir comprovação material adicional", complementar: true },
-  { id: 9, text: "Relação de bens adquiridos ou produzidos, quando houver despesa de capital ou bem patrimonializável", complementar: true },
-  { id: 10, text: "Controle patrimonial — providência de incorporação/registro do bem conforme a rotina da EEx ou do patrimônio da unidade escolar", complementar: true },
-  { id: 11, text: "Comprovante de devolução/recolhimento de saldo ao FNDE (quando houver restituição)", complementar: true },
-  { id: 12, text: "Comprovante do registro federal aplicável ao exercício (por exemplo, BB Gestão Ágil e rotinas correlatas), se exigido pela EEx ou pelo controle interno", complementar: true },
-  { id: 13, text: "Termo de doação ou instrumento patrimonial equivalente, quando exigido pela EEx ou pelo controle patrimonial local", complementar: true },
-  { id: 14, text: "Declaração de autenticidade ou peça interna equivalente, se ainda exigida no fluxo vigente da CRE/SME para documentos digitalizados", complementar: true },
+  { id: 1, text: "Rol de Materiais, Bens e Serviços Prioritários" },
+  { id: 2, text: "Consolidação de Pesquisas de Preços ou justificativa cabível" },
+  { id: 3, text: "Demonstrativo ou registro federal aplicável ao exercício" },
+  { id: 4, text: "Extratos da conta específica" },
+  { id: 5, text: "Extratos das aplicações financeiras" },
+  { id: 6, text: "Conciliação bancária quando houver saldo em 31 de dezembro" },
+  { id: 7, text: "Cópias dos documentos comprobatórios da destinação dos recursos" },
+  { id: 8, text: "Ata de aprovação do plano de gastos" },
+  { id: 9, text: "Ata de aprovação da execução ou prestação de contas" },
+  { id: 10, text: "Documentação patrimonial, quando houver bem permanente" },
+  { id: 11, text: "Ofício ou despacho de encaminhamento local", complementar: true },
+  { id: 12, text: "Autenticação dos documentos efetivamente digitalizados", complementar: true },
+  { id: 13, text: "Documentos internos assinados", complementar: true },
+  { id: 14, text: "Identificação clara na árvore do SEI!RIO", complementar: true },
+  { id: 15, text: "Evidência de incorporação patrimonial, quando exigida", complementar: true },
+  { id: 16, text: "Demais documentos formalmente requeridos pela SME/CRE", complementar: true },
 ];
 
 export const processWorkspaceFieldDefinitions: readonly ProcessWorkspaceFieldDefinition[] = [
@@ -163,9 +167,9 @@ export const processWorkspaceFieldDefinitions: readonly ProcessWorkspaceFieldDef
   },
   {
     key: "seiProcessNumber",
-    label: "Processo SEI!RIO",
-    placeholder: "E/4a.CRE/000000/2026",
-    helperText: "Mantenha o número do processo no padrão adotado pela rede e pela árvore do SEI!RIO.",
+    label: "NUP do processo no SEI!RIO",
+    placeholder: "000704.000123/2026-45",
+    helperText: "Formato esperado: 000000.000000/0000-00.",
     autoComplete: "off",
   },
   {
@@ -210,7 +214,7 @@ export const operationalStatusCopy: Record<
   submitted: {
     title: "Remessa à GAD já registrada",
     description:
-      "A jornada indica que a etapa de despacho e finalização já foi marcada. Acompanhe diligências, análise e despacho final da GAD.",
+      "A jornada indica que a etapa de remessa já foi marcada. Acompanhe diligências, análise e a manifestação cabível conforme o fluxo local vigente.",
     badge: "Remessa marcada",
     tone: "info",
   },
@@ -393,16 +397,16 @@ export const getWorkspaceFieldValidation = (
             hint: "Use o exercício com quatro dígitos, como 2026.",
           };
     case "seiProcessNumber":
-      return /.+\/.+\/\d{1,6}\/\d{4}$/.test(value)
+      return NUP_PATTERN.test(value)
         ? {
             status: "valid",
-            badge: "Padrão OK",
-            hint: "A numeração já está apta para reaproveitamento nos textos e diagnósticos.",
+            badge: "NUP OK",
+            hint: "O NUP está no formato oficial esperado para o SEI!RIO.",
           }
         : {
             status: "warning",
             badge: "Formato",
-            hint: "Revise o padrão do processo, por exemplo: E/4A.CRE/000000/2026.",
+            hint: "Use o formato 000000.000000/0000-00.",
           };
     case "responsibleName":
       return value.split(" ").filter(Boolean).length >= 2
@@ -786,7 +790,7 @@ export const buildOperationalReport = (snapshot: OperationalSnapshot): Operation
               ? {
       anchor: OPERATIONAL_GUIDE_ANCHORS.readiness,
                   title: "Acompanhar análise e diligências da GAD",
-                  description: "A remessa já foi marcada. Use o diagnóstico e o despacho final para acompanhar pendências supervenientes.",
+                  description: "A remessa já foi marcada. Use o diagnóstico para acompanhar pendências supervenientes e a manifestação cabível no fluxo local vigente.",
                   ctaLabel: "Revisar situação atual",
                 }
               : {

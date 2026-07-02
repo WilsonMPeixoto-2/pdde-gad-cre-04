@@ -129,7 +129,7 @@ export const PDDEChecklist = () => {
     }
 
     if (complementaresPending.length > 0) {
-      text += "Bloco B — instrução complementar no SEI!RIO / controle interno:\n";
+      text += "Bloco B — INSTRUÇÃO LOCAL · SEI!RIO / SME-RIO:\n";
       complementaresPending.forEach(item => {
         text += `- ${item.text}\n`;
       });
@@ -268,8 +268,8 @@ export const PDDEChecklist = () => {
         <div className="space-y-2 mb-6">
           <div className="mb-3">
             <h3 className="text-sm font-semibold text-primary mb-1 flex items-center gap-2">
-              <FileCheck className="w-4 h-4" />
-              Bloco A — Documentos federais mínimos
+            <FileCheck className="w-4 h-4" />
+            Bloco A — Base documental federal da UEx
             </h3>
             <p className="text-xs text-muted-foreground">
               Núcleo da comprovação da execução e da prestação de contas, sem prejuízo de atos operacionais do exercício.
@@ -318,7 +318,7 @@ export const PDDEChecklist = () => {
         <div className="mb-6">
           <h3 className="text-sm font-semibold text-warning dark:text-warning mb-3 flex items-center gap-2">
             <FileCheck className="w-4 h-4" />
-            Bloco B — Instrução complementar no SEI!RIO / controle interno
+            Bloco B — INSTRUÇÃO LOCAL · SEI!RIO / SME-RIO
           </h3>
           <p className="mb-3 text-xs text-muted-foreground">
             Inclua quando o objeto, o fluxo local ou a rotina patrimonial/documental da CRE/SME exigir reforço da instrução.
@@ -367,13 +367,14 @@ export const PDDEChecklist = () => {
       )}
 
       {/* Contextual Warnings */}
-      {items.find(i => i.id === 9 && !i.checked) && items.find(i => i.id === 6 && i.checked) && (
+      {items.find(i => i.id === 10 && !i.checked) && (
         <div className="p-3.5 bg-warning/5 border border-warning/20 rounded-xl mb-4 flex items-start gap-3 animate-fade-in">
           <AlertTriangle className="w-4 h-4 text-warning shrink-0 mt-0.5" />
           <div>
-                      <p className="font-semibold text-warning text-xs mb-0.5">Despesa de capital identificada</p>
+                      <p className="font-semibold text-warning text-xs mb-0.5">Documentação patrimonial aplicável</p>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Se houver despesa de capital, lembre-se de preencher a <strong className="text-foreground">Relação de bens</strong> e providenciar a <strong className="text-foreground">incorporação patrimonial</strong>.
+              Quando houver bem permanente, junte a documentação patrimonial cabível e observe o
+              procedimento local formalmente validado.
             </p>
           </div>
         </div>
@@ -396,12 +397,12 @@ export const PDDEChecklist = () => {
         <div className="flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
           <div>
-            <p className="font-semibold text-primary text-sm mb-1">Autenticação de documento digitalizado</p>
+            <p className="font-semibold text-primary text-sm mb-1">Documento digitalizado e tipo de conferência</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Documentos escaneados de originais físicos devem ser autenticados no SEI!RIO no
-              momento da inserção, declarando que a cópia digital{" "}
-              <strong className="text-foreground">confere com o original</strong>. Os originais
-              devem permanecer arquivados na unidade pelo prazo aplicável da{" "}
+              Documentos produzidos a partir de papel devem ser classificados como digitalizados no
+              SEI!RIO e receber o tipo de conferência correspondente ao documento apresentado. Os
+              originais físicos, quando houver, devem permanecer arquivados na unidade pelo prazo
+              aplicável da{" "}
               <a
                 href={externalResources.resolution15.href}
                 target="_blank"

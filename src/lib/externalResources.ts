@@ -19,14 +19,28 @@ export const externalResources = {
     title: "Resolução CD/FNDE nº 15/2021",
     shortLabel: "Resolução nº 15/2021",
     description: "Norma principal do PDDE e base do núcleo mínimo da prestação de contas.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/view",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/%40%40download/file",
     citation: "Resolução CD/FNDE nº 15/2021",
     category: "norma",
     issuingBody: "FNDE",
     appliesTo: "Núcleo normativo da execução e prestação de contas do PDDE.",
     whyItMatters: "É a principal base federal para conferir o conteúdo mínimo do processo e os deveres da UEx/EEx.",
     userWhenToUse: "Use quando surgir dúvida sobre obrigação documental, execução, fiscalização ou prestação de contas.",
-    lastVerifiedText: "Verificado em 28 de março de 2026",
+    lastVerifiedText: "Verificado em 02 de julho de 2026",
+  },
+  resolution7_2024: {
+    id: "resolution7_2024",
+    title: "Resolução CD/FNDE nº 7/2024",
+    shortLabel: "Resolução nº 7/2024",
+    description: "Norma federal relacionada ao BB Gestão Ágil no fluxo do PDDE.",
+    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/RESOLUOCD_FNDEN7DE2DEMAIODE2024RESOLUOCD_FNDEN7DE2DEMAIODE2024DOUImprensaNacional.pdf",
+    citation: "Resolução CD/FNDE nº 7/2024",
+    category: "norma",
+    issuingBody: "FNDE",
+    appliesTo: "BB Gestão Ágil e registros federais do PDDE, conforme exercício e atualizações.",
+    whyItMatters: "Ajuda a separar o processo local no SEI!RIO dos registros em ambiente federal.",
+    userWhenToUse: "Consulte quando a dúvida envolver BB Gestão Ágil, sistema federal ou exercício aplicável.",
+    lastVerifiedText: "Verificado em 02 de julho de 2026",
   },
   comunicado47_2024: {
     id: "comunicado47_2024",
@@ -40,7 +54,7 @@ export const externalResources = {
     appliesTo: "Orientações operacionais para recursos recebidos em 2024.",
     whyItMatters: "Ajuda a interpretar o recorte do exercício e detalhes operacionais relevantes para a conferência.",
     userWhenToUse: "Consulte ao revisar processos do exercício de 2024 e situações específicas daquele ciclo.",
-    lastVerifiedText: "Verificado em 28 de março de 2026",
+    lastVerifiedText: "Verificado em 02 de julho de 2026",
   },
   comunicado01_2026: {
     id: "comunicado01_2026",
@@ -54,7 +68,7 @@ export const externalResources = {
     appliesTo: "Saldos, estorno e efeitos a partir de 2027.",
     whyItMatters: "Evita orientar incorretamente sobre reprogramação, estorno e vigência das mudanças recentes.",
     userWhenToUse: "Consulte quando a dúvida envolver saldo remanescente, estorno ou impacto futuro do exercício.",
-    lastVerifiedText: "Verificado em 28 de março de 2026",
+    lastVerifiedText: "Verificado em 02 de julho de 2026",
   },
   bbGestaoAgilFaq: {
     id: "bbGestaoAgilFaq",
@@ -67,7 +81,7 @@ export const externalResources = {
     appliesTo: "Uso do BB Gestão Ágil e convivência com outros ambientes federais.",
     whyItMatters: "Ajuda a distinguir execução, registro e análise em sistemas federais diferentes.",
     userWhenToUse: "Consulte quando houver dúvida sobre o que deve estar no BB Gestão Ágil e como isso dialoga com o processo local.",
-    lastVerifiedText: "Verificado em 28 de março de 2026",
+    lastVerifiedText: "Verificado em 02 de julho de 2026",
   },
   bbGestaoAgilHub: {
     id: "bbGestaoAgilHub",
@@ -80,7 +94,7 @@ export const externalResources = {
     appliesTo: "Página central da solução BB Gestão Ágil.",
     whyItMatters: "Reúne materiais oficiais úteis para entender o ambiente federal aplicável ao exercício.",
     userWhenToUse: "Use quando precisar localizar manual, orientação operacional ou acesso ao hub oficial do sistema.",
-    lastVerifiedText: "Verificado em 28 de março de 2026",
+    lastVerifiedText: "Verificado em 02 de julho de 2026",
   },
   pddeResolucoes: {
     id: "pddeResolucoes",
@@ -168,6 +182,7 @@ export type ExternalResourceId = keyof typeof externalResources;
 
 export const officialReferenceIds: ExternalResourceId[] = [
   "resolution15",
+  "resolution7_2024",
   "comunicado47_2024",
   "bbGestaoAgilFaq",
   "comunicado01_2026",
@@ -177,6 +192,7 @@ export const officialReferenceIds: ExternalResourceId[] = [
 
 export const referenceGovernanceIds: ExternalResourceId[] = [
   "resolution15",
+  "resolution7_2024",
   "comunicado47_2024",
   "comunicado01_2026",
   "bbGestaoAgilFaq",

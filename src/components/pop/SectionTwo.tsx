@@ -1,6 +1,5 @@
 import {
   AlertTriangle,
-  CalendarClock,
   ClipboardCheck,
   FileCheck,
   FolderKanban,
@@ -14,56 +13,6 @@ import { PDDEModelCards } from "./PDDEModelCards";
 import { ProcessJourneyMap } from "./ProcessJourneyMap";
 import { ProfileCallout } from "./ProfileCallout";
 import { SmartTemplates } from "./SmartTemplates";
-
-const operationalReferences = [
-  {
-    title: "Pesquisa de preços e SRP",
-    summary: "Use como referência rápida apenas para não montar o processo com documentação insuficiente.",
-    details: [
-      "A pesquisa de preços continua sendo a rotina padrão quando não houver uso documentado de SRP ou justificativa idônea.",
-      "Se houver SRP, anexe a ata, o acordo ou instrumento equivalente com os documentos do fornecedor.",
-      "No processo, deixe claro qual foi a base usada para justificar a contratação.",
-    ],
-  },
-  {
-    title: "Compras pela internet",
-    summary: "Registre o valor final da aquisição e preserve os comprovantes que sustentam a peça juntada.",
-    details: [
-      "A cotação deve refletir o valor total da aquisição, inclusive frete quando houver.",
-      "Guarde comprovante de pagamento e identificação do fornecedor vencedor.",
-      "No SEI!RIO, a preocupação central é que a peça juntada permita leitura clara da compra realizada.",
-    ],
-  },
-  {
-    title: "Vedações e enquadramento",
-    summary: "O guia não substitui a análise material da despesa, mas sinaliza quando a documentação exige cuidado adicional.",
-    details: [
-      "Não aplicar recursos indevidamente em despesas de pessoal, contas recorrentes (água, luz, telefone, aluguel), despesas assistencialistas ou gêneros alimentícios.",
-      "Em caso de dúvida sobre enquadramento de custeio vs capital, consulte a GAD antes de executar a despesa.",
-      "Evite misturar peças de ações, exercícios ou naturezas de despesa diferentes no mesmo encadeamento documental.",
-    ],
-  },
-  {
-    title: "Erros recorrentes na instrução",
-    summary: "Os problemas mais comuns começam na organização da árvore e na ausência de documentos básicos.",
-    details: [
-      "Nomear arquivos de forma genérica (ex.: 'documento 1') dificulta a leitura posterior pela GAD.",
-      "Extratos de período incorreto ou incompletos e comprovantes sem vínculo claro com a despesa geram retrabalho imediato.",
-      "Enviar atas do CEC digitalizadas sem as devidas assinaturas dos membros do conselho.",
-      "Divergência entre os saldos finais do demonstrativo e os extratos bancários de 31/12.",
-      "Não registrar a prestação de contas no SiGPC/Contas Online.",
-    ],
-  },
-  {
-    title: "Bens de Capital e SISBENS",
-    summary: "Ao adquirir bens permanentes, a escola deve seguir o fluxo de incorporação patrimonial local.",
-    details: [
-      "Formalize a doação dos bens móveis permanentes do CEC para a SME através do Termo de Doação (disponível nos Smart Templates).",
-      "Junte ao processo a Relação de Bens Adquiridos ou Produzidos e as cópias das Notas Fiscais (DANFE) correspondentes.",
-      "Cadastre a Solicitação de Inventário no sistema municipal SISBENS e anexe o respectivo despacho de tombamento patrimonial ao processo SEI.",
-    ],
-  },
-] as const;
 
 const nextSteps = [
   {
@@ -150,76 +99,85 @@ export const SectionTwo = () => {
           Estes pontos aparecem aqui apenas porque impactam a instrução do processo.
         </p>
 
-        <div className="mt-6">
-          {/* Compras pela internet */}
-          <div className="mb-5">
-            <h3 className="text-sm font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-              Compras pela internet (quando aplicável)
+        <div className="mt-6 space-y-5">
+          <div className="rounded-xl border border-primary/20 bg-primary/5 p-4">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
+              Pesquisa e consolidação de preços
             </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Use <strong className="text-foreground">sites nacionais confiáveis</strong> e registre a cotação com print contendo: <strong className="text-sky-600 dark:text-sky-400">descrição completa, preço final e frete</strong>.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Compare o <strong className="text-foreground">valor total</strong> (incluindo frete) e registre o critério da escolha.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Guarde o <strong className="text-foreground">comprovante de pagamento</strong> identificando o fornecedor vencedor.</span>
-              </li>
-            </ul>
+            <div className="space-y-3 text-sm leading-7 text-foreground/82 sm:text-base">
+              <p>
+                Para cada item ou lote, a UEx/CEC deverá registrar, na Consolidação de Pesquisas de
+                Preços, os três melhores orçamentos obtidos e explicitar o critério de escolha da
+                proposta.
+              </p>
+              <p>
+                A comparação deverá considerar o valor efetivo da aquisição ou contratação,
+                incluindo frete, seguro e outros custos que não sejam oferecidos gratuitamente.
+              </p>
+              <p>
+                Excepcionalmente, admite-se a determinação do preço estimado com menos de três
+                orçamentos, desde que a situação seja devidamente justificada nos autos pelo gestor
+                responsável e aprovada pela autoridade competente da UEx.
+              </p>
+              <p>
+                Em caso de empate, a classificação deverá ocorrer mediante sorteio em ato público,
+                observadas as condições do art. 23, § 8º.
+              </p>
+            </div>
+            <p className="mt-3 text-xs font-medium text-primary">
+              Base federal: Resolução CD/FNDE nº 15/2021, arts. 23 e 27.
+            </p>
           </div>
 
-          {/* Sistema de Registro de Preços */}
-          <div className="mb-5">
-            <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Sistema de Registro de Preços (SRP) — alternativa à pesquisa de preços
+          <div className="rounded-xl border border-border/60 bg-card p-4">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-foreground">
+              Utilização de Ata de Registro de Preços
             </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Se a <strong className="text-foreground">UEx/EM</strong> usar SRP (adesão a ata), anexe a <strong className="text-sky-600 dark:text-sky-400">ata/acordo</strong> e os documentos do fornecedor.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Nesse caso, registre no processo a ata válida, a possibilidade de utilização e a compatibilidade dos preços, sem apresentar o SRP apenas como dispensa automática de cotação.</span>
-              </li>
-            </ul>
+            <div className="space-y-3 text-sm leading-7 text-foreground/82 sm:text-base">
+              <p>
+                A UEx/CEC poderá, quando cabível, aderir a Ata de Registro de Preços gerenciada por
+                órgão público, desde que haja compatibilidade com os preços praticados no mercado e
+                disponibilidade para entrega dos bens ou execução dos serviços.
+              </p>
+              <p>
+                Nessa hipótese, os procedimentos e documentos ordinários da pesquisa serão
+                substituídos pela cópia da Ata de Registro de Preços ou do acordo firmado com o
+                fornecedor.
+              </p>
+              <p>
+                O SRP não deve ser apresentado apenas como "dispensa de cotação". Trata-se de
+                alternativa procedimental que exige ata válida, possibilidade de utilização,
+                documentação da adesão e verificação da compatibilidade dos preços.
+              </p>
+            </div>
           </div>
 
-          {/* Pesquisa de Preços */}
-          <div className="mb-5">
-            <h3 className="text-sm font-bold text-primary uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-              Pesquisa de preços — regra das 3 cotações
+          <div className="rounded-xl border border-sky-200 bg-sky-50/70 p-4 dark:border-sky-900/45 dark:bg-sky-950/20">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-sky-800 dark:text-sky-300">
+              Em que os recursos podem ser aplicados
             </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">Conforme <strong className="text-foreground">Resolução CD/FNDE nº 15/2021, arts. 23 e 27</strong>, registre os três melhores orçamentos obtidos e explicite o critério de escolha da proposta.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">Quando houver <strong className="text-foreground">múltiplas ações do PDDE</strong> no mesmo exercício, os gastos devem ser <strong className="text-foreground">separados por ação</strong> (rateio de despesas), com controle individualizado.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary font-bold">•</span>
-                <span className="text-left sm:text-justify">A cotação pode ser dispensada quando a UEx utilizar o <strong className="text-foreground">Sistema de Registro de Preços (SRP)</strong>, desde que devidamente documentado.</span>
-              </li>
+            <p className="mb-3 text-sm leading-7 text-foreground/82">
+              Observadas a finalidade do programa ou da ação integrada, a categoria econômica do
+              recurso e as demais exigências aplicáveis, os recursos podem ser empregados em:
+            </p>
+            <ul className="grid gap-2 text-sm leading-7 text-foreground/82 sm:grid-cols-2">
+              <li>• aquisição de material permanente;</li>
+              <li>• pequenos reparos, adequações e serviços necessários à manutenção, à conservação e à melhoria da estrutura física;</li>
+              <li>• aquisição de material de consumo;</li>
+              <li>• avaliação de aprendizagem;</li>
+              <li>• implementação de projeto pedagógico;</li>
+              <li>• desenvolvimento de atividades educacionais.</li>
             </ul>
+            <p className="mt-3 text-xs font-medium text-sky-800 dark:text-sky-300">
+              Base federal: Resolução CD/FNDE nº 15/2021, art. 4º.
+            </p>
           </div>
 
-          {/* Vedações */}
-          <div className="mb-5">
-            <h3 className="text-sm font-bold text-red-700 dark:text-red-400 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-              Vedações — despesas proibidas (Res. FNDE 15/2021)
+          <div className="rounded-xl border border-red-200 bg-red-50/70 p-4 dark:border-red-900/45 dark:bg-red-950/20">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-red-800 dark:text-red-300">
+              Vedações federais gerais
             </h3>
-            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50/70 p-4 text-sm leading-7 text-amber-950 dark:border-amber-900/45 dark:bg-amber-950/20 dark:text-amber-100">
+            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50/80 p-4 text-sm leading-7 text-amber-950 dark:border-amber-900/45 dark:bg-amber-950/20 dark:text-amber-100">
               <p className="font-bold">
                 Gastos com pessoal e contratação de serviços não são conceitos equivalentes.
               </p>
@@ -234,94 +192,122 @@ export const SectionTwo = () => {
                 execução e pagamento.
               </p>
             </div>
-            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-              Conforme a Resolução CD/FNDE nº 15/2021, art. 4º, § 2º, não aplique recursos do PDDE em:
+            <p className="mb-3 text-sm leading-7 text-foreground/82">
+              Sem prejuízo das regras específicas de cada ação, é vedada a utilização dos recursos:
             </p>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Contas de <strong className="text-foreground">consumo recorrente</strong>, como tarifas de água, luz, telefone, internet e aluguel.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Despesas <strong className="text-foreground">assistencialistas</strong> ou de caráter eminentemente individual.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-foreground">Obras e reformas estruturais</strong>, salvo ações específicas de ampliação autorizadas pelo FNDE.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Aquisição de <strong className="text-foreground">gêneros alimentícios</strong> (que possuem cobertura orçamentária própria via PNAE).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Em caso de dúvida sobre enquadramento, <strong className="text-primary font-semibold">consulte a GAD antes de executar a despesa</strong>.</span>
-              </li>
+            <ul className="space-y-2 text-sm leading-7 text-foreground/82">
+              <li>• na implementação de ações já financiadas por outros programas do FNDE, ressalvadas as hipóteses normativamente permitidas;</li>
+              <li>• em gastos com pessoal;</li>
+              <li>• em pagamento a agente público da ativa por serviços prestados;</li>
+              <li>• em pagamento a empresa privada que possua, em seu quadro societário, agente público da ativa nas condições previstas pela Resolução;</li>
+              <li>• em despesas de manutenção predial como aluguel, telefone, água, energia elétrica e esgoto;</li>
+              <li>• em despesas de caráter assistencialista;</li>
+              <li>• em tarifas bancárias;</li>
+              <li>• em tributos que não incidam sobre os bens adquiridos, produzidos ou serviços contratados.</li>
             </ul>
+            <Callout variant="warning" title="Atenção à ação específica" className="mt-4">
+              <p className="text-sm">
+                Determinada despesa pode ser admitida ou vedada conforme o programa, a ação
+                integrada, a categoria de custeio ou capital e o normativo específico. Em caso de
+                dúvida sobre internet, alimentação, intervenção predial, contratação especializada ou
+                objeto não usual, consulte a GAD antes da execução.
+              </p>
+            </Callout>
           </div>
 
-          {/* Comprovantes de despesa */}
-          <div className="mb-5 border-t border-border/40 pt-5">
-            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
-              Emissão e liquidação de comprovantes (Res. FNDE 15/2021)
+          <div className="rounded-xl border border-border/60 bg-card p-4">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-foreground">
+              Movimentação e pagamento
             </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-slate-500 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-foreground">Emissão em nome da UEx/CEC:</strong> Notas fiscais e recibos devem ser obrigatoriamente emitidos com a razão social e o CNPJ da UEx/CEC (Art. 33).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-slate-500 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-foreground">Discriminação clara:</strong> O documento fiscal deve detalhar os materiais ou serviços contratados (evite termos genéricos como "prestação de serviços" ou "diversos") (Art. 33).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-slate-500 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-foreground">Nexo temporal:</strong> As despesas devem possuir data igual ou posterior ao crédito dos recursos na conta bancária (Art. 22).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-slate-500 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-foreground">Integridade física:</strong> Comprovantes não podem conter rasuras, emendas ou borrões (Art. 33).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-slate-500 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-foreground">Conta bancária específica:</strong> Todos os pagamentos devem ser efetuados exclusivamente via transferência bancária, débito ou documento bancário a partir da conta do PDDE (Art. 19).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-slate-500 font-bold">•</span>
-                <span className="text-left sm:text-justify"><strong className="text-foreground">Aprovação do Conselho:</strong> A aprovação da prestação de contas pelo Conselho Escolar/CEC em assembleia é requisito de regularidade (Art. 30).</span>
-              </li>
-            </ul>
+            <div className="space-y-3 text-sm leading-7 text-foreground/82 sm:text-base">
+              <p>
+                Os recursos devem permanecer na conta específica do programa e ser utilizados para
+                aplicações financeiras ou para pagamento de despesas a fornecedores e prestadores
+                vinculados às finalidades do PDDE e das Ações Integradas.
+              </p>
+              <p>
+                Como regra, a movimentação deverá ocorrer por meio eletrônico que permita
+                identificar o favorecido. Entre as modalidades admitidas estão transferências entre
+                contas, pagamentos instantâneos, boletos, títulos e guias de recolhimento, ordem de
+                pagamento, cartão específico e outras modalidades eletrônicas autorizadas.
+              </p>
+              <p>
+                Cheque nominativo e pagamento em espécie possuem caráter excepcional e somente
+                poderão ocorrer nas hipóteses e condições expressamente previstas na norma.
+              </p>
+            </div>
+            <Callout variant="warning" title="Não faça" className="mt-4">
+              <p className="text-sm">
+                Não efetue pagamentos por conta particular, não fragmente artificialmente a despesa
+                e não utilize forma de pagamento que impeça a identificação do favorecido.
+              </p>
+            </Callout>
           </div>
 
-          {/* Bens de Capital (SISBENS) */}
-          <div className="mb-3 border-t border-border/40 pt-5">
-            <h3 className="text-sm font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
-              Despesas de capital — controle patrimonial (SISBENS)
+          <div className="rounded-xl border border-border/60 bg-card p-4">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-foreground">
+              Elementos mínimos dos comprovantes
             </h3>
-            <ul className="space-y-2 text-foreground/80 text-sm sm:text-base">
-              <li className="flex items-start gap-2">
-                <span className="text-sky-600 dark:text-sky-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Ao adquirir <strong className="text-foreground">bens permanentes</strong> (móveis, eletrônicos, equipamentos), a escola deve formalizar a doação do CEC para a SME por meio do <strong className="text-sky-600 dark:text-sky-400">Termo de Doação</strong>.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sky-600 dark:text-sky-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Além do termo de doação, anexe a <strong className="text-foreground">Relação de Bens Adquiridos ou Produzidos</strong> e a cópia da Nota Fiscal (DANFE) correspondente ao bem.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sky-600 dark:text-sky-400 font-bold">•</span>
-                <span className="text-left sm:text-justify">Formalize a <strong className="text-foreground">Solicitação de Inventário</strong> e junte o respectivo despacho de tombamento do sistema <strong className="text-foreground">SISBENS</strong> ao processo eletrônico para fins de patrimonialização.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Nota explicativa */}
-          <div className="editorial-note mt-4">
-            <p className="text-center text-xs italic text-muted-foreground sm:text-sm">
-              Seguir estas regras evita confusão entre anos, ações e prestações de contas diferentes — reduzindo inconsistências e glosas.
+            <p className="mb-3 text-sm leading-7 text-foreground/82">
+              As despesas deverão ser comprovadas por documentos fiscais originais ou equivalentes
+              admitidos pela legislação aplicável à entidade. Os documentos deverão:
             </p>
+            <ul className="space-y-2 text-sm leading-7 text-foreground/82">
+              <li>• ser emitidos em nome da UEx/CEC;</li>
+              <li>• identificar o FNDE, o PDDE e, quando aplicável, a ação integrada;</li>
+              <li>• conter o atesto do recebimento do material, do bem ou da execução do serviço;</li>
+              <li>• registrar a data, a assinatura e a identificação de quem realizou o atesto;</li>
+              <li>• conter comprovação de quitação;</li>
+              <li>• permitir a vinculação entre documento fiscal, pagamento e objeto executado.</li>
+            </ul>
+            <p className="mt-3 text-xs font-medium text-muted-foreground">
+              Base federal: Resolução CD/FNDE nº 15/2021, art. 26.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border/60 bg-card p-4">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-foreground">
+              Disponibilidade financeira e vinculação ao exercício
+            </h3>
+            <p className="mb-3 text-sm leading-7 text-foreground/82">
+              A regularidade temporal da despesa não deve ser analisada apenas pela comparação com
+              a data do crédito recebido no ano. Verifique:
+            </p>
+            <ul className="grid gap-2 text-sm leading-7 text-foreground/82 sm:grid-cols-2">
+              <li>• o valor repassado no exercício;</li>
+              <li>• os saldos reprogramados de exercícios anteriores;</li>
+              <li>• os rendimentos de aplicação financeira;</li>
+              <li>• a conta específica de origem;</li>
+              <li>• o programa ou ação correspondente;</li>
+              <li>• a categoria de custeio ou capital;</li>
+              <li>• a data e a rastreabilidade do pagamento;</li>
+              <li>• a compatibilidade da despesa com a finalidade do recurso.</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-primary/20 bg-primary/5 p-4">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary">
+              Aquisição e incorporação de bens permanentes
+            </h3>
+            <div className="space-y-3 text-sm leading-7 text-foreground/82 sm:text-base">
+              <p>
+                Os bens permanentes adquiridos ou produzidos com recursos do PDDE devem ser
+                tombados e incorporados ao patrimônio da EEx e destinados à unidade escolar
+                beneficiária.
+              </p>
+              <p>
+                No caso da UEx/CEC, o Termo de Doação deve ser preenchido e encaminhado à EEx no
+                momento do recebimento do bem. A EEx deverá realizar o tombamento e fornecer à UEx
+                o respectivo número de registro patrimonial.
+              </p>
+            </div>
+            <Callout variant="warning" title="Fluxo municipal de incorporação" className="mt-4">
+              <p className="text-sm">
+                Após o Termo de Doação, a unidade deverá observar o procedimento vigente da SME-Rio
+                para registro patrimonial. A rotina SISBENS depende de validação local formal antes
+                de ser publicada como obrigação operacional detalhada.
+              </p>
+            </Callout>
           </div>
         </div>
       </section>

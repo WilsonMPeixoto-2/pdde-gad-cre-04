@@ -16,25 +16,32 @@ import { ProfileCallout } from "./ProfileCallout";
 const classificationRows = [
   {
     label: "Origem",
-    digitalizado: "Documento físico convertido em arquivo digital por escaneamento.",
-    natoDigital: "Documento criado originariamente em meio eletrônico.",
+    digitalizado: "Arquivo produzido a partir da digitalização de documento em papel.",
+    natoDigital: "Arquivo criado ou recebido originalmente por meio eletrônico.",
   },
   {
     label: "Exemplos no processo",
-    digitalizado: "Ata em papel escaneada, nota impressa escaneada, recibo assinado à mão.",
-    natoDigital: "NF-e, comprovante bancário exportado, PDF de sistema oficial.",
+    digitalizado: "Ata originalmente assinada em papel, recibo físico escaneado, nota impressa e digitalizada.",
+    natoDigital: "NF-e ou DANFE recebido eletronicamente, extrato bancário baixado do banco, comprovante eletrônico, PDF emitido por sistema oficial.",
   },
   {
     label: "Como entra no SEI!RIO",
-    digitalizado: "Documento Externo com formato digitalizado.",
+    digitalizado: "Documento Externo com formato Digitalizado nesta unidade.",
     natoDigital: "Documento Externo como original eletrônico.",
   },
   {
-    label: "Autenticação administrativa",
-    digitalizado: "Sim, na etapa própria do guia.",
-    natoDigital: "Não.",
+    label: "Tipo de conferência",
+    digitalizado: "Informar documento original, cópia autenticada administrativamente, cópia autenticada por cartório ou cópia simples, conforme o documento apresentado.",
+    natoDigital: "Não exige tipo de conferência de documento em papel.",
   },
 ];
+
+const conferenceTypes = [
+  "Documento original",
+  "Cópia autenticada administrativamente",
+  "Cópia autenticada por cartório",
+  "Cópia simples",
+] as const;
 
 const attachmentCare = [
   {
@@ -78,7 +85,9 @@ export const SectionThree = () => {
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
               Documento externo é a peça que não foi produzida diretamente dentro do SEI!RIO e
               precisa ser juntada ao processo como elemento de instrução. Para a montagem correta
-              dos autos, o ponto decisivo é classificá-la como <strong className="text-foreground">digitalizada</strong> ou <strong className="text-foreground">nato-digital</strong>.
+              dos autos, o ponto decisivo é classificar corretamente o formato do documento:
+              <strong className="text-foreground"> nato-digital</strong> ou{" "}
+              <strong className="text-foreground">digitalizado nesta unidade</strong>.
             </p>
 
             <div className="flex flex-wrap gap-2">
@@ -107,7 +116,7 @@ export const SectionThree = () => {
 
       <div className="section-card p-5 sm:p-6">
         <h3 className="mb-4 font-semibold text-foreground">
-          3.2. Classificação do documento externo
+          3.2. Como classificar o formato do documento externo
         </h3>
 
         <div className="overflow-x-auto -mx-6 px-6 sm:-mx-8 sm:px-8">
@@ -144,8 +153,21 @@ export const SectionThree = () => {
         <Callout variant="info" icon={AlertCircle} className="mt-5">
           <p className="font-medium">Regra prática</p>
           <p className="mt-1 text-sm">
-            Documento em papel escaneado entra como <strong>digitalizado</strong>. Documento que já
-            nasceu eletrônico entra como <strong>nato-digital</strong>.
+            Documento em papel escaneado entra como <strong>Digitalizado nesta unidade</strong>.
+            Documento criado ou recebido por meio eletrônico entra como <strong>Nato-digital</strong>.
+          </p>
+        </Callout>
+
+        <Callout variant="warning" icon={AlertCircle} className="mt-4">
+          <p className="font-medium">Tipo de conferência do digitalizado</p>
+          <ul className="mt-2 grid gap-2 text-sm sm:grid-cols-2">
+            {conferenceTypes.map((type) => (
+              <li key={type}>• {type}</li>
+            ))}
+          </ul>
+          <p className="mt-2 text-sm">
+            A opção escolhida deve refletir o documento efetivamente apresentado. Não use uma
+            declaração genérica quando o caso exigir outro tipo de conferência.
           </p>
         </Callout>
       </div>

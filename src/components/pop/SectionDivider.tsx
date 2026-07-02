@@ -29,97 +29,108 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
     }, [copyText, sectionId]);
 
     return (
-      <div ref={ref} className="relative my-9 -mx-4 overflow-hidden py-10 section-divider-print sm:mx-0 sm:my-12 sm:py-12">
-        {/* Editorial background — restrained dark civic band */}
-        <div className="absolute inset-0 print-hide-effects" style={{ 
-          background: 'linear-gradient(135deg, hsl(222, 45%, 8%) 0%, hsl(216, 48%, 15%) 54%, hsl(222, 45%, 8%) 100%)'
-        }}>
-          <div
-            className="absolute inset-0 opacity-[0.08]"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, hsl(199, 89%, 68%, 0.3) 0 1px, transparent 1px), linear-gradient(180deg, hsl(0, 0%, 100%, 0.16) 0 1px, transparent 1px)",
-              backgroundSize: "88px 88px",
-            }}
-          />
-          
-          {/* Organic lines (same language as Hero) */}
-          <svg className="absolute inset-0 w-full h-full opacity-[0.03]" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice" fill="none">
-            <path d="M-50,50 C100,30 200,80 350,60 S500,30 650,65 S800,90 950,55" stroke="hsl(199, 89%, 60%)" strokeWidth="0.8" />
-            <path d="M-50,120 C100,100 250,150 400,130 S550,90 700,125 S850,160 950,130" stroke="hsl(215, 75%, 55%)" strokeWidth="0.6" />
-            <path d="M-50,170 C150,155 300,190 450,175 S600,145 750,170 S900,200 1050,180" stroke="hsl(199, 89%, 55%)" strokeWidth="0.5" />
-          </svg>
+      <div
+        ref={ref}
+        className="relative my-12 -mx-4 overflow-hidden py-12 px-6 section-divider-print sm:mx-0 sm:my-16 sm:py-16 sm:px-10 rounded-2xl"
+        style={{
+          background: "linear-gradient(135deg, hsl(222, 45%, 9%) 0%, hsl(218, 48%, 14%) 50%, hsl(222, 45%, 9%) 100%)",
+          border: "1px solid rgba(255, 255, 255, 0.06)",
+          boxShadow: "0 20px 50px -25px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.03)",
+        }}
+      >
+        {/* Civic grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, rgba(255,255,255,0.1) 0 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,0.1) 0 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+          }}
+        />
 
-          <div
-            className="absolute inset-x-0 top-0 h-px"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent 0%, hsl(199, 89%, 70%, 0.36) 18%, hsl(0, 0%, 100%, 0.35) 50%, hsl(199, 89%, 70%, 0.26) 82%, transparent 100%)",
-            }}
-          />
+        {/* Organic waves for branding coherence */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice" fill="none">
+          <path d="M-50,50 C100,30 200,80 350,60 S500,30 650,65 S800,90 950,55" stroke="hsl(40, 76%, 52%)" strokeWidth="0.8" />
+          <path d="M-50,120 C100,100 250,150 400,130 S550,90 700,125 S850,160 950,130" stroke="url(#divider-blue-glow)" strokeWidth="0.6" />
+          <defs>
+            <linearGradient id="divider-blue-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="hsl(214, 86%, 44%)" />
+              <stop offset="100%" stopColor="hsl(200, 90%, 39%)" />
+            </linearGradient>
+          </defs>
+        </svg>
 
-          {/* Grain texture */}
-          <div className="absolute inset-0 pointer-events-none" style={{
+        {/* Grain texture */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
             backgroundRepeat: 'repeat',
             backgroundSize: '200px 200px',
-            opacity: 0.03,
+            opacity: 0.02,
             mixBlendMode: 'overlay',
-          }} />
-        </div>
-        
-        <div className="section-divider-shell">
-          {/* Number Badge */}
-          <div 
-            className="flex shrink-0 items-center justify-center rounded-xl font-heading text-2xl font-extrabold text-white transition-transform duration-300 hover:scale-[1.03] sm:text-3xl"
-            style={{ 
-              width: '4.25rem',
-              height: '4.25rem',
-              background: 'linear-gradient(135deg, hsl(201, 82%, 42%) 0%, hsl(214, 68%, 30%) 100%)',
-              boxShadow: '0 12px 28px -20px hsl(201, 82%, 42%, 0.55), inset 0 1px 0 0 hsl(0, 0%, 100%, 0.15)',
-            }}
-          >
-            {number}
+          }}
+        />
+
+        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-10">
+          {/* Section Number — Massive Editorial display style */}
+          <div className="flex flex-col items-center md:items-start shrink-0 select-none">
+            <span
+              className="font-display text-7xl sm:text-8xl font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/40"
+              style={{ letterSpacing: "-0.04em" }}
+            >
+              {number}
+            </span>
+            <span className="mt-2 text-[0.6rem] font-bold uppercase tracking-[0.25em] text-white/40">Seção</span>
           </div>
-          
-          {/* Content */}
-          <div className="text-center sm:text-left flex-1">
-            <div className="mb-4 flex justify-center sm:justify-end no-print">
+
+          {/* Vertical Separator line (desktop only) */}
+          <div className="hidden md:block w-px self-stretch bg-gradient-to-b from-white/10 via-white/20 to-white/5" />
+
+          {/* Divider details */}
+          <div className="flex-1 text-center md:text-left min-w-0">
+            {/* Share button */}
+            <div className="mb-4 flex justify-center md:justify-end no-print">
               <button
                 type="button"
                 onClick={() => {
                   void handleCopySectionLink();
                 }}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs font-medium text-white/80 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.09] hover:text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.04] px-3.5 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.08em] text-white/80 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
                 aria-label={`Copiar link da seção ${number}: ${title}`}
               >
-                <Link2 className="h-3.5 w-3.5" />
                 {copiedValue === sectionId ? (
                   <>
-                    <Check className="h-3.5 w-3.5" />
+                    <Check className="h-3.5 w-3.5 text-emerald-400" />
                     Link copiado
                   </>
                 ) : (
                   <>
-                    <Copy className="h-3.5 w-3.5" />
-                    Copiar link
+                    <Link2 className="h-3.5 w-3.5 text-sky-400" />
+                    Compartilhar
                   </>
                 )}
               </button>
             </div>
-            <h2 className="mb-2.5 flex items-center justify-center gap-3 font-display text-2xl font-bold tracking-normal text-white sm:justify-start sm:text-3xl lg:text-4xl">
-              <div 
-                className="hidden h-10 w-10 items-center justify-center rounded-lg sm:flex"
+
+            {/* Title & Icon Header */}
+            <h2 className="mb-4 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3.5 font-display text-2xl font-extrabold tracking-tight text-white sm:text-3xl lg:text-4xl">
+              <div
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
                 style={{
-                  background: 'hsl(199, 89%, 48%, 0.1)',
-                  border: '1px solid hsl(199, 89%, 48%, 0.14)',
+                  background: 'rgba(2, 132, 199, 0.12)',
+                  border: '1px solid rgba(2, 132, 199, 0.2)',
                 }}
               >
-                <Icon className="w-6 h-6 text-accent" />
+                <Icon className="w-5.5 h-5.5 text-accent animate-pulse" />
               </div>
-              {title}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/90">
+                {title}
+              </span>
             </h2>
-            <p className="max-w-3xl text-base font-normal leading-7 tracking-normal text-white/62 sm:text-lg">
+
+            {/* Description */}
+            <p className="max-w-3xl text-sm sm:text-base font-normal leading-relaxed text-white/60 text-pretty">
               {subtitle}
             </p>
           </div>

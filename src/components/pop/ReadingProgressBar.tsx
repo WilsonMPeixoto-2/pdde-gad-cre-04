@@ -43,18 +43,18 @@ export const ReadingProgressBar = () => {
   }, []);
 
   return (
-    <div 
-      className="fixed top-0 left-0 right-0 z-60 h-[3px] no-print"
-      style={{ background: "hsl(var(--primary) / 0.08)" }}
+    <div
+      className="absolute bottom-0 left-0 right-0 z-10 h-[3px] no-print overflow-hidden"
+      style={{ background: "rgba(255, 255, 255, 0.05)" }}
       role="progressbar"
       aria-label="Progresso de leitura do documento"
       aria-valuenow={Math.round(progress)}
       aria-valuemin={0}
       aria-valuemax={100}
     >
-      <div 
+      <div
         className="h-full transition-all duration-150 ease-out relative"
-        style={{ 
+        style={{
           width: `${progress}%`,
           background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--accent-glow)))",
           backgroundSize: '200% 100%',
@@ -62,7 +62,7 @@ export const ReadingProgressBar = () => {
         }}
       >
         {/* Leading edge glow */}
-        <div 
+        <div
           className="absolute right-0 top-[-2px] bottom-[-2px] w-16"
           style={{
             background: 'linear-gradient(90deg, transparent, hsl(var(--accent-glow) / 0.5))',
@@ -72,10 +72,10 @@ export const ReadingProgressBar = () => {
         />
       </div>
       {/* Shadow below */}
-      <div className="absolute bottom-0 left-0 h-[4px] opacity-20" style={{ 
+      <div className="absolute bottom-[-2px] left-0 h-[3px] opacity-35" style={{
         width: `${progress}%`,
-        background: 'linear-gradient(90deg, hsl(var(--primary) / 0.24), hsl(var(--accent) / 0.36))',
-        filter: 'blur(3px)'
+        background: 'linear-gradient(90deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.45))',
+        filter: 'blur(2px)'
       }} />
     </div>
   );

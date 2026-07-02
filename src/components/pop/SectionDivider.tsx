@@ -1,5 +1,5 @@
 import { forwardRef, useCallback } from "react";
-import { Check, Copy, Link2, type LucideIcon } from "lucide-react";
+import { Check, Link2, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useClipboardAction } from "@/hooks/useClipboardAction";
 import { buildGuideShareUrl } from "@/lib/guideRoutes";

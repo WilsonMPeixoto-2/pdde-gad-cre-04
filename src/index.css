@@ -719,7 +719,7 @@
   letter-spacing: 0.14em;
   line-height: 1.45;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.62);
+  color: hsl(var(--foreground));
 }
 
 .chapter-opening {

@@ -10,14 +10,9 @@ import {
   type LucideIcon,
   Upload,
 } from "lucide-react";
+import { GUIDE_VERSION } from "@/lib/guideVersion";
 
-export const GUIDE_VERSION = {
-  number: "2.6.0",
-  shortLabel: "V. 2.6.0",
-  cycleLabel: "Julho/2026",
-  lastUpdatedText: "2 de julho de 2026",
-  publishedIsoDate: "2026-07-02",
-} as const;
+export { GUIDE_VERSION };
 
 export const PROCESS_TYPE_LABEL =
   "GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC";

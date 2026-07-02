@@ -2,7 +2,6 @@ import {
   AlertCircle,
   ExternalLink,
   FileImage,
-  FilePlus2,
   FileText,
   FolderTree,
   Upload,

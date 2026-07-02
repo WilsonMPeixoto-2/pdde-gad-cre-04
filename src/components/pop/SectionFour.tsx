@@ -172,7 +172,7 @@ export const SectionFour = () => {
               "O documento continua identificado corretamente na árvore.",
               "A autenticação ficou visível no item digitalizado.",
               "Nenhum documento nato-digital foi autenticado por engano.",
-            ].map((item, idx) => (
+            ].map((item) => (
               <div
                 key={item}
                 className="rounded-xl border border-border/50 bg-card p-5 text-sm leading-relaxed text-muted-foreground shadow-xs"

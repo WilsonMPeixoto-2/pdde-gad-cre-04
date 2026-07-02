@@ -5,6 +5,8 @@ import { type ProcessFlowStep, processFlowSteps } from "@/lib/guideContent";
 import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
 import type { GuideAnchorId } from "@/lib/guideContent";
 import {
+  PDDE_STORAGE_CLEAR_ALL_KEY,
+  PDDE_STORAGE_EVENT,
   PDDE_STORAGE_KEYS,
   readStorageJson,
   sanitizeJourneyProgress,
@@ -45,6 +47,18 @@ export const ProcessJourneyMap = () => {
   useEffect(() => {
     writeStorageJson(PDDE_STORAGE_KEYS.journey, [...completed]);
   }, [completed]);
+
+  useEffect(() => {
+    const syncJourney = (event: Event) => {
+      const detail = (event as CustomEvent<{ key?: string }>).detail;
+      if (detail?.key === PDDE_STORAGE_CLEAR_ALL_KEY) {
+        setCompleted(new Set(sanitizeJourneyProgress(readStorageJson(PDDE_STORAGE_KEYS.journey, []))));
+      }
+    };
+
+    window.addEventListener(PDDE_STORAGE_EVENT, syncJourney as EventListener);
+    return () => window.removeEventListener(PDDE_STORAGE_EVENT, syncJourney as EventListener);
+  }, []);
 
   const canComplete = useCallback((step: ProcessFlowStep) => {
     return step.dependencies.every((dep) => completed.has(dep));

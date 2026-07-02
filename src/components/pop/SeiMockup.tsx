@@ -1,5 +1,5 @@
 import { Menu, FileText, Search, ChevronDown, Check, User, Eye, Printer, Download } from "lucide-react";
-import { SeiIncluirIcon, SeiAssinarIcon, SeiEnviarIcon, SeiPastaIcon, SeiIniciarProcessoIcon, SeiInteressadosIcon } from "./SeiIcons";
+import { SeiIncluirIcon, SeiAssinarIcon, SeiEnviarIcon, SeiPastaIcon, SeiIniciarProcessoIcon } from "./SeiIcons";
 import { PROCESS_TYPE_LABEL, seiProcessTreeDocuments } from "@/lib/guideContent";
 
 interface SeiMockupProps {

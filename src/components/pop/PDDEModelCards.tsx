@@ -1,4 +1,4 @@
-import { Download, ExternalLink, FileText, FolderDown } from "lucide-react";
+import { Download, ExternalLink, FolderDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {

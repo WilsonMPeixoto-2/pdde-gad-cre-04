@@ -7,6 +7,8 @@ import { useClipboardAction } from "@/hooks/useClipboardAction";
 import {
   createChecklistItems,
   hydrateChecklistItems,
+  PDDE_STORAGE_CLEAR_ALL_KEY,
+  PDDE_STORAGE_EVENT,
   PDDE_STORAGE_KEYS,
   readStorageJson,
   writeStorageJson,
@@ -33,6 +35,19 @@ export const PDDEChecklist = () => {
   useEffect(() => {
     writeStorageJson(PDDE_STORAGE_KEYS.checklist, items);
   }, [items]);
+
+  useEffect(() => {
+    const syncChecklist = (event: Event) => {
+      const detail = (event as CustomEvent<{ key?: string }>).detail;
+      if (detail?.key === PDDE_STORAGE_CLEAR_ALL_KEY) {
+        setItems(hydrateChecklistItems(readStorageJson(PDDE_STORAGE_KEYS.checklist, createChecklistItems())));
+        hasConfettiFired.current = false;
+      }
+    };
+
+    window.addEventListener(PDDE_STORAGE_EVENT, syncChecklist as EventListener);
+    return () => window.removeEventListener(PDDE_STORAGE_EVENT, syncChecklist as EventListener);
+  }, []);
 
   const toggleItem = (id: number) => {
     setItems(prev =>

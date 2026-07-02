@@ -43,14 +43,14 @@
       "name": "Início",
       "short_name": "Início",
       "description": "Ir para o início do guia",
-      "url": "/#introducao",
+      "url": "/?secao=introducao",
       "icons": [{ "src": "/icons/shortcut-home.png", "sizes": "192x192" }]
     },
     {
       "name": "Checklist",
       "short_name": "Checklist",
       "description": "Ver checklist de documentos",
-      "url": "/#checklist-documentos",
+      "url": "/?secao=checklist-documentos",
       "icons": [{ "src": "/icons/shortcut-checklist.png", "sizes": "192x192" }]
     }
   ],

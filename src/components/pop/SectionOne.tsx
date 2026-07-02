@@ -141,7 +141,7 @@ export const SectionOne = ({ renderId = true }: SectionOneProps) => {
             </div>
 
             <div className="preflight-grid mt-8 border border-border/50 bg-border/40">
-              {preflightCards.map((card, idx) => {
+              {preflightCards.map((card) => {
                 const Icon = card.icon;
 
                 return (

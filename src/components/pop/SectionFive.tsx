@@ -1,8 +1,6 @@
 import {
   AlertCircle,
   CheckCircle2,
-  FileCheck,
-  FileText,
   FolderTree,
   PenLine,
   Send,

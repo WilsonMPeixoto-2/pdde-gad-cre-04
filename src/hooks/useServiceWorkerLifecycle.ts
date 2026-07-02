@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent } from "react";
+import { useEffect, useEffectEvent, useRef } from "react";
 import { toast } from "@/components/ui/sonner";
 
 const UPDATE_TOAST_ID = "pdde-sw-update";
@@ -6,6 +6,8 @@ const UPDATE_TOAST_ID = "pdde-sw-update";
 const getServiceWorkerUrl = () => `${import.meta.env.BASE_URL}sw.js?v=${__APP_BUILD_ID__}`;
 
 export const useServiceWorkerLifecycle = () => {
+  const shouldReloadOnControllerChangeRef = useRef(false);
+
   const promptForUpdate = useEffectEvent((registration: ServiceWorkerRegistration) => {
     if (!registration.waiting) return;
 
@@ -15,7 +17,10 @@ export const useServiceWorkerLifecycle = () => {
       duration: Number.POSITIVE_INFINITY,
       action: {
         label: "Atualizar",
-        onClick: () => registration.waiting?.postMessage("skipWaiting"),
+        onClick: () => {
+          shouldReloadOnControllerChangeRef.current = true;
+          registration.waiting?.postMessage("skipWaiting");
+        },
       },
       cancel: {
         label: "Depois",
@@ -51,6 +56,7 @@ export const useServiceWorkerLifecycle = () => {
 
     const handleControllerChange = () => {
       if (controllerChanged || !isMounted) return;
+      if (!shouldReloadOnControllerChangeRef.current) return;
       controllerChanged = true;
       reloadOnControllerChange();
     };

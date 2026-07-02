@@ -8,11 +8,12 @@ import { GUIDE_VERSION } from "@/lib/guideContent";
 import { ReadingProgressBar } from "./ReadingProgressBar";
 
 interface PopHeaderProps {
+  isPreparingPrint?: boolean;
   onPrint: () => void;
   onOpenMenu?: () => void;
 }
 
-export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
+export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: PopHeaderProps) => {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark";
@@ -117,14 +118,17 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
               <Button
                 size="sm"
                 onClick={onPrint}
+                disabled={isPreparingPrint}
                 className="btn-premium h-10 rounded-md border border-white/15 bg-white/[0.05] px-4.5 text-white transition-all duration-300 hover:border-white/25 hover:bg-white/[0.1] hover:scale-[1.01]"
                 style={{
                   boxShadow: "0 8px 24px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 rgba(255,255,255,0.08)",
                 }}
-                aria-label="Imprimir ou salvar em PDF"
+                aria-label={isPreparingPrint ? "Preparando o guia completo para impressão" : "Imprimir ou salvar em PDF"}
               >
                 <Printer className="w-4 h-4 mr-2 text-sky-300" aria-hidden="true" />
-                <span className="font-bold text-xs tracking-wider uppercase">PDF</span>
+                <span className="font-bold text-xs tracking-wider uppercase">
+                  {isPreparingPrint ? "..." : "PDF"}
+                </span>
               </Button>
             </div>
 
@@ -166,9 +170,9 @@ export const PopHeader = ({ onPrint, onOpenMenu }: PopHeaderProps) => {
                     {isDark ? <Sun className="w-4 h-4 mr-2" /> : <Moon className="w-4 h-4 mr-2" />}
                     {isDark ? "Modo claro" : "Modo escuro"}
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={onPrint}>
+                  <DropdownMenuItem onClick={onPrint} disabled={isPreparingPrint}>
                     <Printer className="w-4 h-4 mr-2" />
-                    Imprimir / Salvar em PDF
+                    {isPreparingPrint ? "Preparando impressão" : "Imprimir / Salvar em PDF"}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

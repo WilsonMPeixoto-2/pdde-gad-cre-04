@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import { Callout } from "./Callout";
-import { InfoDrawer } from "./InfoDrawer";
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
 import { ProcessJourneyMap } from "./ProcessJourneyMap";

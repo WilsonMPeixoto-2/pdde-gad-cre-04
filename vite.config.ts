@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { execSync } from "node:child_process";
+import { GUIDE_VERSION } from "./src/lib/guideVersion";
 
 const resolveBuildId = () => {
   const commitSha =
@@ -24,6 +25,15 @@ const resolveBuildId = () => {
 
 const buildId = resolveBuildId();
 
+const guideMetadataPlugin = () => ({
+  name: "pdde-guide-metadata",
+  transformIndexHtml(html: string) {
+    return html
+      .replaceAll("__GUIDE_FIRST_PUBLISHED_ISO_DATE__", GUIDE_VERSION.firstPublishedIsoDate)
+      .replaceAll("__GUIDE_PUBLISHED_ISO_DATE__", GUIDE_VERSION.publishedIsoDate);
+  },
+});
+
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
@@ -33,7 +43,7 @@ export default defineConfig({
   define: {
     __APP_BUILD_ID__: JSON.stringify(buildId),
   },
-  plugins: [react()],
+  plugins: [react(), guideMetadataPlugin()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

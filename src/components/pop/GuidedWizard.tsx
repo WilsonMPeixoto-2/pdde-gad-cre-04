@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { processFlowSteps, type GuideAnchorId } from "@/lib/guideContent";
 import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
+import { PDDE_STORAGE_CLEAR_ALL_KEY, PDDE_STORAGE_EVENT } from "@/lib/pddeOperationalData";
 
 const steps = processFlowSteps;
 
@@ -44,6 +45,18 @@ export const GuidedWizard = () => {
   useEffect(() => {
     persistCompletedSteps(completedSteps);
   }, [completedSteps]);
+
+  useEffect(() => {
+    const syncWizard = (event: Event) => {
+      const detail = (event as CustomEvent<{ key?: string }>).detail;
+      if (detail?.key === PDDE_STORAGE_CLEAR_ALL_KEY) {
+        setCompletedSteps(new Set());
+      }
+    };
+
+    window.addEventListener(PDDE_STORAGE_EVENT, syncWizard as EventListener);
+    return () => window.removeEventListener(PDDE_STORAGE_EVENT, syncWizard as EventListener);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

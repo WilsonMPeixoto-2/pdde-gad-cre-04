@@ -121,6 +121,20 @@ export const PDDE_STORAGE_KEYS = {
 } as const;
 
 export const PDDE_STORAGE_EVENT = "pdde-storage-sync";
+export const PDDE_STORAGE_CLEAR_ALL_KEY = "*";
+export const PDDE_PERSISTENCE_DISABLED_KEY = "pdde-persistence-disabled-v1";
+export const PDDE_PERSISTENCE_SCHEMA_VERSION = 2;
+
+const PDDE_STORAGE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const PDDE_WORKSPACE_SESSION_KEY = `${PDDE_STORAGE_KEYS.workspace}:nup-session`;
+const PDDE_AUXILIARY_STORAGE_KEYS = ["pdde-wizard-progress-v1", "pdde-profile-mode"] as const;
+const PDDE_SESSION_STORAGE_KEYS = new Set<string>([
+  PDDE_STORAGE_KEYS.templates,
+]);
+const PDDE_EXPIRING_LOCAL_STORAGE_KEYS = new Set<string>([
+  PDDE_STORAGE_KEYS.workspace,
+  PDDE_STORAGE_KEYS.notes,
+]);
 
 export const NUP_PATTERN = /^\d{6}\.\d{6}\/\d{4}-\d{2}$/;
 
@@ -530,26 +544,185 @@ export const getDocumentNamingSuggestions = (
   }));
 };
 
-export const readStorageJson = <T,>(key: string, fallback: T): T => {
-  if (typeof window === "undefined") return fallback;
+const notifyStorageChange = (key: string) => {
+  window.dispatchEvent(
+    new CustomEvent(PDDE_STORAGE_EVENT, {
+      detail: { key },
+    }),
+  );
+};
+
+const canUseBrowserStorage = () => typeof window !== "undefined";
+
+export const isGuidePersistenceDisabled = () => {
+  if (!canUseBrowserStorage()) return false;
 
   try {
-    const saved = window.localStorage.getItem(key);
-    return saved ? (JSON.parse(saved) as T) : fallback;
+    return window.localStorage.getItem(PDDE_PERSISTENCE_DISABLED_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+
+const getStorageForKey = (key: string): Storage =>
+  PDDE_SESSION_STORAGE_KEYS.has(key) ? window.sessionStorage : window.localStorage;
+
+const createExpiringEnvelope = <T,>(key: string, value: T) => ({
+  schemaVersion: PDDE_PERSISTENCE_SCHEMA_VERSION,
+  savedAt: new Date().toISOString(),
+  expiresAt: PDDE_EXPIRING_LOCAL_STORAGE_KEYS.has(key)
+    ? new Date(Date.now() + PDDE_STORAGE_TTL_MS).toISOString()
+    : null,
+  value,
+});
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  Boolean(value) && typeof value === "object" && !Array.isArray(value);
+
+const stripEmptyValues = (value: unknown): unknown => {
+  if (Array.isArray(value)) {
+    return value.map(stripEmptyValues);
+  }
+
+  if (!isRecord(value)) return value;
+
+  return Object.fromEntries(
+    Object.entries(value)
+      .map(([entryKey, entryValue]) => [entryKey, stripEmptyValues(entryValue)] as const)
+      .filter(([, entryValue]) => entryValue !== "" && entryValue !== null && entryValue !== undefined),
+  );
+};
+
+const unwrapStoredValue = <T,>(key: string, parsed: unknown, fallback: T): T => {
+  if (
+    isRecord(parsed) &&
+    parsed.schemaVersion === PDDE_PERSISTENCE_SCHEMA_VERSION &&
+    "value" in parsed
+  ) {
+    const expiresAt = typeof parsed.expiresAt === "string" ? Date.parse(parsed.expiresAt) : null;
+    if (expiresAt && Date.now() > expiresAt) {
+      getStorageForKey(key).removeItem(key);
+      return fallback;
+    }
+
+    return parsed.value as T;
+  }
+
+  // Legacy value without envelope: read once, then next write migrates it.
+  return parsed as T;
+};
+
+const readRawStorageJson = <T,>(key: string, fallback: T): T => {
+  const storage = getStorageForKey(key);
+  const saved = storage.getItem(key);
+  if (!saved) return fallback;
+
+  return unwrapStoredValue(key, JSON.parse(saved), fallback);
+};
+
+const writeRawStorageJson = <T,>(key: string, value: T) => {
+  const storage = getStorageForKey(key);
+  const normalized = stripEmptyValues(value) as T;
+  const shouldEnvelope = !PDDE_SESSION_STORAGE_KEYS.has(key);
+  storage.setItem(key, JSON.stringify(shouldEnvelope ? createExpiringEnvelope(key, normalized) : normalized));
+};
+
+const readWorkspaceStorage = <T,>(fallback: T): T => {
+  const localWorkspace = readRawStorageJson<Partial<ProcessWorkspaceProfile>>(
+    PDDE_STORAGE_KEYS.workspace,
+    {},
+  );
+  const sessionNup = window.sessionStorage.getItem(PDDE_WORKSPACE_SESSION_KEY);
+
+  return {
+    ...(fallback as Record<string, unknown>),
+    ...localWorkspace,
+    seiProcessNumber: sessionNup ?? localWorkspace.seiProcessNumber ?? "",
+  } as T;
+};
+
+const writeWorkspaceStorage = (value: unknown) => {
+  const workspace = isRecord(value) ? { ...value } : {};
+  const nup = typeof workspace.seiProcessNumber === "string" ? workspace.seiProcessNumber : "";
+  delete workspace.seiProcessNumber;
+
+  writeRawStorageJson(PDDE_STORAGE_KEYS.workspace, workspace);
+
+  if (nup.trim()) {
+    window.sessionStorage.setItem(PDDE_WORKSPACE_SESSION_KEY, nup);
+  } else {
+    window.sessionStorage.removeItem(PDDE_WORKSPACE_SESSION_KEY);
+  }
+};
+
+export const readStorageJson = <T,>(key: string, fallback: T): T => {
+  if (!canUseBrowserStorage() || isGuidePersistenceDisabled()) return fallback;
+
+  try {
+    if (key === PDDE_STORAGE_KEYS.workspace) {
+      return readWorkspaceStorage(fallback);
+    }
+
+    return readRawStorageJson(key, fallback);
   } catch {
     return fallback;
   }
 };
 
 export const writeStorageJson = <T,>(key: string, value: T) => {
-  if (typeof window === "undefined") return;
+  if (!canUseBrowserStorage() || isGuidePersistenceDisabled()) return;
 
-  window.localStorage.setItem(key, JSON.stringify(value));
-  window.dispatchEvent(
-    new CustomEvent(PDDE_STORAGE_EVENT, {
-      detail: { key },
-    }),
-  );
+  try {
+    if (key === PDDE_STORAGE_KEYS.workspace) {
+      writeWorkspaceStorage(value);
+    } else {
+      writeRawStorageJson(key, value);
+    }
+
+    notifyStorageChange(key);
+  } catch {
+    if (import.meta.env.DEV) {
+      console.warn("Nao foi possivel salvar dados locais do guia.");
+    }
+  }
+};
+
+export const clearGuideStorage = (keys: string[] = Object.values(PDDE_STORAGE_KEYS)) => {
+  if (!canUseBrowserStorage()) return;
+
+  for (const key of keys) {
+    window.localStorage.removeItem(key);
+    window.sessionStorage.removeItem(key);
+    notifyStorageChange(key);
+  }
+
+  if (keys.includes(PDDE_STORAGE_KEYS.workspace) || keys.includes(PDDE_STORAGE_CLEAR_ALL_KEY)) {
+    window.sessionStorage.removeItem(PDDE_WORKSPACE_SESSION_KEY);
+  }
+};
+
+export const clearAllGuideStorage = () => {
+  if (!canUseBrowserStorage()) return;
+
+  clearGuideStorage(Object.values(PDDE_STORAGE_KEYS));
+  for (const key of PDDE_AUXILIARY_STORAGE_KEYS) {
+    window.localStorage.removeItem(key);
+    window.sessionStorage.removeItem(key);
+  }
+  notifyStorageChange(PDDE_STORAGE_CLEAR_ALL_KEY);
+};
+
+export const setGuidePersistenceDisabled = (disabled: boolean) => {
+  if (!canUseBrowserStorage()) return;
+
+  if (disabled) {
+    clearAllGuideStorage();
+    window.localStorage.setItem(PDDE_PERSISTENCE_DISABLED_KEY, "1");
+  } else {
+    window.localStorage.removeItem(PDDE_PERSISTENCE_DISABLED_KEY);
+  }
+
+  notifyStorageChange(PDDE_STORAGE_CLEAR_ALL_KEY);
 };
 
 export const hydrateChecklistItems = (saved: unknown): ChecklistItemState[] => {

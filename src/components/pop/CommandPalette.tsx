@@ -6,15 +6,14 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from "@/components/ui/command";
 import { searchItems, getQuickSuggestions, SearchItem } from "@/lib/searchIndex";
 import { scrollToGuideAnchor } from "@/lib/guideNavigation";
-import { COMMAND_PALETTE_OPEN_EVENT } from "@/lib/commandPaletteEvents";
+import { COMMAND_PALETTE_OPEN_EVENT, consumePendingCommandPaletteOpen } from "@/lib/commandPaletteEvents";
 import { Search, FileText, Hash, ArrowRight, Keyboard } from "lucide-react";
 
 export function CommandPalette() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(() => consumePendingCommandPaletteOpen());
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
 
@@ -35,6 +34,7 @@ export function CommandPalette() {
       handleKeyboardShortcut(event);
     };
     const handleExplicitOpen = () => {
+      consumePendingCommandPaletteOpen();
       openPalette();
     };
 
@@ -129,9 +129,7 @@ export function CommandPalette() {
               ))}
             </CommandGroup>
 
-            <CommandSeparator />
-
-            <CommandGroup heading="Navegação">
+            <CommandGroup heading="Navegação" className="border-t border-border/70">
               <div className="px-2 py-3 text-xs text-muted-foreground flex items-center gap-4">
                 <span className="flex items-center gap-1">
                   <Keyboard className="h-3 w-3" />

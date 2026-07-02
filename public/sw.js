@@ -18,7 +18,7 @@ const APP_SHELL = [
   "/icons/shortcut-home.png",
   "/icons/shortcut-checklist.png",
 ];
-const CACHEABLE_DESTINATIONS = new Set(["image", "font", "manifest"]);
+const CACHEABLE_DESTINATIONS = new Set(["image", "font", "manifest", "script", "style"]);
 const PDF_PATH_PREFIX = "/models/";
 
 const cacheResponse = async (request, response) => {
@@ -50,7 +50,6 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
   );
-  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {

@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 import { ProfileCallout } from "./ProfileCallout";
 import { AnimatedReveal } from "./AnimatedReveal";
-import { externalResources } from "@/lib/externalResources";
 
 export const SectionAnexo = () => {
   const documentosExigidos = [

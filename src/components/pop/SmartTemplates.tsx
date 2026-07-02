@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
+  PDDE_STORAGE_CLEAR_ALL_KEY,
   emptyProcessWorkspaceProfile,
   PDDE_STORAGE_EVENT,
   PDDE_STORAGE_KEYS,
@@ -18,6 +19,7 @@ import {
   writeStorageJson,
   type ProcessWorkspaceProfile,
 } from "@/lib/pddeOperationalData";
+import { DataPersistenceNotice } from "./DataPersistenceNotice";
 
 interface TemplateField {
   key: string;
@@ -173,11 +175,15 @@ export const SmartTemplates = () => {
   useEffect(() => {
     const syncWorkspace = () =>
       setWorkspace(sanitizeWorkspaceProfile(readStorageJson(PDDE_STORAGE_KEYS.workspace, emptyProcessWorkspaceProfile())));
+    const syncTemplates = () => setValues(loadSavedValues());
 
     const handleCustomSync = (event: Event) => {
       const detail = (event as CustomEvent<{ key?: string }>).detail;
-      if (detail?.key === PDDE_STORAGE_KEYS.workspace) {
+      if (detail?.key === PDDE_STORAGE_KEYS.workspace || detail?.key === PDDE_STORAGE_CLEAR_ALL_KEY) {
         syncWorkspace();
+      }
+      if (detail?.key === PDDE_STORAGE_KEYS.templates || detail?.key === PDDE_STORAGE_CLEAR_ALL_KEY) {
+        syncTemplates();
       }
     };
 
@@ -243,6 +249,10 @@ export const SmartTemplates = () => {
           </h2>
           <p className="text-xs text-muted-foreground">Preencha os campos necessários, visualize o texto e copie a minuta para uso no processo.</p>
         </div>
+      </div>
+
+      <div className="mb-5">
+        <DataPersistenceNotice />
       </div>
 
       <div className="space-y-4">

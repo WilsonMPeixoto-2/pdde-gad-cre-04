@@ -23,34 +23,43 @@ test.describe("Conteúdo normativo PDDE", () => {
     expect(body).toContain("reprogramação");
   });
 
-  test("reescreve regras de execução sem vedações ampliadas por inferência", async ({ page }) => {
+  test("renderiza regras de execução a partir da camada normativa estruturada", async ({ page }) => {
     await page.goto("/?secao=regras-operacionais");
 
-    await expect(page.getByText(/Resolução CD\/FNDE nº 15\/2021, arts\. 23 e 27/i)).toBeVisible();
-    await expect(page.getByText(/Gastos com pessoal e contratação de serviços não são conceitos equivalentes/i)).toBeVisible();
-    await expect(page.getByText(/fornecedor ou prestador privado é admitida/i)).toBeVisible();
     await expect(page.getByText(/Pesquisa e consolidação de preços/i)).toBeVisible();
+    await expect(page.getByText(/Gastos com pessoal e contratação de serviços/i)).toBeVisible();
+    await expect(page.getByText(/Admitir contratação de fornecedor ou prestador privado/i)).toBeVisible();
     await expect(page.getByText(/Utilização de Ata de Registro de Preços/i)).toBeVisible();
     await expect(page.getByText(/Elementos mínimos dos comprovantes/i)).toBeVisible();
     await expect(page.getByText(/Disponibilidade financeira e vinculação ao exercício/i)).toBeVisible();
+    await expect(page.getByRole("link", { name: /Resolução CD\/FNDE nº 15\/2021 · arts\. 23, 27/i })).toBeVisible();
 
-    let body = await pageText(page);
+    const body = await pageText(page);
     expect(body).not.toContain("Resolução CD/FNDE nº 15/2021 (Art. 17)");
     expect(body).not.toContain("prestadores e gratificações");
     expect(body).not.toContain("internet e aluguel como vedação federal genérica");
     expect(body).not.toContain("As despesas devem possuir data igual ou posterior ao crédito dos recursos na conta bancária");
-    expect(body).toContain("fornecedores e prestadores");
+    expect(body).not.toContain("não fragmente artificialmente a despesa");
+    expect(body).toContain("fornecedor ou prestador privado");
+  });
 
+  test("separa art. 33, patrimônio e linhas de aplicabilidade ainda pendentes", async ({ page }) => {
     await page.goto("/?secao=anexo");
 
     await expect(page.getByText(/Contratação de pessoa física — consulta prévia obrigatória/i)).toBeVisible();
     await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
     await expect(page.getByText(/SEI!RIO, BB Gestão Ágil e SiGPC cumprem funções distintas/i)).toBeVisible();
+    await expect(page.getByText("Ata de aprovação da execução do plano de gastos")).toBeVisible();
+    await expect(page.getByText(/fundamento próprio no art\. 47/i)).toBeVisible();
+    await expect(page.getByText("Em validação")).toHaveCount(2);
+    await expect(page.getByText(/não constituem orientação operacional definitiva/i)).toBeVisible();
 
-    body = await pageText(page);
+    const body = await pageText(page);
     expect(body).not.toContain("Recibo comum com CPF do prestador");
     expect(body).not.toContain("Recibo de Pagamento de Autônomo (RPA)");
     expect(body).not.toContain("Resolução CD/FNDE nº 6/2006");
+    expect(body).not.toContain("conter os elements exigidos");
+    expect(body).not.toContain("árvore do SE e separe");
     expect(body).toContain("BB Gestão Ágil não substitui a documentação");
   });
 
@@ -76,5 +85,9 @@ test.describe("Conteúdo normativo PDDE", () => {
     expect(body).toContain("Cópia simples");
     expect(body).toContain("Documento original");
     expect(body).not.toContain("confere com o original");
+
+    await page.goto("/?secao=secao-4");
+    body = await pageText(page);
+    expect(body).not.toContain("Esta etapa treats");
   });
 });

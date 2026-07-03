@@ -50,7 +50,12 @@ test.describe("Conteúdo normativo PDDE", () => {
     await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
     await expect(page.getByText(/SEI!RIO, BB Gestão Ágil e SiGPC cumprem funções distintas/i)).toBeVisible();
     await expect(page.getByText("Ata de aprovação da execução do plano de gastos")).toBeVisible();
-    await expect(page.getByText(/fundamento próprio no art\. 47/i)).toBeVisible();
+    await expect(
+      page.getByText(
+        "A documentação patrimonial de bens permanentes possui fundamento próprio no art. 47 e não deve ser apresentada como parte automática do rol do art. 33.",
+        { exact: true },
+      ),
+    ).toBeVisible();
     await expect(page.getByText("Em validação")).toHaveCount(2);
     await expect(page.getByText(/não constituem orientação operacional definitiva/i)).toBeVisible();
 

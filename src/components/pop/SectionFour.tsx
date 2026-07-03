@@ -194,7 +194,7 @@ export const SectionFour = () => {
           <Callout variant="warning" icon={AlertCircle} className="mt-4">
             <p className="font-bold">Fora do escopo deste tópico</p>
             <p className="mt-1 text-sm">
-              Esta etapa treats do procedimento no sistema. A análise material do conteúdo do documento
+              Esta etapa trata do procedimento no sistema. A análise material do conteúdo do documento
               ou do mérito da despesa pertence a outras orientações.
             </p>
           </Callout>

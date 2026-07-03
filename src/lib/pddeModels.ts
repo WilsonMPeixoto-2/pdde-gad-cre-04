@@ -10,7 +10,6 @@ import {
 import { pdfAssetManifest, type PdfAssetKey } from "@/generated/pdfManifest";
 import { externalResources, type ExternalResourceId } from "@/lib/externalResources";
 
-
 export interface PDDEModelResource {
   id: string;
   title: string;
@@ -130,7 +129,7 @@ export const modelContentKindMeta = {
   },
   "filled-example": {
     label: "Exemplo preenchido",
-    className: "bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-950/30 dark:text-sky-300 dark:border-sky-800/40",
+    className: "bg-sky-50 text-sky-800 border-sky-300 dark:bg-sky-950/30 dark:text-sky-300 dark:border-sky-800/40",
   },
   "visual-reference": {
     label: "Referência visual",
@@ -138,34 +137,34 @@ export const modelContentKindMeta = {
   },
   "complementary-reference": {
     label: "Complementar local",
-    className: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800/40",
+    className: "bg-amber-50 text-amber-800 border-amber-300 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800/40",
   },
 } as const;
 
 export const modelCategoryMeta = {
   instrucao: {
     label: "Instrução Processual",
-    color: "text-primary dark:text-accent",
+    color: "text-blue-800 dark:text-sky-300",
     bgColor: "bg-primary/8 dark:bg-accent/12",
     iconBg: "bg-linear-to-br from-primary/15 to-primary/5 dark:from-accent/20 dark:to-accent/5",
-    iconColor: "text-primary dark:text-accent",
+    iconColor: "text-blue-800 dark:text-sky-300",
     accent: "hsl(var(--primary))",
   },
   financeiro: {
     label: "Documentos Financeiros",
-    color: "text-success dark:text-success",
-    bgColor: "bg-success/8 dark:bg-success/12",
-    iconBg: "bg-linear-to-br from-success/15 to-success/5 dark:from-success/20 dark:to-success/5",
-    iconColor: "text-success",
-    accent: "hsl(var(--success))",
+    color: "text-emerald-800 dark:text-emerald-300",
+    bgColor: "bg-emerald-100/80 dark:bg-emerald-950/30",
+    iconBg: "bg-linear-to-br from-emerald-200 to-emerald-50 dark:from-emerald-900/60 dark:to-emerald-950/20",
+    iconColor: "text-emerald-800 dark:text-emerald-300",
+    accent: "#047857",
   },
   parecer: {
     label: "Deliberação",
-    color: "text-accent dark:text-accent",
-    bgColor: "bg-accent/8 dark:bg-accent/12",
-    iconBg: "bg-linear-to-br from-accent/15 to-accent/5 dark:from-accent/20 dark:to-accent/5",
-    iconColor: "text-accent",
-    accent: "hsl(var(--accent))",
+    color: "text-violet-800 dark:text-violet-300",
+    bgColor: "bg-violet-100/80 dark:bg-violet-950/30",
+    iconBg: "bg-linear-to-br from-violet-200 to-violet-50 dark:from-violet-900/60 dark:to-violet-950/20",
+    iconColor: "text-violet-800 dark:text-violet-300",
+    accent: "#6d28d9",
   },
 } as const;
 
@@ -179,7 +178,8 @@ export const modelResourceSummary = {
 };
 
 export const getPdfAssetMeta = (fileName: PdfAssetKey) => pdfAssetManifest[fileName];
+
 export const getModelSourceLinks = (sourceIds: ExternalResourceId[]) =>
   sourceIds.map((sourceId) => externalResources[sourceId]);
 
-export const openablePdfLinks = pddeModels.map((model) => pdfAssetManifest[model.fileName].href);
+export const openablePdfLinks = pddeModels.map((item) => getPdfAssetMeta(item.fileName).href);

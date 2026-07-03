@@ -13,6 +13,19 @@ test.describe("Sistema visual institucional", () => {
     await expect(hero.getByRole("button", { name: /iniciar guia/i })).toBeVisible();
   });
 
+  test("mantém cabeçalho e sumário sem pulsação, rotação ou brilho promocional", async ({ page }) => {
+    await page.goto("/");
+
+    const header = page.locator("header.no-print").first();
+    const sidebar = page.getByRole("navigation", { name: /menu principal de navegação/i });
+
+    await expect(header).toBeVisible();
+    await expect(sidebar).toBeVisible();
+    await expect(header.locator(".animate-pulse, .btn-premium")).toHaveCount(0);
+    await expect(sidebar.locator(".animate-pulse, .btn-premium")).toHaveCount(0);
+    await expect(header.getByRole("button", { name: /abrir busca global/i })).toBeVisible();
+  });
+
   test("usa divisores editoriais claros e ícones padronizados", async ({ page }) => {
     await page.goto("/");
     const divider = page.locator(".section-divider-print").first();

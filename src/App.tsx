@@ -6,11 +6,11 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import { ProfileModeProvider } from "@/contexts/ProfileModeContext";
 import { useAssetUpdateRecovery } from "@/hooks/useAssetUpdateRecovery";
 import { useServiceWorkerLifecycle } from "@/hooks/useServiceWorkerLifecycle";
+import { requestCommandPaletteOpen } from "@/lib/commandPaletteEvents";
 import Index from "./pages/Index";
 
-// Lazy-load non-critical components to reduce initial JS bundle
 const loadCommandPalette = () =>
-  import("@/components/pop/CommandPalette").then((m) => ({ default: m.CommandPalette }));
+  import("@/components/pop/CommandPalette").then((module) => ({ default: module.CommandPalette }));
 
 const CommandPalette = lazy(loadCommandPalette);
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -18,6 +18,19 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const App = () => {
   useAssetUpdateRecovery();
   useServiceWorkerLifecycle();
+
+  useEffect(() => {
+    const openSearchFromKeyboard = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        void loadCommandPalette();
+        requestCommandPaletteOpen();
+      }
+    };
+
+    document.addEventListener("keydown", openSearchFromKeyboard);
+    return () => document.removeEventListener("keydown", openSearchFromKeyboard);
+  }, []);
 
   useEffect(() => {
     const preloadCommandPalette = () => {
@@ -44,7 +57,6 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
             </Routes>
           </BrowserRouter>

@@ -13,6 +13,12 @@ const levelStyles: Record<NormativeLevel, string> = {
   local: "gov-badge-local",
 };
 
+const levelMarkerStyles: Record<NormativeLevel, string> = {
+  federal: "bg-blue-700 dark:bg-blue-300",
+  municipal: "bg-teal-700 dark:bg-teal-300",
+  local: "bg-violet-700 dark:bg-violet-300",
+};
+
 const statusLabels: Record<NormativeStatus, string> = {
   verified: "Vigente",
   "pending-local-validation": "Pendente de Homologação",
@@ -36,26 +42,16 @@ export const LegalSourceBadge = ({
   const suffix = issuingBody ? ` · ${issuingBody}` : "";
 
   return (
-    <span
-      className={cn(
-        levelStyles[level],
-        className
-      )}
-    >
-      <span className="shrink-0 flex items-center gap-1">
-        {level === "federal" && (
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-        )}
-        {level === "municipal" && (
-          <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-        )}
-        {level === "local" && (
-          <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-        )}
+    <span className={cn(levelStyles[level], className)}>
+      <span className="flex shrink-0 items-center gap-1.5">
+        <span
+          className={cn("h-2 w-2 rounded-sm", levelMarkerStyles[level])}
+          aria-hidden="true"
+        />
         {levelLabels[level]}
         {suffix}
       </span>
-      <span className="ml-1.5 pl-1.5 border-l border-current/20 normal-case tracking-normal opacity-85 font-medium">
+      <span className="ml-2 border-l border-current/30 pl-2 font-semibold normal-case tracking-normal">
         {statusLabels[status]}
       </span>
     </span>

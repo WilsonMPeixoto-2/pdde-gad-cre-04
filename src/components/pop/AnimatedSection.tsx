@@ -16,18 +16,16 @@ export const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
       <div
         ref={ref}
         className={cn(
-          "transition-all duration-600 ease-out",
-          isVisible 
-            ? "opacity-100 translate-y-0" 
-            : "opacity-0 translate-y-3",
-          className
+          "transition-all duration-600 ease-out motion-reduce:transform-none motion-reduce:opacity-100 motion-reduce:transition-none",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3",
+          className,
         )}
         style={{ transitionDelay: `${delay}ms` }}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
 AnimatedSection.displayName = "AnimatedSection";

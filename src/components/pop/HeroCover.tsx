@@ -31,7 +31,7 @@ export const HeroCover = () => {
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
         <div className="min-w-0">
-          <div className="inline-flex items-center gap-2.5 rounded-[0.55rem] border border-white/12 bg-white/[0.045] px-3.5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.13em] text-white/82">
+          <div className="inline-flex items-center gap-2.5 rounded-[0.55rem] border border-white/15 bg-white/[0.055] px-3.5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.13em] text-white/90">
             <ShieldCheck className="h-4 w-4 text-sky-300" aria-hidden="true" />
             4ª Coordenadoria Regional de Educação
           </div>
@@ -49,7 +49,7 @@ export const HeroCover = () => {
             <span className="mt-2 block text-sky-300">PDDE no SEI!RIO</span>
           </h1>
 
-          <p className="mt-7 max-w-3xl text-base leading-8 text-white/72 sm:text-lg">
+          <p className="mt-7 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
             Orientações para autuação, organização documental, autenticação, assinatura e remessa do
             processo local, com separação clara entre o fluxo municipal e as exigências federais do PDDE.
           </p>
@@ -57,29 +57,29 @@ export const HeroCover = () => {
           <button
             type="button"
             onClick={scrollToIntroduction}
-            className="mt-9 inline-flex h-11 items-center justify-center gap-2 rounded-[0.65rem] border border-sky-400/35 bg-sky-500 px-5 text-sm font-bold text-slate-950 shadow-[0_10px_30px_-18px_hsl(199_89%_48%/0.75)] transition-[background-color,border-color,box-shadow] duration-150 hover:border-sky-300 hover:bg-sky-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+            className="mt-9 inline-flex h-11 items-center justify-center gap-2 rounded-[0.65rem] border border-sky-400/40 bg-sky-500 px-5 text-sm font-bold text-slate-950 shadow-[0_10px_30px_-18px_hsl(199_89%_48%/0.75)] transition-[background-color,border-color,box-shadow] duration-150 hover:border-sky-300 hover:bg-sky-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
           >
             <Compass className="h-4 w-4" aria-hidden="true" />
             Iniciar guia
           </button>
         </div>
 
-        <aside className="border-t border-white/12 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
-          <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-white/46">
+        <aside className="border-t border-white/15 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-white/72">
             Estrutura do conteúdo
           </p>
           <dl className="mt-4 grid grid-cols-2 gap-x-5 gap-y-4 lg:grid-cols-1">
             <div>
               <dt className="text-2xl font-extrabold tracking-[-0.04em] text-white">6</dt>
-              <dd className="mt-0.5 text-sm text-white/62">etapas operacionais</dd>
+              <dd className="mt-0.5 text-sm text-white/72">etapas operacionais</dd>
             </div>
             <div>
               <dt className="text-2xl font-extrabold tracking-[-0.04em] text-white">3</dt>
-              <dd className="mt-0.5 text-sm text-white/62">camadas de orientação</dd>
+              <dd className="mt-0.5 text-sm text-white/72">camadas de orientação</dd>
             </div>
             <div>
               <dt className="text-sm font-bold text-sky-300">Federal · Municipal · Local</dt>
-              <dd className="mt-1 text-sm leading-6 text-white/62">fontes e aplicabilidade identificadas</dd>
+              <dd className="mt-1 text-sm leading-6 text-white/72">fontes e aplicabilidade identificadas</dd>
             </div>
           </dl>
         </aside>
@@ -88,7 +88,7 @@ export const HeroCover = () => {
       <button
         type="button"
         onClick={scrollToIntroduction}
-        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.13em] text-white/48 transition-colors hover:text-white/78 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-300 lg:inline-flex"
+        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.13em] text-white/72 transition-colors hover:text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-300 lg:inline-flex"
         aria-label="Ir para a apresentação"
       >
         Continuar

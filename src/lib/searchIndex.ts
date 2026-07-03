@@ -23,11 +23,19 @@ const sectionTitle = (sectionId: GuideSectionId) => guideSectionsById[sectionId]
 const baseSearchIndex: SearchItem[] = [
   {
     id: "intro",
-    title: "Apresentação do POP",
-    content: "Escopo, limites e finalidade do guia local da prestação de contas do PDDE.",
-    keywords: ["introdução", "apresentação", "pop", "4ª cre", "escopo"],
+    title: "Apresentação do guia",
+    content: "Escopo, limites, visão geral do fluxo e finalidade do guia local da prestação de contas do PDDE.",
+    keywords: ["introdução", "apresentação", "guia", "4ª cre", "escopo", "fluxo"],
     section: sectionTitle("introducao"),
     anchor: "introducao",
+  },
+  {
+    id: "jornada",
+    title: "Mapa das etapas do processo",
+    content: "Visão geral da sequência entre abertura, instrução, inclusão, autenticação, assinatura, remessa e acompanhamento.",
+    keywords: ["jornada", "fluxo", "etapas", "mapa", "processo"],
+    section: sectionTitle("introducao"),
+    anchor: GUIDE_ANCHORS.journey,
   },
   {
     id: "tipo-processo",
@@ -56,15 +64,15 @@ const baseSearchIndex: SearchItem[] = [
   {
     id: "checklist",
     title: "Checklist de documentos",
-    content: "Lista federal e complementar para a instrução processual da prestação de contas.",
+    content: "Instrumento de conferência final da base federal e das peças complementares aplicáveis ao processo local.",
     keywords: ["checklist", "documentos", "rol mínimo", "verificação", "prestação de contas"],
     section: sectionTitle("secao-2"),
     anchor: GUIDE_ANCHORS.checklist,
   },
   {
     id: "regras-operacionais",
-    title: "Regras operacionais da instrução",
-    content: "Orientações com fonte, aplicabilidade e status de revisão que afetam a montagem do processo.",
+    title: "Regras aplicadas à instrução",
+    content: "Orientações com fonte, aplicabilidade e status de revisão que afetam a preparação dos documentos.",
     keywords: ["regras operacionais", "pesquisa de preços", "srp", "vedações", "compras", "instrução"],
     section: sectionTitle("secao-2"),
     anchor: GUIDE_ANCHORS.rules,
@@ -86,24 +94,16 @@ const baseSearchIndex: SearchItem[] = [
     anchor: GUIDE_ANCHORS.templates,
   },
   {
-    id: "jornada",
-    title: "Mapa das etapas do processo",
-    content: "Sequência de referência entre abertura, instrução, autenticação, assinatura e remessa.",
-    keywords: ["jornada", "fluxo", "etapas", "mapa", "processo"],
-    section: sectionTitle("secao-2"),
-    anchor: GUIDE_ANCHORS.journey,
-  },
-  {
     id: "documentos-externos",
     title: "Inclusão de documentos externos",
-    content: "Cadastro de PDFs digitalizados e nato-digitais no SEI!RIO, com identificação clara na árvore.",
+    content: "Classificação, metadados, inclusão e identificação de PDFs digitalizados e nato-digitais no SEI!RIO.",
     keywords: ["documento externo", "pdf", "árvore", "nome na árvore", "digitalizado", "nato-digital"],
     section: sectionTitle("secao-3"),
     anchor: "secao-3",
   },
   {
     id: "autenticacao",
-    title: "Autenticação de documentos",
+    title: "Autenticação de documentos digitalizados",
     content: "Documentos digitalizados exigem tipo de conferência compatível; nato-digitais entram como original eletrônico.",
     keywords: ["autenticação", "tipo de conferência", "digitalizado", "nato-digital", "original eletrônico"],
     section: sectionTitle("secao-4"),
@@ -119,7 +119,7 @@ const baseSearchIndex: SearchItem[] = [
   },
   {
     id: "remessa-gad",
-    title: "Remessa para a GAD",
+    title: "Remessa do processo",
     content: `A tramitação para ${GAD_UNIT.fullLabel} deve observar o fluxo local formal vigente e a conclusão das etapas anteriores.`,
     keywords: ["enviar", "tramitar", "gad", "10729", "remessa", "encaminhamento", "validação local"],
     section: sectionTitle("secao-5"),
@@ -127,8 +127,8 @@ const baseSearchIndex: SearchItem[] = [
   },
   {
     id: "pos-envio-gad",
-    title: "Análise e providências posteriores",
-    content: "Acompanhe a análise da GAD e eventuais diligências sem presumir autoridade decisória ou conclusão não formalizada.",
+    title: "Acompanhamento posterior à remessa",
+    content: "Acompanhe a tramitação e eventuais diligências sem presumir aprovação, autoridade decisória ou conclusão não formalizada.",
     keywords: ["pós-envio", "gad", "análise", "diligência", "manifestação", "fluxo local"],
     section: sectionTitle("secao-6"),
     anchor: "secao-6",
@@ -146,8 +146,8 @@ const baseSearchIndex: SearchItem[] = [
     title: "Prazos da prestação de contas",
     content: "Os prazos devem seguir os atos do exercício e as orientações formalmente publicadas pela SME-Rio ou pela CRE.",
     keywords: ["prazos", "cronograma", "eex", "uex", "atos do exercício", "saldos", "2027", "comunicado 01/2026"],
-    section: sectionTitle("anexo"),
-    anchor: "anexo",
+    section: sectionTitle("introducao"),
+    anchor: "introducao",
   },
   {
     id: "legislacao",
@@ -167,9 +167,9 @@ const baseSearchIndex: SearchItem[] = [
   },
   {
     id: "contatos",
-    title: "Contatos úteis",
-    content: "Canais de suporte da GAD/4ª CRE para dúvidas sobre o processo.",
-    keywords: ["contatos", "telefone", "email", "suporte", "gad"],
+    title: "Atendimento e suporte",
+    content: "Canais da GAD/4ª CRE e recursos oficiais de suporte do SEI!RIO.",
+    keywords: ["contatos", "telefone", "email", "suporte", "gad", "sei"],
     section: sectionTitle("contatos"),
     anchor: "contatos",
   },
@@ -177,14 +177,18 @@ const baseSearchIndex: SearchItem[] = [
 
 const getNormativeRuleAnchor = (ruleId: string): GuideAnchorId => {
   if (ruleId === "external-document-format-classification") return "secao-3";
-  if (ruleId === "individual-service-tax-consultation") return "anexo";
-  if (ruleId === "guide-scope-federal-systems" || ruleId === "deadlines-internal-remittance") return "anexo";
+  if (ruleId === "guide-scope-federal-systems" || ruleId === "deadlines-internal-remittance") return "introducao";
   return GUIDE_ANCHORS.rules;
 };
 
 const normativeSearchItems: SearchItem[] = normativeRules.map((rule) => {
   const anchor = getNormativeRuleAnchor(rule.id);
-  const parentSection = anchor === GUIDE_ANCHORS.rules ? "secao-2" : anchor === "secao-3" ? "secao-3" : "anexo";
+  const parentSection: GuideSectionId =
+    anchor === GUIDE_ANCHORS.rules
+      ? "secao-2"
+      : anchor === "secao-3"
+        ? "secao-3"
+        : "introducao";
 
   return {
     id: `normative-${rule.id}`,

@@ -37,6 +37,10 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
     localStorage.setItem("theme", nextIsDark ? "dark" : "light");
   };
 
+  const openSearch = () => {
+    requestCommandPaletteOpen();
+  };
+
   return (
     <TooltipProvider delayDuration={120}>
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/96 text-white backdrop-blur-xl no-print">
@@ -64,7 +68,7 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={requestCommandPaletteOpen}
+                    onClick={openSearch}
                     className={darkActionClass}
                     aria-label="Abrir busca global (Ctrl+K)"
                   >
@@ -122,7 +126,7 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
               <Button
                 variant="outline"
                 size="icon"
-                onClick={requestCommandPaletteOpen}
+                onClick={openSearch}
                 className={`h-9 w-9 ${darkActionClass}`}
                 aria-label="Abrir busca global"
               >
@@ -147,7 +151,7 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={onPrint} disabled={isPreparingPrint}>
                     <Printer aria-hidden="true" />
-                    {isPreparingPrint ? "Preparando impressão" : "Imprimir ou salvar em PDF"}
+                    {isPreparingPrint ? "Preparando impressão" : "Imprimir / Salvar em PDF"}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

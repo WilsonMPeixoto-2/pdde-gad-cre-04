@@ -36,11 +36,15 @@ interface Template {
   generate: (values: Record<string, string>) => string;
 }
 
+const draftHeader =
+  "MINUTA DE APOIO — ADEQUAR AO CASO CONCRETO E AO FLUXO INSTITUCIONAL VIGENTE\n\n";
+
 const templates: Template[] = [
   {
     id: "oficio",
     title: "Ofício de Encaminhamento",
-    description: "Ofício padrão para encaminhamento da prestação de contas PDDE",
+    description:
+      "Minuta de apoio sujeita à adequação e à confirmação de que o ofício é exigido no fluxo local vigente.",
     fields: [
       { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
       { key: "cnpj", label: "CNPJ da UEx", placeholder: "00.000.000/0001-00" },
@@ -49,6 +53,7 @@ const templates: Template[] = [
       { key: "matricula", label: "Matrícula", placeholder: "12/345.678-9" },
     ],
     generate: (v) =>
+      draftHeader +
       `OFÍCIO Nº ____/${v.exercicio || "____"}\n\n` +
       `${v.escola || "[NOME DA UNIDADE ESCOLAR]"}\n` +
       `CNPJ: ${v.cnpj || "[CNPJ]"}\n\n` +
@@ -68,7 +73,8 @@ const templates: Template[] = [
   {
     id: "despacho",
     title: "Despacho de Conferência",
-    description: "Despacho padrão da GAD para conferência de documentos",
+    description:
+      "Minuta neutra para registrar conferência documental; não declara regularidade nem substitui o fluxo decisório competente.",
     fields: [
       { key: "processo", label: "NUP do processo no SEI!RIO", placeholder: "000704.000123/2026-45" },
       { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
@@ -76,16 +82,16 @@ const templates: Template[] = [
       { key: "servidor", label: "Nome do Servidor GAD", placeholder: "Carlos Souza" },
     ],
     generate: (v) =>
+      draftHeader +
       `DESPACHO\n\n` +
       `Processo: ${v.processo || "[Nº PROCESSO SEI]"}\n` +
       `Assunto: Prestação de Contas PDDE — ${v.escola || "[UNIDADE ESCOLAR]"} — Exercício ${v.exercicio || "[ANO]"}\n\n` +
       `Trata-se de prestação de contas dos recursos do PDDE, exercício ${v.exercicio || "[ANO]"}, ` +
       `encaminhada pela unidade escolar ${v.escola || "[UNIDADE ESCOLAR]"}.\n\n` +
-      `Após análise da documentação constante nos autos, verificou-se que:\n\n` +
-      `( ) A prestação de contas está REGULAR, com os documentos essenciais apresentados e sem inconsistência aparente em relação aos registros federais aplicáveis.\n` +
-      `( ) A prestação de contas apresenta PENDÊNCIA(S), conforme apontamentos abaixo.\n\n` +
-      `Observações:\n` +
-      `_______________________________________________\n\n` +
+      `Após conferência da documentação constante nos autos, registram-se os seguintes apontamentos:\n\n` +
+      `[DESCREVER DOCUMENTOS CONFERIDOS, INCONSISTÊNCIAS OU NECESSIDADE DE DILIGÊNCIA]\n\n` +
+      `Providência proposta:\n` +
+      `[PREENCHER CONFORME O FLUXO FORMAL VIGENTE E A COMPETÊNCIA DA UNIDADE]\n\n` +
       `${v.servidor || "[NOME DO SERVIDOR]"}\n` +
       `Gerência de Administração — GAD\n` +
       `4ª Coordenadoria Regional de Educação`,
@@ -93,7 +99,8 @@ const templates: Template[] = [
   {
     id: "termo-doacao",
     title: "Termo de Doação (Bens de Capital)",
-    description: "Minuta de apoio para doação de bens móveis permanentes adquiridos pelo CEC; conferir com o modelo institucional vigente antes da utilização.",
+    description:
+      "Minuta de apoio para bens móveis permanentes; conferir o modelo institucional vigente antes da utilização.",
     fields: [
       { key: "escola", label: "Nome da Unidade Escolar", placeholder: "E.M. João da Silva" },
       { key: "cnpj", label: "CNPJ da UEx", placeholder: "00.000.000/0001-00" },
@@ -107,6 +114,7 @@ const templates: Template[] = [
       { key: "valorTotal", label: "Valor Total (R$)", placeholder: "15.000,00" },
     ],
     generate: (v) =>
+      draftHeader +
       `TERMO DE DOAÇÃO DE BENS MÓVEIS\n\n` +
       `Pelo presente instrumento, o CONSELHO ESCOLA COMUNIDADE (CEC) da unidade escolar ${v.escola || "[NOME DA UNIDADE ESCOLAR]"}, ` +
       `CNPJ: ${v.cnpj || "[CNPJ]"}, neste ato representado por seu Diretor Executivo ${v.diretor || "[NOME DO(A) DIRETOR(A)]"}, ` +
@@ -245,9 +253,12 @@ export const SmartTemplates = () => {
         </div>
         <div>
           <h2 className="font-bold text-foreground text-base sm:text-lg">
-            Modelos de texto de apoio
+            Minutas de texto de apoio
           </h2>
-          <p className="text-xs text-muted-foreground">Preencha os campos necessários, visualize o texto e copie a minuta para uso no processo.</p>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            Preencha, revise e adapte ao caso concreto. Estes textos não substituem modelo institucional
+            aprovado nem definem competência decisória.
+          </p>
         </div>
       </div>
 
@@ -267,7 +278,6 @@ export const SmartTemplates = () => {
               key={template.id}
               className="overflow-hidden rounded-3xl border border-border/60 bg-card transition-all duration-300 hover:border-primary/15 hover:shadow-soft"
             >
-              {/* Header */}
               <button
                 onClick={() => setActiveTemplate(isActive ? null : template.id)}
                 className="w-full flex items-center justify-between p-4 text-left hover:bg-muted/30 transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden"
@@ -282,10 +292,8 @@ export const SmartTemplates = () => {
                 </span>
               </button>
 
-              {/* Body */}
               {isActive && (
                 <div className="px-4 pb-4 pt-1 border-t border-border/40 animate-fade-in">
-                  {/* Fields */}
                   <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {template.fields.map(field => (
                       <div key={field.key}>
@@ -309,7 +317,6 @@ export const SmartTemplates = () => {
                     </p>
                   )}
 
-                  {/* Actions */}
                   <div className="flex flex-wrap items-center gap-2">
                     <TooltipProvider>
                       <Tooltip>
@@ -324,7 +331,7 @@ export const SmartTemplates = () => {
                             {isPreviewing ? "Ocultar" : "Visualizar"}
                           </Button>
                         </TooltipTrigger>
-                        <TooltipContent>Preview do texto gerado</TooltipContent>
+                        <TooltipContent>Visualização do texto gerado</TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
 
@@ -352,7 +359,6 @@ export const SmartTemplates = () => {
                     </Button>
                   </div>
 
-                  {/* Preview */}
                   {isPreviewing && (
                     <div className="mt-4 p-4 rounded-lg bg-muted/50 border border-border/40 animate-fade-in">
                       <pre className="text-xs text-foreground whitespace-pre-wrap font-mono leading-relaxed">

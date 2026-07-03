@@ -13,6 +13,7 @@ export interface NormativeSource {
   level: NormativeLevel;
   officialUrl: string;
   publishedAt?: string;
+  publishedPeriod?: string;
   lastVerifiedAt: string;
   status: NormativeStatus;
   notes?: string;
@@ -66,6 +67,18 @@ export const normativeSources = {
     lastVerifiedAt: "2026-07-02",
     status: "verified",
   },
+  comunicado47_2024: {
+    id: "comunicado47_2024",
+    title: "Comunicado PDDE nº 47/2024",
+    issuingBody: "FNDE",
+    level: "federal",
+    officialUrl:
+      "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2024-1/Comunicadon.47_2024Orientaesparaaprestaodecontasdosrecursosrecebidosem2024.pdf",
+    publishedAt: "2024-12-18",
+    lastVerifiedAt: "2026-07-02",
+    status: "verified",
+    notes: "Orientação operacional específica para recursos recebidos em 2024.",
+  },
   comunicado01_2026: {
     id: "comunicado01_2026",
     title: "Comunicado PDDE nº 01/2026",
@@ -73,9 +86,11 @@ export const normativeSources = {
     level: "federal",
     officialUrl:
       "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2026/comunicado-n-01_2026-alteracoes-na-resolucao-cd-fnde-no-7-2024-estorno-de-recurso.pdf",
-    publishedAt: "2026-01-01",
+    publishedPeriod: "2026-01",
     lastVerifiedAt: "2026-07-02",
     status: "verified",
+    notes:
+      "O documento informa apenas Brasília, janeiro de 2026. Ele referencia a Resolução CD/FNDE nº 18, de 27 de novembro de 2025, e esclarece os efeitos sobre saldos e estornos a partir de 2027.",
   },
   bbGestaoAgilFaq: {
     id: "bbGestaoAgilFaq",
@@ -84,6 +99,16 @@ export const normativeSources = {
     level: "federal",
     officialUrl:
       "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil/PerguntaseRespostasPDDE.pdf",
+    lastVerifiedAt: "2026-07-02",
+    status: "verified",
+  },
+  decreto8539_2015: {
+    id: "decreto8539_2015",
+    title: "Decreto nº 8.539/2015",
+    issuingBody: "Presidência da República",
+    level: "federal",
+    officialUrl: "https://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2015/Decreto/D8539.htm",
+    publishedAt: "2015-10-08",
     lastVerifiedAt: "2026-07-02",
     status: "verified",
   },

@@ -1,0 +1,137 @@
+/* Light-mode contrast refinement. Loaded after the institutional base layer. */
+
+html:not(.dark) {
+  --background: 211 32% 94%;
+  --foreground: 222 43% 10%;
+  --card: 210 40% 99%;
+  --card-foreground: 222 43% 10%;
+  --popover: 210 40% 99%;
+  --popover-foreground: 222 43% 10%;
+  --secondary: 211 34% 88%;
+  --secondary-foreground: 222 43% 12%;
+  --muted: 212 27% 84%;
+  --muted-foreground: 217 30% 24%;
+  --border: 213 28% 72%;
+  --input: 213 28% 72%;
+  --card-hover: 210 45% 97%;
+  --highlight-bg: 214 75% 92%;
+  --table-stripe: 211 35% 92%;
+  --normative-bg: 214 38% 92%;
+  --normative-border: 214 34% 72%;
+  --surface-subtle: 212 38% 94%;
+  --surface-info: 214 64% 94%;
+  --surface-strong: 212 30% 89%;
+  --surface-blue: 214 72% 93%;
+}
+
+html:not(.dark) body {
+  background:
+    linear-gradient(180deg, hsl(211 34% 95%) 0%, hsl(var(--background)) 34rem, hsl(211 30% 93%) 100%);
+}
+
+html:not(.dark) .section-card,
+html:not(.dark) .article-intro-panel,
+html:not(.dark) .section-divider-print {
+  border-color: hsl(var(--border) / 0.9);
+  background: hsl(var(--card));
+}
+
+html:not(.dark) .article-intro-panel {
+  background:
+    linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--surface-info)) 100%);
+}
+
+html:not(.dark) .article-summary-card {
+  border-color: hsl(var(--border) / 0.9);
+  background: hsl(var(--surface-subtle));
+}
+
+html:not(.dark) .info-panel,
+html:not(.dark) .highlight-box {
+  border-color: hsl(214 38% 70% / 0.9);
+  background: hsl(var(--surface-info));
+}
+
+html:not(.dark) .rule-card {
+  border-color: hsl(var(--border) / 0.92);
+  background:
+    linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--surface-subtle)) 100%);
+}
+
+html:not(.dark) .signal-card {
+  border-color: hsl(var(--border) / 0.92);
+  background:
+    linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--surface-subtle)) 100%);
+}
+
+html:not(.dark) .journey-shell {
+  background: hsl(var(--card));
+}
+
+html:not(.dark) .journey-card {
+  border-color: hsl(var(--border) / 0.92);
+  background: hsl(var(--surface-subtle));
+}
+
+html:not(.dark) .journey-card:hover {
+  border-color: hsl(var(--accent) / 0.42);
+  background: hsl(var(--surface-blue));
+}
+
+html:not(.dark) .kicker-label,
+html:not(.dark) .meta-pill {
+  border-color: hsl(var(--border) / 0.9);
+  background: hsl(var(--surface-strong));
+  color: hsl(var(--foreground) / 0.82);
+}
+
+html:not(.dark) .icon-tile--primary {
+  border-color: hsl(var(--accent) / 0.28);
+  background: hsl(var(--surface-blue));
+  color: hsl(var(--accent));
+}
+
+html:not(.dark) .icon-tile--neutral {
+  border-color: hsl(var(--border));
+  background: hsl(var(--surface-strong));
+  color: hsl(var(--foreground) / 0.78);
+}
+
+html:not(.dark) .step-diamond--muted {
+  border-color: hsl(var(--border));
+  background: hsl(var(--surface-strong));
+  color: hsl(var(--foreground) / 0.72);
+}
+
+html:not(.dark) .section-divider-index {
+  border-color: hsl(var(--border) / 0.9);
+  background: hsl(var(--surface-strong));
+}
+
+html:not(.dark) .section-divider-index-label {
+  color: hsl(var(--foreground) / 0.72);
+}
+
+html:not(.dark) .section-divider-index-number {
+  color: hsl(var(--accent));
+}
+
+html:not(.dark) .section-divider-subtitle {
+  color: hsl(var(--foreground) / 0.86);
+}
+
+html:not(.dark) .table-institutional td {
+  border-color: hsl(var(--border) / 0.72);
+}
+
+html:not(.dark) .table-institutional tr:nth-child(even) td {
+  background: hsl(var(--table-stripe));
+}
+
+html:not(.dark) .table-institutional tbody tr:hover td {
+  background: hsl(var(--surface-blue));
+}
+
+html:not(.dark) .text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}

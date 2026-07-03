@@ -1,5 +1,6 @@
 const SW_VERSION = new URL(self.location.href).searchParams.get("v") ?? "fallback";
-const CACHE_NAME = `pdde-guide-shell-${SW_VERSION}`;
+const CACHE_PREFIX = "pdde-guide-shell-";
+const CACHE_NAME = `${CACHE_PREFIX}${SW_VERSION}`;
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -57,7 +58,7 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((cacheNames) =>
       Promise.all(
         cacheNames
-          .filter((cacheName) => cacheName !== CACHE_NAME)
+          .filter((cacheName) => cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME)
           .map((cacheName) => caches.delete(cacheName))
       )
     )

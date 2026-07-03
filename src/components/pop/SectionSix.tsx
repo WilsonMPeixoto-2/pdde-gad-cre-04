@@ -1,124 +1,99 @@
-import { FileText, Package, Send, UserCheck } from "lucide-react";
-import { Callout } from "./Callout";
-import { ProfileCallout } from "./ProfileCallout";
-import { AnimatedReveal } from "./AnimatedReveal";
+import {
+  AlertCircle,
+  FileSearch,
+  PackageCheck,
+  Reply,
+  Send,
+} from "lucide-react";
+import { SectionLead } from "@/components/visual/SectionLead";
 
-const finalizationSteps = [
+const followUpSteps = [
   {
     number: "1",
-    title: "Análise pela GAD",
+    title: "Acompanhar a tramitação",
     description:
-      "A GAD analisará a instrução e poderá solicitar complementação, devolver o processo para correção ou emitir a manifestação cabível, conforme o fluxo interno vigente.",
-    icon: Send,
+      "Consulte o processo no SEI!RIO após a remessa e verifique se houve recebimento, devolução ou solicitação de complementação.",
+    icon: FileSearch,
   },
   {
     number: "2",
-    title: "Providência cabível",
+    title: "Atender eventual diligência",
     description:
-      "A manifestação registrada deverá observar a orientação formal da SME-Rio e da 4ª CRE em vigor para o respectivo ciclo.",
-    icon: FileText,
+      "Quando houver pendência formalmente registrada, complemente ou corrija a instrução e mantenha a resposta vinculada ao mesmo processo.",
+    icon: Reply,
   },
   {
     number: "3",
-    title: "Etapas subsequentes",
+    title: "Observar a providência comunicada",
     description:
-      "A autoridade responsável pela decisão final e os procedimentos de arquivamento ou encaminhamento dependem do fluxo local formalmente vigente.",
-    icon: UserCheck,
-  },
-  {
-    number: "4",
-    title: "Controle Patrimonial — PDDE Capital",
-    description:
-      "Quando houver aquisição de bens permanentes com recursos de capital do PDDE, a unidade deve incluir a documentação patrimonial cabível e seguir o procedimento local formalmente validado.",
-    icon: Package,
+      "A manifestação, a autoridade competente e o encerramento devem seguir o fluxo formal vigente para o respectivo ciclo.",
+    icon: Send,
   },
 ] as const;
 
-export const SectionSix = () => {
-  return (
-    <section className="space-y-6">
-      <AnimatedReveal delay={50} duration={600}>
-        <div className="section-card">
-          <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2 font-heading">
-            <FileText className="w-5.5 h-5.5 text-accent" />
-            Fluxo pós-envio
-          </h3>
-          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-            Após a remessa, a GAD analisará a instrução e poderá solicitar complementação, devolver o
-            processo para correção ou emitir a manifestação cabível, conforme o fluxo interno vigente.
-            As etapas subsequentes devem seguir orientação formal da SME-Rio e da 4ª CRE para o ciclo.
-          </p>
-        </div>
-      </AnimatedReveal>
+export const SectionSix = () => (
+  <section className="space-y-8">
+    <SectionLead
+      step="6"
+      eyebrow="Após a remessa"
+      title="Acompanhe a análise e responda somente ao que for formalmente solicitado"
+      description="A remessa não encerra automaticamente o processo. A unidade deve acompanhar a tramitação, atender diligências e observar a providência registrada pela unidade competente, sem presumir aprovação ou encerramento."
+      icon={FileSearch}
+    />
 
-      <AnimatedReveal delay={150} duration={650}>
-        <div className="section-card">
-          <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2 font-heading">
-            <Send className="w-4.5 h-4.5 text-accent" />
-            Etapas da finalização
-          </h4>
-
-          <div className="space-y-4">
-            {finalizationSteps.map((step) => {
-              const Icon = step.icon;
-
-              return (
-                <div key={step.number} className="flex gap-4 rounded-xl border border-border/50 bg-gradient-to-br from-card to-secondary/35 p-5 shadow-xs" style={{ boxShadow: "var(--shadow-card-rest)" }}>
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-accent text-sm font-bold text-white shadow-sm">
-                    <span className="text-sm font-extrabold text-white">{step.number}</span>
-                  </div>
-                  <div className="space-y-1 min-w-0 flex-1">
-                    <p className="font-bold text-foreground flex items-center gap-2 text-sm sm:text-base font-heading">
-                      <Icon className="w-4 h-4 text-accent" />
-                      {step.title}
-                    </p>
-                    <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </AnimatedReveal>
-
-      <AnimatedReveal delay={200} duration={650}>
-        <Callout variant="info" icon={UserCheck}>
-          <p className="font-bold">Acompanhamento do processo</p>
-          <p className="mt-1 text-sm">
-            A unidade escolar deve acompanhar a tramitação no SEI!RIO e atender tempestivamente
-            eventual diligência ou devolução.
-          </p>
-        </Callout>
-      </AnimatedReveal>
-
-      <AnimatedReveal delay={250} duration={650}>
-        <div className="grid gap-4 md:grid-cols-2">
-          <ProfileCallout visibleFor="diretor" variant="info">
-            <p>
-              Após o envio, acompanhe o processo no SEI!RIO. Havendo diligência, regularize o que for
-              solicitado com rapidez para evitar atraso na conclusão.
-            </p>
-          </ProfileCallout>
-
-          <ProfileCallout visibleFor="gad" variant="info">
-            <p>
-              Na análise, registre com objetividade o resultado da conferência e as pendências
-              identificadas. Processos com despesa de capital exigem verificação patrimonial adicional.
-            </p>
-          </ProfileCallout>
-        </div>
-      </AnimatedReveal>
-
-      <AnimatedReveal delay={300} duration={650}>
-        <Callout variant="warning" icon={Package} title="Nota sobre controle patrimonial">
-          <span className="block text-left sm:text-justify">
-            O procedimento completo de incorporação patrimonial está fora do escopo deste POP. Em
-            caso de dúvida, siga a orientação específica da GAD.
-          </span>
-        </Callout>
-      </AnimatedReveal>
+    <section className="section-card" aria-labelledby="post-remittance-steps-title">
+      <h3 id="post-remittance-steps-title" className="text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
+        Sequência de acompanhamento
+      </h3>
+      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        {followUpSteps.map((step) => {
+          const Icon = step.icon;
+          return (
+            <article key={step.number} className="rounded-xl border border-slate-300 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/55">
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-700 text-sm font-bold text-white">
+                  {step.number}
+                </span>
+                <Icon className="h-5 w-5 text-blue-800 dark:text-sky-300" aria-hidden="true" />
+              </div>
+              <h4 className="mt-4 text-base font-bold text-foreground">{step.title}</h4>
+              <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">{step.description}</p>
+            </article>
+          );
+        })}
+      </div>
     </section>
-  );
-};
+
+    <aside className="section-card border-l-4 border-l-amber-700" aria-labelledby="post-remittance-limit-title">
+      <div className="flex items-start gap-4">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-amber-400 bg-amber-100 text-amber-900 dark:border-amber-700 dark:bg-amber-950/30 dark:text-yellow-300">
+          <AlertCircle className="h-5 w-5" aria-hidden="true" />
+        </div>
+        <div>
+          <h3 id="post-remittance-limit-title" className="text-base font-bold text-foreground">
+            Limite desta orientação
+          </h3>
+          <p className="mt-2 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
+            Este guia não define autoridade decisória, manifestação conclusiva ou procedimento de arquivamento sem fonte formal. Essas etapas devem seguir a orientação vigente da SME-Rio e da 4ª CRE.
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <aside className="section-card border-l-4 border-l-teal-700" aria-labelledby="patrimonial-follow-up-title">
+      <div className="flex items-start gap-4">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-teal-400 bg-teal-100 text-teal-900 dark:border-teal-700 dark:bg-teal-950/30 dark:text-teal-300">
+          <PackageCheck className="h-5 w-5" aria-hidden="true" />
+        </div>
+        <div>
+          <h3 id="patrimonial-follow-up-title" className="text-base font-bold text-foreground">
+            Despesa de capital
+          </h3>
+          <p className="mt-2 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
+            Quando houver bem permanente, acompanhe também a documentação de doação, incorporação e controle patrimonial exigida pelo procedimento formal aplicável. O fluxo completo do sistema patrimonial municipal permanece fora do escopo deste guia.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </section>
+);

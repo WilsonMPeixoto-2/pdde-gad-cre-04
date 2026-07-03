@@ -21,7 +21,7 @@ test("prepara todas as seções diferidas antes de imprimir", async ({ page }) =
     window.print = () => {
       window.__printCalls = (window.__printCalls ?? 0) + 1;
       window.__printSnapshot = {
-        hasAnexo: document.body.innerText.includes("SEI!RIO, BB Gestão Ágil e SiGPC cumprem funções distintas"),
+        hasAnexo: document.body.innerText.includes("Fontes oficiais e aplicabilidade"),
         hasPrintButtonHideRule: Array.from(document.styleSheets).some((sheet) => {
           try {
             return Array.from(sheet.cssRules).some((rule) =>

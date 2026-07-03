@@ -6,10 +6,7 @@ const collectConsoleIssues = (page: import("@playwright/test").Page) => {
   const issues: string[] = [];
 
   page.on("console", (message) => {
-    if (message.text().includes("Service Worker registration blocked by Playwright")) {
-      return;
-    }
-
+    if (message.text().includes("Service Worker registration blocked by Playwright")) return;
     if (message.type() === "error" || message.type() === "warning") {
       issues.push(`[${message.type()}] ${message.text()}`);
     }
@@ -20,11 +17,7 @@ const collectConsoleIssues = (page: import("@playwright/test").Page) => {
 
 const collectPageErrors = (page: import("@playwright/test").Page) => {
   const issues: string[] = [];
-
-  page.on("pageerror", (error) => {
-    issues.push(error.stack || error.message);
-  });
-
+  page.on("pageerror", (error) => issues.push(error.stack || error.message));
   return issues;
 };
 
@@ -56,7 +49,7 @@ test.describe("Fluxo desktop", () => {
 
     await page.goto("/?secao=secao-4");
     await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
-    await expect(page.locator("main").getByText(/procedimento para autenticar documentos externos/i)).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: /autentique somente os documentos que vieram do papel/i })).toBeVisible();
     await page.waitForTimeout(1800);
     await expect(page).toHaveURL(/[?&]secao=secao-4$/i);
     await expect(page.getByText(/^build [a-f0-9]{12} · (produção|preview|desenvolvimento)$/i)).toBeVisible();
@@ -80,16 +73,15 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByText(/assinam esta apresentação/i)).toBeVisible();
     await expect(page.getByRole("heading", { level: 3, name: /escopo e limites deste guia/i })).toBeVisible();
     await expect(page.getByRole("heading", { level: 3, name: /prazos: consulte o calendário formal do ciclo/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /mapa das etapas do processo/i })).toBeVisible();
     await expect(page.getByRole("list", { name: /recursos centrais do guia/i })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /ler guia completo/i })).toHaveCount(0);
     await expect(page.getByText(/painel do processo/i)).toHaveCount(0);
     await expect(page.getByText(/resumo compartilhável/i)).toHaveCount(0);
-
     await expect(page.locator(".hero-tech-board")).toHaveCount(0);
 
     const searchButton = page.getByRole("button", { name: /abrir busca global/i });
     await expect(searchButton).toBeVisible();
-    await page.waitForTimeout(300);
     await searchButton.click();
     const searchInput = page.getByPlaceholder("Buscar seções, documentos, procedimentos...");
     await expect(searchInput).toBeVisible();
@@ -104,14 +96,16 @@ test.describe("Fluxo desktop", () => {
 
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
-    await expect(page.getByRole("heading", { level: 3, name: /consulta rápida para não montar os autos com fragilidade documental/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: /regras que alteram a forma de preparar os documentos/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: /o que cada grupo documental demonstra/i })).toBeVisible();
     await expect(page.getByText(/roteiro de instrução para as próximas etapas deste guia/i)).toHaveCount(0);
 
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();
-    await expect(page.locator("h2").filter({ hasText: /análise e providências posteriores/i }).first()).toBeVisible();
+    await expect(page.locator("h2").filter({ hasText: /acompanhamento posterior à remessa/i }).first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: /sequência de acompanhamento/i })).toBeVisible();
 
-    await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
-    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais prioritárias para consulta rápida/i })).toBeVisible();
+    await page.getByRole("button", { name: /ir para seção 8: fontes e aplicabilidade/i }).click();
+    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
     await expect(page.getByText(/central operacional/i)).toHaveCount(0);
 
     const hasOverflow = await page.evaluate(() => {
@@ -147,8 +141,6 @@ test.describe("Fluxo mobile", () => {
 
     const menuButton = page.getByRole("button", { name: /abrir menu de navegação/i }).first();
     await expect(menuButton).toBeVisible();
-    await page.waitForTimeout(400);
-
     await menuButton.click();
     await expect(page.getByRole("button", { name: /fechar menu de navegação/i })).toBeVisible();
     await page.getByRole("button", { name: /fechar menu de navegação/i }).click();
@@ -169,8 +161,8 @@ test.describe("Fluxo mobile", () => {
     await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toHaveCount(0);
 
     await page.getByRole("button", { name: /abrir menu de navegação/i }).first().click();
-    await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
-    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais prioritárias para consulta rápida/i })).toBeVisible();
+    await page.getByRole("button", { name: /ir para seção 8: fontes e aplicabilidade/i }).click();
+    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
 
     await page.goto("/?secao=secao-4");
     await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
@@ -190,10 +182,8 @@ test.describe("Fluxo mobile", () => {
           document.body.scrollWidth > window.innerWidth + allowance,
         heroTechDisplay: heroTechBoard ? window.getComputedStyle(heroTechBoard).display : "missing",
         focusableInIllustrations,
-        hasProcessPanel:
-          document.body.textContent?.includes("Painel do processo") ?? false,
-        hasSharePack:
-          document.body.textContent?.includes("Resumo compartilhável") ?? false,
+        hasProcessPanel: document.body.textContent?.includes("Painel do processo") ?? false,
+        hasSharePack: document.body.textContent?.includes("Resumo compartilhável") ?? false,
       };
     });
 

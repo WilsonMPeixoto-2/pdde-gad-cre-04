@@ -11,5 +11,8 @@ import "@fontsource/source-serif-4/latin-600.css";
 import "@fontsource/source-serif-4/latin-700.css";
 import App from "./App.tsx";
 import "./index.css";
+import "./styles/institutional-polish.css";
+import "./styles/light-contrast.css";
+import "./styles/wcag-warning.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

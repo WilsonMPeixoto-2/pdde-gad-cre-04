@@ -1,0 +1,27 @@
+html:not(.dark) .text-warning {
+  color: #854d0e !important;
+}
+
+html.dark .text-warning {
+  color: #fde047 !important;
+}
+
+html:not(.dark) [class*="bg-[#fff4e5]"][class*="text-[#c77700]"] {
+  background-color: #fffbeb !important;
+  color: #854d0e !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-animated,
+  .reveal-animated.revealed,
+  .animate-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  html:not(.dark) .animate-fade-in .text-muted-foreground {
+    color: #475569 !important;
+  }
+}

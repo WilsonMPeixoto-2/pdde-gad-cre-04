@@ -56,7 +56,7 @@ test.describe("Conteúdo normativo PDDE", () => {
         { exact: true },
       ),
     ).toBeVisible();
-    await expect(page.getByText("Em validação")).toHaveCount(2);
+    await expect(page.locator('[data-applicability-status="pending-local-validation"]')).toHaveCount(2);
     await expect(page.getByText(/não constituem orientação operacional definitiva/i)).toBeVisible();
 
     const body = await pageText(page);

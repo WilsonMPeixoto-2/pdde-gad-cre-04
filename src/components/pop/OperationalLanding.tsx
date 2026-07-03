@@ -1,4 +1,6 @@
 import { ArrowRight, ClipboardList, FolderOpen, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { IconTile } from "@/components/visual/IconTile";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import { requestGuideAnchorPreload, scrollToGuideAnchor } from "@/lib/guideNavigation";
 
@@ -14,90 +16,78 @@ const readinessItems = [
 export const OperationalLanding = () => {
   return (
     <section id="entrada-operacional" className="article-intro-panel scroll-mt-20">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.18fr)_minmax(24rem,0.82fr)] min-[1900px]:grid-cols-[minmax(0,1.22fr)_minmax(26rem,0.78fr)]">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.12fr)_minmax(19rem,0.88fr)] lg:items-start">
         <div className="min-w-0">
-          <span className="article-kicker">
-            <ClipboardList className="h-3.5 w-3.5" aria-hidden="true" />
-            Entrada operacional
-          </span>
-          <h3
-            className="mt-4 text-[1.75rem] text-foreground sm:text-[2.05rem]"
-            style={{
-              fontFamily: "var(--font-display)",
-              lineHeight: "1.02",
-              letterSpacing: "-0.035em",
-            }}
-          >
-            Onde começar quando a urgência é montar o processo no SEI!RIO
-          </h3>
-
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            <div className="article-summary-card">
-              <p className="text-sm font-semibold text-foreground">Para quem é este guia</p>
-              <p className="mt-2 text-sm leading-7 text-foreground/84">
-                Diretores, secretários e equipes gestoras da 4ª CRE.
+          <div className="flex items-start gap-4">
+            <IconTile icon={ClipboardList} size="lg" />
+            <div className="min-w-0">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-primary">
+                Entrada operacional
               </p>
-            </div>
-            <div className="article-summary-card">
-              <p className="text-sm font-semibold text-foreground">Quando usar</p>
-              <p className="mt-2 text-sm leading-7 text-foreground/84">
-                Ao instruir o processo no SEI!RIO, da abertura à remessa.
-              </p>
-            </div>
-            <div className="article-summary-card">
-              <p className="text-sm font-semibold text-foreground">O que este guia cobre</p>
-              <p className="mt-2 text-sm leading-7 text-foreground/84">
-                Autuação, juntada, autenticação, assinatura e remessa.
-              </p>
-            </div>
-            <div className="article-summary-card">
-              <p className="text-sm font-semibold text-foreground">O que este guia não cobre</p>
-              <p className="mt-2 text-sm leading-7 text-foreground/84">
-                FNDE/SiGPC nem a elaboração detalhada das peças.
-              </p>
+              <h3 className="mt-1.5 text-[1.75rem] font-bold leading-[1.08] tracking-[-0.04em] text-foreground sm:text-[2.15rem]">
+                Onde começar quando a urgência é montar o processo no SEI!RIO
+              </h3>
             </div>
           </div>
 
-          <div className="mt-5 flex flex-col gap-3">
-            <button
-              onClick={() => scrollToGuideAnchor("secao-1", { focusHeading: true })}
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/92 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:w-auto"
-            >
-              <FolderOpen className="h-4 w-4" aria-hidden="true" />
-              Começar pela Etapa 1
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-            </button>
+          <div className="mt-6 grid gap-px overflow-hidden rounded-[0.8rem] border border-border/70 bg-border/70 sm:grid-cols-2">
+            {[
+              ["Para quem é este guia", "Diretores, secretários e equipes gestoras da 4ª CRE."],
+              ["Quando usar", "Ao instruir o processo no SEI!RIO, da abertura à remessa."],
+              ["O que este guia cobre", "Autuação, juntada, autenticação, assinatura e remessa."],
+              ["O que este guia não substitui", "Registros e procedimentos federais exigidos pelo FNDE."],
+            ].map(([title, copy]) => (
+              <div key={title} className="bg-card px-4 py-4 sm:px-5">
+                <p className="text-sm font-bold text-foreground">{title}</p>
+                <p className="mt-1.5 text-sm leading-6 text-foreground/76">{copy}</p>
+              </div>
+            ))}
+          </div>
 
-            <button
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Button
+              size="lg"
+              onClick={() => scrollToGuideAnchor("secao-1", { focusHeading: true })}
+            >
+              <FolderOpen aria-hidden="true" />
+              Começar pela Etapa 1
+              <ArrowRight aria-hidden="true" />
+            </Button>
+
+            <Button
+              variant="outline"
+              size="lg"
               onMouseEnter={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
               onFocus={() => requestGuideAnchorPreload(GUIDE_ANCHORS.checklist)}
               onClick={() => scrollToGuideAnchor(GUIDE_ANCHORS.checklist, { focusHeading: true })}
-              className="inline-flex items-center gap-2 self-start rounded-full px-1 py-1 text-sm font-medium text-foreground/72 transition-colors duration-200 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
-              <ClipboardList className="h-4 w-4" aria-hidden="true" />
-              Ir direto ao Checklist
-            </button>
+              <ClipboardList aria-hidden="true" />
+              Ir ao checklist
+            </Button>
           </div>
         </div>
 
-        <aside className="article-summary-card">
+        <aside className="rounded-[0.8rem] border border-border/70 bg-card p-5 shadow-[0_1px_2px_hsl(218_28%_18%/0.04)]">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <ShieldCheck className="h-4.5 w-4.5" aria-hidden="true" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <IconTile icon={ShieldCheck} tone="neutral" size="md" />
+            <div className="min-w-0 flex-1">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-muted-foreground">
                 Tenha em mãos
               </p>
-              <ul className="mt-3 grid grid-cols-2 gap-2 text-sm text-foreground/84 2xl:grid-cols-3">
-                {readinessItems.map((item) => (
-                  <li key={item} className="rounded-[1rem] border border-border/55 bg-background/72 px-3 py-2 leading-6">
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-1.5 text-sm leading-6 text-foreground/72">
+                Organize estes elementos antes de iniciar a autuação.
+              </p>
             </div>
           </div>
+
+          <ul className="mt-4 divide-y divide-border/60 border-y border-border/60 text-sm text-foreground/82">
+            {readinessItems.map((item) => (
+              <li key={item} className="flex items-center gap-3 py-2.5">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </aside>
       </div>
     </section>

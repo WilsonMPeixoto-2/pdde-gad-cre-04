@@ -21,6 +21,7 @@ const ruleGroups = [
       "Critérios que devem ser observados antes da contratação ou aquisição e que afetam diretamente a documentação da instrução.",
     ids: [
       "price-research-three-best-quotes",
+      "price-research-srp-use",
       "allowed-expense-categories",
       "general-federal-prohibitions",
     ],
@@ -28,10 +29,12 @@ const ruleGroups = [
   {
     title: "Contratação, pagamento e comprovação",
     description:
-      "Regras relacionadas à contratação de serviços, identificação do beneficiário e conteúdo mínimo dos comprovantes.",
+      "Regras relacionadas à contratação de serviços, identificação do beneficiário, disponibilidade financeira e conteúdo mínimo dos comprovantes.",
     ids: [
       "personnel-spending-vs-service-contracting",
+      "individual-service-tax-consultation",
       "payment-movement-identifiable-beneficiary",
+      "exercise-financial-availability",
       "expense-voucher-minimum-elements",
     ],
   },

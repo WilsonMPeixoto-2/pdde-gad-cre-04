@@ -13,6 +13,7 @@ export interface NormativeSource {
   level: NormativeLevel;
   officialUrl: string;
   publishedAt?: string;
+  publishedPeriod?: string;
   lastVerifiedAt: string;
   status: NormativeStatus;
   notes?: string;
@@ -73,9 +74,11 @@ export const normativeSources = {
     level: "federal",
     officialUrl:
       "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2026/comunicado-n-01_2026-alteracoes-na-resolucao-cd-fnde-no-7-2024-estorno-de-recurso.pdf",
-    publishedAt: "2026-01-01",
+    publishedPeriod: "2026-01",
     lastVerifiedAt: "2026-07-02",
     status: "verified",
+    notes:
+      "O documento informa apenas Brasília, janeiro de 2026. Ele referencia a Resolução CD/FNDE nº 18, de 27 de novembro de 2025, e esclarece os efeitos sobre saldos e estornos a partir de 2027.",
   },
   bbGestaoAgilFaq: {
     id: "bbGestaoAgilFaq",

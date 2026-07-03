@@ -33,7 +33,7 @@ test.describe("Acessibilidade automatizada", () => {
     await expectNoCriticalOrSeriousA11yViolations(page);
 
     await page.goto("/?secao=anexo");
-    await expect(page.getByRole("heading", { name: /base normativa organizada/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
     await expectNoCriticalOrSeriousA11yViolations(page);
   });
 

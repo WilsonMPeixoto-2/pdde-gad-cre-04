@@ -66,6 +66,27 @@ export const normativeRules = [
     lastVerifiedAt: "2026-07-02",
   },
   {
+    id: "price-research-srp-use",
+    title: "Utilização de Ata de Registro de Preços",
+    summary:
+      "A utilização documentada de ata de registro de preços pode substituir os procedimentos ordinários de pesquisa quando a hipótese for cabível.",
+    practicalGuidance: [
+      "Confirmar a validade da ata, a possibilidade de utilização e a disponibilidade para entrega do bem ou execução do serviço.",
+      "Verificar a compatibilidade dos preços registrados com os valores praticados no mercado.",
+      "Juntar aos autos a ata, o instrumento firmado com o fornecedor e os documentos que demonstrem a utilização regular do procedimento.",
+    ],
+    prohibitedActions: [
+      "Apresentar o registro de preços apenas como dispensa informal de cotação.",
+      "Utilizar ata sem demonstrar vigência, possibilidade de adesão ou compatibilidade do preço.",
+    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["23"] }],
+    appliesTo: ["UEx", "CEC", "EM"],
+    actionScope: ["registro de preços", "pesquisa de preços", "contratação"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-03",
+  },
+  {
     id: "personnel-spending-vs-service-contracting",
     title: "Gastos com pessoal e contratação de serviços",
     summary:
@@ -147,6 +168,30 @@ export const normativeRules = [
     lastVerifiedAt: "2026-07-02",
   },
   {
+    id: "exercise-financial-availability",
+    title: "Disponibilidade financeira e vinculação ao exercício",
+    summary:
+      "A análise temporal da despesa deve considerar o conjunto de recursos disponíveis e sua vinculação, e não apenas a data de um crédito recebido no exercício.",
+    practicalGuidance: [
+      "Considerar repasses do exercício, saldos reprogramados e rendimentos de aplicação financeira.",
+      "Verificar a conta específica, o programa ou ação, a categoria econômica e a rastreabilidade do pagamento.",
+      "Confirmar a compatibilidade da despesa com a finalidade do recurso e com a disponibilidade financeira existente.",
+    ],
+    prohibitedActions: [
+      "Invalidar automaticamente a despesa apenas porque sua data é anterior a um crédito específico, sem analisar saldos e rendimentos disponíveis.",
+    ],
+    legalReferences: [
+      { sourceId: "resolution15_2021", articles: ["24"] },
+      { sourceId: "comunicado01_2026", sections: ["reprogramação de saldos"] },
+    ],
+    appliesTo: ["UEx", "CEC", "EEx", "GAD"],
+    applicableExercises: ["2026"],
+    actionScope: ["disponibilidade financeira", "exercício", "saldos", "pagamento"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-03",
+  },
+  {
     id: "expense-voucher-minimum-elements",
     title: "Elementos mínimos dos comprovantes",
     summary:
@@ -221,9 +266,9 @@ export const normativeRules = [
   },
   {
     id: "individual-service-tax-consultation",
-    title: "Contratação de pessoa física exige consulta prévia",
+    title: "Contratação de pessoa física — consulta prévia obrigatória",
     summary:
-      "O guia não define isoladamente documento fiscal, tratamento previdenciário, retenções ou obrigações acessórias de pessoa física.",
+      "Este guia não define, isoladamente, o documento fiscal, o tratamento previdenciário, as retenções ou as obrigações acessórias aplicáveis à contratação de pessoa física.",
     practicalGuidance: [
       "Consultar a GAD ou a área contábil competente antes da contratação.",
       "Observar a legislação tributária, previdenciária, trabalhista e municipal aplicável ao caso concreto.",

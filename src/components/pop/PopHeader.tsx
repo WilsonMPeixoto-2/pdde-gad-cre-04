@@ -29,6 +29,10 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
+    document.documentElement.style.setProperty(
+      "--warning",
+      isDark ? "48 96% 53%" : "32 85% 29%",
+    );
   }, [isDark]);
 
   const toggleDarkMode = () => {

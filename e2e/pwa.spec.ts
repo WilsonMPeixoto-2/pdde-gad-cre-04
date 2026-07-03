@@ -32,5 +32,8 @@ test.describe("PWA e service worker", () => {
     const installHandler = serviceWorkerSource.match(/self\.addEventListener\("install"[\s\S]*?\n}\);/)?.[0] ?? "";
     expect(installHandler).not.toContain("skipWaiting");
     expect(serviceWorkerSource).toContain('event.data === "skipWaiting"');
+    expect(serviceWorkerSource).toContain('const CACHE_PREFIX = "pdde-guide-shell-"');
+    expect(serviceWorkerSource).toContain("cacheName.startsWith(CACHE_PREFIX)");
+    expect(serviceWorkerSource).not.toContain(".filter((cacheName) => cacheName !== CACHE_NAME)");
   });
 });

@@ -28,10 +28,13 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark);
-    document.documentElement.style.setProperty(
-      "--warning",
-      isDark ? "48 96% 53%" : "32 85% 29%",
+    const root = document.documentElement;
+    root.classList.toggle("dark", isDark);
+    root.style.setProperty("--warning", isDark ? "48 96% 53%" : "32 85% 29%");
+    root.style.setProperty("--foreground", isDark ? "210 40% 98%" : "222 52% 6%");
+    root.style.setProperty(
+      "--muted-foreground",
+      isDark ? "215 20% 70%" : "217 34% 19%",
     );
   }, [isDark]);
 

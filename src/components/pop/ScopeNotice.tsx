@@ -1,13 +1,15 @@
 import { ExternalLink, ShieldCheck } from "lucide-react";
+import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import { normativeSources } from "@/lib/normativeSources";
+import { ProcessJourneyMap } from "./ProcessJourneyMap";
 
 const sourceLinks = [
   normativeSources.resolution15_2021,
   normativeSources.resolution7_2024,
 ] as const;
 
-export const ScopeNotice = () => {
-  return (
+export const ScopeNotice = () => (
+  <div className="space-y-8">
     <section
       className="section-card border-l-4 border-l-blue-700 bg-blue-50/85 p-5 text-slate-800 sm:p-6 dark:border-l-blue-400 dark:bg-blue-950/22 dark:text-slate-100"
       aria-labelledby="scope-notice-title"
@@ -22,34 +24,28 @@ export const ScopeNotice = () => {
             ESCOPO DO GUIA
           </span>
 
-          <h3
-            id="scope-notice-title"
-            className="mt-3 text-xl font-bold leading-tight text-slate-950 sm:text-2xl dark:text-white"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
+          <h3 id="scope-notice-title" className="mt-3 text-xl font-bold leading-tight text-slate-950 sm:text-2xl dark:text-white">
             Escopo e limites deste guia
           </h3>
 
           <div className="mt-4 space-y-3 text-sm leading-7 text-slate-700 sm:text-[0.98rem] dark:text-slate-200">
             <p>
-              Este material orienta a autuação, a instrução, a assinatura e a tramitação, no
-              SEI!RIO, do processo local de prestação de contas do PDDE das UEx/CEC vinculadas à
-              4ª CRE.
+              Este material orienta a autuação, a instrução, a assinatura e a tramitação, no SEI!RIO,
+              do processo local de prestação de contas do PDDE das UEx/CEC vinculadas à 4ª CRE.
             </p>
             <p>
               O processo administrativo municipal não substitui os registros, as classificações, os
-              documentos ou os procedimentos exigidos pelo FNDE na Solução BB Gestão Ágil, no SiGPC
-              ou em outro ambiente federal aplicável ao exercício.
+              documentos ou os procedimentos exigidos pelo FNDE na Solução BB Gestão Ágil, no SiGPC ou
+              em outro ambiente federal aplicável ao exercício.
             </p>
             <p>
-              Em matéria de execução e prestação de contas dos recursos federais, prevalecem as
-              normas do FNDE e os normativos específicos de cada ação integrada. Os prazos internos
-              de remessa à GAD serão aqueles formalmente comunicados pela SME-Rio ou pela 4ª CRE
-              para cada ciclo.
+              Em matéria de execução e prestação de contas dos recursos federais, prevalecem as normas
+              do FNDE e os normativos específicos de cada ação integrada. Os prazos internos de remessa
+              à GAD serão aqueles formalmente comunicados pela SME-Rio ou pela 4ª CRE para cada ciclo.
             </p>
             <p className="font-semibold text-slate-900 dark:text-white">
-              Tipo processual, classificação, código da GAD, interessados, padrão de especificação,
-              uso do CNPJ em observações e peças de encaminhamento são referências operacionais locais.
+              Tipo processual, classificação, código da GAD, interessados, padrão de especificação, uso
+              do CNPJ em observações e peças de encaminhamento são referências operacionais locais.
               Antes de tratá-las como obrigação definitiva, confirme a configuração atual do SEI!RIO e
               a orientação formal vigente da SME-Rio ou da 4ª CRE.
             </p>
@@ -72,5 +68,9 @@ export const ScopeNotice = () => {
         </div>
       </div>
     </section>
-  );
-};
+
+    <div id={GUIDE_ANCHORS.journey} className="scroll-mt-28">
+      <ProcessJourneyMap />
+    </div>
+  </div>
+);

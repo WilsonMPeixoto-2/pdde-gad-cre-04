@@ -31,8 +31,8 @@ test.describe("Metadados estruturados", () => {
     expect(structuredData.step?.[5]).toEqual({
       "@type": "HowToStep",
       position: 6,
-      name: "Análise e Providências Posteriores",
-      text: "Análise pela GAD, diligências e providências posteriores conforme fluxo formal vigente",
+      name: "Acompanhamento Posterior à Remessa",
+      text: "Acompanhamento da análise, atendimento de diligências e providências formalmente comunicadas",
     });
   });
 });

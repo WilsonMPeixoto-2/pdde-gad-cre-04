@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
-test.use({ serviceWorkers: "block" });
+test.use({ serviceWorkers: "block", reducedMotion: "reduce" });
 
 const expectNoCriticalOrSeriousA11yViolations = async (page: Page, includeSelector?: string) => {
   let builder = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]);
@@ -11,7 +11,6 @@ const expectNoCriticalOrSeriousA11yViolations = async (page: Page, includeSelect
   }
 
   const results = await builder.analyze();
-
   const blockingViolations = results.violations.filter((violation) =>
     violation.impact === "critical" || violation.impact === "serious"
   );

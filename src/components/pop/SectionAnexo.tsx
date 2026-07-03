@@ -1,70 +1,77 @@
 import {
+  ArrowUpRight,
   BookOpen,
   ExternalLink,
   FileText,
   Gavel,
   Scale,
-  ArrowUpRight,
 } from "lucide-react";
+import { ApplicabilityMatrix } from "@/components/legal/ApplicabilityMatrix";
+import { SourceCitation } from "@/components/legal/SourceCitation";
+import { normativeSources, type NormativeSourceId } from "@/lib/normativeSources";
+import { checklistItemDefinitions } from "@/lib/pddeOperationalData";
 import { ProfileCallout } from "./ProfileCallout";
 import { AnimatedReveal } from "./AnimatedReveal";
 
+const federalDocumentLabelOverrides: Partial<Record<number, string>> = {
+  9: "Ata de aprovação da execução do plano de gastos",
+};
+
+const federalDocuments = checklistItemDefinitions
+  .filter((item) => !item.complementar)
+  .map((item) => ({
+    ...item,
+    text: federalDocumentLabelOverrides[item.id] ?? item.text,
+    legalReference:
+      item.id === 10
+        ? { sourceId: "resolution15_2021", articles: ["47"] }
+        : { sourceId: "resolution15_2021", articles: ["33"] },
+    character: item.id === 6 || item.id === 10 ? "Quando aplicável" : "Núcleo federal",
+  }));
+
+const localInstruction = checklistItemDefinitions.filter((item) => item.complementar);
+
+const federalSourceIds = [
+  "resolution15_2021",
+  "resolution7_2024",
+  "comunicado01_2026",
+  "bbGestaoAgilFaq",
+] as const satisfies readonly NormativeSourceId[];
+
+const municipalSourceIds = [
+  "decretoRio47769_2020",
+  "seiRioCriarProcesso",
+  "seiRioIncluirDocumentos",
+  "seiRioBlocoAssinatura",
+] as const satisfies readonly NormativeSourceId[];
+
+const SourceCard = ({ sourceId, tone }: { sourceId: NormativeSourceId; tone: "federal" | "municipal" }) => {
+  const source = normativeSources[sourceId];
+  const toneClass =
+    tone === "federal"
+      ? "hover:border-blue-400/60 text-blue-800 dark:text-blue-200"
+      : "hover:border-teal-400/60 text-teal-800 dark:text-teal-200";
+
+  return (
+    <a
+      href={source.officialUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`flex items-center gap-4 rounded-xl border border-border/60 bg-background/55 px-4 py-4 transition-colors hover:bg-secondary/45 ${toneClass}`}
+    >
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-current/15 bg-current/5">
+        {tone === "federal" ? <Gavel className="h-5 w-5" /> : <Scale className="h-5 w-5" />}
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-bold text-foreground">{source.title}</p>
+        <p className="mt-1 text-xs text-muted-foreground">{source.issuingBody}</p>
+      </div>
+      <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+    </a>
+  );
+};
+
 export const SectionAnexo = () => {
-  const documentosExigidos = [
-    { documento: "Rol de Materiais, Bens e Serviços Prioritários", obrigatorio: true },
-    { documento: "Consolidação de Pesquisas de Preços ou justificativa cabível", obrigatorio: true },
-    { documento: "Demonstrativo ou registro federal aplicável ao exercício", obrigatorio: true },
-    { documento: "Extratos da conta específica", obrigatorio: true },
-    { documento: "Extratos das aplicações financeiras", obrigatorio: true },
-    { documento: "Conciliação bancária quando houver saldo em 31 de dezembro", obrigatorio: false },
-    { documento: "Cópias dos documentos comprobatórios da destinação dos recursos", obrigatorio: true },
-    { documento: "Ata de aprovação do plano de gastos", obrigatorio: true },
-    { documento: "Ata de aprovação da execução ou prestação de contas", obrigatorio: true },
-    { documento: "Documentação patrimonial, quando houver bem permanente", obrigatorio: false },
-  ];
-
-  const instrucaoLocal = [
-    "Ofício ou despacho de encaminhamento",
-    "Autenticação dos documentos efetivamente digitalizados",
-    "Documentos internos assinados",
-    "Identificação clara na árvore",
-    "Evidência de incorporação patrimonial, quando exigida",
-    "Demais documentos formalmente requeridos pela SME/CRE",
-  ];
-
-  const applicabilityRows = [
-    {
-      exercise: "Até 2011",
-      uex: "Fluxo histórico por protocolo",
-      eex: "Fluxo histórico",
-      guidance: "Tratar somente em guia histórico",
-    },
-    {
-      exercise: "2012-2022",
-      uex: "Documentação à EEx",
-      eex: "Consolidação/SiGPC",
-      guidance: "Identificar como regime histórico",
-    },
-    {
-      exercise: "2023-2024",
-      uex: "BB Gestão Ágil ou documentação à EEx, conforme orientação do FNDE",
-      eex: "BB Gestão Ágil e consolidação pertinente",
-      guidance: "Aplicar o FAQ oficial",
-    },
-    {
-      exercise: "2025-2026",
-      uex: "BB Gestão Ágil e fluxo da EEx, conforme atos vigentes",
-      eex: "Conforme Resolução nº 7/2024 e atualizações",
-      guidance: "Confirmar anualmente e não reproduzir automaticamente regra de 2024",
-    },
-    {
-      exercise: "2027 em diante",
-      uex: "Regime alterado de saldos e estorno",
-      eex: "Conforme atos vigentes",
-      guidance: "Exigir nova revisão antes da publicação",
-    },
-  ];
-
   return (
     <section id="anexo" className="scroll-mt-20 space-y-6">
       <AnimatedReveal delay={50} duration={650}>
@@ -77,21 +84,15 @@ export const SectionAnexo = () => {
               </span>
               <h2
                 className="mt-4 text-[1.9rem] text-foreground sm:text-[2.45rem]"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  lineHeight: "1.01",
-                  letterSpacing: "-0.04em",
-                }}
+                style={{ fontFamily: "var(--font-display)", lineHeight: "1.01", letterSpacing: "-0.04em" }}
               >
                 Fontes oficiais prioritárias para consulta rápida
               </h2>
-
               <div className="editorial-hairline mt-5" />
-
-              <p className="mt-6 max-w-3xl text-sm sm:text-base leading-relaxed text-foreground/82">
+              <p className="mt-6 max-w-3xl text-sm leading-relaxed text-foreground/82 sm:text-base">
                 Este anexo separa a base federal do PDDE, o processo eletrônico municipal e as
-                orientações locais. A fonte original da Resolução nº 15/2021 não deve ser apresentada
-                como texto consolidado sem conferência de todas as alterações posteriores.
+                orientações locais. A Resolução nº 15/2021 deve ser lida em conjunto com seus atos
+                modificadores e com os normativos específicos de cada ação e exercício.
               </p>
             </div>
 
@@ -100,26 +101,18 @@ export const SectionAnexo = () => {
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   Quando consultar
                 </p>
-                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-foreground/80">
-                  Antes da remessa, durante a conferência de pendências e sempre que houver dúvida sobre documentação, prazo ou vedação.
+                <p className="mt-2.5 text-xs leading-relaxed text-foreground/80 sm:text-sm">
+                  Antes da remessa, durante a conferência de pendências e sempre que houver dúvida sobre
+                  documentação, prazo, pagamento ou vedação.
                 </p>
               </div>
               <div className="article-summary-card">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  O que está reunido aqui
+                  Regra de leitura
                 </p>
-                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-foreground/80">
-                  Checklist documental federal, instrução local no SEI!RIO, matriz de aplicabilidade
-                  por exercício e base normativa essencial.
-                </p>
-              </div>
-              <div className="article-summary-card">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  Risco principal
-                </p>
-                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-foreground/80">
-                  Misturar regra federal, procedimento municipal e orientação local pode transformar
-                  cautela operacional em obrigação sem fonte.
+                <p className="mt-2.5 text-xs leading-relaxed text-foreground/80 sm:text-sm">
+                  Não transforme cautela operacional, prática local ou referência histórica em obrigação
+                  sem fonte e aplicabilidade identificadas.
                 </p>
               </div>
             </aside>
@@ -130,37 +123,38 @@ export const SectionAnexo = () => {
       <AnimatedReveal delay={100} duration={600}>
         <div className="grid gap-4 md:grid-cols-2">
           <ProfileCallout visibleFor="diretor" variant="info" title="Leitura prática para a unidade escolar" className="h-full">
-            Consulte abaixo a lista de documentos necessários para a prestação de contas. Para marcar as etapas e exportar um relatório de pendências, use o checklist interativo na Seção 2.
+            Consulte a base documental abaixo e use o checklist interativo da Seção 2 para acompanhar a
+            montagem do processo.
           </ProfileCallout>
           <ProfileCallout visibleFor="gad" variant="warning" title="Ponto de atenção para a conferência na GAD" className="h-full">
-            Ao receber o processo, confronte a base documental federal com a árvore do SE e separe as
-            peças locais exigidas por orientação formal da SME/CRE.
+            Confronte a base documental federal com a árvore do SEI!RIO e trate as peças locais somente
+            conforme orientação formal da SME-Rio ou da 4ª CRE.
           </ProfileCallout>
         </div>
       </AnimatedReveal>
 
       <AnimatedReveal delay={150} duration={650}>
         <div className="section-card p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-lg bg-primary/8 text-primary border border-primary/15 shrink-0">
-                <FileText className="w-5.5 h-5.5" />
+              <div className="shrink-0 rounded-lg border border-primary/15 bg-primary/8 p-2.5 text-primary">
+                <FileText className="h-5.5 w-5.5" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-foreground font-heading">
                   Bloco A — Base documental federal da UEx
                 </h3>
-                <p className="text-xs text-muted-foreground">
-                  Conforme Resolução CD/FNDE nº 15/2021, art. 33
-                </p>
+                <div className="mt-1">
+                  <SourceCitation reference={{ sourceId: "resolution15_2021", articles: ["33", "47"] }} />
+                </div>
               </div>
             </div>
             <a
-              href="#checklist"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold bg-accent text-white hover:bg-accent/90 transition-colors shadow-sm self-start sm:self-auto"
+              href="#checklist-documentos"
+              className="inline-flex items-center gap-1.5 self-start rounded-lg bg-accent px-3.5 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-accent/90 sm:self-auto"
             >
-              Ir para o Checklist Interativo
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              Ir para o checklist interativo
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
 
@@ -168,65 +162,57 @@ export const SectionAnexo = () => {
             <table className="table-institutional table-responsive-cards w-full text-sm">
               <thead>
                 <tr>
-                  <th className="w-12">
-                    #
-                  </th>
-                  <th>
-                    Nome do Documento / Peça
-                  </th>
-                  <th className="text-center w-36">
-                    Caráter
-                  </th>
+                  <th className="w-12">#</th>
+                  <th>Documento ou peça</th>
+                  <th className="w-40">Caráter</th>
+                  <th className="w-52">Fundamento</th>
                 </tr>
               </thead>
               <tbody>
-                {documentosExigidos.map((item, index) => (
-                  <tr key={index}>
-                    <td className="font-semibold text-muted-foreground">
-                      {String(index + 1).padStart(2, "0")}
-                    </td>
-                    <td className="font-bold text-foreground">
-                      {item.documento}
-                    </td>
-                    <td className="text-center">
-                      <span
-                        className={`inline-block px-2.5 py-1 text-xs font-bold rounded-lg ${
-                          item.obrigatorio
-                            ? "bg-accent/10 text-accent"
-                            : "bg-secondary text-muted-foreground"
-                        }`}
-                      >
-                        {item.obrigatorio ? "Obrigatório" : "Se houver"}
+                {federalDocuments.map((item, index) => (
+                  <tr key={item.id}>
+                    <td className="font-semibold text-muted-foreground">{String(index + 1).padStart(2, "0")}</td>
+                    <td className="font-bold text-foreground">{item.text}</td>
+                    <td>
+                      <span className="inline-flex rounded-lg bg-accent/10 px-2.5 py-1 text-xs font-bold text-accent">
+                        {item.character}
                       </span>
+                    </td>
+                    <td>
+                      <SourceCitation reference={item.legalReference} />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          <p className="mt-4 text-xs leading-6 text-muted-foreground">
+            A documentação patrimonial de bens permanentes possui fundamento próprio no art. 47 e não
+            deve ser apresentada como parte automática do rol do art. 33.
+          </p>
         </div>
       </AnimatedReveal>
 
       <AnimatedReveal delay={200} duration={650}>
         <div className="section-card p-6 sm:p-8">
           <div className="mb-5 flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-primary/8 text-primary border border-primary/15 shrink-0">
-              <FileText className="w-5.5 h-5.5" />
+            <div className="shrink-0 rounded-lg border border-primary/15 bg-primary/8 p-2.5 text-primary">
+              <FileText className="h-5.5 w-5.5" />
             </div>
             <div>
               <h3 className="text-lg font-bold text-foreground font-heading">
-                Bloco B — INSTRUÇÃO LOCAL · SEI!RIO / SME-RIO
+                Bloco B — Instrução local · SEI!RIO / SME-Rio
               </h3>
               <p className="text-xs text-muted-foreground">
-                Peças administrativas locais, sem classificação automática como documento federal.
+                Peças administrativas locais, sem classificação automática como documentos federais.
               </p>
             </div>
           </div>
-
           <ul className="grid gap-3 text-sm leading-relaxed text-foreground/80 md:grid-cols-2">
-            {instrucaoLocal.map((item) => (
-              <li key={item} className="rounded-xl border border-border/50 bg-card px-4 py-3 font-semibold text-foreground/80" style={{ boxShadow: "var(--shadow-card-rest)" }}>
-                {item}
+            {localInstruction.map((item) => (
+              <li key={item.id} className="rounded-xl border border-border/50 bg-card px-4 py-3 font-semibold">
+                {item.text}
               </li>
             ))}
           </ul>
@@ -235,15 +221,21 @@ export const SectionAnexo = () => {
 
       <AnimatedReveal delay={220} duration={650}>
         <div className="section-card p-6 sm:p-8">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="p-2.5 rounded-lg bg-primary/8 text-primary border border-primary/15 shrink-0">
-              <FileText className="w-5.5 h-5.5" />
+          <div className="mb-5 flex items-center gap-3">
+            <div className="shrink-0 rounded-lg border border-primary/15 bg-primary/8 p-2.5 text-primary">
+              <FileText className="h-5.5 w-5.5" />
             </div>
-            <h3 className="text-lg font-bold text-foreground font-heading">
-              Contratação de pessoa física — consulta prévia obrigatória
-            </h3>
+            <div>
+              <h3 className="text-lg font-bold text-foreground font-heading">
+                Contratação de pessoa física — consulta prévia obrigatória
+              </h3>
+              <div className="mt-1">
+                <SourceCitation
+                  reference={{ sourceId: "resolution15_2021", articles: ["6º, IV, ‘k’", "17", "26"] }}
+                />
+              </div>
+            </div>
           </div>
-
           <div className="space-y-3 text-sm leading-relaxed text-foreground/80">
             <p>
               Este guia não define, isoladamente, o documento fiscal, o tratamento previdenciário, as
@@ -252,12 +244,12 @@ export const SectionAnexo = () => {
             </p>
             <p>
               Antes da contratação, a UEx/CEC deverá consultar a GAD ou a área contábil competente e
-              observar a legislação tributária, previdenciária, trabalhista e municipal aplicável ao
-              caso concreto.
+              observar a legislação tributária, previdenciária, trabalhista e municipal aplicável ao caso
+              concreto.
             </p>
             <p>
-              O documento comprobatório deverá ser válido segundo a legislação à qual a entidade
-              estiver sujeita e conter os elements exigidos para comprovação da despesa.
+              O documento comprobatório deverá ser válido segundo a legislação à qual a entidade estiver
+              sujeita e conter os elementos exigidos para comprovação da despesa.
             </p>
           </div>
         </div>
@@ -266,151 +258,42 @@ export const SectionAnexo = () => {
       <AnimatedReveal delay={250} duration={650}>
         <div className="section-card p-6 sm:p-8">
           <div className="mb-6 flex items-start gap-3">
-            <div className="p-2.5 rounded-lg bg-primary/8 text-primary border border-primary/15 shrink-0">
-              <BookOpen className="w-5.5 h-5.5" />
+            <div className="shrink-0 rounded-lg border border-primary/15 bg-primary/8 p-2.5 text-primary">
+              <BookOpen className="h-5.5 w-5.5" />
             </div>
             <div>
               <h3 className="text-xl font-bold text-foreground font-heading">Base normativa organizada por finalidade</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Separe a consulta entre regras federais do PDDE e normas de procedimento interno para manter clareza entre obrigação normativa e rotina administrativa.
+                Os links abaixo são gerados pelo registro central de fontes do projeto.
               </p>
             </div>
           </div>
 
           <div className="grid gap-5 xl:grid-cols-2">
-            <div className="article-summary-card h-full" style={{ boxShadow: "var(--shadow-card-rest)" }}>
-              <div className="flex items-center gap-3 border-b border-border/30 pb-3 mb-4">
-                <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent text-xs font-bold text-white shadow-sm">
-                  A
-                </span>
-                <h4 className="text-base font-bold text-foreground font-heading">
-                  PDDE — regras federais (FNDE)
-                </h4>
+            <div className="article-summary-card h-full">
+              <h4 className="mb-4 border-b border-border/30 pb-3 text-base font-bold text-foreground font-heading">
+                PDDE — fontes federais
+              </h4>
+              <div className="grid gap-3">
+                {federalSourceIds.map((sourceId) => (
+                  <SourceCard key={sourceId} sourceId={sourceId} tone="federal" />
+                ))}
               </div>
-
-              <ul className="space-y-3 text-xs sm:text-sm text-muted-foreground">
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <Gavel className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Lei nº 11.947/2009</strong> — Dispõe sobre o atendimento da alimentação escolar e do PDDE.</span>
-                </li>
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <Gavel className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Resolução CD/FNDE nº 15/2021</strong> — Norma-base para execução, fiscalização, monitoramento e prestação de contas do PDDE, com atos modificadores conferidos separadamente.</span>
-                </li>
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <Gavel className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Resolução CD/FNDE nº 7/2024</strong> — Institui regras do BB Gestão Ágil no fluxo federal aplicável.</span>
-                </li>
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <Gavel className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Resolução CD/FNDE nº 18/2025 e Comunicado PDDE nº 01/2026</strong> — Conferência específica sobre saldos, estornos e efeitos a partir de 2027.</span>
-                </li>
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <BookOpen className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Normativos específicos das Ações Integradas</strong> — Aplicáveis conforme programa, exercício e categoria econômica.</span>
-                </li>
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <BookOpen className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Resoluções e Formulários do PDDE</strong> — Página oficial para conferência de atos, formulários e atualizações.</span>
-                </li>
-              </ul>
-
-              <div className="mt-6 grid gap-3">
-                <a
-                  href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/%40%40download/file"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-xl border border-border/60 bg-background/50 px-4 py-4 transition-all duration-300 hover:border-accent/40 hover:bg-secondary/45"
-                  aria-label="Abrir Resolução CD/FNDE nº 15/2021 no Portal GOV.BR"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-accent/8 border border-accent/15 flex items-center justify-center shrink-0">
-                    <Gavel className="w-5 h-5 text-accent" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-bold text-foreground text-sm font-heading">Resolução CD/FNDE nº 15/2021</p>
-                    <p className="text-xs text-muted-foreground">Texto integral no GOV.BR</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-                </a>
-
-                <a
-                  href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-xl border border-border/60 bg-background/50 px-4 py-4 transition-all duration-300 hover:border-accent/40 hover:bg-secondary/45"
-                  aria-label="Abrir Portal do PDDE no site do FNDE"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-accent/8 border border-accent/15 flex items-center justify-center shrink-0">
-                    <BookOpen className="w-5 h-5 text-accent" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-bold text-foreground text-sm font-heading">Portal do PDDE - FNDE</p>
-                    <p className="text-xs text-muted-foreground">Guias, manuais e capacitações</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-                </a>
-
-                <a
-                  href="https://sigpc.fnde.gov.br/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-xl border border-border/60 bg-background/50 px-4 py-4 transition-all duration-300 hover:border-accent/40 hover:bg-secondary/45"
-                  aria-label="Acessar SiGPC/Contas Online"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-accent/8 border border-accent/15 flex items-center justify-center shrink-0">
-                    <FileText className="w-5 h-5 text-accent" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-bold text-foreground text-sm font-heading">SiGPC / Contas Online</p>
-                    <p className="text-xs text-muted-foreground">Sistema de prestação de contas do FNDE</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-                </a>
-              </div>
+              <p className="mt-4 text-xs leading-6 text-muted-foreground">
+                O Comunicado nº 01/2026 referencia a Resolução CD/FNDE nº 18, de 27 de novembro de 2025,
+                e esclarece que os efeitos sobre estorno e saldos zerados passam a ser exigidos a partir
+                de fevereiro de 2027.
+              </p>
             </div>
 
-            <div className="article-summary-card h-full" style={{ boxShadow: "var(--shadow-card-rest)" }}>
-              <div className="flex items-center gap-3 border-b border-border/30 pb-3 mb-4">
-                <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-warning text-xs font-bold text-white shadow-sm">
-                  B
-                </span>
-                <h4 className="text-base font-bold text-foreground font-heading">
-                  Procedimento interno e sistema (SEI!RIO / SME-Rio)
-                </h4>
-              </div>
-
-              <ul className="space-y-3 text-xs sm:text-sm text-muted-foreground">
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <Scale className="w-4 h-4 text-warning shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Decreto Rio nº 47.769/2020</strong> — Processo eletrônico municipal, classificação documental e tramitação no SEI!RIO.</span>
-                </li>
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <Scale className="w-4 h-4 text-warning shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Guia oficial do usuário interno do SEI!RIO</strong> — Criação de processo, inclusão de documentos externos e bloco de assinatura.</span>
-                </li>
-                <li className="flex items-start gap-2 leading-relaxed">
-                  <Scale className="w-4 h-4 text-warning shrink-0 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Normas municipais de acesso, transparência, segurança e gestão documental</strong> — Aplicáveis conforme o conteúdo efetivo do processo.</span>
-                </li>
-              </ul>
-
-              <div className="mt-6">
-                <a
-                  href="https://doweb.rio.rj.gov.br/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-xl border border-border/60 bg-background/50 px-4 py-4 transition-all duration-300 hover:border-warning/40 hover:bg-secondary/45"
-                  aria-label="Abrir Diário Oficial do Rio de Janeiro"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-warning/8 border border-warning/15 flex items-center justify-center shrink-0">
-                    <FileText className="w-5 h-5 text-warning" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-bold text-foreground text-sm font-heading">Diário Oficial do Rio</p>
-                    <p className="text-xs text-muted-foreground">Busca por legislação municipal</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-                </a>
+            <div className="article-summary-card h-full">
+              <h4 className="mb-4 border-b border-border/30 pb-3 text-base font-bold text-foreground font-heading">
+                Processo eletrônico municipal
+              </h4>
+              <div className="grid gap-3">
+                {municipalSourceIds.map((sourceId) => (
+                  <SourceCard key={sourceId} sourceId={sourceId} tone="municipal" />
+                ))}
               </div>
             </div>
           </div>
@@ -418,65 +301,30 @@ export const SectionAnexo = () => {
       </AnimatedReveal>
 
       <AnimatedReveal delay={300} duration={650}>
-        <div className="section-card p-6 sm:p-8 mt-6">
+        <div className="section-card p-6 sm:p-8">
           <div className="mb-5 flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-primary/8 text-primary border border-primary/15 shrink-0">
-              <FileText className="w-5.5 h-5.5" />
+            <div className="shrink-0 rounded-lg border border-primary/15 bg-primary/8 p-2.5 text-primary">
+              <FileText className="h-5.5 w-5.5" />
             </div>
             <div>
               <h3 className="text-lg font-bold text-foreground font-heading">
                 SEI!RIO, BB Gestão Ágil e SiGPC cumprem funções distintas
               </h3>
               <p className="text-xs text-muted-foreground">
-                Matriz de aplicabilidade por exercício para evitar generalizações indevidas.
+                Matriz com status explícito para impedir generalizações entre exercícios.
               </p>
             </div>
           </div>
-
-          <div className="space-y-3 text-sm leading-relaxed text-foreground/80">
-            <p>
-              O processo local no SEI!RIO organiza a instrução, a análise e a tramitação
-              administrativa no Município.
-            </p>
-            <p>
-              O BB Gestão Ágil recebe informações e documentos relacionados à comprovação da execução
-              financeira no ambiente federal.
-            </p>
-            <p>
-              O SiGPC permanece relacionado aos registros e consolidações cabíveis à EEx e ao FNDE.
-            </p>
+          <div className="mb-6 space-y-3 text-sm leading-relaxed text-foreground/80">
+            <p>O processo local no SEI!RIO organiza a instrução, a análise e a tramitação administrativa no Município.</p>
+            <p>O BB Gestão Ágil recebe informações e documentos relacionados à comprovação da execução financeira no ambiente federal.</p>
+            <p>O SiGPC permanece relacionado aos registros e consolidações cabíveis à EEx e ao FNDE.</p>
             <p>
               O BB Gestão Ágil não substitui a documentação exigida pela Resolução nº 15/2021 nem a
               necessidade de apresentação da prestação à EEx.
             </p>
           </div>
-
-          <div className="mt-6 overflow-x-auto">
-            <table className="table-institutional table-responsive-cards w-full text-sm">
-              <thead>
-                <tr>
-                  <th>
-                    Exercício
-                  </th>
-                  <th>UEx</th>
-                  <th>EEx/EM</th>
-                  <th>
-                    Orientação do site
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {applicabilityRows.map((row) => (
-                  <tr key={row.exercise}>
-                    <td className="font-semibold text-foreground">{row.exercise}</td>
-                    <td className="text-muted-foreground">{row.uex}</td>
-                    <td className="text-muted-foreground">{row.eex}</td>
-                    <td className="text-muted-foreground">{row.guidance}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ApplicabilityMatrix />
         </div>
       </AnimatedReveal>
     </section>

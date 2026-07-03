@@ -28,7 +28,7 @@ export const SourceCitation = ({ reference, className }: SourceCitationProps) =>
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 underline-offset-4 hover:text-slate-950 hover:underline focus-visible:underline",
+        "inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 underline-offset-4 hover:text-slate-950 hover:underline focus-visible:underline dark:text-slate-300 dark:hover:text-white",
         className,
       )}
     >

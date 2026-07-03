@@ -18,7 +18,10 @@ export const AnimatedReveal = ({
   threshold = 0.1,
   once = true,
 }: AnimatedRevealProps) => {
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,10 +29,7 @@ export const AnimatedReveal = ({
     if (!element) return;
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mediaQuery.matches) {
-      setIsRevealed(true);
-      return;
-    }
+    if (mediaQuery.matches) return;
 
     let timeoutId: number | undefined;
     const observer = new IntersectionObserver(

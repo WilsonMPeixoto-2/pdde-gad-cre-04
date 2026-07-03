@@ -25,7 +25,7 @@ const classificationRows = [
   },
   {
     label: "Registro no SEI!RIO",
-    digitalizado: "Documento externo classificado como digitalizado nesta unidade.",
+    digitalizado: "Digitalizado nesta unidade.",
     natoDigital: "Documento externo juntado como original eletrônico.",
   },
   {
@@ -33,6 +33,13 @@ const classificationRows = [
     digitalizado: "Deve refletir o documento apresentado: original, cópia autenticada ou cópia simples.",
     natoDigital: "Não recebe conferência de documento em papel.",
   },
+] as const;
+
+const conferenceTypes = [
+  "Documento original",
+  "Cópia autenticada administrativamente",
+  "Cópia autenticada por cartório",
+  "Cópia simples",
 ] as const;
 
 const inclusionSteps = [
@@ -147,6 +154,18 @@ export const SectionThree = () => (
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-5 rounded-xl border border-slate-300 bg-slate-100 p-4 dark:border-slate-700 dark:bg-slate-900/60">
+        <p className="text-sm font-bold text-foreground">Tipos de conferência para documento digitalizado</p>
+        <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 sm:grid-cols-2 dark:text-slate-300">
+          {conferenceTypes.map((type) => (
+            <li key={type} className="flex items-start gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-700 dark:bg-sky-300" aria-hidden="true" />
+              <span>{type}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <Callout variant="info" icon={AlertCircle} className="mt-5" title="Síntese operacional">

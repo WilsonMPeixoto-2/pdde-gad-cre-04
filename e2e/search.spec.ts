@@ -11,8 +11,8 @@ test.describe("Busca global", () => {
     await expect(input).toBeVisible();
 
     await input.fill("pessoa física");
-    await expect(page.getByText("Contratação de pessoa física exige consulta prévia", { exact: true })).toBeVisible();
-    await expect(page.getByText(/O guia não define isoladamente documento fiscal/i)).toBeVisible();
+    await expect(page.getByText("Contratação de pessoa física — consulta prévia obrigatória", { exact: true })).toBeVisible();
+    await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
 
     await input.fill("tipo de processo");
     await expect(page.getByText("Tipo de processo no SEI!RIO", { exact: true })).toBeVisible();

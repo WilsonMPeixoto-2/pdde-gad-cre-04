@@ -15,9 +15,18 @@ interface SectionDividerProps {
   icon: LucideIcon;
 }
 
+const subtitleOverrides: Partial<Record<GuideSectionId, string>> = {
+  "secao-2": "Função dos documentos, regras aplicáveis, organização dos autos e conferência final",
+  "secao-3": "Classificação, inclusão, metadados e identificação dos documentos externos",
+  "secao-4": "Autenticação dos arquivos digitalizados e conferência do registro na árvore",
+  "secao-5": "Documentos internos, assinaturas, conferência final e remessa do processo",
+  "secao-6": "Acompanhamento da análise, diligências e providências posteriores formalmente comunicadas",
+};
+
 export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
   ({ sectionId, number, title, subtitle, icon }, ref) => {
     const { copiedValue, copyText } = useClipboardAction<GuideSectionId>();
+    const displaySubtitle = subtitleOverrides[sectionId] ?? subtitle;
 
     const handleCopySectionLink = useCallback(async () => {
       const didCopy = await copyText(sectionId, buildGuideShareUrl(sectionId));
@@ -46,7 +55,7 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
                 <IconTile icon={icon} size="lg" />
                 <div className="min-w-0">
                   <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl lg:text-3xl">{title}</h2>
-                  <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-800 sm:text-base dark:text-slate-200">{subtitle}</p>
+                  <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-800 sm:text-base dark:text-slate-200">{displaySubtitle}</p>
                 </div>
               </div>
 

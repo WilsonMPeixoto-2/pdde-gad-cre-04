@@ -79,9 +79,7 @@ export const normativeRules = [
       "Incluir prestadores genericamente na vedação de gastos com pessoal.",
       "Autorizar contratação sem vínculo com a finalidade do programa ou ação integrada.",
     ],
-    legalReferences: [
-      { sourceId: "resolution15_2021", articles: ["4", "17"] },
-    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["4", "17"] }],
     appliesTo: ["UEx", "CEC", "EM"],
     actionScope: ["vedações", "contratação", "pagamento"],
     level: "federal",
@@ -95,7 +93,7 @@ export const normativeRules = [
       "Os recursos do PDDE e das Ações Integradas possuem categorias positivas de aplicação condicionadas à finalidade, ação e categoria econômica.",
     practicalGuidance: [
       "Verificar a finalidade do programa ou ação integrada antes da execução.",
-      "Distinguir possibilidade normativa de aprovação automática da despesa.",
+      "Não confundir possibilidade normativa com aprovação automática da despesa.",
       "Conferir custeio, capital e eventual normativo específico da ação.",
     ],
     legalReferences: [{ sourceId: "resolution15_2021", articles: ["4"] }],
@@ -139,7 +137,6 @@ export const normativeRules = [
     ],
     prohibitedActions: [
       "Efetuar pagamentos por conta particular.",
-      "Fragmentar artificialmente a despesa.",
       "Usar forma de pagamento que impeça a identificação do favorecido.",
     ],
     legalReferences: [{ sourceId: "resolution15_2021", articles: ["17"] }],
@@ -162,6 +159,23 @@ export const normativeRules = [
     legalReferences: [{ sourceId: "resolution15_2021", articles: ["26"] }],
     appliesTo: ["UEx", "CEC", "EM", "EEx"],
     actionScope: ["comprovantes", "documento fiscal", "pagamento"],
+    level: "federal",
+    status: "verified",
+    lastVerifiedAt: "2026-07-02",
+  },
+  {
+    id: "accountability-document-set",
+    title: "Núcleo documental da prestação de contas",
+    summary:
+      "O rol federal da prestação de contas deve ser distinguido das peças locais de instrução e da documentação patrimonial aplicável.",
+    practicalGuidance: [
+      "Organizar separadamente o rol de materiais, a pesquisa de preços, o demonstrativo aplicável, os extratos, a conciliação quando houver saldo, os comprovantes e as atas de aprovação do plano e de sua execução.",
+      "Tratar a documentação patrimonial de bens permanentes com fundamento próprio no art. 47.",
+      "Identificar peças locais do SEI!RIO sem apresentá-las como integrantes automáticos do rol federal.",
+    ],
+    legalReferences: [{ sourceId: "resolution15_2021", articles: ["33"] }],
+    appliesTo: ["UEx", "CEC", "EEx", "GAD"],
+    actionScope: ["prestação de contas", "documentos", "checklist"],
     level: "federal",
     status: "verified",
     lastVerifiedAt: "2026-07-02",
@@ -193,7 +207,12 @@ export const normativeRules = [
       "Classificar como digitalizado nesta unidade arquivo produzido a partir de documento em papel.",
       "Informar o tipo de conferência somente quando o documento for digitalizado.",
     ],
-    legalReferences: [{ sourceId: "seiRioIncluirDocumentos", sections: ["Documento Externo", "Formato", "Tipo de conferência"] }],
+    legalReferences: [
+      {
+        sourceId: "seiRioIncluirDocumentos",
+        sections: ["Documento Externo", "Formato", "Tipo de conferência"],
+      },
+    ],
     appliesTo: ["UEx", "CEC", "GAD"],
     actionScope: ["SEI!RIO", "documento externo", "autenticação"],
     level: "municipal",
@@ -210,10 +229,10 @@ export const normativeRules = [
       "Observar a legislação tributária, previdenciária, trabalhista e municipal aplicável ao caso concreto.",
       "Exigir documento comprobatório válido segundo a legislação à qual a entidade estiver sujeita.",
     ],
-    prohibitedActions: [
-      "Classificar automaticamente pessoa física como caso de recibo comum ou RPA.",
+    prohibitedActions: ["Classificar automaticamente pessoa física como caso de recibo comum ou RPA."],
+    legalReferences: [
+      { sourceId: "resolution15_2021", articles: ["6º, IV, ‘k’", "17", "26"] },
     ],
-    legalReferences: [{ sourceId: "resolution15_2021", articles: ["17", "26"] }],
     appliesTo: ["UEx", "CEC"],
     actionScope: ["contratação", "tributação", "comprovação da despesa"],
     level: "federal",

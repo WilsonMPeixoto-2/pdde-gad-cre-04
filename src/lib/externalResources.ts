@@ -1,3 +1,5 @@
+import { normativeSources, type NormativeSourceId } from "./normativeSources";
+
 interface ExternalResource {
   id: string;
   title: string;
@@ -13,76 +15,91 @@ interface ExternalResource {
   lastVerifiedText?: string;
 }
 
+const monthNames = [
+  "janeiro",
+  "fevereiro",
+  "março",
+  "abril",
+  "maio",
+  "junho",
+  "julho",
+  "agosto",
+  "setembro",
+  "outubro",
+  "novembro",
+  "dezembro",
+] as const;
+
+const formatVerifiedDate = (isoDate: string) => {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return `Verificado em ${String(day).padStart(2, "0")} de ${monthNames[month - 1]} de ${year}`;
+};
+
+const fromNormativeSource = (
+  sourceId: NormativeSourceId,
+  resource: Omit<ExternalResource, "title" | "href" | "issuingBody" | "lastVerifiedText">,
+): ExternalResource => {
+  const source = normativeSources[sourceId];
+
+  return {
+    ...resource,
+    title: source.title,
+    href: source.officialUrl,
+    issuingBody: source.issuingBody,
+    lastVerifiedText: formatVerifiedDate(source.lastVerifiedAt),
+  };
+};
+
 export const externalResources = {
-  resolution15: {
+  resolution15: fromNormativeSource("resolution15_2021", {
     id: "resolution15",
-    title: "Resolução CD/FNDE nº 15/2021",
     shortLabel: "Resolução nº 15/2021",
     description: "Norma principal do PDDE e base do núcleo mínimo da prestação de contas.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2021/resolucao-no-15-de-16-de-setembro-de-2021/%40%40download/file",
     citation: "Resolução CD/FNDE nº 15/2021",
     category: "norma",
-    issuingBody: "FNDE",
     appliesTo: "Núcleo normativo da execução e prestação de contas do PDDE.",
     whyItMatters: "É a principal base federal para conferir o conteúdo mínimo do processo e os deveres da UEx/EEx.",
     userWhenToUse: "Use quando surgir dúvida sobre obrigação documental, execução, fiscalização ou prestação de contas.",
-    lastVerifiedText: "Verificado em 02 de julho de 2026",
-  },
-  resolution7_2024: {
+  }),
+  resolution7_2024: fromNormativeSource("resolution7_2024", {
     id: "resolution7_2024",
-    title: "Resolução CD/FNDE nº 7/2024",
     shortLabel: "Resolução nº 7/2024",
     description: "Norma federal relacionada ao BB Gestão Ágil no fluxo do PDDE.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/RESOLUOCD_FNDEN7DE2DEMAIODE2024RESOLUOCD_FNDEN7DE2DEMAIODE2024DOUImprensaNacional.pdf",
     citation: "Resolução CD/FNDE nº 7/2024",
     category: "norma",
-    issuingBody: "FNDE",
     appliesTo: "BB Gestão Ágil e registros federais do PDDE, conforme exercício e atualizações.",
     whyItMatters: "Ajuda a separar o processo local no SEI!RIO dos registros em ambiente federal.",
     userWhenToUse: "Consulte quando a dúvida envolver BB Gestão Ágil, sistema federal ou exercício aplicável.",
-    lastVerifiedText: "Verificado em 02 de julho de 2026",
-  },
-  comunicado47_2024: {
+  }),
+  comunicado47_2024: fromNormativeSource("comunicado47_2024", {
     id: "comunicado47_2024",
-    title: "Comunicado PDDE nº 47/2024",
     shortLabel: "Comunicado nº 47/2024",
     description: "Orientação operacional específica para os recursos recebidos em 2024.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2024-1/Comunicadon.47_2024Orientaesparaaprestaodecontasdosrecursosrecebidosem2024.pdf",
     citation: "Comunicado PDDE nº 47/2024",
     category: "comunicado",
-    issuingBody: "FNDE",
     appliesTo: "Orientações operacionais para recursos recebidos em 2024.",
     whyItMatters: "Ajuda a interpretar o recorte do exercício e detalhes operacionais relevantes para a conferência.",
     userWhenToUse: "Consulte ao revisar processos do exercício de 2024 e situações específicas daquele ciclo.",
-    lastVerifiedText: "Verificado em 02 de julho de 2026",
-  },
-  comunicado01_2026: {
+  }),
+  comunicado01_2026: fromNormativeSource("comunicado01_2026", {
     id: "comunicado01_2026",
-    title: "Comunicado PDDE nº 01/2026",
     shortLabel: "Comunicado nº 01/2026",
     description: "Esclarecimento oficial do FNDE sobre saldos, estorno e aplicabilidade a partir de 2027.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/2026/comunicado-n-01_2026-alteracoes-na-resolucao-cd-fnde-no-7-2024-estorno-de-recurso.pdf",
     citation: "Comunicado PDDE nº 01/2026",
     category: "comunicado",
-    issuingBody: "FNDE",
     appliesTo: "Saldos, estorno e efeitos a partir de 2027.",
     whyItMatters: "Evita orientar incorretamente sobre reprogramação, estorno e vigência das mudanças recentes.",
     userWhenToUse: "Consulte quando a dúvida envolver saldo remanescente, estorno ou impacto futuro do exercício.",
-    lastVerifiedText: "Verificado em 02 de julho de 2026",
-  },
-  bbGestaoAgilFaq: {
+  }),
+  bbGestaoAgilFaq: fromNormativeSource("bbGestaoAgilFaq", {
     id: "bbGestaoAgilFaq",
-    title: "Perguntas e Respostas PDDE (BB Gestão Ágil)",
     shortLabel: "FAQ BB Gestão Ágil",
     description: "Material oficial do FNDE sobre o recorte dos recursos de 2023 e 2024 e a convivência com o SiGPC.",
-    href: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/area-para-gestores/bb-gestao-agil/PerguntaseRespostasPDDE.pdf",
     category: "sistema",
-    issuingBody: "FNDE",
     appliesTo: "Uso do BB Gestão Ágil e convivência com outros ambientes federais.",
     whyItMatters: "Ajuda a distinguir execução, registro e análise em sistemas federais diferentes.",
     userWhenToUse: "Consulte quando houver dúvida sobre o que deve estar no BB Gestão Ágil e como isso dialoga com o processo local.",
-    lastVerifiedText: "Verificado em 02 de julho de 2026",
-  },
+  }),
   bbGestaoAgilHub: {
     id: "bbGestaoAgilHub",
     title: "BB Gestão Ágil",
@@ -109,34 +126,26 @@ export const externalResources = {
     userWhenToUse: "Consulte quando precisar verificar se houve nova resolução, formulário ou material oficial.",
     lastVerifiedText: "Verificado em 28 de março de 2026",
   },
-  decreto8539_2015: {
+  decreto8539_2015: fromNormativeSource("decreto8539_2015", {
     id: "decreto8539_2015",
-    title: "Decreto nº 8.539/2015",
     shortLabel: "Decreto nº 8.539/2015",
     description: "Marco federal sobre processos eletrônicos e distinção entre documento nato-digital e digitalizado.",
-    href: "https://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2015/Decreto/D8539.htm",
     citation: "Decreto nº 8.539/2015",
     category: "norma",
-    issuingBody: "Presidência da República",
     appliesTo: "Processo eletrônico e distinção entre documento nato-digital e digitalizado.",
     whyItMatters: "Sustenta a diferença entre autenticação, original nato-digital e documento digitalizado.",
     userWhenToUse: "Use quando a dúvida envolver validade documental ou natureza do arquivo inserido no SEI!RIO.",
-    lastVerifiedText: "Verificado em 28 de março de 2026",
-  },
-  decretoProcessoRio_47769_2020: {
+  }),
+  decretoProcessoRio_47769_2020: fromNormativeSource("decretoRio47769_2020", {
     id: "decretoProcessoRio_47769_2020",
-    title: "Decreto Rio nº 47.769/2020",
     shortLabel: "Decreto Rio nº 47.769/2020",
     description: "Norma municipal do processo eletrônico com definições de documento nato-digital e digitalizado.",
-    href: "https://doweb.rio.rj.gov.br/apifront/portal/edicoes/publicacoes_ver_conteudo/671238",
     citation: "Decreto Rio nº 47.769/2020",
     category: "norma",
-    issuingBody: "Município do Rio de Janeiro",
     appliesTo: "Processo eletrônico municipal, classificação documental e fluxo local de documentos digitais.",
     whyItMatters: "Ajuda a sustentar localmente a distinção entre documento digitalizado, nato-digital e documento produzido no sistema.",
     userWhenToUse: "Consulte quando a dúvida envolver a base municipal do processo eletrônico e do tratamento documental no rito local.",
-    lastVerifiedText: "Verificado em 12 de abril de 2026",
-  },
+  }),
   seiRioPortal: {
     id: "seiRioPortal",
     title: "SEI!RIO",

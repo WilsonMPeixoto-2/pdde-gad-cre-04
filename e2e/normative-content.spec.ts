@@ -33,7 +33,7 @@ test.describe("Conteúdo normativo PDDE", () => {
     await expect(page.getByText(/Contratação de pessoa física — consulta prévia obrigatória/i)).toBeVisible();
     await expect(page.getByText(/Elementos mínimos dos comprovantes/i)).toBeVisible();
     await expect(page.getByText(/Disponibilidade financeira e vinculação ao exercício/i)).toBeVisible();
-    await expect(page.getByRole("link", { name: /Resolução CD\/FNDE nº 15\/2021 · arts\. 23, 27/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Resolução CD/FNDE nº 15/2021 · arts. 23, 27", exact: true })).toBeVisible();
 
     const body = await pageText(page);
     expect(body).not.toContain("Resolução CD/FNDE nº 15/2021 (Art. 17)");
@@ -49,8 +49,8 @@ test.describe("Conteúdo normativo PDDE", () => {
 
     await expect(page.getByText(/Contratação de pessoa física — consulta prévia obrigatória/i)).toBeVisible();
     await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
-    await expect(page.getByText("Ata de aprovação da execução do plano de gastos")).toBeVisible();
-    await expect(page.getByText(/documentação patrimonial cabível/i)).toBeVisible();
+    await expect(page.getByText("Ata de aprovação da execução do plano de gastos", { exact: true })).toBeVisible();
+    await expect(page.getByText("Documentação patrimonial cabível", { exact: true })).toBeVisible();
 
     await page.goto("/?secao=anexo");
     await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();

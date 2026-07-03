@@ -53,19 +53,21 @@ test.describe("Arquitetura integrada do guia", () => {
   test("mantém o anexo como referência e não repete a lista documental", async ({ page }) => {
     await page.goto("/?secao=anexo");
 
-    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /fontes federais prioritárias/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /fontes municipais e guias do sei!rio/i })).toBeVisible();
-    await expect(page.getByText(/bloco a — base documental federal da uex/i)).toHaveCount(0);
-    await expect(page.getByText(/bloco b — instrução local/i)).toHaveCount(0);
+    const annex = page.locator("#anexo");
+    await expect(annex.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
+    await expect(annex.getByRole("heading", { name: /fontes federais prioritárias/i })).toBeVisible();
+    await expect(annex.getByRole("heading", { name: /fontes municipais e guias do sei!rio/i })).toBeVisible();
+    await expect(annex.getByText(/bloco a — base documental federal da uex/i)).toHaveCount(0);
+    await expect(annex.getByText(/bloco b — instrução local/i)).toHaveCount(0);
   });
 
   test("mantém saldos e demonstrativos fora da etapa de assinatura", async ({ page }) => {
     await page.goto("/?secao=secao-5");
 
-    await expect(page.getByRole("heading", { name: /função do bloco de assinatura/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /conferência final antes da remessa/i })).toBeVisible();
-    await expect(page.getByText(/saldos e movimentações/i)).toHaveCount(0);
-    await expect(page.getByText(/saldo total inicial/i)).toHaveCount(0);
+    const signatureSection = page.locator("#secao-5");
+    await expect(signatureSection.getByRole("heading", { name: /função do bloco de assinatura/i })).toBeVisible();
+    await expect(signatureSection.getByRole("heading", { name: /conferência final antes da remessa/i })).toBeVisible();
+    await expect(signatureSection.getByText(/saldos e movimentações/i)).toHaveCount(0);
+    await expect(signatureSection.getByText(/saldo total inicial/i)).toHaveCount(0);
   });
 });

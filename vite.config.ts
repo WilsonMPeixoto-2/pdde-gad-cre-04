@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { execSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { GUIDE_VERSION } from "./src/lib/guideVersion";
 
 const resolveBuildId = () => {
@@ -23,14 +24,39 @@ const resolveBuildId = () => {
   }
 };
 
+const extractGuideHowToSteps = () => {
+  const guideContentPath = path.resolve(__dirname, "src/lib/guideContent.ts");
+  const source = readFileSync(guideContentPath, "utf8");
+  const sectionPattern = /\{\s*id:\s*"secao-([1-6])",\s*number:\s*"\1",\s*title:\s*"([^"]+)",\s*shortTitle:\s*"[^"]+",\s*subtitle:\s*"([^"]+)"/g;
+  const steps = [...source.matchAll(sectionPattern)]
+    .map((match) => ({
+      "@type": "HowToStep",
+      position: Number(match[1]),
+      name: match[2],
+      text: match[3],
+    }))
+    .sort((a, b) => a.position - b.position);
+
+  if (steps.length !== 6) {
+    throw new Error(
+      `Não foi possível gerar o JSON-LD a partir de guideContent.ts: esperados 6 passos, encontrados ${steps.length}.`,
+    );
+  }
+
+  return steps;
+};
+
 const buildId = resolveBuildId();
 
 const guideMetadataPlugin = () => ({
   name: "pdde-guide-metadata",
   transformIndexHtml(html: string) {
+    const howToSteps = extractGuideHowToSteps();
+
     return html
       .replaceAll("__GUIDE_FIRST_PUBLISHED_ISO_DATE__", GUIDE_VERSION.firstPublishedIsoDate)
-      .replaceAll("__GUIDE_PUBLISHED_ISO_DATE__", GUIDE_VERSION.publishedIsoDate);
+      .replaceAll("__GUIDE_PUBLISHED_ISO_DATE__", GUIDE_VERSION.publishedIsoDate)
+      .replaceAll("__GUIDE_HOW_TO_STEPS__", JSON.stringify(howToSteps, null, 2));
   },
 });
 
@@ -50,4 +76,3 @@ export default defineConfig({
     },
   },
 });
-

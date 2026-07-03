@@ -49,7 +49,7 @@ test.describe("Fluxo desktop", () => {
 
     await page.goto("/?secao=secao-4");
     await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
-    await expect(page.locator("main").getByText(/autenticação dos arquivos digitalizados/i)).toBeVisible();
+    await expect(page.locator("main").getByText(/autenticação dos arquivos originados em papel/i)).toBeVisible();
     await page.waitForTimeout(1800);
     await expect(page).toHaveURL(/[?&]secao=secao-4$/i);
     await expect(page.getByText(/^build [a-f0-9]{12} · (produção|preview|desenvolvimento)$/i)).toBeVisible();
@@ -101,10 +101,10 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByText(/roteiro de instrução para as próximas etapas deste guia/i)).toHaveCount(0);
 
     await page.getByRole("button", { name: /ir para seção 6:/i }).click();
-    await expect(page.locator("h2").filter({ hasText: /análise e providências posteriores/i }).first()).toBeVisible();
+    await expect(page.locator("h2").filter({ hasText: /acompanhamento posterior à remessa/i }).first()).toBeVisible();
     await expect(page.getByRole("heading", { name: /sequência de acompanhamento/i })).toBeVisible();
 
-    await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
+    await page.getByRole("button", { name: /ir para seção 8: fontes e aplicabilidade/i }).click();
     await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
     await expect(page.getByText(/central operacional/i)).toHaveCount(0);
 
@@ -161,7 +161,7 @@ test.describe("Fluxo mobile", () => {
     await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toHaveCount(0);
 
     await page.getByRole("button", { name: /abrir menu de navegação/i }).first().click();
-    await page.getByRole("button", { name: /ir para seção 8: referências normativas/i }).click();
+    await page.getByRole("button", { name: /ir para seção 8: fontes e aplicabilidade/i }).click();
     await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
 
     await page.goto("/?secao=secao-4");

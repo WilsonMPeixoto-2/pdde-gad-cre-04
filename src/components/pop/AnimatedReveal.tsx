@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 interface AnimatedRevealProps {
   children: React.ReactNode;
   className?: string;
-  delay?: number; // In milliseconds
-  duration?: number; // In milliseconds
-  threshold?: number; // 0 to 1
+  delay?: number;
+  duration?: number;
+  threshold?: number;
   once?: boolean;
 }
 
@@ -18,58 +18,54 @@ export const AnimatedReveal = ({
   threshold = 0.1,
   once = true,
 }: AnimatedRevealProps) => {
-  const [isRevealed, setIsRevealed] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  });
+  const [isRevealed, setIsRevealed] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = elementRef.current;
-    if (!el) return;
+    const element = elementRef.current;
+    if (!element) return;
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mediaQuery.matches) {
+      setIsRevealed(true);
       return;
     }
 
+    let timeoutId: number | undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           if (delay > 0) {
-            setTimeout(() => {
-              setIsRevealed(true);
-            }, delay);
+            timeoutId = window.setTimeout(() => setIsRevealed(true), delay);
           } else {
             setIsRevealed(true);
           }
 
-          if (once) {
-            observer.unobserve(el);
-          }
+          if (once) observer.unobserve(element);
         } else if (!once) {
           setIsRevealed(false);
         }
       },
-      { threshold }
+      { threshold },
     );
 
-    observer.observe(el);
+    observer.observe(element);
 
     return () => {
-      if (el) {
-        observer.unobserve(el);
-      }
+      observer.disconnect();
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
     };
   }, [delay, threshold, once]);
 
   return (
     <div
       ref={elementRef}
-      className={cn("reveal-animated", isRevealed && "revealed", className)}
-      style={{
-        transitionDuration: `${duration}ms`,
-      }}
+      className={cn(
+        "reveal-animated motion-reduce:transform-none motion-reduce:opacity-100 motion-reduce:transition-none",
+        isRevealed && "revealed",
+        className,
+      )}
+      style={{ transitionDuration: `${duration}ms` }}
     >
       {children}
     </div>

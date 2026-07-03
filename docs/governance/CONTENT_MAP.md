@@ -10,16 +10,16 @@ Dados normativos e operacionais devem existir em um único registro estruturado.
 
 | Conteúdo | Fonte de verdade | Superfícies consumidoras | Situação na versão 2.7.0 |
 |---|---|---|---|
-| Fontes normativas oficiais | `src/lib/normativeSources.ts` | Citações, cartões jurídicos, Anexo, matriz | Centralizado para o Anexo e a matriz |
-| Regras normativas | `src/lib/normativeRules.ts` | Seção 2 e futuros resumos | Seção 2 migrada para cartões estruturados |
+| Fontes normativas oficiais | `src/lib/normativeSources.ts` | Citações, cartões jurídicos, Anexo, matriz e recursos oficiais | Centralizado para os dados compartilhados |
+| Regras normativas | `src/lib/normativeRules.ts` | Seção 2, busca e auditoria | Principais regras renderizadas e indexadas estruturalmente |
 | Matriz por exercício | `src/lib/applicabilityMatrix.ts` | Anexo | Centralizada, com status explícito |
-| Regras locais pendentes | `src/lib/localOperationalRules.ts` e `LOCAL_RULES_REGISTER.md` | Auditoria e futuras interfaces | Parcial; ampliação depende de validação local |
-| Lista documental interativa | `src/lib/pddeOperationalData.ts` | Checklist e Anexo | Compartilhada; revisão estrutural adicional recomendada |
-| Seções e navegação | `src/lib/guideContent.ts` | Menu, busca, jornada, JSON-LD | Navegação centralizada; JSON-LD ainda requer migração completa |
-| Links de apoio gerais | `src/lib/externalResources.ts` | Cards, checklist e contatos | Ainda paralelo ao registro normativo; unificação completa pendente |
+| Regras locais pendentes | `src/lib/localOperationalRules.ts` e `LOCAL_RULES_REGISTER.md` | Auditoria e governança editorial | Registro ampliado para todas as rotinas locais identificadas |
+| Lista documental interativa | `src/lib/pddeOperationalData.ts` | Checklist e Anexo | Compartilhada; fundamento individual ainda deve migrar para registro próprio |
+| Seções e navegação | `src/lib/guideContent.ts` | Menu, busca, jornada e JSON-LD | JSON-LD gerado no build a partir das seis seções do guia |
+| Links de apoio gerais | `src/lib/externalResources.ts` | Cards, checklist e contatos | Título, URL, órgão e verificação das fontes compartilhadas derivados do catálogo normativo |
 | Versão e datas | `src/lib/guideVersion.ts` | Interface e metadados de build | Centralizado parcialmente |
-| Índice de busca | `src/lib/searchIndex.ts` | Busca global | Revisão e geração parcial ainda pendentes |
-| Modelos de texto | `src/components/pop/SmartTemplates.tsx` | Seção 2 | Devem ser tratados como minutas de apoio até homologação |
+| Índice de busca | `src/lib/searchIndex.ts` | Busca global | Regras normativas geradas automaticamente; itens editoriais permanecem manuais |
+| Modelos de texto | `src/components/pop/SmartTemplates.tsx` | Seção 2 | Identificados como minutas; despacho sem conclusão antecipada de regularidade |
 
 ## Conteúdo que não deve permanecer hardcoded em componentes
 
@@ -43,9 +43,9 @@ Dados normativos e operacionais devem existir em um único registro estruturado.
 
 ## Pendências de consolidação
 
-- unificar completamente `externalResources.ts` e `normativeSources.ts`;
-- fazer o checklist derivar de um registro documental com fundamento por item;
-- gerar parte do índice de busca a partir dos registros estruturados;
-- gerar o JSON-LD a partir de `guideHowToSteps`;
+- fazer o checklist derivar de um registro documental com fundamento individual por item;
+- migrar integralmente os itens editoriais manuais da busca quando houver fonte estruturada equivalente;
 - remover as exceções restantes da auditoria de citações diretas;
-- registrar todas as rotinas locais no modelo de governança.
+- substituir redações imperativas locais nas seções operacionais por conteúdo derivado do registro de validação;
+- registrar fonte formal e revisão humana para as rotinas locais que vierem a ser homologadas;
+- sincronizar a versão 2.7.0 em `package.json`, `package-lock.json` e `guideVersion.ts` no momento da publicação aprovada.

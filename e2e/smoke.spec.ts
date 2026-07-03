@@ -49,7 +49,7 @@ test.describe("Fluxo desktop", () => {
 
     await page.goto("/?secao=secao-4");
     await expect(page.locator("h2").filter({ hasText: /autenticação de documentos/i }).first()).toBeVisible();
-    await expect(page.locator("main").getByText(/autenticação dos arquivos originados em papel/i)).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: /autentique somente os documentos que vieram do papel/i })).toBeVisible();
     await page.waitForTimeout(1800);
     await expect(page).toHaveURL(/[?&]secao=secao-4$/i);
     await expect(page.getByText(/^build [a-f0-9]{12} · (produção|preview|desenvolvimento)$/i)).toBeVisible();

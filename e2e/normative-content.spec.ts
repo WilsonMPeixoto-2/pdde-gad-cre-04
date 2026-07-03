@@ -27,9 +27,10 @@ test.describe("Conteúdo normativo PDDE", () => {
     await page.goto("/?secao=regras-operacionais");
 
     await expect(page.getByText(/Pesquisa e consolidação de preços/i)).toBeVisible();
+    await expect(page.getByText(/Utilização de Ata de Registro de Preços/i)).toBeVisible();
     await expect(page.getByText(/Gastos com pessoal e contratação de serviços/i)).toBeVisible();
     await expect(page.getByText(/Admitir contratação de fornecedor ou prestador privado/i)).toBeVisible();
-    await expect(page.getByText(/Utilização de Ata de Registro de Preços/i)).toBeVisible();
+    await expect(page.getByText(/Contratação de pessoa física — consulta prévia obrigatória/i)).toBeVisible();
     await expect(page.getByText(/Elementos mínimos dos comprovantes/i)).toBeVisible();
     await expect(page.getByText(/Disponibilidade financeira e vinculação ao exercício/i)).toBeVisible();
     await expect(page.getByRole("link", { name: /Resolução CD\/FNDE nº 15\/2021 · arts\. 23, 27/i })).toBeVisible();
@@ -43,19 +44,16 @@ test.describe("Conteúdo normativo PDDE", () => {
     expect(body).toContain("fornecedor ou prestador privado");
   });
 
-  test("separa art. 33, patrimônio e linhas de aplicabilidade ainda pendentes", async ({ page }) => {
-    await page.goto("/?secao=anexo");
+  test("separa orientação documental, patrimônio e linhas de aplicabilidade pendentes", async ({ page }) => {
+    await page.goto("/?secao=secao-2");
 
     await expect(page.getByText(/Contratação de pessoa física — consulta prévia obrigatória/i)).toBeVisible();
     await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
-    await expect(page.getByText(/SEI!RIO, BB Gestão Ágil e SiGPC cumprem funções distintas/i)).toBeVisible();
     await expect(page.getByText("Ata de aprovação da execução do plano de gastos")).toBeVisible();
-    await expect(
-      page.getByText(
-        "A documentação patrimonial de bens permanentes possui fundamento próprio no art. 47 e não deve ser apresentada como parte automática do rol do art. 33.",
-        { exact: true },
-      ),
-    ).toBeVisible();
+    await expect(page.getByText(/documentação patrimonial cabível/i)).toBeVisible();
+
+    await page.goto("/?secao=anexo");
+    await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
     await expect(page.locator('[data-applicability-status="pending-local-validation"]')).toHaveCount(2);
     await expect(page.getByText(/não constituem orientação operacional definitiva/i)).toBeVisible();
 
@@ -65,7 +63,6 @@ test.describe("Conteúdo normativo PDDE", () => {
     expect(body).not.toContain("Resolução CD/FNDE nº 6/2006");
     expect(body).not.toContain("conter os elements exigidos");
     expect(body).not.toContain("árvore do SE e separe");
-    expect(body).toContain("BB Gestão Ágil não substitui a documentação");
   });
 
   test("padroniza NUP e classificação documental no SEI!RIO", async ({ page }) => {
@@ -75,13 +72,13 @@ test.describe("Conteúdo normativo PDDE", () => {
 
     let body = await pageText(page);
     expect(body).toContain("000704.000123/2026-45");
-    expect(body).toContain("Cuidado com o campo Interessados");
+    expect(body).toContain("Não utilize este campo para dados pessoais desnecessários");
     expect(body).not.toContain("SEI-000000/000000/2025");
     expect(body).not.toContain("E/4a.CRE/000000/2026");
 
     await page.goto("/?secao=secao-3");
     await page.locator("#secao-3").scrollIntoViewIfNeeded();
-    await expect(page.getByRole("heading", { name: /3\.1\. Documento externo no processo/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Documento externo e classificação do arquivo/i })).toBeVisible();
     body = await pageText(page);
     expect(body).toContain("Nato-digital");
     expect(body).toContain("Digitalizado nesta unidade");

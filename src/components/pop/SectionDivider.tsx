@@ -37,11 +37,11 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
       >
         <div className="grid md:grid-cols-[7rem_minmax(0,1fr)]">
           <div className="flex items-center justify-center border-b border-border/65 bg-secondary/45 px-5 py-7 md:border-b-0 md:border-r md:py-8">
-            <div className="text-center">
+            <div className="text-center" aria-hidden="true">
               <span className="block text-[0.64rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
                 Seção
               </span>
-              <span className="mt-1 block text-5xl font-extrabold tracking-[-0.07em] text-primary/24 sm:text-6xl">
+              <span className="mt-1 block text-5xl font-extrabold tracking-[-0.07em] text-primary/45 sm:text-6xl">
                 {number.padStart(2, "0")}
               </span>
             </div>
@@ -55,7 +55,7 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
                   <h2 className="text-xl font-bold tracking-[-0.03em] text-foreground sm:text-2xl lg:text-[1.8rem]">
                     {title}
                   </h2>
-                  <p className="mt-2 max-w-3xl text-sm leading-7 text-foreground/76 sm:text-[0.98rem]">
+                  <p className="mt-2 max-w-3xl text-sm leading-7 text-foreground/82 sm:text-[0.98rem]">
                     {subtitle}
                   </p>
                 </div>

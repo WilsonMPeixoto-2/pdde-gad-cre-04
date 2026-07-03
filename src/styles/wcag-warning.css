@@ -1,0 +1,7 @@
+html:not(.dark) .text-warning {
+  color: #854d0e !important;
+}
+
+html.dark .text-warning {
+  color: #fde047 !important;
+}

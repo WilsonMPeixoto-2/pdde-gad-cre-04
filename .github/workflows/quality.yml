@@ -35,11 +35,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run quality pipeline
-        shell: bash
-        run: |
-          mkdir -p output
-          set -o pipefail
-          npm run check:ci 2>&1 | tee output/quality.log
+        run: npm run check:ci
 
       - name: Upload Playwright artifacts
         if: always()
@@ -47,7 +43,6 @@ jobs:
         with:
           name: playwright-artifacts
           path: |
-            output/quality.log
             output/playwright/report
             output/playwright/test-results
           if-no-files-found: ignore

@@ -1,8 +1,35 @@
-/* Ajustes incrementais verificados pelos contratos da camada v4. */
+/* Ajustes incrementais verificados pelos contratos e pela comparação visual da camada v4. */
 
 :root {
   /* O token legado era usado como texto pequeno com contraste insuficiente. */
   --ref-amber: #8f5b08;
+}
+
+/* Textos curtos e operacionais seguem a referência aprovada: alinhamento à esquerda, sem rios tipográficos. */
+.editorial-hero__lead,
+.editorial-hero__caption,
+.editorial-hero__orientation p,
+.editorial-chapter__subtitle,
+.editorial-map__step p,
+.editorial-map__summary-item strong,
+.editorial-section-lead__description,
+.editorial-block__heading > div > p:last-child,
+.document-function-card__header p,
+.document-function-card__list dd,
+.editorial-process-step__content p,
+.editorial-context-grid p,
+.editorial-context-grid li,
+.editorial-control-grid p,
+.editorial-binary-choice p,
+.editorial-follow-up-flow p,
+.editorial-boundary-card p,
+.editorial-contact-grid p,
+.editorial-resource-grid p,
+.editorial-source-card p,
+#secao-1 .section-card p {
+  text-align: left !important;
+  text-justify: auto !important;
+  word-spacing: normal !important;
 }
 
 .system-command-preview__toolbar > div {
@@ -29,6 +56,63 @@
 .dark .system-command-preview__toolbar > div {
   border-color: var(--fidelity-rule);
   background: #172b3c;
+}
+
+/* Etapa 1: restabelece o grid funcional previsto no componente e remove rótulos pseudoeditoriais legados. */
+#secao-1 .section-card[aria-labelledby="start-process-title"],
+#secao-1 .section-card[aria-labelledby="save-process-title"] {
+  overflow: visible !important;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"]::before,
+#secao-1 .section-card[aria-labelledby="start-process-title"]::after,
+#secao-1 .section-card[aria-labelledby="save-process-title"]::before,
+#secao-1 .section-card[aria-labelledby="save-process-title"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr) !important;
+  grid-template-areas: "copy visual" !important;
+  gap: clamp(1.5rem, 2.8vw, 2.75rem) !important;
+  align-items: start !important;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid > div:first-child {
+  grid-area: copy !important;
+  min-width: 0;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid > div:last-child {
+  grid-area: visual !important;
+  min-width: 0;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] .sei-mockup {
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr) !important;
+  grid-template-areas: "copy result" !important;
+  gap: clamp(1.5rem, 2.8vw, 2.75rem) !important;
+  align-items: stretch !important;
+}
+
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid > div:first-child {
+  grid-area: copy !important;
+  min-width: 0;
+}
+
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid > aside {
+  grid-area: result !important;
+  min-width: 0;
+  align-self: stretch;
 }
 
 /* Aviso de prazos: mantém o sentido âmbar sem herdar texto escuro no tema noturno. */
@@ -104,6 +188,49 @@
 
 .dark .document-function-card__source a {
   color: #9ed0f3 !important;
+}
+
+@media (min-width: 1024px) {
+  /* A referência desktop usa sidebar persistente; a topbar não deve cobrir o conteúdo durante a leitura. */
+  .editorial-topbar {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* O acesso ao modo guiado passa a ocupar a área funcional da sidebar, sem cobrir os cartões. */
+  div.fixed.bottom-24.right-6 {
+    left: 1rem !important;
+    right: auto !important;
+    bottom: 1rem !important;
+    width: calc(var(--fidelity-sidebar) - 2rem) !important;
+  }
+
+  div.fixed.bottom-24.right-6 > button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  aside.fixed.bottom-24.right-6 {
+    left: calc(var(--fidelity-sidebar) + 1rem) !important;
+    right: auto !important;
+    bottom: 1rem !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  #secao-1 .section-card[aria-labelledby="start-process-title"] > .grid,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] > .grid {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "copy"
+      "visual" !important;
+  }
+
+  #secao-1 .section-card[aria-labelledby="save-process-title"] > .grid {
+    grid-template-areas:
+      "copy"
+      "result" !important;
+  }
 }
 
 @media (max-width: 767px) {

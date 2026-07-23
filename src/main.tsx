@@ -18,5 +18,6 @@ import "./styles/editorial-contemporary.css";
 import "./styles/editorial-semantic.css";
 import "./styles/editorial-accessibility.css";
 import "./styles/editorial-reference-system.css";
+import "./styles/editorial-reference-components.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

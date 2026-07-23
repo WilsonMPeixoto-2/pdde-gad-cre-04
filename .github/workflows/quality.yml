@@ -35,7 +35,19 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run quality pipeline
-        run: npm run check:ci
+        shell: bash
+        run: |
+          mkdir -p output
+          set -o pipefail
+          npm run check:ci 2>&1 | tee output/quality.log
+
+      - name: Upload quality log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: quality-log
+          path: output/quality.log
+          if-no-files-found: ignore
 
       - name: Upload Playwright artifacts
         if: always()

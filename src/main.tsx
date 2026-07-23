@@ -16,5 +16,6 @@ import "./styles/light-contrast.css";
 import "./styles/wcag-warning.css";
 import "./styles/editorial-contemporary.css";
 import "./styles/editorial-semantic.css";
+import "./styles/editorial-accessibility.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

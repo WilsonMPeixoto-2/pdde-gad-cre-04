@@ -70,17 +70,91 @@
 }
 
 @media print {
+  html.dark {
+    color-scheme: light !important;
+    --background: 0 0% 100% !important;
+    --foreground: 218 38% 13% !important;
+    --card: 0 0% 100% !important;
+    --card-hover: 210 25% 98% !important;
+    --popover: 0 0% 100% !important;
+    --popover-foreground: 218 38% 13% !important;
+    --secondary: 210 25% 96% !important;
+    --secondary-foreground: 218 38% 13% !important;
+    --muted: 210 20% 96% !important;
+    --muted-foreground: 215 18% 35% !important;
+    --border: 214 24% 82% !important;
+    --input: 214 24% 82% !important;
+    --editorial-ink: 218 38% 13% !important;
+    --editorial-copy: 215 27% 29% !important;
+    --editorial-muted: 214 16% 42% !important;
+    --editorial-paper: 0 0% 100% !important;
+    --editorial-surface: 0 0% 100% !important;
+    --editorial-rule: 214 24% 82% !important;
+    --editorial-blue-soft: 210 55% 96% !important;
+    --editorial-teal-soft: 174 35% 95% !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+    -webkit-print-color-adjust: economy !important;
+    print-color-adjust: economy !important;
+  }
+
+  html,
+  body,
+  #root,
+  #root > div,
+  main,
+  .guide-shell,
+  .article-frame,
+  [data-guide-section-slot] {
+    background: white !important;
+    color: #111827 !important;
+  }
+
   #hero-cover.editorial-hero {
+    display: block !important;
     min-height: auto !important;
     padding: 0 0 18pt !important;
     border: 0 !important;
     background: white !important;
     color: #111827 !important;
-    -webkit-print-color-adjust: economy !important;
-    print-color-adjust: economy !important;
+    page-break-after: always;
+  }
+
+  #hero-cover.editorial-hero::before,
+  #hero-cover.editorial-hero::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  #hero-cover.editorial-hero > .editorial-hero__inner {
+    display: block !important;
+    min-height: auto !important;
+    padding: 12pt 0 18pt !important;
+    background: white !important;
+  }
+
+  #hero-cover.editorial-hero .editorial-hero__title,
+  #hero-cover.editorial-hero .editorial-hero__lead,
+  #hero-cover.editorial-hero .editorial-hero__kicker {
+    display: block !important;
+    color: #111827 !important;
+  }
+
+  #hero-cover.editorial-hero .editorial-hero__title span {
+    color: #0f766e !important;
   }
 
   .section-divider-print.editorial-chapter {
+    display: block !important;
     margin: 18pt 0 10pt !important;
     padding: 0 !important;
     border: 0 !important;
@@ -88,13 +162,22 @@
     border-radius: 0 !important;
     background: white !important;
     color: #111827 !important;
-    box-shadow: none !important;
-    -webkit-print-color-adjust: economy !important;
-    print-color-adjust: economy !important;
+    page-break-before: always;
+    page-break-after: avoid;
+  }
+
+  .section-divider-print.editorial-chapter .editorial-chapter__grid {
+    display: block !important;
+    min-height: auto !important;
+    background: white !important;
   }
 
   .section-divider-print.editorial-chapter .editorial-chapter__content {
+    display: grid !important;
+    grid-template-columns: 58pt minmax(0, 1fr) !important;
+    gap: 14pt !important;
     padding: 12pt 0 !important;
+    background: white !important;
   }
 
   .section-divider-print.editorial-chapter .editorial-chapter__number,
@@ -102,12 +185,13 @@
   .section-divider-print.editorial-chapter .editorial-chapter__title,
   .section-divider-print.editorial-chapter .editorial-chapter__subtitle {
     color: #111827 !important;
-    -webkit-print-color-adjust: economy !important;
-    print-color-adjust: economy !important;
   }
 
   .section-divider-print.editorial-chapter .editorial-chapter__media,
-  .section-divider-print.editorial-chapter .editorial-chapter__actions {
+  .section-divider-print.editorial-chapter .editorial-chapter__actions,
+  #hero-cover.editorial-hero .editorial-hero__visual,
+  #hero-cover.editorial-hero .editorial-hero__actions,
+  #hero-cover.editorial-hero .editorial-hero__summary {
     display: none !important;
   }
 }

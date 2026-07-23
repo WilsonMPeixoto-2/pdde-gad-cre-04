@@ -47,18 +47,18 @@ export const SystemCommandPreview = ({ variant }: SystemCommandPreviewProps) => 
         {variant === "include-document" ? (
           <>
             <div className="system-command-preview__toolbar">
-              <button type="button" tabIndex={-1}>
+              <div>
                 <FilePlus2 />
                 <span>Incluir Documento</span>
-              </button>
-              <button type="button" tabIndex={-1}>
+              </div>
+              <div>
                 <Search />
                 <span>Pesquisar</span>
-              </button>
-              <button type="button" tabIndex={-1}>
+              </div>
+              <div>
                 <FileText />
                 <span>Consultar</span>
-              </button>
+              </div>
             </div>
             <div className="system-command-preview__focus">
               <FilePlus2 />
@@ -71,10 +71,10 @@ export const SystemCommandPreview = ({ variant }: SystemCommandPreviewProps) => 
           </>
         ) : (
           <>
-            <label className="system-command-preview__search">
+            <div className="system-command-preview__search">
               <Search />
               <span>Pesquisar tipo de documento</span>
-            </label>
+            </div>
             <div className="system-command-preview__option">
               <FileText />
               <div>

@@ -1,157 +1,201 @@
-# Auditoria do Redesign Editorial Contemporâneo
+# Auditoria Final do Redesign Editorial do Guia PDDE
 
 **Data:** 23/07/2026  
 **Branch:** `design/editorial-contemporaneo-v3`  
 **PR:** #7  
-**Escopo:** todo o Guia PDDE no SEI!RIO
+**Escopo:** Guia PDDE no SEI!RIO completo
 
-## 1. Direção aprovada
+## 1. Referências vinculantes
 
-- revisão visual, editorial e de arquitetura da informação;
-- direção editorial contemporânea;
-- alta presença visual;
-- fotografia na capa e ilustrações nas etapas;
-- paleta azul institucional + verde/teal;
-- transformação estrutural intermediária;
-- preservação do conteúdo normativo, das regras de negócio e das funcionalidades.
+A implementação foi revista para materializar, e não apenas citar, os princípios do projeto **Referências editoriais**:
 
-## 2. Implementação verificada
+- conteúdo antes da forma;
+- função antes da repetição;
+- cores com significado;
+- camadas executiva, técnica e de auditoria;
+- densidade controlada;
+- diversidade de componentes conforme a pergunta cognitiva;
+- imagens e elementos gráficos somente quando acrescentam orientação, compreensão ou memória;
+- rastreabilidade normativa visível.
+
+A imagem editorial aprovada durante o planejamento foi adotada como referência operacional de composição, hierarquia, ritmo, modularidade e presença cromática.
+
+## 2. Implementação final verificada
 
 ### Capa
 
-- composição clara em duas colunas;
-- título editorial em Source Serif 4;
-- fotografia contextual com proporção estável;
-- ação primária preservada;
-- síntese estrutural na faixa inferior;
-- adaptação mobile em uma coluna;
-- mídia removida na impressão.
+- composição integrada em duas colunas no desktop e uma coluna no mobile;
+- título editorial em Source Serif 4 com largura compatível com o espaço disponível;
+- fotografia contextual preservada, reposicionada e incorporada à composição;
+- legenda vinculada à imagem, sem sobreposição com conteúdo subjacente;
+- orientação de uso textual, sem botão redundante de início;
+- faixa inferior com percurso, conteúdo, segurança e uso recomendado;
+- impressão simplificada e sem imagem pesada.
 
-### Capítulos
+### Aberturas de etapas
 
-- sete aberturas editoriais renderizadas;
-- número, ícone, título, subtítulo, compartilhamento e ilustração temática;
-- modo escuro com contraste e hierarquia preservados;
-- mídia removida e composição simplificada no PDF.
+- sete aberturas editoriais com número, título, síntese e compartilhamento;
+- ilustrações decorativas removidas;
+- mapas informacionais com três movimentos da etapa, resultado esperado e ponto de atenção;
+- cores específicas por etapa: azul, teal, âmbar, violeta e slate, conforme a função;
+- recomposição vertical no mobile;
+- versão de impressão reduzida ao conteúdo essencial.
 
-### Hierarquia interna
+### Arquitetura da informação
 
-- `SectionLead` substituído por cabeçalho aberto com trilho teal;
-- título e descrição com largura de leitura controlada;
-- distinção clara entre capítulo e conteúdo interno.
+O conteúdo foi reorganizado conforme a finalidade cognitiva de cada bloco:
 
-### Navegação
+- função documental;
+- comparação e classificação;
+- fluxo e sequência operacional;
+- decisão e recomendação;
+- regra, conduta correta, vedação e evidência;
+- checklist e controle;
+- canais de atendimento;
+- fontes, aplicabilidade e vigência.
 
-- grupos “Visão geral”, “Etapas do processo” e “Apoio e referências”;
-- item ativo com trilho teal;
-- progresso de leitura preservado;
-- painel mobile com overlay, `Escape` e `inert` preservados.
+As etapas deixaram de repetir uma única fórmula de cartões. Foram criadas famílias visuais próprias para documentos, comparações, processos, decisões, riscos, regras, evidências, conferências, suporte e fontes.
 
-### Superfícies e semântica
+### Tipografia e leitura
 
-- redução de cartões aninhados;
-- hover sem deslocamento em blocos de leitura;
-- harmonização de azul, teal, verde, âmbar e vermelho por função;
-- transições de etapa convertidas em faixas editoriais.
+- Source Serif 4 reservada a títulos editoriais;
+- Plus Jakarta Sans na hierarquia de interface;
+- Public Sans no corpo, tabelas e controles;
+- largura de leitura controlada;
+- justificação seletiva em textos editoriais longos, com hifenização e retorno ao alinhamento à esquerda em telas estreitas;
+- títulos, descrições e metadados com proporções distintas;
+- leads sem numeração corrigidos para ocupar a largura integral.
+
+### Cor semântica
+
+- azul: estrutura, navegação, orientação técnica e referências federais;
+- teal: processo, conformidade, orientação administrativa e progresso;
+- âmbar: cautela, transição, pendência e validação necessária;
+- vermelho: vedação, impedimento e não conformidade;
+- violeta: análise, classificação e regras complementares;
+- slate: contexto, metadados, auditoria e fontes.
+
+As cores de identidade foram separadas das cores tipográficas acessíveis, especialmente no modo escuro.
+
+### Navegação e funcionalidades preservadas
+
+- parâmetros `?secao=` e âncoras;
+- busca global;
+- navegação lateral e mobile;
+- modo escuro;
+- modo guiado;
+- checklists e persistência local;
+- modelos e links externos;
+- PWA;
+- impressão e geração de PDF.
 
 ## 3. Validação funcional e técnica
 
-Pipeline executado por `npm run check:ci`:
+O pipeline `npm run check:ci` foi executado após as correções e aprovou:
 
-- ESLint: aprovado;
-- TypeScript: aprovado;
-- Vite build: aprovado;
-- auditoria de conteúdo: aprovada;
-- auditoria normativa: aprovada;
-- auditoria de PDFs: aprovada;
-- Playwright: aprovado;
-- Axe: aprovado nos modos claro, mobile e escuro;
-- impressão: aprovada;
-- PWA e rotas: aprovadas.
+- ESLint;
+- TypeScript;
+- Vite build;
+- auditoria de conteúdo;
+- auditoria normativa;
+- auditoria dos documentos PDF vinculados;
+- Playwright;
+- Axe nos modos claro, mobile e escuro;
+- responsividade e ausência de overflow horizontal;
+- impressão;
+- PWA e rotas.
 
-A suíte final anterior à limpeza dos instrumentos temporários registrou **26 testes aprovados**. Os três testes temporários de captura foram posteriormente removidos; os contratos permanentes permanecem na suíte.
+Os testes temporários de homologação visual foram removidos após a inspeção; permanecem somente os contratos permanentes do produto.
 
-## 4. Correções identificadas durante a auditoria
+## 4. Correções realizadas durante a homologação
 
-### Contraste teal
+### Capa e imagens
 
-O teal inicial apresentava 3,97:1 em rótulos pequenos sobre fundo claro. Foi escurecido para atingir WCAG AA. No modo escuro, utiliza variante luminosa separada.
+- retirada do CTA sem função editorial;
+- ampliação da coluna de título;
+- reposicionamento da fotografia;
+- eliminação da colisão entre fotografia, legenda e faixa inferior;
+- remoção integral das ilustrações vetoriais decorativas das etapas.
 
-### Contraste de ação no modo escuro
+### Monotonia e repetição
 
-Uma ação textual `primary` apresentava 4,47:1. Foi aplicada correção localizada, sem alterar botões que usam azul como fundo.
+- substituição da repetição de cartões equivalentes por componentes definidos segundo a finalidade;
+- ampliação controlada da paleta semântica;
+- alternância entre matrizes, faixas, tabelas, fluxos, comparativos, decisões, checklists e evidências;
+- diferenciação visual entre explicação, regra, risco, vedação, orientação e fonte.
 
-### Links oficiais do SEI!RIO
+### Contraste e modo escuro
 
-Duas rotas oficiais retornavam 404 no ambiente de CI embora estivessem publicadas e indexadas. A auditoria passou a usar verificação alternativa do portal institucional somente para essas rotas conhecidas, mantendo falha obrigatória para outros links e domínios.
+- correção do teal de pequenos rótulos para WCAG AA;
+- criação de variantes tipográficas luminosas para azul, teal, âmbar, vermelho, violeta e slate;
+- correção final dos títulos dos passos dos mapas;
+- correção do botão de copiar link no modo escuro;
+- manutenção da hierarquia sem perda do significado cromático.
 
-### Fotografia da capa
+### Leads sem numeração
 
-A fotografia inicialmente ocupava área superior à resolução nativa. A moldura foi reduzida e reposicionada para evitar ampliação excessiva e preservar nitidez.
+Os cabeçalhos de **Atendimento e suporte** e **Fontes oficiais e aplicabilidade** ocupavam apenas a primeira coluna do grid por não possuírem número de passo. A composição foi corrigida para usar toda a largura disponível em tela e no PDF.
 
-### Impressão a partir do modo escuro
+### Impressão e PDF
 
-A primeira geração de PDF revelou:
+A primeira implementação de impressão revelou fundo escuro residual, ruído cromático, barras laterais, ocultação da capa e arquivo de aproximadamente 101 MB.
 
-- fundo escuro residual;
-- ruído cromático;
-- barras laterais;
-- ocultação do conteúdo principal da capa por seletor legado;
-- arquivo de aproximadamente 101 MB.
+A versão final:
 
-A camada final de impressão passou a:
-
-- redefinir variáveis para modo claro;
-- remover fundos gráficos, filtros e sombras;
-- restaurar o conteúdo da capa;
-- ocultar mídias e ações;
-- simplificar capítulos;
-- usar ajuste cromático econômico.
-
-Resultado final:
-
-- PDF com 29 páginas;
-- tamanho aproximado de 0,78 MB;
-- capa limpa e legível;
-- capítulo 2 limpo e legível;
-- ausência de ruído e barras escuras;
-- texto extraível e fontes corretamente renderizadas.
+- redefine as variáveis para uma paleta clara na mídia de impressão;
+- remove fundos, filtros, sombras e mídia não essencial;
+- preserva cores semânticas em tons imprimíveis;
+- mantém títulos e textos com contraste adequado;
+- impede a quebra interna dos cabeçalhos editoriais;
+- evita rótulos órfãos entre páginas;
+- produz PDF A4 com 29 páginas e aproximadamente 0,87 MB;
+- mantém texto extraível e fontes corretamente renderizadas.
 
 ## 5. Evidências visuais inspecionadas
 
-Capturas temporárias geradas pelo Playwright e removidas após a inspeção:
+Foram produzidas e examinadas capturas de:
 
-1. capa desktop — 1440 × 1000;
-2. abertura da Etapa 2 — 1066 × 512;
-3. lead interno da Etapa 2 — 1066 × 262;
-4. capa mobile — 390 × 844;
-5. sumário mobile — 390 × 844;
-6. abertura da Etapa 2 em modo escuro — 1066 × 512;
-7. mídia de impressão;
-8. PDF nativo A4 renderizado por ferramenta independente.
+1. capa desktop;
+2. capa mobile;
+3. abertura da Etapa 2 no desktop;
+4. abertura da Etapa 2 no mobile;
+5. abertura da Etapa 2 no modo escuro;
+6. funções documentais;
+7. grupos de regras semânticas;
+8. comparativo documental;
+9. bloco de decisão de assinatura;
+10. controle final da remessa;
+11. cabeçalho de Atendimento e suporte;
+12. cabeçalho de Fontes oficiais e aplicabilidade;
+13. PDF A4 integral renderizado por ferramenta independente.
 
-## 6. Comparação com a direção B aprovada
+A inspeção final confirmou:
 
-| Critério | Resultado |
+- ausência de sobreposição e cortes;
+- consistência de alinhamentos;
+- mapas legíveis nos modos claro e escuro;
+- leads sem numeração em largura integral;
+- tabelas e componentes contidos no mobile;
+- contatos e fontes com contraste adequado no PDF;
+- paginação sem cabeçalhos editoriais partidos.
+
+## 6. Resultado em relação à referência aprovada
+
+| Critério | Resultado final |
 |---|---|
-| Hierarquia editorial | Aprovada — títulos, números e leads claramente diferenciados |
-| Paleta azul + teal | Aprovada — estrutural, semântica e acessível |
-| Presença visual | Aprovada — fotografia na capa e ilustrações em todos os capítulos |
-| Redução de cartões | Aprovada — wrappers abertos e superfícies mais discretas |
-| Navegação | Aprovada — agrupada, clara e preservando progresso |
-| Mobile | Aprovado — sem overflow horizontal e com recomposição editorial |
-| Modo escuro | Aprovado — contraste Axe e mídia preservada |
-| Impressão | Aprovada — clara, compacta e independente do tema ativo |
+| Hierarquia editorial | Aprovada — capa, etapa, lead, detalhe e auditoria claramente diferenciados |
+| Variedade funcional | Aprovada — componentes variam conforme a pergunta que respondem |
+| Cor semântica | Aprovada — seis famílias cromáticas com função e contraste controlados |
+| Imagens | Aprovada — fotografia integrada à capa; decoração genérica removida |
+| Ritmo e densidade | Aprovados — alternância de estruturas e respiro proporcional |
+| Navegação | Aprovada — estrutura e encontrabilidade preservadas |
+| Mobile | Aprovado — recomposição vertical e ausência de overflow |
+| Modo escuro | Aprovado — contraste, hierarquia e ações preservados |
+| Impressão | Aprovada — clara, compacta, legível e independente do tema ativo |
+| Funcionalidades | Preservadas e cobertas por testes |
 
-## 7. Desvios intencionais
+## 7. Conclusão
 
-- A fotografia não ocupa toda a altura do painel da capa para permanecer próxima da resolução nativa e evitar perda de nitidez.
-- As ilustrações são vetoriais e não contêm texto rasterizado.
-- O conteúdo técnico não foi reescrito materialmente; a intervenção concentrou-se em organização e apresentação.
-- Nenhuma dependência nova foi adicionada, porque React, Tailwind, Lucide e Playwright existentes foram suficientes.
+O redesign final utiliza a referência editorial aprovada como arquitetura do produto, e não como simples inspiração estética. A versão resultante preserva o conteúdo normativo e as funcionalidades, ao mesmo tempo que melhora hierarquia, variedade, encontrabilidade, legibilidade, semântica cromática, responsividade, modo escuro e impressão.
 
-## 8. Conclusão
-
-O redesign atende à direção editorial contemporânea aprovada, preserva as funcionalidades e melhora de forma consistente a leitura, a orientação, a presença institucional, a responsividade, o contraste e a impressão.
-
-A publicação em produção deve ocorrer somente após revisão do preview e decisão explícita de merge do PR.
+A promoção para produção permanece condicionada à revisão do preview e à decisão explícita de merge do PR #7.

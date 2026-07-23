@@ -19,17 +19,20 @@ export const SectionLead = ({
   icon,
   className,
 }: SectionLeadProps) => (
-  <header className={cn("editorial-section-lead", className)}>
-    <div className="editorial-section-lead__row">
-      <IconTile icon={icon} size="lg" />
-      <div className="min-w-0 flex-1">
-        <div className="editorial-section-lead__labels">
-          {step ? <span>Etapa {step}</span> : null}
-          <span>{eyebrow}</span>
-        </div>
-        <h2 className="editorial-section-lead__title">{title}</h2>
-        <p className="editorial-section-lead__description">{description}</p>
+  <header className={cn("editorial-section-lead", className)} data-step={step}>
+    {step ? (
+      <div className="editorial-section-lead__index" aria-hidden="true">
+        <span>{step.padStart(2, "0")}</span>
       </div>
+    ) : null}
+
+    <div className="editorial-section-lead__body">
+      <div className="editorial-section-lead__eyebrow">
+        <IconTile icon={icon} size="md" />
+        <span>{eyebrow}</span>
+      </div>
+      <h2 className="editorial-section-lead__title">{title}</h2>
+      <p className="editorial-section-lead__description">{description}</p>
     </div>
   </header>
 );

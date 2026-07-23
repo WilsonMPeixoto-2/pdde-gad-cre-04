@@ -1,0 +1,60 @@
+/* Composição tipográfica explícita do título principal. */
+
+.editorial-hero__title {
+  max-width: none !important;
+}
+
+.editorial-hero__title-line,
+.editorial-hero__title-accent {
+  display: block !important;
+  white-space: nowrap;
+}
+
+.editorial-hero__title-line {
+  margin: 0 !important;
+  color: var(--fidelity-navy) !important;
+}
+
+.editorial-hero__title-accent {
+  margin-top: 0.08em !important;
+  color: var(--fidelity-teal) !important;
+  font-size: 0.76em;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 1180px) {
+  .editorial-hero__feature {
+    grid-template-columns: minmax(0, 1.3fr) minmax(14rem, 0.55fr) !important;
+  }
+
+  .editorial-hero__title {
+    font-size: clamp(3rem, 4vw, 4.2rem) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .editorial-hero__title {
+    font-size: clamp(3rem, 14vw, 3.75rem) !important;
+  }
+
+  .editorial-hero__title-accent {
+    font-size: 0.72em;
+  }
+}
+
+@media (max-width: 359px) {
+  .editorial-hero__title {
+    font-size: 3.25rem !important;
+  }
+
+  .editorial-hero__title-accent {
+    font-size: 0.68em;
+  }
+}
+
+@media print {
+  .editorial-hero__title-line,
+  .editorial-hero__title-accent {
+    white-space: normal;
+  }
+}

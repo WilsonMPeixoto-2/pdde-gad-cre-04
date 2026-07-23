@@ -78,8 +78,9 @@ export const HeroCover = () => {
               aria-label="Prestação de Contas PDDE no SEI!RIO"
               className="editorial-hero__title"
             >
-              Prestação de Contas
-              <span>PDDE no SEI!RIO</span>
+              <span className="editorial-hero__title-line">Prestação de</span>
+              <span className="editorial-hero__title-line">Contas</span>
+              <span className="editorial-hero__title-accent">PDDE no SEI!RIO</span>
             </h1>
 
             <p className="editorial-hero__lead">

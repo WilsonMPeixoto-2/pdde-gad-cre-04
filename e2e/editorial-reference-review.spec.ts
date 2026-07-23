@@ -81,9 +81,17 @@ test.describe("Homologação visual do sistema editorial de referência", () => 
     });
     await page.goto("/");
     await page.getByRole("button", { name: /imprimir ou salvar em pdf/i }).click();
-    await page.waitForFunction(() => document.documentElement.classList.contains("print-prepared"));
+    await page.waitForFunction(() => {
+      const slots = Array.from(document.querySelectorAll<HTMLElement>("[data-guide-section-slot]"));
+      return slots.length === 7
+        && slots.every((slot) => slot.dataset.guideSectionStatus === "ready")
+        && document.querySelectorAll(".skeleton-shimmer").length === 0;
+    });
+
+    await page.evaluate(() => document.documentElement.classList.add("print-prepared"));
     await page.emulateMedia({ media: "print" });
     const pdf = await page.pdf({ format: "A4", printBackground: true, preferCSSPageSize: true });
     await testInfo.attach("13-guia-editorial.pdf", { body: pdf, contentType: "application/pdf" });
+    await page.evaluate(() => document.documentElement.classList.remove("print-prepared"));
   });
 });

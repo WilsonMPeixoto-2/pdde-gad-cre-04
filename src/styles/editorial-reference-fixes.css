@@ -1,0 +1,52 @@
+/* Correções finais de acessibilidade e contenção responsiva. */
+
+:root {
+  --ref-teal-text: #236e6b;
+  --ref-slate-text: #58687a;
+}
+
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.editorial-hero {
+  overflow-x: clip;
+}
+
+.legal-rule-card__panel--correct .legal-rule-card__panel-heading span {
+  color: var(--ref-teal-text);
+}
+
+.legal-rule-card__evidence-label span {
+  color: var(--ref-slate-text);
+}
+
+@media (max-width: 640px) {
+  .editorial-hero__visual::before {
+    inset: -0.6rem 0 2rem 0.85rem;
+    border-radius: 2rem 0.9rem 2.8rem 0.9rem;
+  }
+
+  .editorial-comparison-table,
+  .editorial-system-reference,
+  .editorial-applicability-frame {
+    max-width: 100%;
+  }
+
+  .editorial-section,
+  .editorial-block,
+  .section-card,
+  .legal-rule-card,
+  .document-function-card,
+  .editorial-process-step__content {
+    min-width: 0;
+  }
+}
+
+.dark {
+  --ref-teal-text: #71d1ca;
+  --ref-slate-text: #b6c4d1;
+}

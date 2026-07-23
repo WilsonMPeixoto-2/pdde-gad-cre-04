@@ -76,5 +76,8 @@ test.describe("Capturas de revisão editorial", () => {
       "07-capitulo-2-impressao",
       await chapter.screenshot({ animations: "disabled" }),
     );
+
+    const pdf = await page.pdf({ format: "A4", printBackground: true });
+    await testInfo.attach("08-guia-impressao", { body: pdf, contentType: "application/pdf" });
   });
 });

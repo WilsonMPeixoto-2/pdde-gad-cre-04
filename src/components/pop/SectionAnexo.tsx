@@ -55,7 +55,7 @@ export const SectionAnexo = () => (
   <section id="anexo" className="scroll-mt-20 space-y-8 editorial-section" data-editorial-section="references">
     <SectionLead
       eyebrow="Consulta de referência"
-      title="Fontes oficiais, vigência e aplicabilidade"
+      title="Fontes oficiais e aplicabilidade"
       description="Esta seção reúne a matriz temporal e os documentos oficiais utilizados pelo guia. A explicação das peças permanece na Etapa 2; aqui ficam as fontes necessárias para verificar fundamento, vigência e alcance."
       icon={Scale}
     />

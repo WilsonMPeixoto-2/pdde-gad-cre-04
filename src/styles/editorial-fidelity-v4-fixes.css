@@ -1,0 +1,356 @@
+/* Ajustes incrementais verificados pelos contratos, pela comparação visual e pelo render independente do PDF. */
+
+:root {
+  /* O token legado era usado como texto pequeno com contraste insuficiente. */
+  --ref-amber: #8f5b08;
+}
+
+/* Textos curtos e operacionais seguem a referência aprovada: alinhamento à esquerda, sem rios tipográficos. */
+.editorial-hero__lead,
+.editorial-hero__caption,
+.editorial-hero__orientation p,
+.editorial-chapter__subtitle,
+.editorial-map__step p,
+.editorial-map__summary-item strong,
+.editorial-section-lead__description,
+.editorial-block__heading > div > p:last-child,
+.document-function-card__header p,
+.document-function-card__list dd,
+.editorial-process-step__content p,
+.editorial-context-grid p,
+.editorial-context-grid li,
+.editorial-control-grid p,
+.editorial-binary-choice p,
+.editorial-follow-up-flow p,
+.editorial-boundary-card p,
+.editorial-contact-grid p,
+.editorial-resource-grid p,
+.editorial-source-card p,
+#secao-1 .section-card p {
+  text-align: left !important;
+  text-justify: auto !important;
+  word-spacing: normal !important;
+}
+
+/* No desktop, a linha verde do título permanece íntegra e reduz a sensação de coluna comprimida. */
+@media (min-width: 1180px) {
+  .editorial-hero__feature {
+    grid-template-columns: minmax(0, 1.12fr) minmax(16rem, 0.62fr) !important;
+  }
+
+  .editorial-hero__title {
+    max-width: 15ch !important;
+    font-size: clamp(3rem, 4.25vw, 4.45rem) !important;
+  }
+
+  .editorial-hero__title span {
+    white-space: nowrap;
+  }
+}
+
+.system-command-preview__toolbar > div {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--fidelity-rule);
+  border-radius: 0.65rem;
+  background: #fff;
+  padding: 0.65rem 0.8rem;
+  color: var(--fidelity-copy);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.system-command-preview__toolbar > div:first-child {
+  border-color: rgb(23 105 170 / 0.4);
+  background: #eaf4fb;
+  color: var(--fidelity-blue);
+  box-shadow: 0 0 0 3px rgb(23 105 170 / 0.08);
+}
+
+.dark .system-command-preview__toolbar > div {
+  border-color: var(--fidelity-rule);
+  background: #172b3c;
+}
+
+/* Etapa 1: restabelece o grid funcional previsto no componente e remove rótulos pseudoeditoriais legados. */
+#secao-1 .section-card[aria-labelledby="start-process-title"],
+#secao-1 .section-card[aria-labelledby="save-process-title"] {
+  overflow: visible !important;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"]::before,
+#secao-1 .section-card[aria-labelledby="start-process-title"]::after,
+#secao-1 .section-card[aria-labelledby="save-process-title"]::before,
+#secao-1 .section-card[aria-labelledby="save-process-title"]::after,
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid::before,
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid::after,
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid::before,
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid::after {
+  display: none !important;
+  content: none !important;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr) !important;
+  grid-template-areas: "copy visual" !important;
+  gap: clamp(1.5rem, 2.8vw, 2.75rem) !important;
+  align-items: start !important;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid > div:first-child {
+  grid-area: copy !important;
+  min-width: 0;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid > div:last-child {
+  grid-area: visual !important;
+  min-width: 0;
+}
+
+#secao-1 .section-card[aria-labelledby="start-process-title"] .sei-mockup {
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr) !important;
+  grid-template-areas: "copy result" !important;
+  gap: clamp(1.5rem, 2.8vw, 2.75rem) !important;
+  align-items: stretch !important;
+}
+
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid > div:first-child {
+  grid-area: copy !important;
+  min-width: 0;
+}
+
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid > aside {
+  grid-area: result !important;
+  min-width: 0;
+  align-self: stretch;
+}
+
+/* Aviso de prazos: mantém o sentido âmbar sem herdar texto escuro no tema noturno. */
+.dark .section-card[aria-labelledby="deadlines-notice-title"] {
+  border-color: #9b7129 !important;
+  background: linear-gradient(135deg, #302610, #182735 78%) !important;
+  color: #d7e2ea !important;
+}
+
+.dark .section-card[aria-labelledby="deadlines-notice-title"] h3,
+.dark .section-card[aria-labelledby="deadlines-notice-title"] .text-slate-950,
+.dark .section-card[aria-labelledby="deadlines-notice-title"] .text-slate-900 {
+  color: #f6f9fb !important;
+}
+
+.dark .section-card[aria-labelledby="deadlines-notice-title"] p,
+.dark .section-card[aria-labelledby="deadlines-notice-title"] .text-slate-800,
+.dark .section-card[aria-labelledby="deadlines-notice-title"] .text-slate-700,
+.dark .section-card[aria-labelledby="deadlines-notice-title"] .text-slate-600,
+.dark .section-card[aria-labelledby="deadlines-notice-title"] .text-slate-500 {
+  color: #d0dce5 !important;
+}
+
+.dark .section-card[aria-labelledby="deadlines-notice-title"] a {
+  color: #f2c36c !important;
+}
+
+/* Cartões documentais: cor de identidade e cor tipográfica são independentes. */
+.dark .document-function-card[data-tone="blue"] {
+  --document-accent: #8fc7ed;
+  --document-soft: #122b40;
+}
+
+.dark .document-function-card[data-tone="teal"] {
+  --document-accent: #76d4cd;
+  --document-soft: #12312f;
+}
+
+.dark .document-function-card[data-tone="amber"] {
+  --document-accent: #f2c36c;
+  --document-soft: #34270f;
+}
+
+.dark .document-function-card[data-tone="violet"] {
+  --document-accent: #c2b6f2;
+  --document-soft: #292440;
+}
+
+.dark .document-function-card {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--document-soft) 72%, #132333), #132333 42%) !important;
+}
+
+.dark .document-function-card__header span {
+  color: var(--document-accent) !important;
+}
+
+.dark .document-function-card__list {
+  border-color: var(--fidelity-rule) !important;
+}
+
+.dark .document-function-card__list > div + div {
+  border-color: var(--fidelity-rule) !important;
+}
+
+.dark .document-function-card__source {
+  border-color: var(--fidelity-rule) !important;
+  background: #172b3c !important;
+}
+
+.dark .document-function-card__source > span {
+  color: #b7c6d3 !important;
+}
+
+.dark .document-function-card__source a {
+  color: #9ed0f3 !important;
+}
+
+@media (min-width: 1024px) {
+  /* A referência desktop usa sidebar persistente; a topbar não deve cobrir o conteúdo durante a leitura. */
+  .editorial-topbar {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* O acesso ao modo guiado passa a ocupar a área funcional da sidebar, sem cobrir os cartões. */
+  div.fixed.bottom-24.right-6 {
+    left: 1rem !important;
+    right: auto !important;
+    bottom: 1rem !important;
+    width: calc(var(--fidelity-sidebar) - 2rem) !important;
+  }
+
+  div.fixed.bottom-24.right-6 > button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  aside.fixed.bottom-24.right-6 {
+    left: calc(var(--fidelity-sidebar) + 1rem) !important;
+    right: auto !important;
+    bottom: 1rem !important;
+  }
+}
+
+@media (max-width: 1179px) {
+  .editorial-hero__title span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 1023px) {
+  #secao-1 .section-card[aria-labelledby="start-process-title"] > .grid,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] > .grid {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "copy"
+      "visual" !important;
+  }
+
+  #secao-1 .section-card[aria-labelledby="save-process-title"] > .grid {
+    grid-template-areas:
+      "copy"
+      "result" !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .system-command-preview__toolbar > div {
+    width: 100%;
+  }
+}
+
+@media print {
+  /* Aberturas: número em coluna própria e título sem colisão. */
+  .editorial-chapter__content {
+    display: grid !important;
+    grid-template-columns: 52pt minmax(0, 1fr) !important;
+    grid-template-areas: "identity meta" !important;
+    gap: 14pt !important;
+    align-items: start !important;
+    padding: 18pt 0 !important;
+  }
+
+  .editorial-chapter__identity,
+  .editorial-chapter__index,
+  .editorial-chapter__label,
+  .editorial-chapter__meta,
+  .editorial-chapter__title,
+  .editorial-chapter__subtitle {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+  }
+
+  .editorial-chapter__identity {
+    grid-area: identity !important;
+    display: block !important;
+    min-width: 0 !important;
+  }
+
+  .editorial-chapter__label {
+    display: none !important;
+  }
+
+  .editorial-chapter__index {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2pt !important;
+  }
+
+  .editorial-chapter__index span:first-child {
+    font-size: 25pt !important;
+    line-height: 1 !important;
+  }
+
+  .editorial-chapter__index span:last-child {
+    font-size: 6.5pt !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .editorial-chapter__meta {
+    grid-area: meta !important;
+    min-width: 0 !important;
+  }
+
+  .editorial-chapter__title {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    font-size: 28pt !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  .editorial-chapter__subtitle {
+    max-width: 52ch !important;
+    margin-top: 7pt !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Rótulos pseudoeditoriais do layout de tela não pertencem ao PDF. */
+  #secao-1 .section-card[aria-labelledby="start-process-title"] *,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] * {
+    -webkit-print-color-adjust: economy !important;
+    print-color-adjust: economy !important;
+  }
+
+  #secao-1 .section-card[aria-labelledby="start-process-title"] *::before,
+  #secao-1 .section-card[aria-labelledby="start-process-title"] *::after,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] *::before,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] *::after {
+    content: none !important;
+  }
+
+  /* O cabeçalho e o rodapé fixos já identificam o documento; o bloco duplicado criava uma página vazia. */
+  .guide-shell > .print-only {
+    display: none !important;
+  }
+}

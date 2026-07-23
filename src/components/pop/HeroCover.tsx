@@ -1,99 +1,167 @@
-import { ArrowDown, Compass, FileText, ShieldCheck } from "lucide-react";
+import {
+  BookOpenCheck,
+  CheckCircle2,
+  FileCheck2,
+  Files,
+  Route,
+  Search,
+  ShieldCheck,
+} from "lucide-react";
+import { editorialMedia } from "@/lib/editorialMedia";
 
-const scrollToIntroduction = () => {
-  const introduction = document.getElementById("introducao");
-  if (!introduction) return;
-  introduction.scrollIntoView({ behavior: "smooth", block: "start" });
-};
+const heroStats = [
+  {
+    icon: Route,
+    label: "Tempo de leitura",
+    title: "Consulta por etapa",
+    description: "Acesse diretamente a rotina necessária.",
+  },
+  {
+    icon: Files,
+    label: "Conteúdo",
+    title: "Documentos e modelos",
+    description: "Função das peças, exemplos e ferramentas.",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Segurança",
+    title: "Regras e evidências",
+    description: "Fundamentos e cuidados no ponto de uso.",
+  },
+  {
+    icon: BookOpenCheck,
+    label: "Resultado",
+    title: "Processo rastreável",
+    description: "Instrução coerente e encaminhamento seguro.",
+  },
+] as const;
+
+const overviewSteps = [
+  { label: "Abrir", description: "Criar e identificar o processo." },
+  { label: "Preparar", description: "Organizar documentos e fundamentos." },
+  { label: "Incluir", description: "Registrar arquivos e metadados." },
+  { label: "Conferir", description: "Autenticar, assinar e revisar." },
+  { label: "Acompanhar", description: "Remeter e monitorar a análise." },
+] as const;
+
+const quickLinks = [
+  { href: "?secao=secao-2", label: "Documentos e regras", icon: Files },
+  { href: "?secao=checklist", label: "Checklist", icon: FileCheck2 },
+  { href: "?secao=anexo", label: "Fontes oficiais", icon: Search },
+] as const;
 
 export const HeroCover = () => {
+  const heroMedia = editorialMedia.hero;
+
   return (
     <section
       id="hero-cover"
-      className="relative isolate flex min-h-[74vh] items-center overflow-hidden bg-slate-950 px-5 py-20 text-white sm:px-8 sm:py-24"
+      className="editorial-hero"
+      data-editorial-hero="true"
+      aria-labelledby="hero-cover-title"
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-70"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(circle at 72% 25%, hsl(201 90% 42% / 0.16), transparent 30%), radial-gradient(circle at 18% 78%, hsl(214 86% 44% / 0.12), transparent 34%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 left-[10%] w-px bg-white/6"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 right-[10%] w-px bg-white/6"
-        aria-hidden="true"
-      />
+      <div className="editorial-hero__inner">
+        <div className="editorial-hero__feature">
+          <div className="editorial-hero__copy">
+            <p className="editorial-hero__kicker">
+              <ShieldCheck aria-hidden="true" />
+              4ª Coordenadoria Regional de Educação · GAD
+            </p>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
-        <div className="min-w-0">
-          <div className="inline-flex items-center gap-2.5 rounded-[0.55rem] border border-white/15 bg-white/[0.055] px-3.5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.13em] text-white/90">
-            <ShieldCheck className="h-4 w-4 text-sky-300" aria-hidden="true" />
-            4ª Coordenadoria Regional de Educação
+            <div className="editorial-hero__tags" aria-label="Características do documento">
+              <span>Guia operacional</span>
+              <span>Prestação de contas</span>
+            </div>
+
+            <h1
+              id="hero-cover-title"
+              aria-label="Prestação de Contas PDDE no SEI!RIO"
+              className="editorial-hero__title"
+            >
+              <span className="editorial-hero__title-line">Prestação de</span>
+              <span className="editorial-hero__title-line">Contas</span>
+              <span className="editorial-hero__title-accent">PDDE no SEI!RIO</span>
+            </h1>
+
+            <p className="editorial-hero__lead">
+              Organize os autos, compreenda a função de cada peça e registre os documentos com clareza,
+              segurança e rastreabilidade.
+            </p>
           </div>
 
-          <div className="mt-10 flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.15em] text-sky-300">
-            <FileText className="h-4 w-4" aria-hidden="true" />
-            Guia operacional
-          </div>
-
-          <h1
-            aria-label="Prestação de Contas PDDE no SEI!RIO"
-            className="mt-4 max-w-4xl text-[2.8rem] font-extrabold leading-[0.98] tracking-[-0.06em] text-white sm:text-[4.4rem] lg:text-[5.35rem]"
-          >
-            Prestação de Contas
-            <span className="mt-2 block text-sky-300">PDDE no SEI!RIO</span>
-          </h1>
-
-          <p className="mt-7 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
-            Orientações para autuação, organização documental, autenticação, assinatura e remessa do
-            processo local, com separação clara entre o fluxo municipal e as exigências federais do PDDE.
-          </p>
-
-          <button
-            type="button"
-            onClick={scrollToIntroduction}
-            className="mt-9 inline-flex h-11 items-center justify-center gap-2 rounded-[0.65rem] border border-sky-400/40 bg-sky-500 px-5 text-sm font-bold text-slate-950 shadow-[0_10px_30px_-18px_hsl(199_89%_48%/0.75)] transition-[background-color,border-color,box-shadow] duration-150 hover:border-sky-300 hover:bg-sky-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-          >
-            <Compass className="h-4 w-4" aria-hidden="true" />
-            Iniciar guia
-          </button>
+          <figure className="editorial-hero__visual" data-editorial-media="hero">
+            <div className="editorial-hero__photo">
+              <img
+                src={heroMedia.src}
+                alt={heroMedia.alt}
+                width={heroMedia.width}
+                height={heroMedia.height}
+                fetchPriority="high"
+                decoding="async"
+                style={{ objectPosition: heroMedia.position }}
+              />
+            </div>
+            <figcaption className="editorial-hero__caption">
+              <strong>Orientação para a rotina real da unidade escolar</strong>
+              <span>Conteúdo técnico transformado em percurso prático de conferência e registro.</span>
+            </figcaption>
+          </figure>
         </div>
 
-        <aside className="border-t border-white/15 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
-          <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-white/72">
-            Estrutura do conteúdo
-          </p>
-          <dl className="mt-4 grid grid-cols-2 gap-x-5 gap-y-4 lg:grid-cols-1">
-            <div>
-              <dt className="text-2xl font-extrabold tracking-[-0.04em] text-white">6</dt>
-              <dd className="mt-0.5 text-sm text-white/72">etapas operacionais</dd>
-            </div>
-            <div>
-              <dt className="text-2xl font-extrabold tracking-[-0.04em] text-white">3</dt>
-              <dd className="mt-0.5 text-sm text-white/72">camadas de orientação</dd>
-            </div>
-            <div>
-              <dt className="text-sm font-bold text-sky-300">Federal · Municipal · Local</dt>
-              <dd className="mt-1 text-sm leading-6 text-white/72">fontes e aplicabilidade identificadas</dd>
-            </div>
-          </dl>
-        </aside>
-      </div>
+        <aside className="editorial-hero__overview" aria-label="Visão geral do percurso">
+          <header>
+            <span>Visão geral do percurso</span>
+            <h2>Da abertura ao acompanhamento da análise</h2>
+          </header>
 
-      <button
-        type="button"
-        onClick={scrollToIntroduction}
-        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.13em] text-white/72 transition-colors hover:text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-300 lg:inline-flex"
-        aria-label="Ir para a apresentação"
-      >
-        Continuar
-        <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
-      </button>
+          <ol className="editorial-hero__steps">
+            {overviewSteps.map((step, index) => (
+              <li key={step.label}>
+                <span className="editorial-hero__step-number" aria-hidden="true">{index + 1}</span>
+                <div>
+                  <strong>{step.label}</strong>
+                  <p>{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="editorial-hero__quick-access">
+            <span>Acesso rápido</span>
+            <div>
+              {quickLinks.map(({ href, label, icon: Icon }) => (
+                <a key={label} href={href}>
+                  <Icon aria-hidden="true" />
+                  <span>{label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <div className="editorial-hero__summary" aria-label="Estrutura do guia">
+          {heroStats.map(({ icon: Icon, label, title, description }) => (
+            <article key={title} className="editorial-hero__stat">
+              <span className="editorial-hero__stat-icon" aria-hidden="true">
+                <Icon />
+              </span>
+              <div>
+                <span className="editorial-hero__stat-label">{label}</span>
+                <strong>{title}</strong>
+                <p>{description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="editorial-hero__orientation" aria-label="Orientação de leitura">
+          <CheckCircle2 aria-hidden="true" />
+          <p>
+            Leia a visão geral da etapa antes do detalhamento. Utilize modelos e checklists depois de compreender
+            a finalidade de cada documento e a regra aplicável.
+          </p>
+        </div>
+      </div>
     </section>
   );
 };

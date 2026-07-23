@@ -1,32 +1,16 @@
+import { Ban, BookOpenCheck, CheckCircle2 } from "lucide-react";
 import type { NormativeRule } from "@/lib/normativeSources";
 import { LegalSourceBadge } from "./LegalSourceBadge";
 import { NormativeReviewStamp } from "./NormativeReviewStamp";
 import { SourceCitation } from "./SourceCitation";
-import { cn } from "@/lib/utils";
 
-type LegalRuleCardProps = {
-  rule: NormativeRule;
-};
-
-export const LegalRuleCard = ({ rule }: LegalRuleCardProps) => {
-  // Determine gradient border matching the normative level
-  const borderLevelClass = 
-    rule.level === "federal" 
-      ? "hover:border-[hsl(var(--gov-federal)/0.4)]"
-      : rule.level === "municipal"
-        ? "hover:border-[hsl(var(--gov-municipal)/0.4)]"
-        : "hover:border-[hsl(var(--gov-local)/0.4)]";
+export const LegalRuleCard = ({ rule }: { rule: NormativeRule }) => {
+  const hasProhibitions = Boolean(rule.prohibitedActions?.length);
 
   return (
-    <article 
-      className={cn(
-        "card-juridico relative flex flex-col justify-between h-full border border-border/60",
-        borderLevelClass
-      )}
-    >
-      <div>
-        {/* Header Stamps & Badges */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/30 pb-3">
+    <article className="legal-rule-card" data-level={rule.level} data-status={rule.status}>
+      <header className="legal-rule-card__header">
+        <div className="legal-rule-card__metadata">
           <LegalSourceBadge level={rule.level} status={rule.status} />
           <NormativeReviewStamp
             lastVerifiedAt={rule.lastVerifiedAt}
@@ -35,56 +19,56 @@ export const LegalRuleCard = ({ rule }: LegalRuleCardProps) => {
           />
         </div>
 
-        {/* Title & Summary */}
-        <div className="mt-4">
-          <h3 className="text-lg font-extrabold tracking-tight text-foreground/95 font-heading">
-            {rule.title}
-          </h3>
-          <p className="mt-2 text-[0.88rem] leading-relaxed text-foreground/72">
-            {rule.summary}
-          </p>
+        <div className="legal-rule-card__title-block">
+          <span>Critério aplicável</span>
+          <h3>{rule.title}</h3>
+          <p>{rule.summary}</p>
         </div>
+      </header>
 
-        {/* Practical Guidance lists */}
-        <div className="mt-6 space-y-4">
-          {/* Actionable To Do (O que fazer) */}
-          <div className="rounded-xl border border-emerald-500/10 bg-emerald-500/[0.02] dark:bg-emerald-500/[0.04] p-4">
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400">
-              Conduta Correta (O que fazer)
-            </p>
-            <ul className="mt-3.5 space-y-2 text-[0.85rem] leading-relaxed text-foreground/80 list-none">
-              {rule.practicalGuidance.map((item) => (
-                <li key={item} className="relative pl-5 before:content-['✓'] before:absolute before:left-0 before:text-emerald-500 before:font-bold">
-                  {item}
-                </li>
+      <div className="legal-rule-card__guidance" data-columns={hasProhibitions ? "2" : "1"}>
+        <section className="legal-rule-card__panel legal-rule-card__panel--correct" aria-label="Conduta correta">
+          <div className="legal-rule-card__panel-heading">
+            <CheckCircle2 aria-hidden="true" />
+            <div>
+              <span>Conduta correta</span>
+              <strong>O que fazer</strong>
+            </div>
+          </div>
+          <ul>
+            {rule.practicalGuidance.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        {hasProhibitions ? (
+          <section className="legal-rule-card__panel legal-rule-card__panel--prohibited" aria-label="Conduta vedada">
+            <div className="legal-rule-card__panel-heading">
+              <Ban aria-hidden="true" />
+              <div>
+                <span>Conduta vedada</span>
+                <strong>O que não fazer</strong>
+              </div>
+            </div>
+            <ul>
+              {rule.prohibitedActions?.map((item) => (
+                <li key={item}>{item}</li>
               ))}
             </ul>
-          </div>
-
-          {/* Actionable To Dont (Não faça) */}
-          {rule.prohibitedActions?.length ? (
-            <div className="prohibition-card">
-              <p className="text-[0.66rem] font-bold uppercase tracking-[0.15em] text-destructive">
-                Conduta Vedada (Não faça)
-              </p>
-              <ul className="mt-3.5 space-y-2 text-[0.85rem] leading-relaxed text-foreground/80 list-none">
-                {rule.prohibitedActions.map((item) => (
-                  <li key={item} className="relative pl-5 before:content-['⛔'] before:absolute before:left-0 before:text-[0.85rem]">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-        </div>
+          </section>
+        ) : null}
       </div>
 
-      {/* Normative Base section */}
-      <div className="mt-6 border-t border-border/40 pt-4">
-        <p className="text-[0.66rem] font-bold uppercase tracking-[0.15em] text-muted-foreground">
-          Base Normativa & Artigos
-        </p>
-        <div className="mt-2.5 flex flex-wrap gap-2">
+      <footer className="legal-rule-card__evidence">
+        <div className="legal-rule-card__evidence-label">
+          <BookOpenCheck aria-hidden="true" />
+          <div>
+            <span>Leitura de auditoria</span>
+            <strong>Base normativa e localização</strong>
+          </div>
+        </div>
+        <div className="legal-rule-card__citations">
           {rule.legalReferences.map((reference) => (
             <SourceCitation
               key={`${reference.sourceId}-${reference.articles?.join(".") ?? ""}-${reference.sections?.join(".") ?? ""}`}
@@ -92,7 +76,7 @@ export const LegalRuleCard = ({ rule }: LegalRuleCardProps) => {
             />
           ))}
         </div>
-      </div>
+      </footer>
     </article>
   );
 };

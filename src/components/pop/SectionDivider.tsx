@@ -2,7 +2,7 @@ import { forwardRef, useCallback } from "react";
 import { Check, Link2, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { IconTile } from "@/components/visual/IconTile";
+import { EditorialChapterVisual } from "@/components/visual/EditorialChapterVisual";
 import { useClipboardAction } from "@/hooks/useClipboardAction";
 import { buildGuideShareUrl } from "@/lib/guideRoutes";
 import type { GuideSectionId } from "@/lib/guideContent";
@@ -16,15 +16,16 @@ interface SectionDividerProps {
 }
 
 const subtitleOverrides: Partial<Record<GuideSectionId, string>> = {
-  "secao-2": "Função dos documentos, regras aplicáveis, organização dos autos e conferência final",
-  "secao-3": "Classificação, inclusão, metadados e identificação dos documentos externos",
-  "secao-4": "Autenticação dos arquivos digitalizados e conferência do registro na árvore",
-  "secao-5": "Documentos internos, assinaturas, conferência final e remessa do processo",
-  "secao-6": "Acompanhamento da análise, diligências e providências posteriores formalmente comunicadas",
+  "secao-1": "Prepare os dados da unidade, autue o processo e preserve o Número Único de Protocolo.",
+  "secao-2": "Compreenda a função das peças, relacione regras e evidências e confira a instrução ao final.",
+  "secao-3": "Classifique a origem, preencha os metadados e identifique cada documento externo na árvore.",
+  "secao-4": "Autentique somente arquivos digitalizados e confirme o registro produzido no sistema.",
+  "secao-5": "Conclua documentos internos, assinaturas, revisão final e remessa à unidade competente.",
+  "secao-6": "Acompanhe a análise, responda diligências formais e preserve a rastreabilidade das providências.",
 };
 
 export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
-  ({ sectionId, number, title, subtitle, icon }, ref) => {
+  ({ sectionId, number, title, subtitle, icon: Icon }, ref) => {
     const { copiedValue, copyText } = useClipboardAction<GuideSectionId>();
     const displaySubtitle = subtitleOverrides[sectionId] ?? subtitle;
 
@@ -38,32 +39,60 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
     }, [copyText, sectionId]);
 
     return (
-      <header ref={ref} className="section-divider-print my-12 overflow-hidden rounded-2xl border border-slate-400 bg-card shadow-sm sm:my-16 dark:border-slate-700">
-        <div className="grid md:grid-cols-[7rem_minmax(0,1fr)]">
-          <div className="flex items-center justify-center border-b border-slate-400 bg-slate-200 px-5 py-7 md:border-b-0 md:border-r md:py-8 dark:border-slate-700 dark:bg-slate-900">
-            <div className="text-center" aria-hidden="true">
-              <span className="block text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">Seção</span>
-              <span className="mt-1 block text-5xl font-extrabold tracking-tight text-blue-700 sm:text-6xl dark:text-sky-300">
-                {number.padStart(2, "0")}
-              </span>
-            </div>
-          </div>
-
-          <div className="px-5 py-6 sm:px-7 sm:py-7 lg:px-8">
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-              <div className="flex min-w-0 items-start gap-4">
-                <IconTile icon={icon} size="lg" />
-                <div className="min-w-0">
-                  <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl lg:text-3xl">{title}</h2>
-                  <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-800 sm:text-base dark:text-slate-200">{displaySubtitle}</p>
-                </div>
+      <header
+        ref={ref}
+        className="section-divider-print editorial-chapter"
+        data-editorial-chapter={sectionId}
+        aria-labelledby={`${sectionId}-chapter-title`}
+      >
+        <div className="editorial-chapter__grid">
+          <div className="editorial-chapter__content">
+            <div className="editorial-chapter__identity">
+              <div className="editorial-chapter__index" aria-hidden="true">
+                <span>{number.padStart(2, "0")}</span>
+                <span>Etapa</span>
               </div>
 
-              <Button type="button" variant="outline" size="sm" onClick={() => void handleCopySectionLink()} className="no-print shrink-0 self-start" aria-label={`Copiar link da seção ${number}: ${title}`}>
-                {copiedValue === sectionId ? <><Check className="text-success" aria-hidden="true" />Link copiado</> : <><Link2 aria-hidden="true" />Compartilhar</>}
-              </Button>
+              <div className="editorial-chapter__label">
+                <span className="editorial-chapter__icon" aria-hidden="true">
+                  <Icon />
+                </span>
+                <span>Capítulo operacional</span>
+              </div>
+            </div>
+
+            <div className="editorial-chapter__meta">
+              <h2 id={`${sectionId}-chapter-title`} className="editorial-chapter__title">
+                {title}
+              </h2>
+              <p className="editorial-chapter__subtitle">{displaySubtitle}</p>
+
+              <div className="editorial-chapter__actions no-print">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => void handleCopySectionLink()}
+                  aria-label={`Copiar link da seção ${number}: ${title}`}
+                  className="editorial-chapter__share"
+                >
+                  {copiedValue === sectionId ? (
+                    <>
+                      <Check aria-hidden="true" />
+                      Link copiado
+                    </>
+                  ) : (
+                    <>
+                      <Link2 aria-hidden="true" />
+                      Copiar link da etapa
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
+
+          <EditorialChapterVisual sectionId={sectionId} />
         </div>
       </header>
     );

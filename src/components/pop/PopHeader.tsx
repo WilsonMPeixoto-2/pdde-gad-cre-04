@@ -19,7 +19,7 @@ interface PopHeaderProps {
 }
 
 const darkActionClass =
-  "border-white/12 bg-transparent text-white/82 hover:border-white/22 hover:bg-white/[0.07] hover:text-white";
+  "border-white/14 bg-white/[0.035] text-white/88 hover:border-teal-300/35 hover:bg-white/[0.08] hover:text-white";
 
 export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: PopHeaderProps) => {
   const [isDark, setIsDark] = useState(() => {
@@ -50,18 +50,18 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
 
   return (
     <TooltipProvider delayDuration={120}>
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/96 text-white backdrop-blur-xl no-print">
-        <div className="mx-auto max-w-[1280px] px-4 py-2.5 sm:px-6">
+      <header className="editorial-topbar sticky top-0 z-50 text-white backdrop-blur-xl no-print">
+        <div className="mx-auto max-w-[1320px] px-4 py-2.5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.6rem] border border-white/12 bg-white/[0.055] text-sky-300">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.62rem] border border-teal-300/20 bg-teal-300/[0.08] text-teal-200">
                 <FileText className="h-4.5 w-4.5 stroke-[1.9]" aria-hidden="true" />
               </div>
               <div className="min-w-0">
                 <p className="truncate text-sm font-bold tracking-[-0.015em] text-white sm:text-[0.98rem]">
                   Guia PDDE no SEI!RIO
                 </p>
-                <div className="hidden items-center gap-2 text-[0.68rem] text-white/68 sm:flex">
+                <div className="hidden items-center gap-2 text-[0.68rem] text-white/66 sm:flex">
                   <span>4ª CRE · GAD</span>
                   <span aria-hidden="true">·</span>
                   <span>{GUIDE_VERSION.shortLabel}</span>
@@ -79,8 +79,8 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                     className={darkActionClass}
                     aria-label="Abrir busca global (Ctrl+K)"
                   >
-                    <Search className="text-sky-300" aria-hidden="true" />
-                    Buscar
+                    <Search className="text-teal-200" aria-hidden="true" />
+                    Buscar no guia
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">Buscar no guia (Ctrl+K)</TooltipContent>
@@ -99,7 +99,7 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                     {isDark ? (
                       <Sun className="text-amber-300" aria-hidden="true" />
                     ) : (
-                      <Moon className="text-sky-300" aria-hidden="true" />
+                      <Moon className="text-teal-200" aria-hidden="true" />
                     )}
                   </Button>
                 </TooltipTrigger>
@@ -114,7 +114,7 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                 className={darkActionClass}
                 aria-label={isPreparingPrint ? "Preparando o guia completo para impressão" : "Imprimir ou salvar em PDF"}
               >
-                <Printer className="text-sky-300" aria-hidden="true" />
+                <Printer className="text-teal-200" aria-hidden="true" />
                 {isPreparingPrint ? "Preparando" : "PDF"}
               </Button>
             </div>
@@ -137,7 +137,7 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                 className={`h-9 w-9 ${darkActionClass}`}
                 aria-label="Abrir busca global"
               >
-                <Search className="text-sky-300" aria-hidden="true" />
+                <Search className="text-teal-200" aria-hidden="true" />
               </Button>
 
               <DropdownMenu>

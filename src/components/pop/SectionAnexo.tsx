@@ -24,7 +24,7 @@ const municipalSourceIds = [
   "seiRioBlocoAssinatura",
 ] as const satisfies readonly NormativeSourceId[];
 
-const SourceCard = ({ sourceId, level }: { sourceId: NormativeSourceId; level: "federal" | "municipal" }) => {
+const SourceCard = ({ sourceId, level, index }: { sourceId: NormativeSourceId; level: "federal" | "municipal"; index: number }) => {
   const source = normativeSources[sourceId];
   const levelLabel = level === "federal" ? "Fonte federal" : "Fonte municipal";
   const Icon = level === "federal" ? Gavel : Scale;
@@ -34,98 +34,85 @@ const SourceCard = ({ sourceId, level }: { sourceId: NormativeSourceId; level: "
       href={source.officialUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-start gap-4 rounded-xl border border-slate-300 bg-slate-50 p-4 transition-colors hover:border-blue-500 hover:bg-blue-50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-900/55 dark:hover:border-sky-500 dark:hover:bg-slate-900"
+      className="editorial-source-card"
+      data-level={level}
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-blue-300 bg-blue-100 text-blue-800 dark:border-blue-800 dark:bg-blue-950/40 dark:text-sky-300">
-        <Icon className="h-5 w-5" aria-hidden="true" />
+      <div className="editorial-source-card__index">{String(index).padStart(2, "0")}</div>
+      <div className="editorial-source-card__icon">
+        <Icon aria-hidden="true" />
       </div>
-      <div className="min-w-0 flex-1">
-        <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-700 dark:text-slate-300">
-          {levelLabel}
-        </p>
-        <p className="mt-1 text-sm font-bold leading-6 text-foreground">{source.title}</p>
-        <p className="mt-1 text-xs leading-5 text-slate-700 dark:text-slate-300">{source.issuingBody}</p>
+      <div className="editorial-source-card__body">
+        <span>{levelLabel}</span>
+        <h4>{source.title}</h4>
+        <p>{source.issuingBody}</p>
       </div>
-      <ExternalLink className="mt-1 h-4 w-4 shrink-0 text-blue-800 dark:text-sky-300" aria-hidden="true" />
+      <ExternalLink aria-hidden="true" />
     </a>
   );
 };
 
 export const SectionAnexo = () => (
-  <section id="anexo" className="scroll-mt-20 space-y-8">
+  <section id="anexo" className="scroll-mt-20 space-y-8 editorial-section" data-editorial-section="references">
     <SectionLead
       eyebrow="Consulta de referência"
       title="Fontes oficiais e aplicabilidade"
-      description="Esta seção reúne a matriz temporal e os documentos oficiais utilizados pelo guia. A explicação das peças permanece na Etapa 2; aqui ficam somente as fontes necessárias para verificar fundamento, vigência e alcance."
+      description="Esta seção reúne a matriz temporal e os documentos oficiais utilizados pelo guia. A explicação das peças permanece na Etapa 2; aqui ficam as fontes necessárias para verificar fundamento, vigência e alcance."
       icon={Scale}
     />
 
-    <section className="section-card" aria-labelledby="applicability-title">
-      <div className="mb-6">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
-          Recorte temporal
-        </p>
-        <h3 id="applicability-title" className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-          Aplicabilidade por exercício
-        </h3>
-        <p className="mt-3 max-w-[72ch] text-sm leading-7 text-slate-700 sm:text-base dark:text-slate-300">
-          Utilize a matriz para identificar quais orientações estão verificadas e quais ainda dependem de validação específica antes de serem aplicadas ao processo.
-        </p>
-      </div>
-      <ApplicabilityMatrix />
-    </section>
-
-    <section className="section-card" aria-labelledby="federal-sources-title">
-      <header className="border-b border-slate-300 pb-4 dark:border-slate-700">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
-          Programa e sistemas federais
-        </p>
-        <h3 id="federal-sources-title" className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-          Fontes federais prioritárias
-        </h3>
-        <p className="mt-2 max-w-[72ch] text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Consulte a resolução-base, seus atos modificadores e as orientações específicas do exercício ou do ambiente federal utilizado.
-        </p>
-      </header>
-      <div className="mt-5 grid gap-3 lg:grid-cols-2">
-        {federalSourceIds.map((sourceId) => (
-          <SourceCard key={sourceId} sourceId={sourceId} level="federal" />
-        ))}
-      </div>
-    </section>
-
-    <section className="section-card" aria-labelledby="municipal-sources-title">
-      <header className="border-b border-slate-300 pb-4 dark:border-slate-700">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-teal-800 dark:text-teal-300">
-          Processo eletrônico municipal
-        </p>
-        <h3 id="municipal-sources-title" className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-          Fontes municipais e guias do SEI!RIO
-        </h3>
-        <p className="mt-2 max-w-[72ch] text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Estas referências orientam o tratamento documental e o uso do sistema, sem substituir as regras federais do PDDE.
-        </p>
-      </header>
-      <div className="mt-5 grid gap-3 lg:grid-cols-2">
-        {municipalSourceIds.map((sourceId) => (
-          <SourceCard key={sourceId} sourceId={sourceId} level="municipal" />
-        ))}
-      </div>
-    </section>
-
-    <aside className="section-card border-l-4 border-l-amber-700" aria-labelledby="local-validation-title">
-      <div className="flex items-start gap-4">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-amber-400 bg-amber-100 text-amber-900 dark:border-amber-700 dark:bg-amber-950/30 dark:text-yellow-300">
-          <MapPinned className="h-5 w-5" aria-hidden="true" />
-        </div>
+    <section className="section-card editorial-block" data-editorial-role="applicability" aria-labelledby="applicability-title">
+      <header className="editorial-block__heading editorial-block__heading--compact">
         <div>
-          <h3 id="local-validation-title" className="text-base font-bold text-foreground">
-            Orientações locais ainda dependem de homologação
-          </h3>
-          <p className="mt-2 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
-            O registro de governança contém {localOperationalRules.length} referências operacionais locais pendentes de fonte ou validação formal. Enquanto permanecerem nesse estado, elas devem ser apresentadas como referência provisória, e não como obrigação institucional definitiva.
-          </p>
+          <p className="editorial-block__eyebrow">Recorte temporal</p>
+          <h3 id="applicability-title">Aplicabilidade por exercício</h3>
+          <p>Utilize a matriz para identificar quais orientações estão verificadas e quais ainda dependem de validação específica antes de serem aplicadas ao processo.</p>
         </div>
+      </header>
+      <div className="editorial-applicability-frame">
+        <ApplicabilityMatrix />
+      </div>
+    </section>
+
+    <section className="section-card editorial-block" data-editorial-role="sources" aria-labelledby="federal-sources-title">
+      <header className="editorial-source-section-heading" data-level="federal">
+        <div>
+          <span>Camada normativa federal</span>
+          <h3 id="federal-sources-title">Fontes federais prioritárias</h3>
+          <p>Consulte a resolução-base, seus atos modificadores e as orientações específicas do exercício ou do ambiente federal utilizado.</p>
+        </div>
+      </header>
+      <div className="editorial-source-card-grid">
+        {federalSourceIds.map((sourceId, index) => (
+          <SourceCard key={sourceId} sourceId={sourceId} level="federal" index={index + 1} />
+        ))}
+      </div>
+    </section>
+
+    <section className="section-card editorial-block" data-editorial-role="sources" aria-labelledby="municipal-sources-title">
+      <header className="editorial-source-section-heading" data-level="municipal">
+        <div>
+          <span>Camada operacional municipal</span>
+          <h3 id="municipal-sources-title">Fontes municipais e guias do SEI!RIO</h3>
+          <p>Estas referências orientam o tratamento documental e o uso do sistema, sem substituir as regras federais do PDDE.</p>
+        </div>
+      </header>
+      <div className="editorial-source-card-grid">
+        {municipalSourceIds.map((sourceId, index) => (
+          <SourceCard key={sourceId} sourceId={sourceId} level="municipal" index={index + 1} />
+        ))}
+      </div>
+    </section>
+
+    <aside className="editorial-validation-notice" aria-labelledby="local-validation-title">
+      <div className="editorial-validation-notice__icon">
+        <MapPinned aria-hidden="true" />
+      </div>
+      <div>
+        <span>Governança e homologação</span>
+        <h3 id="local-validation-title">Orientações locais ainda dependem de fonte formal</h3>
+        <p>
+          O registro de governança contém {localOperationalRules.length} referências operacionais locais pendentes de fonte ou validação formal. Enquanto permanecerem nesse estado, elas devem ser apresentadas como referência provisória, e não como obrigação institucional definitiva.
+        </p>
       </div>
     </aside>
   </section>

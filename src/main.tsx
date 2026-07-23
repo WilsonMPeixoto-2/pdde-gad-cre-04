@@ -14,5 +14,15 @@ import "./index.css";
 import "./styles/institutional-polish.css";
 import "./styles/light-contrast.css";
 import "./styles/wcag-warning.css";
+import "./styles/editorial-contemporary.css";
+import "./styles/editorial-semantic.css";
+import "./styles/editorial-accessibility.css";
+import "./styles/editorial-reference-system.css";
+import "./styles/editorial-reference-components.css";
+import "./styles/editorial-reference-support.css";
+import "./styles/editorial-reference-fixes.css";
+import "./styles/editorial-fidelity-v4.css";
+import "./styles/editorial-fidelity-v4-fixes.css";
+import "./styles/editorial-fidelity-v4-title.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

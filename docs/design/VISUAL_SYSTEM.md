@@ -1,137 +1,233 @@
-# Sistema Visual Institucional
+# Sistema Visual Editorial do Guia PDDE - v4
 
-Este documento orienta a composição visual do Guia PDDE no SEI!RIO e reduz a proliferação de estilos isolados, efeitos decorativos e componentes inconsistentes.
+Este documento define a linguagem visual e informacional do Guia PDDE no SEI!RIO. A versão v4 trata as referências aprovadas como **contrato composicional**, não como inspiração genérica.
 
-## Direção estética
+## 1. Direção vinculante
 
-O projeto deve parecer um guia institucional digital contemporâneo: claro, sóbrio, legível e tecnicamente confiável. A interface não deve competir com o conteúdo normativo nem assumir estética de painel comercial, aplicativo promocional ou landing page genérica.
+O produto funciona como publicação digital institucional orientadora, combinando:
 
-## Tipografia
+- sidebar navy persistente;
+- capa integrada com fotografia contextual;
+- visão geral do percurso e de cada etapa;
+- conteúdo modular de alta encontrabilidade;
+- tipografia confortável;
+- cor semântica;
+- rastreabilidade normativa;
+- equivalência entre desktop, mobile, modo escuro e impressão.
+
+Evitar:
+
+- títulos monumentais que reduzam a área útil;
+- painéis vazios;
+- cartão usado apenas como ornamento;
+- imagens borradas ou ampliadas além da resolução útil;
+- sobreposição de controles e conteúdo;
+- texto pequeno para aumentar artificialmente a densidade.
+
+## 2. Princípios
+
+1. **Conteúdo antes da forma:** a estrutura visual nasce da tarefa do leitor.
+2. **Função antes da repetição:** componentes semelhantes representam finalidades semelhantes.
+3. **Fidelidade composicional:** proporção, densidade, escala e relação entre os blocos seguem as referências aprovadas.
+4. **Camadas de leitura:** síntese, desenvolvimento e evidência normativa são reconhecíveis.
+5. **Cor semântica:** cor informa natureza ou estado e nunca atua sozinha.
+6. **Densidade equilibrada:** informação suficiente sem vazios arbitrários ou compressão tipográfica.
+7. **Visualidade funcional:** fotografia, ícone, tabela ou diagrama precisam orientar ou explicar.
+8. **Acessibilidade por construção:** legibilidade e navegação não dependem de correções posteriores.
+
+## 3. Tipografia
 
 | Função | Família | Uso |
 |---|---|---|
-| Corpo e interface | Public Sans | Texto corrido, tabelas, botões, metadados e controles |
-| Títulos e hierarquia | Plus Jakarta Sans | H1, títulos de seção, cabeçalhos e números editoriais |
-| Recurso editorial | Source Serif 4 | Citações, cartas, epígrafes e trechos que realmente exijam contraste editorial |
-| Dados e códigos | Família monoespaçada do sistema | NUP, CNPJ, códigos, identificadores e exemplos técnicos |
+| Corpo e interface | Public Sans | Texto, tabelas, controles e metadados |
+| Hierarquia de interface | Plus Jakarta Sans | Leads, módulos, navegação e ações |
+| Títulos editoriais | Source Serif 4 | Capa e abertura das etapas |
+| Códigos | Monoespaçada do sistema | NUP, CNPJ e identificadores |
+
+Escala mínima:
+
+- corpo: 16 px;
+- texto de destaque: 17 a 18 px;
+- tabela: 15 px;
+- rótulo: 12 px;
+- título interno: 30 a 44 px conforme a hierarquia;
+- título da capa: 48 a 67 px no desktop.
 
 Regras:
 
-- não justificar texto em tela;
-- limitar texto corrido a aproximadamente 70 caracteres por linha;
-- usar entrelinha generosa, mas não superior ao necessário;
-- evitar tracking excessivo em textos longos;
-- reservar caixa alta para rótulos curtos.
+- instruções, resumos, cartões e tabelas usam alinhamento à esquerda;
+- justificação somente em textos formais longos, quando não produzir rios tipográficos;
+- caixa alta restrita a rótulos curtos;
+- título principal usa três linhas explícitas;
+- nenhuma palavra pode ser cortada ou encoberta.
 
-## Espaçamento
+## 4. Paleta semântica
 
-A escala recomendada utiliza múltiplos próximos de 4 px:
+| Família | Função |
+|---|---|
+| Navy | autoridade, títulos e estrutura |
+| Azul | navegação, informação técnica e referências federais |
+| Teal | percurso, orientação, conformidade e atendimento |
+| Verde | resultado confirmado e boa prática |
+| Âmbar | cautela, pendência e validação |
+| Vermelho | vedação, impedimento e não conformidade |
+| Violeta | análise, classificação e auditoria |
+| Slate | contexto, metadados e neutralidade |
 
-- 4 px: microajustes;
-- 8 px: relação entre ícone e texto curto;
-- 12 px: agrupamentos compactos;
-- 16 px: espaçamento interno padrão;
-- 24 px: separação entre blocos relacionados;
-- 32 px: separação entre grupos principais;
-- 48–64 px: transição entre seções.
+A cor de superfície, a cor de identidade e a cor tipográfica são independentes. O modo escuro utiliza variantes luminosas próprias.
 
-Não usar margens diferentes sem função clara. Componentes equivalentes devem manter o mesmo espaçamento interno.
+## 5. Shell institucional
 
-## Cores
+### Desktop
 
-- azul institucional: ações, navegação e destaques principais;
-- azul-céu: acento pontual em fundo escuro;
-- verde: somente estados concluídos ou sucesso;
-- âmbar: cautela e validação pendente;
-- vermelho: erro ou bloqueio real;
-- grafite e cinzas frios: texto, bordas e superfícies neutras.
+- sidebar fixa com aproximadamente 248 px;
+- capa, topbar e conteúdo deslocados pela largura da sidebar;
+- topbar participa do fluxo e não cobre o conteúdo;
+- modo guiado ocupa a área inferior da sidebar;
+- conteúdo central limitado a aproximadamente 1500 px.
 
-Evitar:
+### Mobile
 
-- gradientes multicoloridos em elementos pequenos;
-- texto com gradiente;
-- cores decorativas sem significado semântico;
-- contraste baseado apenas em opacidade muito baixa.
+- sidebar convertida em painel sobreposto;
+- conteúdo em uma coluna;
+- corpo mínimo de 16 px;
+- controles flutuantes reduzidos ou omitidos;
+- ausência de overflow horizontal em 390 px.
 
-## Superfícies
+## 6. Capa
 
-Cartões e painéis devem usar:
+`HeroCover` combina:
 
-- raio entre 9 e 17 px;
-- borda visível e discreta;
-- sombra curta e baixa;
-- fundo predominantemente plano;
-- elevação apenas quando necessário para hierarquia.
+- identificação institucional;
+- dois marcadores de escopo;
+- título em três linhas deliberadas;
+- fotografia contextual;
+- legenda integrada;
+- visão geral com cinco movimentos;
+- três acessos rápidos;
+- quatro cartões de metadados;
+- orientação final de leitura.
 
-Evitar:
+As duas primeiras linhas do título usam navy. `PDDE no SEI!RIO` usa teal.
 
-- arredondamento de 24–32 px em todos os componentes;
-- múltiplas sombras simultâneas;
-- máscaras, brilhos, textura e ruído em cartões comuns;
-- movimento vertical no hover de blocos de leitura.
+A fotografia:
 
-## Botões
+- não ultrapassa a resolução natural;
+- não cobre texto;
+- não recebe filtros agressivos;
+- possui texto alternativo;
+- é omitida no PDF.
 
-Os botões devem:
+## 7. Aberturas das etapas
 
-- ter altura entre 36 e 44 px;
-- usar raio aproximado de 10 px;
-- manter ícones com stroke consistente;
-- apresentar foco visível;
-- mudar cor, borda ou sombra no hover, sem saltos ou rotações.
+`SectionDivider` e `EditorialChapterVisual` produzem um cabeçalho em dois painéis.
 
-Botões arredondados em formato de cápsula devem ser reservados a filtros ou estados muito compactos.
+Painel de identidade:
 
-## Ícones
+- número;
+- rótulo;
+- título;
+- síntese;
+- ação de compartilhar.
 
-Todos os ícones de interface devem utilizar Lucide e, preferencialmente, o componente `IconTile` quando inseridos em cartões ou cabeçalhos.
+Painel de visão geral:
 
-- tamanho visual consistente;
-- stroke entre 1,8 e 2;
-- moldura neutra ou semântica;
-- sem pulsação contínua;
-- sem rotação decorativa no hover.
+- cinco movimentos;
+- resultado esperado;
+- ponto de atenção.
 
-## Etapas e losangos
+Não são usadas ilustrações decorativas. No mobile, o mapa se torna uma sequência vertical. No PDF, o mapa é removido e o número ocupa coluna própria, sem sobreposição com o título.
 
-O componente `StepDiamond` é a única representação gráfica dos números de etapa em formato de losango.
+## 8. Famílias de componentes
 
-Estados:
+| Pergunta | Componente |
+|---|---|
+| Para que serve a peça? | Função documental |
+| Qual classificação aplicar? | Comparação e classificação |
+| Em que ordem executar? | Processo e sequência |
+| O que escolher? | Decisão e recomendação |
+| O que é permitido ou vedado? | Regra, conduta e evidência |
+| O que falta? | Checklist e controle |
+| Onde buscar ajuda? | Atendimento por finalidade |
+| Qual fonte se aplica? | Camada normativa e aplicabilidade |
 
-- azul: etapa atual ou disponível;
-- verde: concluída;
-- cinza: ainda indisponível.
+Os módulos não podem parecer equivalentes quando respondem a perguntas diferentes.
 
-Regras de diagramação:
+## 9. Referências visuais do SEI!RIO
 
-- conteúdo interno deve permanecer horizontal;
-- conectores devem alinhar ao centro geométrico do losango;
-- rótulos devem ficar abaixo, com largura controlada;
-- em telas menores, a grade deve quebrar em 3 ou 2 colunas sem conectores atravessando linhas.
+Comandos e escolhas do sistema são apresentados por `SystemCommandPreview`:
 
-## Organização dos arquivos
+- mockups HTML/CSS nítidos;
+- ícones Lucide;
+- nenhum bitmap de baixa resolução;
+- sem controles interativos falsos;
+- descrição acessível no elemento raiz.
+
+## 10. Navegação e controles
+
+- navegação agrupada em visão geral, etapas e apoio;
+- item ativo com trilho e contraste;
+- busca, links diretos e âncoras preservados;
+- botão de modo guiado não cobre os módulos;
+- compartilhamento de etapa possui rótulo textual;
+- áreas de toque mantêm dimensão adequada.
+
+## 11. Modo escuro
+
+- fundo navy/grafite;
+- títulos quase brancos;
+- corpo cinza-azulado claro;
+- variantes luminosas de todas as famílias semânticas;
+- bordas mais perceptíveis;
+- sombras reduzidas;
+- fotografia sem filtro global.
+
+## 12. Impressão e PDF
+
+A impressão é sempre clara.
+
+- sidebar, topbar, fotografia, mapas e ações são removidos;
+- capítulos iniciam de forma previsível;
+- número e título usam colunas separadas;
+- cabeçalhos não quebram internamente;
+- rótulos pseudoeditoriais da tela são removidos;
+- rodapé final duplicado é omitido;
+- texto permanece extraível;
+- arquivo final permanece compacto.
+
+A homologação v4 produziu PDF A4 com 29 páginas e aproximadamente 0,83 MB.
+
+## 13. Arquivos da camada v4
 
 ```text
 src/
   components/
-    ui/           componentes básicos de interação
-    visual/       primitivas visuais reutilizáveis
-    pop/          composição e conteúdo das seções do guia
+    visual/
+      EditorialChapterVisual.tsx
+      SystemCommandPreview.tsx
+    pop/
+      HeroCover.tsx
+      SectionDivider.tsx
+      SectionThree.tsx
   styles/
-    institutional-polish.css
+    editorial-fidelity-v4.css
+    editorial-fidelity-v4-fixes.css
+    editorial-fidelity-v4-title.css
+e2e/
+  editorial-fidelity.spec.ts
 ```
 
-Componentes visuais genéricos não devem ser criados dentro de `components/pop`. Estilos globais de refinamento não devem ser adicionados diretamente em componentes por meio de grandes objetos `style`.
+## 14. Critérios de revisão
 
-## Critérios de revisão visual
+Antes da publicação:
 
-Antes da publicação, conferir:
-
-- alinhamento de ícones, títulos e ações;
-- hierarquia tipográfica consistente;
-- contraste claro nos modos claro e escuro;
-- ausência de texto justificado;
-- responsividade dos losangos e tabelas;
-- foco visível em todos os controles;
-- coerência entre capa, divisores, cartões e modo guiado;
-- impressão sem fundos ou efeitos desnecessários.
+- comparar a capa com as referências aprovadas;
+- verificar título e fotografia em desktop e mobile;
+- inspecionar todas as aberturas de etapa;
+- confirmar cinco movimentos por mapa;
+- revisar Etapa 1, funções documentais e tabela de classificação;
+- verificar os dois mockups vetoriais;
+- executar Axe claro, escuro e mobile;
+- confirmar ausência de overflow;
+- renderizar o PDF em ferramenta independente;
+- executar `npm run check:ci` integralmente.

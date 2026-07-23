@@ -3,7 +3,6 @@ import { Check, Link2, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { EditorialChapterVisual } from "@/components/visual/EditorialChapterVisual";
-import { IconTile } from "@/components/visual/IconTile";
 import { useClipboardAction } from "@/hooks/useClipboardAction";
 import { buildGuideShareUrl } from "@/lib/guideRoutes";
 import type { GuideSectionId } from "@/lib/guideContent";
@@ -17,15 +16,16 @@ interface SectionDividerProps {
 }
 
 const subtitleOverrides: Partial<Record<GuideSectionId, string>> = {
-  "secao-2": "Função dos documentos, regras aplicáveis, organização dos autos e conferência final",
-  "secao-3": "Classificação, inclusão, metadados e identificação dos documentos externos",
-  "secao-4": "Autenticação dos arquivos digitalizados e conferência do registro na árvore",
-  "secao-5": "Documentos internos, assinaturas, conferência final e remessa do processo",
-  "secao-6": "Acompanhamento da análise, diligências e providências posteriores formalmente comunicadas",
+  "secao-1": "Prepare os dados da unidade, autue o processo e preserve o Número Único de Protocolo.",
+  "secao-2": "Compreenda a função das peças, relacione regras e evidências e confira a instrução ao final.",
+  "secao-3": "Classifique a origem, preencha os metadados e identifique cada documento externo na árvore.",
+  "secao-4": "Autentique somente arquivos digitalizados e confirme o registro produzido no sistema.",
+  "secao-5": "Conclua documentos internos, assinaturas, revisão final e remessa à unidade competente.",
+  "secao-6": "Acompanhe a análise, responda diligências formais e preserve a rastreabilidade das providências.",
 };
 
 export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
-  ({ sectionId, number, title, subtitle, icon }, ref) => {
+  ({ sectionId, number, title, subtitle, icon: Icon }, ref) => {
     const { copiedValue, copyText } = useClipboardAction<GuideSectionId>();
     const displaySubtitle = subtitleOverrides[sectionId] ?? subtitle;
 
@@ -47,17 +47,21 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
       >
         <div className="editorial-chapter__grid">
           <div className="editorial-chapter__content">
-            <div className="editorial-chapter__index" aria-hidden="true">
-              <span>{number.padStart(2, "0")}</span>
-              <span>Etapa</span>
+            <div className="editorial-chapter__identity">
+              <div className="editorial-chapter__index" aria-hidden="true">
+                <span>{number.padStart(2, "0")}</span>
+                <span>Etapa</span>
+              </div>
+
+              <div className="editorial-chapter__label">
+                <span className="editorial-chapter__icon" aria-hidden="true">
+                  <Icon />
+                </span>
+                <span>Capítulo operacional</span>
+              </div>
             </div>
 
             <div className="editorial-chapter__meta">
-              <div className="editorial-chapter__label">
-                <IconTile icon={icon} size="lg" />
-                <span>Capítulo operacional</span>
-              </div>
-
               <h2 id={`${sectionId}-chapter-title`} className="editorial-chapter__title">
                 {title}
               </h2>
@@ -80,7 +84,7 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
                   ) : (
                     <>
                       <Link2 aria-hidden="true" />
-                      Copiar link desta etapa
+                      Copiar link da etapa
                     </>
                   )}
                 </Button>

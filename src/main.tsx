@@ -23,5 +23,6 @@ import "./styles/editorial-reference-support.css";
 import "./styles/editorial-reference-fixes.css";
 import "./styles/editorial-fidelity-v4.css";
 import "./styles/editorial-fidelity-v4-fixes.css";
+import "./styles/editorial-fidelity-v4-title.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

@@ -66,7 +66,7 @@ export const SectionFive = () => (
         </div>
         <div>
           <p className="editorial-block__eyebrow">Critério de inclusão</p>
-          <h3 id="signature-block-definition-title">O que integra o bloco de assinatura</h3>
+          <h3 id="signature-block-definition-title">Função do bloco de assinatura</h3>
           <p>O bloco reúne documentos internos que precisam de assinatura eletrônica. Arquivos externos permanecem fora dele, ainda que façam parte do mesmo processo.</p>
         </div>
       </header>

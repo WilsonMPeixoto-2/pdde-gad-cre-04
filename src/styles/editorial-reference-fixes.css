@@ -193,6 +193,8 @@ body,
     display: block !important;
     width: 100% !important;
     max-width: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
     break-after: avoid;
   }
 

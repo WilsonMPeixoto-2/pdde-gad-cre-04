@@ -6,9 +6,8 @@ import {
   FolderTree,
   Upload,
 } from "lucide-react";
-import seiChooseDocType from "@/assets/sei-choose-doc-type.png";
-import seiIncludeDocIcon from "@/assets/sei-include-doc-icon.png";
 import { SectionLead } from "@/components/visual/SectionLead";
+import { SystemCommandPreview } from "@/components/visual/SystemCommandPreview";
 import { externalResources } from "@/lib/externalResources";
 import { Callout } from "./Callout";
 
@@ -157,7 +156,7 @@ export const SectionThree = () => (
           </ul>
         </article>
         <Callout variant="info" icon={AlertCircle} title="Síntese operacional">
-          <p className="text-sm leading-7">
+          <p>
             Papel escaneado é documento digitalizado. Arquivo criado ou recebido eletronicamente é nato-digital. Essa classificação deve ser definida antes de avançar para a autenticação.
           </p>
         </Callout>
@@ -182,13 +181,13 @@ export const SectionThree = () => (
               <p>{step.description}</p>
               {index === 0 ? (
                 <figure className="editorial-system-reference">
-                  <img src={seiIncludeDocIcon} alt="Ícone Incluir Documento no SEI!RIO" width={177} height={32} />
-                  <figcaption>Referência visual do comando no sistema.</figcaption>
+                  <SystemCommandPreview variant="include-document" />
+                  <figcaption>Referência vetorial do comando na barra de ações do processo.</figcaption>
                 </figure>
               ) : null}
               {index === 1 ? (
                 <figure className="editorial-system-reference editorial-system-reference--wide">
-                  <img src={seiChooseDocType} alt="Seleção do tipo Documento Externo no SEI!RIO" width={448} height={187} />
+                  <SystemCommandPreview variant="external-document" />
                   <figcaption>Selecione Documento Externo quando a peça não tiver sido produzida no SEI!RIO.</figcaption>
                 </figure>
               ) : null}

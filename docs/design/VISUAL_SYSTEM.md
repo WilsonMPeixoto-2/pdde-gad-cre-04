@@ -1,137 +1,260 @@
-# Sistema Visual Institucional
+# Sistema Visual Editorial Contemporâneo
 
-Este documento orienta a composição visual do Guia PDDE no SEI!RIO e reduz a proliferação de estilos isolados, efeitos decorativos e componentes inconsistentes.
+Este documento orienta a composição visual do Guia PDDE no SEI!RIO. O sistema busca conciliar institucionalidade, leitura longa, clareza operacional, presença visual e consistência entre tela, mobile, modo escuro e impressão.
 
-## Direção estética
+## 1. Direção de arte
 
-O projeto deve parecer um guia institucional digital contemporâneo: claro, sóbrio, legível e tecnicamente confiável. A interface não deve competir com o conteúdo normativo nem assumir estética de painel comercial, aplicativo promocional ou landing page genérica.
+O produto deve funcionar como uma **publicação digital institucional orientadora**. Não deve parecer um dashboard comercial, uma landing page promocional ou uma coleção de cartões independentes.
 
-## Tipografia
+A linguagem aprovada combina:
+
+- composição editorial contemporânea;
+- fotografia institucional nas grandes aberturas;
+- ilustrações e diagramas nas etapas operacionais;
+- base azul institucional e verde/teal;
+- títulos editoriais fortes;
+- superfícies claras e densidade controlada;
+- navegação funcional, sem competir com o conteúdo.
+
+## 2. Princípios
+
+1. **Conteúdo antes do ornamento:** todo elemento visual deve orientar, contextualizar, organizar ou sinalizar.
+2. **Hierarquia estável:** capa, capítulo, lead interno, conteúdo, regra, alerta, ferramenta e próxima ação devem ser visualmente distinguíveis.
+3. **Cores com significado:** azul estrutura; teal orientação e progresso; verde sucesso; âmbar cautela; vermelho erro ou vedação.
+4. **Leitura longa confortável:** texto alinhado à esquerda, largura controlada e entrelinha consistente.
+5. **Visualidade funcional:** imagens devem apoiar a compreensão ou o ritmo editorial, nunca ocupar espaço apenas para decorar.
+6. **Equivalência entre modos:** a estrutura e o significado devem permanecer claros no modo escuro, mobile e impressão.
+
+## 3. Tipografia
 
 | Função | Família | Uso |
 |---|---|---|
 | Corpo e interface | Public Sans | Texto corrido, tabelas, botões, metadados e controles |
-| Títulos e hierarquia | Plus Jakarta Sans | H1, títulos de seção, cabeçalhos e números editoriais |
-| Recurso editorial | Source Serif 4 | Citações, cartas, epígrafes e trechos que realmente exijam contraste editorial |
-| Dados e códigos | Família monoespaçada do sistema | NUP, CNPJ, códigos, identificadores e exemplos técnicos |
+| Hierarquia de interface | Plus Jakarta Sans | Leads, cabeçalhos internos, navegação e ações |
+| Títulos editoriais | Source Serif 4 | Capa, aberturas de capítulo e citações |
+| Dados e códigos | Família monoespaçada do sistema | NUP, CNPJ, códigos e identificadores |
 
 Regras:
 
 - não justificar texto em tela;
-- limitar texto corrido a aproximadamente 70 caracteres por linha;
-- usar entrelinha generosa, mas não superior ao necessário;
-- evitar tracking excessivo em textos longos;
-- reservar caixa alta para rótulos curtos.
+- limitar texto corrido a aproximadamente 70–72 caracteres por linha;
+- usar caixa alta apenas em rótulos curtos;
+- evitar tracking elevado em frases completas;
+- títulos editoriais podem usar tracking negativo moderado;
+- controles devem possuir tamanho tipográfico deliberado, sem depender do padrão do navegador.
 
-## Espaçamento
+Escala principal:
 
-A escala recomendada utiliza múltiplos próximos de 4 px:
+- capa: `clamp(3rem, 7vw, 6.35rem)`;
+- capítulo: `clamp(2.15rem, 4vw, 3.9rem)`;
+- lead interno: `clamp(1.65rem, 2.8vw, 2.45rem)`;
+- corpo: `1rem` a `1.08rem`, entrelinha aproximada de `1.7`;
+- rótulos: `0.72rem` a `0.78rem`.
 
-- 4 px: microajustes;
-- 8 px: relação entre ícone e texto curto;
-- 12 px: agrupamentos compactos;
-- 16 px: espaçamento interno padrão;
-- 24 px: separação entre blocos relacionados;
-- 32 px: separação entre grupos principais;
-- 48–64 px: transição entre seções.
+## 4. Paleta
 
-Não usar margens diferentes sem função clara. Componentes equivalentes devem manter o mesmo espaçamento interno.
+Tokens centrais da camada editorial:
 
-## Cores
+| Token | Finalidade |
+|---|---|
+| `--editorial-navy` | estrutura, títulos, ações principais |
+| `--editorial-navy-deep` | títulos de maior contraste e fundos escuros |
+| `--editorial-blue` | links, ações e estados ativos |
+| `--editorial-teal` | orientação, progresso e acento editorial |
+| `--editorial-ink` | texto principal |
+| `--editorial-copy` | texto corrido |
+| `--editorial-paper` | fundo editorial |
+| `--editorial-surface` | superfícies de conteúdo |
+| `--editorial-rule` | bordas e divisores |
 
-- azul institucional: ações, navegação e destaques principais;
-- azul-céu: acento pontual em fundo escuro;
-- verde: somente estados concluídos ou sucesso;
-- âmbar: cautela e validação pendente;
-- vermelho: erro ou bloqueio real;
-- grafite e cinzas frios: texto, bordas e superfícies neutras.
+Regras semânticas:
+
+- azul: estrutura, navegação e ação;
+- teal: orientação, etapa e progresso;
+- verde: conclusão ou sucesso confirmado;
+- âmbar: atenção, cautela e validação pendente;
+- vermelho: erro, bloqueio ou vedação real;
+- cinzas frios: superfícies neutras e metadados.
+
+O teal do modo claro deve manter contraste WCAG AA para texto pequeno. O modo escuro utiliza variante mais luminosa e independente.
 
 Evitar:
 
+- texto em gradiente;
 - gradientes multicoloridos em elementos pequenos;
-- texto com gradiente;
-- cores decorativas sem significado semântico;
-- contraste baseado apenas em opacidade muito baixa.
+- cor decorativa sem significado;
+- contraste baseado apenas em opacidade baixa;
+- usar verde ou vermelho para conteúdo neutro.
 
-## Superfícies
+## 5. Capa
 
-Cartões e painéis devem usar:
+A capa é implementada por `HeroCover` e pelas classes `.editorial-hero*`.
 
-- raio entre 9 e 17 px;
-- borda visível e discreta;
-- sombra curta e baixa;
-- fundo predominantemente plano;
-- elevação apenas quando necessário para hierarquia.
+Estrutura:
 
-Evitar:
+- identificação institucional curta;
+- H1 editorial;
+- descrição objetiva;
+- ação primária;
+- fotografia contextual;
+- legenda editorial;
+- faixa inferior com síntese da estrutura.
 
-- arredondamento de 24–32 px em todos os componentes;
-- múltiplas sombras simultâneas;
-- máscaras, brilhos, textura e ruído em cartões comuns;
-- movimento vertical no hover de blocos de leitura.
+A fotografia deve:
 
-## Botões
+- ter função contextual;
+- possuir texto alternativo;
+- manter proporção estável;
+- permanecer próxima de sua resolução nativa;
+- não receber filtro cromático agressivo;
+- ser ocultada na impressão.
 
-Os botões devem:
+## 6. Aberturas de capítulo
 
-- ter altura entre 36 e 44 px;
-- usar raio aproximado de 10 px;
-- manter ícones com stroke consistente;
-- apresentar foco visível;
-- mudar cor, borda ou sombra no hover, sem saltos ou rotações.
+`SectionDivider` funciona como abertura de capítulo e utiliza:
 
-Botões arredondados em formato de cápsula devem ser reservados a filtros ou estados muito compactos.
+- número editorial;
+- ícone em `IconTile`;
+- título em Source Serif 4;
+- subtítulo;
+- ação de compartilhamento;
+- ilustração temática associada por `editorialMediaBySection`.
 
-## Ícones
+A abertura deve usar `data-editorial-chapter` e mídia com `data-editorial-media="chapter"` para testes e auditorias.
 
-Todos os ícones de interface devem utilizar Lucide e, preferencialmente, o componente `IconTile` quando inseridos em cartões ou cabeçalhos.
+`SectionLead` é o segundo nível hierárquico. Ele não repete a imagem do capítulo. Usa trilho teal, ícone, rótulo curto, título em Plus Jakarta Sans e descrição.
 
-- tamanho visual consistente;
-- stroke entre 1,8 e 2;
-- moldura neutra ou semântica;
-- sem pulsação contínua;
-- sem rotação decorativa no hover.
+## 7. Imagens e ilustrações
 
-## Etapas e losangos
+Ativos ficam em `public/editorial/` e são catalogados em `src/lib/editorialMedia.ts`.
 
-O componente `StepDiamond` é a única representação gráfica dos números de etapa em formato de losango.
+Tipos:
 
-Estados:
+- `hero-pdde.webp`: fotografia da capa;
+- `chapter-process.svg`: abertura e fluxo processual;
+- `chapter-documents.svg`: organização e inclusão documental;
+- `chapter-authentication.svg`: autenticação e segurança;
+- `chapter-follow-up.svg`: análise, acompanhamento e suporte.
 
-- azul: etapa atual ou disponível;
-- verde: concluída;
-- cinza: ainda indisponível.
+Regras:
 
-Regras de diagramação:
+- não rasterizar textos de interface dentro das imagens;
+- usar dimensões explícitas em `<img>`;
+- usar `loading="lazy"` abaixo da dobra;
+- usar `fetchPriority="high"` apenas na imagem principal da capa;
+- manter alternativas textuais descritivas;
+- não reutilizar imagem temática em contexto incompatível.
 
-- conteúdo interno deve permanecer horizontal;
-- conectores devem alinhar ao centro geométrico do losango;
-- rótulos devem ficar abaixo, com largura controlada;
-- em telas menores, a grade deve quebrar em 3 ou 2 colunas sem conectores atravessando linhas.
+## 8. Navegação
 
-## Organização dos arquivos
+A navegação lateral é agrupada em:
+
+1. Visão geral;
+2. Etapas do processo;
+3. Apoio e referências.
+
+Cada grupo possui `data-sidebar-group`. O item ativo utiliza trilho teal, número, ícone e contraste suficiente. O progresso de leitura permanece discreto.
+
+No mobile:
+
+- o painel deve ocupar até 90% da largura;
+- o overlay deve impedir interação com a página;
+- `Escape` fecha o painel;
+- `inert` é aplicado quando fechado;
+- áreas de toque devem permanecer adequadas.
+
+## 9. Superfícies e cartões
+
+Cartões são reservados a unidades informacionais reais: regra, documento, ferramenta, modelo, checklist ou ação.
+
+Regras:
+
+- evitar cartão dentro de cartão;
+- wrappers que apenas agrupam cartões devem usar composição aberta;
+- bordas devem ser mais informativas que sombras;
+- blocos de leitura não devem saltar no hover;
+- interativos podem alterar borda, fundo ou sombra, sem rotação;
+- raio padrão entre 10 e 22 px conforme escala do bloco.
+
+## 10. Componentes semânticos
+
+Os blocos existentes são harmonizados pela camada `editorial-semantic.css`:
+
+- azul: informação e fundamento;
+- teal: orientação e conferência;
+- âmbar: atenção;
+- vermelho: erro ou vedação;
+- verde: sucesso ou conclusão.
+
+Cor nunca é o único sinal. Ícone, título ou rótulo devem acompanhar o estado.
+
+As transições de etapa utilizam composição azul/teal aberta, sem borda lateral pesada nem sombra promocional.
+
+## 11. Modo escuro
+
+O modo escuro usa:
+
+- navy profundo e grafite azulado;
+- texto principal quase branco;
+- texto secundário cinza-azulado;
+- teal luminoso para orientação;
+- imagens sem filtro global;
+- bordas mais perceptíveis e sombras reduzidas.
+
+Textos `primary` sobre superfícies escuras possuem correção específica de contraste em `editorial-accessibility.css`.
+
+## 12. Impressão
+
+A impressão deve ser clara mesmo quando acionada no modo escuro.
+
+Regras finais:
+
+- redefinir variáveis escuras para equivalentes claros;
+- remover imagens e fundos gráficos;
+- remover gradientes, sombras, filtros e animações;
+- restaurar explicitamente o primeiro bloco da capa;
+- preservar título, descrição, capítulos e leads internos;
+- ocultar ações, navegação e mídias decorativas;
+- iniciar cada capítulo em nova página;
+- usar ajuste cromático econômico;
+- manter arquivo final compacto.
+
+A validação de 23/07/2026 reduziu o PDF gerado de aproximadamente 101 MB para 0,78 MB e eliminou ruído cromático e barras escuras.
+
+## 13. Organização dos arquivos
 
 ```text
 src/
   components/
     ui/           componentes básicos de interação
     visual/       primitivas visuais reutilizáveis
-    pop/          composição e conteúdo das seções do guia
+    pop/          composição e conteúdo das seções
+  lib/
+    editorialMedia.ts
   styles/
     institutional-polish.css
+    editorial-contemporary.css
+    editorial-semantic.css
+    editorial-accessibility.css
+public/
+  editorial/
 ```
 
-Componentes visuais genéricos não devem ser criados dentro de `components/pop`. Estilos globais de refinamento não devem ser adicionados diretamente em componentes por meio de grandes objetos `style`.
+Componentes visuais genéricos não devem ser criados dentro de `components/pop`. Estilos transversais devem permanecer nas camadas de `src/styles`.
 
-## Critérios de revisão visual
+## 14. Critérios de revisão
 
-Antes da publicação, conferir:
+Antes da publicação, verificar:
 
-- alinhamento de ícones, títulos e ações;
-- hierarquia tipográfica consistente;
-- contraste claro nos modos claro e escuro;
-- ausência de texto justificado;
-- responsividade dos losangos e tabelas;
-- foco visível em todos os controles;
-- coerência entre capa, divisores, cartões e modo guiado;
-- impressão sem fundos ou efeitos desnecessários.
+- capa desktop e mobile;
+- abertura de capítulo clara e escura;
+- hierarquia do `SectionLead`;
+- grupos da navegação;
+- contraste Axe nos modos claro e escuro;
+- ausência de rolagem horizontal mobile;
+- carregamento das imagens;
+- compartilhamento de seção;
+- impressão iniciada no modo claro e escuro;
+- tamanho e renderização do PDF;
+- integridade das âncoras, busca, modo guiado e ferramentas;
+- `npm run check:ci` integralmente aprovado.

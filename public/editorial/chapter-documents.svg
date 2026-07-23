@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Organização e inclusão de documentos</title>
+  <desc id="desc">Documentos sobrepostos, checklist e seta de envio em uma composição azul e teal.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1f7fc"/>
+      <stop offset="1" stop-color="#e9f8f5"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#125a9c"/>
+      <stop offset="1" stop-color="#0b948b"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#14324c" flood-opacity=".13"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" rx="32" fill="url(#bg)"/>
+  <path d="M48 116c116-74 222-64 316 28s216 112 388 20" fill="none" stroke="#0b948b" stroke-opacity=".09" stroke-width="70" stroke-linecap="round"/>
+  <g filter="url(#shadow)" transform="translate(124 76)">
+    <rect x="80" y="18" width="330" height="330" rx="25" fill="#dcecf5" transform="rotate(8 245 183)"/>
+    <rect x="42" y="28" width="330" height="330" rx="25" fill="#e9f5f8" transform="rotate(-5 207 193)"/>
+    <rect width="330" height="330" rx="25" fill="#fff" stroke="#b8ccda" stroke-width="4"/>
+    <path d="M230 0v72h100" fill="#e7f5f5" stroke="#b8ccda" stroke-width="4"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M54 92h155M54 132h196M54 172h136" stroke="#64849f" stroke-width="11"/>
+      <path d="m54 232 18 18 34-42" stroke="#0b948b" stroke-width="12" stroke-linejoin="round"/>
+      <path d="M126 232h128M126 272h104" stroke="#64849f" stroke-width="11"/>
+    </g>
+  </g>
+  <g transform="translate(510 126)" filter="url(#shadow)">
+    <circle cx="92" cy="92" r="92" fill="#0b4a86"/>
+    <path d="M48 96h88M105 58l38 38-38 38" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(540 318)">
+    <rect width="174" height="76" rx="24" fill="#fff" stroke="#a7c8cf" stroke-width="4"/>
+    <circle cx="42" cy="38" r="17" fill="#0b948b"/>
+    <path d="m34 38 6 6 12-15" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M76 28h66M76 48h48" stroke="#6385a2" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

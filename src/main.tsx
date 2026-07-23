@@ -21,5 +21,6 @@ import "./styles/editorial-reference-system.css";
 import "./styles/editorial-reference-components.css";
 import "./styles/editorial-reference-support.css";
 import "./styles/editorial-reference-fixes.css";
+import "./styles/editorial-fidelity-v4.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

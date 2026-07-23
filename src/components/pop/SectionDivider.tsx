@@ -2,11 +2,11 @@ import { forwardRef, useCallback } from "react";
 import { Check, Link2, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { EditorialChapterVisual } from "@/components/visual/EditorialChapterVisual";
 import { IconTile } from "@/components/visual/IconTile";
 import { useClipboardAction } from "@/hooks/useClipboardAction";
 import { buildGuideShareUrl } from "@/lib/guideRoutes";
 import type { GuideSectionId } from "@/lib/guideContent";
-import { editorialMedia, editorialMediaBySection } from "@/lib/editorialMedia";
 
 interface SectionDividerProps {
   sectionId: GuideSectionId;
@@ -28,8 +28,6 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
   ({ sectionId, number, title, subtitle, icon }, ref) => {
     const { copiedValue, copyText } = useClipboardAction<GuideSectionId>();
     const displaySubtitle = subtitleOverrides[sectionId] ?? subtitle;
-    const mediaKey = editorialMediaBySection[sectionId] ?? "process";
-    const media = editorialMedia[mediaKey];
 
     const handleCopySectionLink = useCallback(async () => {
       const didCopy = await copyText(sectionId, buildGuideShareUrl(sectionId));
@@ -49,14 +47,15 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
       >
         <div className="editorial-chapter__grid">
           <div className="editorial-chapter__content">
-            <div className="editorial-chapter__number" aria-hidden="true">
-              {number.padStart(2, "0")}
+            <div className="editorial-chapter__index" aria-hidden="true">
+              <span>{number.padStart(2, "0")}</span>
+              <span>Etapa</span>
             </div>
 
             <div className="editorial-chapter__meta">
               <div className="editorial-chapter__label">
                 <IconTile icon={icon} size="lg" />
-                <span>Etapa {number}</span>
+                <span>Capítulo operacional</span>
               </div>
 
               <h2 id={`${sectionId}-chapter-title`} className="editorial-chapter__title">
@@ -71,17 +70,17 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
                   size="sm"
                   onClick={() => void handleCopySectionLink()}
                   aria-label={`Copiar link da seção ${number}: ${title}`}
-                  className="border-blue-900/20 bg-white/80 text-blue-950 hover:bg-blue-50 dark:border-white/15 dark:bg-slate-950/40 dark:text-white dark:hover:bg-white/10"
+                  className="editorial-chapter__share"
                 >
                   {copiedValue === sectionId ? (
                     <>
-                      <Check className="text-success" aria-hidden="true" />
+                      <Check aria-hidden="true" />
                       Link copiado
                     </>
                   ) : (
                     <>
                       <Link2 aria-hidden="true" />
-                      Compartilhar
+                      Copiar link desta etapa
                     </>
                   )}
                 </Button>
@@ -89,17 +88,7 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
             </div>
           </div>
 
-          <div className="editorial-chapter__media" data-editorial-media="chapter">
-            <img
-              src={media.src}
-              alt={media.alt}
-              width={media.width}
-              height={media.height}
-              loading="lazy"
-              decoding="async"
-              style={{ objectPosition: media.position }}
-            />
-          </div>
+          <EditorialChapterVisual sectionId={sectionId} />
         </div>
       </header>
     );

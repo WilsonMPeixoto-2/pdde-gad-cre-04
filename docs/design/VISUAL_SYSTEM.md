@@ -1,278 +1,233 @@
-# Sistema Editorial do Guia PDDE
+# Sistema Visual Editorial do Guia PDDE - v4
 
-Este documento define a linguagem visual e informacional do Guia PDDE no SEI!RIO. O sistema materializa o Manual de Identidade Editorial e a Biblioteca de Componentes do projeto **Referências editoriais** em um produto web responsivo, acessível e imprimível.
+Este documento define a linguagem visual e informacional do Guia PDDE no SEI!RIO. A versão v4 trata as referências aprovadas como **contrato composicional**, não como inspiração genérica.
 
-## 1. Direção
+## 1. Direção vinculante
 
-O guia deve funcionar como uma **publicação digital institucional orientadora**. A composição combina:
+O produto funciona como publicação digital institucional orientadora, combinando:
 
-- autoridade institucional;
-- leitura longa confortável;
-- estrutura modular;
-- presença visual controlada;
-- cores com significado;
-- componentes escolhidos pela função cognitiva;
+- sidebar navy persistente;
+- capa integrada com fotografia contextual;
+- visão geral do percurso e de cada etapa;
+- conteúdo modular de alta encontrabilidade;
+- tipografia confortável;
+- cor semântica;
 - rastreabilidade normativa;
 - equivalência entre desktop, mobile, modo escuro e impressão.
 
-O produto não deve parecer uma landing page promocional, um painel comercial nem uma coleção uniforme de cartões.
+Evitar:
 
-## 2. Princípios vinculantes
+- títulos monumentais que reduzam a área útil;
+- painéis vazios;
+- cartão usado apenas como ornamento;
+- imagens borradas ou ampliadas além da resolução útil;
+- sobreposição de controles e conteúdo;
+- texto pequeno para aumentar artificialmente a densidade.
 
-1. **Conteúdo antes da forma:** a estrutura visual nasce da informação e da decisão que o leitor precisa tomar.
-2. **Função antes da repetição:** componentes semelhantes somente são usados para conteúdos com finalidade semelhante.
-3. **Camadas de leitura:** síntese, desenvolvimento técnico e evidência normativa devem ser reconhecíveis.
-4. **Cor semântica:** cor sinaliza natureza, estado ou prioridade; não é ornamento isolado.
-5. **Densidade controlada:** páginas densas devem alternar síntese, detalhe, tabela, fluxo, regra e respiro.
-6. **Visualidade funcional:** imagem, ícone ou diagrama deve acrescentar compreensão, orientação, memória ou contexto.
-7. **Rastreabilidade:** fundamentos, vigência, fontes e evidências permanecem visíveis no ponto de uso.
-8. **Acessibilidade por construção:** significado não depende exclusivamente de cor, posição ou imagem.
+## 2. Princípios
+
+1. **Conteúdo antes da forma:** a estrutura visual nasce da tarefa do leitor.
+2. **Função antes da repetição:** componentes semelhantes representam finalidades semelhantes.
+3. **Fidelidade composicional:** proporção, densidade, escala e relação entre os blocos seguem as referências aprovadas.
+4. **Camadas de leitura:** síntese, desenvolvimento e evidência normativa são reconhecíveis.
+5. **Cor semântica:** cor informa natureza ou estado e nunca atua sozinha.
+6. **Densidade equilibrada:** informação suficiente sem vazios arbitrários ou compressão tipográfica.
+7. **Visualidade funcional:** fotografia, ícone, tabela ou diagrama precisam orientar ou explicar.
+8. **Acessibilidade por construção:** legibilidade e navegação não dependem de correções posteriores.
 
 ## 3. Tipografia
 
 | Função | Família | Uso |
 |---|---|---|
-| Corpo e interface | Public Sans | Texto corrido, tabelas, controles e metadados |
-| Hierarquia de interface | Plus Jakarta Sans | Leads, blocos internos, navegação e ações |
-| Títulos editoriais | Source Serif 4 | Capa e aberturas de etapas |
-| Códigos e identificadores | Monoespaçada do sistema | NUP, CNPJ e identificadores técnicos |
+| Corpo e interface | Public Sans | Texto, tabelas, controles e metadados |
+| Hierarquia de interface | Plus Jakarta Sans | Leads, módulos, navegação e ações |
+| Títulos editoriais | Source Serif 4 | Capa e abertura das etapas |
+| Códigos | Monoespaçada do sistema | NUP, CNPJ e identificadores |
+
+Escala mínima:
+
+- corpo: 16 px;
+- texto de destaque: 17 a 18 px;
+- tabela: 15 px;
+- rótulo: 12 px;
+- título interno: 30 a 44 px conforme a hierarquia;
+- título da capa: 48 a 67 px no desktop.
 
 Regras:
 
-- títulos editoriais usam largura e quebra deliberadas;
-- texto corrido mantém largura aproximada de 60 a 75 caracteres;
-- caixa alta é restrita a rótulos curtos;
-- tracking elevado não é usado em frases;
-- a justificação é seletiva em textos formais longos, com hifenização e largura controlada;
-- em telas estreitas, o corpo retorna ao alinhamento à esquerda para evitar rios tipográficos;
-- tabelas, listas e instruções operacionais permanecem alinhadas à esquerda.
-
-Escala de referência:
-
-- capa: `clamp(3rem, 6.2vw, 6.7rem)`;
-- abertura de etapa: `clamp(2.4rem, 4vw, 4.5rem)`;
-- lead interno: `clamp(2rem, 3.3vw, 3.2rem)`;
-- corpo principal: `1rem` a `1.22rem`, conforme a camada;
-- rótulos: `0.6rem` a `0.78rem`.
+- instruções, resumos, cartões e tabelas usam alinhamento à esquerda;
+- justificação somente em textos formais longos, quando não produzir rios tipográficos;
+- caixa alta restrita a rótulos curtos;
+- título principal usa três linhas explícitas;
+- nenhuma palavra pode ser cortada ou encoberta.
 
 ## 4. Paleta semântica
 
-| Família | Função principal |
+| Família | Função |
 |---|---|
 | Navy | autoridade, títulos e estrutura |
 | Azul | navegação, informação técnica e referências federais |
-| Teal | processo, orientação, conformidade e atendimento |
-| Âmbar | cautela, pendência, transição e validação |
+| Teal | percurso, orientação, conformidade e atendimento |
+| Verde | resultado confirmado e boa prática |
+| Âmbar | cautela, pendência e validação |
 | Vermelho | vedação, impedimento e não conformidade |
-| Violeta | análise, classificação e regras complementares |
-| Slate | contexto, metadados, auditoria e fontes |
+| Violeta | análise, classificação e auditoria |
+| Slate | contexto, metadados e neutralidade |
 
-Tokens centrais:
+A cor de superfície, a cor de identidade e a cor tipográfica são independentes. O modo escuro utiliza variantes luminosas próprias.
 
-- `--ref-navy`;
-- `--ref-blue`;
-- `--ref-teal`;
-- `--ref-amber`;
-- `--ref-red`;
-- `--ref-violet`;
-- `--ref-slate`;
-- `--ref-ink` e `--ref-copy`;
-- variantes `*-soft` para superfícies;
-- variantes `*-text` para contraste tipográfico.
+## 5. Shell institucional
 
-A cor de identidade e a cor usada em texto são tratadas separadamente. No modo escuro, cada família possui equivalente luminoso próprio.
+### Desktop
 
-Evitar:
+- sidebar fixa com aproximadamente 248 px;
+- capa, topbar e conteúdo deslocados pela largura da sidebar;
+- topbar participa do fluxo e não cobre o conteúdo;
+- modo guiado ocupa a área inferior da sidebar;
+- conteúdo central limitado a aproximadamente 1500 px.
 
-- gradiente em texto;
-- cor decorativa sem função;
-- opacidade baixa como único mecanismo de hierarquia;
-- verde ou vermelho para conteúdo neutro;
-- repetição de azul/teal em todos os blocos sem distinção funcional.
+### Mobile
 
-## 5. Capa
+- sidebar convertida em painel sobreposto;
+- conteúdo em uma coluna;
+- corpo mínimo de 16 px;
+- controles flutuantes reduzidos ou omitidos;
+- ausência de overflow horizontal em 390 px.
 
-A capa é implementada por `HeroCover` e pelas classes `.editorial-hero*`.
+## 6. Capa
 
-Estrutura:
+`HeroCover` combina:
 
 - identificação institucional;
-- três marcadores de escopo;
-- H1 editorial em largura proporcional;
-- descrição e orientação de uso;
+- dois marcadores de escopo;
+- título em três linhas deliberadas;
 - fotografia contextual;
-- legenda vinculada à fotografia;
-- faixa inferior com percurso, conteúdo, segurança e uso recomendado.
+- legenda integrada;
+- visão geral com cinco movimentos;
+- três acessos rápidos;
+- quatro cartões de metadados;
+- orientação final de leitura.
 
-Não há botão genérico de “iniciar”. A navegação natural e o sumário cumprem essa função.
+As duas primeiras linhas do título usam navy. `PDDE no SEI!RIO` usa teal.
 
-A fotografia deve:
+A fotografia:
 
-- contextualizar a rotina real da unidade escolar;
-- possuir texto alternativo;
-- manter proporção estável;
-- não encobrir conteúdo;
-- não receber filtro agressivo;
-- permanecer próxima da resolução nativa;
-- ser omitida na impressão.
+- não ultrapassa a resolução natural;
+- não cobre texto;
+- não recebe filtros agressivos;
+- possui texto alternativo;
+- é omitida no PDF.
 
-## 6. Aberturas de etapas
+## 7. Aberturas das etapas
 
-`SectionDivider` é a abertura editorial de cada etapa. A composição inclui:
+`SectionDivider` e `EditorialChapterVisual` produzem um cabeçalho em dois painéis.
 
-- número da etapa;
-- ícone;
-- rótulo de capítulo;
-- título em Source Serif 4;
+Painel de identidade:
+
+- número;
+- rótulo;
+- título;
 - síntese;
-- ação de copiar link;
-- `EditorialChapterVisual` com mapa informacional.
+- ação de compartilhar.
 
-O mapa informa:
+Painel de visão geral:
 
-1. três movimentos centrais da etapa;
-2. resultado esperado;
-3. ponto de atenção.
+- cinco movimentos;
+- resultado esperado;
+- ponto de atenção.
 
-Não são utilizadas ilustrações decorativas ou cenas genéricas. A função visual é explicar a estrutura da etapa.
-
-No mobile, o mapa passa para sequência vertical. Na impressão, o mapa é removido e a abertura mantém somente a identificação essencial.
-
-## 7. Leads internos
-
-`SectionLead` representa o segundo nível hierárquico.
-
-- com `step`, utiliza índice lateral e corpo principal;
-- sem `step`, ocupa integralmente a largura disponível;
-- inclui ícone, rótulo, título e descrição;
-- não repete o mapa ou a imagem da abertura;
-- não pode ser quebrado internamente entre páginas no PDF.
+Não são usadas ilustrações decorativas. No mobile, o mapa se torna uma sequência vertical. No PDF, o mapa é removido e o número ocupa coluna própria, sem sobreposição com o título.
 
 ## 8. Famílias de componentes
 
-Os componentes são selecionados conforme a pergunta que precisam responder.
-
-| Pergunta | Família visual |
+| Pergunta | Componente |
 |---|---|
-| Para que serve cada documento? | Função documental |
-| Qual classificação se aplica? | Comparação e classificação |
+| Para que serve a peça? | Função documental |
+| Qual classificação aplicar? | Comparação e classificação |
 | Em que ordem executar? | Processo e sequência |
-| O que escolher ou decidir? | Decisão e recomendação |
+| O que escolher? | Decisão e recomendação |
 | O que é permitido ou vedado? | Regra, conduta e evidência |
-| O que falta conferir? | Checklist e controle |
-| Qual canal utilizar? | Atendimento por finalidade |
-| Qual fonte vale para o caso? | Aplicabilidade e camada normativa |
+| O que falta? | Checklist e controle |
+| Onde buscar ajuda? | Atendimento por finalidade |
+| Qual fonte se aplica? | Camada normativa e aplicabilidade |
 
-Regras gerais:
+Os módulos não podem parecer equivalentes quando respondem a perguntas diferentes.
 
-- não criar cartão apenas para agrupar texto;
-- evitar cartão dentro de cartão sem necessidade semântica;
-- usar bordas e faixas para revelar função;
-- reservar sombras para elevação real;
-- interações não devem deslocar blocos de leitura;
-- cada componente deve possuir rótulo, mensagem e contexto; ação somente quando necessária.
+## 9. Referências visuais do SEI!RIO
 
-## 9. Iconografia
+Comandos e escolhas do sistema são apresentados por `SystemCommandPreview`:
 
-A iconografia usa Lucide com traço consistente e molduras simples.
+- mockups HTML/CSS nítidos;
+- ícones Lucide;
+- nenhum bitmap de baixa resolução;
+- sem controles interativos falsos;
+- descrição acessível no elemento raiz.
 
-- ícones não substituem rótulos;
-- cada ícone deve representar a função do bloco;
-- molduras circulares são usadas em mapas e metadados;
-- cores acompanham a função semântica;
-- não são admitidos ícones infantis, tridimensionais ou de banco genérico incompatíveis com o contexto institucional.
+## 10. Navegação e controles
 
-## 10. Navegação
-
-A navegação lateral organiza:
-
-1. visão geral;
-2. etapas do processo;
-3. apoio e referências.
-
-O item ativo utiliza trilho, contraste e estado textual. O progresso permanece discreto.
-
-No mobile:
-
-- painel com largura limitada;
-- overlay bloqueia a página;
-- `Escape` fecha o painel;
-- `inert` é aplicado quando apropriado;
-- áreas de toque mantêm dimensão adequada;
-- componentes flutuantes são reduzidos para não competir com o conteúdo.
+- navegação agrupada em visão geral, etapas e apoio;
+- item ativo com trilho e contraste;
+- busca, links diretos e âncoras preservados;
+- botão de modo guiado não cobre os módulos;
+- compartilhamento de etapa possui rótulo textual;
+- áreas de toque mantêm dimensão adequada.
 
 ## 11. Modo escuro
 
-O modo escuro preserva a mesma estrutura informacional.
-
-- títulos principais quase brancos;
-- corpo em cinza-azulado claro;
-- variantes luminosas de azul, teal, âmbar, vermelho, violeta e slate;
-- títulos dos passos e ações com contraste explícito;
+- fundo navy/grafite;
+- títulos quase brancos;
+- corpo cinza-azulado claro;
+- variantes luminosas de todas as famílias semânticas;
 - bordas mais perceptíveis;
 - sombras reduzidas;
 - fotografia sem filtro global.
 
-O modo escuro deve ser validado por Axe e por inspeção visual, pois contraste matemático não substitui avaliação de hierarquia.
-
 ## 12. Impressão e PDF
 
-A impressão é sempre clara, independentemente do tema ativo.
+A impressão é sempre clara.
 
-Regras:
+- sidebar, topbar, fotografia, mapas e ações são removidos;
+- capítulos iniciam de forma previsível;
+- número e título usam colunas separadas;
+- cabeçalhos não quebram internamente;
+- rótulos pseudoeditoriais da tela são removidos;
+- rodapé final duplicado é omitido;
+- texto permanece extraível;
+- arquivo final permanece compacto.
 
-- redefinir variáveis escuras para equivalentes claros;
-- remover fotografia, mapas, navegação, ações, fundos pesados, filtros e animações;
-- preservar cores semânticas em tons imprimíveis;
-- manter títulos, leads, tabelas, regras e evidências;
-- iniciar capítulos de modo previsível;
-- impedir quebra interna de cabeçalhos editoriais;
-- evitar rótulos órfãos no fim da página;
-- usar `break-inside: avoid` apenas em unidades que comportem essa proteção;
-- manter texto extraível;
-- manter o arquivo compacto.
+A homologação v4 produziu PDF A4 com 29 páginas e aproximadamente 0,83 MB.
 
-A homologação final produziu PDF A4 com 29 páginas e aproximadamente 0,87 MB.
-
-## 13. Organização das camadas
+## 13. Arquivos da camada v4
 
 ```text
 src/
   components/
-    ui/           primitivas de interação
-    visual/       hierarquia e mapas reutilizáveis
-    legal/        regras e evidências
-    pop/          conteúdo e composição das seções
+    visual/
+      EditorialChapterVisual.tsx
+      SystemCommandPreview.tsx
+    pop/
+      HeroCover.tsx
+      SectionDivider.tsx
+      SectionThree.tsx
   styles/
-    editorial-contemporary.css
-    editorial-semantic.css
-    editorial-accessibility.css
-    editorial-reference-system.css
-    editorial-reference-components.css
-    editorial-reference-support.css
-    editorial-reference-fixes.css
-public/
-  editorial/
-    hero-pdde.webp
+    editorial-fidelity-v4.css
+    editorial-fidelity-v4-fixes.css
+    editorial-fidelity-v4-title.css
+e2e/
+  editorial-fidelity.spec.ts
 ```
-
-Estilos transversais permanecem em `src/styles`. Componentes de conteúdo não devem introduzir sistemas visuais paralelos.
 
 ## 14. Critérios de revisão
 
-Antes da publicação, verificar:
+Antes da publicação:
 
-- capa desktop e mobile;
-- fotografia e legenda sem colisão;
-- abertura de cada etapa;
-- mapas claro, escuro e mobile;
-- leads com e sem numeração;
-- variedade de componentes por função;
-- contraste Axe e inspeção visual;
-- ausência de overflow horizontal;
-- navegação e compartilhamento;
-- busca, modo guiado, checklists e persistência;
-- impressão iniciada nos modos claro e escuro;
-- paginação, tamanho e renderização do PDF;
-- integridade de rotas, âncoras, PWA e links;
-- `npm run check:ci` integralmente aprovado.
+- comparar a capa com as referências aprovadas;
+- verificar título e fotografia em desktop e mobile;
+- inspecionar todas as aberturas de etapa;
+- confirmar cinco movimentos por mapa;
+- revisar Etapa 1, funções documentais e tabela de classificação;
+- verificar os dois mockups vetoriais;
+- executar Axe claro, escuro e mobile;
+- confirmar ausência de overflow;
+- renderizar o PDF em ferramenta independente;
+- executar `npm run check:ci` integralmente.

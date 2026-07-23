@@ -1,0 +1,207 @@
+/* Semantic and section-level editorial refinements. */
+
+#introducao .editorial-letter {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid hsl(var(--editorial-rule));
+  border-radius: var(--editorial-radius-lg);
+  background: hsl(var(--editorial-surface));
+  padding: clamp(1.5rem, 4vw, 4rem);
+  box-shadow: var(--editorial-shadow);
+}
+
+#introducao .editorial-letter::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, hsl(var(--editorial-navy)), hsl(var(--editorial-teal)));
+}
+
+#introducao .editorial-spread {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.34fr);
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+}
+
+#introducao .article-kicker {
+  color: hsl(var(--editorial-teal));
+}
+
+#introducao h2 {
+  max-width: 18ch;
+  color: hsl(var(--editorial-navy-deep));
+  font-family: var(--font-editorial);
+  font-weight: 650;
+  letter-spacing: -0.045em !important;
+}
+
+#introducao .editorial-hairline {
+  height: 1px;
+  max-width: 10rem;
+  background: hsl(var(--editorial-teal));
+}
+
+#introducao .editorial-aside {
+  position: relative;
+  border-left: 1px solid hsl(var(--editorial-rule));
+  padding-left: clamp(1.5rem, 3vw, 2.7rem);
+}
+
+#introducao .editorial-quote-mark {
+  color: hsl(var(--editorial-teal) / 0.25);
+  font-size: 6rem;
+  line-height: 0.7;
+}
+
+#introducao .editorial-quote {
+  margin-top: 1rem;
+  color: hsl(var(--editorial-navy-deep));
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.35;
+}
+
+#introducao .editorial-aside-caption {
+  margin-top: 1rem;
+  color: hsl(var(--editorial-muted));
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+/* Existing semantic boxes inherit the approved color grammar. */
+[class~="border-emerald-300"][class~="bg-emerald-50"],
+[class~="border-emerald-200"][class~="bg-emerald-50"] {
+  border-color: hsl(var(--editorial-teal) / 0.3) !important;
+  background: hsl(var(--editorial-teal-soft) / 0.72) !important;
+}
+
+[class~="border-blue-300"][class~="bg-blue-50"],
+[class~="border-sky-300"][class~="bg-sky-50"] {
+  border-color: hsl(var(--editorial-blue) / 0.27) !important;
+  background: hsl(var(--editorial-blue-soft) / 0.64) !important;
+}
+
+[class~="border-amber-300"][class~="bg-amber-50"],
+[class~="border-amber-200"][class~="bg-amber-50"] {
+  border-color: hsl(var(--warning) / 0.34) !important;
+  background: hsl(var(--warning) / 0.08) !important;
+}
+
+[class~="border-red-300"][class~="bg-red-50"],
+[class~="border-red-200"][class~="bg-red-50"] {
+  border-color: hsl(var(--destructive) / 0.32) !important;
+  background: hsl(var(--destructive) / 0.065) !important;
+}
+
+/* Existing next-step and transition blocks become open editorial bands. */
+aside[aria-label="Transição para a etapa seguinte"],
+aside[aria-label*="etapa seguinte" i],
+.section-card.border-l-4.border-l-blue-700 {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid hsl(var(--editorial-blue) / 0.22) !important;
+  border-left: 1px solid hsl(var(--editorial-blue) / 0.22) !important;
+  border-radius: var(--editorial-radius-lg);
+  background:
+    linear-gradient(105deg, hsl(var(--editorial-blue-soft) / 0.68), hsl(var(--editorial-teal-soft) / 0.72)) !important;
+  box-shadow: none !important;
+}
+
+aside[aria-label="Transição para a etapa seguinte"]::after,
+aside[aria-label*="etapa seguinte" i]::after,
+.section-card.border-l-4.border-l-blue-700::after {
+  content: "";
+  position: absolute;
+  display: block;
+  inset: -70% -8% auto auto;
+  width: 18rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: hsl(var(--editorial-teal) / 0.08);
+  pointer-events: none;
+}
+
+/* Section rhythm: open spacing between major groups, controlled density inside. */
+[id^="secao-"] > section + section,
+[id="contatos"] > section + section,
+[id="anexo"] > section + section {
+  margin-top: clamp(2rem, 4vw, 3.75rem);
+}
+
+[id^="secao-"] .section-card > header,
+[id="contatos"] .section-card > header,
+[id="anexo"] .section-card > header {
+  border-bottom-color: hsl(var(--editorial-rule));
+}
+
+/* Interactive cards keep a restrained, functional hover state. */
+a.section-card,
+button.section-card,
+.link-card {
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+a.section-card:hover,
+button.section-card:hover,
+.link-card:hover {
+  background: hsl(var(--editorial-blue-soft) / 0.26);
+}
+
+.dark #introducao h2,
+.dark #introducao .editorial-quote {
+  color: hsl(var(--editorial-ink));
+}
+
+.dark [class~="border-emerald-300"][class~="bg-emerald-50"],
+.dark [class~="border-emerald-200"][class~="bg-emerald-50"] {
+  background: hsl(var(--editorial-teal-soft) / 0.74) !important;
+}
+
+.dark [class~="border-blue-300"][class~="bg-blue-50"],
+.dark [class~="border-sky-300"][class~="bg-sky-50"] {
+  background: hsl(var(--editorial-blue-soft) / 0.72) !important;
+}
+
+@media (max-width: 1023px) {
+  #introducao .editorial-spread {
+    grid-template-columns: 1fr;
+  }
+
+  #introducao .editorial-aside {
+    display: block !important;
+    border-top: 1px solid hsl(var(--editorial-rule));
+    border-left: 0;
+    padding-top: 2rem;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  #introducao .editorial-letter {
+    padding: 1.3rem;
+    border-radius: 1rem;
+  }
+
+  #introducao .editorial-letter::before {
+    width: 4px;
+  }
+
+  #introducao h2 {
+    font-size: clamp(2.1rem, 11vw, 3rem) !important;
+  }
+}
+
+@media print {
+  #introducao .editorial-letter {
+    border: 0;
+    border-top: 2px solid #222;
+    border-radius: 0;
+    padding: 1rem 0;
+    box-shadow: none;
+  }
+
+  #introducao .editorial-letter::before,
+  #introducao .editorial-aside {
+    display: none !important;
+  }
+}

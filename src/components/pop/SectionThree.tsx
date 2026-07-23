@@ -97,7 +97,7 @@ export const SectionThree = () => (
         </div>
         <div>
           <p className="editorial-block__eyebrow">Critério de classificação</p>
-          <h3 id="external-document-definition-title">Documento digitalizado ou nato-digital?</h3>
+          <h3 id="external-document-definition-title">Documento externo e classificação do arquivo</h3>
           <p>
             Documento externo é a peça que não foi produzida diretamente no SEI!RIO. Antes da juntada, identifique se o arquivo nasceu em papel e foi digitalizado ou se já foi criado e recebido em meio eletrônico.
           </p>

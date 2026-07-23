@@ -20,7 +20,8 @@ body,
   color: var(--ref-teal-text);
 }
 
-.legal-rule-card__evidence-label span {
+.legal-rule-card__evidence-label span,
+.editorial-map__summary-item span {
   color: var(--ref-slate-text);
 }
 

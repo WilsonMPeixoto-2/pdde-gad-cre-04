@@ -1,4 +1,4 @@
-/* Ajustes incrementais verificados pelos contratos e pela comparação visual da camada v4. */
+/* Ajustes incrementais verificados pelos contratos, pela comparação visual e pelo render independente do PDF. */
 
 :root {
   /* O token legado era usado como texto pequeno com contraste insuficiente. */
@@ -30,6 +30,22 @@
   text-align: left !important;
   text-justify: auto !important;
   word-spacing: normal !important;
+}
+
+/* No desktop, a linha verde do título permanece íntegra e reduz a sensação de coluna comprimida. */
+@media (min-width: 1180px) {
+  .editorial-hero__feature {
+    grid-template-columns: minmax(0, 1.12fr) minmax(16rem, 0.62fr) !important;
+  }
+
+  .editorial-hero__title {
+    max-width: 15ch !important;
+    font-size: clamp(3rem, 4.25vw, 4.45rem) !important;
+  }
+
+  .editorial-hero__title span {
+    white-space: nowrap;
+  }
 }
 
 .system-command-preview__toolbar > div {
@@ -67,7 +83,11 @@
 #secao-1 .section-card[aria-labelledby="start-process-title"]::before,
 #secao-1 .section-card[aria-labelledby="start-process-title"]::after,
 #secao-1 .section-card[aria-labelledby="save-process-title"]::before,
-#secao-1 .section-card[aria-labelledby="save-process-title"]::after {
+#secao-1 .section-card[aria-labelledby="save-process-title"]::after,
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid::before,
+#secao-1 .section-card[aria-labelledby="start-process-title"] > .grid::after,
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid::before,
+#secao-1 .section-card[aria-labelledby="save-process-title"] > .grid::after {
   display: none !important;
   content: none !important;
 }
@@ -217,6 +237,12 @@
   }
 }
 
+@media (max-width: 1179px) {
+  .editorial-hero__title span {
+    white-space: normal;
+  }
+}
+
 @media (max-width: 1023px) {
   #secao-1 .section-card[aria-labelledby="start-process-title"] > .grid,
   #secao-1 .section-card[aria-labelledby="save-process-title"] > .grid {
@@ -236,5 +262,95 @@
 @media (max-width: 767px) {
   .system-command-preview__toolbar > div {
     width: 100%;
+  }
+}
+
+@media print {
+  /* Aberturas: número em coluna própria e título sem colisão. */
+  .editorial-chapter__content {
+    display: grid !important;
+    grid-template-columns: 52pt minmax(0, 1fr) !important;
+    grid-template-areas: "identity meta" !important;
+    gap: 14pt !important;
+    align-items: start !important;
+    padding: 18pt 0 !important;
+  }
+
+  .editorial-chapter__identity,
+  .editorial-chapter__index,
+  .editorial-chapter__label,
+  .editorial-chapter__meta,
+  .editorial-chapter__title,
+  .editorial-chapter__subtitle {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+  }
+
+  .editorial-chapter__identity {
+    grid-area: identity !important;
+    display: block !important;
+    min-width: 0 !important;
+  }
+
+  .editorial-chapter__label {
+    display: none !important;
+  }
+
+  .editorial-chapter__index {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2pt !important;
+  }
+
+  .editorial-chapter__index span:first-child {
+    font-size: 25pt !important;
+    line-height: 1 !important;
+  }
+
+  .editorial-chapter__index span:last-child {
+    font-size: 6.5pt !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .editorial-chapter__meta {
+    grid-area: meta !important;
+    min-width: 0 !important;
+  }
+
+  .editorial-chapter__title {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    font-size: 28pt !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  .editorial-chapter__subtitle {
+    max-width: 52ch !important;
+    margin-top: 7pt !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Rótulos pseudoeditoriais do layout de tela não pertencem ao PDF. */
+  #secao-1 .section-card[aria-labelledby="start-process-title"] *,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] * {
+    -webkit-print-color-adjust: economy !important;
+    print-color-adjust: economy !important;
+  }
+
+  #secao-1 .section-card[aria-labelledby="start-process-title"] *::before,
+  #secao-1 .section-card[aria-labelledby="start-process-title"] *::after,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] *::before,
+  #secao-1 .section-card[aria-labelledby="save-process-title"] *::after {
+    content: none !important;
+  }
+
+  /* O cabeçalho e o rodapé fixos já identificam o documento; o bloco duplicado criava uma página vazia. */
+  .guide-shell > .print-only {
+    display: none !important;
   }
 }

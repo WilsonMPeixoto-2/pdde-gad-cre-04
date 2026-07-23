@@ -44,55 +44,63 @@ test.describe("Sistema visual editorial contemporâneo", () => {
     await expect(divider.getByRole("button", { name: /copiar link da seção/i })).toBeVisible();
 
     await page.goto("/?secao=secao-2");
-    const lead = page.locator(".editorial-section-lead").first();
+    const section = page.locator("#secao-2");
+    const lead = section.locator(".editorial-section-lead").first();
     await expect(lead).toBeVisible();
     await expect(lead.locator(".editorial-section-lead__index")).toContainText("02");
   });
 
   test("aplica componentes semânticos distintos à instrução documental e normativa", async ({ page }) => {
     await page.goto("/?secao=secao-2");
+    const section = page.locator("#secao-2");
 
-    await expect(page.locator(".document-function-card")).toHaveCount(4);
-    await expect(page.locator(".editorial-rule-group")).toHaveCount(3);
-    await expect(page.locator(".legal-rule-card").first()).toBeVisible();
-    await expect(page.locator(".legal-rule-card__panel--correct").first()).toBeVisible();
-    await expect(page.locator(".legal-rule-card__evidence").first()).toBeVisible();
-    await expect(page.locator(".editorial-checkpoint")).toBeVisible();
-    await expect(page.locator(".editorial-next-step")).toBeVisible();
+    await expect(section.locator(".document-function-card")).toHaveCount(4);
+    await expect(section.locator(".editorial-rule-group")).toHaveCount(3);
+    await expect(section.locator(".legal-rule-card").first()).toBeVisible();
+    await expect(section.locator(".legal-rule-card__panel--correct").first()).toBeVisible();
+    await expect(section.locator(".legal-rule-card__evidence").first()).toBeVisible();
+    await expect(section.locator(".editorial-checkpoint")).toBeVisible();
+    await expect(section.locator(".editorial-next-step")).toBeVisible();
   });
 
   test("diferencia comparação, execução, decisão e controle nas etapas operacionais", async ({ page }) => {
     await page.goto("/?secao=secao-3");
-    await expect(page.locator(".editorial-comparison-table")).toBeVisible();
-    await expect(page.locator(".editorial-process-step")).toHaveCount(4);
-    await expect(page.locator(".editorial-control-grid article")).toHaveCount(4);
+    const sectionThree = page.locator("#secao-3");
+    await expect(sectionThree.locator(".editorial-comparison-table")).toBeVisible();
+    await expect(sectionThree.locator(".editorial-process-step")).toHaveCount(4);
+    await expect(sectionThree.locator(".editorial-control-grid article")).toHaveCount(4);
 
     await page.goto("/?secao=secao-4");
-    await expect(page.locator(".editorial-binary-choice article")).toHaveCount(2);
-    await expect(page.locator(".editorial-process-step")).toHaveCount(4);
-    await expect(page.locator(".editorial-callout-pair")).toBeVisible();
+    const sectionFour = page.locator("#secao-4");
+    await expect(sectionFour.locator(".editorial-binary-choice article")).toHaveCount(2);
+    await expect(sectionFour.locator(".editorial-process-step")).toHaveCount(4);
+    await expect(sectionFour.locator(".editorial-callout-pair")).toBeVisible();
 
     await page.goto("/?secao=secao-5");
-    await expect(page.locator(".editorial-binary-choice--signature article")).toHaveCount(2);
-    await expect(page.locator(".editorial-check-list > div")).toHaveCount(5);
-    await expect(page.locator(".editorial-blocking-note")).toBeVisible();
+    const sectionFive = page.locator("#secao-5");
+    await expect(sectionFive.locator(".editorial-binary-choice--signature article")).toHaveCount(2);
+    await expect(sectionFive.locator(".editorial-check-list > div")).toHaveCount(5);
+    await expect(sectionFive.locator(".editorial-blocking-note")).toBeVisible();
 
     await page.goto("/?secao=secao-6");
-    await expect(page.locator(".editorial-follow-up-flow > li")).toHaveCount(3);
-    await expect(page.locator(".editorial-boundary-card")).toHaveCount(2);
+    const sectionSix = page.locator("#secao-6");
+    await expect(sectionSix.locator(".editorial-follow-up-flow > li")).toHaveCount(3);
+    await expect(sectionSix.locator(".editorial-boundary-card")).toHaveCount(2);
   });
 
   test("organiza apoio e fontes por finalidade, nível e aplicabilidade", async ({ page }) => {
     await page.goto("/?secao=contatos");
-    await expect(page.locator(".editorial-contact-grid > article")).toHaveCount(2);
-    await expect(page.locator(".editorial-resource-grid > a")).toHaveCount(3);
-    await expect(page.locator(".editorial-print-panel")).toBeVisible();
+    const contacts = page.locator("#contatos").first();
+    await expect(contacts.locator(".editorial-contact-grid > article")).toHaveCount(2);
+    await expect(contacts.locator(".editorial-resource-grid > a")).toHaveCount(3);
+    await expect(contacts.locator(".editorial-print-panel")).toBeVisible();
 
     await page.goto("/?secao=anexo");
-    await expect(page.locator(".editorial-applicability-frame")).toBeVisible();
-    await expect(page.locator('.editorial-source-card[data-level="federal"]')).toHaveCount(5);
-    await expect(page.locator('.editorial-source-card[data-level="municipal"]')).toHaveCount(4);
-    await expect(page.locator(".editorial-validation-notice")).toBeVisible();
+    const annex = page.locator("#anexo").first();
+    await expect(annex.locator(".editorial-applicability-frame")).toBeVisible();
+    await expect(annex.locator('.editorial-source-card[data-level="federal"]')).toHaveCount(5);
+    await expect(annex.locator('.editorial-source-card[data-level="municipal"]')).toHaveCount(4);
+    await expect(annex.locator(".editorial-validation-notice")).toBeVisible();
   });
 
   test("preserva seis losangos alinhados no mapa das etapas", async ({ page }) => {

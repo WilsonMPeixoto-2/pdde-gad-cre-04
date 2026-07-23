@@ -3,16 +3,16 @@ import { expect, test } from "@playwright/test";
 test.use({ serviceWorkers: "block", reducedMotion: "reduce" });
 
 test.describe("Sistema visual editorial contemporâneo", () => {
-  test("apresenta capa editorial com mídia funcional e sem efeitos promocionais concorrentes", async ({ page }) => {
+  test("apresenta capa editorial integrada, sem ação redundante ou sobreposição", async ({ page }) => {
     await page.goto("/");
 
     const hero = page.locator('[data-editorial-hero="true"]');
     await expect(hero).toBeVisible();
     await expect(hero.getByRole("heading", { level: 1, name: /prestação de contas pdde no sei!rio/i })).toBeVisible();
     await expect(hero.locator('[data-editorial-media="hero"] img')).toBeVisible();
-    await expect(hero.locator(".bg-clip-text")).toHaveCount(0);
-    await expect(hero.locator(".animate-pulse")).toHaveCount(0);
-    await expect(hero.getByRole("button", { name: /iniciar guia/i })).toBeVisible();
+    await expect(hero.locator(".editorial-hero__summary .editorial-hero__stat")).toHaveCount(4);
+    await expect(hero.getByRole("button", { name: /iniciar guia/i })).toHaveCount(0);
+    await expect(hero.locator(".bg-clip-text, .animate-pulse")).toHaveCount(0);
   });
 
   test("mantém cabeçalho e sumário sem pulsação, rotação ou brilho promocional", async ({ page }) => {
@@ -30,7 +30,7 @@ test.describe("Sistema visual editorial contemporâneo", () => {
     await expect(sidebar.locator('[data-sidebar-group="support"]')).toBeVisible();
   });
 
-  test("usa aberturas editoriais de capítulo e leads internos padronizados", async ({ page }) => {
+  test("usa mapas informacionais nas aberturas e leads internos hierarquizados", async ({ page }) => {
     await page.goto("/");
 
     const chapters = page.locator("[data-editorial-chapter]");
@@ -38,13 +38,27 @@ test.describe("Sistema visual editorial contemporâneo", () => {
 
     const divider = chapters.first();
     await expect(divider).toBeVisible();
-    await expect(divider.locator(".icon-tile")).toHaveCount(1);
-    await expect(divider.locator("svg.animate-pulse")).toHaveCount(0);
-    await expect(divider.locator('[data-editorial-media="chapter"] img')).toBeVisible();
+    await expect(divider.locator(".editorial-map")).toBeVisible();
+    await expect(divider.locator(".editorial-map__step")).toHaveCount(3);
+    await expect(divider.locator('[data-editorial-media="chapter"] img')).toHaveCount(0);
     await expect(divider.getByRole("button", { name: /copiar link da seção/i })).toBeVisible();
 
     await page.goto("/?secao=secao-2");
-    await expect(page.locator(".editorial-section-lead").first()).toBeVisible();
+    const lead = page.locator(".editorial-section-lead").first();
+    await expect(lead).toBeVisible();
+    await expect(lead.locator(".editorial-section-lead__index")).toContainText("02");
+  });
+
+  test("aplica componentes semânticos distintos à instrução documental e normativa", async ({ page }) => {
+    await page.goto("/?secao=secao-2");
+
+    await expect(page.locator(".document-function-card")).toHaveCount(4);
+    await expect(page.locator(".editorial-rule-group")).toHaveCount(3);
+    await expect(page.locator(".legal-rule-card").first()).toBeVisible();
+    await expect(page.locator(".legal-rule-card__panel--correct").first()).toBeVisible();
+    await expect(page.locator(".legal-rule-card__evidence").first()).toBeVisible();
+    await expect(page.locator(".editorial-checkpoint")).toBeVisible();
+    await expect(page.locator(".editorial-next-step")).toBeVisible();
   });
 
   test("preserva seis losangos alinhados no mapa das etapas", async ({ page }) => {

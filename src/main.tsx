@@ -20,5 +20,6 @@ import "./styles/editorial-accessibility.css";
 import "./styles/editorial-reference-system.css";
 import "./styles/editorial-reference-components.css";
 import "./styles/editorial-reference-support.css";
+import "./styles/editorial-reference-fixes.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

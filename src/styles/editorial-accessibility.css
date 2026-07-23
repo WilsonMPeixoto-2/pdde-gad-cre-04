@@ -1,0 +1,21 @@
+/* Contrast corrections validated against WCAG 2.1 AA. */
+
+:root {
+  --editorial-teal: 178 76% 24%;
+}
+
+.dark {
+  --editorial-teal: 174 67% 50%;
+}
+
+.editorial-chapter__label,
+.editorial-section-lead__labels,
+.editorial-hero__kicker {
+  color: hsl(var(--editorial-teal));
+}
+
+.dark .editorial-chapter__label,
+.dark .editorial-section-lead__labels,
+.dark .editorial-hero__kicker {
+  color: hsl(174 72% 62%);
+}

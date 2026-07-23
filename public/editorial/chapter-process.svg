@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Fluxo de abertura e organização do processo</title>
+  <desc id="desc">Composição abstrata com pasta, documento, etapas conectadas e marca de conclusão.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef7fb"/>
+      <stop offset="1" stop-color="#e7f7f4"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b4a86"/>
+      <stop offset="1" stop-color="#0b8f87"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#12314f" flood-opacity=".14"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" rx="32" fill="url(#bg)"/>
+  <circle cx="650" cy="92" r="118" fill="#0b8f87" opacity=".08"/>
+  <circle cx="118" cy="420" r="160" fill="#0b4a86" opacity=".06"/>
+  <path d="M120 338h560" stroke="#9db5c9" stroke-width="5" stroke-linecap="round" stroke-dasharray="4 18"/>
+  <g filter="url(#shadow)">
+    <path d="M152 164h174l34 42h256c22 0 40 18 40 40v132c0 22-18 40-40 40H152c-22 0-40-18-40-40V204c0-22 18-40 40-40Z" fill="#fff" stroke="#b5cad9" stroke-width="4"/>
+    <path d="M112 246h544v132c0 22-18 40-40 40H152c-22 0-40-18-40-40V246Z" fill="#f8fbfd"/>
+  </g>
+  <g transform="translate(250 110)" filter="url(#shadow)">
+    <rect width="250" height="190" rx="22" fill="#fff" stroke="#b5cad9" stroke-width="4"/>
+    <path d="M178 0v48h72" fill="#e9f5f8" stroke="#b5cad9" stroke-width="4"/>
+    <path d="M42 72h150M42 104h124M42 136h92" stroke="#6385a2" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g fill="#fff" stroke="url(#accent)" stroke-width="5">
+    <circle cx="156" cy="338" r="34"/>
+    <circle cx="320" cy="338" r="34"/>
+    <circle cx="484" cy="338" r="34"/>
+    <circle cx="648" cy="338" r="34"/>
+  </g>
+  <g fill="#0b4a86">
+    <circle cx="156" cy="338" r="11"/>
+    <circle cx="320" cy="338" r="11"/>
+    <circle cx="484" cy="338" r="11"/>
+  </g>
+  <circle cx="648" cy="338" r="22" fill="#0b8f87"/>
+  <path d="m636 338 8 8 17-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

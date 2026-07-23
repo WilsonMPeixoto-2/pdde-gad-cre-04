@@ -11,6 +11,8 @@ test.describe("Sistema visual editorial contemporâneo", () => {
     await expect(hero.getByRole("heading", { level: 1, name: /prestação de contas pdde no sei!rio/i })).toBeVisible();
     await expect(hero.locator('[data-editorial-media="hero"] img')).toBeVisible();
     await expect(hero.locator(".editorial-hero__summary .editorial-hero__stat")).toHaveCount(4);
+    await expect(hero.locator(".editorial-hero__overview")).toBeVisible();
+    await expect(hero.locator(".editorial-hero__steps > li")).toHaveCount(5);
     await expect(hero.getByRole("button", { name: /iniciar guia/i })).toHaveCount(0);
     await expect(hero.locator(".bg-clip-text, .animate-pulse")).toHaveCount(0);
   });
@@ -39,7 +41,7 @@ test.describe("Sistema visual editorial contemporâneo", () => {
     const divider = chapters.first();
     await expect(divider).toBeVisible();
     await expect(divider.locator(".editorial-map")).toBeVisible();
-    await expect(divider.locator(".editorial-map__step")).toHaveCount(3);
+    await expect(divider.locator(".editorial-map__step")).toHaveCount(5);
     await expect(divider.locator('[data-editorial-media="chapter"] img')).toHaveCount(0);
     await expect(divider.getByRole("button", { name: /copiar link da seção/i })).toBeVisible();
 

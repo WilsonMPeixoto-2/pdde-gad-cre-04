@@ -15,5 +15,6 @@ import "./styles/institutional-polish.css";
 import "./styles/light-contrast.css";
 import "./styles/wcag-warning.css";
 import "./styles/editorial-contemporary.css";
+import "./styles/editorial-semantic.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

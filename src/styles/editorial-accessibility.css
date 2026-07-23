@@ -68,3 +68,46 @@
     width: calc(100% - 1.4rem);
   }
 }
+
+@media print {
+  #hero-cover.editorial-hero {
+    min-height: auto !important;
+    padding: 0 0 18pt !important;
+    border: 0 !important;
+    background: white !important;
+    color: #111827 !important;
+    -webkit-print-color-adjust: economy !important;
+    print-color-adjust: economy !important;
+  }
+
+  .section-divider-print.editorial-chapter {
+    margin: 18pt 0 10pt !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-top: 2px solid #1f2937 !important;
+    border-radius: 0 !important;
+    background: white !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: economy !important;
+    print-color-adjust: economy !important;
+  }
+
+  .section-divider-print.editorial-chapter .editorial-chapter__content {
+    padding: 12pt 0 !important;
+  }
+
+  .section-divider-print.editorial-chapter .editorial-chapter__number,
+  .section-divider-print.editorial-chapter .editorial-chapter__label,
+  .section-divider-print.editorial-chapter .editorial-chapter__title,
+  .section-divider-print.editorial-chapter .editorial-chapter__subtitle {
+    color: #111827 !important;
+    -webkit-print-color-adjust: economy !important;
+    print-color-adjust: economy !important;
+  }
+
+  .section-divider-print.editorial-chapter .editorial-chapter__media,
+  .section-divider-print.editorial-chapter .editorial-chapter__actions {
+    display: none !important;
+  }
+}

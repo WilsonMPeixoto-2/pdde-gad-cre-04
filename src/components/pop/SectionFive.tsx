@@ -50,7 +50,7 @@ const remittanceChecks = [
 ] as const;
 
 export const SectionFive = () => (
-  <section className="space-y-8">
+  <section className="space-y-8 editorial-section" data-editorial-section="signature">
     <SectionLead
       step="5"
       eyebrow="Documentos internos e remessa"
@@ -59,123 +59,125 @@ export const SectionFive = () => (
       icon={FileSignature}
     />
 
-    <section className="section-card" aria-labelledby="signature-block-definition-title">
-      <div className="flex items-start gap-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-blue-300 bg-blue-100 text-blue-800 dark:border-blue-800 dark:bg-blue-950/40 dark:text-sky-300">
-          <PenLine className="h-5 w-5" aria-hidden="true" />
-        </div>
-        <div className="min-w-0">
-          <h3 id="signature-block-definition-title" className="text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-            Função do bloco de assinatura
-          </h3>
-          <p className="mt-3 max-w-[72ch] text-sm leading-7 text-slate-700 sm:text-base dark:text-slate-300">
-            O bloco permite reunir documentos internos que precisam de assinatura eletrônica. Ele pode ser utilizado para assinatura na própria unidade ou disponibilizado a outra unidade quando o fluxo formal exigir participação externa.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <Callout variant="success" title="Podem integrar o bloco">
-          <ul className="space-y-3 text-sm leading-6">
-            {includedDocuments.map((item) => (
-              <li key={item} className="flex items-start gap-2.5">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700 dark:text-emerald-300" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </Callout>
-
-        <Callout variant="danger" title="Não integram o bloco">
-          <ul className="space-y-3 text-sm leading-6">
-            {excludedDocuments.map((item) => (
-              <li key={item} className="flex items-start gap-2.5">
-                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-700 dark:text-red-300" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </Callout>
-      </div>
-    </section>
-
-    <section className="section-card" aria-labelledby="signature-block-procedure-title">
-      <h3 id="signature-block-procedure-title" className="text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-        Montagem e acompanhamento do bloco
-      </h3>
-      <div className="mt-6 space-y-4">
-        {blockSteps.map((step, index) => (
-          <article key={step.title} className="grid gap-4 rounded-xl border border-slate-300 bg-slate-50 p-5 sm:grid-cols-[2.5rem_minmax(0,1fr)] dark:border-slate-700 dark:bg-slate-900/55">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-700 text-sm font-bold text-white">
-              {index + 1}
-            </span>
-            <div>
-              <h4 className="text-base font-bold text-foreground">{step.title}</h4>
-              <p className="mt-1.5 text-sm leading-6 text-slate-700 dark:text-slate-300">{step.description}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <Callout variant="info" title="Descrição de referência" className="mt-5">
-        <code className="block rounded-lg border border-slate-300 bg-slate-100 px-4 py-3 text-sm text-foreground data-code dark:border-slate-700 dark:bg-slate-900">
-          Assinatura — Prestação de Contas PDDE — Exercício AAAA — Nome da Unidade Escolar
-        </code>
-      </Callout>
-
-      <div className="mt-6 border-t border-slate-300 pt-6 dark:border-slate-700">
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-300">
-          Exemplo do bloco
-        </p>
-        <SeiMockup variant="signature-block" />
-      </div>
-    </section>
-
-    <section className="section-card" aria-labelledby="forwarding-document-title">
-      <div className="flex items-start gap-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-slate-100 text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">
-          <Send className="h-5 w-5" aria-hidden="true" />
+    <section className="section-card editorial-block" data-editorial-role="decision" aria-labelledby="signature-block-definition-title">
+      <header className="editorial-block__heading">
+        <div className="editorial-block__icon" data-tone="amber">
+          <PenLine aria-hidden="true" />
         </div>
         <div>
-          <h3 id="forwarding-document-title" className="text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-            Peça de encaminhamento e remessa
-          </h3>
-          <p className="mt-3 max-w-[72ch] text-sm leading-7 text-slate-700 sm:text-base dark:text-slate-300">
-            Quando o fluxo formal exigir ofício ou despacho, a peça deve identificar o processo e registrar o encaminhamento sem antecipar decisão, aprovação ou conclusão de regularidade.
-          </p>
+          <p className="editorial-block__eyebrow">Critério de inclusão</p>
+          <h3 id="signature-block-definition-title">O que integra o bloco de assinatura</h3>
+          <p>O bloco reúne documentos internos que precisam de assinatura eletrônica. Arquivos externos permanecem fora dele, ainda que façam parte do mesmo processo.</p>
         </div>
-      </div>
+      </header>
 
-      <Callout variant="warning" title="Validação local necessária" className="mt-5">
-        <p className="text-sm leading-7">
-          A obrigatoriedade, o tipo documental, o signatário, o conteúdo e a unidade de destino dependem de orientação institucional vigente. As minutas disponíveis no guia são apenas apoio de redação.
-        </p>
-      </Callout>
+      <div className="editorial-binary-choice editorial-binary-choice--signature">
+        <article data-state="apply">
+          <div className="editorial-binary-choice__icon">
+            <CheckCircle2 aria-hidden="true" />
+          </div>
+          <span>Integram o bloco</span>
+          <h4>Documentos internos</h4>
+          <ul>
+            {includedDocuments.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
 
-      <div className="mt-6 rounded-xl border border-slate-300 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/55">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-300">
-          Unidade apresentada como referência local
-        </p>
-        <p className="mt-2 text-sm font-bold text-foreground">{GAD_UNIT.fullLabel}</p>
-        <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Confirme no SEI!RIO se o código e a denominação permanecem vigentes antes da tramitação.
-        </p>
+        <article data-state="exclude">
+          <div className="editorial-binary-choice__icon">
+            <AlertCircle aria-hidden="true" />
+          </div>
+          <span>Não integram o bloco</span>
+          <h4>Documentos externos</h4>
+          <ul>
+            {excludedDocuments.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
       </div>
     </section>
 
-    <section className="section-card" aria-labelledby="remittance-check-title">
-      <h3 id="remittance-check-title" className="text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-        Conferência final antes da remessa
-      </h3>
-      <ul className="mt-5 divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
-        {remittanceChecks.map((item) => (
-          <li key={item} className="flex items-start gap-3 py-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
-            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700 dark:text-emerald-300" aria-hidden="true" />
-            <span>{item}</span>
+    <section className="section-card editorial-block" data-editorial-role="process" aria-labelledby="signature-block-procedure-title">
+      <header className="editorial-block__heading editorial-block__heading--compact">
+        <div>
+          <p className="editorial-block__eyebrow">Fluxo de assinatura</p>
+          <h3 id="signature-block-procedure-title">Montagem e acompanhamento do bloco</h3>
+          <p>A montagem deve permitir identificar o exercício, a unidade e os documentos pendentes sem depender de explicação oral.</p>
+        </div>
+      </header>
+
+      <ol className="editorial-process-list">
+        {blockSteps.map((step, index) => (
+          <li key={step.title} className="editorial-process-step">
+            <span className="editorial-process-step__number">{index + 1}</span>
+            <div className="editorial-process-step__content">
+              <h4>{step.title}</h4>
+              <p>{step.description}</p>
+            </div>
           </li>
         ))}
-      </ul>
-      <p className="mt-4 text-sm font-semibold leading-6 text-foreground">
+      </ol>
+
+      <div className="editorial-reference-code">
+        <span>Descrição de referência</span>
+        <code>Assinatura — Prestação de Contas PDDE — Exercício AAAA — Nome da Unidade Escolar</code>
+      </div>
+
+      <figure className="editorial-system-reference editorial-system-reference--wide">
+        <SeiMockup variant="signature-block" />
+        <figcaption>Referência visual do bloco de assinatura no SEI!RIO.</figcaption>
+      </figure>
+    </section>
+
+    <section className="section-card editorial-block" data-editorial-role="transition" aria-labelledby="forwarding-document-title">
+      <header className="editorial-block__heading">
+        <div className="editorial-block__icon" data-tone="blue">
+          <Send aria-hidden="true" />
+        </div>
+        <div>
+          <p className="editorial-block__eyebrow">Encaminhamento formal</p>
+          <h3 id="forwarding-document-title">Peça de encaminhamento e remessa</h3>
+          <p>Quando o fluxo formal exigir ofício ou despacho, a peça deve identificar o processo e registrar o encaminhamento sem antecipar decisão, aprovação ou conclusão de regularidade.</p>
+        </div>
+      </header>
+
+      <div className="editorial-callout-pair">
+        <Callout variant="warning" title="Validação local necessária">
+          <p className="text-sm leading-7">
+            A obrigatoriedade, o tipo documental, o signatário, o conteúdo e a unidade de destino dependem de orientação institucional vigente. As minutas disponíveis no guia são apenas apoio de redação.
+          </p>
+        </Callout>
+
+        <article className="editorial-context-card">
+          <span>Unidade apresentada como referência local</span>
+          <h4>{GAD_UNIT.fullLabel}</h4>
+          <p>Confirme no SEI!RIO se o código e a denominação permanecem vigentes antes da tramitação.</p>
+        </article>
+      </div>
+    </section>
+
+    <section className="section-card editorial-block" data-editorial-role="control" aria-labelledby="remittance-check-title">
+      <header className="editorial-block__heading editorial-block__heading--compact">
+        <div>
+          <p className="editorial-block__eyebrow">Condição para prosseguir</p>
+          <h3 id="remittance-check-title">Conferência final antes da remessa</h3>
+          <p>Todos os critérios abaixo devem estar atendidos antes do envio à unidade competente.</p>
+        </div>
+      </header>
+
+      <div className="editorial-check-list">
+        {remittanceChecks.map((item, index) => (
+          <div key={item}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="editorial-blocking-note">
         Não tramite o processo enquanto houver documento interno obrigatório sem assinatura ou pendência conhecida de instrução.
       </p>
     </section>

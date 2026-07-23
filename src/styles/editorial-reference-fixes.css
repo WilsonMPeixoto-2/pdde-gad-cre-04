@@ -2,7 +2,9 @@
 
 :root {
   --ref-teal-text: #236e6b;
+  --ref-amber-text: #8f5b08;
   --ref-slate-text: #58687a;
+  --ref-red-text: #9e3030;
 }
 
 html,
@@ -16,12 +18,49 @@ body,
   overflow-x: clip;
 }
 
+#secao-1,
+#secao-3 {
+  --section-accent-text: var(--ref-blue);
+}
+
+#secao-2,
+#secao-6 {
+  --section-accent-text: var(--ref-violet);
+}
+
+#secao-4,
+#contatos {
+  --section-accent-text: var(--ref-teal-text);
+}
+
+#secao-5 {
+  --section-accent-text: var(--ref-amber-text);
+}
+
+#anexo {
+  --section-accent-text: var(--ref-slate-text);
+}
+
+.editorial-chapter__index span:first-child,
+.editorial-chapter__index span:last-child,
+.editorial-chapter__label,
+.editorial-section-lead__index span,
+.editorial-section-lead__eyebrow,
+.editorial-block__eyebrow {
+  color: var(--section-accent-text, var(--section-accent));
+}
+
 .legal-rule-card__panel--correct .legal-rule-card__panel-heading span {
   color: var(--ref-teal-text);
 }
 
+.legal-rule-card__panel--prohibited .legal-rule-card__panel-heading span {
+  color: var(--ref-red-text);
+}
+
 .legal-rule-card__evidence-label span,
-.editorial-map__summary-item span {
+.editorial-map__summary-item span,
+.editorial-address-band span {
   color: var(--ref-slate-text);
 }
 
@@ -49,5 +88,51 @@ body,
 
 .dark {
   --ref-teal-text: #71d1ca;
+  --ref-amber-text: #f4bf5d;
   --ref-slate-text: #b6c4d1;
+  --ref-red-text: #ff9b9b;
+}
+
+.dark #secao-1,
+.dark #secao-3 {
+  --section-accent-text: #8fc2e5;
+}
+
+.dark #secao-2,
+.dark #secao-6 {
+  --section-accent-text: #b9afe9;
+}
+
+.dark #secao-4,
+.dark #contatos {
+  --section-accent-text: var(--ref-teal-text);
+}
+
+.dark #secao-5 {
+  --section-accent-text: var(--ref-amber-text);
+}
+
+.dark #anexo {
+  --section-accent-text: var(--ref-slate-text);
+}
+
+.dark .legal-rule-card {
+  --rule-accent: #8fc2e5;
+}
+
+.dark .legal-rule-card[data-level="municipal"] {
+  --rule-accent: #71d1ca;
+}
+
+.dark .legal-rule-card[data-level="local"] {
+  --rule-accent: #b9afe9;
+}
+
+.dark .legal-rule-card__metadata .text-slate-500 {
+  color: var(--ref-slate-text) !important;
+}
+
+.dark .editorial-rule-group h4,
+.dark .editorial-rule-group > header h4 {
+  color: #f2f7fa;
 }

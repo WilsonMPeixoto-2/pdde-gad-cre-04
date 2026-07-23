@@ -1,4 +1,4 @@
-/* Contrast corrections validated against WCAG 2.1 AA. */
+/* Contrast corrections validated against WCAG 2.1 AA and media fidelity. */
 
 :root {
   --editorial-teal: 178 76% 24%;
@@ -18,4 +18,48 @@
 .dark .editorial-section-lead__labels,
 .dark .editorial-hero__kicker {
   color: hsl(174 72% 62%);
+}
+
+/* Keep the generated editorial photograph close to its native resolution. */
+.editorial-hero__visual {
+  min-height: 30rem;
+}
+
+.editorial-hero__photo {
+  inset: 7% 0 auto 8%;
+  aspect-ratio: 400 / 278;
+}
+
+.editorial-hero__caption {
+  right: 0.4rem;
+  bottom: 5%;
+  width: min(23rem, 82%);
+}
+
+.editorial-hero__caption strong {
+  font-size: 0.9rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 1023px) {
+  .editorial-hero__visual {
+    min-height: 28rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .editorial-hero__visual {
+    min-height: 23rem;
+  }
+
+  .editorial-hero__photo {
+    inset: 0 0 auto 0;
+  }
+
+  .editorial-hero__caption {
+    right: 0.7rem;
+    bottom: 0;
+    width: calc(100% - 1.4rem);
+  }
 }

@@ -49,7 +49,7 @@ export const SectionSix = () => (
       <header className="editorial-block__heading editorial-block__heading--compact">
         <div>
           <p className="editorial-block__eyebrow">Fluxo de acompanhamento</p>
-          <h3 id="post-remittance-steps-title">Sequência posterior à remessa</h3>
+          <h3 id="post-remittance-steps-title">Sequência de acompanhamento</h3>
           <p>
             A unidade permanece responsável por acompanhar o processo e responder às comunicações formais sem criar etapas, conclusões ou exigências não registradas.
           </p>

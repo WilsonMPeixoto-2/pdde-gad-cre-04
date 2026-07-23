@@ -1,12 +1,8 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type TestInfo } from "@playwright/test";
 
 test.use({ serviceWorkers: "block", reducedMotion: "reduce" });
 
-const attachScreenshot = async (
-  testInfo: Parameters<typeof test>[1] extends never ? never : import("@playwright/test").TestInfo,
-  name: string,
-  body: Buffer,
-) => {
+const attachScreenshot = async (testInfo: TestInfo, name: string, body: Buffer) => {
   await testInfo.attach(name, { body, contentType: "image/png" });
 };
 

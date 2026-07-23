@@ -14,6 +14,7 @@ const documentGroups = [
     title: "Planejamento e aprovação das prioridades",
     description: "Documentos que demonstram o que foi priorizado, como a decisão foi aprovada e de que forma os preços foram pesquisados.",
     icon: ClipboardList,
+    tone: "blue",
     items: [
       {
         name: "Rol de materiais, bens e serviços prioritários",
@@ -34,6 +35,7 @@ const documentGroups = [
     title: "Movimentação financeira e posição da conta",
     description: "Documentos que permitem reconstruir entradas, aplicações, pagamentos e saldos do exercício.",
     icon: Landmark,
+    tone: "teal",
     items: [
       {
         name: "Demonstrativo ou registro federal aplicável ao exercício",
@@ -58,6 +60,7 @@ const documentGroups = [
     title: "Comprovação das despesas",
     description: "Peças que demonstram o objeto adquirido ou contratado, o pagamento e a relação da despesa com o planejamento aprovado.",
     icon: ReceiptText,
+    tone: "amber",
     items: [
       {
         name: "Documentos comprobatórios da destinação dos recursos",
@@ -74,6 +77,7 @@ const documentGroups = [
     title: "Patrimônio, quando houver bem permanente",
     description: "Documentação adicional exigida somente quando a execução envolver aquisição de bens permanentes.",
     icon: PackageCheck,
+    tone: "violet",
     items: [
       {
         name: "Documentação patrimonial cabível",
@@ -93,70 +97,66 @@ const localItems = [
 ] as const;
 
 export const InstructionDocumentGuide = () => (
-  <section className="section-card" aria-labelledby="instruction-documents-title">
-    <div className="flex items-start gap-4">
+  <section className="section-card editorial-block" data-editorial-role="evidence" aria-labelledby="instruction-documents-title">
+    <header className="editorial-block__heading">
       <IconTile icon={FileCheck2} size="lg" />
-      <div className="min-w-0">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
-          Antes da conferência
-        </p>
-        <h3 id="instruction-documents-title" className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
-          O que cada grupo documental demonstra
-        </h3>
-        <p className="mt-3 max-w-[72ch] text-sm leading-7 text-slate-700 sm:text-base dark:text-slate-300">
+      <div>
+        <p className="editorial-block__eyebrow">Antes da conferência</p>
+        <h3 id="instruction-documents-title">O que cada grupo documental demonstra</h3>
+        <p>
           A instrução não deve começar pela simples marcação de uma lista. Primeiro, identifique a função de cada peça e verifique se ela se aplica ao exercício, à ação e à despesa analisada.
         </p>
       </div>
-    </div>
+    </header>
 
-    <div className="mt-7 space-y-5">
-      {documentGroups.map((group, groupIndex) => {
+    <div className="document-function-grid">
+      {documentGroups.map((group) => {
         const Icon = group.icon;
         return (
-          <article key={group.title} className="rounded-xl border border-slate-300 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/55">
-            <div className="flex items-start gap-3">
-              <IconTile icon={Icon} size="md" tone={groupIndex === 3 ? "warning" : "primary"} />
-              <div className="min-w-0 flex-1">
-                <h4 className="text-base font-bold tracking-[-0.015em] text-foreground">{group.title}</h4>
-                <p className="mt-1.5 text-sm leading-6 text-slate-700 dark:text-slate-300">{group.description}</p>
+          <article key={group.title} className="document-function-card" data-tone={group.tone}>
+            <header className="document-function-card__header">
+              <IconTile icon={Icon} size="md" />
+              <div>
+                <span>Função documental</span>
+                <h4>{group.title}</h4>
+                <p>{group.description}</p>
               </div>
-            </div>
+            </header>
 
-            <dl className="mt-5 divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
+            <dl className="document-function-card__list">
               {group.items.map((item) => (
-                <div key={item.name} className="grid gap-1 py-3 sm:grid-cols-[minmax(13rem,0.8fr)_minmax(0,1.2fr)] sm:gap-5">
-                  <dt className="text-sm font-bold leading-6 text-foreground">{item.name}</dt>
-                  <dd className="text-sm leading-6 text-slate-700 dark:text-slate-300">{item.purpose}</dd>
+                <div key={item.name}>
+                  <dt>{item.name}</dt>
+                  <dd>{item.purpose}</dd>
                 </div>
               ))}
             </dl>
 
-            <div className="mt-4">
+            <footer className="document-function-card__source">
+              <span>Fundamento</span>
               <SourceCitation reference={group.reference} />
-            </div>
+            </footer>
           </article>
         );
       })}
     </div>
 
-    <aside className="mt-6 rounded-xl border border-blue-300 bg-blue-50 p-5 dark:border-blue-800 dark:bg-blue-950/25">
-      <div className="flex items-start gap-3">
-        <Banknote className="mt-0.5 h-5 w-5 shrink-0 text-blue-800 dark:text-sky-300" aria-hidden="true" />
+    <aside className="editorial-scope-band" aria-label="Peças complementares do processo local">
+      <div className="editorial-scope-band__heading">
+        <Banknote aria-hidden="true" />
         <div>
-          <h4 className="text-sm font-bold text-blue-950 dark:text-sky-100">Peças complementares do processo local</h4>
-          <p className="mt-1.5 text-sm leading-6 text-blue-950 dark:text-blue-100">
-            Além da base federal, o processo pode exigir peças administrativas do SEI!RIO. Elas não devem ser confundidas com o rol documental federal e só devem ser tratadas como obrigatórias quando houver orientação formal vigente.
-          </p>
-          <ul className="mt-3 grid gap-2 text-sm leading-6 text-blue-950 sm:grid-cols-2 dark:text-blue-100">
-            {localItems.map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-700 dark:bg-sky-300" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+          <span>Escopo e aplicabilidade</span>
+          <h4>Peças complementares do processo local</h4>
         </div>
       </div>
+      <p>
+        Além da base federal, o processo pode exigir peças administrativas do SEI!RIO. Elas não devem ser confundidas com o rol documental federal e só devem ser tratadas como obrigatórias quando houver orientação formal vigente.
+      </p>
+      <ul>
+        {localItems.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </aside>
   </section>
 );

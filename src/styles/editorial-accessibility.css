@@ -20,6 +20,11 @@
   color: hsl(174 72% 62%);
 }
 
+.dark [class~="text-primary"],
+.dark [class~="border-primary/30"] {
+  color: hsl(213 94% 72%) !important;
+}
+
 /* Keep the generated editorial photograph close to its native resolution. */
 .editorial-hero__visual {
   min-height: 30rem;

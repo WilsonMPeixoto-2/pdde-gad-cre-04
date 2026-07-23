@@ -1,0 +1,38 @@
+/* Ajustes incrementais verificados pelo primeiro ciclo de contratos v4. */
+
+:root {
+  /* O token legado era usado como texto pequeno com contraste insuficiente. */
+  --ref-amber: #8f5b08;
+}
+
+.system-command-preview__toolbar > div {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--fidelity-rule);
+  border-radius: 0.65rem;
+  background: #fff;
+  padding: 0.65rem 0.8rem;
+  color: var(--fidelity-copy);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.system-command-preview__toolbar > div:first-child {
+  border-color: rgb(23 105 170 / 0.4);
+  background: #eaf4fb;
+  color: var(--fidelity-blue);
+  box-shadow: 0 0 0 3px rgb(23 105 170 / 0.08);
+}
+
+.dark .system-command-preview__toolbar > div {
+  border-color: var(--fidelity-rule);
+  background: #172b3c;
+}
+
+@media (max-width: 767px) {
+  .system-command-preview__toolbar > div {
+    width: 100%;
+  }
+}

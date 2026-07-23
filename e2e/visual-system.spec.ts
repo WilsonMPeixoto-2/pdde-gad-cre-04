@@ -61,6 +61,40 @@ test.describe("Sistema visual editorial contemporâneo", () => {
     await expect(page.locator(".editorial-next-step")).toBeVisible();
   });
 
+  test("diferencia comparação, execução, decisão e controle nas etapas operacionais", async ({ page }) => {
+    await page.goto("/?secao=secao-3");
+    await expect(page.locator(".editorial-comparison-table")).toBeVisible();
+    await expect(page.locator(".editorial-process-step")).toHaveCount(4);
+    await expect(page.locator(".editorial-control-grid article")).toHaveCount(4);
+
+    await page.goto("/?secao=secao-4");
+    await expect(page.locator(".editorial-binary-choice article")).toHaveCount(2);
+    await expect(page.locator(".editorial-process-step")).toHaveCount(4);
+    await expect(page.locator(".editorial-callout-pair")).toBeVisible();
+
+    await page.goto("/?secao=secao-5");
+    await expect(page.locator(".editorial-binary-choice--signature article")).toHaveCount(2);
+    await expect(page.locator(".editorial-check-list > div")).toHaveCount(5);
+    await expect(page.locator(".editorial-blocking-note")).toBeVisible();
+
+    await page.goto("/?secao=secao-6");
+    await expect(page.locator(".editorial-follow-up-flow > li")).toHaveCount(3);
+    await expect(page.locator(".editorial-boundary-card")).toHaveCount(2);
+  });
+
+  test("organiza apoio e fontes por finalidade, nível e aplicabilidade", async ({ page }) => {
+    await page.goto("/?secao=contatos");
+    await expect(page.locator(".editorial-contact-grid > article")).toHaveCount(2);
+    await expect(page.locator(".editorial-resource-grid > a")).toHaveCount(3);
+    await expect(page.locator(".editorial-print-panel")).toBeVisible();
+
+    await page.goto("/?secao=anexo");
+    await expect(page.locator(".editorial-applicability-frame")).toBeVisible();
+    await expect(page.locator('.editorial-source-card[data-level="federal"]')).toHaveCount(5);
+    await expect(page.locator('.editorial-source-card[data-level="municipal"]')).toHaveCount(4);
+    await expect(page.locator(".editorial-validation-notice")).toBeVisible();
+  });
+
   test("preserva seis losangos alinhados no mapa das etapas", async ({ page }) => {
     await page.goto("/?secao=mapa-jornada");
 

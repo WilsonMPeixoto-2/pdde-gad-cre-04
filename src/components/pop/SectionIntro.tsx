@@ -76,7 +76,11 @@ export const SectionIntro = () => {
               4ª Coordenadoria Regional de Educação · GAD
             </p>
 
-            <h1 id="cover-intro-v5-title" className="cover-intro-v5__title">
+            <h1
+              id="cover-intro-v5-title"
+              className="cover-intro-v5__title"
+              aria-label="Prestação de Contas PDDE no SEI!RIO"
+            >
               <span>Prestação de</span>
               <span>contas do PDDE</span>
               <span className="cover-intro-v5__title-accent">no SEI!RIO</span>
@@ -95,12 +99,16 @@ export const SectionIntro = () => {
 
           <figure className="cover-intro-v5__visual">
             <img
-              src="https://images.pexels.com/photos/5905486/pexels-photo-5905486.jpeg?auto=compress&cs=tinysrgb&w=2400&h=1853&fit=crop"
-              alt="Educadora acompanha estudante durante uma atividade de registro e organização escolar."
+              src="https://images.pexels.com/photos/5905481/pexels-photo-5905481.jpeg?auto=compress&cs=tinysrgb&w=2400"
+              alt="Professora conversa com duas crianças durante uma atividade de escrita em sala de aula."
               width={2400}
-              height={1853}
+              height={3600}
               fetchPriority="high"
               decoding="async"
+              onError={(event) => {
+                event.currentTarget.onerror = null;
+                event.currentTarget.src = "/editorial/hero-pdde.webp";
+              }}
             />
             <span className="cover-intro-v5__photo-shape" aria-hidden="true" />
             <figcaption className="cover-intro-v5__photo-caption">

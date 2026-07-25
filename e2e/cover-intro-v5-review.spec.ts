@@ -10,8 +10,12 @@ const waitForCover = async (page: Page) => {
 };
 
 test.describe("homologação visual temporária da capa e introdução v5", () => {
-  test("captura desktop 4K em 16:9", async ({ page }) => {
-    await page.setViewportSize({ width: 3840, height: 2160 });
+  test("captura desktop 4K em 16:9", async ({ browser }) => {
+    const context = await browser.newContext({
+      viewport: { width: 1920, height: 1080 },
+      deviceScaleFactor: 2,
+    });
+    const page = await context.newPage();
     await waitForCover(page);
 
     const cover = page.locator(".cover-intro-v5__cover");
@@ -26,6 +30,8 @@ test.describe("homologação visual temporária da capa e introdução v5", () =
     await page.locator(".cover-intro-v5__scope-stack").screenshot({
       path: test.info().outputPath("scope-journey-desktop-full.png"),
     });
+
+    await context.close();
   });
 
   test("captura mobile de alta densidade", async ({ browser }) => {

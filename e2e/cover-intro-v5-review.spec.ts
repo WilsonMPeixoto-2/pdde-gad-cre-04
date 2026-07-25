@@ -1,6 +1,6 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
-const waitForCover = async (page: Parameters<typeof test>[0]["page"]) => {
+const waitForCover = async (page: Page) => {
   await page.goto("/");
   await page.locator('[data-cover-intro-version="5"]').waitFor({ state: "visible" });
   await page.evaluate(async () => {

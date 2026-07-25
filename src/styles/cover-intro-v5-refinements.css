@@ -20,10 +20,23 @@
 
 .dark .cover-intro-v5,
 .dark .cover-intro-v5__scope-stack {
+  --ci-navy: #edf6fc;
+  --ci-navy-deep: #f7fbfe;
+  --ci-blue: #86c9f5;
+  --ci-teal: #57d7c8;
+  --ci-teal-deep: #86e7dc;
+  --ci-violet: #c6b9ff;
+  --ci-amber: #ffc95f;
+  --ci-ink: #f4f8fb;
+  --ci-copy: #d4e0ea;
   --ci-muted: #bed0dc;
 }
 
 @media (max-width: 900px) {
+  .cover-intro-v5__title {
+    font-size: clamp(3rem, 13.5vw, 4.35rem);
+  }
+
   .cover-intro-v5__visual img {
     object-position: center 45%;
   }

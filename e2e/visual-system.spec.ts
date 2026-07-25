@@ -3,14 +3,16 @@ import { expect, test } from "@playwright/test";
 test.use({ serviceWorkers: "block", reducedMotion: "reduce" });
 
 test.describe("Sistema visual institucional", () => {
-  test("mantém a capa sem efeitos promocionais concorrentes", async ({ page }) => {
+  test("mantém a capa aprovada sem efeitos promocionais ou ação redundante", async ({ page }) => {
     await page.goto("/");
 
     const hero = page.locator("#hero-cover");
     await expect(hero.getByRole("heading", { level: 1, name: /prestação de contas pdde no sei!rio/i })).toBeVisible();
     await expect(hero.locator(".bg-clip-text")).toHaveCount(0);
     await expect(hero.locator(".animate-pulse")).toHaveCount(0);
-    await expect(hero.getByRole("button", { name: /iniciar guia/i })).toBeVisible();
+    await expect(hero.getByRole("button", { name: /iniciar guia/i })).toHaveCount(0);
+    await expect(hero.getByText(/apresentação institucional e escopo do guia/i)).toBeVisible();
+    await expect(hero.locator("img")).toHaveAttribute("width", "2400");
   });
 
   test("mantém cabeçalho e sumário sem pulsação, rotação ou brilho promocional", async ({ page }) => {

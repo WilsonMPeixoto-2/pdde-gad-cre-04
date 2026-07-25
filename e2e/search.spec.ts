@@ -7,15 +7,16 @@ test.describe("Busca global", () => {
     await page.goto("/");
 
     await page.keyboard.press("Control+k");
-    const input = page.getByPlaceholder("Buscar seções, documentos, procedimentos...");
+    const dialog = page.getByRole("dialog");
+    const input = dialog.getByPlaceholder("Buscar seções, documentos, procedimentos...");
     await expect(input).toBeVisible();
 
     await input.fill("pessoa física");
-    await expect(page.getByText("Contratação de pessoa física — consulta prévia obrigatória", { exact: true })).toBeVisible();
-    await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
+    await expect(dialog.getByText("Contratação de pessoa física — consulta prévia obrigatória", { exact: true }).first()).toBeVisible();
+    await expect(dialog.getByText(/Este guia não define, isoladamente, o documento fiscal/i).first()).toBeVisible();
 
     await input.fill("tipo de processo");
-    await expect(page.getByText("Tipo de processo no SEI!RIO", { exact: true })).toBeVisible();
-    await expect(page.getByText(/Confirme a denominação no sistema e na orientação local vigente/i)).toBeVisible();
+    await expect(dialog.getByText("Tipo de processo no SEI!RIO", { exact: true }).first()).toBeVisible();
+    await expect(dialog.getByText(/Confirme a denominação no sistema e na orientação local vigente/i).first()).toBeVisible();
   });
 });

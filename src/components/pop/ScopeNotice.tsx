@@ -15,7 +15,7 @@ export const ScopeNotice = () => (
         <span className="cover-intro-v5__scope-icon" aria-hidden="true"><ShieldCheck /></span>
         <div>
           <p>Escopo institucional</p>
-          <h2 id="scope-notice-title">Escopo e limites deste guia</h2>
+          <h3 id="scope-notice-title">Escopo e limites deste guia</h3>
         </div>
       </header>
 

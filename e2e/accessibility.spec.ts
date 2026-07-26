@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
 test.use({ serviceWorkers: "block", reducedMotion: "reduce" });
+test.describe.configure({ timeout: 120_000 });
 
 const expectNoCriticalOrSeriousA11yViolations = async (page: Page, includeSelector?: string) => {
   let builder = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]);

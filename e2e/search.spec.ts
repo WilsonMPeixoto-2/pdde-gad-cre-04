@@ -11,11 +11,21 @@ test.describe("Busca global", () => {
     await expect(input).toBeVisible();
 
     await input.fill("pessoa física");
-    await expect(page.getByText("Contratação de pessoa física — consulta prévia obrigatória", { exact: true })).toBeVisible();
-    await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
+    const personRule = page
+      .getByRole("option")
+      .filter({ hasText: "Contratação de pessoa física — consulta prévia obrigatória" })
+      .first();
+    await expect(personRule).toBeVisible();
+    await expect(personRule).toContainText(/Este guia não define, isoladamente, o documento fiscal/i);
 
     await input.fill("tipo de processo");
-    await expect(page.getByText("Tipo de processo no SEI!RIO", { exact: true })).toBeVisible();
-    await expect(page.getByText(/Confirme a denominação no sistema e na orientação local vigente/i)).toBeVisible();
+    const processTypeRule = page
+      .getByRole("option")
+      .filter({ hasText: "Tipo de processo no SEI!RIO" })
+      .first();
+    await expect(processTypeRule).toBeVisible();
+    await expect(processTypeRule).toContainText(
+      /Confirme a denominação no sistema e na orientação local vigente/i,
+    );
   });
 });

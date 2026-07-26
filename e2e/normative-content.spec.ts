@@ -53,6 +53,11 @@ test.describe("Conteúdo normativo PDDE", () => {
     await expect(page.getByText("Documentação patrimonial cabível", { exact: true })).toBeVisible();
 
     await page.goto("/?secao=anexo");
+    await expect(page.locator('#anexo')).toHaveAttribute(
+      "data-guide-section-status",
+      "ready",
+      { timeout: 15_000 },
+    );
     await expect(page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i })).toBeVisible();
     await expect(page.locator('[data-applicability-status="pending-local-validation"]')).toHaveCount(2);
     await expect(page.getByText(/não constituem orientação operacional definitiva/i)).toBeVisible();

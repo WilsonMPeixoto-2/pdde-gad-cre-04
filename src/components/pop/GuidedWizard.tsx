@@ -110,16 +110,17 @@ export const GuidedWizard = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-24 right-6 z-40 no-print xl:right-[max(1.5rem,calc(50vw-54rem))]">
+      <div className="fixed bottom-24 right-6 z-40 no-print">
         <Button
           onClick={() => startTransition(() => setIsOpen(true))}
-          className="h-11 gap-2 px-4 shadow-[0_10px_30px_-18px_hsl(var(--primary)/0.7)]"
+          className="relative h-12 w-12 rounded-full p-0 shadow-[0_10px_30px_-18px_hsl(var(--primary)/0.7)]"
+          title="Abrir modo guiado"
           aria-label="Abrir modo guiado da prestação de contas"
         >
           <Compass aria-hidden="true" />
-          Modo guiado
+          <span className="sr-only">Modo guiado</span>
           {completedCount > 0 ? (
-            <span className="rounded-md border border-white/20 bg-white/12 px-1.5 py-0.5 text-[0.68rem] tabular-nums text-white">
+            <span className="absolute -left-2 -top-2 rounded-full border border-white/30 bg-primary px-1.5 py-0.5 text-[0.62rem] tabular-nums text-white shadow-sm">
               {completedCount}/{steps.length}
             </span>
           ) : null}
@@ -129,7 +130,7 @@ export const GuidedWizard = () => {
   }
 
   return (
-    <aside className="fixed bottom-24 right-6 z-50 w-[430px] no-print xl:right-[max(1.5rem,calc(50vw-54rem))]" aria-label="Modo guiado">
+    <aside className="fixed bottom-24 right-6 z-50 w-[430px] no-print" aria-label="Modo guiado">
       <div className="overflow-hidden rounded-[1rem] border border-border/75 bg-card shadow-[0_24px_70px_-32px_hsl(218_28%_18%/0.48)]">
         <header className="flex items-center justify-between border-b border-border/65 px-4 py-3.5">
           <div className="flex items-center gap-3">

@@ -386,8 +386,10 @@ export const PDDEChecklist = () => {
         <div className="p-3.5 bg-warning/5 border border-warning/20 rounded-xl mb-4 flex items-start gap-3 animate-fade-in">
           <AlertTriangle className="w-4 h-4 text-warning shrink-0 mt-0.5" />
           <div>
-                      <p className="font-semibold text-warning text-xs mb-0.5">Documentação patrimonial aplicável</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">
+                      <p className="mb-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">
+                        Documentação patrimonial aplicável
+                      </p>
+                      <p className="text-xs leading-relaxed text-slate-700 dark:text-slate-300">
               Quando houver bem permanente, junte a documentação patrimonial cabível e observe o
               procedimento local formalmente validado.
             </p>

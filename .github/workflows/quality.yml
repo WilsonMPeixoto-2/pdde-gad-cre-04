@@ -121,7 +121,20 @@ jobs:
         run: npm run check:headers
 
       - name: Audit structural content
-        run: npm run check:content
+        shell: bash
+        run: |
+          mkdir -p output/content-audit
+          set -o pipefail
+          npm run check:content 2>&1 | tee output/content-audit/content-audit.log
+
+      - name: Upload structural content diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: structural-content-diagnostics
+          path: output/content-audit/content-audit.log
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Audit normative content
         run: npm run check:normative

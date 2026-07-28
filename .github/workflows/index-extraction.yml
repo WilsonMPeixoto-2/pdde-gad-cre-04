@@ -1,0 +1,42 @@
+name: index-extraction
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/apply-index-extraction.py
+      - .github/workflows/index-extraction.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.head_ref == 'chore/project-hardening-v2.7'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+        with:
+          ref: chore/project-hardening-v2.7
+          fetch-depth: 0
+
+      - name: Apply extraction
+        run: python scripts/apply-index-extraction.py
+
+      - name: Commit extraction
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "Extração já aplicada."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/pages/Index.tsx
+          git commit -m "refactor: separar coordenação de seções e impressão"
+          git pull --rebase origin chore/project-hardening-v2.7
+          git push origin HEAD:chore/project-hardening-v2.7

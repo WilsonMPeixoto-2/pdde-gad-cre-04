@@ -4,6 +4,7 @@
   "project": ["src/**/*.{ts,tsx}", "scripts/**/*.ts", "e2e/**/*.ts"],
   "ignore": ["src/components/ui/**"],
   "ignoreDependencies": [
+    "lighthouse",
     "tailwindcss",
     "tailwindcss-animate",
     "@tailwindcss/typography"

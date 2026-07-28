@@ -201,7 +201,6 @@
 
   &:hover {
     box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
     border-color: hsl(var(--border) / 0.78);
   }
 

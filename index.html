@@ -140,6 +140,11 @@
         50% { opacity: 0.6; }
         100% { opacity: 1; }
       }
+      @media (prefers-reduced-motion: reduce) {
+        .initial-skeleton * {
+          animation: none !important;
+        }
+      }
     </style>
     
     <!-- Fonts loaded via @fontsource in main.tsx -->

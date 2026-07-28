@@ -1,7 +1,6 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { ProfileModeProvider } from "@/contexts/ProfileModeContext";
 import { useAssetUpdateRecovery } from "@/hooks/useAssetUpdateRecovery";
@@ -11,22 +10,39 @@ import Index from "./pages/Index";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+const normalizePathname = (pathname: string) => {
+  const normalized = pathname.replace(/\/+$/, "");
+  return normalized || "/";
+};
+
 const App = () => {
   useAssetUpdateRecovery();
   useServiceWorkerLifecycle();
+
+  const [pathname, setPathname] = useState(() => normalizePathname(window.location.pathname));
+  const isGuideRoute = pathname === "/";
+
+  useEffect(() => {
+    const syncPathname = () => setPathname(normalizePathname(window.location.pathname));
+    window.addEventListener("popstate", syncPathname);
+    return () => window.removeEventListener("popstate", syncPathname);
+  }, []);
 
   return (
     <ErrorBoundary>
       <ProfileModeProvider>
         <TooltipProvider>
           <Sonner />
-          <CommandPalette />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
-            </Routes>
-          </BrowserRouter>
+          {isGuideRoute ? (
+            <>
+              <CommandPalette />
+              <Index />
+            </>
+          ) : (
+            <Suspense fallback={null}>
+              <NotFound pathname={pathname} />
+            </Suspense>
+          )}
         </TooltipProvider>
       </ProfileModeProvider>
     </ErrorBoundary>

@@ -14,7 +14,7 @@ concurrency:
 jobs:
   check-ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 50
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -25,17 +25,157 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
+
+      - name: Verify npm lockfile synchronization
+        id: lockfile
+        shell: bash
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          if git diff --quiet -- package-lock.json; then
+            echo "mismatch=false" >> "$GITHUB_OUTPUT"
+            echo "package-lock.json está sincronizado."
+          else
+            echo "mismatch=true" >> "$GITHUB_OUTPUT"
+            echo "package-lock.json precisa ser atualizado."
+          fi
+
+      - name: Upload synchronized lockfile
+        if: steps.lockfile.outputs.mismatch == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: synchronized-package-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Fail when lockfile is outdated
+        if: steps.lockfile.outputs.mismatch == 'true'
+        run: |
+          echo "O package-lock.json versionado diverge do package.json."
+          exit 1
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate npm audit evidence
+        shell: bash
+        run: |
+          mkdir -p output/security
+          npm audit --json > output/security/npm-audit.json || true
+
+      - name: Upload npm audit evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: npm-security-audit
+          path: output/security/npm-audit.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Enforce npm audit gate
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from "node:fs";
+
+          const audit = JSON.parse(readFileSync("output/security/npm-audit.json", "utf8"));
+          const counts = audit.metadata?.vulnerabilities ?? {};
+          const high = Number(counts.high ?? 0);
+          const critical = Number(counts.critical ?? 0);
+
+          console.log("Resumo npm audit:", counts);
+          if (high + critical > 0) {
+            console.error(`Gate bloqueado: ${high} vulnerabilidade(s) alta(s) e ${critical} crítica(s).`);
+            process.exit(1);
+          }
+          NODE
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript checks
+        run: npm run typecheck
+
+      - name: Build production application
+        shell: bash
+        run: |
+          mkdir -p output/build
+          set -o pipefail
+          npm run build 2>&1 | tee output/build/build.log
+
+      - name: Upload build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: build-diagnostics
+          path: output/build/build.log
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Check bundle budget
+        run: npm run check:bundle-budget
+
+      - name: Audit security headers
+        run: npm run check:headers
+
+      - name: Audit structural content
+        shell: bash
+        run: |
+          mkdir -p output/content-audit
+          set -o pipefail
+          npm run check:content 2>&1 | tee output/content-audit/content-audit.log
+
+      - name: Upload structural content diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: structural-content-diagnostics
+          path: output/content-audit/content-audit.log
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Audit normative content
+        run: npm run check:normative
+
+      - name: Audit linked PDFs
+        run: npm run check:pdfs
+
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Run quality pipeline
-        run: npm run check:ci
+      - name: Run Playwright end-to-end contracts
+        run: npx playwright test
+
+      - name: Run unused-code audit
+        run: npm run audit:unused
+
+      - name: Run Lighthouse CI
+        run: npm run lighthouse
+
+      - name: Upload Lighthouse artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse-artifacts
+          path: output/lighthouse
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Generate bundle analysis
+        env:
+          ANALYZE_BUNDLE: "true"
+        run: npm run analyze:bundle
+
+      - name: Upload bundle analysis
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: bundle-analysis
+          path: stats.html
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Upload Playwright artifacts
         if: always()
@@ -46,3 +186,4 @@ jobs:
             output/playwright/report
             output/playwright/test-results
           if-no-files-found: ignore
+          retention-days: 14

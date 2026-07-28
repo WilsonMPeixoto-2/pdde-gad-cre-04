@@ -1,9 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { visualizer } from "rollup-plugin-visualizer";
 import path from "path";
 import { execSync } from "node:child_process";
-import { readFileSync } from "node:fs";
 import { GUIDE_VERSION } from "./src/lib/guideVersion";
+import { guideHowToSteps } from "./src/lib/guideMetadata";
 
 const resolveBuildId = () => {
   const commitSha =
@@ -24,34 +25,21 @@ const resolveBuildId = () => {
   }
 };
 
-const extractGuideHowToSteps = () => {
-  const guideContentPath = path.resolve(__dirname, "src/lib/guideContent.ts");
-  const source = readFileSync(guideContentPath, "utf8");
-  const sectionPattern = /\{\s*id:\s*"secao-([1-6])",\s*number:\s*"\1",\s*title:\s*"([^"]+)",\s*shortTitle:\s*"[^"]+",\s*subtitle:\s*"([^"]+)"/g;
-  const steps = [...source.matchAll(sectionPattern)]
-    .map((match) => ({
-      "@type": "HowToStep",
-      position: Number(match[1]),
-      name: match[2],
-      text: match[3],
-    }))
-    .sort((a, b) => a.position - b.position);
-
-  if (steps.length !== 6) {
-    throw new Error(
-      `Não foi possível gerar o JSON-LD a partir de guideContent.ts: esperados 6 passos, encontrados ${steps.length}.`,
-    );
-  }
-
-  return steps;
-};
-
 const buildId = resolveBuildId();
 
 const guideMetadataPlugin = () => ({
   name: "pdde-guide-metadata",
   transformIndexHtml(html: string) {
-    const howToSteps = extractGuideHowToSteps();
+    const howToSteps = guideHowToSteps.map((step) => ({
+      "@type": "HowToStep",
+      ...step,
+    }));
+
+    if (howToSteps.length !== 6) {
+      throw new Error(
+        `Não foi possível gerar o JSON-LD: esperados 6 passos, encontrados ${howToSteps.length}.`,
+      );
+    }
 
     return html
       .replaceAll("__GUIDE_FIRST_PUBLISHED_ISO_DATE__", GUIDE_VERSION.firstPublishedIsoDate)
@@ -61,18 +49,36 @@ const guideMetadataPlugin = () => ({
 });
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  define: {
-    __APP_BUILD_ID__: JSON.stringify(buildId),
-  },
-  plugins: [react(), guideMetadataPlugin()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+export default defineConfig(({ mode }) => {
+  const analyzeBundle = mode === "analyze" || process.env.ANALYZE_BUNDLE === "true";
+
+  return {
+    server: {
+      host: "::",
+      port: 8080,
     },
-  },
+    define: {
+      __APP_BUILD_ID__: JSON.stringify(buildId),
+    },
+    plugins: [
+      react(),
+      guideMetadataPlugin(),
+      ...(analyzeBundle
+        ? [
+            visualizer({
+              filename: "stats.html",
+              gzipSize: true,
+              brotliSize: true,
+              open: false,
+              template: "treemap",
+            }),
+          ]
+        : []),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+  };
 });

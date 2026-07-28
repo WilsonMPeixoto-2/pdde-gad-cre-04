@@ -59,4 +59,21 @@ test.describe("Acessibilidade automatizada", () => {
     await expect(page.locator("html")).toHaveClass(/dark/);
     await expectNoCriticalOrSeriousA11yViolations(page);
   });
+
+  test("mantém a conclusão do checklist sem confete quando há redução de movimento", async ({ page }) => {
+    await page.goto("/?secao=checklist-documentos");
+    await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
+
+    const pendingEssentialItems = page.locator('button[aria-label^="Marcar item "]');
+    const initialCount = await pendingEssentialItems.count();
+    expect(initialCount).toBeGreaterThan(0);
+
+    for (let completed = 0; completed < initialCount; completed += 1) {
+      await pendingEssentialItems.first().click();
+    }
+
+    await expect(pendingEssentialItems).toHaveCount(0);
+    await expect(page.getByText("Itens essenciais completos!", { exact: true })).toBeVisible();
+    await expect(page.locator("canvas")).toHaveCount(0);
+  });
 });

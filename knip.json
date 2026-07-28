@@ -1,13 +1,11 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "entry": [
-    "src/main.tsx",
-    "vite.config.ts",
-    "playwright.config.ts",
-    "scripts/*.ts",
-    "e2e/*.spec.ts"
-  ],
+  "entry": ["scripts/*.ts", "e2e/*.spec.ts"],
   "project": ["src/**/*.{ts,tsx}", "scripts/**/*.ts", "e2e/**/*.ts"],
   "ignore": ["src/components/ui/**"],
-  "ignoreDependencies": ["tailwindcss-animate", "@tailwindcss/typography", "@tailwindcss/postcss"]
+  "ignoreDependencies": [
+    "tailwindcss",
+    "tailwindcss-animate",
+    "@tailwindcss/typography"
+  ]
 }

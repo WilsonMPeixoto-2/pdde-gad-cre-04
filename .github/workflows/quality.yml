@@ -14,7 +14,7 @@ concurrency:
 jobs:
   check-ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -59,14 +59,73 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Audit high severity vulnerabilities
-        run: npm run audit:security
+      - name: Generate npm audit evidence
+        shell: bash
+        run: |
+          mkdir -p output/security
+          npm audit --json > output/security/npm-audit.json || true
+
+      - name: Upload npm audit evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: npm-security-audit
+          path: output/security/npm-audit.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Enforce npm audit gate
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from "node:fs";
+
+          const audit = JSON.parse(readFileSync("output/security/npm-audit.json", "utf8"));
+          const counts = audit.metadata?.vulnerabilities ?? {};
+          const high = Number(counts.high ?? 0);
+          const critical = Number(counts.critical ?? 0);
+
+          console.log("Resumo npm audit:", counts);
+          if (high + critical > 0) {
+            console.error(`Gate bloqueado: ${high} vulnerabilidade(s) alta(s) e ${critical} crítica(s).`);
+            process.exit(1);
+          }
+          NODE
 
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
       - name: Run quality pipeline
         run: npm run check:ci
+
+      - name: Run unused-code audit
+        run: npm run audit:unused
+
+      - name: Run Lighthouse CI
+        run: npm run lighthouse
+
+      - name: Upload Lighthouse artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse-artifacts
+          path: .lighthouseci
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Generate bundle analysis
+        env:
+          ANALYZE_BUNDLE: "true"
+        run: npm run analyze:bundle
+
+      - name: Upload bundle analysis
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: bundle-analysis
+          path: stats.html
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Upload Playwright artifacts
         if: always()
@@ -77,3 +136,4 @@ jobs:
             output/playwright/report
             output/playwright/test-results
           if-no-files-found: ignore
+          retention-days: 14

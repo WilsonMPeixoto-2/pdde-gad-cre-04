@@ -14,7 +14,7 @@ concurrency:
 jobs:
   check-ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 50
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -92,11 +92,35 @@ jobs:
           }
           NODE
 
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript checks
+        run: npm run typecheck
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Check bundle budget
+        run: npm run check:bundle-budget
+
+      - name: Audit security headers
+        run: npm run check:headers
+
+      - name: Audit structural content
+        run: npm run check:content
+
+      - name: Audit normative content
+        run: npm run check:normative
+
+      - name: Audit linked PDFs
+        run: npm run check:pdfs
+
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Run quality pipeline
-        run: npm run check:ci
+      - name: Run Playwright end-to-end contracts
+        run: npx playwright test
 
       - name: Run unused-code audit
         run: npm run audit:unused

@@ -14,7 +14,7 @@ concurrency:
 jobs:
   check-ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 40
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -25,11 +25,42 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
+
+      - name: Verify npm lockfile synchronization
+        id: lockfile
+        shell: bash
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          if git diff --quiet -- package-lock.json; then
+            echo "mismatch=false" >> "$GITHUB_OUTPUT"
+            echo "package-lock.json está sincronizado."
+          else
+            echo "mismatch=true" >> "$GITHUB_OUTPUT"
+            echo "package-lock.json precisa ser atualizado."
+          fi
+
+      - name: Upload synchronized lockfile
+        if: steps.lockfile.outputs.mismatch == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: synchronized-package-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Fail when lockfile is outdated
+        if: steps.lockfile.outputs.mismatch == 'true'
+        run: |
+          echo "O package-lock.json versionado diverge do package.json."
+          exit 1
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Audit high severity vulnerabilities
+        run: npm run audit:security
 
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium

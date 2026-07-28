@@ -24,7 +24,7 @@
     "check:pdfs": "tsx scripts/audit-pdfs.ts",
     "check:bundle-budget": "tsx scripts/check-bundle-budget.ts",
     "analyze:bundle": "vite build --mode analyze",
-    "lighthouse": "lhci autorun",
+    "lighthouse": "npm exec --yes --package=@lhci/cli@0.15.1 -- lhci autorun",
     "audit:security": "npm audit --audit-level=high",
     "audit:unused": "knip --include files,dependencies,unlisted,unresolved",
     "check:all": "npm run lint && npm run typecheck && npm run build && npm run check:bundle-budget && npm run check:content && npm run check:normative",
@@ -45,7 +45,7 @@
     "lucide-react": "^1.27.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.1",
+    "react-router-dom": "7.11.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7"
@@ -53,8 +53,6 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
     "@eslint/js": "^10.0.1",
-    "@htmlacademy/eslint-plugin-jsx-a11y": "^6.11.0",
-    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4.2.2",
     "@tailwindcss/typography": "^0.5.19",

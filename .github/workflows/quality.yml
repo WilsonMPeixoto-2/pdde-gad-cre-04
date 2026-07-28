@@ -159,7 +159,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: lighthouse-artifacts
-          path: .lighthouseci
+          path: output/lighthouse
           if-no-files-found: ignore
           retention-days: 14
 

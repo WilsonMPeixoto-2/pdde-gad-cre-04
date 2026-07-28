@@ -1,5 +1,5 @@
 import { type ReactNode, lazy, Suspense, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useBrowserSearchParams } from "@/hooks/useBrowserSearchParams";
 import { AlertTriangle, RotateCcw } from "lucide-react";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
@@ -204,7 +204,7 @@ const DeferredSectionSlot = ({
 };
 
 const Index = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useBrowserSearchParams();
   const [activeSection, setActiveSection] = useState<GuideSectionId>("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isPreparingPrint, setIsPreparingPrint] = useState(false);

@@ -29,7 +29,7 @@ jobs:
           from pathlib import Path
           path = Path("src/pages/Index.tsx")
           source = path.read_text(encoding="utf-8")
-          old = "\n  useEffectEvent((\n"
+          old = "\n useEffectEvent((\n"
           new = "\n  const syncVisibleSection = useEffectEvent((\n"
           if old in source:
               source = source.replace(old, new, 1)

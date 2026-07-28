@@ -99,7 +99,20 @@ jobs:
         run: npm run typecheck
 
       - name: Build production application
-        run: npm run build
+        shell: bash
+        run: |
+          mkdir -p output/build
+          set -o pipefail
+          npm run build 2>&1 | tee output/build/build.log
+
+      - name: Upload build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: build-diagnostics
+          path: output/build/build.log
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Check bundle budget
         run: npm run check:bundle-budget

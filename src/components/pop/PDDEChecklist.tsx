@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { downloadTextFile } from "@/lib/clientFileExports";
 import { externalResources } from "@/lib/externalResources";
 import { useClipboardAction } from "@/hooks/useClipboardAction";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import {
   createChecklistItems,
   hydrateChecklistItems,
@@ -25,6 +26,7 @@ const loadConfetti = () => {
 };
 
 export const PDDEChecklist = () => {
+  const reducedMotion = useReducedMotion();
   const hasConfettiFired = useRef(false);
   const [filter, setFilter] = useState<FilterType>('todos');
   const [items, setItems] = useState<ChecklistItemState[]>(() =>
@@ -62,32 +64,34 @@ export const PDDEChecklist = () => {
   const completedCount = items.filter(item => item.checked).length;
   const progressPercent = (essenciaisCompleted / essenciaisCount) * 100;
 
-  // Fire confetti when all essential items are completed
+  // Provide a restrained completion acknowledgement and avoid motion when requested.
   useEffect(() => {
     let isActive = true;
 
     if (essenciaisCompleted === essenciaisCount && essenciaisCount > 0 && !hasConfettiFired.current) {
       hasConfettiFired.current = true;
-      const end = Date.now() + 800;
+      toast.success("Todos os itens essenciais foram concluídos.");
+
+      if (reducedMotion) {
+        return () => {
+          isActive = false;
+        };
+      }
 
       void loadConfetti().then(({ default: confetti }) => {
         if (!isActive) return;
 
-        const fire = () => {
-          confetti({
-            particleCount: 30,
-            angle: 60 + Math.random() * 60,
-            spread: 55,
-            origin: { x: Math.random(), y: 0.6 },
-            colors: ['#2563eb', '#10b981', '#f59e0b'],
-            zIndex: 9999,
-          });
-          if (Date.now() < end) requestAnimationFrame(fire);
-        };
-
-        fire();
+        confetti({
+          particleCount: 42,
+          spread: 62,
+          origin: { x: 0.5, y: 0.68 },
+          colors: ["#2563eb", "#10b981", "#f59e0b"],
+          zIndex: 9999,
+          disableForReducedMotion: true,
+        });
       });
     }
+
     if (essenciaisCompleted < essenciaisCount) {
       hasConfettiFired.current = false;
     }
@@ -95,7 +99,7 @@ export const PDDEChecklist = () => {
     return () => {
       isActive = false;
     };
-  }, [essenciaisCompleted, essenciaisCount]);
+  }, [essenciaisCompleted, essenciaisCount, reducedMotion]);
 
   const resetChecklist = () => {
     setItems(createChecklistItems());

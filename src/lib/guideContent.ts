@@ -11,8 +11,9 @@ import {
   Upload,
 } from "lucide-react";
 import { GUIDE_VERSION } from "@/lib/guideVersion";
+import { GUIDE_PROCESS_SECTIONS, guideHowToSteps } from "@/lib/guideMetadata";
 
-export { GUIDE_VERSION };
+export { GUIDE_VERSION, guideHowToSteps };
 
 export const PROCESS_TYPE_LABEL =
   "GESTÃO DOS CONSELHOS MUNICIPAIS DE EDUCAÇÃO: PRESTAÇÃO DE CONTAS DO CONSELHO ESCOLA COMUNIDADE - CEC";
@@ -48,6 +49,15 @@ export interface GuideSectionMeta {
   icon: LucideIcon;
 }
 
+const GUIDE_SECTION_ICONS: Record<(typeof GUIDE_PROCESS_SECTIONS)[number]["id"], LucideIcon> = {
+  "secao-1": ClipboardList,
+  "secao-2": FileText,
+  "secao-3": Upload,
+  "secao-4": Shield,
+  "secao-5": PenTool,
+  "secao-6": Send,
+};
+
 export const guideSections = [
   {
     id: "introducao",
@@ -56,54 +66,10 @@ export const guideSections = [
     shortTitle: "Apresentação",
     icon: FileText,
   },
-  {
-    id: "secao-1",
-    number: "1",
-    title: "Abertura e Identificação do Processo",
-    shortTitle: "Abertura do Processo",
-    subtitle: "Preparação dos dados, autuação, preenchimento do cadastro e registro do NUP",
-    icon: ClipboardList,
-  },
-  {
-    id: "secao-2",
-    number: "2",
-    title: "Preparação e Instrução dos Autos",
-    shortTitle: "Instrução dos Autos",
-    subtitle: "Função dos documentos, regras aplicáveis, organização e conferência final",
-    icon: FileText,
-  },
-  {
-    id: "secao-3",
-    number: "3",
-    title: "Inclusão de Documentos Externos",
-    shortTitle: "Documentos Externos",
-    subtitle: "Classificação, inclusão, metadados e identificação dos arquivos no SEI!RIO",
-    icon: Upload,
-  },
-  {
-    id: "secao-4",
-    number: "4",
-    title: "Autenticação de Documentos Digitalizados",
-    shortTitle: "Autenticação",
-    subtitle: "Autenticação dos arquivos originados em papel e conferência do registro na árvore",
-    icon: Shield,
-  },
-  {
-    id: "secao-5",
-    number: "5",
-    title: "Assinaturas e Remessa do Processo",
-    shortTitle: "Assinaturas e Remessa",
-    subtitle: "Documentos internos, bloco de assinatura, conferência final e tramitação",
-    icon: PenTool,
-  },
-  {
-    id: "secao-6",
-    number: "6",
-    title: "Acompanhamento Posterior à Remessa",
-    shortTitle: "Acompanhamento",
-    subtitle: "Acompanhamento da análise, atendimento de diligências e providências formalmente comunicadas",
-    icon: Send,
-  },
+  ...GUIDE_PROCESS_SECTIONS.map((section) => ({
+    ...section,
+    icon: GUIDE_SECTION_ICONS[section.id],
+  })),
   {
     id: "contatos",
     number: "7",

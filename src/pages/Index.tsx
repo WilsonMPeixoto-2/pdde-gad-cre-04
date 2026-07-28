@@ -121,7 +121,7 @@ const Index = () => {
     });
   }, [lockGuideTargetSync, syncGuideUrl]);
 
- useEffectEvent((
+  const syncVisibleSection = useEffectEvent((
     visibleSections: Map<string, { ratio: number; top: number }>,
   ) => {
     const lockedTarget = lockedGuideTargetRef.current;

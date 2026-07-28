@@ -1,0 +1,53 @@
+name: index-extraction-fix
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/index-extraction-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.head_ref == 'chore/project-hardening-v2.7'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+        with:
+          ref: chore/project-hardening-v2.7
+          fetch-depth: 0
+
+      - name: Restore named effect event
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("src/pages/Index.tsx")
+          source = path.read_text(encoding="utf-8")
+          old = "\n  useEffectEvent((\n"
+          new = "\n  const syncVisibleSection = useEffectEvent((\n"
+          if old in source:
+              source = source.replace(old, new, 1)
+              path.write_text(source, encoding="utf-8")
+          elif new not in source:
+              raise SystemExit("Declaração esperada não encontrada.")
+          PY
+
+      - name: Commit correction
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "Correção já aplicada."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/pages/Index.tsx
+          git commit -m "fix: restaurar sincronização da seção visível"
+          git pull --rebase origin chore/project-hardening-v2.7
+          git push origin HEAD:chore/project-hardening-v2.7

@@ -108,14 +108,6 @@ export const guideSectionsById = Object.fromEntries(
   guideSections.map((section) => [section.id, section]),
 ) as Record<GuideSectionId, GuideSectionMeta>;
 
-export const guideHowToSteps = contentSections
-  .filter((section) => /^[1-6]$/.test(section.number))
-  .map((section, index) => ({
-    position: index + 1,
-    name: section.title,
-    text: section.subtitle,
-  }));
-
 export const seiProcessTreeDocuments = [
   {
     name: "Peça interna de encaminhamento, quando aplicável",

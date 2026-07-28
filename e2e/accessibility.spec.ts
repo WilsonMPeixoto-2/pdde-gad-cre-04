@@ -64,14 +64,15 @@ test.describe("Acessibilidade automatizada", () => {
     await page.goto("/?secao=checklist-documentos");
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
 
-    const essentialItems = page.locator('button[aria-label^="Marcar item "]');
-    const count = await essentialItems.count();
-    expect(count).toBeGreaterThan(0);
+    const pendingEssentialItems = page.locator('button[aria-label^="Marcar item "]');
+    const initialCount = await pendingEssentialItems.count();
+    expect(initialCount).toBeGreaterThan(0);
 
-    for (let index = 0; index < count; index += 1) {
-      await essentialItems.nth(index).click();
+    for (let completed = 0; completed < initialCount; completed += 1) {
+      await pendingEssentialItems.first().click();
     }
 
+    await expect(pendingEssentialItems).toHaveCount(0);
     await expect(page.getByText("Itens essenciais completos!", { exact: true })).toBeVisible();
     await expect(page.locator("canvas")).toHaveCount(0);
   });

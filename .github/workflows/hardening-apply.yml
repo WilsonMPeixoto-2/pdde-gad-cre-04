@@ -38,7 +38,9 @@ jobs:
           python scripts/apply-native-routing.py
 
       - name: Synchronize npm dependencies
-        run: npm install --ignore-scripts
+        run: |
+          npm install --ignore-scripts
+          npm audit fix --package-lock-only --ignore-scripts
 
       - name: Commit generated changes
         shell: bash

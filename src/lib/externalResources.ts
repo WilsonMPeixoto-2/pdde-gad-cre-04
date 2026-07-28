@@ -164,7 +164,7 @@ export const externalResources = {
     title: "Guia do Usuário Interno",
     shortLabel: "Guia do Usuário Interno",
     description: "Manual oficial do SEI!RIO para uso interno.",
-    href: "https://sei.rio/servidor/capacitacao/guia-do-usuario-interno/",
+    href: "https://sei.rio/servidor/guias-e-ambiente-de-teste/",
     category: "servico",
     issuingBody: "Prefeitura do Rio de Janeiro",
     appliesTo: "Manual institucional do usuário interno do SEI!RIO.",

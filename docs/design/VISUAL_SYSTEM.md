@@ -6,6 +6,37 @@ Este documento orienta a composição visual do Guia PDDE no SEI!RIO e reduz a p
 
 O projeto deve parecer um guia institucional digital contemporâneo: claro, sóbrio, legível e tecnicamente confiável. A interface não deve competir com o conteúdo normativo nem assumir estética de painel comercial, aplicativo promocional ou landing page genérica.
 
+## Referência operacional vinculante
+
+As Etapas 3 e 4 publicadas em julho de 2026 constituem a referência de composição para o conteúdo operacional do guia. A capa e a apresentação podem manter linguagem editorial própria, mas as áreas de instrução, checklist, modelos, minutas, referências e suporte devem preservar a mesma gramática visual.
+
+Características obrigatórias do padrão:
+
+- `SectionLead` como abertura de cada etapa, com rótulo curto, título forte e descrição de largura controlada;
+- separação vertical de aproximadamente 32 px entre blocos principais;
+- `section-card` como superfície principal, com raio próximo de 12–17 px, borda fria visível e sombra discreta;
+- títulos internos entre 20 e 24 px e corpo de texto entre 14 e 16 px, sempre com entrelinha confortável;
+- largura de leitura de até 70–72 caracteres para explicações corridas;
+- cartões internos com uma função cognitiva por bloco: decisão, procedimento, conferência, referência ou exceção;
+- procedimentos apresentados em sequência numerada, com número em bloco azul e texto separado;
+- grades de duas ou três colunas somente quando os itens forem equivalentes e curtos;
+- azul para estrutura e ação; verde para conclusão ou conduta correta; âmbar para cautela; vermelho para vedação ou erro;
+- fundos predominantemente planos, sem gradientes ornamentais em conteúdo operacional;
+- bordas e espaçamento devem criar a hierarquia antes de sombras, cor ou efeitos;
+- cápsulas arredondadas somente para estados compactos e metadados, nunca como padrão de botão, filtro ou cartão;
+- evitar cartões aninhados sem necessidade. Um bloco interno deve existir apenas quando representar uma função distinta dentro do painel principal.
+
+### Anatomia preferencial
+
+1. abertura da etapa;
+2. painel de conceito ou escopo;
+3. procedimento ou comparação;
+4. conferência do resultado;
+5. callout de síntese, cautela ou limite quando necessário;
+6. transição clara para a etapa seguinte.
+
+A consistência deve ser avaliada por ritmo, tipografia, espaçamento, função das cores e densidade visual, e não pela repetição mecânica da mesma composição em todos os conteúdos.
+
 ## Tipografia
 
 | Função | Família | Uso |

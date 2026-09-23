@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check, Download } from "lucide-react";
 import { toast } from "sonner";
+import { IconTile } from "@/components/visual/IconTile";
 import { downloadTextFile } from "@/lib/clientFileExports";
 import { externalResources } from "@/lib/externalResources";
 import { useClipboardAction } from "@/hooks/useClipboardAction";
@@ -187,19 +188,19 @@ export const PDDEChecklist = () => {
   const pendingCount = items.filter(i => !i.checked).length;
 
   return (
-    <div className="section-card border-l-[3px] border-l-primary/75">
+    <div className="section-card">
       {/* Header */}
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-primary/10">
-            <ClipboardCheck className="w-5 h-5 text-primary" />
-          </div>
-          <div>
-            <span className="meta-pill mb-2">Conferência mínima</span>
-            <h2 className="font-bold text-foreground text-base sm:text-lg">
+      <div className="mb-5 flex flex-col gap-4 border-b border-slate-300 pb-5 sm:flex-row sm:items-start sm:justify-between dark:border-slate-700">
+        <div className="flex items-start gap-4">
+          <IconTile icon={ClipboardCheck} size="lg" />
+          <div className="min-w-0">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
+              Conferência mínima
+            </p>
+            <h3 className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
               Checklist mínimo — Prestação de Contas do PDDE (SEI!RIO)
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-foreground/74">
+            </h3>
+            <p className="mt-2 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
               Use este quadro para separar o núcleo documental essencial dos anexos complementares e
               retomar a conferência sem perder o contexto do processo.
             </p>
@@ -207,7 +208,7 @@ export const PDDEChecklist = () => {
         </div>
         <button
           onClick={resetChecklist}
-          className="inline-flex items-center justify-center rounded-full border border-border/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-200 hover:border-primary/20 hover:bg-primary/5 hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="inline-flex min-h-9 items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-blue-400 hover:text-blue-800 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-sky-600 dark:hover:text-sky-300"
           aria-label="Limpar todas as marcações do checklist"
         >
           Limpar
@@ -215,21 +216,21 @@ export const PDDEChecklist = () => {
       </div>
 
       {/* Intro */}
-      <p className="mb-5 text-sm leading-7 text-muted-foreground">
+      <p className="mb-6 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
         O <strong className="text-foreground">Bloco A</strong> destaca o núcleo documental federal mínimo e as peças nucleares da comprovação. O <strong className="text-foreground">Bloco B</strong> reúne documentos complementares úteis para a instrução no <strong className="text-foreground">SEI!RIO</strong> e para o controle interno da CRE/SME. Pesquisa de preços admite exceções justificadas, e itens adicionais podem variar conforme a ação do PDDE, o exercício e as orientações locais vigentes.
       </p>
 
       {/* Progress Bar */}
-      <div className="mb-4 rounded-2xl border border-border/50 bg-secondary/35 p-4">
+      <div className="mb-5 rounded-xl border border-slate-300 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/55">
         <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">Bloco A — base federal mínima</span>
+          <span className="font-semibold text-slate-700 dark:text-slate-300">Bloco A — base federal mínima</span>
           <span className="font-semibold text-primary">
             {essenciaisCompleted} de {essenciaisCount} ({Math.round(progressPercent)}%)
           </span>
         </div>
-        <div className="h-2 bg-muted rounded-full overflow-hidden">
+        <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
           <div
-            className="h-full bg-linear-to-r from-primary to-primary/80 rounded-full transition-all duration-500 ease-out"
+            className="h-full rounded-full bg-blue-700 transition-[width] duration-500 ease-out dark:bg-sky-400"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -242,10 +243,10 @@ export const PDDEChecklist = () => {
           <button
             key={f.key}
             onClick={() => setFilter(f.key)}
-            className={`rounded-full border px-3.5 py-2 text-xs font-medium transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+            className={`rounded-lg border px-3 py-2 text-xs font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
               filter === f.key
-                ? 'bg-primary text-primary-foreground border-primary shadow-xs'
-                : 'bg-muted/50 text-muted-foreground border-border/50 hover:bg-muted hover:text-foreground'
+                ? 'border-blue-700 bg-blue-700 text-white dark:border-sky-400 dark:bg-sky-400 dark:text-slate-950'
+                : 'border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-800 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-sky-600 dark:hover:text-sky-300'
             }`}
             aria-pressed={filter === f.key}
           >
@@ -259,7 +260,7 @@ export const PDDEChecklist = () => {
         <div className="mb-5 flex flex-col gap-2 sm:flex-row">
           <button
             onClick={generateSummary}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-all duration-200 hover:bg-primary/10 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-blue-300 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-800 transition-colors hover:border-blue-500 hover:bg-blue-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:border-blue-800 dark:bg-blue-950/25 dark:text-sky-300"
             aria-label={`Copiar resumo dos ${pendingCount} itens pendentes`}
           >
             <Copy className="w-4 h-4" aria-hidden="true" />
@@ -269,7 +270,7 @@ export const PDDEChecklist = () => {
           </button>
           <button
             onClick={downloadSummary}
-            className="flex items-center justify-center gap-2 rounded-xl border border-border/60 bg-card px-4 py-3 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/30 hover:bg-primary/5 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-blue-400 hover:text-blue-800 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-950 dark:hover:border-sky-600 dark:hover:text-sky-300"
             aria-label="Baixar resumo dos itens pendentes"
           >
             <Download className="w-4 h-4" aria-hidden="true" />
@@ -280,13 +281,13 @@ export const PDDEChecklist = () => {
 
       {/* Essenciais */}
       {essenciaisFiltered.length > 0 && (
-        <div className="space-y-2 mb-6">
+        <div className="mb-7 space-y-3">
           <div className="mb-3">
-            <h3 className="text-sm font-semibold text-primary mb-1 flex items-center gap-2">
+            <h3 className="mb-1 flex items-center gap-2 text-base font-bold text-foreground">
             <FileCheck className="w-4 h-4" />
             Bloco A — Base documental federal da UEx
             </h3>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm leading-6 text-slate-700 dark:text-slate-300">
               Núcleo da comprovação da execução e da prestação de contas, sem prejuízo de atos operacionais do exercício.
             </p>
           </div>
@@ -294,10 +295,10 @@ export const PDDEChecklist = () => {
             <button
               key={item.id}
               onClick={() => toggleItem(item.id)}
-                className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                className={`group flex w-full items-start gap-3 rounded-xl border p-4 text-left transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   item.checked
-                    ? "bg-success/10 border-success/30 hover:bg-success/15"
-                    : "bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-primary/30"
+                    ? "border-emerald-300 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-950/25"
+                    : "border-slate-300 bg-slate-50 hover:border-blue-400 dark:border-slate-700 dark:bg-slate-900/55 dark:hover:border-sky-600"
               }`}
               aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item ${item.id}: ${item.text}`}
               aria-pressed={item.checked}
@@ -331,11 +332,11 @@ export const PDDEChecklist = () => {
       {/* Complementares */}
       {complementaresFiltered.length > 0 && (
         <div className="mb-6">
-          <h3 className="text-sm font-semibold text-warning dark:text-warning mb-3 flex items-center gap-2">
+          <h3 className="mb-2 flex items-center gap-2 text-base font-bold text-foreground">
             <FileCheck className="w-4 h-4" />
             Bloco B — INSTRUÇÃO LOCAL · SEI!RIO / SME-RIO
           </h3>
-          <p className="mb-3 text-xs text-muted-foreground">
+          <p className="mb-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
             Inclua quando o objeto, o fluxo local ou a rotina patrimonial/documental da CRE/SME exigir reforço da instrução.
           </p>
           <div className="space-y-2">
@@ -345,8 +346,8 @@ export const PDDEChecklist = () => {
                 onClick={() => toggleItem(item.id)}
                 className={`group flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   item.checked
-                    ? "bg-warning/10 border-warning/30 hover:bg-warning/15"
-                    : "bg-warning/5 border-warning/20 hover:bg-warning/10 hover:border-warning/40"
+                    ? "border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/25"
+                    : "border-slate-300 bg-slate-50 hover:border-amber-400 dark:border-slate-700 dark:bg-slate-900/55 dark:hover:border-amber-700"
                 }`}
                 aria-label={`${item.checked ? 'Desmarcar' : 'Marcar'} item complementar: ${item.text}`}
                 aria-pressed={item.checked}
@@ -410,12 +411,12 @@ export const PDDEChecklist = () => {
       )}
 
       {/* Callout - Autenticação de digitalizados */}
-      <div className="p-4 bg-linear-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl">
+      <div className="rounded-xl border border-blue-300 bg-blue-50 p-5 dark:border-blue-800 dark:bg-blue-950/25">
         <div className="flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
           <div>
             <p className="font-semibold text-primary text-sm mb-1">Documento digitalizado e tipo de conferência</p>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm leading-7 text-blue-950 dark:text-blue-100">
               Documentos produzidos a partir de papel devem ser classificados como digitalizados no
               SEI!RIO e receber o tipo de conferência correspondente ao documento apresentado. Os
               originais físicos, quando houver, devem permanecer arquivados na unidade pelo prazo
@@ -436,7 +437,7 @@ export const PDDEChecklist = () => {
       </div>
       {/* Completion Message */}
       {essenciaisCompleted === essenciaisCount && (
-        <div className="mt-6 p-4 bg-success/10 border border-success/30 rounded-xl text-center animate-fade-in">
+        <div className="mt-6 animate-fade-in rounded-xl border border-emerald-300 bg-emerald-50 p-5 text-center dark:border-emerald-800 dark:bg-emerald-950/25">
           <CheckCircle2 className="w-8 h-8 text-success mx-auto mb-2" />
           <p className="font-semibold text-success">Itens essenciais completos!</p>
           <p className="text-sm text-success/80">Verifique os itens complementares quando aplicável.</p>

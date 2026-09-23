@@ -54,6 +54,9 @@ test.describe("Sistema visual institucional", () => {
 
     const sectionTwo = page.locator("#secao-2");
     await expect(sectionTwo).toBeVisible();
+    await expect(
+      sectionTwo.getByRole("heading", { name: /compreenda, organize e só então confira a instrução/i }),
+    ).toBeVisible();
 
     expect(await sectionTwo.locator(".section-card").count()).toBeGreaterThanOrEqual(4);
     await expect(sectionTwo.locator(".rounded-3xl")).toHaveCount(0);

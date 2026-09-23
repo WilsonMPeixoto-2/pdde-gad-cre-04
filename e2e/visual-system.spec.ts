@@ -48,4 +48,31 @@ test.describe("Sistema visual institucional", () => {
     await expect(journey.locator(".journey-card__toggle")).toHaveCount(6);
     await expect(journey.locator(".step-diamond")).toHaveCount(0);
   });
+
+  test("propaga o padrão das etapas 3 e 4 para os módulos operacionais", async ({ page }) => {
+    await page.goto("/?secao=secao-2");
+
+    const sectionTwo = page.locator("#secao-2");
+    await expect(sectionTwo).toBeVisible();
+    await expect(
+      sectionTwo.getByRole("heading", { name: /compreenda, organize e só então confira a instrução/i }),
+    ).toBeVisible();
+
+    expect(await sectionTwo.locator(".section-card").count()).toBeGreaterThanOrEqual(4);
+    await expect(sectionTwo.locator(".rounded-3xl")).toHaveCount(0);
+    await expect(sectionTwo.locator('[class*="bg-linear-to-r"]')).toHaveCount(0);
+
+    const templates = sectionTwo.locator(".smart-templates");
+    await expect(templates).toBeVisible();
+    await expect(templates.locator(".rounded-3xl")).toHaveCount(0);
+
+    const ruleCard = sectionTwo.getByText("Critério aplicável", { exact: true }).first();
+    await expect(ruleCard).toBeVisible();
+
+    const ruleCardFontSize = await ruleCard.evaluate((element) =>
+      Number.parseFloat(window.getComputedStyle(element).fontSize),
+    );
+    expect(ruleCardFontSize).toBeGreaterThanOrEqual(12);
+  });
+
 });

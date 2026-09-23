@@ -28,14 +28,14 @@ export const DocumentFooter = () => {
         </p>
       </div>
 
-      <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-border/50 bg-linear-to-br from-background via-background to-secondary/50 px-5 py-4 text-center shadow-soft">
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+      <div className="mx-auto mt-6 max-w-3xl rounded-xl border border-slate-300 bg-slate-50 px-5 py-5 text-center dark:border-slate-700 dark:bg-slate-900/55">
+        <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-300">
           Créditos editoriais
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-foreground/82 sm:text-base">
+        <p className="mt-3 text-sm leading-7 text-foreground sm:text-base">
           {PROJECT_BRANDING.creatorCreditLine}
         </p>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-xs leading-6 text-slate-700 dark:text-slate-300">
           Documento institucional de orientação processual para a 4ª CRE/GAD.
         </p>
       </div>

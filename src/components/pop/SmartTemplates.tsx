@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { FileText, Copy, Check, RotateCcw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { IconTile } from "@/components/visual/IconTile";
 import { toast } from "sonner";
 import { useClipboardAction } from "@/hooks/useClipboardAction";
 import {
@@ -246,16 +247,17 @@ export const SmartTemplates = () => {
   }, [copyTemplateToClipboard, resolveTemplateValues]);
 
   return (
-    <div className="section-card border-l-[3px] border-l-accent/75 smart-templates">
-      <div className="flex items-center gap-3 mb-5">
-        <div className="p-2.5 rounded-xl bg-accent/10">
-          <FileText className="w-5 h-5 text-accent" />
-        </div>
-        <div>
-          <h2 className="font-bold text-foreground text-base sm:text-lg">
+    <div className="section-card smart-templates">
+      <div className="mb-6 flex items-start gap-4 border-b border-slate-300 pb-5 dark:border-slate-700">
+        <IconTile icon={FileText} size="lg" />
+        <div className="min-w-0">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
+            Apoio à elaboração
+          </p>
+          <h3 className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
             Minutas de texto de apoio
-          </h2>
-          <p className="text-xs leading-relaxed text-muted-foreground">
+          </h3>
+          <p className="mt-2 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
             Preencha, revise e adapte ao caso concreto. Estes textos não substituem modelo institucional
             aprovado nem definem competência decisória.
           </p>
@@ -276,16 +278,16 @@ export const SmartTemplates = () => {
           return (
             <div
               key={template.id}
-              className="overflow-hidden rounded-3xl border border-border/60 bg-card transition-all duration-300 hover:border-primary/15 hover:shadow-soft"
+              className="overflow-hidden rounded-xl border border-slate-300 bg-slate-50 transition-colors hover:border-blue-400 dark:border-slate-700 dark:bg-slate-900/55 dark:hover:border-sky-600"
             >
               <button
                 onClick={() => setActiveTemplate(isActive ? null : template.id)}
-                className="w-full flex items-center justify-between p-4 text-left hover:bg-muted/30 transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden"
+                className="flex w-full items-start justify-between gap-4 p-5 text-left transition-colors hover:bg-slate-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:hover:bg-slate-900"
                 aria-expanded={isActive}
               >
                 <div>
-                  <h3 className="font-semibold text-foreground text-sm">{template.title}</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{template.description}</p>
+                  <h4 className="text-base font-bold text-foreground">{template.title}</h4>
+                  <p className="mt-1.5 max-w-[72ch] text-sm leading-6 text-slate-700 dark:text-slate-300">{template.description}</p>
                 </div>
                 <span className={`text-muted-foreground transition-transform duration-300 ${isActive ? "rotate-180" : ""}`}>
                   ▾
@@ -293,11 +295,11 @@ export const SmartTemplates = () => {
               </button>
 
               {isActive && (
-                <div className="px-4 pb-4 pt-1 border-t border-border/40 animate-fade-in">
+                <div className="animate-fade-in border-t border-slate-300 px-5 pb-5 pt-5 dark:border-slate-700">
                   <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {template.fields.map(field => (
                       <div key={field.key}>
-                        <label className="text-xs font-medium text-muted-foreground mb-1 block">
+                        <label className="mb-1.5 block text-sm font-semibold text-foreground">
                           {field.label}
                         </label>
                         <input
@@ -305,14 +307,14 @@ export const SmartTemplates = () => {
                           value={templateValues[field.key] || ""}
                           onChange={e => updateField(template.id, field.key, e.target.value)}
                           placeholder={(effectiveValues[field.key] as string) || field.placeholder}
-                          className="w-full px-3 py-2 text-sm rounded-lg border border-border/60 bg-background focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all outline-hidden placeholder:text-muted-foreground/50"
+                          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-foreground outline-hidden transition-colors placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-950 dark:placeholder:text-slate-500"
                         />
                       </div>
                     ))}
                   </div>
 
                   {Object.values(getWorkspaceTemplateDefaults(template.id, workspace)).some(Boolean) && (
-                    <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
+                    <p className="mb-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
                       Se houver informações já registradas neste equipamento, os campos em branco poderão ser aproveitados automaticamente como referência.
                     </p>
                   )}
@@ -360,8 +362,8 @@ export const SmartTemplates = () => {
                   </div>
 
                   {isPreviewing && (
-                    <div className="mt-4 p-4 rounded-lg bg-muted/50 border border-border/40 animate-fade-in">
-                      <pre className="text-xs text-foreground whitespace-pre-wrap font-mono leading-relaxed">
+                    <div className="mt-5 animate-fade-in rounded-xl border border-slate-300 bg-white p-5 dark:border-slate-700 dark:bg-slate-950">
+                      <pre className="whitespace-pre-wrap font-mono text-xs leading-6 text-foreground">
                         {template.generate(effectiveValues)}
                       </pre>
                     </div>

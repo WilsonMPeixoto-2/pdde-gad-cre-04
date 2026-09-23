@@ -29,7 +29,7 @@ export const NormativeReviewStamp = ({
   }).format(new Date(`${lastVerifiedAt}T00:00:00Z`));
 
   return (
-    <span className={cn("text-xs font-semibold text-slate-500", className)}>
+    <span className={cn("text-xs font-semibold text-slate-600 dark:text-slate-300", className)}>
       {statusCopy[status]} em {verifiedDate}
       {reviewedBy ? ` · ${reviewedBy}` : ""}
     </span>

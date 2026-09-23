@@ -50,11 +50,16 @@ export const PDDEModelCards = () => {
   }));
 
   return (
-    <div className="mb-8">
-      <div className="mb-6 flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
-          {openablePdfLinks.length} documentos disponíveis
-        </p>
+    <div>
+      <div className="mb-6 flex flex-col gap-3 border-b border-slate-300 pb-4 sm:flex-row sm:items-center sm:justify-between dark:border-slate-700">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-300">
+            Acervo de apoio
+          </p>
+          <p className="mt-1 text-sm leading-6 text-slate-700 dark:text-slate-300">
+            {openablePdfLinks.length} documentos disponíveis para consulta.
+          </p>
+        </div>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -62,9 +67,9 @@ export const PDDEModelCards = () => {
                 onClick={handleDownloadAll}
                 variant="outline"
                 size="sm"
-                className="gap-2 border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5"
+                className="gap-2"
               >
-                <FolderDown className="h-4 w-4" />
+                <FolderDown className="h-4 w-4" aria-hidden="true" />
                 <span>Abrir todos</span>
               </Button>
             </TooltipTrigger>
@@ -75,28 +80,16 @@ export const PDDEModelCards = () => {
         </TooltipProvider>
       </div>
 
-      <div className="space-y-10">
+      <div className="space-y-8">
         {grouped.map((group) => (
-          <div key={group.category}>
-            <div className="mb-5 flex items-center gap-3">
-              <div
-                className="h-7 w-1.5 rounded-full"
-                style={{
-                  background: `linear-gradient(180deg, ${group.accent}, ${group.accent}40)`,
-                }}
-              />
-              <span className={`text-[0.72rem] font-bold uppercase tracking-[0.16em] ${group.color}`}>
+          <section key={group.category} aria-label={group.label}>
+            <header className="mb-4 border-b border-slate-300 pb-3 dark:border-slate-700">
+              <p className={`text-xs font-bold uppercase tracking-[0.12em] ${group.color}`}>
                 {group.label}
-              </span>
-              <div
-                className="h-px flex-1"
-                style={{
-                  background: `linear-gradient(90deg, ${group.accent}20, transparent)`,
-                }}
-              />
-            </div>
+              </p>
+            </header>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {group.items.map((doc) => {
                 const Icon = doc.icon;
                 const asset = getPdfAssetMeta(doc.fileName);
@@ -104,87 +97,70 @@ export const PDDEModelCards = () => {
                 const contentMeta = modelContentKindMeta[doc.contentKind];
 
                 return (
-                  <div
+                  <article
                     key={doc.id}
-                    className="group relative rounded-2xl border border-border/60 bg-card p-5 transition-colors duration-300 hover:border-primary/20 sm:p-6"
+                    className="rounded-xl border border-slate-300 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/55"
                   >
-                    <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                      <div className="flex min-w-0 flex-1 items-center gap-4">
-                        <div
-                          className={`relative shrink-0 rounded-2xl border border-border/20 p-3.5 transition-colors duration-300 ${group.iconBg}`}
-                        >
-                          <Icon className={`h-5 w-5 ${group.iconColor}`} />
+                    <div className="grid gap-4 sm:grid-cols-[2.5rem_minmax(0,1fr)_auto] sm:items-start">
+                      <div className={`flex h-10 w-10 items-center justify-center rounded-lg border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-950 ${group.iconBg}`}>
+                        <Icon className={`h-5 w-5 ${group.iconColor}`} aria-hidden="true" />
+                      </div>
+
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h4 className="text-base font-bold tracking-[-0.015em] text-foreground">
+                            {doc.title}
+                          </h4>
+                          <span className={`rounded-md border px-2 py-1 text-[0.68rem] font-bold uppercase tracking-[0.1em] ${contentMeta.className}`}>
+                            {contentMeta.label}
+                          </span>
                         </div>
 
-                        <div className="min-w-0">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <h4
-                              className="font-heading text-[1rem] font-semibold leading-tight text-foreground sm:text-[1.08rem]"
-                              style={{ letterSpacing: "-0.015em" }}
-                            >
-                              {doc.title}
-                            </h4>
-                            <span
-                              className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${contentMeta.className}`}
-                            >
-                              {contentMeta.label}
-                            </span>
-                          </div>
+                        <p className="mt-2 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
+                          {doc.description}
+                        </p>
 
-                          <p className="mt-2 max-w-3xl text-sm leading-7 text-foreground/75">
-                            {doc.description}
-                          </p>
-
-                          <div className="mt-3 flex flex-wrap items-center gap-2 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
-                            <span className="meta-pill max-w-[240px] truncate">
-                              {doc.fileName}
-                            </span>
-                            <span className="meta-pill">
-                              {asset.sizeLabel}
-                            </span>
-                            <span className="meta-pill">
-                              {asset.pageLabel}
-                            </span>
-                          </div>
-
-                          {sourceLinks.length > 0 && (
-                            <div className="mt-3 flex flex-col gap-1.5">
-                              {sourceLinks.map((source) => (
-                                <a
-                                  key={source.id}
-                                  href={source.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-start gap-1.5 text-xs font-medium leading-relaxed text-primary underline-offset-4 hover:underline"
-                                >
-                                  <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                                  <span>{source.title}</span>
-                                </a>
-                              ))}
-                            </div>
-                          )}
+                        <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-700 dark:text-slate-300">
+                          <span className="max-w-[240px] truncate rounded-md border border-slate-300 bg-slate-100 px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
+                            {doc.fileName}
+                          </span>
+                          <span className="rounded-md border border-slate-300 bg-slate-100 px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
+                            {asset.sizeLabel}
+                          </span>
+                          <span className="rounded-md border border-slate-300 bg-slate-100 px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
+                            {asset.pageLabel}
+                          </span>
                         </div>
+
+                        {sourceLinks.length > 0 && (
+                          <div className="mt-3 flex flex-col gap-2">
+                            {sourceLinks.map((source) => (
+                              <a
+                                key={source.id}
+                                href={source.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-start gap-2 text-xs font-semibold leading-5 text-blue-800 underline-offset-4 hover:underline dark:text-sky-300"
+                              >
+                                <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                                <span>{source.title}</span>
+                              </a>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button
-                              asChild
-                              size="sm"
-                              className="w-full rounded-xl border-0 text-white shadow-soft sm:w-auto"
-                              style={{
-                                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gradient-mid)) 100%)",
-                              }}
-                            >
+                            <Button asChild size="sm" className="w-full gap-2 sm:w-auto">
                               <a
                                 href={asset.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2"
                               >
-                                <Download className="h-3.5 w-3.5" />
-                                <span className="font-medium">Abrir PDF</span>
+                                <Download className="h-4 w-4" aria-hidden="true" />
+                                <span>Abrir PDF</span>
                               </a>
                             </Button>
                           </TooltipTrigger>
@@ -194,11 +170,11 @@ export const PDDEModelCards = () => {
                         </Tooltip>
                       </TooltipProvider>
                     </div>
-                  </div>
+                  </article>
                 );
               })}
             </div>
-          </div>
+          </section>
         ))}
       </div>
     </div>

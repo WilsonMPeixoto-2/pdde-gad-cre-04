@@ -173,6 +173,29 @@ test.describe("Contrato vinculante da capa e introdução v6", () => {
     await expectNoHorizontalOverflow(page);
   });
 
+
+
+  test("mantém orientação acima das métricas em 1440 px", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+
+    const orientation = page.locator(".cover-intro-v5__orientation");
+    const metrics = page.locator(".cover-intro-v5__metrics");
+    await expect(orientation).toBeVisible();
+    await expect(metrics).toBeVisible();
+
+    const [orientationBox, metricsBox] = await Promise.all([
+      orientation.boundingBox(),
+      metrics.boundingBox(),
+    ]);
+
+    expect(orientationBox).not.toBeNull();
+    expect(metricsBox).not.toBeNull();
+    expect((orientationBox?.y ?? 0) + (orientationBox?.height ?? 0)).toBeLessThanOrEqual(
+      (metricsBox?.y ?? Number.POSITIVE_INFINITY) - 2,
+    );
+  });
+
   test("escala a composição para 4K sem cortar título ou ampliar a fotografia", async ({ page }) => {
     await page.setViewportSize({ width: 3840, height: 2160 });
     await page.goto("/");
@@ -253,6 +276,23 @@ test.describe("Contrato vinculante da capa e introdução v6", () => {
     );
     expect(mobileContract.scopeColumns.trim().split(/\s+/)).toHaveLength(1);
     expect(mobileContract.journeyColumns.trim().split(/\s+/)).toHaveLength(1);
+
+    const institution = page.locator(".cover-intro-v5__institution");
+    const copy = page.locator(".cover-intro-v5__copy");
+    const [institutionBox, copyBox] = await Promise.all([
+      institution.boundingBox(),
+      copy.boundingBox(),
+    ]);
+    expect(institutionBox).not.toBeNull();
+    expect(copyBox).not.toBeNull();
+    expect(institutionBox!.left).toBeGreaterThanOrEqual(copyBox!.left - 1);
+    expect(institutionBox!.right).toBeLessThanOrEqual(copyBox!.right + 1);
+
+    const institutionOverflow = await institution.evaluate(
+      (element) => element.scrollWidth > element.clientWidth + 1,
+    );
+    expect(institutionOverflow).toBe(false);
+    await expect(institution).toContainText("4ª Coordenadoria Regional de Educação · GAD");
 
     await context.close();
   });

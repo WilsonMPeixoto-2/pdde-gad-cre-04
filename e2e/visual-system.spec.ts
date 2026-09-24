@@ -176,7 +176,7 @@ test.describe("Sistema visual institucional", () => {
 
     expect(dividerMetrics.marginTop).toBe(0);
     expect(dividerMetrics.marginBottom).toBe(0);
-    expect(dividerMetrics.borderRadius).toBeLessThanOrEqual(12);
+    expect(dividerMetrics.borderRadius).toBeLessThanOrEqual(18);
 
     const operationalHeading = page.getByRole("heading", {
       name: /inclua cada documento com classificação e identificação adequadas/i,

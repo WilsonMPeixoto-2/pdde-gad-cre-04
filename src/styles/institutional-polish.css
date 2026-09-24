@@ -440,3 +440,25 @@ li {
     animation-duration: 0.01ms !important;
   }
 }
+
+
+@media print {
+  .legal-rule-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .legal-rule-card > summary {
+    cursor: default !important;
+  }
+
+  .legal-rule-card__toggle-label {
+    display: none !important;
+  }
+
+  .legal-rule-card:not([open]) > .legal-rule-card__details {
+    display: block !important;
+  }
+}

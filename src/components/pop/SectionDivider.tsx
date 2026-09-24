@@ -38,18 +38,18 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
     }, [copyText, sectionId]);
 
     return (
-      <header ref={ref} className="section-divider-print my-12 overflow-hidden rounded-2xl border border-slate-400 bg-card shadow-sm sm:my-16 dark:border-slate-700">
-        <div className="grid md:grid-cols-[7rem_minmax(0,1fr)]">
-          <div className="flex items-center justify-center border-b border-slate-400 bg-slate-200 px-5 py-7 md:border-b-0 md:border-r md:py-8 dark:border-slate-700 dark:bg-slate-900">
+      <header ref={ref} className="section-divider-print overflow-hidden rounded-xl border border-slate-400 bg-card shadow-sm dark:border-slate-700">
+        <div className="grid md:grid-cols-[6.25rem_minmax(0,1fr)]">
+          <div className="flex items-center justify-center border-b border-slate-400 bg-slate-200 px-5 py-6 md:border-b-0 md:border-r md:py-7 dark:border-slate-700 dark:bg-slate-900">
             <div className="text-center" aria-hidden="true">
               <span className="block text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">Seção</span>
-              <span className="mt-1 block text-5xl font-extrabold tracking-tight text-blue-700 sm:text-6xl dark:text-sky-300">
+              <span className="mt-1 block text-4xl font-extrabold tracking-tight text-blue-700 sm:text-5xl dark:text-sky-300">
                 {number.padStart(2, "0")}
               </span>
             </div>
           </div>
 
-          <div className="px-5 py-6 sm:px-7 sm:py-7 lg:px-8">
+          <div className="px-5 py-5 sm:px-7 sm:py-6 lg:px-8">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex min-w-0 items-start gap-4">
                 <IconTile icon={icon} size="lg" />

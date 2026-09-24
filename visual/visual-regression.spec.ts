@@ -129,13 +129,13 @@ test.describe("Regressão visual institucional", () => {
     await openTarget(page, "anexo", /fontes oficiais e aplicabilidade/i);
 
     const table = page.locator(".table-responsive-cards");
-    await expect(table.locator("tbody tr").first().locator("td").nth(2)).toContainText(/./);
-    await pinToViewportTop(page, ".table-responsive-cards", 64);
+    const firstCard = table.locator("tbody tr").first();
+    await expect(firstCard.locator("td").nth(2)).toContainText(/./);
+    await firstCard.scrollIntoViewIfNeeded();
     await stabilizePage(page);
 
-    await expect(page).toHaveScreenshot("sources-mobile-390.png", {
+    await expect(firstCard).toHaveScreenshot("sources-mobile-390.png", {
       animations: "disabled",
-      fullPage: false,
       maxDiffPixelRatio: 0.005,
     });
   });

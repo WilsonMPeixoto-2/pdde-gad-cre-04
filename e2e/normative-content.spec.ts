@@ -29,11 +29,31 @@ test.describe("Conteúdo normativo PDDE", () => {
     await expect(page.getByText(/Pesquisa e consolidação de preços/i)).toBeVisible();
     await expect(page.getByText(/Utilização de Ata de Registro de Preços/i)).toBeVisible();
     await expect(page.getByText(/Gastos com pessoal e contratação de serviços/i)).toBeVisible();
-    await expect(page.getByText(/Admitir contratação de fornecedor ou prestador privado/i)).toBeVisible();
     await expect(page.getByText(/Contratação de pessoa física — consulta prévia obrigatória/i)).toBeVisible();
     await expect(page.getByText(/Elementos mínimos dos comprovantes/i)).toBeVisible();
     await expect(page.getByText(/Disponibilidade financeira e vinculação ao exercício/i)).toBeVisible();
-    await expect(page.getByRole("link", { name: "Resolução CD/FNDE nº 15/2021 · arts. 23, 27", exact: true })).toBeVisible();
+
+    const priceResearchRule = page
+      .locator("details.legal-rule-card")
+      .filter({ hasText: "Pesquisa e consolidação de preços" })
+      .first();
+    await expect(priceResearchRule).not.toHaveAttribute("open", "");
+    await priceResearchRule.locator("summary").click();
+    await expect(
+      priceResearchRule.getByRole("link", {
+        name: "Resolução CD/FNDE nº 15/2021 · arts. 23, 27",
+        exact: true,
+      }),
+    ).toBeVisible();
+
+    const serviceRule = page
+      .locator("details.legal-rule-card")
+      .filter({ hasText: "Gastos com pessoal e contratação de serviços" })
+      .first();
+    await serviceRule.locator("summary").click();
+    await expect(
+      serviceRule.getByText(/Admitir contratação de fornecedor ou prestador privado/i),
+    ).toBeVisible();
 
     const body = await pageText(page);
     expect(body).not.toContain("Resolução CD/FNDE nº 15/2021 (Art. 17)");
@@ -47,8 +67,12 @@ test.describe("Conteúdo normativo PDDE", () => {
   test("separa orientação documental, patrimônio e linhas de aplicabilidade pendentes", async ({ page }) => {
     await page.goto("/?secao=secao-2");
 
-    await expect(page.getByText(/Contratação de pessoa física — consulta prévia obrigatória/i)).toBeVisible();
-    await expect(page.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
+    const individualRule = page
+      .locator("details.legal-rule-card")
+      .filter({ hasText: "Contratação de pessoa física — consulta prévia obrigatória" })
+      .first();
+    await expect(individualRule).toBeVisible();
+    await expect(individualRule.getByText(/Este guia não define, isoladamente, o documento fiscal/i)).toBeVisible();
     await expect(page.getByText("Ata de aprovação da execução do plano de gastos", { exact: true })).toBeVisible();
     await expect(page.getByText("Documentação patrimonial cabível", { exact: true })).toBeVisible();
 

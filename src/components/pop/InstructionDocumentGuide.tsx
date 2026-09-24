@@ -98,7 +98,7 @@ export const InstructionDocumentGuide = () => (
       <IconTile icon={FileCheck2} size="lg" />
       <div className="min-w-0">
         <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
-          Antes da conferência
+          2.1 · Entender os documentos
         </p>
         <h3 id="instruction-documents-title" className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
           O que cada grupo documental demonstra

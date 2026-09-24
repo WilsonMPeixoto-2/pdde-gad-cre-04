@@ -1,5 +1,6 @@
 import {
   ArrowRight,
+  BookOpenText,
   ClipboardCheck,
   FileCheck2,
   FolderKanban,
@@ -8,6 +9,7 @@ import {
 import { LegalRuleCard } from "@/components/legal/LegalRuleCard";
 import { SectionLead } from "@/components/visual/SectionLead";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
+import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 import { normativeRules } from "@/lib/normativeRules";
 import { InstructionDocumentGuide } from "./InstructionDocumentGuide";
 import { PDDEChecklist } from "./PDDEChecklist";
@@ -46,6 +48,37 @@ const ruleGroups = [
   },
 ] as const;
 
+const sectionTwoNavigation = [
+  {
+    number: "2.1",
+    title: "Entender os documentos",
+    description: "Função das peças e grupos documentais.",
+    anchor: GUIDE_ANCHORS.documents,
+    icon: BookOpenText,
+  },
+  {
+    number: "2.2",
+    title: "Aplicar as regras",
+    description: "Critérios que afetam a preparação dos autos.",
+    anchor: GUIDE_ANCHORS.rules,
+    icon: Scale,
+  },
+  {
+    number: "2.3",
+    title: "Conferir a documentação",
+    description: "Checklist após a organização das peças.",
+    anchor: GUIDE_ANCHORS.checklist,
+    icon: FileCheck2,
+  },
+  {
+    number: "2.4",
+    title: "Consultar modelos e minutas",
+    description: "Recursos opcionais de apoio à elaboração.",
+    anchor: GUIDE_ANCHORS.models,
+    icon: FolderKanban,
+  },
+] as const;
+
 const rulesById = new Map(normativeRules.map((rule) => [rule.id, rule]));
 
 export const SectionTwo = () => (
@@ -58,7 +91,70 @@ export const SectionTwo = () => (
       icon={ClipboardCheck}
     />
 
-    <InstructionDocumentGuide />
+    <nav
+      className="no-print overflow-hidden rounded-xl border border-slate-300 bg-card dark:border-slate-700"
+      aria-labelledby="section-two-navigation-title"
+    >
+      <div className="border-b border-slate-300 px-5 py-5 sm:px-6 dark:border-slate-700">
+        <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
+          Roteiro da Etapa 2
+        </p>
+        <h3
+          id="section-two-navigation-title"
+          className="mt-1.5 text-lg font-bold tracking-[-0.02em] text-foreground sm:text-xl"
+        >
+          Quatro blocos para orientar a leitura
+        </h3>
+        <p className="mt-2 max-w-[72ch] text-sm leading-6 text-slate-700 dark:text-slate-300">
+          A sequência separa compreensão documental, regras aplicáveis, conferência e ferramentas de apoio.
+          Use os atalhos para retornar diretamente ao ponto de trabalho necessário.
+        </p>
+      </div>
+
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4">
+        {sectionTwoNavigation.map((item, index) => {
+          const Icon = item.icon;
+
+          return (
+            <button
+              key={item.anchor}
+              type="button"
+              onClick={() => scrollToGuideAnchor(item.anchor, { focusHeading: true })}
+              className={[
+                "group flex min-h-[9.25rem] items-start gap-3 border-slate-300 p-5 text-left transition-colors",
+                "hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset",
+                "dark:border-slate-700 dark:hover:bg-blue-950/20 dark:focus-visible:ring-sky-400",
+                index < 3 ? "border-b" : "",
+                index % 2 === 0 && index < 3 ? "sm:border-r" : "",
+                index === 2 ? "sm:border-b-0" : "",
+                index < 2 ? "xl:border-b-0" : "",
+                index < 3 ? "xl:border-r" : "xl:border-r-0",
+              ].join(" ")}
+              aria-label={`Ir para ${item.number}: ${item.title}`}
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-blue-300 bg-blue-100 text-blue-800 dark:border-blue-800 dark:bg-blue-950/40 dark:text-sky-300">
+                <Icon className="h-4.5 w-4.5" aria-hidden="true" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
+                  {item.number}
+                </span>
+                <span className="mt-1 block text-sm font-bold leading-5 text-foreground">
+                  {item.title}
+                </span>
+                <span className="mt-1.5 block text-sm leading-6 text-slate-700 dark:text-slate-300">
+                  {item.description}
+                </span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+
+    <div id={GUIDE_ANCHORS.documents} className="scroll-mt-28">
+      <InstructionDocumentGuide />
+    </div>
 
     <section id={GUIDE_ANCHORS.rules} className="section-card scroll-mt-28" aria-labelledby="instruction-rules-title">
       <div className="flex items-start gap-4">
@@ -67,7 +163,7 @@ export const SectionTwo = () => (
         </div>
         <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
-            Fundamentação aplicada à instrução
+            2.2 · Aplicar as regras
           </p>
           <h3 id="instruction-rules-title" className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
             Regras que alteram a forma de preparar os documentos
@@ -92,7 +188,7 @@ export const SectionTwo = () => (
                   {group.description}
                 </p>
               </header>
-              <div className="mt-4 grid gap-4 xl:grid-cols-2">
+              <div className="mt-4 grid items-start gap-4 xl:grid-cols-2">
                 {groupRules.map((rule) => (
                   <LegalRuleCard key={rule.id} rule={rule} />
                 ))}
@@ -107,7 +203,10 @@ export const SectionTwo = () => (
       <div className="mb-4 flex items-start gap-3 rounded-xl border border-emerald-300 bg-emerald-50 p-4 dark:border-emerald-800 dark:bg-emerald-950/25">
         <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700 dark:text-emerald-300" aria-hidden="true" />
         <div>
-          <h3 id="instruction-checklist-transition" className="text-sm font-bold text-emerald-950 dark:text-emerald-100">
+          <p className="text-xs font-bold uppercase tracking-[0.1em] text-emerald-800 dark:text-emerald-300">
+            2.3 · Conferir a documentação
+          </p>
+          <h3 id="instruction-checklist-transition" className="mt-1 text-sm font-bold text-emerald-950 dark:text-emerald-100">
             Conferência após a compreensão das peças
           </h3>
           <p className="mt-1 text-sm leading-6 text-emerald-950 dark:text-emerald-100">
@@ -125,7 +224,7 @@ export const SectionTwo = () => (
         </div>
         <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-300">
-            Ferramentas opcionais
+            2.4 · Consultar modelos e minutas
           </p>
           <h3 id="support-tools-title" className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
             Modelos e minutas para apoiar a elaboração

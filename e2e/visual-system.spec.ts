@@ -130,4 +130,32 @@ test.describe("Sistema visual institucional", () => {
     expect(progress).toBeGreaterThanOrEqual(99);
   });
 
+
+  test("mantém regras resumidas na tela e completas na impressão", async ({ page }) => {
+    await page.goto("/?secao=regras-operacionais");
+
+    const rule = page
+      .locator("details.legal-rule-card")
+      .filter({ hasText: "Pesquisa e consolidação de preços" })
+      .first();
+
+    await expect(rule).toBeVisible();
+    await expect(rule).not.toHaveAttribute("open", "");
+    await expect(rule.getByText(/Considerar o valor efetivo da aquisição ou contratação/i)).toBeHidden();
+
+    await rule.locator("summary").click();
+    await expect(rule).toHaveAttribute("open", "");
+    await expect(rule.getByText(/Considerar o valor efetivo da aquisição ou contratação/i)).toBeVisible();
+
+    await rule.locator("summary").click();
+    await expect(rule).not.toHaveAttribute("open", "");
+
+    await page.emulateMedia({ media: "print" });
+    const detailsDisplay = await rule.locator(".legal-rule-card__details").evaluate(
+      (element) => getComputedStyle(element).display,
+    );
+    expect(detailsDisplay).not.toBe("none");
+    await expect(rule.locator(".legal-rule-card__toggle-label")).toBeHidden();
+  });
+
 });

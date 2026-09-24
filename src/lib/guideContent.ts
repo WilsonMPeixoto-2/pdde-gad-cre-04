@@ -30,6 +30,7 @@ export const GAD_UNIT = {
 export const INTERNAL_PROCESS_TRACKER_LABEL = "Controle de processos 2026";
 
 export const GUIDE_ANCHORS = {
+  documents: "documentos-instrucao",
   checklist: "checklist-documentos",
   rules: "regras-operacionais",
   models: "modelos-documentos",
@@ -126,6 +127,7 @@ export type GuideSectionId = (typeof guideSections)[number]["id"];
 export type GuideAnchorId = GuideSectionId | GuideNestedAnchorId;
 
 export const guideAnchorParentSections: Record<GuideNestedAnchorId, GuideSectionId> = {
+  [GUIDE_ANCHORS.documents]: "secao-2",
   [GUIDE_ANCHORS.checklist]: "secao-2",
   [GUIDE_ANCHORS.rules]: "secao-2",
   [GUIDE_ANCHORS.models]: "secao-2",

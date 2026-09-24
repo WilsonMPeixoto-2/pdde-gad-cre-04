@@ -62,6 +62,14 @@ const baseSearchIndex: SearchItem[] = [
     anchor: "secao-1",
   },
   {
+    id: "documentos-instrucao",
+    title: "Grupos documentais da instrução",
+    content: "Função das peças de planejamento, movimentação financeira, comprovação de despesas e patrimônio na prestação de contas.",
+    keywords: ["documentos", "grupos documentais", "planejamento", "extratos", "comprovantes", "patrimônio", "instrução"],
+    section: sectionTitle("secao-2"),
+    anchor: GUIDE_ANCHORS.documents,
+  },
+  {
     id: "checklist",
     title: "Checklist de documentos",
     content: "Instrumento de conferência final da base federal e das peças complementares aplicáveis ao processo local.",

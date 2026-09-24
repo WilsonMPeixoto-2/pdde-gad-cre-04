@@ -70,4 +70,27 @@ test.describe("Arquitetura integrada do guia", () => {
     await expect(signatureSection.getByText(/saldos e movimentações/i)).toHaveCount(0);
     await expect(signatureSection.getByText(/saldo total inicial/i)).toHaveCount(0);
   });
+
+  test("organiza a etapa 2 em quatro blocos navegáveis e endereçáveis", async ({ page }) => {
+    await page.goto("/?secao=secao-2");
+
+    const sectionTwo = page.locator("#secao-2");
+    const sectionNav = sectionTwo.getByRole("navigation", { name: /quatro blocos para orientar a leitura/i });
+
+    await expect(sectionTwo.getByText("2.1", { exact: true }).first()).toBeVisible();
+    await expect(sectionTwo.getByText("2.2", { exact: true }).first()).toBeVisible();
+    await expect(sectionTwo.getByText("2.3", { exact: true }).first()).toBeVisible();
+    await expect(sectionTwo.getByText("2.4", { exact: true }).first()).toBeVisible();
+
+    const shortcuts = sectionNav.getByRole("button");
+    await expect(shortcuts).toHaveCount(4);
+
+    await shortcuts.nth(0).click();
+    await expect(page.locator("#documentos-instrucao")).toBeInViewport();
+
+    await page.goto("/?secao=documentos-instrucao");
+    await expect(page.getByRole("heading", { name: /o que cada grupo documental demonstra/i })).toBeVisible();
+    await expect(page).toHaveURL(/[?&]secao=documentos-instrucao$/i);
+  });
+
 });

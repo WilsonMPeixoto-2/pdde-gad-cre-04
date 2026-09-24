@@ -1878,6 +1878,15 @@
     border-bottom: none !important;
   }
 
+  html:not(.dark) .table-responsive-cards tbody tr:nth-child(even) {
+    background: hsl(var(--table-stripe));
+  }
+
+  html:not(.dark) .table-responsive-cards tbody tr:nth-child(even) td,
+  html:not(.dark) .table-responsive-cards tbody tr:hover td {
+    background: transparent;
+  }
+
   .table-responsive-cards tbody tr td::before {
     content: attr(data-label);
     font-weight: 600;

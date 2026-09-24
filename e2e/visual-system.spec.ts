@@ -100,10 +100,26 @@ test.describe("Sistema visual institucional", () => {
       await expect(firstRowCells.nth(index)).toHaveAttribute("data-label", label);
     }
 
-    const display = await page
-      .locator(".table-responsive-cards")
-      .evaluate((element) => getComputedStyle(element).display);
+    const matrix = page.locator(".table-responsive-cards");
+    const display = await matrix.evaluate((element) => getComputedStyle(element).display);
     expect(display).toBe("block");
+
+    await expect(firstRowCells.nth(0)).toContainText("Até 2011");
+    await expect(firstRowCells.nth(1)).toContainText("Referência histórica");
+    await expect(firstRowCells.nth(2)).toContainText("Fluxo histórico por protocolo.");
+    await expect(firstRowCells.nth(4)).toContainText("Tratar somente como referência histórica.");
+
+    for (let index = 0; index < 6; index += 1) {
+      await expect(firstRowCells.nth(index)).toBeVisible();
+    }
+
+    const matrixMetrics = await matrix.evaluate((element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+      minWidth: getComputedStyle(element).minWidth,
+    }));
+    expect(matrixMetrics.scrollWidth).toBeLessThanOrEqual(matrixMetrics.clientWidth + 1);
+    expect(matrixMetrics.minWidth).toBe("0px");
   });
 
   test("mede o progresso lateral pela leitura real da seção", async ({ page }) => {

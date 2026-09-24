@@ -92,7 +92,7 @@ export const SectionTwo = () => (
     />
 
     <nav
-      className="overflow-hidden rounded-xl border border-slate-300 bg-card dark:border-slate-700"
+      className="no-print overflow-hidden rounded-xl border border-slate-300 bg-card dark:border-slate-700"
       aria-labelledby="section-two-navigation-title"
     >
       <div className="border-b border-slate-300 px-5 py-5 sm:px-6 dark:border-slate-700">

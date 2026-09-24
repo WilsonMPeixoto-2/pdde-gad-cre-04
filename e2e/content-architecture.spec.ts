@@ -93,4 +93,27 @@ test.describe("Arquitetura integrada do guia", () => {
     await expect(page).toHaveURL(/[?&]secao=documentos-instrucao$/i);
   });
 
+
+  test("oferece acesso rápido sem interromper a apresentação institucional", async ({ page }) => {
+    await page.goto("/");
+
+    const quickAccess = page.getByRole("navigation", { name: /acesso rápido/i });
+    await expect(quickAccess).toBeVisible();
+    await expect(quickAccess.getByRole("button")).toHaveCount(4);
+
+    await quickAccess.getByRole("button", { name: /abrir checklist/i }).click();
+    await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
+    await expect(page.locator("#checklist-documentos")).toBeInViewport();
+  });
+
+  test("distingue sequência recomendada de acesso ao conteúdo no mapa", async ({ page }) => {
+    await page.goto("/?secao=mapa-jornada");
+
+    const journey = page.locator(".journey-list");
+    await expect(journey).toBeVisible();
+    await expect(journey.getByText("Etapa posterior no fluxo", { exact: true }).first()).toBeVisible();
+    await expect(journey.getByText("Aguardando etapa anterior", { exact: true })).toHaveCount(0);
+    await expect(journey.getByRole("button", { name: /ir para a etapa/i })).toHaveCount(6);
+  });
+
 });

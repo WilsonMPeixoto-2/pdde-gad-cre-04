@@ -122,7 +122,7 @@ test.describe("Sistema visual institucional", () => {
 
     await sectionTwo.evaluate((element) => {
       const target = element.getBoundingClientRect().top + window.scrollY + element.scrollHeight;
-      window.scrollTo({ top: target, behavior: "instant" });
+      window.scrollTo(0, target);
     });
 
     await expect(sidebarItem).toHaveAttribute("data-read", "true");

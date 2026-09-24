@@ -158,4 +158,66 @@ test.describe("Sistema visual institucional", () => {
     await expect(rule.locator(".legal-rule-card__toggle-label")).toBeHidden();
   });
 
+
+  test("aproxima divisor e conteúdo sem repetir a numeração da etapa", async ({ page }) => {
+    await page.goto("/?secao=secao-3");
+
+    const divider = page.locator(".section-divider-print").filter({ hasText: "Inclusão de Documentos Externos" }).first();
+    await expect(divider).toBeVisible();
+
+    const dividerMetrics = await divider.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        marginTop: Number.parseFloat(style.marginTop),
+        marginBottom: Number.parseFloat(style.marginBottom),
+        borderRadius: Number.parseFloat(style.borderRadius),
+      };
+    });
+
+    expect(dividerMetrics.marginTop).toBe(0);
+    expect(dividerMetrics.marginBottom).toBe(0);
+    expect(dividerMetrics.borderRadius).toBeLessThanOrEqual(12);
+
+    const operationalHeading = page.getByRole("heading", {
+      name: /inclua cada documento com classificação e identificação adequadas/i,
+    });
+    await expect(operationalHeading).toBeVisible();
+
+    const lead = operationalHeading.locator("xpath=ancestor::header[1]");
+    const hiddenStepLabel = lead.locator(".sr-only").filter({ hasText: /Etapa 3/i });
+    await expect(hiddenStepLabel).toHaveCount(1);
+  });
+
+  test("reduz metadados técnicos e gradientes residuais nos modelos", async ({ page }) => {
+    await page.goto("/?secao=modelos-documentos");
+
+    const models = page.locator("#modelos-documentos");
+    await expect(models.getByRole("heading", { name: /modelos e minutas para apoiar a elaboração/i })).toBeVisible();
+    await expect(models.getByText("MODELO_DE_OFICIO_PDDE.pdf", { exact: true })).toHaveCount(0);
+    await expect(models.getByText(/PDF · .*página/i).first()).toBeVisible();
+    await expect(models.locator('[class*="bg-linear-to-br"]')).toHaveCount(0);
+  });
+
+  test("mantém os controles flutuantes discretos e sem gradiente", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+
+    await page.evaluate(() => window.scrollTo(0, Math.max(document.body.scrollHeight * 0.35, 1200)));
+
+    const backToTop = page.getByRole("button", { name: /voltar ao topo da página/i });
+    const guided = page.getByRole("button", { name: /abrir modo guiado da prestação de contas/i });
+
+    await expect(backToTop).toBeVisible();
+    await expect(guided).toBeVisible();
+
+    const backgroundImage = await backToTop.evaluate((element) => getComputedStyle(element).backgroundImage);
+    expect(backgroundImage).toBe("none");
+
+    const [backBox, guidedBox] = await Promise.all([backToTop.boundingBox(), guided.boundingBox()]);
+    expect(backBox).not.toBeNull();
+    expect(guidedBox).not.toBeNull();
+    expect(Math.abs((backBox?.x ?? 0) - (guidedBox?.x ?? 0))).toBeLessThanOrEqual(2);
+    expect((guidedBox?.y ?? 0) + (guidedBox?.height ?? 0)).toBeLessThan(backBox?.y ?? Number.POSITIVE_INFINITY);
+  });
+
 });

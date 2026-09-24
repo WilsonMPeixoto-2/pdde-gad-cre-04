@@ -6,6 +6,7 @@ import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
 import { SectionDivider } from "@/components/pop/SectionDivider";
 import { ScopeNotice } from "@/components/pop/ScopeNotice";
+import { QuickAccessNav } from "@/components/pop/QuickAccessNav";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
 import {
@@ -551,6 +552,7 @@ const Index = () => {
                     <Suspense fallback={<SectionLoader />}>
                       <SectionIntro />
                     </Suspense>
+                    <QuickAccessNav />
                     <ScopeNotice />
                     <Suspense fallback={<SectionLoader />}>
                       <DeadlinesCalculator />

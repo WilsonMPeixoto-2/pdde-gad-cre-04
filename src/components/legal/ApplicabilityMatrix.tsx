@@ -40,15 +40,15 @@ export const ApplicabilityMatrix = () => {
 
               return (
                 <tr key={entry.id} data-applicability-status={entry.status}>
-                  <td className="font-semibold text-foreground">{entry.exerciseRange}</td>
-                  <td>
+                  <td data-label="Exercício" className="font-semibold text-foreground">{entry.exerciseRange}</td>
+                  <td data-label="Status">
                     <span className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-bold ${status.className}`}>
                       {status.label}
                     </span>
                   </td>
-                  <td className="text-muted-foreground">{entry.uexApplicability}</td>
-                  <td className="text-muted-foreground">{entry.eexApplicability}</td>
-                  <td className="text-muted-foreground">
+                  <td data-label="UEx" className="text-muted-foreground">{entry.uexApplicability}</td>
+                  <td data-label="EEx/EM" className="text-muted-foreground">{entry.eexApplicability}</td>
+                  <td data-label="Orientação do site" className="text-muted-foreground">
                     <p>{entry.siteGuidance}</p>
                     {entry.validationRequired ? (
                       <p className="mt-2 text-xs font-semibold text-amber-800 dark:text-amber-200">
@@ -56,7 +56,7 @@ export const ApplicabilityMatrix = () => {
                       </p>
                     ) : null}
                   </td>
-                  <td>
+                  <td data-label="Fontes">
                     <div className="flex flex-col items-start gap-2">
                       {entry.sourceIds.map((sourceId) => {
                         const source = normativeSources[sourceId];

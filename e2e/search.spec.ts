@@ -27,5 +27,15 @@ test.describe("Busca global", () => {
     await expect(processTypeRule).toContainText(
       /Confirme a denominação no sistema e na orientação local vigente/i,
     );
+
+    await input.fill("grupos documentais");
+    const documentGroups = page
+      .getByRole("option")
+      .filter({ hasText: "Grupos documentais da instrução" })
+      .first();
+    await expect(documentGroups).toBeVisible();
+    await documentGroups.click();
+    await expect(page.getByRole("heading", { name: /o que cada grupo documental demonstra/i })).toBeVisible();
+    await expect(page).toHaveURL(/[?&]secao=documentos-instrucao$/i);
   });
 });

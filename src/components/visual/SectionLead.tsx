@@ -24,12 +24,8 @@ export const SectionLead = ({
       <IconTile icon={icon} size="lg" />
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          {step ? (
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
-              Etapa {step}
-            </span>
-          ) : null}
-          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-700 dark:text-slate-300">
+          {step ? <span className="sr-only">Etapa {step}. </span> : null}
+          <span className="text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
             {eyebrow}
           </span>
         </div>

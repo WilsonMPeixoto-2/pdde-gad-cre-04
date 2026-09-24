@@ -19,7 +19,7 @@ const stepTones = ["navy", "violet", "blue", "teal", "amber", "slate"] as const;
 const statusLabel = (isCompleted: boolean, isAvailable: boolean) => {
   if (isCompleted) return "Concluída";
   if (isAvailable) return "Disponível";
-  return "Aguardando etapa anterior";
+  return "Etapa posterior no fluxo";
 };
 
 export const ProcessJourneyMap = () => {
@@ -99,7 +99,7 @@ export const ProcessJourneyMap = () => {
           <div className="journey-lead">
             <p>
               Acompanhe a sequência lógica, marque o que já foi concluído e acesse diretamente a seção
-              correspondente. As dependências evitam que etapas posteriores sejam registradas antes das anteriores.
+              correspondente. As dependências preservam a ordem das marcações sem bloquear a consulta das etapas.
             </p>
             <div className="journey-progress" aria-label={`${completedCount} de ${totalSteps} etapas concluídas`}>
               <div>
@@ -165,7 +165,7 @@ export const ProcessJourneyMap = () => {
 
                 {!isCompleted && !isAvailable && step.dependencies.length > 0 ? (
                   <p className="journey-card__dependency">
-                    Liberação condicionada a: {step.dependencies
+                    Para marcar esta etapa como concluída, conclua antes: {step.dependencies
                       .map((dependency) => steps.find((item) => item.id === dependency)?.title)
                       .join(", ")}.
                   </p>

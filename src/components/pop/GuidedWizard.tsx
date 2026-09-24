@@ -110,17 +110,18 @@ export const GuidedWizard = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-24 right-6 z-40 no-print">
+      <div className="fixed bottom-20 right-6 z-40 no-print">
         <Button
+          variant="outline"
           onClick={() => startTransition(() => setIsOpen(true))}
-          className="relative h-12 w-12 rounded-full p-0 shadow-[0_10px_30px_-18px_hsl(var(--primary)/0.7)]"
+          className="relative h-11 w-11 rounded-lg border-slate-300 bg-white p-0 text-blue-800 shadow-sm hover:border-blue-400 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-950 dark:text-sky-300 dark:hover:border-sky-700 dark:hover:bg-slate-900"
           title="Abrir modo guiado"
           aria-label="Abrir modo guiado da prestação de contas"
         >
           <Compass aria-hidden="true" />
           <span className="sr-only">Modo guiado</span>
           {completedCount > 0 ? (
-            <span className="absolute -left-2 -top-2 rounded-full border border-white/30 bg-primary px-1.5 py-0.5 text-[0.62rem] tabular-nums text-white shadow-sm">
+            <span className="absolute -left-2 -top-2 rounded-md border border-white/40 bg-blue-700 px-1.5 py-0.5 text-xs font-bold tabular-nums text-white shadow-sm dark:bg-sky-400 dark:text-slate-950">
               {completedCount}/{steps.length}
             </span>
           ) : null}
@@ -130,7 +131,7 @@ export const GuidedWizard = () => {
   }
 
   return (
-    <aside className="fixed bottom-24 right-6 z-50 w-[430px] no-print" aria-label="Modo guiado">
+    <aside className="fixed bottom-20 right-6 z-50 w-[430px] no-print" aria-label="Modo guiado">
       <div className="overflow-hidden rounded-[1rem] border border-border/75 bg-card shadow-[0_24px_70px_-32px_hsl(218_28%_18%/0.48)]">
         <header className="flex items-center justify-between border-b border-border/65 px-4 py-3.5">
           <div className="flex items-center gap-3">
@@ -189,7 +190,7 @@ export const GuidedWizard = () => {
         </nav>
 
         <div className="max-h-[min(52vh,26rem)] overflow-y-auto border-t border-border/55 px-4 py-4 scrollbar-thin">
-          <p className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-primary">Etapa {step.number}</p>
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary">Etapa {step.number}</p>
           <h4 className="mt-1 text-lg font-bold tracking-[-0.025em] text-foreground">{step.title}</h4>
           <p className="mt-2 text-sm leading-6 text-foreground/76">{step.description}</p>
 

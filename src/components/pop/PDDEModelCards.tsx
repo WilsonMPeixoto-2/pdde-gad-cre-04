@@ -111,7 +111,7 @@ export const PDDEModelCards = () => {
                           <h4 className="text-base font-bold tracking-[-0.015em] text-foreground">
                             {doc.title}
                           </h4>
-                          <span className={`rounded-md border px-2 py-1 text-[0.68rem] font-bold uppercase tracking-[0.1em] ${contentMeta.className}`}>
+                          <span className={`rounded-md border px-2 py-1 text-xs font-bold uppercase tracking-[0.08em] ${contentMeta.className}`}>
                             {contentMeta.label}
                           </span>
                         </div>
@@ -120,17 +120,9 @@ export const PDDEModelCards = () => {
                           {doc.description}
                         </p>
 
-                        <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-700 dark:text-slate-300">
-                          <span className="max-w-[240px] truncate rounded-md border border-slate-300 bg-slate-100 px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
-                            {doc.fileName}
-                          </span>
-                          <span className="rounded-md border border-slate-300 bg-slate-100 px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
-                            {asset.sizeLabel}
-                          </span>
-                          <span className="rounded-md border border-slate-300 bg-slate-100 px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
-                            {asset.pageLabel}
-                          </span>
-                        </div>
+                        <p className="mt-3 text-xs leading-5 text-slate-600 dark:text-slate-300">
+                          PDF · {asset.pageLabel} · {asset.sizeLabel}
+                        </p>
 
                         {sourceLinks.length > 0 && (
                           <div className="mt-3 flex flex-col gap-2">

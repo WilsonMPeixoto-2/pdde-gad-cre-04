@@ -28,7 +28,7 @@ export const LegalRuleCard = ({ rule }: LegalRuleCardProps) => {
           {rule.summary}
         </span>
 
-        <span className="mt-4 flex items-center justify-between gap-3 border-t border-slate-300 pt-3 text-sm font-bold text-blue-800 dark:border-slate-700 dark:text-sky-300">
+        <span className="legal-rule-card__toggle-label mt-4 flex items-center justify-between gap-3 border-t border-slate-300 pt-3 text-sm font-bold text-blue-800 dark:border-slate-700 dark:text-sky-300">
           <span className="group-open:hidden">Ver orientação</span>
           <span className="hidden group-open:inline">Ocultar orientação</span>
           <ChevronDown

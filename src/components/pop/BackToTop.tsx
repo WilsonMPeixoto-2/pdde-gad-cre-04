@@ -1,24 +1,35 @@
 import { ArrowUp } from "lucide-react";
-import { useEffect, useState, useRef, useCallback } from "react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const rafRef = useRef<number | null>(null);
 
   const toggleVisibility = useCallback(() => {
-    if (rafRef.current) return;
-    rafRef.current = requestAnimationFrame(() => {
-      setIsVisible(window.scrollY > 400);
+    if (rafRef.current !== null) return;
+
+    rafRef.current = window.requestAnimationFrame(() => {
+      const visibilityThreshold = Math.max(700, window.innerHeight * 0.9);
+      setIsVisible(window.scrollY > visibilityThreshold);
       rafRef.current = null;
     });
   }, []);
 
   useEffect(() => {
+    toggleVisibility();
     window.addEventListener("scroll", toggleVisibility, { passive: true });
+    window.addEventListener("resize", toggleVisibility);
+
     return () => {
       window.removeEventListener("scroll", toggleVisibility);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("resize", toggleVisibility);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
     };
   }, [toggleVisibility]);
 
@@ -31,32 +42,26 @@ export const BackToTop = () => {
       <Tooltip>
         <TooltipTrigger asChild>
           <button
+            type="button"
             onClick={scrollToTop}
-            title="Voltar ao topo"
-            className="fixed bottom-4 right-3 z-50 hidden h-10 w-10 items-center justify-center rounded-full no-print opacity-90 transition-all duration-500 group hover:-translate-y-1 hover:opacity-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:bottom-6 sm:right-6 sm:flex sm:h-12 sm:w-12"
-            style={{
-              background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gradient-mid)) 100%)',
-              boxShadow: '0 16px 34px -18px hsl(var(--primary) / 0.45), 0 8px 16px -12px hsl(var(--primary) / 0.28)',
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'scale(1) translateY(0)' : 'scale(0.5) translateY(20px)',
-              pointerEvents: isVisible ? 'auto' : 'none',
-              animation: isVisible ? 'back-to-top-enter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none',
-            }}
+            className={[
+              "fixed bottom-6 right-6 z-40 hidden h-11 w-11 items-center justify-center rounded-lg border border-slate-300 bg-white text-blue-800 shadow-sm no-print transition-[opacity,transform,border-color,background-color] duration-200",
+              "hover:border-blue-400 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
+              "sm:flex dark:border-slate-700 dark:bg-slate-950 dark:text-sky-300 dark:hover:border-sky-700 dark:hover:bg-slate-900 dark:focus-visible:ring-sky-400",
+              isVisible
+                ? "pointer-events-auto translate-y-0 opacity-100"
+                : "pointer-events-none translate-y-2 opacity-0",
+            ].join(" ")}
             aria-label="Voltar ao topo da página"
+            aria-hidden={!isVisible}
+            tabIndex={isVisible ? 0 : -1}
           >
-            {/* Pulse ring */}
-            <span 
-              className="absolute inset-[-4px] rounded-full border-2 border-current opacity-30"
-              style={{ 
-                borderColor: 'hsl(var(--accent) / 0.4)',
-                animation: isVisible ? 'pulse-ring 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
-              }}
-              aria-hidden="true"
-            />
-            <ArrowUp className="w-5 h-5 text-white group-hover:animate-bounce" aria-hidden="true" />
+            <ArrowUp className="h-5 w-5" aria-hidden="true" />
           </button>
         </TooltipTrigger>
-        <TooltipContent side="left"><p>Voltar ao topo</p></TooltipContent>
+        <TooltipContent side="left">
+          <p>Voltar ao topo</p>
+        </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

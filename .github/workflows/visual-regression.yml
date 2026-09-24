@@ -1,0 +1,59 @@
+name: visual-regression
+
+on:
+  push:
+    branches:
+      - main
+      - test/visual-regression-phase-4
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: visual-regression-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build application
+        run: npm run build
+
+      - name: Generate visual baselines on bootstrap branch
+        if: github.event_name == 'push' && github.ref_name == 'test/visual-regression-phase-4'
+        run: npx playwright test --config=playwright.visual.config.ts --update-snapshots
+
+      - name: Compare visual snapshots
+        if: ${{ !(github.event_name == 'push' && github.ref_name == 'test/visual-regression-phase-4') }}
+        run: npx playwright test --config=playwright.visual.config.ts
+
+      - name: Upload visual artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-regression-artifacts
+          path: |
+            visual/__screenshots__
+            output/playwright/visual-results
+          if-no-files-found: ignore

@@ -1156,6 +1156,73 @@
 }
 
 /* Tablet and mobile */
+@media (min-width: 1051px) and (max-width: 1599px) {
+  .cover-intro-v5__copy {
+    padding: 1.75rem 2rem;
+  }
+
+  .cover-intro-v5__institution {
+    margin-bottom: 0.9rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+  }
+
+  .cover-intro-v5__title {
+    font-size: 3.5rem;
+    line-height: 0.92;
+  }
+
+  .cover-intro-v5__deck {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.46;
+  }
+
+  .cover-intro-v5__orientation {
+    gap: 0.2rem;
+    margin-top: 1rem;
+  }
+
+  .cover-intro-v5__orientation span {
+    font-size: 0.7rem;
+  }
+
+  .cover-intro-v5__orientation strong {
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .cover-intro-v5__visual {
+    margin: 1.1rem;
+    margin-left: 0;
+  }
+
+  .cover-intro-v5__metric {
+    gap: 0.65rem;
+    padding: 0.78rem 0.95rem;
+  }
+
+  .cover-intro-v5__metric-number {
+    width: 2.35rem;
+    font-size: 0.88rem;
+  }
+
+  .cover-intro-v5__metric-label {
+    font-size: 0.68rem;
+  }
+
+  .cover-intro-v5__metric strong {
+    margin-top: 0.18rem;
+    font-size: 0.88rem;
+  }
+
+  .cover-intro-v5__metric p {
+    margin-top: 0.12rem;
+    font-size: 0.77rem;
+    line-height: 1.42;
+  }
+}
+
 @media (max-width: 1050px) {
   .cover-intro-v5 {
     border-inline: 0;
@@ -1239,8 +1306,19 @@
   }
 
   .cover-intro-v5__institution {
-    align-items: flex-start;
+    display: block;
+    max-width: 100%;
+    margin-bottom: 1.1rem;
     font-size: 0.75rem;
+    letter-spacing: 0.11em;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .cover-intro-v5__institution::before {
+    display: block;
+    width: 2rem;
+    margin-bottom: 0.6rem;
   }
 
   .cover-intro-v5__title {

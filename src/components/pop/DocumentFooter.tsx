@@ -21,7 +21,10 @@ export const DocumentFooter = () => {
           Gerência de Administração (GAD)
         </h3>
         <p className="text-sm tracking-wide text-muted-foreground">
-          {`Última atualização: ${GUIDE_VERSION.lastUpdatedText}`}
+          {`Atualização editorial: ${GUIDE_VERSION.lastUpdatedText}`}
+        </p>
+        <p className="text-xs leading-5 text-muted-foreground">
+          Verificação normativa: consulte a data indicada em cada regra e fonte oficial.
         </p>
         <p className="text-xs tracking-[0.12em] text-muted-foreground/85">
           {`Build ${__APP_BUILD_ID__.slice(0, 12)} · ${environmentLabel}`}

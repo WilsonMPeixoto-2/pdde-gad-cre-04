@@ -172,8 +172,10 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                           ? "border-sky-400/25 bg-sky-400/[0.09] text-white"
                           : "border-transparent text-white/72 hover:border-white/10 hover:bg-white/[0.045] hover:text-white",
                       )}
-                      aria-label={`Ir para seção ${section.number}: ${section.title}`}
+                      aria-label={`Ir para seção ${section.number}: ${section.title}${isRead ? " (lida)" : ""}`}
                       aria-current={isActive ? "page" : undefined}
+                      data-reading-progress={Math.round(sectionProgress * 100)}
+                      data-read={isRead ? "true" : "false"}
                     >
                       <span
                         className={cn(

@@ -44,6 +44,7 @@ export const BackToTop = () => {
           <button
             type="button"
             onClick={scrollToTop}
+            title="Voltar ao topo"
             className={[
               "fixed bottom-6 right-6 z-40 hidden h-11 w-11 items-center justify-center rounded-lg border border-slate-300 bg-white text-blue-800 shadow-sm no-print transition-[opacity,transform,border-color,background-color] duration-200",
               "hover:border-blue-400 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",

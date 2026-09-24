@@ -34,6 +34,14 @@ const openTarget = async (page: Page, target: string, heading: RegExp) => {
   await stabilizePage(page);
 };
 
+const pinToViewportTop = async (page: Page, selector: string, offset = 72) => {
+  await page.locator(selector).evaluate((element, topOffset) => {
+    const top = element.getBoundingClientRect().top + window.scrollY - Number(topOffset);
+    window.scrollTo(0, Math.max(0, top));
+  }, offset);
+  await page.waitForTimeout(80);
+};
+
 test.describe("Regressão visual institucional", () => {
   test("capa desktop 1440", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
@@ -63,8 +71,7 @@ test.describe("Regressão visual institucional", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await openTarget(page, "secao-2", /compreenda, organize e só então confira a instrução/i);
 
-    const section = page.locator("#secao-2");
-    await section.scrollIntoViewIfNeeded();
+    await pinToViewportTop(page, "#secao-2");
     await stabilizePage(page);
 
     await expect(page).toHaveScreenshot("section-2-desktop-1440.png", {
@@ -78,7 +85,7 @@ test.describe("Regressão visual institucional", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await openTarget(page, "secao-3", /inclua cada documento com classificação e identificação adequadas/i);
 
-    await page.locator("#secao-3").scrollIntoViewIfNeeded();
+    await pinToViewportTop(page, "#secao-3");
     await stabilizePage(page);
 
     await expect(page).toHaveScreenshot("section-3-desktop-1440.png", {
@@ -90,9 +97,10 @@ test.describe("Regressão visual institucional", () => {
 
   test("etapa 3 dark desktop", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
+    await page.addInitScript(() => localStorage.setItem("theme", "dark"));
     await openTarget(page, "secao-3", /inclua cada documento com classificação e identificação adequadas/i);
-    await page.evaluate(() => document.documentElement.classList.add("dark"));
-    await page.locator("#secao-3").scrollIntoViewIfNeeded();
+    await expect(page.locator("html")).toHaveClass(/dark/);
+    await pinToViewportTop(page, "#secao-3");
     await stabilizePage(page);
 
     await expect(page).toHaveScreenshot("section-3-dark-desktop-1440.png", {
@@ -106,7 +114,7 @@ test.describe("Regressão visual institucional", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await openTarget(page, "secao-4", /autentique somente os documentos que vieram do papel/i);
 
-    await page.locator("#secao-4").scrollIntoViewIfNeeded();
+    await pinToViewportTop(page, "#secao-4", 64);
     await stabilizePage(page);
 
     await expect(page).toHaveScreenshot("section-4-mobile-390.png", {
@@ -121,7 +129,8 @@ test.describe("Regressão visual institucional", () => {
     await openTarget(page, "anexo", /fontes oficiais e aplicabilidade/i);
 
     const table = page.locator(".table-responsive-cards");
-    await table.scrollIntoViewIfNeeded();
+    await expect(table.locator("tbody tr").first().locator("td").nth(2)).toContainText(/./);
+    await pinToViewportTop(page, ".table-responsive-cards", 64);
     await stabilizePage(page);
 
     await expect(page).toHaveScreenshot("sources-mobile-390.png", {

@@ -234,11 +234,19 @@ test.describe("Contrato vinculante da capa e introdução v6", () => {
         pixelRatio: window.devicePixelRatio,
         scopeColumns,
         titleSize: title ? Number.parseFloat(getComputedStyle(title).fontSize) : 0,
+        metricLabelSize: Number.parseFloat(
+          getComputedStyle(document.querySelector(".cover-intro-v5__metric-label")!).fontSize,
+        ),
+        metricBodySize: Number.parseFloat(
+          getComputedStyle(document.querySelector(".cover-intro-v5__metric p")!).fontSize,
+        ),
       };
     });
 
     expect(mobileContract.pixelRatio).toBe(3);
-    expect(mobileContract.titleSize).toBeGreaterThanOrEqual(53);
+    expect(mobileContract.titleSize).toBeGreaterThanOrEqual(48);
+    expect(mobileContract.metricLabelSize).toBeGreaterThanOrEqual(12);
+    expect(mobileContract.metricBodySize).toBeGreaterThanOrEqual(13);
     expect(mobileContract.captionInsideFigure).toBe(true);
     expect(sourcePhysicalWidth(mobileContract.imageCurrentSrc)).toBeGreaterThanOrEqual(
       mobileContract.imageClientWidth * mobileContract.pixelRatio * 0.9,

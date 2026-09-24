@@ -7,35 +7,58 @@ import { requestGuideAnchorPreload } from "@/lib/guideNavigation";
 
 function useSectionProgress() {
   const [progress, setProgress] = useState<Record<string, number>>({});
-  const progressRef = useRef<Record<string, number>>({});
-  const syncProgress = useEffectEvent((entries: IntersectionObserverEntry[]) => {
-    for (const entry of entries) {
-      const id = entry.target.id;
-      if (entry.isIntersecting) {
-        progressRef.current[id] = Math.max(progressRef.current[id] ?? 0, entry.intersectionRatio);
-      }
-    }
+  const rafRef = useRef<number | null>(null);
 
-    setProgress({ ...progressRef.current });
-  });
-
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+  const measureProgress = useEffectEvent(() => {
+    const readingMarker = Math.min(window.innerHeight * 0.34, 280);
+    const nextProgress: Record<string, number> = {};
 
     for (const section of guideSections) {
       const element = document.getElementById(section.id);
       if (!element) continue;
 
-      const observer = new IntersectionObserver(
-        (entries) => syncProgress(entries),
-        { threshold: Array.from({ length: 21 }, (_, index) => index / 20) },
-      );
-
-      observer.observe(element);
-      observers.push(observer);
+      const rect = element.getBoundingClientRect();
+      const rawProgress = (readingMarker - rect.top) / Math.max(rect.height, 1);
+      nextProgress[section.id] = Math.min(1, Math.max(0, rawProgress));
     }
 
-    return () => observers.forEach((observer) => observer.disconnect());
+    setProgress((current) => {
+      const ids = Object.keys(nextProgress);
+      const isUnchanged =
+        ids.length === Object.keys(current).length &&
+        ids.every((id) => Math.abs((current[id] ?? 0) - nextProgress[id]) < 0.005);
+
+      return isUnchanged ? current : nextProgress;
+    });
+  });
+
+  useEffect(() => {
+    const scheduleMeasurement = () => {
+      if (rafRef.current !== null) return;
+
+      rafRef.current = window.requestAnimationFrame(() => {
+        rafRef.current = null;
+        measureProgress();
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(scheduleMeasurement);
+
+    for (const section of guideSections) {
+      const element = document.getElementById(section.id);
+      if (element) resizeObserver.observe(element);
+    }
+
+    scheduleMeasurement();
+    window.addEventListener("scroll", scheduleMeasurement, { passive: true });
+    window.addEventListener("resize", scheduleMeasurement);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", scheduleMeasurement);
+      window.removeEventListener("resize", scheduleMeasurement);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return progress;
@@ -131,7 +154,7 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
               {guideSections.map((section) => {
                 const sectionProgress = progress[section.id] ?? 0;
                 const isActive = activeSection === section.id;
-                const isRead = sectionProgress >= 0.95;
+                const isRead = sectionProgress >= 0.985;
 
                 return (
                   <li key={section.id}>
@@ -149,8 +172,10 @@ export const PopSidebar = ({ activeSection, onSectionClick, isOpen, onClose }: P
                           ? "border-sky-400/25 bg-sky-400/[0.09] text-white"
                           : "border-transparent text-white/72 hover:border-white/10 hover:bg-white/[0.045] hover:text-white",
                       )}
-                      aria-label={`Ir para seção ${section.number}: ${section.title}`}
+                      aria-label={`Ir para seção ${section.number}: ${section.title}${isRead ? " (lida)" : ""}`}
                       aria-current={isActive ? "page" : undefined}
+                      data-reading-progress={Math.round(sectionProgress * 100)}
+                      data-read={isRead ? "true" : "false"}
                     >
                       <span
                         className={cn(

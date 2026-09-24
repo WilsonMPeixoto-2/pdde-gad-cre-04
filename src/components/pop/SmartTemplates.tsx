@@ -363,7 +363,7 @@ export const SmartTemplates = () => {
 
                   {isPreviewing && (
                     <div className="mt-5 animate-fade-in rounded-xl border border-slate-300 bg-white p-5 dark:border-slate-700 dark:bg-slate-950">
-                      <pre className="whitespace-pre-wrap font-mono text-xs leading-6 text-foreground">
+                      <pre className="whitespace-pre-wrap font-body text-sm leading-7 text-foreground">
                         {template.generate(effectiveValues)}
                       </pre>
                     </div>

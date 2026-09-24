@@ -124,9 +124,11 @@ export const SectionTwo = () => (
                 "group flex min-h-[9.25rem] items-start gap-3 border-slate-300 p-5 text-left transition-colors",
                 "hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset",
                 "dark:border-slate-700 dark:hover:bg-blue-950/20 dark:focus-visible:ring-sky-400",
-                index % 2 === 0 ? "sm:border-r" : "",
-                index < 2 ? "border-b" : "",
-                index < 3 ? "xl:border-b-0 xl:border-r" : "xl:border-b-0 xl:border-r-0",
+                index < 3 ? "border-b" : "",
+                index % 2 === 0 && index < 3 ? "sm:border-r" : "",
+                index === 2 ? "sm:border-b-0" : "",
+                index < 2 ? "xl:border-b-0" : "",
+                index < 3 ? "xl:border-r" : "xl:border-r-0",
               ].join(" ")}
               aria-label={`Ir para ${item.number}: ${item.title}`}
             >

@@ -75,4 +75,59 @@ test.describe("Sistema visual institucional", () => {
     expect(ruleCardFontSize).toBeGreaterThanOrEqual(12);
   });
 
+
+  test("rotula corretamente a matriz de aplicabilidade no mobile", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?secao=anexo");
+
+    await expect(
+      page.getByRole("heading", { level: 2, name: /fontes oficiais e aplicabilidade/i }),
+    ).toBeVisible();
+
+    const firstRowCells = page.locator(".table-responsive-cards tbody tr").first().locator("td");
+    await expect(firstRowCells).toHaveCount(6);
+
+    const expectedLabels = [
+      "Exercício",
+      "Status",
+      "UEx",
+      "EEx/EM",
+      "Orientação do site",
+      "Fontes",
+    ];
+
+    for (const [index, label] of expectedLabels.entries()) {
+      await expect(firstRowCells.nth(index)).toHaveAttribute("data-label", label);
+    }
+
+    const display = await page
+      .locator(".table-responsive-cards")
+      .evaluate((element) => getComputedStyle(element).display);
+    expect(display).toBe("block");
+  });
+
+  test("mede o progresso lateral pela leitura real da seção", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/?secao=secao-2");
+
+    const sectionTwo = page.locator("#secao-2");
+    await expect(
+      sectionTwo.getByRole("heading", { name: /compreenda, organize e só então confira a instrução/i }),
+    ).toBeVisible();
+
+    const sidebarItem = page.locator(
+      'button[aria-label^="Ir para seção 2: Preparação e Instrução dos Autos"]',
+    );
+    await expect(sidebarItem).toBeVisible();
+
+    await sectionTwo.evaluate((element) => {
+      const target = element.getBoundingClientRect().top + window.scrollY + element.scrollHeight;
+      window.scrollTo({ top: target, behavior: "instant" });
+    });
+
+    await expect(sidebarItem).toHaveAttribute("data-read", "true");
+    const progress = Number(await sidebarItem.getAttribute("data-reading-progress"));
+    expect(progress).toBeGreaterThanOrEqual(99);
+  });
+
 });

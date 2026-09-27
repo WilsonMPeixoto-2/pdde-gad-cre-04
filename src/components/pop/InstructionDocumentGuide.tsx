@@ -84,6 +84,11 @@ const documentGroups = [
   },
 ] as const;
 
+export const instructionDocumentSummary = {
+  groupCount: documentGroups.length,
+  federalItemCount: documentGroups.reduce((total, group) => total + group.items.length, 0),
+} as const;
+
 const localItems = [
   "Peça de encaminhamento local, quando formalmente exigida",
   "Documentos internos assinados no SEI!RIO",

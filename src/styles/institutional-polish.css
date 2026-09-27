@@ -389,6 +389,20 @@ li {
   background: hsl(var(--primary) / 0.025);
 }
 
+.journey-card[data-current="true"] {
+  border-color: hsl(var(--primary) / 0.52);
+  box-shadow:
+    inset 4px 0 0 hsl(var(--primary)),
+    var(--institutional-shadow);
+}
+
+.dark .journey-card[data-current="true"] {
+  border-color: hsl(var(--accent) / 0.62);
+  box-shadow:
+    inset 4px 0 0 hsl(var(--accent)),
+    0 12px 28px -22px hsl(0 0% 0% / 0.55);
+}
+
 /* Dark mode refinement */
 .dark .section-card,
 .dark .article-intro-panel,

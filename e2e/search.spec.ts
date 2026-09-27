@@ -37,5 +37,6 @@ test.describe("Busca global", () => {
     await documentGroups.click();
     await expect(page.getByRole("heading", { name: /o que cada grupo documental demonstra/i })).toBeVisible();
     await expect(page.locator("#documentos-instrucao")).toBeInViewport();
+    await expect(page).toHaveURL(/[?&]secao=documentos-instrucao$/i);
   });
 });

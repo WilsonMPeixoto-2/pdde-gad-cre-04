@@ -1,4 +1,5 @@
 import { startTransition, useDeferredValue, useEffect, useEffectEvent, useState, useCallback, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   CommandDialog,
   CommandEmpty,
@@ -9,10 +10,12 @@ import {
 } from "@/components/ui/command";
 import { searchItems, getQuickSuggestions, SearchItem } from "@/lib/searchIndex";
 import { scrollToGuideAnchor } from "@/lib/guideNavigation";
+import { readGuideTargetFromSearchParams, withGuideTarget } from "@/lib/guideRoutes";
 import { COMMAND_PALETTE_OPEN_EVENT, consumePendingCommandPaletteOpen } from "@/lib/commandPaletteEvents";
 import { Search, FileText, Hash, ArrowRight, Keyboard } from "lucide-react";
 
 export function CommandPalette() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [open, setOpen] = useState(() => consumePendingCommandPaletteOpen());
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
@@ -60,8 +63,17 @@ export function CommandPalette() {
       setQuery("");
     });
 
-    scrollToGuideAnchor(item.anchor, { focusHeading: true });
-  }, []);
+    const currentTarget = readGuideTargetFromSearchParams(searchParams);
+    if (currentTarget === item.anchor) {
+      scrollToGuideAnchor(item.anchor, { focusHeading: true });
+      return;
+    }
+
+    setSearchParams(
+      (current) => withGuideTarget(current, item.anchor),
+      { replace: true },
+    );
+  }, [searchParams, setSearchParams]);
 
   const quickSuggestions = getQuickSuggestions();
   const getItemValue = useCallback(

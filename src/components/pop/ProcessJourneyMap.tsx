@@ -15,6 +15,15 @@ import {
 
 const steps = processFlowSteps;
 const stepTones = ["navy", "violet", "blue", "teal", "amber", "slate"] as const;
+const stepShortLabels: Record<string, string> = {
+  abertura: "Abertura",
+  instrucao: "Instrução",
+  inclusao: "Inclusão",
+  autenticacao: "Autenticação",
+  assinatura: "Remessa",
+  finalizacao: "Acompanhamento",
+};
+
 
 const statusLabel = (isCompleted: boolean, isAvailable: boolean) => {
   if (isCompleted) return "Concluída";
@@ -217,7 +226,7 @@ export const ProcessJourneyMap = () => {
                     {isCompleted ? <Check className="mx-auto h-4 w-4" aria-hidden="true" /> : step.number}
                   </span>
                   <span className="mt-1 block text-xs font-bold leading-4">
-                    {step.title.split(" ").slice(0, 2).join(" ")}
+                    {stepShortLabels[step.id] ?? step.title}
                   </span>
                 </button>
               );

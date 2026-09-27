@@ -1,4 +1,5 @@
-import { Download, ExternalLink, FolderDown } from "lucide-react";
+import { useState } from "react";
+import { Download, ExternalLink, FolderDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -13,28 +14,28 @@ import {
   modelCategoryMeta,
   modelCategoryOrder,
   modelContentKindMeta,
-  openablePdfLinks,
   pddeModels,
 } from "@/lib/pddeModels";
 
-const handleDownloadAll = () => {
+type CategoryFilter = "todos" | (typeof modelCategoryOrder)[number];
+type KindFilter = "todos" | keyof typeof modelContentKindMeta;
+
+const handleOpenMany = (links: string[]) => {
   let openedCount = 0;
 
-  openablePdfLinks.forEach((href) => {
+  links.forEach((href) => {
     const openedWindow = window.open(href, "_blank", "noopener,noreferrer");
-    if (openedWindow) {
-      openedCount += 1;
-    }
+    if (openedWindow) openedCount += 1;
   });
 
-  if (openedCount === openablePdfLinks.length) {
-    toast.success(`Abrindo ${openablePdfLinks.length} PDFs em novas abas.`);
+  if (openedCount === links.length) {
+    toast.success(`Abrindo ${links.length} PDFs em novas abas.`);
     return;
   }
 
   if (openedCount > 0) {
     toast(
-      `${openedCount} PDF(s) foram abertos. ${openablePdfLinks.length - openedCount} aba(s) podem ter sido bloqueadas pelo navegador.`,
+      `${openedCount} PDF(s) foram abertos. ${links.length - openedCount} aba(s) podem ter sido bloqueadas pelo navegador.`,
     );
     return;
   }
@@ -43,44 +44,177 @@ const handleDownloadAll = () => {
 };
 
 export const PDDEModelCards = () => {
-  const grouped = modelCategoryOrder.map((category) => ({
-    category,
-    ...modelCategoryMeta[category],
-    items: pddeModels.filter((item) => item.category === category),
-  }));
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("todos");
+  const [kindFilter, setKindFilter] = useState<KindFilter>("todos");
+
+  const visibleModels = pddeModels.filter(
+    (item) =>
+      (categoryFilter === "todos" || item.category === categoryFilter) &&
+      (kindFilter === "todos" || item.contentKind === kindFilter),
+  );
+
+  const grouped = modelCategoryOrder
+    .map((category) => ({
+      category,
+      ...modelCategoryMeta[category],
+      items: visibleModels.filter((item) => item.category === category),
+    }))
+    .filter((group) => group.items.length > 0);
+
+  const visibleLinks = visibleModels.map((item) => getPdfAssetMeta(item.fileName).href);
+  const hasActiveFilters = categoryFilter !== "todos" || kindFilter !== "todos";
+  const categoryLabel =
+    categoryFilter === "todos" ? "Todas as áreas" : modelCategoryMeta[categoryFilter].label;
+  const kindLabel =
+    kindFilter === "todos" ? "Todos os tipos" : modelContentKindMeta[kindFilter].label;
+
+  const categoryOptions: { key: CategoryFilter; label: string }[] = [
+    { key: "todos", label: "Todas as áreas" },
+    ...modelCategoryOrder.map((key) => ({ key, label: modelCategoryMeta[key].label })),
+  ];
+
+  const kindOptions: { key: KindFilter; label: string }[] = [
+    { key: "todos", label: "Todos os tipos" },
+    ...Object.entries(modelContentKindMeta).map(([key, meta]) => ({
+      key: key as KindFilter,
+      label: meta.label,
+    })),
+  ];
 
   return (
     <div>
-      <div className="mb-6 flex flex-col gap-3 border-b border-slate-300 pb-4 sm:flex-row sm:items-center sm:justify-between dark:border-slate-700">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-300">
-            Acervo de apoio
-          </p>
-          <p className="mt-1 text-sm leading-6 text-slate-700 dark:text-slate-300">
-            {openablePdfLinks.length} documentos disponíveis para consulta.
-          </p>
+      <div className="mb-6 overflow-hidden rounded-xl border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-950">
+        <div className="grid xl:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-300">
+              Biblioteca visual
+            </p>
+            <div className="mt-2 flex flex-wrap items-end gap-x-3 gap-y-1">
+              <strong className="text-3xl font-extrabold tracking-[-0.04em] text-foreground">
+                {visibleModels.length}
+              </strong>
+              <span className="pb-1 text-sm text-slate-600 dark:text-slate-300">
+                de {pddeModels.length} documentos exibidos
+              </span>
+            </div>
+            <p className="mt-2 max-w-[62ch] text-sm leading-6 text-slate-700 dark:text-slate-300">
+              Combine área e tipo para reduzir o acervo ao conjunto útil para a tarefa atual.
+            </p>
+          </div>
+
+          <div className="flex items-center border-t border-slate-300 p-4 xl:border-l xl:border-t-0 dark:border-slate-700">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={() => handleOpenMany(visibleLinks)}
+                    variant="outline"
+                    size="sm"
+                    className="w-full gap-2 xl:w-auto"
+                    disabled={visibleLinks.length === 0}
+                  >
+                    <FolderDown className="h-4 w-4" aria-hidden="true" />
+                    <span>Abrir visíveis ({visibleLinks.length})</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Abre somente os PDFs que correspondem à visão atual</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                onClick={handleDownloadAll}
-                variant="outline"
-                size="sm"
-                className="gap-2"
+
+        <div className="border-t border-slate-300 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/55">
+          <div className="grid gap-4 xl:grid-cols-2">
+            <fieldset>
+              <legend className="text-xs font-bold uppercase tracking-[0.1em] text-slate-600 dark:text-slate-300">
+                Área
+              </legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {categoryOptions.map((option) => (
+                  <button
+                    key={option.key}
+                    type="button"
+                    onClick={() => setCategoryFilter(option.key)}
+                    className={[
+                      "rounded-lg border px-3 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
+                      categoryFilter === option.key
+                        ? "border-blue-700 bg-blue-700 text-white dark:border-sky-400 dark:bg-sky-400 dark:text-slate-950"
+                        : "border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-800 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-sky-600 dark:hover:text-sky-300",
+                    ].join(" ")}
+                    aria-pressed={categoryFilter === option.key}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend className="text-xs font-bold uppercase tracking-[0.1em] text-slate-600 dark:text-slate-300">
+                Tipo
+              </legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {kindOptions.map((option) => (
+                  <button
+                    key={option.key}
+                    type="button"
+                    onClick={() => setKindFilter(option.key)}
+                    className={[
+                      "rounded-lg border px-3 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
+                      kindFilter === option.key
+                        ? "border-blue-700 bg-blue-700 text-white dark:border-sky-400 dark:bg-sky-400 dark:text-slate-950"
+                        : "border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-800 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-sky-600 dark:hover:text-sky-300",
+                    ].join(" ")}
+                    aria-pressed={kindFilter === option.key}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
+            <span className="font-bold uppercase tracking-[0.08em]">Visão atual:</span>
+            <span>{categoryLabel} · {kindLabel}</span>
+            {hasActiveFilters ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setCategoryFilter("todos");
+                  setKindFilter("todos");
+                }}
+                className="ml-auto inline-flex min-h-8 items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 font-semibold text-slate-700 hover:border-blue-400 hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-sky-600 dark:hover:text-sky-300"
               >
-                <FolderDown className="h-4 w-4" aria-hidden="true" />
-                <span>Abrir todos</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Abre os {openablePdfLinks.length} arquivos PDF em novas abas</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+                <X className="h-3.5 w-3.5" aria-hidden="true" />
+                Limpar filtros
+              </button>
+            ) : null}
+          </div>
+        </div>
       </div>
 
       <div className="space-y-8">
+        {visibleModels.length === 0 ? (
+          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center dark:border-slate-700 dark:bg-slate-900/45">
+            <p className="text-sm font-bold text-foreground">
+              Nenhum documento corresponde aos filtros atuais.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setCategoryFilter("todos");
+                setKindFilter("todos");
+              }}
+              className="mt-3 text-sm font-semibold text-blue-800 underline underline-offset-4 dark:text-sky-300"
+            >
+              Mostrar todo o acervo
+            </button>
+          </div>
+        ) : null}
+
         {grouped.map((group) => (
           <section key={group.category} aria-label={group.label}>
             <header className="mb-4 border-b border-slate-300 pb-3 dark:border-slate-700">

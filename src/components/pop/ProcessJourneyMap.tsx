@@ -216,7 +216,7 @@ export const ProcessJourneyMap = () => {
                   <span className="block text-lg font-extrabold">
                     {isCompleted ? <Check className="mx-auto h-4 w-4" aria-hidden="true" /> : step.number}
                   </span>
-                  <span className="mt-1 block text-[0.7rem] font-bold leading-4">
+                  <span className="mt-1 block text-xs font-bold leading-4">
                     {step.title.split(" ").slice(0, 2).join(" ")}
                   </span>
                 </button>

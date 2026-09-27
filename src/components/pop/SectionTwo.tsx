@@ -14,7 +14,7 @@ import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 import { normativeRules } from "@/lib/normativeRules";
 import { checklistItemDefinitions } from "@/lib/pddeOperationalData";
 import { pddeModels } from "@/lib/pddeModels";
-import { InstructionDocumentGuide } from "./InstructionDocumentGuide";
+import { InstructionDocumentGuide, instructionDocumentSummary } from "./InstructionDocumentGuide";
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
 import { SmartTemplates } from "./SmartTemplates";
@@ -56,8 +56,8 @@ const sectionTwoNavigation = [
     number: "2.1",
     title: "Entender os documentos",
     description: "Função das peças e grupos documentais.",
-    metric: "4 grupos",
-    metricDetail: "10 peças federais de referência",
+    metric: `${instructionDocumentSummary.groupCount} grupos`,
+    metricDetail: `${instructionDocumentSummary.federalItemCount} peças federais de referência`,
     anchor: GUIDE_ANCHORS.documents,
     icon: BookOpenText,
   },
@@ -65,7 +65,7 @@ const sectionTwoNavigation = [
     number: "2.2",
     title: "Aplicar as regras",
     description: "Critérios que afetam a preparação dos autos.",
-    metric: `${normativeRules.length} critérios`,
+    metric: `${ruleGroups.reduce((total, group) => total + group.ids.length, 0)} critérios`,
     metricDetail: "organizados por tema",
     anchor: GUIDE_ANCHORS.rules,
     icon: Scale,

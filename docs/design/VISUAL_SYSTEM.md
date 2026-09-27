@@ -37,6 +37,28 @@ Características obrigatórias do padrão:
 
 A consistência deve ser avaliada por ritmo, tipografia, espaçamento, função das cores e densidade visual, e não pela repetição mecânica da mesma composição em todos os conteúdos.
 
+## Linguagens de composição por tarefa
+
+O guia utiliza três linguagens complementares, escolhidas conforme a tarefa cognitiva do usuário:
+
+1. **Editorial** — capa, apresentação e contextualização institucional.
+2. **Instrucional** — etapas lineares de execução, especialmente Etapas 1, 3, 4, 5 e 6.
+3. **Analítica e interativa** — mapa da jornada, Etapa 2, checklist, modelos e áreas de consulta.
+
+A linguagem analítica pode se inspirar em padrões de dashboards como Power BI, desde que a visualização represente informação ou ação real. O objetivo é permitir a sequência **indicador → filtro ou seleção → detalhe → ação**, e não decorar a página com gráficos sem função.
+
+Regras para painéis analíticos:
+
+- indicadores devem derivar do estado ou do conteúdo real exibido;
+- KPIs podem funcionar como filtros quando isso reduzir etapas de navegação;
+- filtros combináveis devem exibir claramente a visão atual e oferecer limpeza simples;
+- uma ação global deve respeitar o conjunto filtrado quando a expectativa do usuário for operar sobre a visão corrente;
+- seleções devem produzir alteração visual imediata, persistente e compreensível;
+- usar drill-down para revelar detalhe progressivamente e drill-through para levar a conteúdo relacionado;
+- não usar gráficos quando uma contagem, progresso, matriz ou sequência visual comunicar melhor a informação;
+- preservar leitura linear nas etapas cujo objetivo principal seja executar um procedimento em ordem;
+- no mobile, painéis devem reorganizar a informação sem exigir rolagem horizontal da página.
+
 ## Tipografia
 
 | Função | Família | Uso |

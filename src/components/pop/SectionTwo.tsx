@@ -1,5 +1,6 @@
 import {
   ArrowRight,
+  ArrowUpRight,
   BookOpenText,
   ClipboardCheck,
   FileCheck2,
@@ -11,6 +12,8 @@ import { SectionLead } from "@/components/visual/SectionLead";
 import { GUIDE_ANCHORS } from "@/lib/guideContent";
 import { scrollToGuideAnchor } from "@/lib/guideNavigation";
 import { normativeRules } from "@/lib/normativeRules";
+import { checklistItemDefinitions } from "@/lib/pddeOperationalData";
+import { pddeModels } from "@/lib/pddeModels";
 import { InstructionDocumentGuide } from "./InstructionDocumentGuide";
 import { PDDEChecklist } from "./PDDEChecklist";
 import { PDDEModelCards } from "./PDDEModelCards";
@@ -53,6 +56,8 @@ const sectionTwoNavigation = [
     number: "2.1",
     title: "Entender os documentos",
     description: "Função das peças e grupos documentais.",
+    metric: "4 grupos",
+    metricDetail: "10 peças federais de referência",
     anchor: GUIDE_ANCHORS.documents,
     icon: BookOpenText,
   },
@@ -60,6 +65,8 @@ const sectionTwoNavigation = [
     number: "2.2",
     title: "Aplicar as regras",
     description: "Critérios que afetam a preparação dos autos.",
+    metric: `${normativeRules.length} critérios`,
+    metricDetail: "organizados por tema",
     anchor: GUIDE_ANCHORS.rules,
     icon: Scale,
   },
@@ -67,6 +74,8 @@ const sectionTwoNavigation = [
     number: "2.3",
     title: "Conferir a documentação",
     description: "Checklist após a organização das peças.",
+    metric: `${checklistItemDefinitions.length} itens`,
+    metricDetail: "essenciais + complementares",
     anchor: GUIDE_ANCHORS.checklist,
     icon: FileCheck2,
   },
@@ -74,6 +83,8 @@ const sectionTwoNavigation = [
     number: "2.4",
     title: "Consultar modelos e minutas",
     description: "Recursos opcionais de apoio à elaboração.",
+    metric: `${pddeModels.length} PDFs`,
+    metricDetail: "modelos, exemplos e referências",
     anchor: GUIDE_ANCHORS.models,
     icon: FolderKanban,
   },
@@ -135,7 +146,7 @@ export const SectionTwo = () => (
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-blue-300 bg-blue-100 text-blue-800 dark:border-blue-800 dark:bg-blue-950/40 dark:text-sky-300">
                 <Icon className="h-4.5 w-4.5" aria-hidden="true" />
               </span>
-              <span className="min-w-0">
+              <span className="flex min-w-0 flex-1 flex-col self-stretch">
                 <span className="block text-xs font-bold uppercase tracking-[0.12em] text-blue-800 dark:text-sky-300">
                   {item.number}
                 </span>
@@ -144,6 +155,18 @@ export const SectionTwo = () => (
                 </span>
                 <span className="mt-1.5 block text-sm leading-6 text-slate-700 dark:text-slate-300">
                   {item.description}
+                </span>
+                <span className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-700">
+                  <span className="block text-lg font-extrabold tracking-[-0.03em] text-foreground">
+                    {item.metric}
+                  </span>
+                  <span className="mt-0.5 block text-xs leading-5 text-slate-600 dark:text-slate-300">
+                    {item.metricDetail}
+                  </span>
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-800 dark:text-sky-300">
+                    Abrir bloco
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </span>
                 </span>
               </span>
             </button>

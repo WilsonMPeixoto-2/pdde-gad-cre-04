@@ -54,14 +54,19 @@ test.describe("Camada analítica operacional", () => {
     await models.getByRole("button", { name: "Documentos Financeiros", exact: true }).click();
     await models.getByRole("button", { name: "Referência visual", exact: true }).click();
 
-    await expect(models.getByText("3", { exact: true }).first()).toBeVisible();
-    await expect(models.getByRole("button", { name: "Abrir visíveis (3)", exact: true })).toBeVisible();
+    const modelCards = models.getByTestId("model-card");
+    const openVisible = models.getByTestId("open-visible-models");
+
+    await expect(modelCards).toHaveCount(3);
+    await expect(openVisible).toBeVisible();
+    await expect(openVisible).toContainText("Abrir visíveis (3)");
     await expect(models.getByText(/documentos financeiros · referência visual/i)).toBeVisible();
     await expect(models.getByRole("heading", { name: "Nota Fiscal Eletrônica — DANFE", exact: true })).toBeVisible();
     await expect(models.getByRole("heading", { name: "Planejamento com Ata", exact: true })).toHaveCount(0);
 
     await models.getByRole("button", { name: /limpar filtros/i }).click();
-    await expect(models.getByRole("button", { name: "Abrir visíveis (8)", exact: true })).toBeVisible();
+    await expect(modelCards).toHaveCount(8);
+    await expect(openVisible).toContainText("Abrir visíveis (8)");
   });
 
   test("mostra etapa atual e atualiza a visão da jornada após conclusão", async ({ page }) => {

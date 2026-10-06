@@ -55,13 +55,13 @@ test.describe("Camada analítica operacional", () => {
     await models.getByRole("button", { name: "Referência visual", exact: true }).click();
 
     await expect(models.getByText("3", { exact: true }).first()).toBeVisible();
-    await expect(models.getByRole("button", { name: /abrir visíveis \(3\)/i })).toBeVisible();
+    await expect(models.getByRole("button", { name: "Abrir visíveis (3)", exact: true })).toBeVisible();
     await expect(models.getByText(/documentos financeiros · referência visual/i)).toBeVisible();
     await expect(models.getByRole("heading", { name: "Nota Fiscal Eletrônica — DANFE", exact: true })).toBeVisible();
     await expect(models.getByRole("heading", { name: "Planejamento com Ata", exact: true })).toHaveCount(0);
 
     await models.getByRole("button", { name: /limpar filtros/i }).click();
-    await expect(models.getByRole("button", { name: /abrir visíveis \(8\)/i })).toBeVisible();
+    await expect(models.getByRole("button", { name: "Abrir visíveis (8)", exact: true })).toBeVisible();
   });
 
   test("mostra etapa atual e atualiza a visão da jornada após conclusão", async ({ page }) => {

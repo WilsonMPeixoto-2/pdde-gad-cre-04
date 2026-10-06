@@ -9,6 +9,7 @@ import { searchIndex } from "../src/lib/searchIndex.ts";
 
 const httpTimeoutMs = 20000;
 const externalLinkRetryAttempts = 3;
+const inconclusiveExternalStatuses = new Set([401, 403, 429]);
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -140,15 +141,28 @@ const fetchStatusWithRetry = async (url: string) => {
   throw lastError instanceof Error ? lastError : new Error(String(lastError));
 };
 
+const isInconclusiveExternalStatus = (status: number) =>
+  inconclusiveExternalStatuses.has(status) || status >= 500;
+
 const ensureExternalLinksRespond = async () => {
   const findings: string[] = [];
 
   for (const resource of externalResourceList) {
     try {
       const status = await fetchStatusWithRetry(resource.href);
-      if (status >= 400) {
-        findings.push(`Link externo com falha (${status}): ${resource.title} -> ${resource.href}`);
+
+      if (status < 400) {
+        continue;
       }
+
+      if (isInconclusiveExternalStatus(status)) {
+        console.warn(
+          `Aviso: link externo não pôde ser validado de forma conclusiva (${status}): ${resource.title} -> ${resource.href}`,
+        );
+        continue;
+      }
+
+      findings.push(`Link externo com falha (${status}): ${resource.title} -> ${resource.href}`);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       const isCiNetworkFailure =

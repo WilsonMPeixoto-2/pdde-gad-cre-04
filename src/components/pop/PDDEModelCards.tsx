@@ -107,6 +107,7 @@ export const PDDEModelCards = () => {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
+                    data-testid="open-visible-models"
                     onClick={() => handleOpenMany(visibleLinks)}
                     variant="outline"
                     size="sm"
@@ -233,6 +234,7 @@ export const PDDEModelCards = () => {
                 return (
                   <article
                     key={doc.id}
+                    data-testid="model-card"
                     className="rounded-xl border border-slate-300 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/55"
                   >
                     <div className="grid gap-4 sm:grid-cols-[2.5rem_minmax(0,1fr)_auto] sm:items-start">

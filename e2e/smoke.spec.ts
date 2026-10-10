@@ -149,8 +149,9 @@ test.describe("Fluxo mobile", () => {
 
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
+    await expect(page.locator("#checklist-documentos")).toBeInViewport();
     await page.waitForTimeout(1800);
-    await expect(page).toHaveURL(/[?&]secao=secao-2$/i);
+    await expect(page).toHaveURL(/[?&]secao=checklist-documentos$/i);
 
     await page.getByRole("button", { name: /mais ações/i }).click();
     await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toBeVisible();

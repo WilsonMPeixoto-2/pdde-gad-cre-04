@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Filter, Copy, Check, Download } from "lucide-react";
+import { CheckCircle2, Circle, ClipboardCheck, FileCheck, AlertTriangle, Copy, Check, Download } from "lucide-react";
 import { toast } from "sonner";
 import { IconTile } from "@/components/visual/IconTile";
 import { downloadTextFile } from "@/lib/clientFileExports";
@@ -60,7 +60,10 @@ export const PDDEChecklist = () => {
 
   const essenciaisCount = items.filter(item => !item.complementar).length;
   const essenciaisCompleted = items.filter(item => !item.complementar && item.checked).length;
+  const complementaresCount = items.filter(item => item.complementar).length;
+  const complementaresCompleted = items.filter(item => item.complementar && item.checked).length;
   const completedCount = items.filter(item => item.checked).length;
+  const pendingCount = items.length - completedCount;
   const progressPercent = (essenciaisCompleted / essenciaisCount) * 100;
 
   // Fire confetti when all essential items are completed
@@ -177,15 +180,50 @@ export const PDDEChecklist = () => {
       toast.success("Lista baixada com sucesso.");
   }, [items]);
 
-  const filters: { key: FilterType; label: string }[] = [
-    { key: 'todos', label: 'Todos' },
-    { key: 'pendentes', label: `Pendentes (${items.filter(i => !i.checked).length})` },
-    { key: 'concluidos', label: `Concluídos (${completedCount})` },
-    { key: 'essenciais', label: 'Essenciais' },
-    { key: 'complementares', label: 'Complementares' },
+  const analyticsFilters: {
+    key: Exclude<FilterType, "todos">;
+    label: string;
+    value: string;
+    detail: string;
+    tone: string;
+  }[] = [
+    {
+      key: "pendentes",
+      label: "Pendentes",
+      value: String(pendingCount),
+      detail: "itens ainda não marcados",
+      tone: "text-amber-800 dark:text-amber-300",
+    },
+    {
+      key: "concluidos",
+      label: "Concluídos",
+      value: String(completedCount),
+      detail: `de ${items.length} itens totais`,
+      tone: "text-emerald-800 dark:text-emerald-300",
+    },
+    {
+      key: "essenciais",
+      label: "Essenciais",
+      value: `${essenciaisCompleted}/${essenciaisCount}`,
+      detail: "base federal mínima",
+      tone: "text-blue-800 dark:text-sky-300",
+    },
+    {
+      key: "complementares",
+      label: "Complementares",
+      value: `${complementaresCompleted}/${complementaresCount}`,
+      detail: "instrução local e apoio",
+      tone: "text-violet-800 dark:text-violet-300",
+    },
   ];
 
-  const pendingCount = items.filter(i => !i.checked).length;
+  const filterLabel: Record<FilterType, string> = {
+    todos: "Todos os itens",
+    pendentes: "Pendentes",
+    concluidos: "Concluídos",
+    essenciais: "Essenciais",
+    complementares: "Complementares",
+  };
 
   return (
     <div className="section-card">
@@ -220,39 +258,75 @@ export const PDDEChecklist = () => {
         O <strong className="text-foreground">Bloco A</strong> destaca o núcleo documental federal mínimo e as peças nucleares da comprovação. O <strong className="text-foreground">Bloco B</strong> reúne documentos complementares úteis para a instrução no <strong className="text-foreground">SEI!RIO</strong> e para o controle interno da CRE/SME. Pesquisa de preços admite exceções justificadas, e itens adicionais podem variar conforme a ação do PDDE, o exercício e as orientações locais vigentes.
       </p>
 
-      {/* Progress Bar */}
-      <div className="mb-5 rounded-xl border border-slate-300 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/55">
-        <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="font-semibold text-slate-700 dark:text-slate-300">Bloco A — base federal mínima</span>
-          <span className="font-semibold text-primary">
-            {essenciaisCompleted} de {essenciaisCount} ({Math.round(progressPercent)}%)
-          </span>
+      {/* Painel analítico */}
+      <div className="mb-5 overflow-hidden rounded-xl border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-950">
+        <div className="grid grid-cols-2 xl:grid-cols-4" data-testid="checklist-kpis">
+          {analyticsFilters.map((metric, index) => (
+            <button
+              key={metric.key}
+              type="button"
+              onClick={() => setFilter(metric.key)}
+              className={[
+                "min-w-0 p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset dark:focus-visible:ring-sky-400",
+                "hover:bg-slate-50 dark:hover:bg-slate-900/70",
+                filter === metric.key ? "bg-blue-50 dark:bg-blue-950/25" : "",
+                index % 2 === 0 ? "border-r border-slate-300 dark:border-slate-700" : "",
+                index < 2 ? "border-b border-slate-300 xl:border-b-0 dark:border-slate-700" : "",
+                index === 2 ? "xl:border-r xl:border-slate-300 dark:xl:border-slate-700" : "",
+              ].join(" ")}
+              aria-pressed={filter === metric.key}
+              aria-label={`Filtrar checklist por ${metric.label}`}
+            >
+              <span className="block text-xs font-bold uppercase tracking-[0.1em] text-slate-600 dark:text-slate-300">
+                {metric.label}
+              </span>
+              <span className={`mt-2 block text-2xl font-extrabold tracking-[-0.04em] ${metric.tone}`}>
+                {metric.value}
+              </span>
+              <span className="mt-1 block text-xs leading-5 text-slate-600 dark:text-slate-300">
+                {metric.detail}
+              </span>
+            </button>
+          ))}
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-          <div
-            className="h-full rounded-full bg-blue-700 transition-[width] duration-500 ease-out dark:bg-sky-400"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-      </div>
 
-      {/* Filters */}
-      <div className="mb-4 flex items-center gap-2 flex-wrap">
-        <Filter className="w-4 h-4 text-muted-foreground shrink-0" aria-hidden="true" />
-        {filters.map(f => (
-          <button
-            key={f.key}
-            onClick={() => setFilter(f.key)}
-            className={`rounded-lg border px-3 py-2 text-xs font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-              filter === f.key
-                ? 'border-blue-700 bg-blue-700 text-white dark:border-sky-400 dark:bg-sky-400 dark:text-slate-950'
-                : 'border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-800 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-sky-600 dark:hover:text-sky-300'
-            }`}
-            aria-pressed={filter === f.key}
-          >
-            {f.label}
-          </button>
-        ))}
+        <div className="border-t border-slate-300 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/55">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="text-xs font-bold uppercase tracking-[0.1em] text-slate-600 dark:text-slate-300">
+                  Visão atual
+                </span>
+                <strong className="text-sm text-foreground">{filterLabel[filter]}</strong>
+              </div>
+              <div className="mt-2 flex items-center gap-3">
+                <div className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-slate-200 sm:w-64 dark:bg-slate-800">
+                  <div
+                    className="h-full rounded-full bg-blue-700 transition-[width] duration-500 ease-out dark:bg-sky-400"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
+                <span className="shrink-0 text-xs font-bold text-blue-800 dark:text-sky-300">
+                  Base essencial {Math.round(progressPercent)}%
+                </span>
+              </div>
+            </div>
+
+            {filter !== "todos" ? (
+              <button
+                type="button"
+                onClick={() => setFilter("todos")}
+                className="min-h-9 shrink-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-blue-400 hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-sky-600 dark:hover:text-sky-300"
+              >
+                Limpar filtro
+              </button>
+            ) : (
+              <span className="text-xs text-slate-600 dark:text-slate-300">
+                Clique em um indicador para filtrar a lista.
+              </span>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Summary Button */}

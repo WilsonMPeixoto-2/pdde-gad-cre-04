@@ -20,8 +20,8 @@ const App = () => {
       <ProfileModeProvider>
         <TooltipProvider>
           <Sonner />
-          <CommandPalette />
           <BrowserRouter>
+            <CommandPalette />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />

@@ -7,7 +7,7 @@ import {
   PDDE_STORAGE_KEYS,
   setGuidePersistenceDisabled,
 } from "@/lib/pddeOperationalData";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 type PersistenceScope = "models" | "analysis";
 
@@ -44,6 +44,7 @@ export const DataPersistenceNotice = ({
   scope = "models",
 }: DataPersistenceNoticeProps) => {
   const [persistenceDisabled, setPersistenceDisabled] = useState(isGuidePersistenceDisabled);
+  const titleId = useId();
   const copy = scopeCopy[scope];
 
   const clearCurrentData = () => {
@@ -70,7 +71,7 @@ export const DataPersistenceNotice = ({
   return (
     <section
       className="rounded-xl border border-sky-200 bg-sky-50/80 p-4 text-slate-900 dark:border-sky-900/50 dark:bg-sky-950/25 dark:text-sky-50"
-      aria-labelledby="data-persistence-title"
+      aria-labelledby={titleId}
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex min-w-0 gap-3">
@@ -80,7 +81,7 @@ export const DataPersistenceNotice = ({
           />
           <div className="min-w-0">
             <h3
-              id="data-persistence-title"
+              id={titleId}
               className="font-heading text-sm font-bold text-slate-950 dark:text-white"
             >
               Privacidade neste dispositivo

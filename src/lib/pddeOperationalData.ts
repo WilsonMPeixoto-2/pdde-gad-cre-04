@@ -118,22 +118,29 @@ export const PDDE_STORAGE_KEYS = {
   workspace: "pdde-process-workspace-v1",
   notes: "pdde-case-notes-v1",
   templates: "pdde-smart-templates-v1",
+  analysis: "pdde-gad-analysis-v1",
 } as const;
 
 export const PDDE_STORAGE_EVENT = "pdde-storage-sync";
 export const PDDE_STORAGE_CLEAR_ALL_KEY = "*";
 export const PDDE_PERSISTENCE_DISABLED_KEY = "pdde-persistence-disabled-v1";
+export const PDDE_ANALYSIS_NUP_SESSION_KEY = "pdde-gad-analysis-v1:nup-session";
 export const PDDE_PERSISTENCE_SCHEMA_VERSION = 2;
 
 const PDDE_STORAGE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const PDDE_WORKSPACE_SESSION_KEY = `${PDDE_STORAGE_KEYS.workspace}:nup-session`;
-const PDDE_AUXILIARY_STORAGE_KEYS = ["pdde-wizard-progress-v1", "pdde-profile-mode"] as const;
+const PDDE_AUXILIARY_STORAGE_KEYS = [
+  "pdde-wizard-progress-v1",
+  "pdde-profile-mode",
+  PDDE_ANALYSIS_NUP_SESSION_KEY,
+] as const;
 const PDDE_SESSION_STORAGE_KEYS = new Set<string>([
   PDDE_STORAGE_KEYS.templates,
 ]);
 const PDDE_EXPIRING_LOCAL_STORAGE_KEYS = new Set<string>([
   PDDE_STORAGE_KEYS.workspace,
   PDDE_STORAGE_KEYS.notes,
+  PDDE_STORAGE_KEYS.analysis,
 ]);
 
 export const NUP_PATTERN = /^\d{6}\.\d{6}\/\d{4}-\d{2}$/;
@@ -698,6 +705,10 @@ export const clearGuideStorage = (keys: string[] = Object.values(PDDE_STORAGE_KE
 
   if (keys.includes(PDDE_STORAGE_KEYS.workspace) || keys.includes(PDDE_STORAGE_CLEAR_ALL_KEY)) {
     window.sessionStorage.removeItem(PDDE_WORKSPACE_SESSION_KEY);
+  }
+
+  if (keys.includes(PDDE_STORAGE_KEYS.analysis) || keys.includes(PDDE_STORAGE_CLEAR_ALL_KEY)) {
+    window.sessionStorage.removeItem(PDDE_ANALYSIS_NUP_SESSION_KEY);
   }
 };
 

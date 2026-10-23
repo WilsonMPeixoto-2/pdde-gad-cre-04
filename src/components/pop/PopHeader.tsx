@@ -1,4 +1,4 @@
-import { FileText, Menu, Moon, MoreVertical, Printer, Search, Sun } from "lucide-react";
+import { FileText, Menu, Moon, MoreVertical, Printer, School, Search, ShieldCheck, Sun } from "lucide-react";
 import { startTransition, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +11,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { requestCommandPaletteOpen } from "@/lib/commandPaletteEvents";
 import { GUIDE_VERSION } from "@/lib/guideContent";
 import { ReadingProgressBar } from "./ReadingProgressBar";
+import { useProfileMode } from "@/contexts/ProfileModeContext";
 
 interface PopHeaderProps {
   isPreparingPrint?: boolean;
@@ -22,6 +23,7 @@ const darkActionClass =
   "border-white/12 bg-transparent text-white/82 hover:border-white/22 hover:bg-white/[0.07] hover:text-white";
 
 export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: PopHeaderProps) => {
+  const { mode, setMode } = useProfileMode();
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark";
@@ -70,6 +72,42 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
             </div>
 
             <div className="hidden shrink-0 items-center gap-1.5 sm:flex">
+              <div
+                className="mr-1 flex items-center rounded-lg border border-white/12 bg-white/[0.035] p-0.5"
+                aria-label="Modo de uso"
+              >
+                <button
+                  type="button"
+                  onClick={() => setMode("diretor")}
+                  className={[
+                    "inline-flex min-h-8 items-center gap-1.5 rounded-md px-2.5 text-xs font-bold transition-colors",
+                    mode === "diretor"
+                      ? "bg-white text-slate-950"
+                      : "text-white/72 hover:bg-white/[0.07] hover:text-white",
+                  ].join(" ")}
+                  aria-pressed={mode === "diretor"}
+                  aria-label="Usar modo Unidade Escolar"
+                >
+                  <School className="h-3.5 w-3.5" aria-hidden="true" />
+                  Unidade
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("gad")}
+                  className={[
+                    "inline-flex min-h-8 items-center gap-1.5 rounded-md px-2.5 text-xs font-bold transition-colors",
+                    mode === "gad"
+                      ? "bg-sky-300 text-slate-950"
+                      : "text-white/72 hover:bg-white/[0.07] hover:text-white",
+                  ].join(" ")}
+                  aria-pressed={mode === "gad"}
+                  aria-label="Usar modo Análise GAD"
+                >
+                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                  Análise GAD
+                </button>
+              </div>
+
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
@@ -151,7 +189,15 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                     <MoreVertical aria-hidden="true" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-52">
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem onClick={() => setMode("diretor")}>
+                    <School aria-hidden="true" />
+                    {mode === "diretor" ? "✓ Unidade Escolar" : "Modo Unidade Escolar"}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setMode("gad")}>
+                    <ShieldCheck aria-hidden="true" />
+                    {mode === "gad" ? "✓ Análise GAD" : "Modo Análise GAD"}
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={toggleDarkMode}>
                     {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
                     {isDark ? "Modo claro" : "Modo escuro"}

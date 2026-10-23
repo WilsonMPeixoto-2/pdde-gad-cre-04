@@ -9,6 +9,7 @@ import { ScopeNotice } from "@/components/pop/ScopeNotice";
 import { QuickAccessNav } from "@/components/pop/QuickAccessNav";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
+import { useProfileMode } from "@/contexts/ProfileModeContext";
 import {
   GUIDE_ANCHORS,
   guideAnchorParentSections,
@@ -35,12 +36,14 @@ const loadGuidedWizard = () => import("@/components/pop/GuidedWizard").then((m) 
 const loadSectionIntro = () => import("@/components/pop/SectionIntro").then((m) => ({ default: m.SectionIntro }));
 const loadSectionOne = () => import("@/components/pop/SectionOne").then((m) => ({ default: m.SectionOne }));
 const loadDeadlinesCalculator = () => import("@/components/pop/DeadlinesCalculator").then((m) => ({ default: m.DeadlinesCalculator }));
+const loadGadAnalysisWorkspace = () => import("@/components/pop/GadAnalysisWorkspace").then((m) => ({ default: m.GadAnalysisWorkspace }));
 
 const BackToTop = lazy(loadBackToTop);
 const GuidedWizard = lazy(loadGuidedWizard);
 const SectionIntro = lazy(loadSectionIntro);
 const SectionOne = lazy(loadSectionOne);
 const DeadlinesCalculator = lazy(loadDeadlinesCalculator);
+const GadAnalysisWorkspace = lazy(loadGadAnalysisWorkspace);
 
 // Lazy load below-the-fold sections for better initial load performance
 const loadSectionTwo = () => import("@/components/pop/SectionTwo").then((m) => ({ default: m.SectionTwo }));
@@ -205,6 +208,7 @@ const DeferredSectionSlot = ({
 };
 
 const Index = () => {
+  const { isGAD } = useProfileMode();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeSection, setActiveSection] = useState<GuideSectionId>("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -517,7 +521,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Cover */}
-      <HeroCover />
+      {!isGAD ? <HeroCover /> : null}
 
       {/* Header */}
       <PopHeader
@@ -533,6 +537,22 @@ const Index = () => {
         >
           Preparando o guia completo para impressão...
         </div>
+      ) : null}
+
+      {isGAD ? (
+        <>
+          <Suspense fallback={<SectionLoader />}>
+            <GadAnalysisWorkspace />
+          </Suspense>
+          <div className="mx-auto max-w-[1280px] px-4 pb-2 sm:px-6 no-print">
+            <div className="flex items-center gap-3 border-t border-slate-300 pt-6 dark:border-slate-700">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-600 dark:text-slate-300">
+                Guia de referência
+              </span>
+              <span className="h-px flex-1 bg-slate-300 dark:bg-slate-700" aria-hidden="true" />
+            </div>
+          </div>
+        </>
       ) : null}
 
       <div className="flex min-w-0">

@@ -92,7 +92,8 @@ test.describe("Fluxo desktop", () => {
     await expect(page.getByRole("button", { name: /ativar texto maior/i })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /ativar movimento reduzido/i })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /visualização automática/i })).toHaveCount(0);
-    await expect(page.getByRole("button", { name: /modo diretor\(a\) \/ escola/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /usar modo unidade escolar/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /usar modo análise gad/i })).toBeVisible();
 
     await searchAndOpen(page, "checklist", /checklist de documentos/i);
     await expect(page.getByRole("heading", { name: /checklist mínimo/i })).toBeVisible();
@@ -153,6 +154,8 @@ test.describe("Fluxo mobile", () => {
     await expect(page).toHaveURL(/[?&]secao=secao-2$/i);
 
     await page.getByRole("button", { name: /mais ações/i }).click();
+    await expect(page.getByRole("menuitem", { name: /modo unidade escolar/i })).toBeVisible();
+    await expect(page.getByRole("menuitem", { name: /modo análise gad/i })).toBeVisible();
     await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toBeVisible();
     await expect(page.getByRole("menuitem", { name: /imprimir \/ salvar em pdf/i })).toBeVisible();
     await expect(page.getByRole("menuitem", { name: /ativar texto maior/i })).toHaveCount(0);

@@ -1,7 +1,6 @@
 import {
   AlertTriangle,
   CheckCircle2,
-  ClipboardCheck,
   Download,
   FileSearch,
   Plus,

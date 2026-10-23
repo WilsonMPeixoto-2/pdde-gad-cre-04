@@ -30,6 +30,8 @@ import {
   type AnalysisSnapshot,
 } from "@/lib/pddeAnalysisData";
 import {
+  PDDE_STORAGE_CLEAR_ALL_KEY,
+  PDDE_STORAGE_EVENT,
   checklistItemDefinitions,
   normalizeWorkspaceFieldValue,
 } from "@/lib/pddeOperationalData";
@@ -135,6 +137,19 @@ export const GadAnalysisWorkspace = () => {
   useEffect(() => {
     writeAnalysisSnapshot(snapshot);
   }, [snapshot]);
+
+  useEffect(() => {
+    const handleStorageReset = (event: Event) => {
+      const detail = (event as CustomEvent<{ key?: string }>).detail;
+      if (detail?.key === PDDE_STORAGE_CLEAR_ALL_KEY) {
+        setSnapshot(readAnalysisSnapshot());
+      }
+    };
+
+    window.addEventListener(PDDE_STORAGE_EVENT, handleStorageReset as EventListener);
+    return () =>
+      window.removeEventListener(PDDE_STORAGE_EVENT, handleStorageReset as EventListener);
+  }, []);
 
   const metrics = useMemo(() => deriveAnalysisMetrics(snapshot), [snapshot]);
   const nextAction = useMemo(

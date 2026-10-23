@@ -284,24 +284,28 @@ export const GadAnalysisWorkspace = () => {
         <div className="grid grid-cols-2 border-b border-slate-300 xl:grid-cols-4 dark:border-slate-700">
           {[
             {
+              id: "reviewed",
               label: "Conferidos",
               value: `${metrics.reviewedItems}/${metrics.totalItems}`,
               detail: `${metrics.progressPercent}% da matriz`,
               tone: "text-blue-800 dark:text-sky-300",
             },
             {
+              id: "pending",
               label: "Pendências",
               value: String(metrics.pendingItems),
               detail: "itens classificados",
               tone: "text-amber-800 dark:text-amber-300",
             },
             {
+              id: "findings",
               label: "Apontamentos",
               value: String(metrics.openFindings),
               detail: "ainda abertos",
               tone: "text-violet-800 dark:text-violet-300",
             },
             {
+              id: "critical",
               label: "Críticos",
               value: String(metrics.criticalOpenFindings),
               detail: "exigem atenção",
@@ -309,7 +313,8 @@ export const GadAnalysisWorkspace = () => {
             },
           ].map((metric, index) => (
             <div
-              key={metric.label}
+              key={metric.id}
+              data-testid={`analysis-metric-${metric.id}`}
               className={[
                 "p-4 sm:p-5",
                 index % 2 === 0 ? "border-r border-slate-300 dark:border-slate-700" : "",

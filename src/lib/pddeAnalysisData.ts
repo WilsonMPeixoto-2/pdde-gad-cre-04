@@ -373,11 +373,19 @@ export const getAnalysisNextAction = (
     };
   }
 
+  if (metrics.pendingItems > 0) {
+    return {
+      kind: "resolve",
+      title: "Reavaliar itens ainda classificados como pendência",
+      description: `Ainda há ${metrics.pendingItems} item(ns) marcado(s) como Pendência. Após o saneamento, registre o resultado da reanálise antes de concluir o caso.`,
+    };
+  }
+
   return {
     kind: "conclude",
     title: "Preparar a conclusão da análise",
     description:
-      "Todos os itens foram classificados e não há apontamentos abertos. O caso está pronto para a manifestação conclusiva cabível.",
+      "Todos os itens foram classificados sem pendências remanescentes e não há apontamentos abertos. O caso está pronto para a manifestação conclusiva cabível.",
   };
 };
 

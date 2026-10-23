@@ -387,12 +387,15 @@ export const GadAnalysisWorkbench = () => {
           {caseFields.map((field) => (
             <label
               key={field.key}
+              htmlFor={`gad-case-${field.key}`}
               className="bg-white p-4 dark:bg-slate-950"
             >
               <span className="block text-xs font-bold uppercase tracking-[0.08em] text-slate-600 dark:text-slate-300">
                 {field.label}
               </span>
               <input
+                id={`gad-case-${field.key}`}
+                data-testid={`gad-case-${field.key}`}
                 value={state.case[field.key]}
                 onChange={(event) =>
                   updateCaseField(field.key, event.target.value)

@@ -154,8 +154,8 @@ test.describe("Fluxo mobile", () => {
     await expect(page).toHaveURL(/[?&]secao=secao-2$/i);
 
     await page.getByRole("button", { name: /mais ações/i }).click();
-    await expect(page.getByRole("menuitem", { name: /modo unidade escolar/i })).toBeVisible();
-    await expect(page.getByRole("menuitem", { name: /modo análise gad/i })).toBeVisible();
+    await expect(page.getByRole("menuitem", { name: /unidade escolar/i })).toBeVisible();
+    await expect(page.getByRole("menuitem", { name: /análise gad/i })).toBeVisible();
     await expect(page.getByRole("menuitem", { name: /modo escuro/i })).toBeVisible();
     await expect(page.getByRole("menuitem", { name: /imprimir \/ salvar em pdf/i })).toBeVisible();
     await expect(page.getByRole("menuitem", { name: /ativar texto maior/i })).toHaveCount(0);

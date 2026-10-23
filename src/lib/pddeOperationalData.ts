@@ -135,6 +135,7 @@ const PDDE_SESSION_STORAGE_KEYS = new Set<string>([
 const PDDE_EXPIRING_LOCAL_STORAGE_KEYS = new Set<string>([
   PDDE_STORAGE_KEYS.workspace,
   PDDE_STORAGE_KEYS.notes,
+  PDDE_STORAGE_KEYS.gadAnalysis,
 ]);
 
 export const NUP_PATTERN = /^\d{6}\.\d{6}\/\d{4}-\d{2}$/;

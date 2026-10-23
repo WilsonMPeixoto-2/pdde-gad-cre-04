@@ -124,11 +124,16 @@ export const PDDE_STORAGE_KEYS = {
 export const PDDE_STORAGE_EVENT = "pdde-storage-sync";
 export const PDDE_STORAGE_CLEAR_ALL_KEY = "*";
 export const PDDE_PERSISTENCE_DISABLED_KEY = "pdde-persistence-disabled-v1";
+export const PDDE_ANALYSIS_NUP_SESSION_KEY = "pdde-gad-analysis-v1:nup-session";
 export const PDDE_PERSISTENCE_SCHEMA_VERSION = 2;
 
 const PDDE_STORAGE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const PDDE_WORKSPACE_SESSION_KEY = `${PDDE_STORAGE_KEYS.workspace}:nup-session`;
-const PDDE_AUXILIARY_STORAGE_KEYS = ["pdde-wizard-progress-v1", "pdde-profile-mode"] as const;
+const PDDE_AUXILIARY_STORAGE_KEYS = [
+  "pdde-wizard-progress-v1",
+  "pdde-profile-mode",
+  PDDE_ANALYSIS_NUP_SESSION_KEY,
+] as const;
 const PDDE_SESSION_STORAGE_KEYS = new Set<string>([
   PDDE_STORAGE_KEYS.templates,
 ]);

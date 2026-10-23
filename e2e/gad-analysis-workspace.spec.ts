@@ -57,6 +57,12 @@ test.describe("Mesa de Análise GAD", () => {
     await expect(workspace.getByTestId("analysis-metric-pending")).toContainText("1");
     await expect(workspace.getByTestId("analysis-metric-findings")).toContainText("1");
     await expect(workspace.getByTestId("analysis-metric-critical")).toContainText("1");
+    await expect(
+      workspace.getByRole("heading", {
+        level: 2,
+        name: /tratar apontamento crítico antes de avançar/i,
+      }),
+    ).toBeVisible();
 
     const finding = workspace.getByTestId("analysis-finding").first();
     await expect(finding).toContainText("Pesquisa de preços incompleta");
@@ -72,6 +78,12 @@ test.describe("Mesa de Análise GAD", () => {
     await finding.getByRole("button", { name: "Resolvido", exact: true }).click();
     await expect(workspace.getByTestId("analysis-metric-findings")).toContainText("0");
     await expect(workspace.getByTestId("analysis-metric-critical")).toContainText("0");
+    await expect(
+      workspace.getByRole("heading", {
+        level: 2,
+        name: /continuar a conferência documental/i,
+      }),
+    ).toBeVisible();
     await expect(
       workspace.getByRole("button", { name: /baixar minuta de diligência/i }),
     ).toBeDisabled();

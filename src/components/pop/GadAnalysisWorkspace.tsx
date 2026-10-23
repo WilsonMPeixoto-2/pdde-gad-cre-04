@@ -254,7 +254,7 @@ export const GadAnalysisWorkspace = () => {
   };
 
   return (
-    <main
+    <section
       id="mesa-analise-gad"
       className="mx-auto max-w-[1280px] px-4 py-8 sm:px-6 lg:py-10"
       aria-labelledby="gad-analysis-title"
@@ -681,6 +681,6 @@ export const GadAnalysisWorkspace = () => {
           </div>
         </div>
       </aside>
-    </main>
+    </section>
   );
 };

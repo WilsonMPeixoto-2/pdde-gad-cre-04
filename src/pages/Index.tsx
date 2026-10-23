@@ -1,6 +1,6 @@
 import { type ReactNode, lazy, Suspense, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AlertTriangle, RotateCcw } from "lucide-react";
+import { AlertTriangle, BookOpenCheck, RotateCcw } from "lucide-react";
 import { PopHeader } from "@/components/pop/PopHeader";
 import { PopSidebar } from "@/components/pop/PopSidebar";
 import { HeroCover } from "@/components/pop/HeroCover";
@@ -9,6 +9,7 @@ import { ScopeNotice } from "@/components/pop/ScopeNotice";
 import { QuickAccessNav } from "@/components/pop/QuickAccessNav";
 import { AnimatedSection } from "@/components/pop/AnimatedSection";
 import { DocumentFooter } from "@/components/pop/DocumentFooter";
+import { useProfileMode } from "@/contexts/ProfileModeContext";
 import {
   GUIDE_ANCHORS,
   guideAnchorParentSections,
@@ -35,12 +36,14 @@ const loadGuidedWizard = () => import("@/components/pop/GuidedWizard").then((m) 
 const loadSectionIntro = () => import("@/components/pop/SectionIntro").then((m) => ({ default: m.SectionIntro }));
 const loadSectionOne = () => import("@/components/pop/SectionOne").then((m) => ({ default: m.SectionOne }));
 const loadDeadlinesCalculator = () => import("@/components/pop/DeadlinesCalculator").then((m) => ({ default: m.DeadlinesCalculator }));
+const loadGadAnalysisWorkbench = () => import("@/components/pop/GadAnalysisWorkbench").then((m) => ({ default: m.GadAnalysisWorkbench }));
 
 const BackToTop = lazy(loadBackToTop);
 const GuidedWizard = lazy(loadGuidedWizard);
 const SectionIntro = lazy(loadSectionIntro);
 const SectionOne = lazy(loadSectionOne);
 const DeadlinesCalculator = lazy(loadDeadlinesCalculator);
+const GadAnalysisWorkbench = lazy(loadGadAnalysisWorkbench);
 
 // Lazy load below-the-fold sections for better initial load performance
 const loadSectionTwo = () => import("@/components/pop/SectionTwo").then((m) => ({ default: m.SectionTwo }));
@@ -205,6 +208,7 @@ const DeferredSectionSlot = ({
 };
 
 const Index = () => {
+  const { isGAD } = useProfileMode();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeSection, setActiveSection] = useState<GuideSectionId>("introducao");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -517,7 +521,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Cover */}
-      <HeroCover />
+      {!isGAD ? <HeroCover /> : null}
 
       {/* Header */}
       <PopHeader
@@ -547,11 +551,40 @@ const Index = () => {
           <div className="guide-shell">
             <article className="article-frame">
               <div className="space-y-10 sm:space-y-12">
+                {isGAD ? (
+                  <AnimatedSection delay={20}>
+                    <Suspense fallback={<SectionLoader />}>
+                      <GadAnalysisWorkbench />
+                    </Suspense>
+                  </AnimatedSection>
+                ) : null}
+
                 <AnimatedSection delay={35}>
                   <div id="introducao" className="scroll-mt-20 space-y-6">
-                    <Suspense fallback={<SectionLoader />}>
-                      <SectionIntro />
-                    </Suspense>
+                    {isGAD ? (
+                      <section className="rounded-xl border border-slate-300 bg-white p-5 dark:border-slate-700 dark:bg-slate-950">
+                        <div className="flex items-start gap-4">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-blue-300 bg-blue-50 text-blue-800 dark:border-blue-800 dark:bg-blue-950/25 dark:text-sky-300">
+                            <BookOpenCheck className="h-5 w-5" aria-hidden="true" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold uppercase tracking-[0.1em] text-blue-800 dark:text-sky-300">
+                              Base de consulta
+                            </p>
+                            <h2 className="mt-1.5 text-xl font-bold tracking-[-0.025em] text-foreground sm:text-2xl">
+                              Guia operacional e fontes para apoiar a análise
+                            </h2>
+                            <p className="mt-2 max-w-[72ch] text-sm leading-7 text-slate-700 dark:text-slate-300">
+                              Use as etapas abaixo como referência para compreender a instrução, localizar critérios e consultar fontes. O registro do caso permanece concentrado na Mesa de Análise.
+                            </p>
+                          </div>
+                        </div>
+                      </section>
+                    ) : (
+                      <Suspense fallback={<SectionLoader />}>
+                        <SectionIntro />
+                      </Suspense>
+                    )}
                     <QuickAccessNav />
                     <ScopeNotice />
                     <Suspense fallback={<SectionLoader />}>
@@ -675,9 +708,11 @@ const Index = () => {
       <Suspense fallback={null}>
         <BackToTop />
       </Suspense>
-      <Suspense fallback={null}>
-        <GuidedWizard />
-      </Suspense>
+      {!isGAD ? (
+        <Suspense fallback={null}>
+          <GuidedWizard />
+        </Suspense>
+      ) : null}
     </div>
   );
 };

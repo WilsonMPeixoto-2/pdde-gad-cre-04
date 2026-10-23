@@ -15,9 +15,11 @@ import {
   analysisFindingSeverityMeta,
   analysisFindingStatusMeta,
   analysisReviewStatusMeta,
+  buildAnalysisDiligenceDraft,
   buildAnalysisSummaryText,
   createAnalysisFinding,
   deriveAnalysisMetrics,
+  getAnalysisDiligenceFileName,
   getAnalysisNextAction,
   readAnalysisSnapshot,
   updateAnalysisReview,
@@ -235,6 +237,13 @@ export const GadAnalysisWorkspace = () => {
           : finding,
       ),
     }));
+  };
+
+  const downloadDiligenceDraft = () => {
+    downloadTextFile(
+      buildAnalysisDiligenceDraft(snapshot),
+      getAnalysisDiligenceFileName(snapshot),
+    );
   };
 
   const exportSummary = () => {
@@ -527,6 +536,18 @@ export const GadAnalysisWorkspace = () => {
               Um apontamento pode permanecer aberto, aguardar resposta e depois ser marcado como resolvido. Isso preserva a história da análise em vez de substituir a anotação anterior.
             </p>
           </div>
+        </div>
+
+        <div className="mt-5 flex justify-end">
+          <Button
+            variant="outline"
+            className="gap-2"
+            onClick={downloadDiligenceDraft}
+            disabled={metrics.openFindings === 0}
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Baixar minuta de diligência
+          </Button>
         </div>
 
         <div className="mt-6 grid gap-4 rounded-xl border border-slate-300 bg-slate-50 p-4 lg:grid-cols-2 dark:border-slate-700 dark:bg-slate-900/55">

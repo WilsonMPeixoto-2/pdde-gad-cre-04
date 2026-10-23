@@ -1,5 +1,5 @@
 import {
-  PDDE_PDDE_ANALYSIS_NUP_SESSION_KEY,
+  PDDE_ANALYSIS_NUP_SESSION_KEY,
   PDDE_STORAGE_KEYS,
   checklistItemDefinitions,
   normalizeWorkspaceFieldValue,

@@ -118,6 +118,7 @@ export const PDDE_STORAGE_KEYS = {
   workspace: "pdde-process-workspace-v1",
   notes: "pdde-case-notes-v1",
   templates: "pdde-smart-templates-v1",
+  gadAnalysis: "pdde-gad-analysis-case-v1",
 } as const;
 
 export const PDDE_STORAGE_EVENT = "pdde-storage-sync";

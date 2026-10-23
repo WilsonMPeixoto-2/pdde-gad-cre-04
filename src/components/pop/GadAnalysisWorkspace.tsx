@@ -200,10 +200,18 @@ export const GadAnalysisWorkspace = () => {
       checklistItemId: findingChecklistId ? Number(findingChecklistId) : null,
     });
 
-    setSnapshot((current) => ({
-      ...current,
-      findings: [finding, ...current.findings],
-    }));
+    setSnapshot((current) => {
+      const withFinding = {
+        ...current,
+        findings: [finding, ...current.findings],
+      };
+
+      return finding.checklistItemId
+        ? updateAnalysisReview(withFinding, finding.checklistItemId, {
+            status: "pending",
+          })
+        : withFinding;
+    });
 
     setFindingTitle("");
     setFindingDescription("");

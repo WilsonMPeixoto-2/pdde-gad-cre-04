@@ -1,4 +1,4 @@
-import { FileText, Menu, Moon, MoreVertical, Printer, Search, Sun } from "lucide-react";
+import { FileText, Menu, Moon, MoreVertical, Printer, Search, School, ShieldCheck, Sun } from "lucide-react";
 import { startTransition, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +11,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { requestCommandPaletteOpen } from "@/lib/commandPaletteEvents";
 import { GUIDE_VERSION } from "@/lib/guideContent";
 import { ReadingProgressBar } from "./ReadingProgressBar";
+import { useProfileMode, type ProfileMode } from "@/contexts/ProfileModeContext";
 
 interface PopHeaderProps {
   isPreparingPrint?: boolean;
@@ -22,6 +23,7 @@ const darkActionClass =
   "border-white/12 bg-transparent text-white/82 hover:border-white/22 hover:bg-white/[0.07] hover:text-white";
 
 export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: PopHeaderProps) => {
+  const { mode, setMode } = useProfileMode();
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark";
@@ -48,6 +50,15 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
     requestCommandPaletteOpen();
   };
 
+  const changeProfileMode = (nextMode: ProfileMode) => {
+    if (nextMode === mode) return;
+
+    startTransition(() => setMode(nextMode));
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
+
   return (
     <TooltipProvider delayDuration={120}>
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/96 text-white backdrop-blur-xl no-print">
@@ -70,6 +81,41 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
             </div>
 
             <div className="hidden shrink-0 items-center gap-1.5 sm:flex">
+              <div
+                className="mr-1 flex items-center rounded-lg border border-white/12 bg-white/[0.045] p-1"
+                role="group"
+                aria-label="Modo de uso"
+              >
+                <button
+                  type="button"
+                  onClick={() => changeProfileMode("diretor")}
+                  className={[
+                    "inline-flex min-h-8 items-center gap-1.5 rounded-md px-2.5 text-xs font-bold transition-colors",
+                    mode === "diretor"
+                      ? "bg-white text-slate-950"
+                      : "text-white/72 hover:bg-white/[0.07] hover:text-white",
+                  ].join(" ")}
+                  aria-pressed={mode === "diretor"}
+                >
+                  <School className="h-3.5 w-3.5" aria-hidden="true" />
+                  Unidade
+                </button>
+                <button
+                  type="button"
+                  onClick={() => changeProfileMode("gad")}
+                  className={[
+                    "inline-flex min-h-8 items-center gap-1.5 rounded-md px-2.5 text-xs font-bold transition-colors",
+                    mode === "gad"
+                      ? "bg-sky-300 text-slate-950"
+                      : "text-white/72 hover:bg-white/[0.07] hover:text-white",
+                  ].join(" ")}
+                  aria-pressed={mode === "gad"}
+                >
+                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                  Análise GAD
+                </button>
+              </div>
+
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
@@ -152,6 +198,14 @@ export const PopHeader = ({ isPreparingPrint = false, onPrint, onOpenMenu }: Pop
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-52">
+                  <DropdownMenuItem onClick={() => changeProfileMode("diretor")}>
+                    <School aria-hidden="true" />
+                    Modo Unidade Escolar
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => changeProfileMode("gad")}>
+                    <ShieldCheck aria-hidden="true" />
+                    Modo Análise GAD
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={toggleDarkMode}>
                     {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
                     {isDark ? "Modo claro" : "Modo escuro"}

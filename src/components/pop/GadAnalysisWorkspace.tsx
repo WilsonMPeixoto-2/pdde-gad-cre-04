@@ -387,7 +387,10 @@ export const GadAnalysisWorkspace = () => {
         </div>
 
         <div className="border-t border-slate-300 p-5 sm:p-6 dark:border-slate-700">
-          <DataPersistenceNotice scope="analysis" />
+          <DataPersistenceNotice
+            scope="analysis"
+            onClearScope={() => setSnapshot(readAnalysisSnapshot())}
+          />
         </div>
       </section>
 

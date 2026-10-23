@@ -36,30 +36,27 @@ test.describe("Mesa de Análise GAD", () => {
       workspace.getByRole("heading", { level: 2, name: /continuar a conferência documental/i }),
     ).toBeVisible();
 
-    await page.getByRole("button", { name: "Item 1: Pendência" }).click();
+    await page.getByRole("button", { name: "Item 1: Conforme" }).click();
 
     await expect(workspace.getByTestId("analysis-metric-reviewed")).toContainText("1/16");
-    await expect(workspace.getByTestId("analysis-metric-pending")).toContainText("1");
-
-    const firstReview = workspace.getByTestId("analysis-review-item").first();
-    await firstReview
-      .getByPlaceholder(/descreva objetivamente a inconsistência encontrada/i)
-      .fill("Ausência de identificação suficiente em uma das cotações.");
+    await expect(workspace.getByTestId("analysis-metric-pending")).toContainText("0");
 
     await workspace.getByLabel("Título do apontamento").fill("Pesquisa de preços incompleta");
-    await workspace.getByLabel("Vincular ao item da matriz").selectOption("1");
+    await workspace.getByLabel("Vincular ao item da matriz").selectOption("2");
     await workspace.getByLabel("Gravidade").selectOption("critical");
     await workspace
       .getByLabel("Descrição")
       .fill("Cotação sem identificação suficiente do fornecedor para conferência.");
     await workspace.getByRole("button", { name: /registrar apontamento/i }).click();
 
+    await expect(workspace.getByTestId("analysis-metric-reviewed")).toContainText("2/16");
+    await expect(workspace.getByTestId("analysis-metric-pending")).toContainText("1");
     await expect(workspace.getByTestId("analysis-metric-findings")).toContainText("1");
     await expect(workspace.getByTestId("analysis-metric-critical")).toContainText("1");
 
     const finding = workspace.getByTestId("analysis-finding").first();
     await expect(finding).toContainText("Pesquisa de preços incompleta");
-    await expect(finding).toContainText("1. Rol de Materiais, Bens e Serviços Prioritários");
+    await expect(finding).toContainText("2. Consolidação de Pesquisas de Preços");
 
     await finding.getByRole("button", { name: "Resolvido", exact: true }).click();
     await expect(workspace.getByTestId("analysis-metric-findings")).toContainText("0");
@@ -73,7 +70,13 @@ test.describe("Mesa de Análise GAD", () => {
     await expect(page.getByLabel("NUP do processo no SEI!RIO")).toHaveValue(
       "000704.000123/2026-45",
     );
-    await expect(page.getByTestId("analysis-metric-reviewed")).toContainText("1/16");
+    await expect(page.getByTestId("analysis-metric-reviewed")).toContainText("2/16");
+    await expect(page.getByTestId("analysis-metric-pending")).toContainText("1");
+
+    await page.getByRole("button", { name: "Limpar dados desta análise" }).click();
+    await expect(page.getByLabel("Unidade escolar")).toHaveValue("");
+    await expect(page.getByLabel("NUP do processo no SEI!RIO")).toHaveValue("");
+    await expect(page.getByTestId("analysis-metric-reviewed")).toContainText("0/16");
 
     await page.getByRole("button", { name: "Usar modo Unidade Escolar" }).click();
     await expect(page.getByTestId("gad-analysis-workspace")).toHaveCount(0);

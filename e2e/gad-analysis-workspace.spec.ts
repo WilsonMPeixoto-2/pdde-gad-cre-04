@@ -29,12 +29,12 @@ test.describe("Mesa de Análise GAD", () => {
       }),
     ).toBeVisible();
 
-    await page.getByLabel("Unidade escolar").fill("E.M. Teste de Fiscalização");
-    await page.getByLabel("CNPJ do CEC/UEx").fill("11.222.333/0001-81");
-    await page.getByLabel("Exercício").fill("2026");
-    await page.getByLabel("Programa / ação").fill("PDDE Básico");
-    await page.getByLabel("NUP do processo no SEI!RIO").fill("000704.000123/2026-45");
-    await page.getByLabel("Responsável pela análise").fill("Servidor Teste");
+    await workspace.getByLabel("Unidade escolar").fill("E.M. Teste de Fiscalização");
+    await workspace.getByLabel("CNPJ do CEC/UEx").fill("11.222.333/0001-81");
+    await workspace.getByLabel("Exercício").fill("2026");
+    await workspace.getByLabel("Programa / ação").fill("PDDE Básico");
+    await workspace.getByLabel("NUP do processo no SEI!RIO").fill("000704.000123/2026-45");
+    await workspace.getByLabel("Responsável pela análise").fill("Servidor Teste");
 
     await expect(
       workspace.getByRole("heading", { level: 2, name: /continuar a conferência documental/i }),
@@ -91,17 +91,17 @@ test.describe("Mesa de Análise GAD", () => {
     await page.reload();
 
     await expect(page.getByTestId("gad-analysis-workspace")).toBeVisible();
-    await expect(page.getByLabel("Unidade escolar")).toHaveValue("E.M. Teste de Fiscalização");
-    await expect(page.getByLabel("Programa / ação")).toHaveValue("PDDE Básico");
-    await expect(page.getByLabel("NUP do processo no SEI!RIO")).toHaveValue(
+    await expect(workspace.getByLabel("Unidade escolar")).toHaveValue("E.M. Teste de Fiscalização");
+    await expect(workspace.getByLabel("Programa / ação")).toHaveValue("PDDE Básico");
+    await expect(workspace.getByLabel("NUP do processo no SEI!RIO")).toHaveValue(
       "000704.000123/2026-45",
     );
     await expect(page.getByTestId("analysis-metric-reviewed")).toContainText("2/16");
     await expect(page.getByTestId("analysis-metric-pending")).toContainText("1");
 
     await page.getByRole("button", { name: "Limpar dados desta análise" }).click();
-    await expect(page.getByLabel("Unidade escolar")).toHaveValue("");
-    await expect(page.getByLabel("NUP do processo no SEI!RIO")).toHaveValue("");
+    await expect(workspace.getByLabel("Unidade escolar")).toHaveValue("");
+    await expect(workspace.getByLabel("NUP do processo no SEI!RIO")).toHaveValue("");
     await expect(page.getByTestId("analysis-metric-reviewed")).toContainText("0/16");
 
     await page.getByRole("button", { name: "Usar modo Unidade Escolar" }).click();

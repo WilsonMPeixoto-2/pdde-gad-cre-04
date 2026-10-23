@@ -706,6 +706,10 @@ export const clearGuideStorage = (keys: string[] = Object.values(PDDE_STORAGE_KE
   if (keys.includes(PDDE_STORAGE_KEYS.workspace) || keys.includes(PDDE_STORAGE_CLEAR_ALL_KEY)) {
     window.sessionStorage.removeItem(PDDE_WORKSPACE_SESSION_KEY);
   }
+
+  if (keys.includes(PDDE_STORAGE_KEYS.analysis) || keys.includes(PDDE_STORAGE_CLEAR_ALL_KEY)) {
+    window.sessionStorage.removeItem(PDDE_ANALYSIS_NUP_SESSION_KEY);
+  }
 };
 
 export const clearAllGuideStorage = () => {

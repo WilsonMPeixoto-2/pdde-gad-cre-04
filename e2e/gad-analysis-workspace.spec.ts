@@ -29,12 +29,12 @@ test.describe("Mesa de Análise GAD", () => {
       }),
     ).toBeVisible();
 
-    await workspace.getByLabel("Unidade escolar").fill("E.M. Teste de Fiscalização");
-    await workspace.getByLabel("CNPJ do CEC/UEx").fill("11.222.333/0001-81");
-    await workspace.getByLabel("Exercício").fill("2026");
-    await workspace.getByLabel("Programa / ação").fill("PDDE Básico");
-    await workspace.getByLabel("NUP do processo no SEI!RIO").fill("000704.000123/2026-45");
-    await workspace.getByLabel("Responsável pela análise").fill("Servidor Teste");
+    await workspace.getByLabel("Unidade escolar", { exact: true }).fill("E.M. Teste de Fiscalização");
+    await workspace.getByLabel("CNPJ do CEC/UEx", { exact: true }).fill("11.222.333/0001-81");
+    await workspace.getByLabel("Exercício", { exact: true }).fill("2026");
+    await workspace.getByLabel("Programa / ação", { exact: true }).fill("PDDE Básico");
+    await workspace.getByLabel("NUP do processo no SEI!RIO", { exact: true }).fill("000704.000123/2026-45");
+    await workspace.getByLabel("Responsável pela análise", { exact: true }).fill("Servidor Teste");
 
     await expect(
       workspace.getByRole("heading", { level: 2, name: /continuar a conferência documental/i }),
@@ -91,17 +91,17 @@ test.describe("Mesa de Análise GAD", () => {
     await page.reload();
 
     await expect(page.getByTestId("gad-analysis-workspace")).toBeVisible();
-    await expect(workspace.getByLabel("Unidade escolar")).toHaveValue("E.M. Teste de Fiscalização");
-    await expect(workspace.getByLabel("Programa / ação")).toHaveValue("PDDE Básico");
-    await expect(workspace.getByLabel("NUP do processo no SEI!RIO")).toHaveValue(
+    await expect(workspace.getByLabel("Unidade escolar", { exact: true })).toHaveValue("E.M. Teste de Fiscalização");
+    await expect(workspace.getByLabel("Programa / ação", { exact: true })).toHaveValue("PDDE Básico");
+    await expect(workspace.getByLabel("NUP do processo no SEI!RIO", { exact: true })).toHaveValue(
       "000704.000123/2026-45",
     );
     await expect(page.getByTestId("analysis-metric-reviewed")).toContainText("2/16");
     await expect(page.getByTestId("analysis-metric-pending")).toContainText("1");
 
     await page.getByRole("button", { name: "Limpar dados desta análise" }).click();
-    await expect(workspace.getByLabel("Unidade escolar")).toHaveValue("");
-    await expect(workspace.getByLabel("NUP do processo no SEI!RIO")).toHaveValue("");
+    await expect(workspace.getByLabel("Unidade escolar", { exact: true })).toHaveValue("");
+    await expect(workspace.getByLabel("NUP do processo no SEI!RIO", { exact: true })).toHaveValue("");
     await expect(page.getByTestId("analysis-metric-reviewed")).toContainText("0/16");
 
     await page.getByRole("button", { name: "Usar modo Unidade Escolar" }).click();

@@ -376,7 +376,7 @@ export const GadAnalysisWorkspace = () => {
             </p>
 
             <div className="mt-5">
-              <DataPersistenceNotice />
+              <DataPersistenceNotice scope="analysis" />
             </div>
           </aside>
         </div>

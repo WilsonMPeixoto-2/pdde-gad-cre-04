@@ -1,4 +1,5 @@
 import {
+  PDDE_PDDE_ANALYSIS_NUP_SESSION_KEY,
   PDDE_STORAGE_KEYS,
   checklistItemDefinitions,
   normalizeWorkspaceFieldValue,
@@ -68,7 +69,6 @@ export interface AnalysisNextAction {
   description: string;
 }
 
-const ANALYSIS_NUP_SESSION_KEY = "pdde-gad-analysis-v1:nup-session";
 
 const nowIso = () => new Date().toISOString();
 
@@ -242,7 +242,7 @@ export const readAnalysisSnapshot = (): AnalysisSnapshot => {
   );
 
   try {
-    const sessionNup = window.sessionStorage.getItem(ANALYSIS_NUP_SESSION_KEY);
+    const sessionNup = window.sessionStorage.getItem(PDDE_ANALYSIS_NUP_SESSION_KEY);
     if (sessionNup) {
       saved.caseProfile.seiProcessNumber = normalizeWorkspaceFieldValue(
         "seiProcessNumber",
@@ -272,9 +272,9 @@ export const writeAnalysisSnapshot = (snapshot: AnalysisSnapshot) => {
 
   try {
     if (nup.trim()) {
-      window.sessionStorage.setItem(ANALYSIS_NUP_SESSION_KEY, nup);
+      window.sessionStorage.setItem(PDDE_ANALYSIS_NUP_SESSION_KEY, nup);
     } else {
-      window.sessionStorage.removeItem(ANALYSIS_NUP_SESSION_KEY);
+      window.sessionStorage.removeItem(PDDE_ANALYSIS_NUP_SESSION_KEY);
     }
   } catch {
     // Session storage is optional.

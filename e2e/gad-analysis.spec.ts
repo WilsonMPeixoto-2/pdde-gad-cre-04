@@ -40,12 +40,12 @@ test.describe("Mesa de Análise GAD", () => {
     const workbench = page.locator("#gad-analysis-workbench");
     await expect(workbench).toBeVisible();
 
-    await workbench.getByLabel("Unidade escolar").fill("E.M. Teste de Produto");
-    await workbench.getByLabel("CNPJ do CEC/UEx").fill("11222333000181");
-    await workbench.getByLabel("Exercício").fill("2026");
-    await workbench.getByLabel("Programa / ação").fill("PDDE Básico");
-    await workbench.getByLabel("NUP do processo").fill("000704.000123/2026-45");
-    await workbench.getByLabel("Responsável pela análise").fill("Servidor de Teste");
+    await workbench.getByTestId("gad-case-schoolName").fill("E.M. Teste de Produto");
+    await workbench.getByTestId("gad-case-uexCnpj").fill("11222333000181");
+    await workbench.getByTestId("gad-case-exercise").fill("2026");
+    await workbench.getByTestId("gad-case-programAction").fill("PDDE Básico");
+    await workbench.getByTestId("gad-case-seiProcessNumber").fill("000704.000123/2026-45");
+    await workbench.getByTestId("gad-case-analystName").fill("Servidor de Teste");
 
     const priceReview = workbench.locator("#gad-review-document-2");
     await priceReview.getByLabel(/resultado da conferência de consolidação de pesquisas de preços/i).selectOption("issue");
@@ -77,8 +77,8 @@ test.describe("Mesa de Análise GAD", () => {
     await page.getByRole("group", { name: /modo de uso/i }).getByRole("button", { name: /análise gad/i }).click();
 
     const workbench = page.locator("#gad-analysis-workbench");
-    await workbench.getByLabel("Unidade escolar").fill("E.M. Persistência");
-    await workbench.getByLabel("Exercício").fill("2026");
+    await workbench.getByTestId("gad-case-schoolName").fill("E.M. Persistência");
+    await workbench.getByTestId("gad-case-exercise").fill("2026");
 
     const firstReview = workbench.locator("#gad-review-document-1");
     await firstReview.getByLabel(/resultado da conferência/i).selectOption("conform");
@@ -91,7 +91,7 @@ test.describe("Mesa de Análise GAD", () => {
     await page.reload();
 
     await expect(page.getByRole("heading", { name: /mesa de análise da prestação de contas/i })).toBeVisible();
-    await expect(page.locator("#gad-analysis-workbench").getByLabel("Unidade escolar")).toHaveValue("E.M. Persistência");
+    await expect(page.locator("#gad-analysis-workbench").getByTestId("gad-case-schoolName")).toHaveValue("E.M. Persistência");
     await expect(page.locator("#gad-review-document-1").getByLabel(/resultado da conferência/i)).toHaveValue("conform");
   });
 

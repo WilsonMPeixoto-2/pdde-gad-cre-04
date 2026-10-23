@@ -62,9 +62,19 @@ test.describe("Mesa de Análise GAD", () => {
     await expect(finding).toContainText("Pesquisa de preços incompleta");
     await expect(finding).toContainText("2. Consolidação de Pesquisas de Preços");
 
+    const downloadPromise = page.waitForEvent("download");
+    await workspace.getByRole("button", { name: /baixar minuta de diligência/i }).click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toBe(
+      "PDDE_MINUTA_DILIGENCIA_2026_E_M_TESTE_DE_FISCALIZACAO.txt",
+    );
+
     await finding.getByRole("button", { name: "Resolvido", exact: true }).click();
     await expect(workspace.getByTestId("analysis-metric-findings")).toContainText("0");
     await expect(workspace.getByTestId("analysis-metric-critical")).toContainText("0");
+    await expect(
+      workspace.getByRole("button", { name: /baixar minuta de diligência/i }),
+    ).toBeDisabled();
 
     await page.reload();
 

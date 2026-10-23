@@ -433,3 +433,71 @@ export const buildAnalysisSummaryText = (
 
   return lines.join("\n");
 };
+
+
+const analysisFileSegment = (value: string) =>
+  value
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w-]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .replace(/_+/g, "_")
+    .toUpperCase();
+
+export const getAnalysisDiligenceFileName = (snapshot: AnalysisSnapshot) => {
+  const exercise = snapshot.caseProfile.exercise.trim() || "SEM_EXERCICIO";
+  const school = analysisFileSegment(snapshot.caseProfile.schoolName) || "UNIDADE";
+  return `PDDE_MINUTA_DILIGENCIA_${exercise}_${school}.txt`;
+};
+
+export const buildAnalysisDiligenceDraft = (snapshot: AnalysisSnapshot) => {
+  const openFindings = snapshot.findings.filter((finding) => finding.status !== "resolved");
+  const caseProfile = snapshot.caseProfile;
+
+  const lines = [
+    "MINUTA DE APOIO — ADEQUAR AO CASO CONCRETO E AO FLUXO INSTITUCIONAL VIGENTE",
+    "",
+    "DILIGÊNCIA / SOLICITAÇÃO DE COMPLEMENTAÇÃO",
+    "",
+    `Processo: ${caseProfile.seiProcessNumber || "[NUP DO PROCESSO]"}`,
+    `Unidade escolar: ${caseProfile.schoolName || "[UNIDADE ESCOLAR]"}`,
+    `CNPJ do CEC/UEx: ${caseProfile.uexCnpj || "[CNPJ]"}`,
+    `Exercício: ${caseProfile.exercise || "[EXERCÍCIO]"}`,
+    `Programa/Ação: ${caseProfile.programAction || "[PROGRAMA/AÇÃO]"}`,
+    "",
+    "Após conferência da documentação disponível nos autos, registram-se os seguintes apontamentos para esclarecimento, correção ou complementação, conforme o caso:",
+    "",
+  ];
+
+  if (openFindings.length === 0) {
+    lines.push("[NENHUM APONTAMENTO ABERTO REGISTRADO NA MESA DE ANÁLISE]");
+  } else {
+    openFindings.forEach((finding, index) => {
+      const linkedItem = finding.checklistItemId
+        ? checklistItemDefinitions.find((item) => item.id === finding.checklistItemId)
+        : null;
+
+      lines.push(`${index + 1}. ${finding.title}`);
+      lines.push(
+        `   Classificação: ${analysisFindingSeverityMeta[finding.severity].label}`,
+      );
+      if (linkedItem) {
+        lines.push(`   Item relacionado: ${linkedItem.id}. ${linkedItem.text}`);
+      }
+      if (finding.description.trim()) {
+        lines.push(`   Descrição: ${finding.description.trim()}`);
+      }
+      lines.push("");
+    });
+  }
+
+  lines.push(
+    "Providência de referência:",
+    "Apresentar os esclarecimentos ou documentos pertinentes no mesmo processo SEI!RIO, observando a orientação formal vigente e a competência da unidade responsável pela análise.",
+    "",
+    "Esta minuta é apoio de redação. Não define prazo, autoridade decisória, aprovação, rejeição ou encerramento do processo.",
+  );
+
+  return lines.join("\n");
+};

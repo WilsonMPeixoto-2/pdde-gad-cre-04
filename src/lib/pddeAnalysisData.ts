@@ -357,6 +357,14 @@ export const getAnalysisNextAction = (
     };
   }
 
+  if (metrics.criticalOpenFindings > 0) {
+    return {
+      kind: "resolve",
+      title: "Tratar apontamento crítico antes de avançar",
+      description: `Há ${metrics.criticalOpenFindings} apontamento(s) crítico(s) ainda aberto(s). Priorize o saneamento ou a diligência correspondente.`,
+    };
+  }
+
   if (metrics.unreviewedItems > 0) {
     return {
       kind: "review",

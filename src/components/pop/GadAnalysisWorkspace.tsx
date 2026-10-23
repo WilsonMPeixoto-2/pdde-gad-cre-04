@@ -383,10 +383,11 @@ export const GadAnalysisWorkspace = () => {
               {nextAction.description}
             </p>
 
-            <div className="mt-5">
-              <DataPersistenceNotice scope="analysis" />
-            </div>
           </aside>
+        </div>
+
+        <div className="border-t border-slate-300 p-5 sm:p-6 dark:border-slate-700">
+          <DataPersistenceNotice scope="analysis" />
         </div>
       </section>
 

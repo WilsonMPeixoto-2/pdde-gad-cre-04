@@ -18,6 +18,10 @@ test.describe("Mesa de Análise GAD", () => {
 
     const workspace = page.getByTestId("gad-analysis-workspace");
     await expect(workspace).toBeVisible();
+    await expect(page.locator("main")).toHaveCount(1);
+    await expect(
+      page.getByRole("region", { name: /mesa de análise da prestação de contas/i }),
+    ).toBeVisible();
     await expect(
       workspace.getByRole("heading", {
         level: 1,

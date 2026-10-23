@@ -13,6 +13,7 @@ type PersistenceScope = "models" | "analysis";
 
 interface DataPersistenceNoticeProps {
   scope?: PersistenceScope;
+  onClearScope?: () => void;
 }
 
 const scopeCopy: Record<
@@ -42,6 +43,7 @@ const scopeCopy: Record<
 
 export const DataPersistenceNotice = ({
   scope = "models",
+  onClearScope,
 }: DataPersistenceNoticeProps) => {
   const [persistenceDisabled, setPersistenceDisabled] = useState(isGuidePersistenceDisabled);
   const titleId = useId();
@@ -49,6 +51,7 @@ export const DataPersistenceNotice = ({
 
   const clearCurrentData = () => {
     clearGuideStorage([copy.storageKey]);
+    onClearScope?.();
     toast.success(copy.clearedMessage);
   };
 
